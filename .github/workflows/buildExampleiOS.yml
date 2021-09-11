@@ -1,0 +1,17 @@
+on: push
+name: iOS example
+jobs:
+  test:
+    name: Test
+    runs-on: macOS-latest
+    strategy:
+        matrix:
+          destination: ['platform=iOS Simulator,OS=14.0,name=iPhone 8','platform=iOS Simulator,OS=14.3,name=iPhone X','platform=iOS Simulator,OS=14.5,name=iPhone X']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+      - name: Build and test
+        run: |
+          xcodebuild clean build test -project "Example/Example.xcodeproj" -scheme Example -sdk $TEST_SDK ONLY_ACTIVE_ARCH=NO | xcpretty
+        env: 
+         destination: ${{ matrix.destination }}
