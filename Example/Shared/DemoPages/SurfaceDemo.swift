@@ -1,0 +1,51 @@
+//
+// Copyright © 2021 Alexander Romanov
+// Created on 11.09.2021
+//
+
+import OversizeUI
+import SwiftUI
+
+struct SurfaceDemo: View {
+    var body: some View {
+        ScrollView {
+            VStack(spacing: .large) {
+                Surface(background: .secondary) {
+                    Text("Text")
+                        .fontStyle(.title3, color: .onSurfaceHighEmphasis)
+                }
+
+                Text("Text")
+                    .surface(elevation: .z4)
+                    .previewLayout(.fixed(width: 414, height: 200))
+
+                HStack {
+                    Text("Text")
+
+                    Spacer()
+                }
+                .surface(elevation: .z4)
+
+                Surface(background: .primary, padding: .zero, radius: .zero) { HStack {
+                    Spacer()
+                    Text("Text")
+                    Spacer()
+                }}
+                    .elevation(.z2)
+
+                Surface { HStack {
+                    Text("Text")
+                    Spacer()
+                }}
+                    .elevation(.z1)
+            }
+            .padding()
+        }
+    }
+}
+
+struct SurfaceDemo_Previews: PreviewProvider {
+    static var previews: some View {
+        SurfaceDemo()
+    }
+}

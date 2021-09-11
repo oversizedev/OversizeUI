@@ -1,0 +1,46 @@
+//
+// Copyright © 2021 Alexander Romanov
+// Created on 11.09.2021
+//
+
+import OversizeUI
+import SwiftUI
+
+struct ButtonsDemo: View {
+    var body: some View {
+        ScrollView {
+            VStack(spacing: .xSmall) {
+                Button("Button") { print(#function) }
+                    .style(.primary)
+
+                Button("Button") { print(#function) }
+                    .style(.primary)
+
+                Button("Button") { print(#function) }
+                    .style(.secondary)
+
+                Button("Button") { print(#function) }
+                    .style(.gray)
+
+                Button("Button") { print(#function) }
+                    .style(.text)
+
+                Button("Button") { print(#function) }
+                    .style(.link)
+
+                Button("Button") { print(#function) }
+                    .style(.deleteLink)
+
+                Button("Button") { print(#function) }
+                    .style(.secondary, size: .m, rounded: .full, width: .full, shadow: true)
+
+            }.padding()
+        }
+    }
+}
+
+struct BittonsDemo_Previews: PreviewProvider {
+    static var previews: some View {
+        ButtonsDemo()
+    }
+}
