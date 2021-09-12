@@ -1,19 +1,36 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 11.09.2021
+// Created on 12.09.2021
 //
 
 import SwiftUI
 
-public enum Radius: CGFloat {
+public enum Radius {
+    private var appearanceSettings: AppearanceSettings {
+        AppearanceSettings.shared
+    }
+
     /// 8
-    case small = 8
+    case small
     /// 12
-    case medium = 12
+    case medium
     /// 16
-    case large = 16
+    case large
     /// 24
-    case xLarge = 24
+    case xLarge
+
+    var rawValue: CGFloat {
+        switch self {
+        case .small:
+            return CGFloat(appearanceSettings.radius)
+        case .medium:
+            return appearanceSettings.radius == .zero ?.zero : CGFloat(appearanceSettings.radius) * 1.5
+        case .large:
+            return appearanceSettings.radius == .zero ?.zero : CGFloat(appearanceSettings.radius) * 2
+        case .xLarge:
+            return appearanceSettings.radius == .zero ?.zero : CGFloat(appearanceSettings.radius) * 3
+        }
+    }
 }
 
 public struct RadiusModifier: ViewModifier {

@@ -43,7 +43,7 @@ public struct BorderSettingView: View {
 
                                         Spacer()
 
-                                        Text(String(format: "%.2f", theme.borderSize))
+                                        Text(String(format: "%.1f", theme.borderSize) + " px")
                                             .fontStyle(.subtitle2)
                                             .foregroundColor(.onSurfaceHighEmphasis)
                                     }
@@ -88,7 +88,7 @@ public struct BorderSettingView: View {
             Spacer()
         }
 
-        .navigationBar("App", style: .fixed($offset)) {
+        .navigationBar("Border", style: .fixed($offset)) {
             BarButton(type: .back)
         } trailingBar: {} bottomBar: {}
 

@@ -47,7 +47,7 @@ public final class AppearanceSettings: ObservableObject {
 
     @AppStorage(AppearanceSettingsNames.borderSize) public var borderSize: Double = 0.5
 
-    @AppStorage(AppearanceSettingsNames.radius) public var radius: Int = 8
+    @AppStorage(AppearanceSettingsNames.radius) public var radius: Double = 8
 
     @AppStorage(AppearanceSettingsNames.theme) public var theme: Int = 0
 

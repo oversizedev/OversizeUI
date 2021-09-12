@@ -1,26 +1,28 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 11.09.2021
+// Created on 12.09.2021
 //
 
 import OversizeUI
 import SwiftUI
 
-struct ColorSelector: View {
+struct ColorSelect: View {
     @State var colorSelect = Color.red
+
+    @State var colorSelect2 = Color.red
 
     var body: some View {
         VStack {
-            ColorSelector(colorSelect: colorSelect)
+            ColorSelector(selection: $colorSelect)
 
-            ColorSelector(colorSelect: colorSelect)
+            ColorSelector(selection: $colorSelect2)
                 .colorSelectorStyle(GridColorSelectorStyle())
         }
     }
 }
 
-struct ColorSelector_Previews: PreviewProvider {
+struct ColorSelect_Previews: PreviewProvider {
     static var previews: some View {
-        ColorSelector()
+        ColorSelect()
     }
 }

@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 11.09.2021
+// Created on 12.09.2021
 //
 
 import SwiftUI
@@ -158,6 +158,10 @@ public struct AppearanceSettingView: View {
 
                 NavigationLink(destination: BorderSettingView()) {
                     Row("Borders", leadingType: .icon(.layout))
+                }
+
+                NavigationLink(destination: RadiusSettingView()) {
+                    Row("Radius", leadingType: .icon(.circle))
                 }
             }
         }

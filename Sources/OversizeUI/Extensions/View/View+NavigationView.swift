@@ -14,7 +14,7 @@ public enum NavigationBarStyleType {
 // swiftlint:disable all
 public extension View {
     @ViewBuilder
-    func navigationBar(_ title: String, style: NavigationBarStyleType = .system) -> some View {
+    func navigationBar(_ title: String, style: NavigationBarStyleType) -> some View {
         switch style {
         case .system:
             NavigationView { self

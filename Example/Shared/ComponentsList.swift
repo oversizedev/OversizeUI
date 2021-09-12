@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 09.09.2021
+// Created on 12.09.2021
 //
 
 import OversizeUI
@@ -18,9 +18,11 @@ struct ComponentsList: View {
 
     @State var updater: Bool = false
 
+    @State var isShowSetting = false
+
     let pages = [
         Page(name: "Buttons", page: AnyView(ButtonsDemo())),
-        Page(name: "ColorSelector", page: AnyView(ColorSelector())),
+        Page(name: "ColorSelector", page: AnyView(ColorSelect())),
         Page(name: "Avatar", page: AnyView(AvatarDemo())),
         Page(name: "GridSelect", page: AnyView(GridSelectDemo())),
         Page(name: "TextField", page: AnyView(TextFieldDemo())),
@@ -32,9 +34,24 @@ struct ComponentsList: View {
     ]
 
     var body: some View {
-        List(pages) { page in
-            NavigationLink(page.name, destination: page.page)
-        }.navigationBar("Example")
+        NavigationView {
+            List(pages) { page in
+                NavigationLink(page.name, destination: page.page)
+            }
+            .navigationTitle("Example")
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button {
+                        isShowSetting.toggle()
+                    } label: {
+                        Icon(.settings, color: .onBackgroundHighEmphasis)
+                    }
+                }
+            }
+            .sheet(isPresented: $isShowSetting) {
+                AppearanceSettingView()
+            }
+        }
     }
 }
 
