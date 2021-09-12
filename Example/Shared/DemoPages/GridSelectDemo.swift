@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 11.09.2021
+// Created on 12.09.2021
 //
 
 import OversizeUI
@@ -12,26 +12,29 @@ struct GridSelectDemo: View {
     @State var selection = ""
 
     var body: some View {
-        Group {
-            GridSelect(items, selection: $selection,
-                       content: { item, _ in
-                           VStack {
-                               Icon(.circle)
-                               Text(item)
-                           }.padding()
-                       })
+        ScrollView {
+            VStack(spacing: .xSmall) {
+                GridSelect(items, selection: $selection,
+                           content: { item, _ in
+                               VStack {
+                                   Icon(.circle)
+                                   Text(item)
+                               }.padding()
+                           })
 
-            GridSelect(items, selection: $selection,
-                       content: { item, _ in
-                           VStack {
-                               Icon(.circle)
-                               Text(item)
-                           }.padding()
-                       })
+                GridSelect(items, selection: $selection,
+                           content: { item, _ in
+                               VStack {
+                                   Icon(.circle)
+                                   Text(item)
+                               }.padding()
+                           })
 
-                .gridSelectStyle(SelectionOnlyGridSelectStyle())
+                    .gridSelectStyle(SelectionOnlyGridSelectStyle())
+            }
+            .padding()
         }
-        .padding()
+        .navigationBarTitle("Grid select", displayMode: .inline)
     }
 }
 

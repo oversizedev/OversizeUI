@@ -40,7 +40,7 @@ struct SurfaceDemo: View {
                     .elevation(.z1)
             }
             .padding()
-        }
+        }.navigationBarTitle("Surface", displayMode: .inline)
     }
 }
 

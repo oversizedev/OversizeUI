@@ -18,6 +18,7 @@ struct ColorSelect: View {
             ColorSelector(selection: $colorSelect2)
                 .colorSelectorStyle(GridColorSelectorStyle())
         }
+        .navigationTitle("Color select")
     }
 }
 

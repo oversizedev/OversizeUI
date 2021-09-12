@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 11.09.2021
+// Created on 12.09.2021
 //
 
 import OversizeUI
@@ -14,13 +14,16 @@ struct IconsDemo: View {
                 GridItem(),
                 GridItem()]
     var body: some View {
-        LazyVGrid(columns: grid) {
-            ForEach(Icons.allCases, id: \.self) { icon in
-                Icon(icon)
-                    .padding(.vertical)
+        ScrollView {
+            LazyVGrid(columns: grid) {
+                ForEach(Icons.allCases, id: \.self) { icon in
+                    Icon(icon)
+                        .padding(.vertical)
+                }
             }
+            .padding()
         }
-        .padding()
+        .navigationBarTitle("Icons", displayMode: .inline)
     }
 }
 

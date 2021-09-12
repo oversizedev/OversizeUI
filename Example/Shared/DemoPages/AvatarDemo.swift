@@ -21,6 +21,7 @@ struct AvatarDemo: View {
 
             AvatarView(firstName: "Jhon", lastName: "Smith", size: .l, stroke: true)
         }
+        .navigationBarTitle("Avatar", displayMode: .inline)
     }
 }
 

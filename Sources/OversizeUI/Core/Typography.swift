@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 11.09.2021
+// Created on 12.09.2021
 //
 
 import SwiftUI
@@ -24,6 +24,39 @@ public enum FontDesignType: String, CaseIterable {
 
 public struct Typography: ViewModifier {
     @ObservedObject var appearanceSettings = AppearanceSettings.shared
+
+    @Environment(\.sizeCategory) var sizeCategory
+
+    private var sizeMultiplicator: CGFloat {
+        switch sizeCategory {
+        case .extraSmall:
+            return 0.7
+        case .small:
+            return 0.8
+        case .medium:
+            return 0.9
+        case .large:
+            return 1
+        case .extraLarge:
+            return 1.2
+        case .extraExtraLarge:
+            return 1.4
+        case .extraExtraExtraLarge:
+            return 1.5
+        case .accessibilityMedium:
+            return 1.8
+        case .accessibilityLarge:
+            return 2.0
+        case .accessibilityExtraLarge:
+            return 2.2
+        case .accessibilityExtraExtraLarge:
+            return 2.4
+        case .accessibilityExtraExtraExtraLarge:
+            return 2.6
+        @unknown default:
+            return 1
+        }
+    }
 
     private var designTitle: Font.Design {
         appearanceSettings.fontTitle.system
@@ -62,27 +95,27 @@ public struct Typography: ViewModifier {
     public func body(content: Content) -> some View {
         switch style {
         case .largeTitle:
-            content.font(.system(size: 34, weight: .heavy, design: designTitle))
+            content.font(.system(size: 34 * sizeMultiplicator, weight: .heavy, design: designTitle))
         case .title1:
-            content.font(.system(size: 28, weight: .heavy, design: designTitle))
+            content.font(.system(size: 28 * sizeMultiplicator, weight: .heavy, design: designTitle))
         case .title2:
-            content.font(.system(size: 22, weight: .bold, design: designTitle))
+            content.font(.system(size: 22 * sizeMultiplicator, weight: .bold, design: designTitle))
         case .title3:
-            content.font(.system(size: 20, weight: .bold, design: designTitle))
+            content.font(.system(size: 20 * sizeMultiplicator, weight: .bold, design: designTitle))
         case .subtitle1:
-            content.font(.system(size: 16, weight: .semibold, design: designTitle))
+            content.font(.system(size: 16 * sizeMultiplicator, weight: .semibold, design: designTitle))
         case .subtitle2:
-            content.font(.system(size: 14, weight: .regular, design: designTitle))
+            content.font(.system(size: 14 * sizeMultiplicator, weight: .regular, design: designTitle))
         case .paragraph1:
-            content.font(.system(size: 16, weight: .regular, design: designParagraph))
+            content.font(.system(size: 16 * sizeMultiplicator, weight: .regular, design: designParagraph))
         case .paragraph2:
-            content.font(.system(size: 14, weight: .regular, design: designParagraph))
+            content.font(.system(size: 14 * sizeMultiplicator, weight: .regular, design: designParagraph))
         case .button:
-            content.font(.system(size: 16, weight: .bold, design: designButton))
+            content.font(.system(size: 16 * sizeMultiplicator, weight: .bold, design: designButton))
         case .caption:
-            content.font(.system(size: 12, weight: .medium, design: designOverline))
+            content.font(.system(size: 12 * sizeMultiplicator, weight: .medium, design: designOverline))
         case .overline:
-            content.font(.system(size: 12, weight: .bold, design: designOverline))
+            content.font(.system(size: 12 * sizeMultiplicator, weight: .bold, design: designOverline))
         }
     }
 }
