@@ -4,6 +4,8 @@
 //
 
 import SwiftUI
+
+// swiftlint:disable line_length
 public extension HStack {
     init(alignment: VerticalAlignment = .center, spacing: Space, @ViewBuilder content: () -> Content) {
         self = .init(alignment: alignment, spacing: spacing.rawValue, content: content)

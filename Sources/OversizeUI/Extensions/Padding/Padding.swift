@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 11.09.2021
+// Created on 13.09.2021
 //
 
 import SwiftUI
@@ -10,6 +10,17 @@ public struct PaddingModifier: ViewModifier {
     let length: Space
     public func body(content: Content) -> some View {
         content.padding(edges, length.rawValue)
+    }
+}
+
+public struct ContentPaddingModifier: ViewModifier {
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    let edges: Edge.Set
+    let length = Space.medium
+    public func body(content: Content) -> some View {
+        content.padding(edges, horizontalSizeClass == .compact
+            ? length.rawValue
+            : length.rawValue + Space.xSmall.rawValue)
     }
 }
 
@@ -24,7 +35,7 @@ public extension View {
 }
 
 public extension View {
-    func paddingContent(_ edges: Edge.Set = .all) -> some View {
-        modifier(PaddingModifier(edges: edges, length: Space.medium))
+    func paddingContent(_ edges: Edge.Set = .horizontal) -> some View {
+        modifier(ContentPaddingModifier(edges: edges))
     }
 }
