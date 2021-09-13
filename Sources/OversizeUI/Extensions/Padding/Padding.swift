@@ -14,6 +14,7 @@ public struct PaddingModifier: ViewModifier {
 }
 
 public struct ContentPaddingModifier: ViewModifier {
+    #if os(iOS)
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     let edges: Edge.Set
     let length = Space.medium
@@ -22,6 +23,13 @@ public struct ContentPaddingModifier: ViewModifier {
             ? length.rawValue
             : length.rawValue + Space.xSmall.rawValue)
     }
+    #else
+    let edges: Edge.Set
+    let length = Space.medium
+    public func body(content: Content) -> some View {
+        content.padding(edges, length.rawValue)
+    }
+    #endif
 }
 
 public extension View {
