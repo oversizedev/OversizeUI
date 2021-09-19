@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 12.09.2021
+// Created on 19.09.2021
 //
 
 import SwiftUI
@@ -20,6 +20,14 @@ public struct AppearanceSettingView: View {
     ]
 
     @State var offset = CGPoint(x: 0, y: 0)
+
+    enum Destenation {
+        case font
+        case border
+        case radius
+    }
+
+    @State var pageDestenation: Destenation?
 
     public var body: some View {
         #if os(iOS)
@@ -151,23 +159,36 @@ public struct AppearanceSettingView: View {
 
     private var advanded: some View {
         SectionView("Advanced settings") {
-            VStack(spacing: .zero) {
-                NavigationLink(destination: FontSettingView()) {
-                    Row("Fonts", leadingType: .icon(.type), trallingType: .arrowIcon)
-                }
+            ZStack {
+                NavigationLink(destination: FontSettingView(),
+                               tag: .font,
+                               selection: $pageDestenation) { EmptyView() }
 
-                NavigationLink(destination: BorderSettingView()) {
-                    Row("Borders", leadingType: .icon(.layout), trallingType: .toggleWithArrowButton(isOn: $theme.borderApp))
+                NavigationLink(destination: BorderSettingView(),
+                               tag: .border,
+                               selection: $pageDestenation) { EmptyView() }
+
+                NavigationLink(destination: RadiusSettingView(),
+                               tag: .radius,
+                               selection: $pageDestenation) { EmptyView() }
+
+                VStack(spacing: .zero) {
+                    Row("Fonts", leadingType: .icon(.type), trallingType: .arrowIcon) {
+                        pageDestenation = .font
+                    }
+
+                    Row("Borders", leadingType: .icon(.layout), trallingType: .toggleWithArrowButton(isOn: $theme.borderApp, action: {
+                        pageDestenation = .border
+                    }))
                         .onChange(of: theme.borderApp) { value in
                             theme.borderSurface = value
                             theme.borderButtons = value
                             theme.borderControls = value
                             theme.borderTextFields = value
                         }
-                }
-
-                NavigationLink(destination: RadiusSettingView()) {
-                    Row("Radius", leadingType: .icon(.circle), trallingType: .arrowIcon)
+                    Row("Radius", leadingType: .icon(.circle), trallingType: .arrowIcon) {
+                        pageDestenation = .radius
+                    }
                 }
             }
         }

@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 11.09.2021
+// Created on 19.09.2021
 //
 
 import SwiftUI
@@ -14,6 +14,12 @@ public struct SectionView<Content: View>: View {
         self.content = content()
     }
 
+    private enum Constants {
+        /// Radius
+        static var radiusMedium: CGFloat { Radius.medium.rawValue }
+        static var radiusSmall: CGFloat { Radius.small.rawValue }
+    }
+
     public var body: some View {
         VStack(alignment: .leading, spacing: Space.xSmall.rawValue) {
             if title != "" {
@@ -25,7 +31,10 @@ public struct SectionView<Content: View>: View {
             Surface(padding: .zero) {
                 content
                     .padding(.vertical, Space.xxSmall)
-            }
+            }.clipShape(
+                RoundedRectangle(cornerRadius: Constants.radiusMedium,
+                                 style: .circular)
+            )
         }
         .paddingContent(.horizontal)
         .padding(.vertical, Space.small)

@@ -22,6 +22,14 @@ public enum RowLeadingType {
     case avatar(_ avatar: AvatarView)
 }
 
+private struct RowActionButtonStyle: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .background(configuration.isPressed ? Color.surfaceSecondary : Color.clear)
+        // .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
+    }
+}
+
 public struct Row: View {
     private enum Constants {
         /// Spacing
@@ -68,6 +76,7 @@ public struct Row: View {
             } label: {
                 content
             }
+            .buttonStyle(RowActionButtonStyle())
         } else {
             content
         }
