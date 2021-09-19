@@ -63,21 +63,17 @@ public struct BorderSettingView: View {
 
                             VStack(spacing: .zero) {
                                 Row("Surface",
-                                    trallingType: .toggle,
-                                    paddingVertical: .xSmall,
-                                    toggle: theme.$borderSurface)
+                                    trallingType: .toggle(isOn: theme.$borderSurface),
+                                    paddingVertical: .xSmall)
                                 Row("Buttons",
-                                    trallingType: .toggle,
-                                    paddingVertical: .xSmall,
-                                    toggle: theme.$borderButtons)
+                                    trallingType: .toggle(isOn: theme.$borderSurface),
+                                    paddingVertical: .xSmall)
                                 Row("Text fields",
-                                    trallingType: .toggle,
-                                    paddingVertical: .xSmall,
-                                    toggle: theme.$borderTextFields)
+                                    trallingType: .toggle(isOn: theme.$borderSurface),
+                                    paddingVertical: .xSmall)
                                 Row("Other controls",
-                                    trallingType: .toggle,
-                                    paddingVertical: .xSmall,
-                                    toggle: theme.$borderControls)
+                                    trallingType: .toggle(isOn: theme.$borderSurface),
+                                    paddingVertical: .xSmall)
                             }.padding(.top, .xxxSmall)
                                 .padding(.vertical, .xxxSmall)
                         }

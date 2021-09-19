@@ -153,15 +153,21 @@ public struct AppearanceSettingView: View {
         SectionView("Advanced settings") {
             VStack(spacing: .zero) {
                 NavigationLink(destination: FontSettingView()) {
-                    Row("Fonts", leadingType: .icon(.type))
+                    Row("Fonts", leadingType: .icon(.type), trallingType: .arrowIcon)
                 }
 
                 NavigationLink(destination: BorderSettingView()) {
-                    Row("Borders", leadingType: .icon(.layout))
+                    Row("Borders", leadingType: .icon(.layout), trallingType: .toggleWithArrowButton(isOn: $theme.borderApp))
+                        .onChange(of: theme.borderApp) { value in
+                            theme.borderSurface = value
+                            theme.borderButtons = value
+                            theme.borderControls = value
+                            theme.borderTextFields = value
+                        }
                 }
 
                 NavigationLink(destination: RadiusSettingView()) {
-                    Row("Radius", leadingType: .icon(.circle))
+                    Row("Radius", leadingType: .icon(.circle), trallingType: .arrowIcon)
                 }
             }
         }

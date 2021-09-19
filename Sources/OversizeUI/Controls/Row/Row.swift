@@ -1,17 +1,20 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 11.09.2021
+// Created on 19.09.2021
 //
 
 import SwiftUI
 
-public enum TrailingType {
+public enum RowTrailingType {
     case none
-    case radio
-    case toggle
+    case radio(isOn: Binding<Bool>)
+    case checkbox(isOn: Binding<Bool>)
+    case toggle(isOn: Binding<Bool>)
+    case toggleWithArrowButton(isOn: Binding<Bool>, action: (() -> Void)? = nil)
+    case arrowIcon
 }
 
-public enum LeadingType {
+public enum RowLeadingType {
     case none
     case icon(_ name: Icons)
     case iconOnSurface(_ name: Icons)
@@ -25,23 +28,24 @@ public struct Row: View {
         static var spacingIconAndText: CGFloat { Space.xxSmall.rawValue }
     }
 
-    private var title: String
-    private var subtitle: String
+    private let title: String
+    private let subtitle: String
 
-    private var paddingVertical: Space
-    private var paddingHorizontal: Space
-    @Binding private var toggle: Bool
+    private let paddingVertical: Space
+    private let paddingHorizontal: Space
 
-    private var leadingType: LeadingType
-    private var trallingType: TrailingType
+    private let leadingType: RowLeadingType
+    private let trallingType: RowTrailingType
+
+    private let action: (() -> Void)?
 
     public init(_ title: String,
                 subtitle: String = "",
-                leadingType: LeadingType = .none,
-                trallingType: TrailingType = .none,
+                leadingType: RowLeadingType = .none,
+                trallingType: RowTrailingType = .none,
                 paddingHorizontal: Space = .medium,
                 paddingVertical: Space = .small,
-                toggle: Binding<Bool> = .constant(false))
+                action: (() -> Void)? = nil)
     {
         self.title = title
         self.subtitle = subtitle
@@ -49,61 +53,40 @@ public struct Row: View {
         self.trallingType = trallingType
         self.paddingVertical = paddingVertical
         self.paddingHorizontal = paddingHorizontal
-        _toggle = toggle
+        self.action = action
     }
 
     public var body: some View {
+        getSurface()
+    }
+
+    @ViewBuilder
+    private func getSurface() -> some View {
+        if action != nil {
+            Button {
+                (action)?()
+            } label: {
+                content
+            }
+        } else {
+            content
+        }
+    }
+
+    public var content: some View {
         VStack(alignment: .leading) {
-            HStack {
+            HStack(spacing: .xSmall) {
                 leading()
 
-                if trallingType == .toggle {
-                    Toggle(isOn: $toggle) {
-                        Text(title)
-                            .fontStyle(.subtitle1)
-                            .foregroundColor(.onSurfaceHighEmphasis)
-                    }
+                text
 
-                } else if trallingType == .radio {
-                    Text(title)
-                        .fontStyle(.subtitle1)
-                        .foregroundColor(.onSurfaceHighEmphasis)
+                Spacer()
 
-                    Spacer()
-
-                    if toggle {
-                        ZStack {
-                            Circle().fill(Color.primary).frame(width: 24, height: 24)
-                                .cornerRadius(12)
-
-                            Circle().fill(Color.white).frame(width: 8, height: 8)
-                                .cornerRadius(4)
-                        }
-
-                    } else {
-                        Circle()
-                            .stroke(Color.onSurfaceDisabled, lineWidth: 4)
-                            .frame(width: 24, height: 24)
-                            .cornerRadius(12)
-                    }
-
-                } else {
-                    VStack(alignment: .leading) {
-                        Text(title)
-                            .fontStyle(.subtitle1, color: .onSurfaceHighEmphasis)
-
-                        if subtitle != "" {
-                            Text(title)
-                                .fontStyle(.subtitle2)
-                                .foregroundColor(.onSurfaceMediumEmphasis)
-                        }
-                    }
-
-                    Spacer()
-                }
+                tralling()
             }
-        }.padding(.vertical, paddingVertical.rawValue)
-            .padding(.horizontal, paddingHorizontal.rawValue)
+        }
+        .padding(.vertical, paddingVertical.rawValue)
+        .padding(.horizontal, paddingHorizontal.rawValue)
     }
 
     @ViewBuilder
@@ -132,6 +115,79 @@ public struct Row: View {
         }
     }
 
+    @ViewBuilder
+    private func tralling() -> some View {
+        switch trallingType {
+        case .none:
+
+            EmptyView()
+
+        case let .toggle(isOn):
+            Toggle(isOn: isOn) {}
+                .labelsHidden()
+
+        case let .radio(isOn: isOn):
+
+            if isOn.wrappedValue {
+                ZStack {
+                    Circle().fill(Color.accent).frame(width: 24, height: 24)
+                        .cornerRadius(12)
+
+                    Circle().fill(Color.white).frame(width: 8, height: 8)
+                        .cornerRadius(4)
+                }
+
+            } else {
+                Circle()
+                    .stroke(Color.onSurfaceDisabled, lineWidth: 4)
+                    .frame(width: 24, height: 24)
+                    .cornerRadius(12)
+            }
+        case let .checkbox(isOn: isOn):
+
+            if isOn.wrappedValue {
+                ZStack {
+                    Circle().fill(Color.accent).frame(width: 24, height: 24)
+                        .cornerRadius(12)
+
+                    Circle().fill(Color.white).frame(width: 8, height: 8)
+                        .cornerRadius(4)
+                }
+
+            } else {
+                Circle()
+                    .stroke(Color.onSurfaceDisabled, lineWidth: 4)
+                    .frame(width: 24, height: 24)
+                    .cornerRadius(12)
+            }
+        case let .toggleWithArrowButton(isOn: isOn, action: action):
+
+            HStack {
+                Toggle(isOn: isOn) {}
+                    .labelsHidden()
+
+                Button(action: action ?? {}, label: {
+                    Icon(.chevronRight, color: .onSurfaceDisabled)
+                })
+            }
+        case .arrowIcon:
+            Icon(.chevronRight, color: .onSurfaceDisabled)
+        }
+    }
+
+    var text: some View {
+        VStack(alignment: .leading) {
+            Text(title)
+                .fontStyle(.subtitle1, color: .onSurfaceHighEmphasis)
+
+            if subtitle != "" {
+                Text(title)
+                    .fontStyle(.subtitle2)
+                    .foregroundColor(.onSurfaceMediumEmphasis)
+            }
+        }
+    }
+
     func createToggle() {}
 }
 
@@ -143,12 +199,17 @@ struct ListRow_Previews: PreviewProvider {
 
             Row("Title", subtitle: "Subtitle")
 
-            Row("Title", subtitle: "Subtitle", leadingType: .icon(.calendar), trallingType: .radio, paddingVertical: .medium)
+            Row("Title", subtitle: "Subtitle", leadingType: .icon(.calendar), trallingType: .radio(isOn: .constant(true)), paddingVertical: .medium)
 
-            Row("Title", subtitle: "Subtitle", leadingType: .icon(.calendar), trallingType: .radio, paddingVertical: .small)
-                .previewLayout(.sizeThatFits)
+            Row("Title", subtitle: "Subtitle", leadingType: .icon(.calendar), trallingType: .toggle(isOn: .constant(true)), paddingVertical: .medium)
+
+            Row("Title", subtitle: "Subtitle", leadingType: .icon(.calendar), trallingType: .radio(isOn: .constant(false)), paddingVertical: .small)
+
+            Row("Title", subtitle: "Subtitle", leadingType: .avatar(AvatarView(firstName: "Name")), trallingType: .radio(isOn: .constant(false)), paddingVertical: .small)
+
+            Row("Title", trallingType: .toggleWithArrowButton(isOn: .constant(true), action: nil))
         }
-        .padding()
+        // .padding()
         .previewLayout(.fixed(width: 375, height: 60))
     }
 }

@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 13.09.2021
+// Created on 15.09.2021
 //
 
 import SwiftUI
@@ -15,20 +15,20 @@ public struct PaddingModifier: ViewModifier {
 
 public struct ContentPaddingModifier: ViewModifier {
     #if os(iOS)
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    let edges: Edge.Set
-    let length = Space.medium
-    public func body(content: Content) -> some View {
-        content.padding(edges, horizontalSizeClass == .compact
-            ? length.rawValue
-            : length.rawValue + Space.xSmall.rawValue)
-    }
+        @Environment(\.horizontalSizeClass) var horizontalSizeClass
+        let edges: Edge.Set
+        let length = Space.medium
+        public func body(content: Content) -> some View {
+            content.padding(edges, horizontalSizeClass == .compact
+                ? length.rawValue
+                : length.rawValue + Space.xSmall.rawValue)
+        }
     #else
-    let edges: Edge.Set
-    let length = Space.medium
-    public func body(content: Content) -> some View {
-        content.padding(edges, length.rawValue)
-    }
+        let edges: Edge.Set
+        let length = Space.medium
+        public func body(content: Content) -> some View {
+            content.padding(edges, length.rawValue)
+        }
     #endif
 }
 

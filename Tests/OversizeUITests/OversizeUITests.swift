@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 11.09.2021
+// Created on 15.09.2021
 //
 
 @testable import OversizeUI
@@ -11,6 +11,6 @@ final class OversizeUITests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-       // XCTAssertEqual(OversizeUI().text, "Hello, World!")
+        // XCTAssertEqual(OversizeUI().text, "Hello, World!")
     }
 }
