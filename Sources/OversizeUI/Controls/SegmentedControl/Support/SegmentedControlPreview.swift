@@ -98,3 +98,11 @@ struct SegmentedControlPreview: View {
         .padding()
     }
 }
+
+
+// swiftlint:disable all
+struct SegmentedPicker2_Preview: PreviewProvider {
+    static var previews: some View {
+        SegmentedControlPreview()
+    }
+}

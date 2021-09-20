@@ -191,10 +191,27 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                 )
                 .shadowElevaton(.z2)
         case .graySurface:
+            
+            if style.unseletionStyle == .clean {
+                
+                RoundedRectangle(cornerRadius: radius.rawValue,
+                                 style: .continuous)
+                    .fill(Color.surfaceSecondary)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: radius.rawValue,
+                                         style: .continuous)
+                            .stroke(appearanceSettings.borderControls
+                                ? Color.border
+                                : Color.surfaceSecondary, lineWidth: CGFloat(appearanceSettings.borderSize))
+                    )
+                
+            } else {
 
             RoundedRectangle(cornerRadius: style.isShowBackground ? radius.rawValue - 4 : radius.rawValue,
                              style: .continuous)
                 .strokeBorder(Color.onSurfaceMediumEmphasis, lineWidth: 2)
+                
+            }
         case .accentSurface:
             RoundedRectangle(cornerRadius: style.isShowBackground ? radius.rawValue - 4 : radius.rawValue,
                              style: .continuous)
