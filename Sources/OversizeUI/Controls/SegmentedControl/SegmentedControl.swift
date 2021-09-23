@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 11.09.2021
+// Created on 24.09.2021
 //
 
 import SwiftUI
@@ -23,17 +23,20 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
     private let data: Data
     private let selectionView: () -> Selection?
     private let content: (Data.Element, Bool) -> Content
+    private let action: (() -> Void)?
 
     public init(_ data: Data,
                 selection: Binding<Data.Element>,
                 radius: Radius = .medium,
                 @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
-                @ViewBuilder selectionView: @escaping () -> Selection? = { nil })
+                @ViewBuilder selectionView: @escaping () -> Selection? = { nil },
+                action: (() -> Void)? = nil)
     {
         self.data = data
         self.content = content
         self.radius = radius
         self.selectionView = selectionView
+        self.action = action
         _selection = selection
         _frames = State(wrappedValue: Array(repeating: .zero,
                                             count: data.count))
@@ -74,7 +77,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
         ZStack(alignment: Alignment(horizontal: .horizontalCenterAlignment,
                                     vertical: .center)) {
             if let selectedIndex = selectedIndex {
-                HStack {
+                HStack(spacing: 0) {
                     Spacer()
                     selectionView()
                     Spacer()
@@ -92,6 +95,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                     Button(action: {
                                selectedIndex = index
                                selection = data[index]
+                               (action)?()
                            },
                            label: {
                                HStack(spacing: 0) {
@@ -145,8 +149,10 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
 
             HStack(spacing: 0) {
                 ForEach(data.indices, id: \.self) { index in
-                    Button(action: { selectedIndex = index
+                    Button(action: {
+                               selectedIndex = index
                                selection = data[index]
+                               (action)?()
                            },
                            label: { content(data[index], selectedIndex == index)
                                .fontStyle(.button,
@@ -171,7 +177,6 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                 }
             }
         }
-        // .animation(.easeInOut(duration: 0.3))
     }
 
     @ViewBuilder
@@ -191,9 +196,8 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                 )
                 .shadowElevaton(.z2)
         case .graySurface:
-            
+
             if style.unseletionStyle == .clean {
-                
                 RoundedRectangle(cornerRadius: radius.rawValue,
                                  style: .continuous)
                     .fill(Color.surfaceSecondary)
@@ -204,13 +208,11 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                                 ? Color.border
                                 : Color.surfaceSecondary, lineWidth: CGFloat(appearanceSettings.borderSize))
                     )
-                
-            } else {
 
-            RoundedRectangle(cornerRadius: style.isShowBackground ? radius.rawValue - 4 : radius.rawValue,
-                             style: .continuous)
-                .strokeBorder(Color.onSurfaceMediumEmphasis, lineWidth: 2)
-                
+            } else {
+                RoundedRectangle(cornerRadius: style.isShowBackground ? radius.rawValue - 4 : radius.rawValue,
+                                 style: .continuous)
+                    .strokeBorder(Color.onSurfaceMediumEmphasis, lineWidth: 2)
             }
         case .accentSurface:
             RoundedRectangle(cornerRadius: style.isShowBackground ? radius.rawValue - 4 : radius.rawValue,
@@ -244,11 +246,13 @@ public extension SegmentedPickerSelector where Selection == EmptyView {
     init(_ data: Data,
          selection: Binding<Data.Element>,
          radius: Radius = .medium,
-         @ViewBuilder content: @escaping (Data.Element, Bool) -> Content)
+         @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
+         action: (() -> Void)? = nil)
     {
         self.data = data
         self.content = content
         self.radius = radius
+        self.action = action
         selectionView = { nil }
         _selection = selection
         _frames = State(wrappedValue: Array(repeating: .zero,

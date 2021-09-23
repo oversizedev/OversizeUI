@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 15.09.2021
+// Created on 22.09.2021
 //
 
 import SwiftUI
@@ -105,12 +105,12 @@ public func hexStringFromColorComponents(_ components: ColorComponentsRGBA) -> S
     }
 }
 
-fileprivate func hexIntFromColorComponents(rgb components: ColorComponentsRGBA) -> Int {
+private func hexIntFromColorComponents(rgb components: ColorComponentsRGBA) -> Int {
     let (r, g, b, _) = components
     return (Int)(r * 255) << 16 | (Int)(g * 255) << 8 | (Int)(b * 255) << 0
 }
 
-fileprivate func hexIntFromColorComponents(rgba components: ColorComponentsRGBA) -> Int {
+private func hexIntFromColorComponents(rgba components: ColorComponentsRGBA) -> Int {
     let (r, g, b, a) = components
     return (Int)(r * 255) << 24 | (Int)(g * 255) << 16 | (Int)(b * 255) << 8 | (Int)(a * 255) << 0
 }

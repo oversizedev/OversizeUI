@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 19.09.2021
+// Created on 24.09.2021
 //
 
 import SwiftUI
@@ -179,13 +179,15 @@ public struct AppearanceSettingView: View {
 
                     Row("Borders", leadingType: .icon(.layout), trallingType: .toggleWithArrowButton(isOn: $theme.borderApp, action: {
                         pageDestenation = .border
-                    }))
-                        .onChange(of: theme.borderApp) { value in
-                            theme.borderSurface = value
-                            theme.borderButtons = value
-                            theme.borderControls = value
-                            theme.borderTextFields = value
-                        }
+                    })) {
+                        pageDestenation = .border
+                    }
+                    .onChange(of: theme.borderApp) { value in
+                        theme.borderSurface = value
+                        theme.borderButtons = value
+                        theme.borderControls = value
+                        theme.borderTextFields = value
+                    }
                     Row("Radius", leadingType: .icon(.circle), trallingType: .arrowIcon) {
                         pageDestenation = .radius
                     }

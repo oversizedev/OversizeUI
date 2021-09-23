@@ -115,7 +115,9 @@ public struct Typography: ViewModifier {
         case .caption:
             content.font(.system(size: 12 * sizeMultiplicator, weight: .medium, design: designOverline))
         case .overline:
-            content.font(.system(size: 12 * sizeMultiplicator, weight: .bold, design: designOverline))
+            content
+                .font(.system(size: 12 * sizeMultiplicator, weight: .bold, design: designOverline))
+                .textCase(.uppercase)
         }
     }
 }

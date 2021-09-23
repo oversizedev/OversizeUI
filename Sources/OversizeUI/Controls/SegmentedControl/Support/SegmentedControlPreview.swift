@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 11.09.2021
+// Created on 22.09.2021
 //
 
 import SwiftUI
@@ -98,7 +98,6 @@ struct SegmentedControlPreview: View {
         .padding()
     }
 }
-
 
 // swiftlint:disable all
 struct SegmentedPicker2_Preview: PreviewProvider {

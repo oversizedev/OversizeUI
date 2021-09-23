@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 19.09.2021
+// Created on 22.09.2021
 //
 
 import SwiftUI
@@ -26,7 +26,7 @@ private struct RowActionButtonStyle: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
             .background(configuration.isPressed ? Color.surfaceSecondary : Color.clear)
-        // .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
+            .contentShape(Rectangle())
     }
 }
 
