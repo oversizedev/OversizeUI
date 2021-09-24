@@ -54,6 +54,7 @@ public enum Icons: String, CaseIterable {
     case checkCircle = "check-circle"
     case checkSquare = "check-square"
     case check
+    case checkMini = "check-mini"
     case chevronDown = "chevron-down"
     case chevronLeft = "chevron-left"
     case chevronRight = "chevron-right"

@@ -1,28 +1,32 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 12.09.2021
+// Created on 25.09.2021
 //
 
 import OversizeUI
 import SwiftUI
 
+// swiftlint:disable all
 struct GridSelectDemo: View {
-    var items = ["One", "Two", "Three", "Four"]
+    var items = ["One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four"]
+    var items2 = ["One", "Two", "Three", "Four"]
 
     @State var selection = ""
 
     var body: some View {
         ScrollView {
             VStack(spacing: .xSmall) {
-                GridSelect(items, selection: $selection,
-                           content: { item, _ in
-                               VStack {
-                                   Icon(.circle)
-                                   Text(item)
-                               }.padding()
-                           })
+                ScrollView {
+                    GridSelect(items, selection: $selection,
+                               content: { item, _ in
+                                   VStack {
+                                       Icon(.circle)
+                                       Text(item)
+                                   }.padding()
+                               })
+                }
 
-                GridSelect(items, selection: $selection,
+                GridSelect(items2, selection: $selection,
                            content: { item, _ in
                                VStack {
                                    Icon(.circle)

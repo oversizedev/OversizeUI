@@ -19,7 +19,7 @@ public enum Radius {
     /// 24
     case xLarge
 
-    var rawValue: CGFloat {
+    public var rawValue: CGFloat {
         switch self {
         case .small:
             return CGFloat(appearanceSettings.radius)
