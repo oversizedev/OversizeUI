@@ -1,5 +1,8 @@
 # OversizeUI
 
+![Build Status](https://github.com/aromanov91/oversizeUI/actions/workflows/ci/badge.svg)
+![GitHub](https://img.shields.io/github/license/aromanov91/oversizeUI)
+
 Yet another component library on SwiftUI
 
 ## Controls
@@ -43,7 +46,6 @@ Colors, Typography, Spacing and other styles in [core folder](Sources/OversizeUI
 ### Import and use FluentUI
 After the framework has been added you can import the module to use it:
 
-For Swift
 ```swift
 import OversizeUI
 ```
