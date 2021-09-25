@@ -17,13 +17,13 @@ public enum ButtonType: Int, CaseIterable {
 
 public enum ButtonSize {
     case large
-    case m
+    case medium
 }
 
 public enum ButtonRounded {
     case full
-    case m
-    case s
+    case medium
+    case small
     case none
 }
 
@@ -39,7 +39,7 @@ public struct ButtonStyleExtended: ButtonStyle {
 
     var style: ButtonType
     var size: ButtonSize = .large
-    var rounded: ButtonRounded = .m
+    var rounded: ButtonRounded = .medium
     var width: ButtonWidth = .full
     var shadow: Bool = true
 
@@ -90,12 +90,12 @@ public struct ButtonStyleExtended: ButtonStyle {
                 .frame(maxWidth: width == .full ? .infinity : width == .standart ? nil : size == .large ? Constants.heightL : Constants.heightM,
                        minHeight: size == .large ? ButtonStyleExtended.Constants.heightL : ButtonStyleExtended.Constants.heightM)
                 .background(
-                    RoundedRectangle(cornerRadius: rounded == .none ? 0 : rounded == .m ? ButtonStyleExtended.Constants.radiusM : rounded == .s ? ButtonStyleExtended.Constants.radiusS :
+                    RoundedRectangle(cornerRadius: rounded == .none ? 0 : rounded == .medium ? ButtonStyleExtended.Constants.radiusM : rounded == .small ? ButtonStyleExtended.Constants.radiusS :
                         size == .large ? ButtonStyleExtended.Constants.heightL / 2 : ButtonStyleExtended.Constants.heightM / 2,
                         style: .continuous)
                         .fill(isEnabled ? Color.accent : Color.accent.opacity(0.9))
                         .overlay(
-                            RoundedRectangle(cornerRadius: rounded == .none ? 0 : rounded == .m ? ButtonStyleExtended.Constants.radiusM : rounded == .s ? ButtonStyleExtended.Constants.radiusS :
+                            RoundedRectangle(cornerRadius: rounded == .none ? 0 : rounded == .medium ? ButtonStyleExtended.Constants.radiusM : rounded == .small ? ButtonStyleExtended.Constants.radiusS :
                                 size == .large ? ButtonStyleExtended.Constants.heightL / 2 : ButtonStyleExtended.Constants.heightM / 2,
                                 style: .continuous)
                                 .stroke(isBordered
@@ -127,12 +127,12 @@ public struct ButtonStyleExtended: ButtonStyle {
                 .frame(maxWidth: width == .full ? .infinity : width == .standart ? nil : size == .large ? Constants.heightL : Constants.heightM,
                        minHeight: size == .large ? ButtonStyleExtended.Constants.heightL : ButtonStyleExtended.Constants.heightM)
                 .background(
-                    RoundedRectangle(cornerRadius: rounded == .none ? 0 : rounded == .m ? ButtonStyleExtended.Constants.radiusM : rounded == .s ? ButtonStyleExtended.Constants.radiusS :
+                    RoundedRectangle(cornerRadius: rounded == .none ? 0 : rounded == .medium ? ButtonStyleExtended.Constants.radiusM : rounded == .small ? ButtonStyleExtended.Constants.radiusS :
                         size == .large ? ButtonStyleExtended.Constants.heightL / 2 : ButtonStyleExtended.Constants.heightM / 2,
                         style: .continuous)
                         .fill(isEnabled ? Color.primary : Color.primary.opacity(0.9))
                         .overlay(
-                            RoundedRectangle(cornerRadius: rounded == .none ? 0 : rounded == .m ? ButtonStyleExtended.Constants.radiusM : rounded == .s ? ButtonStyleExtended.Constants.radiusS :
+                            RoundedRectangle(cornerRadius: rounded == .none ? 0 : rounded == .medium ? ButtonStyleExtended.Constants.radiusM : rounded == .small ? ButtonStyleExtended.Constants.radiusS :
                                 size == .large ? ButtonStyleExtended.Constants.heightL / 2 : ButtonStyleExtended.Constants.heightM / 2,
                                 style: .continuous)
                                 .stroke(isBordered
@@ -164,12 +164,12 @@ public struct ButtonStyleExtended: ButtonStyle {
                 .frame(maxWidth: width == .full ? .infinity : width == .standart ? nil : size == .large ? Constants.heightL : Constants.heightM,
                        minHeight: size == .large ? ButtonStyleExtended.Constants.heightL : ButtonStyleExtended.Constants.heightM)
                 .background(
-                    RoundedRectangle(cornerRadius: rounded == .none ? 0 : rounded == .m ? ButtonStyleExtended.Constants.radiusM : rounded == .s ? ButtonStyleExtended.Constants.radiusS :
+                    RoundedRectangle(cornerRadius: rounded == .none ? 0 : rounded == .medium ? ButtonStyleExtended.Constants.radiusM : rounded == .small ? ButtonStyleExtended.Constants.radiusS :
                         size == .large ? ButtonStyleExtended.Constants.heightL / 2 : ButtonStyleExtended.Constants.heightM / 2,
                         style: .continuous)
                         .fill(isEnabled ? Color.surfacePrimary : Color.surfaceSecondary.opacity(0.9))
                         .overlay(
-                            RoundedRectangle(cornerRadius: rounded == .none ? 0 : rounded == .m ? ButtonStyleExtended.Constants.radiusM : rounded == .s ? ButtonStyleExtended.Constants.radiusS :
+                            RoundedRectangle(cornerRadius: rounded == .none ? 0 : rounded == .medium ? ButtonStyleExtended.Constants.radiusM : rounded == .small ? ButtonStyleExtended.Constants.radiusS :
                                 size == .large ? ButtonStyleExtended.Constants.heightL / 2 : ButtonStyleExtended.Constants.heightM / 2,
                                 style: .continuous)
                                 .stroke(isBordered
@@ -201,12 +201,12 @@ public struct ButtonStyleExtended: ButtonStyle {
                 .frame(maxWidth: width == .full ? .infinity : width == .standart ? nil : size == .large ? Constants.heightL : Constants.heightM,
                        minHeight: size == .large ? ButtonStyleExtended.Constants.heightL : ButtonStyleExtended.Constants.heightM)
                 .background(
-                    RoundedRectangle(cornerRadius: rounded == .none ? 0 : rounded == .m ? ButtonStyleExtended.Constants.radiusM : rounded == .s ? ButtonStyleExtended.Constants.radiusS :
+                    RoundedRectangle(cornerRadius: rounded == .none ? 0 : rounded == .medium ? ButtonStyleExtended.Constants.radiusM : rounded == .small ? ButtonStyleExtended.Constants.radiusS :
                         size == .large ? ButtonStyleExtended.Constants.heightL / 2 : ButtonStyleExtended.Constants.heightM / 2,
                         style: .continuous)
                         .fill(isEnabled ? Color.backgroundSecondary : Color.backgroundSecondary.opacity(0.9))
                         .overlay(
-                            RoundedRectangle(cornerRadius: rounded == .none ? 0 : rounded == .m ? ButtonStyleExtended.Constants.radiusM : rounded == .s ? ButtonStyleExtended.Constants.radiusS :
+                            RoundedRectangle(cornerRadius: rounded == .none ? 0 : rounded == .medium ? ButtonStyleExtended.Constants.radiusM : rounded == .small ? ButtonStyleExtended.Constants.radiusS :
                                 size == .large ? ButtonStyleExtended.Constants.heightL / 2 : ButtonStyleExtended.Constants.heightM / 2,
                                 style: .continuous)
                                 .stroke(isBordered
@@ -354,7 +354,7 @@ struct ButtonStyle_Previews: PreviewProvider {
                 .style(.deleteLink)
 
             Button("Button") { print(#function) }
-                .style(.secondary, size: .m, rounded: .full, width: .full, shadow: true)
+                .style(.secondary, size: .medium, rounded: .full, width: .full, shadow: true)
 
         }.padding()
     }

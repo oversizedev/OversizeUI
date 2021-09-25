@@ -40,56 +40,56 @@ extension BarButton {
             Button(action: { presentationMode.wrappedValue.dismiss() }) {
                 Icon(.xMini)
             }
-            .style(.secondary, size: .m, rounded: .full, width: .round, shadow: true)
+            .style(.secondary, size: .medium, rounded: .full, width: .round, shadow: true)
 
         case .back:
 
             Button(action: { presentationMode.wrappedValue.dismiss() }) {
                 Icon(.arrowLeft)
             }
-            .style(.secondary, size: .m, rounded: .full, width: .round, shadow: true)
+            .style(.secondary, size: .medium, rounded: .full, width: .round, shadow: true)
 
         case let .secondary(text, action: action):
 
             Button(action: action) {
                 Text(text)
             }
-            .style(.secondary, size: .m, rounded: .full, shadow: true)
+            .style(.secondary, size: .medium, rounded: .full, shadow: true)
 
         case let .accent(text, action: action):
 
             Button(action: action) {
                 Text(text)
             }
-            .style(.accent, size: .m, rounded: .full, shadow: true)
+            .style(.accent, size: .medium, rounded: .full, shadow: true)
 
         case let .primary(text, action: action):
 
             Button(action: action) {
                 Text(text)
             }
-            .style(.primary, size: .m, rounded: .full, shadow: true)
+            .style(.primary, size: .medium, rounded: .full, shadow: true)
 
         case let .closeAction(action: action):
 
             Button(action: action) {
                 Icon(.xMini)
             }
-            .style(.secondary, size: .m, rounded: .full, width: .round, shadow: true)
+            .style(.secondary, size: .medium, rounded: .full, width: .round, shadow: true)
 
         case let .backAction(action: action):
 
             Button(action: action) {
                 Icon(.arrowLeft)
             }
-            .style(.secondary, size: .m, rounded: .full, width: .round, shadow: true)
+            .style(.secondary, size: .medium, rounded: .full, width: .round, shadow: true)
 
         case let .disabled(text):
 
             Button(action: {}) {
                 Text(text)
             }
-            .style(.gray, size: .m, rounded: .full, shadow: false)
+            .style(.gray, size: .medium, rounded: .full, shadow: false)
             .disabled(true)
         }
     }
