@@ -21,21 +21,25 @@ Selection: View
     
     private let radius: Radius
     private let data: Data
+    private let spacing: Space
     private let selectionView: () -> Selection?
     private let content: (Data.Element, Bool) -> Content
-    private let grid = [GridItem(),
-                        GridItem()]
+    private let action: (() -> Void)?
     
     public init(_ data: Data,
                 selection: Binding<Data.Element>,
                 radius: Radius = .medium,
+                spacing: Space = .xSmall,
                 @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
-                @ViewBuilder selectionView: @escaping () -> Selection? = { nil })
+                @ViewBuilder selectionView: @escaping () -> Selection? = { nil },
+                action: (() -> Void)? = nil)
     {
         self.data = data
         self.content = content
         self.selectionView = selectionView
         self.radius = radius
+        self.spacing = spacing
+        self.action = action
         _selection = selection
         _frames = State(wrappedValue: Array(repeating: .zero,
                                             count: data.count))
@@ -51,31 +55,32 @@ Selection: View
     }
     
     private var gridSelect: some View {
-        LazyVGrid(columns: grid) {
+        
+        LazyVGrid(columns: [GridItem(spacing: self.spacing), GridItem(spacing: self.spacing)],
+                  spacing: spacing) {
             ForEach(data.indices) { index in
                 
                 Button(action: {
                     selectedIndex = index
                     selection = data[index]
+                    (action)?()
                 }, label: {
                     HStack(spacing: .zero) {
-                        // Spacer()
                         content(data[index], selectedIndex == index)
-                            .animation(.easeInOut(duration: 0.3))
+                            //.animation(.easeInOut(duration: 0.3))
                             .overlay(selectedIndex == index
                                      ? itemBackground
                                         .frame(width: frames[selectedIndex ?? 0].width,
                                                height: frames[selectedIndex ?? 0].height)
                                      : nil)
-                        // Spacer()
                     }
                     .background(getUnselection(unselectionStyle: style.unseletionStyle))
                     
                 })
-                    .buttonStyle(PlainButtonStyle())
                     .background(GeometryReader { proxy in
                         Color.clear.onAppear { frames[index] = proxy.frame(in: .global) }
                     })
+                    .buttonStyle(PlainButtonStyle())
             }
         }.onAppear {
             let selctedValue = self.selection
@@ -101,7 +106,6 @@ Selection: View
     private func getSelection(selectionStyle: GridSelectSeletionStyle) -> some View {
         switch selectionStyle {
         case .shadowSurface:
-            
             RoundedRectangle(cornerRadius: radius.rawValue,
                              style: .continuous)
                 .fill(Color.surfacePrimary)
@@ -159,7 +163,7 @@ Selection: View
                     Circle()
                         .foregroundColor(Color.surfacePrimary)
                         .shadowElevaton(.z2)
-                    Icon(.checkMini)
+                    Icon(.checkMini, color: .onSurfaceHighEmphasis)
                 }.frame(width: Space.large.rawValue, height: Space.large.rawValue)
                     .padding(.small)
                 
@@ -187,12 +191,18 @@ public extension GridSelect where Selection == EmptyView {
     init(_ data: Data,
          selection: Binding<Data.Element>,
          radius: Radius = .medium,
-         @ViewBuilder content: @escaping (Data.Element, Bool) -> Content)
+         spacing: Space = .xSmall,
+         @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
+         action: (() -> Void)? = nil)
+    
     {
         self.data = data
         self.content = content
         self.radius = radius
+        self.spacing = spacing
         selectionView = { nil }
+        self.action = action
+        
         _selection = selection
         _frames = State(wrappedValue: Array(repeating: .zero,
                                             count: data.count))

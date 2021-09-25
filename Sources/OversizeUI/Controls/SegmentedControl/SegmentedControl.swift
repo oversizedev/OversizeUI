@@ -110,7 +110,6 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                                }
 
                                .padding(.vertical, .xxSmall)
-                               // .padding(.horizontal, .xxxSmall)
                                .background(selectedIndex != index
                                    ? getUnselection(unselectionStyle: style.unseletionStyle)
                                    : nil)

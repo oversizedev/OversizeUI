@@ -41,3 +41,10 @@ public extension Spacer {
         self = .init(minLength: minLength.rawValue)
     }
 }
+
+public extension GridItem {
+    init(_ size: GridItem.Size = .flexible(), spacing: Space, alignment: Alignment? = nil) {
+        self = .init(size, spacing: spacing.rawValue, alignment: alignment)
+    }
+
+}
