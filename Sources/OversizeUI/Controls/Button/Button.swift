@@ -105,7 +105,7 @@ public struct ButtonStyleExtended: ButtonStyle {
                 )
                 .opacity(configuration.isPressed ? 0.9 : 1)
                 .scaleEffect(configuration.isPressed ? 0.95 : 1)
-                .animation(.spring())
+                //.animation(.spring())
                 .shadowElevaton(shadow ? .z2 : .z0, color: Color.accent)
         }
     }
@@ -142,7 +142,7 @@ public struct ButtonStyleExtended: ButtonStyle {
                 )
                 .opacity(configuration.isPressed ? 0.9 : 1)
                 .scaleEffect(configuration.isPressed ? 0.95 : 1)
-                .animation(.spring())
+                //.animation(.spring())
                 .shadowElevaton(shadow ? .z2 : .z0, color: Color.primary)
         }
     }
@@ -179,7 +179,7 @@ public struct ButtonStyleExtended: ButtonStyle {
                 )
                 .opacity(configuration.isPressed ? 0.9 : 1)
                 .scaleEffect(configuration.isPressed ? 0.95 : 1)
-                .animation(.spring())
+                //.animation(.spring())
                 .shadowElevaton(shadow ? .z2 : .z0)
         }
     }
@@ -216,7 +216,7 @@ public struct ButtonStyleExtended: ButtonStyle {
                 )
                 .opacity(configuration.isPressed ? 0.9 : 1)
                 .scaleEffect(configuration.isPressed ? 0.95 : 1)
-                .animation(.spring())
+                //.animation(.spring())
                 .shadowElevaton(shadow ? .z2 : .z0)
         }
     }
@@ -236,7 +236,7 @@ public struct ButtonStyleExtended: ButtonStyle {
                        minHeight: size == .large ? ButtonStyleExtended.Constants.heightL : ButtonStyleExtended.Constants.heightM)
                 .opacity(configuration.isPressed ? 0.9 : 1)
                 .scaleEffect(configuration.isPressed ? 0.95 : 1)
-                .animation(.spring())
+                //.animation(.spring())
         }
     }
 
@@ -256,7 +256,7 @@ public struct ButtonStyleExtended: ButtonStyle {
                        minHeight: size == .large ? ButtonStyleExtended.Constants.heightL : ButtonStyleExtended.Constants.heightM)
                 .opacity(configuration.isPressed ? 0.9 : 1)
                 .scaleEffect(configuration.isPressed ? 0.95 : 1)
-                .animation(.spring())
+                //.animation(.spring())
         }
     }
 
@@ -276,7 +276,7 @@ public struct ButtonStyleExtended: ButtonStyle {
                        minHeight: size == .large ? ButtonStyleExtended.Constants.heightL : ButtonStyleExtended.Constants.heightM)
                 .opacity(configuration.isPressed ? 0.9 : 1)
                 .scaleEffect(configuration.isPressed ? 0.95 : 1)
-                .animation(.spring())
+                //.animation(.spring())
         }
     }
 }
