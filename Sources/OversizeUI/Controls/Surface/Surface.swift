@@ -19,12 +19,6 @@ public enum SurfacePadding: Int, CaseIterable {
     case zero
 }
 
-public enum SurfaceRadius: Int, CaseIterable {
-    case zero
-    case medium
-    case small
-}
-
 // swiftlint:disable opening_brace
 public struct Surface<Content: View>: View {
     @ObservedObject var appearanceSettings = AppearanceSettings.shared
@@ -42,9 +36,6 @@ public struct Surface<Content: View>: View {
         static var paddingXXSmall: CGFloat { Space.xxSmall.rawValue }
         static var paddingZero: CGFloat { .zero }
 
-        /// Radius
-        static var radiusMedium: CGFloat { Radius.medium.rawValue }
-        static var radiusSmall: CGFloat { Radius.small.rawValue }
     }
 
     public var padding: SurfacePadding = .xxxSmall
@@ -55,13 +46,13 @@ public struct Surface<Content: View>: View {
 
     public var background: SurfaceColor
 
-    public var radius: SurfaceRadius
+    public var radius: Radius
 
     public var border: Color?
 
     public init(background: SurfaceColor = .primary,
                 padding: SurfacePadding = .medium,
-                radius: SurfaceRadius = .medium,
+                radius: Radius = .medium,
                 border: Color? = nil,
                 @ViewBuilder content: () -> Content)
     {
@@ -92,15 +83,11 @@ public struct Surface<Content: View>: View {
                          : padding == .medium ? Constants.paddingMedium
                          : Constants.paddingZero)
             .background(
-                RoundedRectangle(cornerRadius: radius == .zero ? 0
-                    : radius == .small ? Constants.radiusSmall
-                    : Constants.radiusMedium,
+                RoundedRectangle(cornerRadius: radius.rawValue,
                     style: .circular)
                     .fill(backgroundColor)
                     .overlay(
-                        RoundedRectangle(cornerRadius: radius == .zero ? 0
-                            : radius == .small ? Constants.radiusSmall
-                            : Constants.radiusMedium,
+                        RoundedRectangle(cornerRadius: radius.rawValue,
                             style: .continuous)
                             .stroke(appearanceSettings.borderSurface
                                 ? Color.border

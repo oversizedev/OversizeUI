@@ -10,6 +10,8 @@ public enum Radius {
         AppearanceSettings.shared
     }
 
+    /// 0
+    case zero
     /// 8
     case small
     /// 12
@@ -21,6 +23,8 @@ public enum Radius {
 
     public var rawValue: CGFloat {
         switch self {
+        case .zero:
+            return .zero
         case .small:
             return CGFloat(appearanceSettings.radius)
         case .medium:
