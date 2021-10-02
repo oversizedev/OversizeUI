@@ -88,7 +88,9 @@ public struct Surface<Content: View>: View {
                     .overlay(
                         RoundedRectangle(cornerRadius: radius.rawValue,
                                          style: .continuous)
-                            .stroke(appearanceSettings.borderSurface
+                            .stroke(
+                                border != nil ? border ?? Color.clear
+                                    : appearanceSettings.borderSurface
                                 ? Color.border
                                 : backgroundColor, lineWidth: CGFloat(appearanceSettings.borderSize))
                     )
