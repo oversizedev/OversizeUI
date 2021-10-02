@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 11.09.2021
+// Created on 02.10.2021
 //
 
 import SwiftUI
@@ -35,7 +35,6 @@ public struct Surface<Content: View>: View {
         static var paddingXXXSmall: CGFloat { Space.xxxSmall.rawValue }
         static var paddingXXSmall: CGFloat { Space.xxSmall.rawValue }
         static var paddingZero: CGFloat { .zero }
-
     }
 
     public var padding: SurfacePadding = .xxxSmall
@@ -84,11 +83,11 @@ public struct Surface<Content: View>: View {
                          : Constants.paddingZero)
             .background(
                 RoundedRectangle(cornerRadius: radius.rawValue,
-                    style: .circular)
+                                 style: .circular)
                     .fill(backgroundColor)
                     .overlay(
                         RoundedRectangle(cornerRadius: radius.rawValue,
-                            style: .continuous)
+                                         style: .continuous)
                             .stroke(appearanceSettings.borderSurface
                                 ? Color.border
                                 : backgroundColor, lineWidth: CGFloat(appearanceSettings.borderSize))

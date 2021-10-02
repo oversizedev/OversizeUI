@@ -10,6 +10,7 @@ import SwiftUI
 public enum SegmentedControlStyleType {
     case `default`
     case island(selected: SegmentedControlSeletionStyle = .shadowSurface)
+    case islandLeading(selected: SegmentedControlSeletionStyle = .shadowSurface)
     case islandScroll(selected: SegmentedControlSeletionStyle = .shadowSurface)
     case onlySelection(selected: SegmentedControlSeletionStyle = .shadowSurface)
     case onlySelectionLeading(selected: SegmentedControlSeletionStyle = .shadowSurface)
@@ -84,6 +85,15 @@ public extension View {
                                                         isShowBackground: false,
                                                         seletionStyle: selected,
                                                         unseletionStyle: .clean,
+                                                        style: style))
+        case .islandLeading(selected: let selected):
+            let style = IslandSegmentedControlStyle()
+
+            return environment(\.segmentedControlStyle,
+                               AnySegmentedControlStyle(isEquallySpacing: false,
+                                                        isShowBackground: false,
+                                                        seletionStyle: selected,
+                                                        unseletionStyle: .surface,
                                                         style: style))
         }
     }

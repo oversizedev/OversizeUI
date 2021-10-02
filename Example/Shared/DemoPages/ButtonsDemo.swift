@@ -32,7 +32,7 @@ struct ButtonsDemo: View {
                     .style(.deleteLink)
 
                 Button("Button") { print(#function) }
-                    .style(.secondary, size: .m, rounded: .full, width: .full, shadow: true)
+                    .style(.secondary, size: .medium, rounded: .full, width: .full, shadow: true)
 
             }.padding()
         }

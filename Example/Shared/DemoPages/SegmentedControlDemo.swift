@@ -7,7 +7,7 @@ import OversizeUI
 import SwiftUI
 
 struct SegmentedControlDemo: View {
-    var items = ["One", "Two", "Three", "Four"]
+    var items = ["One", "Two", "Three", "Four long"]
     @State var selection = ""
 
     var body: some View {

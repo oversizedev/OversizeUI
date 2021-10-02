@@ -6,7 +6,7 @@
 import SwiftUI
 
 struct SegmentedControlPreview: View {
-    var items = ["One", "Two", "Three", "Four"]
+    var items = ["One", "Two", "Three", "Four long"]
 
     @State var selection = ""
 
