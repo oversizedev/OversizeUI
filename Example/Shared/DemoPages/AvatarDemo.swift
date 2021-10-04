@@ -8,7 +8,8 @@ import SwiftUI
 
 struct AvatarDemo: View {
     var body: some View {
-        VStack {
+        ScrollView {
+            VStack(spacing: .xSmall) {
             AvatarView(firstName: "Jhon", size: .small)
 
             AvatarView(firstName: "Jhon", lastName: "Smith", size: .small, stroke: true)
@@ -20,6 +21,7 @@ struct AvatarDemo: View {
             AvatarView(firstName: "Jhon", size: .l)
 
             AvatarView(firstName: "Jhon", lastName: "Smith", size: .l, stroke: true)
+        }
         }
         .navigationBarTitle("Avatar", displayMode: .inline)
     }

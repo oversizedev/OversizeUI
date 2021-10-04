@@ -14,9 +14,9 @@ struct RowDemo: View {
 
             Row("Title", subtitle: "Subtitle")
 
-//            Row("Title", subtitle: "Subtitle", leadingType: .icon(.calendar), trallingType: .radio, paddingVertical: .medium)
-//
-//            Row("Title", subtitle: "Subtitle", leadingType: .icon(.calendar), trallingType: .radio, paddingVertical: .small)
+            Row("Title", subtitle: "Subtitle", leadingType: .icon(.calendar), trallingType: .radio, paddingVertical: .medium)
+
+            Row("Title", subtitle: "Subtitle", leadingType: .icon(.calendar), trallingType: .radio, paddingVertical: .small)
         }
     }
 }
