@@ -33,23 +33,27 @@ public struct ColorSelector: View {
 
                             Group {
                                 ColorPickerWithoutBorder(selection: $selection)
-                                    .padding(.horizontal, .xxSmall)
+                                    .padding(.horizontal, .xxxSmall)
                                     .padding(.all, .small)
 
                                 ForEach(colors, id: \.self) { color in
                                     ZStack {
                                         Circle()
                                             .fill(color)
-                                            .frame(width: 28, height: 28)
+                                            .frame(width: 32, height: 32)
+                                            .overlay(
+                                                Circle()
+                                                    .strokeBorder(Color.border, lineWidth: 1)
+                                            )
                                             .onTapGesture(perform: {
                                                 selection = color
                                             })
-                                            .padding(8)
+                                            .padding(6)
 
                                         if color == selection {
                                             Circle()
                                                 .stroke(color, lineWidth: 3)
-                                                .frame(width: 36, height: 36)
+                                                .frame(width: 40, height: 40)
                                         }
                                     }
                                 }

@@ -104,18 +104,15 @@ public struct Row: View {
         case .none:
             EmptyView()
         case let .icon(icon):
-
             Icon(icon)
                 .padding(.trailing, Constants.spacingIconAndText)
 
         case let .image(image):
-
             image
                 .resizable()
                 .frame(width: 32, height: 32)
 
         case let .avatar(avatar):
-
             avatar
         case let .iconOnSurface(icon):
             Surface(background: .secondary, padding: .xxSmall) {

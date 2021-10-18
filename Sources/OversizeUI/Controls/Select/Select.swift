@@ -108,14 +108,15 @@ struct Select_Preview: PreviewProvider {
                 } selectionView: { selected in
                     Text(selected)
                 }
-                .previewDisplayName("Default")
+
             }
-            .previewLayout(.sizeThatFits)
+
             .padding()
         }
     }
 
     static var previews: some View {
         SelectPreview()
+            .previewLayout(.sizeThatFits)
     }
 }
