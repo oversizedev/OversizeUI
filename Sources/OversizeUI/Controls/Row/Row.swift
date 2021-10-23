@@ -22,14 +22,6 @@ public enum RowLeadingType {
     case avatar(_ avatar: AvatarView)
 }
 
-private struct RowActionButtonStyle: ButtonStyle {
-    func makeBody(configuration: Self.Configuration) -> some View {
-        configuration.label
-            .background(configuration.isPressed ? Color.surfaceSecondary : Color.clear)
-            .contentShape(Rectangle())
-    }
-}
-
 public struct Row: View {
     private enum Constants {
         /// Spacing
@@ -195,6 +187,20 @@ public struct Row: View {
     }
 
     func createToggle() {}
+}
+
+public struct RowActionButtonStyle: ButtonStyle {
+    public func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .background(configuration.isPressed ? Color.surfaceSecondary : Color.clear)
+            .contentShape(Rectangle())
+    }
+}
+
+public extension ButtonStyle where Self == RowActionButtonStyle {
+    static var row: RowActionButtonStyle {
+        RowActionButtonStyle()
+    }
 }
 
 // swiftlint:disable all
