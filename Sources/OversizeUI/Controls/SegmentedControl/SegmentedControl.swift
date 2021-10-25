@@ -115,15 +115,15 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                                    : nil)
                            })
 
-                        .buttonStyle(PlainButtonStyle())
-                        .background(GeometryReader { proxy in
-                            Color.clear.onAppear { frames[index] = proxy.frame(in: .global) }
-                        })
-                        .alignmentGuide(.horizontalCenterAlignment,
-                                        isActive: selectedIndex == index) { dimensions in
-                            dimensions[HorizontalAlignment.center]
-                        }
-                        .padding(.trailing, style.unseletionStyle == .surface ? Space.xSmall.rawValue : 0)
+                           .buttonStyle(PlainButtonStyle())
+                           .background(GeometryReader { proxy in
+                               Color.clear.onAppear { frames[index] = proxy.frame(in: .global) }
+                           })
+                           .alignmentGuide(.horizontalCenterAlignment,
+                                           isActive: selectedIndex == index) { dimensions in
+                               dimensions[HorizontalAlignment.center]
+                           }
+                           .padding(.trailing, style.unseletionStyle == .surface ? Space.xSmall.rawValue : 0)
                 }
             }
         }
@@ -164,15 +164,15 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                                    ? getUnselection(unselectionStyle: style.unseletionStyle)
                                    : nil)
                            })
-                        .buttonStyle(PlainButtonStyle())
-                        .background(GeometryReader { proxy in
-                            Color.clear.onAppear { frames[index] = proxy.frame(in: .global) }
-                        })
-                        .alignmentGuide(.horizontalCenterAlignment,
-                                        isActive: selectedIndex == index) { dimensions in
-                            dimensions[HorizontalAlignment.center]
-                        }
-                        .padding(.trailing, style.unseletionStyle == .surface ? Space.xSmall.rawValue : 0)
+                           .buttonStyle(PlainButtonStyle())
+                           .background(GeometryReader { proxy in
+                               Color.clear.onAppear { frames[index] = proxy.frame(in: .global) }
+                           })
+                           .alignmentGuide(.horizontalCenterAlignment,
+                                           isActive: selectedIndex == index) { dimensions in
+                               dimensions[HorizontalAlignment.center]
+                           }
+                           .padding(.trailing, style.unseletionStyle == .surface ? Space.xSmall.rawValue : 0)
                 }
             }
         }

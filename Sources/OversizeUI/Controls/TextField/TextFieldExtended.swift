@@ -80,7 +80,7 @@ public struct TextFieldExtended: View {
                                   onEditingChanged: { focused in
                                       self.focused = focused
                                   })
-                            .fontStyle(.subtitle1, color: .onSurfaceHighEmphasis)
+                                  .fontStyle(.subtitle1, color: .onSurfaceHighEmphasis)
                     }
 
                     if trallingImage != .none {

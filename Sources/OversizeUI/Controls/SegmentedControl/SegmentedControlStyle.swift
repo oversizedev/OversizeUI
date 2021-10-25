@@ -86,7 +86,7 @@ public extension View {
                                                         seletionStyle: selected,
                                                         unseletionStyle: .clean,
                                                         style: style))
-        case .islandLeading(selected: let selected):
+        case let .islandLeading(selected: selected):
             let style = IslandSegmentedControlStyle()
 
             return environment(\.segmentedControlStyle,

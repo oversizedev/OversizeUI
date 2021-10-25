@@ -1,8 +1,6 @@
 //
-//  File.swift
-//  
-//
-//  Created by alexander on 05.10.2021.
+// Copyright © 2021 Alexander Romanov
+// Created on 05.10.2021
 //
 
 import SwiftUI
@@ -10,9 +8,9 @@ import SwiftUI
 public extension View {
     func iOS<Content: View>(_ modifier: (Self) -> Content) -> some View {
         #if os(iOS)
-        return modifier(self)
+            return modifier(self)
         #else
-        return self
+            return self
         #endif
     }
 }
@@ -20,9 +18,9 @@ public extension View {
 public extension View {
     func macOS<Content: View>(_ modifier: (Self) -> Content) -> some View {
         #if os(macOS)
-        return modifier(self)
+            return modifier(self)
         #else
-        return self
+            return self
         #endif
     }
 }
@@ -30,9 +28,9 @@ public extension View {
 public extension View {
     func tvOS<Content: View>(_ modifier: (Self) -> Content) -> some View {
         #if os(tvOS)
-        return modifier(self)
+            return modifier(self)
         #else
-        return self
+            return self
         #endif
     }
 }
@@ -40,9 +38,9 @@ public extension View {
 public extension View {
     func watchOS<Content: View>(_ modifier: (Self) -> Content) -> some View {
         #if os(watchOS)
-        return modifier(self)
+            return modifier(self)
         #else
-        return self
+            return self
         #endif
     }
 }

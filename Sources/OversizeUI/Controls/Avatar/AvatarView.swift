@@ -85,7 +85,7 @@ public struct AvatarView: View {
                                     : .largeTitle,
                                     color: .onPrimaryHighEmphasis)
                         }
-                }
+                    }
             }
         }
     }

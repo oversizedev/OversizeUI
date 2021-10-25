@@ -34,7 +34,7 @@ struct GridSelectDemo: View {
                                }.padding()
                            })
 
-                    .gridSelectStyle(SelectionOnlyGridSelectStyle())
+                           .gridSelectStyle(SelectionOnlyGridSelectStyle())
             }
             .padding()
         }

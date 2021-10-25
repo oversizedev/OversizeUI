@@ -108,7 +108,6 @@ struct Select_Preview: PreviewProvider {
                 } selectionView: { selected in
                     Text(selected)
                 }
-
             }
 
             .padding()

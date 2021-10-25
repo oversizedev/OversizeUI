@@ -76,10 +76,10 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
                     .background(getUnselection(unselectionStyle: style.unseletionStyle))
 
                 })
-                    .background(GeometryReader { proxy in
-                        Color.clear.onAppear { frames[index] = proxy.frame(in: .global) }
-                    })
-                    .buttonStyle(PlainButtonStyle())
+                .background(GeometryReader { proxy in
+                    Color.clear.onAppear { frames[index] = proxy.frame(in: .global) }
+                })
+                .buttonStyle(PlainButtonStyle())
             }
         }.onAppear {
             let selctedValue = self.selection
@@ -220,7 +220,7 @@ struct GridSelect_Preview: PreviewProvider {
                                    Text(item)
                                }.padding()
                            })
-                    .previewDisplayName("Default")
+                           .previewDisplayName("Default")
 
                 GridSelect(items, selection: $selection,
                            content: { item, _ in
@@ -229,8 +229,8 @@ struct GridSelect_Preview: PreviewProvider {
                                    Text(item)
                                }.padding()
                            })
-                    .previewDisplayName("Selection Only")
-                    .gridSelectStyle(SelectionOnlyGridSelectStyle())
+                           .previewDisplayName("Selection Only")
+                           .gridSelectStyle(SelectionOnlyGridSelectStyle())
             }
             .previewLayout(.sizeThatFits)
             .padding()

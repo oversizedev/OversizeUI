@@ -6,12 +6,9 @@
 import SwiftUI
 
 public struct AppearanceSettingView: View {
-    
     @Environment(\.presentationMode) var presentationMode
-    
-    public init() {
-      
-    }
+
+    public init() {}
 
     @ObservedObject var theme = AppearanceSettings.shared
 
@@ -36,14 +33,12 @@ public struct AppearanceSettingView: View {
 
     public var body: some View {
         #if os(iOS)
-        VStack {
-            iOSSettings
-        }
+            VStack {
+                iOSSettings
+            }
             .navigationBarTitle("Hidden Title")
-             .navigationBarHidden(true)
+            .navigationBarHidden(true)
 
-
-        
         #else
             macSettings
         #endif
@@ -63,7 +58,7 @@ public struct AppearanceSettingView: View {
                 }
             }
             .scrollWithNavigationBar("App", style: .fixed($offset), background: Color.backgroundSecondary) {
-                BarButton(type: .backAction(action: { presentationMode.wrappedValue.dismiss() } ) )
+                BarButton(type: .backAction(action: { presentationMode.wrappedValue.dismiss() }))
             } trailingBar: {} bottomBar: {}
             .background(Color.backgroundSecondary.ignoresSafeArea(.all))
             .preferredColorScheme(theme.appearance.colorScheme)

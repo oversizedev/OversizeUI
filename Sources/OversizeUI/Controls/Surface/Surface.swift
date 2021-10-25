@@ -91,8 +91,9 @@ public struct Surface<Content: View>: View {
                             .stroke(
                                 border != nil ? border ?? Color.clear
                                     : appearanceSettings.borderSurface
-                                ? Color.border
-                                : backgroundColor, lineWidth: CGFloat(appearanceSettings.borderSize))
+                                    ? Color.border
+                                    : backgroundColor, lineWidth: CGFloat(appearanceSettings.borderSize)
+                            )
                     )
             )
     }
@@ -142,16 +143,16 @@ struct Surface_Previews: PreviewProvider {
                 Text("Text")
                 Spacer()
             }}
-                .elevation(.z2)
-                .previewLayout(.fixed(width: 375, height: 200))
+            .elevation(.z2)
+            .previewLayout(.fixed(width: 375, height: 200))
 
             Surface { HStack {
                 Text("Text")
                 Spacer()
             }}
-                .elevation(.z1)
-                .preferredColorScheme(.dark)
-                .previewLayout(.fixed(width: 320, height: 200))
+            .elevation(.z1)
+            .preferredColorScheme(.dark)
+            .previewLayout(.fixed(width: 320, height: 200))
         }
         .padding()
     }
