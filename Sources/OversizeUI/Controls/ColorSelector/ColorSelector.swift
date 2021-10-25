@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 11.09.2021
+// Created on 25.10.2021
 //
 
 import SwiftUI
@@ -32,9 +32,17 @@ public struct ColorSelector: View {
                         label: ColorSelectorConfiguration.Label(content:
 
                             Group {
-                                ColorPickerWithoutBorder(selection: $selection)
-                                    .padding(.horizontal, .xxxSmall)
-                                    .padding(.all, .small)
+                                ZStack {
+                                    ColorPickerWithoutBorder(selection: $selection)
+                                        .padding(.horizontal, .xxxSmall)
+                                        .padding(.all, .small)
+
+                                    if !self.colors.contains(selection) {
+                                        Circle()
+                                            .stroke(self.selection, lineWidth: 3)
+                                            .frame(width: 40, height: 40)
+                                    }
+                                }
 
                                 ForEach(colors, id: \.self) { color in
                                     ZStack {
@@ -77,12 +85,20 @@ public struct ColorSelector: View {
             selection
                 .frame(width: 0, height: 0, alignment: .center)
                 .cornerRadius(19.0)
-                .background(AngularGradient(gradient: Gradient(colors:
-                        [.red, .yellow, .green, .blue, .purple, .red]),
-                    center: .center, startAngle: .zero, endAngle: .degrees(360)).cornerRadius(19)
-                        .frame(width: 28, height: 28))
-                .overlay(ColorPicker("", selection: $selection, supportsOpacity: false)
-                    .labelsHidden().opacity(0.015)
+                .background(
+                    ZStack {
+                        AngularGradient(gradient: Gradient(colors:
+                            [.red, .yellow, .green, .blue, .purple, .red]),
+                        center: .center, startAngle: .zero, endAngle: .degrees(360)).cornerRadius(16)
+                            .frame(width: 32, height: 32)
+
+                        Circle()
+                            .strokeBorder(Color.border, lineWidth: 1)
+                    }
+                )
+                .overlay(
+                    ColorPicker("", selection: $selection, supportsOpacity: false)
+                        .labelsHidden().opacity(0.015)
                 )
         }
     }

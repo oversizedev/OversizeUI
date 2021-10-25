@@ -33,7 +33,7 @@ public enum ButtonWidth {
     case standart
 }
 
-// swiftlint:disable line_length type_body_length
+// swiftlint:disable all
 public struct ButtonStyleExtended: ButtonStyle {
     @ObservedObject var appearanceSettings = AppearanceSettings.shared
 
