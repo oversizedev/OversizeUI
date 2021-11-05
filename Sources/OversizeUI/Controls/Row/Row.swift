@@ -19,6 +19,7 @@ public enum RowLeadingType {
     case icon(_ name: Icons)
     case iconOnSurface(_ name: Icons)
     case image(_ image: Image)
+    case systemImage(_ imageName: String)
     case avatar(_ avatar: AvatarView)
 }
 
@@ -110,6 +111,12 @@ public struct Row: View {
             Surface(background: .secondary, padding: .xxSmall) {
                 Icon(icon)
             }.padding(.trailing, Constants.spacingIconAndText)
+        case let .systemImage(systemImage):
+            Image(systemName: systemImage)
+                .foregroundColor(Color.onBackgroundHighEmphasis)
+                .font(.system(size: 24))
+                .frame(width: 24, height: 24, alignment: .center)
+                .padding(.trailing, Constants.spacingIconAndText)
         }
     }
 

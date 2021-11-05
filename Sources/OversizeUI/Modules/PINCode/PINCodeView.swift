@@ -1,15 +1,18 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 31.10.2021
+// Created on 05.11.2021
 //
 
 import SwiftUI
 
 public enum PINCodeViewState {
-    case `default`
-    case loading
-    case error
-    case susses
+    case locked, loading, error, unlocked
+}
+
+public enum BiometricType: String {
+    case none = ""
+    case touchID = "Touch ID"
+    case faceID = "Face ID"
 }
 
 public struct PINCodeView: View {
@@ -29,27 +32,73 @@ public struct PINCodeView: View {
     private var gridItemLayout = Array(repeating: GridItem(.flexible(), spacing: 0), count: 3)
 
     private let action: (() -> Void)?
+    private let biometricAction: (() -> Void)?
 
     private let title: String?
 
     private let errorText: String?
 
+    private let pinCodeEnabled: Bool
+    private let biometricEnabled: Bool
+    private let biometricType: BiometricType
+
     public init(pinCode: Binding<String>,
-                state: Binding<PINCodeViewState> = .constant(.default),
+                state: Binding<PINCodeViewState> = .constant(.locked),
                 maxCount: Int = 4,
                 title: String? = nil,
                 errorText: String? = nil,
-                action: (() -> Void)? = nil)
+                pinCodeEnabled: Bool = true,
+                biometricEnabled: Bool = false,
+                biometricType: BiometricType = .faceID,
+                action: (() -> Void)? = nil,
+                biometricAction: (() -> Void)? = nil)
     {
         _pinCode = pinCode
         _state = state
         self.maxCount = maxCount
         self.title = title
         self.errorText = errorText
+        self.pinCodeEnabled = pinCodeEnabled
+        self.biometricEnabled = biometricEnabled
+        self.biometricType = biometricType
         self.action = action
+        self.biometricAction = biometricAction
     }
 
     public var body: some View {
+        content()
+            .background(Color.surfacePrimary.ignoresSafeArea(.all))
+    }
+
+    @ViewBuilder
+    func content() -> some View {
+        switch pinCodeEnabled {
+        case true:
+            pinCodeView
+        case false:
+            biometricView
+        }
+    }
+
+    var biometricView: some View {
+        VStack {
+            Spacer()
+
+            Text(biometricType.rawValue)
+                .fontStyle(.title2, color: .onBackgroundHighEmphasis)
+
+            Spacer()
+
+            biometricImage()
+                .onTapGesture {
+                    (biometricAction)?()
+                }
+
+            Spacer()
+        }
+    }
+
+    var pinCodeView: some View {
         VStack {
             Spacer()
 
@@ -71,7 +120,6 @@ public struct PINCodeView: View {
 
             numpad
         }
-        .background(Color.surfacePrimary.ignoresSafeArea(.all))
     }
 
     var numpad: some View {
@@ -103,19 +151,48 @@ public struct PINCodeView: View {
             .disabled(state == .loading)
 
             Button {
-                deleteLastNumber()
+                if pinCode.isEmpty, biometricEnabled {
+                    (biometricAction)?()
+                } else if pinCode.isEmpty, !biometricEnabled {
+                } else {
+                    deleteLastNumber()
+                }
             } label: {
-                Icon(.delete)
-            }.opacity(pinCode.isEmpty ? 0 : 1)
+                if pinCode.isEmpty, biometricEnabled {
+                    biometricImage()
+                } else if pinCode.isEmpty, !biometricEnabled {
+                    EmptyView()
+                } else {
+                    Icon(.delete)
+                }
+            } // .opacity(pinCode.isEmpty && biometricEnabled ? 1 : 0)
         }
         .paddingContent()
         .padding(.bottom, .xLarge)
     }
 
     @ViewBuilder
+    private func biometricImage() -> some View {
+        switch biometricType {
+        case .none:
+            EmptyView()
+        case .touchID:
+            Image(systemName: "touchid")
+                .foregroundColor(Color.onBackgroundHighEmphasis)
+                .font(.system(size: 32))
+                .frame(width: 24, height: 24, alignment: .center)
+        case .faceID:
+            Image(systemName: "faceid")
+                .font(.system(size: 32))
+                .foregroundColor(Color.onBackgroundHighEmphasis)
+                .frame(width: 24, height: 24, alignment: .center)
+        }
+    }
+
+    @ViewBuilder
     private func pinCounter(state: PINCodeViewState) -> some View {
         switch state {
-        case .default, .error, .susses:
+        case .locked, .error, .unlocked:
             HStack(spacing: .xSmall) {
                 ForEach(0 ..< maxCount, id: \.self) { number in
                     Circle()
@@ -147,27 +224,23 @@ public struct PINCodeView: View {
     }
 
     func appendNumber(number: Character) {
-        state = .default
+        state = .locked
 
         if pinCode.count > (maxCount - 1) {
             print("return")
-            // isDisabledNumpad = true
             return
         }
 
         if pinCode.count >= (maxCount - 1) {
             pinCode.append(number)
-            print(pinCode)
             enterAction()
-            // isDisabledNumpad = true
         } else {
             pinCode.append(number)
-            print(pinCode)
         }
     }
 
     func deleteLastNumber() {
-        state = .default
+        state = .locked
 
         if pinCode.count <= maxCount {
             // isDisabledNumpad = false
@@ -195,6 +268,6 @@ public struct NumpadButtonStyle: ButtonStyle {
 
 struct PINCodeView_Previews: PreviewProvider {
     static var previews: some View {
-        PINCodeView(pinCode: .constant("123"), state: .constant(.default))
+        PINCodeView(pinCode: .constant("123"), state: .constant(.locked))
     }
 }
