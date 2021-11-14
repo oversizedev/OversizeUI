@@ -3,7 +3,7 @@
 // Created on 26.08.2021
 //
 
-import Foundation
+import SwiftUI
 
 // swiftlint:disable identifier_name
 public enum Elevation: Int, CaseIterable {
@@ -13,3 +13,4 @@ public enum Elevation: Int, CaseIterable {
     case z3
     case z4
 }
+

@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 08.11.2021
+// Created on 15.11.2021
 //
 
 import SwiftUI
@@ -14,6 +14,7 @@ public enum SurfaceColor: Int, CaseIterable {
 // swiftlint:disable opening_brace
 public struct Surface<Content: View>: View {
     @ObservedObject var appearanceSettings = AppearanceSettings.shared
+    @Environment(\.elevation) private var elevation: Elevation
 
     private enum Constants {
         /// Colors
@@ -75,6 +76,7 @@ public struct Surface<Content: View>: View {
                                     : backgroundColor, lineWidth: CGFloat(appearanceSettings.borderSize)
                             )
                     )
+                    .shadowElevaton(elevation)
             )
     }
 
