@@ -1,14 +1,12 @@
 //
-//  File.swift
-//  
-//
-//  Created by alexander on 15.11.2021.
+// Copyright © 2021 Alexander Romanov
+// Created on 15.11.2021
 //
 
 import SwiftUI
 
 struct ElevationStateKey: EnvironmentKey {
-    public static var defaultValue: Elevation = .z1
+    public static var defaultValue: Elevation = .z0
 }
 
 public extension EnvironmentValues {
@@ -20,7 +18,7 @@ public extension EnvironmentValues {
 
 public extension View {
     @ViewBuilder
-    func elevation(_ elevation: Elevation = .z1) -> some View {
+    func elevation(_ elevation: Elevation = .z0) -> some View {
         environment(\.elevation, elevation)
     }
 }
