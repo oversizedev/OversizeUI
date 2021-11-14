@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 25.10.2021
+// Created on 09.11.2021
 //
 
 import SwiftUI
@@ -24,6 +24,8 @@ public enum RowLeadingType {
 }
 
 public struct Row: View {
+    @Environment(\.multilineTextAlignment) var multilineTextAlignment
+
     private enum Constants {
         /// Spacing
         static var spacingIconAndText: CGFloat { Space.xxSmall.rawValue }
@@ -67,28 +69,62 @@ public struct Row: View {
             Button {
                 (action)?()
             } label: {
-                content
+                contentAlignment(multilineTextAlignment)
             }
             .buttonStyle(RowActionButtonStyle())
         } else {
-            content
+            contentAlignment(multilineTextAlignment)
         }
     }
 
-    public var content: some View {
-        VStack(alignment: .leading) {
-            HStack(spacing: .xSmall) {
-                leading()
+    @ViewBuilder
+    private func contentAlignment(_ textAlignment: TextAlignment) -> some View {
+        switch textAlignment {
+        case .leading:
+            VStack(alignment: .leading) {
+                HStack(spacing: .xSmall) {
+                    leading()
 
-                text
+                    text
 
-                Spacer()
+                    Spacer()
 
-                tralling()
+                    tralling()
+                }
             }
+            .padding(.vertical, paddingVertical.rawValue)
+            .padding(.horizontal, paddingHorizontal.rawValue)
+        case .center:
+            VStack(alignment: .leading) {
+                HStack(spacing: .xSmall) {
+                    leading()
+
+                    Spacer()
+
+                    text
+
+                    Spacer()
+
+                    tralling()
+                }
+            }
+            .padding(.vertical, paddingVertical.rawValue)
+            .padding(.horizontal, paddingHorizontal.rawValue)
+        case .trailing:
+            VStack(alignment: .leading) {
+                HStack(spacing: .xSmall) {
+                    leading()
+
+                    Spacer()
+
+                    text
+
+                    tralling()
+                }
+            }
+            .padding(.vertical, paddingVertical.rawValue)
+            .padding(.horizontal, paddingHorizontal.rawValue)
         }
-        .padding(.vertical, paddingVertical.rawValue)
-        .padding(.horizontal, paddingHorizontal.rawValue)
     }
 
     @ViewBuilder

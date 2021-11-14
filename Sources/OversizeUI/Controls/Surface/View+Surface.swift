@@ -9,7 +9,7 @@ import SwiftUI
 public extension View {
     func surface(elevation: Elevation = .z0,
                  background: SurfaceColor = .primary,
-                 padding: SurfacePadding = .medium,
+                 padding: Space = .medium,
                  radius: Radius = .medium) -> some View
     {
         Surface(background: background,

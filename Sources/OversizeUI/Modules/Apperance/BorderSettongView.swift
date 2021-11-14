@@ -8,7 +8,7 @@ import SwiftUI
 public struct BorderSettingView: View {
     public init() {}
 
-    @ObservedObject var theme = AppearanceSettings.shared
+    @StateObject var theme = AppearanceSettings.shared
 
     @State var offset = CGPoint(x: 0, y: 0)
 

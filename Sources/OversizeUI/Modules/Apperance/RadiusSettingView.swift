@@ -6,7 +6,7 @@
 import SwiftUI
 
 struct RadiusSettingView: View {
-    @ObservedObject var theme = AppearanceSettings.shared
+    @StateObject var theme = AppearanceSettings.shared
 
     @State var offset = CGPoint(x: 0, y: 0)
 

@@ -24,7 +24,7 @@ public enum AppearanceSettingsNames {
 
 // swiftlint:disable trailing_comma opening_brace
 public final class AppearanceSettings: ObservableObject {
-    private init() {}
+    public init() {}
 
     public static let shared = AppearanceSettings()
 

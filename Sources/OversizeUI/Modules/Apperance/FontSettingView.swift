@@ -8,7 +8,7 @@ import SwiftUI
 public struct FontSettingView: View {
     public init() {}
 
-    @ObservedObject private var theme = AppearanceSettings.shared
+    @StateObject private var theme = AppearanceSettings.shared
 
     @State private var activeTab: FontSetting = .title
 

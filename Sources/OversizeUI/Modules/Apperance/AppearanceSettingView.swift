@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 25.10.2021
+// Created on 06.11.2021
 //
 
 import SwiftUI
@@ -10,10 +10,10 @@ public struct AppearanceSettingView: View {
 
     public init() {}
 
-    @ObservedObject var theme = AppearanceSettings.shared
+    @StateObject var theme = AppearanceSettings.shared
 
     #if os(iOS)
-        @ObservedObject var iconSettings = AppIconSettings()
+        @StateObject var iconSettings = AppIconSettings()
     #endif
 
     // swiftlint:disable trailing_comma

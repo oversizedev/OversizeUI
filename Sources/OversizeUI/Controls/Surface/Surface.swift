@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 25.10.2021
+// Created on 08.11.2021
 //
 
 import SwiftUI
@@ -9,14 +9,6 @@ public enum SurfaceColor: Int, CaseIterable {
     case primary
     case secondary
     case tertiary
-}
-
-public enum SurfacePadding: Int, CaseIterable {
-    case xxxSmall
-    case xxSmall
-    case medium
-    case small
-    case zero
 }
 
 // swiftlint:disable opening_brace
@@ -28,16 +20,9 @@ public struct Surface<Content: View>: View {
         static var colorPrimary: Color { Color.surfacePrimary }
         static var colorSecondary: Color { Color.surfaceSecondary }
         static var colorTertiary: Color { Color.surfaceTertiary }
-
-        /// Size
-        static var paddingMedium: CGFloat { Space.medium.rawValue }
-        static var paddingSmall: CGFloat { Space.small.rawValue }
-        static var paddingXXXSmall: CGFloat { Space.xxxSmall.rawValue }
-        static var paddingXXSmall: CGFloat { Space.xxSmall.rawValue }
-        static var paddingZero: CGFloat { .zero }
     }
 
-    public var padding: SurfacePadding = .xxxSmall
+    public var padding: Space
 
     private let content: Content
 
@@ -50,7 +35,7 @@ public struct Surface<Content: View>: View {
     public var border: Color?
 
     public init(background: SurfaceColor = .primary,
-                padding: SurfacePadding = .medium,
+                padding: Space = .medium,
                 radius: Radius = .medium,
                 border: Color? = nil,
                 @ViewBuilder content: () -> Content)
@@ -75,12 +60,7 @@ public struct Surface<Content: View>: View {
 
     public var body: some View {
         content
-            .padding(.all,
-                     padding == .xxxSmall ? Constants.paddingXXXSmall
-                         : padding == .xxSmall ? Constants.paddingXXSmall
-                         : padding == .small ? Constants.paddingSmall
-                         : padding == .medium ? Constants.paddingMedium
-                         : Constants.paddingZero)
+            .padding(.all, padding.rawValue)
             .background(
                 RoundedRectangle(cornerRadius: radius.rawValue,
                                  style: .circular)
