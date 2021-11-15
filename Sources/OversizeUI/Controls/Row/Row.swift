@@ -60,11 +60,11 @@ public struct Row: View {
     }
 
     public var body: some View {
-        getSurface()
+        actionableRow()
     }
 
     @ViewBuilder
-    private func getSurface() -> some View {
+    private func actionableRow() -> some View {
         if action != nil {
             Button {
                 (action)?()
@@ -228,8 +228,6 @@ public struct Row: View {
             }
         }
     }
-
-    func createToggle() {}
 }
 
 public struct RowActionButtonStyle: ButtonStyle {

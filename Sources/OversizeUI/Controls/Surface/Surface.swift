@@ -12,7 +12,7 @@ public enum SurfaceColor: Int, CaseIterable {
 }
 
 // swiftlint:disable opening_brace
-public struct Surface<Content: View>: View {
+public struct Surface<Label: View>: View {
     @ObservedObject var appearanceSettings = AppearanceSettings.shared
     @Environment(\.elevation) private var elevation: Elevation
 
@@ -25,7 +25,7 @@ public struct Surface<Content: View>: View {
 
     public var padding: Space
 
-    private let content: Content
+    private let label: Label
 
     public var backgroundColor: Color = Constants.colorPrimary
 
@@ -35,32 +35,68 @@ public struct Surface<Content: View>: View {
 
     public var border: Color?
 
+    private let action: (() -> Void)?
+
     public init(background: SurfaceColor = .primary,
                 padding: Space = .medium,
                 radius: Radius = .medium,
                 border: Color? = nil,
-                @ViewBuilder content: () -> Content)
+                action: (() -> Void)? = nil,
+                @ViewBuilder label: () -> Label)
     {
-        self.content = content()
+        self.label = label()
         self.padding = padding
         self.background = background
         self.radius = radius
         self.border = border
+        self.action = action
         setBackground(background)
     }
 
     public init(background: SurfaceColor = .primary,
-                @ViewBuilder content: () -> Content)
+                action: (() -> Void)? = nil,
+                @ViewBuilder label: () -> Label)
     {
-        self.content = content()
+        self.label = label()
         padding = .medium
         self.background = background
         radius = .medium
+        self.action = action
+        setBackground(background)
+    }
+
+    public init(
+        action: (() -> Void)? = nil,
+        @ViewBuilder label: () -> Label
+    ) {
+        self.label = label()
+        padding = .medium
+        background = .primary
+        radius = .medium
+        self.action = action
         setBackground(background)
     }
 
     public var body: some View {
-        content
+        actionableSurface()
+    }
+
+    @ViewBuilder
+    private func actionableSurface() -> some View {
+        if action != nil {
+            Button {
+                (action)?()
+            } label: {
+                surface
+            }
+            .buttonStyle(SurfaceButtonStyle())
+        } else {
+            surface
+        }
+    }
+
+    public var surface: some View {
+        label
             .padding(.all, padding.rawValue)
             .background(
                 RoundedRectangle(cornerRadius: radius.rawValue,
@@ -89,6 +125,13 @@ public struct Surface<Content: View>: View {
         case .tertiary:
             backgroundColor = Constants.colorTertiary
         }
+    }
+}
+
+public struct SurfaceButtonStyle: ButtonStyle {
+    public func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.95 : 1)
     }
 }
 
