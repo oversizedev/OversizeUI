@@ -222,7 +222,7 @@ public struct Row: View {
                 .fontStyle(.subtitle1, color: .onSurfaceHighEmphasis)
 
             if subtitle != "" {
-                Text(title)
+                Text(subtitle)
                     .fontStyle(.subtitle2)
                     .foregroundColor(.onSurfaceMediumEmphasis)
             }
