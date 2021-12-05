@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 05.12.2021
+// Created on 06.12.2021
 //
 
 import SwiftUI
@@ -28,6 +28,7 @@ public enum RowLeadingType {
 
 public struct Row: View {
     @Environment(\.multilineTextAlignment) var multilineTextAlignment
+    @Environment(\.isPremium) var premiumStatus
 
     private enum Constants {
         /// Spacing
@@ -44,6 +45,8 @@ public struct Row: View {
     private let trallingType: RowTrailingType
 
     private let action: (() -> Void)?
+
+    private var isPremiumOption: Bool = false
 
     public init(_ title: String,
                 subtitle: String = "",
@@ -70,7 +73,10 @@ public struct Row: View {
     private func actionableRow() -> some View {
         if action != nil {
             Button {
-                action?()
+                if isPremiumOption == false || (isPremiumOption && premiumStatus)  {
+                    action?()
+                }
+
             } label: {
                 contentAlignment(multilineTextAlignment)
             }
@@ -89,6 +95,8 @@ public struct Row: View {
                     leading()
 
                     text
+
+                    premiumLabel()
 
                     Spacer()
 
@@ -169,6 +177,7 @@ public struct Row: View {
         case let .toggle(isOn):
             Toggle(isOn: isOn) {}
                 .labelsHidden()
+                .disabled(isPremiumOption && premiumStatus == false)
 
         case let .radio(isOn: isOn):
 
@@ -214,6 +223,7 @@ public struct Row: View {
                     Icon(.chevronRight, color: .onSurfaceDisabled)
                 })
             }
+            .disabled(isPremiumOption && premiumStatus == false)
         case .arrowIcon:
             Icon(.chevronRight, color: .onSurfaceDisabled)
 //        case let .timePicker(date: date):
@@ -226,6 +236,7 @@ public struct Row: View {
         case let .button(text, action: action):
             Button(text, action: action)
                 .style(.gray, size: .medium, rounded: .small, width: .standart, shadow: false)
+                .disabled(isPremiumOption && premiumStatus == false)
         }
     }
 
@@ -240,6 +251,21 @@ public struct Row: View {
                     .foregroundColor(.onSurfaceMediumEmphasis)
             }
         }
+    }
+
+    @ViewBuilder
+    private func premiumLabel() -> some View {
+        if isPremiumOption, premiumStatus == false {
+            PremiumLabel(text: "Pro", size: .small)
+        } else {
+            EmptyView()
+        }
+    }
+
+    public func premium(_ premium: Bool = true) -> Row {
+        var control = self
+        control.isPremiumOption = premium
+        return control
     }
 }
 
@@ -274,6 +300,9 @@ struct ListRow_Previews: PreviewProvider {
             Row("Title", subtitle: "Subtitle", leadingType: .avatar(AvatarView(firstName: "Name")), trallingType: .radio(isOn: .constant(false)), paddingVertical: .small)
 
             Row("Title", trallingType: .toggleWithArrowButton(isOn: .constant(true), action: nil))
+
+            Row("Title")
+                .premium()
         }
         // .padding()
         .previewLayout(.fixed(width: 375, height: 60))

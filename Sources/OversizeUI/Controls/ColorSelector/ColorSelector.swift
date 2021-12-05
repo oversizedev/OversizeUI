@@ -30,7 +30,6 @@ public struct ColorSelector: View {
                 .makeBody(
                     configuration: ColorSelectorConfiguration(
                         label: ColorSelectorConfiguration.Label(content:
-
                             Group {
                                 ZStack {
                                     ColorPickerWithoutBorder(selection: $selection)

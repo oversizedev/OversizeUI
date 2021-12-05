@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 05.12.2021
+// Created on 06.12.2021
 //
 
 import SwiftUI
@@ -20,11 +20,11 @@ public extension View {
     {
         if #available(iOS 15, *) {
             modifier(HalfSheet(isPresented: isPresented,
-                                   detents: detents,
-                                   smallestUndimmedDetentIdentifier: smallestUndimmedDetentIdentifier,
-                                   prefersScrollingExpandsWhenScrolledToEdge: prefersScrollingExpandsWhenScrolledToEdge,
-                                   prefersEdgeAttachedInCompactHeight: prefersEdgeAttachedInCompactHeight,
-                                   content: content))
+                               detents: detents,
+                               smallestUndimmedDetentIdentifier: smallestUndimmedDetentIdentifier,
+                               prefersScrollingExpandsWhenScrolledToEdge: prefersScrollingExpandsWhenScrolledToEdge,
+                               prefersEdgeAttachedInCompactHeight: prefersEdgeAttachedInCompactHeight,
+                               content: content))
         } else {
             sheet(isPresented: isPresented, content: content)
         }
@@ -173,7 +173,7 @@ public class HalfSheetViewController<Content: View>: UIViewController {
         }
     }
 
-    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         if UIDevice.current.orientation.isLandscape {
             isLandscape = true
@@ -186,7 +186,7 @@ public class HalfSheetViewController<Content: View>: UIViewController {
 }
 
 struct HalfSheetView_Previews: PreviewProvider {
-    struct SheetDemo: View {
+    struct HalfSheetDemo: View {
         @State private var isPresented = false
         var body: some View {
             VStack {
@@ -194,14 +194,15 @@ struct HalfSheetView_Previews: PreviewProvider {
                     isPresented.toggle()
                 }).sheet(isPresented: $isPresented,
                          detents: [.medium, .large],
-                         smallestUndimmedDetentIdentifier: .large) {
+                         smallestUndimmedDetentIdentifier: .large)
+                {
                     Text("Sheet content")
                 }
             }
         }
     }
-    
+
     static var previews: some View {
-        SheetDemo()
+        HalfSheetDemo()
     }
 }
