@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 25.10.2021
+// Created on 05.12.2021
 //
 
 import SwiftUI
@@ -95,7 +95,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                     Button(action: {
                                selectedIndex = index
                                selection = data[index]
-                               (action)?()
+                               action?()
                            },
                            label: {
                                HStack(spacing: 0) {
@@ -120,7 +120,8 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                                Color.clear.onAppear { frames[index] = proxy.frame(in: .global) }
                            })
                            .alignmentGuide(.horizontalCenterAlignment,
-                                           isActive: selectedIndex == index) { dimensions in
+                                           isActive: selectedIndex == index)
+                           { dimensions in
                                dimensions[HorizontalAlignment.center]
                            }
                            .padding(.trailing, style.unseletionStyle == .surface ? Space.xSmall.rawValue : 0)
@@ -151,7 +152,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                     Button(action: {
                                selectedIndex = index
                                selection = data[index]
-                               (action)?()
+                               action?()
                            },
                            label: { content(data[index], selectedIndex == index)
                                .fontStyle(.button,
@@ -169,7 +170,8 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                                Color.clear.onAppear { frames[index] = proxy.frame(in: .global) }
                            })
                            .alignmentGuide(.horizontalCenterAlignment,
-                                           isActive: selectedIndex == index) { dimensions in
+                                           isActive: selectedIndex == index)
+                           { dimensions in
                                dimensions[HorizontalAlignment.center]
                            }
                            .padding(.trailing, style.unseletionStyle == .surface ? Space.xSmall.rawValue : 0)

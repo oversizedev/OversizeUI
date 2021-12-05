@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 25.10.2021
+// Created on 05.12.2021
 //
 
 import SwiftUI
@@ -62,7 +62,7 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
                 Button(action: {
                     selectedIndex = index
                     selection = data[index]
-                    (action)?()
+                    action?()
                 }, label: {
                     HStack(spacing: .zero) {
                         content(data[index], selectedIndex == index)

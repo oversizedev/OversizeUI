@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 11.09.2021
+// Created on 03.12.2021
 //
 
 import SwiftUI
@@ -8,16 +8,27 @@ import SwiftUI
 public class HUDState: ObservableObject {
     @Published public var isPresented: Bool = false
     public var title: String
-    public var icon: Icons
+    public var icon: Icons?
 
-    public init(title: String = "", icon: Icons = .bell) {
+    public init(title: String = "") {
+        self.title = title
+    }
+
+    public init(title: String = "", icon: Icons) {
         self.title = title
         self.icon = icon
     }
 
-    public func show(title: String, icon: Icons = .bell) {
+    public func show(title: String, icon: Icons) {
         self.title = title
         self.icon = icon
+        withAnimation {
+            isPresented = true
+        }
+    }
+
+    public func show(title: String) {
+        self.title = title
         withAnimation {
             isPresented = true
         }

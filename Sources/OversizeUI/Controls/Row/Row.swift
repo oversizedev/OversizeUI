@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 09.11.2021
+// Created on 05.12.2021
 //
 
 import SwiftUI
@@ -11,7 +11,10 @@ public enum RowTrailingType {
     case checkbox(isOn: Binding<Bool>)
     case toggle(isOn: Binding<Bool>)
     case toggleWithArrowButton(isOn: Binding<Bool>, action: (() -> Void)? = nil)
+    // case timePicker(date: Binding<Date>)
     case arrowIcon
+    case text(_ text: String)
+    case button(_ text: String, action: () -> Void)
 }
 
 public enum RowLeadingType {
@@ -67,7 +70,7 @@ public struct Row: View {
     private func actionableRow() -> some View {
         if action != nil {
             Button {
-                (action)?()
+                action?()
             } label: {
                 contentAlignment(multilineTextAlignment)
             }
@@ -213,6 +216,16 @@ public struct Row: View {
             }
         case .arrowIcon:
             Icon(.chevronRight, color: .onSurfaceDisabled)
+//        case let .timePicker(date: date):
+//            DatePicker("", selection: date, displayedComponents: .hourAndMinute)
+//                .labelsHidden()
+
+        case let .text(text):
+            Text(text)
+                .fontStyle(.subtitle2, color: .onSurfaceMediumEmphasis)
+        case let .button(text, action: action):
+            Button(text, action: action)
+                .style(.gray, size: .medium, rounded: .small, width: .standart, shadow: false)
         }
     }
 

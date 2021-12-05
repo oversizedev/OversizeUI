@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 05.11.2021
+// Created on 05.12.2021
 //
 
 import SwiftUI
@@ -91,7 +91,7 @@ public struct PINCodeView: View {
 
             biometricImage()
                 .onTapGesture {
-                    (biometricAction)?()
+                    biometricAction?()
                 }
 
             Spacer()
@@ -152,7 +152,7 @@ public struct PINCodeView: View {
 
             Button {
                 if pinCode.isEmpty, biometricEnabled {
-                    (biometricAction)?()
+                    biometricAction?()
                 } else if pinCode.isEmpty, !biometricEnabled {
                 } else {
                     deleteLastNumber()
@@ -250,7 +250,7 @@ public struct PINCodeView: View {
     }
 
     func enterAction() {
-        (action)?()
+        action?()
     }
 }
 

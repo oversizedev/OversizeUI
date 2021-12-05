@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 15.11.2021
+// Created on 05.12.2021
 //
 
 import SwiftUI
@@ -85,7 +85,7 @@ public struct Surface<Label: View>: View {
     private func actionableSurface() -> some View {
         if action != nil {
             Button {
-                (action)?()
+                action?()
             } label: {
                 surface
             }

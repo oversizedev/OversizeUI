@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Created on 15.11.2021
+// Created on 03.12.2021
 //
 
 import SwiftUI
@@ -41,20 +41,19 @@ public struct LoaderOverlayView: View {
         self.surface = surface
         _isLoading = isLoading
     }
-    
+
     public var body: some View {
-        
         ZStack {
-#if os(iOS)
-            BlurView()
-#else
-            Color.surfaceSecondary.opacity(0.5)
-#endif
-            
+            #if os(iOS)
+                BlurView()
+            #else
+                Color.surfaceSecondary.opacity(0.5)
+            #endif
+
             Surface(background: .primary) {
                 VStack(spacing: 20) {
                     containedView()
-                    
+
                     if showText {
                         Text(text.isEmpty ? "Loading" : text)
                             .fontStyle(.subtitle1, color: .onSurfaceDisabled)
@@ -64,49 +63,46 @@ public struct LoaderOverlayView: View {
                 .padding()
             }
             .elevation(.z4)
-            
         }
         .ignoresSafeArea()
-        .opacity(isLoading ? 1 :0)
+        .opacity(isLoading ? 1 : 0)
     }
 
     @ViewBuilder
     private func containedView() -> some View {
         switch loaderType {
         case let .image(image: image):
-           
-                ZStack {
-                    //                    Circle()
-                    //                        .fill(Color.onSurfaceDisabled)
-                    //                        .frame(width: 40, height: 40)
-                    //                        .rotation3DEffect(
-                    //                            .init(degrees: 60),
-                    //                            axis: (x: 1, y: 0, z: 0.0),
-                    //                            anchor: .center,
-                    //                            anchorZ: 0.0,
-                    //                            perspective: 1.0
-                    //
-                    //                            )
-                    //                        .offset(y: 35)
-                    //                        .opacity(jump ? 1 : 0)
 
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 96, height: 96, alignment: .center)
-                        .rotationEffect(.init(degrees: rotationImage /* && jump */ ? 360 : 0))
-                        .offset(y: jump ? -20 : 0)
-                        .onAppear {
-                            animate()
-                        }
-                }
-            
+            ZStack {
+                //                    Circle()
+                //                        .fill(Color.onSurfaceDisabled)
+                //                        .frame(width: 40, height: 40)
+                //                        .rotation3DEffect(
+                //                            .init(degrees: 60),
+                //                            axis: (x: 1, y: 0, z: 0.0),
+                //                            anchor: .center,
+                //                            anchorZ: 0.0,
+                //                            perspective: 1.0
+                //
+                //                            )
+                //                        .offset(y: 35)
+                //                        .opacity(jump ? 1 : 0)
+
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 96, height: 96, alignment: .center)
+                    .rotationEffect(.init(degrees: rotationImage /* && jump */ ? 360 : 0))
+                    .offset(y: jump ? -20 : 0)
+                    .onAppear {
+                        animate()
+                    }
+            }
 
         case .spiner:
-           
-                ProgressView()
-                    .scaleEffect(1.6, anchor: .center)
-            
+
+            ProgressView()
+                .scaleEffect(1.6, anchor: .center)
         }
     }
 
@@ -120,11 +116,9 @@ public struct LoaderOverlayView: View {
     }
 }
 
- struct LoaderOverlayView_Previews: PreviewProvider {
+struct LoaderOverlayView_Previews: PreviewProvider {
     static var previews: some View {
-
         Group {
-
 //            LoaderOverlayView(type: .image(ima), showText: true, text: "Download")
 //
 //            LoaderOverlayView(type: .image(image: "PinWallet"), showText: true)
@@ -137,7 +131,6 @@ public struct LoaderOverlayView: View {
                 }
                 .loading(true)
             }
-
         }
     }
- }
+}
