@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-public class HUDState: ObservableObject {
+public class HUD: ObservableObject {
     @Published public var isPresented: Bool = false
     public var title: String
     public var icon: Icons?
@@ -40,7 +40,7 @@ public extension View {
         ZStack(alignment: .top) {
             self
             if isPresented.wrappedValue {
-                HUD(content: content)
+                HUDView(content: content)
                     .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
                     .onAppear {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
@@ -55,7 +55,7 @@ public extension View {
     }
 }
 
-public struct HUD<Content: View>: View {
+public struct HUDView<Content: View>: View {
     public let content: Content
 
     public init(@ViewBuilder content: () -> Content) {

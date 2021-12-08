@@ -73,7 +73,7 @@ public struct Row: View {
     private func actionableRow() -> some View {
         if action != nil {
             Button {
-                if isPremiumOption == false || (isPremiumOption && premiumStatus)  {
+                if isPremiumOption == false || (isPremiumOption && premiumStatus) {
                     action?()
                 }
 
