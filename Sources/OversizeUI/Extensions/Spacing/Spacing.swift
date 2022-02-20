@@ -1,6 +1,6 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 02.10.2021
+// Copyright © 2022 Alexander Romanov
+// Spacing.swift
 //
 
 import SwiftUI

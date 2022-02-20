@@ -1,6 +1,6 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 12.09.2021
+// Copyright © 2022 Alexander Romanov
+// Typography.swift
 //
 
 import SwiftUI
@@ -23,9 +23,11 @@ public enum FontDesignType: String, CaseIterable {
 }
 
 public struct Typography: ViewModifier {
-    @ObservedObject var appearanceSettings = AppearanceSettings.shared
+    @Environment(\.theme) private var theme: ThemeSettings
 
     @Environment(\.sizeCategory) var sizeCategory
+
+    @Environment(\.isLoading) var isLoading
 
     private var sizeMultiplicator: CGFloat {
         switch sizeCategory {
@@ -59,19 +61,19 @@ public struct Typography: ViewModifier {
     }
 
     private var designTitle: Font.Design {
-        appearanceSettings.fontTitle.system
+        theme.fontTitle.system
     }
 
     private var designParagraph: Font.Design {
-        appearanceSettings.fontParagraph.system
+        theme.fontParagraph.system
     }
 
     private var designOverline: Font.Design {
-        appearanceSettings.fontOverline.system
+        theme.fontOverline.system
     }
 
     private var designButton: Font.Design {
-        appearanceSettings.fontButton.system
+        theme.fontButton.system
     }
 
     public enum Style {
@@ -96,28 +98,39 @@ public struct Typography: ViewModifier {
         switch style {
         case .largeTitle:
             content.font(.system(size: 34 * sizeMultiplicator, weight: .heavy, design: designTitle))
+                .redacted(reason: isLoading ? .placeholder : .init())
         case .title1:
             content.font(.system(size: 28 * sizeMultiplicator, weight: .heavy, design: designTitle))
+                .redacted(reason: isLoading ? .placeholder : .init())
         case .title2:
             content.font(.system(size: 22 * sizeMultiplicator, weight: .bold, design: designTitle))
+                .redacted(reason: isLoading ? .placeholder : .init())
         case .title3:
             content.font(.system(size: 20 * sizeMultiplicator, weight: .bold, design: designTitle))
+                .redacted(reason: isLoading ? .placeholder : .init())
         case .subtitle1:
             content.font(.system(size: 16 * sizeMultiplicator, weight: .semibold, design: designTitle))
+                .redacted(reason: isLoading ? .placeholder : .init())
         case .subtitle2:
             content.font(.system(size: 14 * sizeMultiplicator, weight: .regular, design: designTitle))
+                .redacted(reason: isLoading ? .placeholder : .init())
         case .paragraph1:
             content.font(.system(size: 16 * sizeMultiplicator, weight: .regular, design: designParagraph))
+                .redacted(reason: isLoading ? .placeholder : .init())
         case .paragraph2:
             content.font(.system(size: 14 * sizeMultiplicator, weight: .regular, design: designParagraph))
+                .redacted(reason: isLoading ? .placeholder : .init())
         case .button:
             content.font(.system(size: 16 * sizeMultiplicator, weight: .bold, design: designButton))
+                .redacted(reason: isLoading ? .placeholder : .init())
         case .caption:
             content.font(.system(size: 12 * sizeMultiplicator, weight: .medium, design: designOverline))
+                .redacted(reason: isLoading ? .placeholder : .init())
         case .overline:
             content
                 .font(.system(size: 12 * sizeMultiplicator, weight: .bold, design: designOverline))
                 .textCase(.uppercase)
+                .redacted(reason: isLoading ? .placeholder : .init())
         }
     }
 }

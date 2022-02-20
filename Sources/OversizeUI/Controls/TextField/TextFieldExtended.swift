@@ -1,6 +1,6 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 25.10.2021
+// Copyright © 2022 Alexander Romanov
+// TextFieldExtended.swift
 //
 
 import Combine
@@ -14,7 +14,7 @@ public enum TextFieldPlaceholderPosition {
 }
 
 public struct TextFieldExtended: View {
-    @ObservedObject var appearanceSettings = AppearanceSettings.shared
+    @Environment(\.theme) private var theme: ThemeSettings
 
     public var placeholder: String
     @Binding public var text: String

@@ -1,6 +1,6 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 05.12.2021
+// Copyright © 2022 Alexander Romanov
+// Surface.swift
 //
 
 import SwiftUI
@@ -13,8 +13,8 @@ public enum SurfaceColor: Int, CaseIterable {
 
 // swiftlint:disable opening_brace
 public struct Surface<Label: View>: View {
-    @ObservedObject var appearanceSettings = AppearanceSettings.shared
     @Environment(\.elevation) private var elevation: Elevation
+    @Environment(\.theme) private var theme: ThemeSettings
 
     private enum Constants {
         /// Colors
@@ -107,9 +107,9 @@ public struct Surface<Label: View>: View {
                                          style: .continuous)
                             .stroke(
                                 border != nil ? border ?? Color.clear
-                                    : appearanceSettings.borderSurface
+                                    : theme.borderSurface
                                     ? Color.border
-                                    : backgroundColor, lineWidth: CGFloat(appearanceSettings.borderSize)
+                                    : backgroundColor, lineWidth: CGFloat(theme.borderSize)
                             )
                     )
                     .shadowElevaton(elevation)
@@ -129,6 +129,8 @@ public struct Surface<Label: View>: View {
 }
 
 public struct SurfaceButtonStyle: ButtonStyle {
+    public init() {}
+
     public func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
             .scaleEffect(configuration.isPressed ? 0.95 : 1)

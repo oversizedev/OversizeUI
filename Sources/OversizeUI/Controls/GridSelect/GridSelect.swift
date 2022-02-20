@@ -1,6 +1,6 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 05.12.2021
+// Copyright © 2022 Alexander Romanov
+// GridSelect.swift
 //
 
 import SwiftUI
@@ -10,9 +10,9 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
     Content: View,
     Selection: View
 {
-    @ObservedObject var appearanceSettings = AppearanceSettings.shared
-
+    @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.gridSelectStyle) private var style
+
     public typealias Data = [Element]
 
     @State private var frames: [CGRect]
@@ -91,6 +91,7 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
                 index += 1
             }
         }
+        .animation(.easeInOut(duration: 0.3), value: selection)
     }
 
     private var itemBackground: some View {
@@ -111,9 +112,9 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
                 .overlay(
                     RoundedRectangle(cornerRadius: radius.rawValue,
                                      style: .continuous)
-                        .stroke(appearanceSettings.borderControls
+                        .stroke(theme.borderControls
                             ? Color.border
-                            : Color.surfaceSecondary, lineWidth: CGFloat(appearanceSettings.borderSize))
+                            : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
                 )
                 .shadowElevaton(.z2)
         case .graySurface:
@@ -141,9 +142,9 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
                 .overlay(
                     RoundedRectangle(cornerRadius: radius.rawValue,
                                      style: .continuous)
-                        .stroke(appearanceSettings.borderControls
+                        .stroke(theme.borderControls
                             ? Color.border
-                            : Color.surfaceSecondary, lineWidth: CGFloat(appearanceSettings.borderSize))
+                            : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
                 )
         }
     }

@@ -1,12 +1,12 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 12.09.2021
+// Copyright © 2022 Alexander Romanov
+// RadiusSettingView.swift
 //
 
 import SwiftUI
 
 struct RadiusSettingView: View {
-    @StateObject var theme = AppearanceSettings.shared
+    @Environment(\.theme) private var theme: ThemeSettings
 
     @State var offset = CGPoint(x: 0, y: 0)
 
@@ -33,7 +33,7 @@ struct RadiusSettingView: View {
                                         .foregroundColor(.onSurfaceHighEmphasis)
                                 }
 
-                                Slider(value: $theme.radius, in: 0 ... 12, step: 4)
+                                Slider(value: theme.$radius, in: 0 ... 12, step: 4)
                             }
                             .padding(.horizontal, Space.medium)
                             .padding(.bottom, Space.xxSmall)

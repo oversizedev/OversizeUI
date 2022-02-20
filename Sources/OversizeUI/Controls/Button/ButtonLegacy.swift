@@ -1,6 +1,6 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 28.11.2021
+// Copyright © 2022 Alexander Romanov
+// ButtonLegacy.swift
 //
 
 import SwiftUI
@@ -35,7 +35,7 @@ public enum ButtonWidth {
 
 // swiftlint:disable all
 public struct ButtonStyleExtended: ButtonStyle {
-    @ObservedObject var appearanceSettings = AppearanceSettings.shared
+    @Environment(\.theme) private var theme: ThemeSettings
 
     var style: LegacyButtonType
     var size: ButtonSize = .large
@@ -57,11 +57,11 @@ public struct ButtonStyleExtended: ButtonStyle {
     public func makeBody(configuration: ButtonStyle.Configuration) -> some View {
         switch style {
         case .primary:
-            PrimaryButton(size: size, rounded: rounded, width: width, shadow: shadow, isBordered: appearanceSettings.borderButtons, borderLineWidth: CGFloat(appearanceSettings.borderSize), configuration: configuration)
+            PrimaryButton(size: size, rounded: rounded, width: width, shadow: shadow, isBordered: theme.borderButtons, borderLineWidth: CGFloat(theme.borderSize), configuration: configuration)
         case .secondary:
-            SecondaryButton(size: size, rounded: rounded, width: width, shadow: shadow, isBordered: appearanceSettings.borderButtons, borderLineWidth: CGFloat(appearanceSettings.borderSize), configuration: configuration)
+            SecondaryButton(size: size, rounded: rounded, width: width, shadow: shadow, isBordered: theme.borderButtons, borderLineWidth: CGFloat(theme.borderSize), configuration: configuration)
         case .gray:
-            GrayButton(size: size, rounded: rounded, width: width, shadow: shadow, isBordered: appearanceSettings.borderButtons, borderLineWidth: CGFloat(appearanceSettings.borderSize), configuration: configuration)
+            GrayButton(size: size, rounded: rounded, width: width, shadow: shadow, isBordered: theme.borderButtons, borderLineWidth: CGFloat(theme.borderSize), configuration: configuration)
         case .text:
             TextButton(size: size, rounded: rounded, width: width, configuration: configuration)
         case .link:
@@ -69,7 +69,7 @@ public struct ButtonStyleExtended: ButtonStyle {
         case .deleteLink:
             DeleteButton(size: size, rounded: rounded, width: width, shadow: shadow, configuration: configuration)
         case .accent:
-            AccentButton(size: size, rounded: rounded, width: width, shadow: shadow, configuration: configuration, isBordered: appearanceSettings.borderButtons, borderLineWidth: CGFloat(appearanceSettings.borderSize))
+            AccentButton(size: size, rounded: rounded, width: width, shadow: shadow, configuration: configuration, isBordered: theme.borderButtons, borderLineWidth: CGFloat(theme.borderSize))
         }
     }
 

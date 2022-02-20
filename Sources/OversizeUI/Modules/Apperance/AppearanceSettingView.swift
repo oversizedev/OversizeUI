@@ -1,16 +1,15 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 26.12.2021
+// Copyright © 2022 Alexander Romanov
+// AppearanceSettingView.swift
 //
 
 import SwiftUI
 
 public struct AppearanceSettingView: View {
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.theme) private var theme: ThemeSettings
 
     public init() {}
-
-    @StateObject var theme = AppearanceSettings.shared
 
     #if os(iOS)
         @StateObject var iconSettings = AppIconSettings()
@@ -116,7 +115,7 @@ public struct AppearanceSettingView: View {
     #if os(iOS)
         private var accentColor: some View {
             SectionView("Accent color") {
-                ColorSelector(selection: $theme.accentColor)
+                ColorSelector(selection: theme.$accentColor)
             }
         }
 
@@ -184,7 +183,7 @@ public struct AppearanceSettingView: View {
                     }
                     .premium()
 
-                    Row("Borders", leadingType: .icon(.layout), trallingType: .toggleWithArrowButton(isOn: $theme.borderApp, action: {
+                    Row("Borders", leadingType: .icon(.layout), trallingType: .toggleWithArrowButton(isOn: theme.$borderApp, action: {
                         pageDestenation = .border
                     })) {
                         pageDestenation = .border

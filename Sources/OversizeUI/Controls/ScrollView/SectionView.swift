@@ -1,6 +1,6 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 19.09.2021
+// Copyright © 2022 Alexander Romanov
+// SectionView.swift
 //
 
 import SwiftUI

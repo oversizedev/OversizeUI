@@ -1,2 +1,2 @@
 --swiftversion 5.5
---header "\nCopyright © {year} Alexander Romanov\nCreated on {created}\n"
+--header "\nCopyright © {year} Alexander Romanov\n{file}\n"

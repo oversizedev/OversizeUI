@@ -1,6 +1,6 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 05.12.2021
+// Copyright © 2022 Alexander Romanov
+// PINCodeView.swift
 //
 
 import SwiftUI

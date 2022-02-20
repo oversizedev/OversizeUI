@@ -1,6 +1,6 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 03.12.2021
+// Copyright © 2022 Alexander Romanov
+// LoadingViews.swift
 //
 
 import SwiftUI

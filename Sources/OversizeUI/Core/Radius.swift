@@ -1,13 +1,13 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 12.09.2021
+// Copyright © 2022 Alexander Romanov
+// Radius.swift
 //
 
 import SwiftUI
 
 public enum Radius {
-    private var appearanceSettings: AppearanceSettings {
-        AppearanceSettings.shared
+    private var theme: ThemeSettings {
+        ThemeSettings()
     }
 
     /// 0
@@ -26,13 +26,13 @@ public enum Radius {
         case .zero:
             return .zero
         case .small:
-            return CGFloat(appearanceSettings.radius)
+            return CGFloat(theme.radius)
         case .medium:
-            return appearanceSettings.radius == .zero ?.zero : CGFloat(appearanceSettings.radius) * 1.5
+            return theme.radius == .zero ?.zero : CGFloat(theme.radius) * 1.5
         case .large:
-            return appearanceSettings.radius == .zero ?.zero : CGFloat(appearanceSettings.radius) * 2
+            return theme.radius == .zero ?.zero : CGFloat(theme.radius) * 2
         case .xLarge:
-            return appearanceSettings.radius == .zero ?.zero : CGFloat(appearanceSettings.radius) * 3
+            return theme.radius == .zero ?.zero : CGFloat(theme.radius) * 3
         }
     }
 }

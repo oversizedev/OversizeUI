@@ -1,11 +1,11 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 11.09.2021
+// Copyright © 2022 Alexander Romanov
+// ThemeSettings.swift
 //
 
 import SwiftUI
 
-public enum AppearanceSettingsNames {
+public enum ThemeSettingsNames {
     public static var appearance = "Settings.Appearance"
     public static var accentColor = "Settings.AccentColor"
     public static var fontTitle = "Settings.FontTitle"
@@ -22,34 +22,31 @@ public enum AppearanceSettingsNames {
     public static var radius = "Settings.Radius"
 }
 
-// swiftlint:disable trailing_comma opening_brace
-public final class AppearanceSettings: ObservableObject {
+public class ThemeSettings {
     public init() {}
 
-    public static let shared = AppearanceSettings()
-
-    @AppStorage(AppearanceSettingsNames.appearance) public var appearance: Appearance = .light
+    @AppStorage(ThemeSettingsNames.appearance) public var appearance: Appearance = .light
 
     #if os(iOS)
-        @AppStorage(AppearanceSettingsNames.accentColor) public var accentColor = Color.blue
+        @AppStorage(ThemeSettingsNames.accentColor) public var accentColor: Color = .blue
     #endif
 
-    @AppStorage(AppearanceSettingsNames.fontTitle) public var fontTitle: FontDesignType = .default
-    @AppStorage(AppearanceSettingsNames.fontParagraph) public var fontParagraph: FontDesignType = .default
-    @AppStorage(AppearanceSettingsNames.fontButton) public var fontButton: FontDesignType = .default
-    @AppStorage(AppearanceSettingsNames.fontOverline) public var fontOverline: FontDesignType = .default
+    @AppStorage(ThemeSettingsNames.fontTitle) public var fontTitle: FontDesignType = .default
+    @AppStorage(ThemeSettingsNames.fontParagraph) public var fontParagraph: FontDesignType = .default
+    @AppStorage(ThemeSettingsNames.fontButton) public var fontButton: FontDesignType = .default
+    @AppStorage(ThemeSettingsNames.fontOverline) public var fontOverline: FontDesignType = .default
 
-    @AppStorage(AppearanceSettingsNames.borderApp) public var borderApp: Bool = false
-    @AppStorage(AppearanceSettingsNames.borderButtons) public var borderButtons: Bool = false
-    @AppStorage(AppearanceSettingsNames.borderSurface) public var borderSurface: Bool = false
-    @AppStorage(AppearanceSettingsNames.borderTextFields) public var borderTextFields: Bool = false
-    @AppStorage(AppearanceSettingsNames.borderControls) public var borderControls: Bool = false
+    @AppStorage(ThemeSettingsNames.borderApp) public var borderApp: Bool = false
+    @AppStorage(ThemeSettingsNames.borderButtons) public var borderButtons: Bool = false
+    @AppStorage(ThemeSettingsNames.borderSurface) public var borderSurface: Bool = false
+    @AppStorage(ThemeSettingsNames.borderTextFields) public var borderTextFields: Bool = false
+    @AppStorage(ThemeSettingsNames.borderControls) public var borderControls: Bool = false
 
-    @AppStorage(AppearanceSettingsNames.borderSize) public var borderSize: Double = 0.5
+    @AppStorage(ThemeSettingsNames.borderSize) public var borderSize: Double = 0.5
 
-    @AppStorage(AppearanceSettingsNames.radius) public var radius: Double = 8
+    @AppStorage(ThemeSettingsNames.radius) public var radius: Double = 8
 
-    @AppStorage(AppearanceSettingsNames.theme) public var theme: Int = 0
+    @AppStorage(ThemeSettingsNames.theme) public var theme: Int = 0
 
     public let themes: [Theme] = [
         Theme(id: 0, name: "Black", accentColor: .primary),
