@@ -1,22 +1,21 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 11.09.2021
+// Copyright © 2022 Alexander Romanov
+// FontSettingView.swift
 //
 
 import SwiftUI
 
 public struct FontSettingView: View {
-    public init() {}
-
-    @ObservedObject private var theme = AppearanceSettings.shared
-
-    @State private var activeTab: FontSetting = .title
-
     private enum FontSetting: String, CaseIterable {
         case title, paragraph, other
     }
 
+    @Environment(\.theme) private var theme: ThemeSettings
+
+    @State private var activeTab: FontSetting = .title
     @State var offset = CGPoint(x: 0, y: 0)
+
+    public init() {}
 
     public var body: some View {
         VStack(spacing: 0) {
@@ -25,12 +24,14 @@ public struct FontSettingView: View {
             SegmentedPickerSelector(FontSetting.allCases, selection: $activeTab) { item, _ in
                 Text(item.rawValue.capitalizingFirstLetter())
             } selectionView: {}
+                .animation(.default, value: activeTab)
 
             getActiveTabContent(tab: activeTab)
                 .padding(.top, .small)
         }
         .padding(.horizontal)
         .padding(.bottom)
+
         .navigationBar("Fonts", style: .fixed($offset)) {
             BarButton(type: .back)
         } trailingBar: {} bottomBar: {}
@@ -49,7 +50,7 @@ public struct FontSettingView: View {
     }
 
     private var titleSelector: some View {
-        GridSelect(FontDesignType.allCases, selection: $theme.fontTitle,
+        GridSelect(FontDesignType.allCases, selection: theme.$fontTitle,
                    content: { fontStyle, _ in
                        HStack {
                            VStack(alignment: .leading, spacing: 8) {
@@ -67,7 +68,7 @@ public struct FontSettingView: View {
     }
 
     private var paragraphSelector: some View {
-        GridSelect(FontDesignType.allCases, selection: $theme.fontParagraph,
+        GridSelect(FontDesignType.allCases, selection: theme.$fontParagraph,
                    content: { fontStyle, _ in
                        HStack {
                            VStack(alignment: .leading, spacing: 8) {
@@ -89,7 +90,7 @@ public struct FontSettingView: View {
             VStack(alignment: .leading, spacing: Space.small.rawValue) {
                 Text("Button".uppercased())
                     .fontStyle(.overline, color: .onBackgroundMediumEmphasis)
-                SegmentedPickerSelector(FontDesignType.allCases, selection: $theme.fontButton) { fontStyle, _ in
+                SegmentedPickerSelector(FontDesignType.allCases, selection: theme.$fontButton) { fontStyle, _ in
                     VStack(alignment: .center, spacing: 8) {
                         Text("Aa")
                             .font(.system(size: 28, weight: .heavy, design: fontStyle.system))
@@ -106,7 +107,7 @@ public struct FontSettingView: View {
             VStack(alignment: .leading, spacing: Space.small.rawValue) {
                 Text("Overline & caption".uppercased())
                     .fontStyle(.overline, color: .onBackgroundMediumEmphasis)
-                SegmentedPickerSelector(FontDesignType.allCases, selection: $theme.fontOverline) { fontStyle, _ in
+                SegmentedPickerSelector(FontDesignType.allCases, selection: theme.$fontOverline) { fontStyle, _ in
                     VStack(alignment: .center, spacing: 8) {
                         Text("Aa")
                             .font(.system(size: 28, weight: .heavy, design: fontStyle.system))

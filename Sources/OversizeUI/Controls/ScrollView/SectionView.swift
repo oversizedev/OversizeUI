@@ -1,6 +1,6 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 19.09.2021
+// Copyright © 2022 Alexander Romanov
+// SectionView.swift
 //
 
 import SwiftUI
@@ -8,9 +8,11 @@ import SwiftUI
 public struct SectionView<Content: View>: View {
     private let content: Content
     private let title: String
+    private let verticalPadding: Space
 
-    public init(_ title: String = "", @ViewBuilder content: () -> Content) {
+    public init(_ title: String = "", verticalPadding: Space = .xxSmall, @ViewBuilder content: () -> Content) {
         self.title = title
+        self.verticalPadding = verticalPadding
         self.content = content()
     }
 
@@ -30,7 +32,7 @@ public struct SectionView<Content: View>: View {
 
             Surface(padding: .zero) {
                 content
-                    .padding(.vertical, Space.xxSmall)
+                    .padding(.vertical, verticalPadding)
             }.clipShape(
                 RoundedRectangle(cornerRadius: Constants.radiusMedium,
                                  style: .circular)

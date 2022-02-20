@@ -1,6 +1,6 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 11.09.2021
+// Copyright © 2022 Alexander Romanov
+// SurfaceDemo.swift
 //
 
 import OversizeUI
@@ -31,13 +31,13 @@ struct SurfaceDemo: View {
                     Text("Text")
                     Spacer()
                 }}
-                    .elevation(.z2)
+                .elevation(.z2)
 
                 Surface { HStack {
                     Text("Text")
                     Spacer()
                 }}
-                    .elevation(.z1)
+                .elevation(.z1)
             }
             .padding()
         }.navigationBarTitle("Surface", displayMode: .inline)

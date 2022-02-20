@@ -1,16 +1,15 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 11.09.2021
+// Copyright © 2022 Alexander Romanov
+// BorderSettongView.swift
 //
 
 import SwiftUI
 
 public struct BorderSettingView: View {
-    public init() {}
-
-    @ObservedObject var theme = AppearanceSettings.shared
-
+    @Environment(\.theme) private var theme: ThemeSettings
     @State var offset = CGPoint(x: 0, y: 0)
+
+    public init() {}
 
     public var body: some View {
         settings
@@ -20,7 +19,7 @@ public struct BorderSettingView: View {
         VStack(alignment: .center, spacing: 0) {
             SectionView {
                 VStack(spacing: .zero) {
-                    Toggle("Borders in app", isOn: $theme.borderApp)
+                    Toggle("Borders in app", isOn: theme.$borderApp)
                         .onChange(of: theme.borderApp) { value in
                             theme.borderSurface = value
                             theme.borderButtons = value
@@ -48,7 +47,7 @@ public struct BorderSettingView: View {
                                             .foregroundColor(.onSurfaceHighEmphasis)
                                     }
 
-                                    Slider(value: $theme.borderSize, in: 0.5 ... 2, step: 0.5)
+                                    Slider(value: theme.$borderSize, in: 0.5 ... 2, step: 0.5)
 
                                 }.surface(background: .secondary, padding: .small)
                                     .padding(.horizontal, Space.medium)
@@ -83,11 +82,9 @@ public struct BorderSettingView: View {
 
             Spacer()
         }
-
         .navigationBar("Border", style: .fixed($offset)) {
             BarButton(type: .back)
         } trailingBar: {} bottomBar: {}
-
         .background(Color.backgroundSecondary.ignoresSafeArea(.all))
         .preferredColorScheme(theme.appearance.colorScheme)
         .animation(.easeIn(duration: 0.2))

@@ -1,6 +1,6 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 11.09.2021
+// Copyright © 2022 Alexander Romanov
+// Select.swift
 //
 
 import SwiftUI
@@ -11,7 +11,7 @@ public struct Select<Element, Content, Selection>: View
     Content: View,
     Selection: View
 {
-    @ObservedObject var appearanceSettings = AppearanceSettings.shared
+    @Environment(\.theme) private var theme: ThemeSettings
     public typealias Data = [Element]
 
     @Binding private var selection: Data.Element
@@ -58,9 +58,9 @@ public struct Select<Element, Content, Selection>: View
                     .overlay(
                         RoundedRectangle(cornerRadius: Radius.medium.rawValue,
                                          style: .continuous)
-                            .stroke(appearanceSettings.borderTextFields
+                            .stroke(theme.borderTextFields
                                 ? Color.border
-                                : Color.surfaceSecondary, lineWidth: CGFloat(appearanceSettings.borderSize))
+                                : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
                     )
             )
             .fontStyle(.subtitle1, color: .onSurfaceHighEmphasis)
@@ -108,14 +108,14 @@ struct Select_Preview: PreviewProvider {
                 } selectionView: { selected in
                     Text(selected)
                 }
-                .previewDisplayName("Default")
             }
-            .previewLayout(.sizeThatFits)
+
             .padding()
         }
     }
 
     static var previews: some View {
         SelectPreview()
+            .previewLayout(.sizeThatFits)
     }
 }

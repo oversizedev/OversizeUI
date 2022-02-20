@@ -1,17 +1,18 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 24.09.2021
+// Copyright © 2022 Alexander Romanov
+// AppearanceSettingView.swift
 //
 
 import SwiftUI
 
 public struct AppearanceSettingView: View {
+    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.theme) private var theme: ThemeSettings
+
     public init() {}
 
-    @ObservedObject var theme = AppearanceSettings.shared
-
     #if os(iOS)
-        @ObservedObject var iconSettings = AppIconSettings()
+        @StateObject var iconSettings = AppIconSettings()
     #endif
 
     // swiftlint:disable trailing_comma
@@ -31,7 +32,12 @@ public struct AppearanceSettingView: View {
 
     public var body: some View {
         #if os(iOS)
-            iOSSettings
+            VStack {
+                iOSSettings
+            }
+            .navigationBarTitle("Hidden Title")
+            .navigationBarHidden(true)
+
         #else
             macSettings
         #endif
@@ -50,9 +56,8 @@ public struct AppearanceSettingView: View {
                     appIcon
                 }
             }
-
             .scrollWithNavigationBar("App", style: .fixed($offset), background: Color.backgroundSecondary) {
-                BarButton(type: .close)
+                BarButton(type: .backAction(action: { presentationMode.wrappedValue.dismiss() }))
             } trailingBar: {} bottomBar: {}
             .background(Color.backgroundSecondary.ignoresSafeArea(.all))
             .preferredColorScheme(theme.appearance.colorScheme)
@@ -110,7 +115,7 @@ public struct AppearanceSettingView: View {
     #if os(iOS)
         private var accentColor: some View {
             SectionView("Accent color") {
-                ColorSelector(selection: $theme.accentColor)
+                ColorSelector(selection: theme.$accentColor)
             }
         }
 
@@ -176,21 +181,25 @@ public struct AppearanceSettingView: View {
                     Row("Fonts", leadingType: .icon(.type), trallingType: .arrowIcon) {
                         pageDestenation = .font
                     }
+                    .premium()
 
-                    Row("Borders", leadingType: .icon(.layout), trallingType: .toggleWithArrowButton(isOn: $theme.borderApp, action: {
+                    Row("Borders", leadingType: .icon(.layout), trallingType: .toggleWithArrowButton(isOn: theme.$borderApp, action: {
                         pageDestenation = .border
                     })) {
                         pageDestenation = .border
                     }
+                    .premium()
                     .onChange(of: theme.borderApp) { value in
                         theme.borderSurface = value
                         theme.borderButtons = value
                         theme.borderControls = value
                         theme.borderTextFields = value
                     }
+
                     Row("Radius", leadingType: .icon(.circle), trallingType: .arrowIcon) {
                         pageDestenation = .radius
                     }
+                    .premium()
                 }
             }
         }

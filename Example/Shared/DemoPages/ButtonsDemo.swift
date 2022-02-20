@@ -1,6 +1,6 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 11.09.2021
+// Copyright © 2022 Alexander Romanov
+// ButtonsDemo.swift
 //
 
 import OversizeUI
@@ -32,7 +32,7 @@ struct ButtonsDemo: View {
                     .style(.deleteLink)
 
                 Button("Button") { print(#function) }
-                    .style(.secondary, size: .m, rounded: .full, width: .full, shadow: true)
+                    .style(.secondary, size: .medium, rounded: .full, width: .full, shadow: true)
 
             }.padding()
         }

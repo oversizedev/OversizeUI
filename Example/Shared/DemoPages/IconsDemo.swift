@@ -1,6 +1,6 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 12.09.2021
+// Copyright © 2022 Alexander Romanov
+// IconsDemo.swift
 //
 
 import OversizeUI

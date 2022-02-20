@@ -1,6 +1,6 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 26.08.2021
+// Copyright © 2022 Alexander Romanov
+// View+SizeReader.swift
 //
 
 import SwiftUI

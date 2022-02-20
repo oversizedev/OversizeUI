@@ -1,6 +1,6 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 22.09.2021
+// Copyright © 2022 Alexander Romanov
+// Row.swift
 //
 
 import SwiftUI
@@ -11,7 +11,10 @@ public enum RowTrailingType {
     case checkbox(isOn: Binding<Bool>)
     case toggle(isOn: Binding<Bool>)
     case toggleWithArrowButton(isOn: Binding<Bool>, action: (() -> Void)? = nil)
+    // case timePicker(date: Binding<Date>)
     case arrowIcon
+    case text(_ text: String)
+    case button(_ text: String, action: () -> Void)
 }
 
 public enum RowLeadingType {
@@ -19,18 +22,14 @@ public enum RowLeadingType {
     case icon(_ name: Icons)
     case iconOnSurface(_ name: Icons)
     case image(_ image: Image)
+    case systemImage(_ imageName: String)
     case avatar(_ avatar: AvatarView)
 }
 
-private struct RowActionButtonStyle: ButtonStyle {
-    func makeBody(configuration: Self.Configuration) -> some View {
-        configuration.label
-            .background(configuration.isPressed ? Color.surfaceSecondary : Color.clear)
-            .contentShape(Rectangle())
-    }
-}
-
 public struct Row: View {
+    @Environment(\.multilineTextAlignment) var multilineTextAlignment
+    @Environment(\.isPremium) var premiumStatus
+
     private enum Constants {
         /// Spacing
         static var spacingIconAndText: CGFloat { Space.xxSmall.rawValue }
@@ -46,6 +45,8 @@ public struct Row: View {
     private let trallingType: RowTrailingType
 
     private let action: (() -> Void)?
+
+    private var isPremiumOption: Bool = false
 
     public init(_ title: String,
                 subtitle: String = "",
@@ -65,37 +66,76 @@ public struct Row: View {
     }
 
     public var body: some View {
-        getSurface()
+        actionableRow()
     }
 
     @ViewBuilder
-    private func getSurface() -> some View {
+    private func actionableRow() -> some View {
         if action != nil {
             Button {
-                (action)?()
+                if isPremiumOption == false || (isPremiumOption && premiumStatus) {
+                    action?()
+                }
+
             } label: {
-                content
+                contentAlignment(multilineTextAlignment)
             }
             .buttonStyle(RowActionButtonStyle())
         } else {
-            content
+            contentAlignment(multilineTextAlignment)
         }
     }
 
-    public var content: some View {
-        VStack(alignment: .leading) {
-            HStack(spacing: .xSmall) {
-                leading()
+    @ViewBuilder
+    private func contentAlignment(_ textAlignment: TextAlignment) -> some View {
+        switch textAlignment {
+        case .leading:
+            VStack(alignment: .leading) {
+                HStack(spacing: .xSmall) {
+                    leading()
 
-                text
+                    text
 
-                Spacer()
+                    premiumLabel()
 
-                tralling()
+                    Spacer()
+
+                    tralling()
+                }
             }
+            .padding(.vertical, paddingVertical.rawValue)
+            .padding(.horizontal, paddingHorizontal.rawValue)
+        case .center:
+            VStack(alignment: .leading) {
+                HStack(spacing: .xSmall) {
+                    leading()
+
+                    Spacer()
+
+                    text
+
+                    Spacer()
+
+                    tralling()
+                }
+            }
+            .padding(.vertical, paddingVertical.rawValue)
+            .padding(.horizontal, paddingHorizontal.rawValue)
+        case .trailing:
+            VStack(alignment: .leading) {
+                HStack(spacing: .xSmall) {
+                    leading()
+
+                    Spacer()
+
+                    text
+
+                    tralling()
+                }
+            }
+            .padding(.vertical, paddingVertical.rawValue)
+            .padding(.horizontal, paddingHorizontal.rawValue)
         }
-        .padding(.vertical, paddingVertical.rawValue)
-        .padding(.horizontal, paddingHorizontal.rawValue)
     }
 
     @ViewBuilder
@@ -104,23 +144,26 @@ public struct Row: View {
         case .none:
             EmptyView()
         case let .icon(icon):
-
             Icon(icon)
                 .padding(.trailing, Constants.spacingIconAndText)
 
         case let .image(image):
-
             image
                 .resizable()
                 .frame(width: 32, height: 32)
 
         case let .avatar(avatar):
-
             avatar
         case let .iconOnSurface(icon):
             Surface(background: .secondary, padding: .xxSmall) {
                 Icon(icon)
             }.padding(.trailing, Constants.spacingIconAndText)
+        case let .systemImage(systemImage):
+            Image(systemName: systemImage)
+                .foregroundColor(Color.onBackgroundHighEmphasis)
+                .font(.system(size: 24))
+                .frame(width: 24, height: 24, alignment: .center)
+                .padding(.trailing, Constants.spacingIconAndText)
         }
     }
 
@@ -134,6 +177,7 @@ public struct Row: View {
         case let .toggle(isOn):
             Toggle(isOn: isOn) {}
                 .labelsHidden()
+                .disabled(isPremiumOption && premiumStatus == false)
 
         case let .radio(isOn: isOn):
 
@@ -179,8 +223,20 @@ public struct Row: View {
                     Icon(.chevronRight, color: .onSurfaceDisabled)
                 })
             }
+            .disabled(isPremiumOption && premiumStatus == false)
         case .arrowIcon:
             Icon(.chevronRight, color: .onSurfaceDisabled)
+//        case let .timePicker(date: date):
+//            DatePicker("", selection: date, displayedComponents: .hourAndMinute)
+//                .labelsHidden()
+
+        case let .text(text):
+            Text(text)
+                .fontStyle(.subtitle2, color: .onSurfaceMediumEmphasis)
+        case let .button(text, action: action):
+            Button(text, action: action)
+                .style(.gray, size: .medium, rounded: .small, width: .standart, shadow: false)
+                .disabled(isPremiumOption && premiumStatus == false)
         }
     }
 
@@ -190,14 +246,41 @@ public struct Row: View {
                 .fontStyle(.subtitle1, color: .onSurfaceHighEmphasis)
 
             if subtitle != "" {
-                Text(title)
+                Text(subtitle)
                     .fontStyle(.subtitle2)
                     .foregroundColor(.onSurfaceMediumEmphasis)
             }
         }
     }
 
-    func createToggle() {}
+    @ViewBuilder
+    private func premiumLabel() -> some View {
+        if isPremiumOption, premiumStatus == false {
+            PremiumLabel(text: "Pro", size: .small)
+        } else {
+            EmptyView()
+        }
+    }
+
+    public func premium(_ premium: Bool = true) -> Row {
+        var control = self
+        control.isPremiumOption = premium
+        return control
+    }
+}
+
+public struct RowActionButtonStyle: ButtonStyle {
+    public func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .background(configuration.isPressed ? Color.surfaceSecondary : Color.clear)
+            .contentShape(Rectangle())
+    }
+}
+
+public extension ButtonStyle where Self == RowActionButtonStyle {
+    static var row: RowActionButtonStyle {
+        RowActionButtonStyle()
+    }
 }
 
 // swiftlint:disable all
@@ -217,6 +300,9 @@ struct ListRow_Previews: PreviewProvider {
             Row("Title", subtitle: "Subtitle", leadingType: .avatar(AvatarView(firstName: "Name")), trallingType: .radio(isOn: .constant(false)), paddingVertical: .small)
 
             Row("Title", trallingType: .toggleWithArrowButton(isOn: .constant(true), action: nil))
+
+            Row("Title")
+                .premium()
         }
         // .padding()
         .previewLayout(.fixed(width: 375, height: 60))

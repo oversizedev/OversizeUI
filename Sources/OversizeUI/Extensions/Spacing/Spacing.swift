@@ -1,6 +1,6 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 12.09.2021
+// Copyright © 2022 Alexander Romanov
+// Spacing.swift
 //
 
 import SwiftUI
@@ -46,5 +46,4 @@ public extension GridItem {
     init(_ size: GridItem.Size = .flexible(), spacing: Space, alignment: Alignment? = nil) {
         self = .init(size, spacing: spacing.rawValue, alignment: alignment)
     }
-
 }

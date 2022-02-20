@@ -1,6 +1,6 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 25.09.2021
+// Copyright © 2022 Alexander Romanov
+// GridSelectDemo.swift
 //
 
 import OversizeUI
@@ -34,7 +34,7 @@ struct GridSelectDemo: View {
                                }.padding()
                            })
 
-                    .gridSelectStyle(SelectionOnlyGridSelectStyle())
+                           .gridSelectStyle(SelectionOnlyGridSelectStyle())
             }
             .padding()
         }

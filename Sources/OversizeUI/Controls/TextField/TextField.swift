@@ -1,6 +1,6 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 11.09.2021
+// Copyright © 2022 Alexander Romanov
+// TextField.swift
 //
 
 import SwiftUI
@@ -14,7 +14,7 @@ public enum TextFieldHelperStyle {
 
 // swiftlint:disable identifier_name
 public struct DefaultPlaceholderTextFieldStyle: TextFieldStyle {
-    @ObservedObject var appearanceSettings = AppearanceSettings.shared
+    @Environment(\.theme) private var theme: ThemeSettings
     public init() {}
 
     public func _body(configuration: TextField<_Label>) -> some View {
@@ -30,9 +30,9 @@ public struct DefaultPlaceholderTextFieldStyle: TextFieldStyle {
                 .overlay(
                     RoundedRectangle(cornerRadius: Radius.medium.rawValue,
                                      style: .continuous)
-                        .stroke(appearanceSettings.borderTextFields
+                        .stroke(theme.borderTextFields
                             ? Color.border
-                            : Color.surfaceSecondary, lineWidth: CGFloat(appearanceSettings.borderSize))
+                            : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
                 )
         )
     }
@@ -40,7 +40,7 @@ public struct DefaultPlaceholderTextFieldStyle: TextFieldStyle {
 
 // swiftlint:disable identifier_name
 public struct OverPlaceholderTextFieldStyle: TextFieldStyle {
-    @ObservedObject var appearanceSettings = AppearanceSettings.shared
+    @Environment(\.theme) private var theme: ThemeSettings
 
     public let placeholder: String
 
@@ -68,9 +68,9 @@ public struct OverPlaceholderTextFieldStyle: TextFieldStyle {
                     .overlay(
                         RoundedRectangle(cornerRadius: Radius.medium.rawValue,
                                          style: .continuous)
-                            .stroke(appearanceSettings.borderTextFields
+                            .stroke(theme.borderTextFields
                                 ? Color.border
-                                : Color.surfaceSecondary, lineWidth: CGFloat(appearanceSettings.borderSize))
+                                : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
                     )
             )
         }
@@ -79,7 +79,7 @@ public struct OverPlaceholderTextFieldStyle: TextFieldStyle {
 
 // swiftlint:disable identifier_name
 public struct InsidePlaceholderTextFieldStyle: TextFieldStyle {
-    @ObservedObject var appearanceSettings = AppearanceSettings.shared
+    @Environment(\.theme) private var theme: ThemeSettings
 
     public let placeholder: String
 
@@ -107,9 +107,9 @@ public struct InsidePlaceholderTextFieldStyle: TextFieldStyle {
                     .overlay(
                         RoundedRectangle(cornerRadius: Radius.medium.rawValue,
                                          style: .continuous)
-                            .stroke(appearanceSettings.borderTextFields
+                            .stroke(theme.borderTextFields
                                 ? Color.border
-                                : Color.surfaceSecondary, lineWidth: CGFloat(appearanceSettings.borderSize))
+                                : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
                     )
             )
         }
@@ -117,9 +117,9 @@ public struct InsidePlaceholderTextFieldStyle: TextFieldStyle {
 }
 
 public struct TextFieldModifier: ViewModifier {
+    @Environment(\.theme) private var theme: ThemeSettings
     @Binding public var helperText: String
     @Binding public var helperStyle: TextFieldHelperStyle
-    @ObservedObject var appearanceSettings = AppearanceSettings.shared
     public init(helperText: Binding<String>, helperStyle: Binding<TextFieldHelperStyle>) {
         _helperText = helperText
         _helperStyle = helperStyle

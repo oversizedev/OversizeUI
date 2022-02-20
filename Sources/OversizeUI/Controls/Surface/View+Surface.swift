@@ -1,6 +1,6 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 26.08.2021
+// Copyright © 2022 Alexander Romanov
+// View+Surface.swift
 //
 
 import SwiftUI
@@ -9,8 +9,8 @@ import SwiftUI
 public extension View {
     func surface(elevation: Elevation = .z0,
                  background: SurfaceColor = .primary,
-                 padding: SurfacePadding = .medium,
-                 radius: SurfaceRadius = .medium) -> some View
+                 padding: Space = .medium,
+                 radius: Radius = .medium) -> some View
     {
         Surface(background: background,
                 padding: padding,

@@ -1,6 +1,6 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 24.09.2021
+// Copyright © 2022 Alexander Romanov
+// SegmentedControl.swift
 //
 
 import SwiftUI
@@ -10,7 +10,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
     Content: View,
     Selection: View
 {
-    @ObservedObject var appearanceSettings = AppearanceSettings.shared
+    @Environment(\.theme) private var theme: ThemeSettings
 
     @Environment(\.segmentedControlStyle) private var style
     public typealias Data = [Element]
@@ -95,7 +95,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                     Button(action: {
                                selectedIndex = index
                                selection = data[index]
-                               (action)?()
+                               action?()
                            },
                            label: {
                                HStack(spacing: 0) {
@@ -115,19 +115,20 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                                    : nil)
                            })
 
-                        .buttonStyle(PlainButtonStyle())
-                        .background(GeometryReader { proxy in
-                            Color.clear.onAppear { frames[index] = proxy.frame(in: .global) }
-                        })
-                        .alignmentGuide(.horizontalCenterAlignment,
-                                        isActive: selectedIndex == index) { dimensions in
-                            dimensions[HorizontalAlignment.center]
-                        }
-                        .padding(.trailing, style.unseletionStyle == .surface ? Space.xSmall.rawValue : 0)
+                           .buttonStyle(PlainButtonStyle())
+                           .background(GeometryReader { proxy in
+                               Color.clear.onAppear { frames[index] = proxy.frame(in: .global) }
+                           })
+                           .alignmentGuide(.horizontalCenterAlignment,
+                                           isActive: selectedIndex == index)
+                           { dimensions in
+                               dimensions[HorizontalAlignment.center]
+                           }
+                           .padding(.trailing, style.unseletionStyle == .surface ? Space.xSmall.rawValue : 0)
                 }
             }
         }
-        // .animation(.easeInOut(duration: 0.3))
+        .animation(.easeInOut(duration: 0.3), value: selection)
     }
 
     private var leadingSegmentedControl: some View {
@@ -151,7 +152,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                     Button(action: {
                                selectedIndex = index
                                selection = data[index]
-                               (action)?()
+                               action?()
                            },
                            label: { content(data[index], selectedIndex == index)
                                .fontStyle(.button,
@@ -164,18 +165,20 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                                    ? getUnselection(unselectionStyle: style.unseletionStyle)
                                    : nil)
                            })
-                        .buttonStyle(PlainButtonStyle())
-                        .background(GeometryReader { proxy in
-                            Color.clear.onAppear { frames[index] = proxy.frame(in: .global) }
-                        })
-                        .alignmentGuide(.horizontalCenterAlignment,
-                                        isActive: selectedIndex == index) { dimensions in
-                            dimensions[HorizontalAlignment.center]
-                        }
-                        .padding(.trailing, style.unseletionStyle == .surface ? Space.xSmall.rawValue : 0)
+                           .buttonStyle(PlainButtonStyle())
+                           .background(GeometryReader { proxy in
+                               Color.clear.onAppear { frames[index] = proxy.frame(in: .global) }
+                           })
+                           .alignmentGuide(.horizontalCenterAlignment,
+                                           isActive: selectedIndex == index)
+                           { dimensions in
+                               dimensions[HorizontalAlignment.center]
+                           }
+                           .padding(.trailing, style.unseletionStyle == .surface ? Space.xSmall.rawValue : 0)
                 }
             }
         }
+        .animation(.easeInOut(duration: 0.3), value: selection)
     }
 
     @ViewBuilder
@@ -189,9 +192,9 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                 .overlay(
                     RoundedRectangle(cornerRadius: style.isShowBackground ? radius.rawValue - 4 : radius.rawValue,
                                      style: .continuous)
-                        .stroke(appearanceSettings.borderControls
+                        .stroke(theme.borderControls
                             ? Color.border
-                            : Color.surfaceSecondary, lineWidth: CGFloat(appearanceSettings.borderSize))
+                            : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
                 )
                 .shadowElevaton(.z2)
         case .graySurface:
@@ -203,9 +206,9 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                     .overlay(
                         RoundedRectangle(cornerRadius: radius.rawValue,
                                          style: .continuous)
-                            .stroke(appearanceSettings.borderControls
+                            .stroke(theme.borderControls
                                 ? Color.border
-                                : Color.surfaceSecondary, lineWidth: CGFloat(appearanceSettings.borderSize))
+                                : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
                     )
 
             } else {
@@ -233,9 +236,9 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                 .overlay(
                     RoundedRectangle(cornerRadius: radius.rawValue,
                                      style: .continuous)
-                        .stroke(appearanceSettings.borderControls
+                        .stroke(theme.borderControls
                             ? Color.border
-                            : Color.surfaceSecondary, lineWidth: CGFloat(appearanceSettings.borderSize))
+                            : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
                 )
         }
     }

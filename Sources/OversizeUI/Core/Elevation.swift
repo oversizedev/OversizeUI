@@ -1,9 +1,9 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 26.08.2021
+// Copyright © 2022 Alexander Romanov
+// Elevation.swift
 //
 
-import Foundation
+import SwiftUI
 
 // swiftlint:disable identifier_name
 public enum Elevation: Int, CaseIterable {

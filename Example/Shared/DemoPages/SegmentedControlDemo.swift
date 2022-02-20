@@ -1,13 +1,13 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 12.09.2021
+// Copyright © 2022 Alexander Romanov
+// SegmentedControlDemo.swift
 //
 
 import OversizeUI
 import SwiftUI
 
 struct SegmentedControlDemo: View {
-    var items = ["One", "Two", "Three", "Four"]
+    var items = ["One", "Two", "Three", "Four long"]
     @State var selection = ""
 
     var body: some View {

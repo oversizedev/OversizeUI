@@ -1,6 +1,6 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 11.09.2021
+// Copyright © 2022 Alexander Romanov
+// TextFieldExtended.swift
 //
 
 import Combine
@@ -14,7 +14,7 @@ public enum TextFieldPlaceholderPosition {
 }
 
 public struct TextFieldExtended: View {
-    @ObservedObject var appearanceSettings = AppearanceSettings.shared
+    @Environment(\.theme) private var theme: ThemeSettings
 
     public var placeholder: String
     @Binding public var text: String
@@ -80,7 +80,7 @@ public struct TextFieldExtended: View {
                                   onEditingChanged: { focused in
                                       self.focused = focused
                                   })
-                            .fontStyle(.subtitle1, color: .onSurfaceHighEmphasis)
+                                  .fontStyle(.subtitle1, color: .onSurfaceHighEmphasis)
                     }
 
                     if trallingImage != .none {

@@ -1,6 +1,6 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 15.09.2021
+// Copyright © 2022 Alexander Romanov
+// OversizeUITests.swift
 //
 
 @testable import OversizeUI

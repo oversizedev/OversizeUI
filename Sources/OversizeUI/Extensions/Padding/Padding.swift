@@ -1,6 +1,6 @@
 //
-// Copyright © 2021 Alexander Romanov
-// Created on 15.09.2021
+// Copyright © 2022 Alexander Romanov
+// Padding.swift
 //
 
 import SwiftUI
@@ -37,13 +37,14 @@ public extension View {
         modifier(PaddingModifier(edges: edges, length: length))
     }
 
+    @_disfavoredOverload
     func padding(_ length: Space) -> some View {
         modifier(PaddingModifier(edges: Edge.Set.all, length: length))
     }
 }
 
 public extension View {
-    func paddingContent(_ edges: Edge.Set = .horizontal) -> some View {
+    func paddingContent(_ edges: Edge.Set = .all) -> some View {
         modifier(ContentPaddingModifier(edges: edges))
     }
 }
