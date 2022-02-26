@@ -7,8 +7,8 @@ import SwiftUI
 
 public enum AvatarSize: Int, CaseIterable {
     case small
-    case m
-    case l
+    case medium
+    case large
 }
 
 public struct AvatarView: View {
@@ -28,13 +28,13 @@ public struct AvatarView: View {
     let firstName: String
     let lastName: String
     let size: AvatarSize
-    let avatar: Image
+    let avatar: Image?
     let stroke: Bool
 
     public init(firstName: String = "",
                 lastName: String = "",
-                size: AvatarSize = .m,
-                avatar: Image = Image(""),
+                size: AvatarSize = .medium,
+                avatar: Image? = nil,
                 stroke: Bool = false)
     {
         self.firstName = firstName
@@ -45,11 +45,11 @@ public struct AvatarView: View {
     }
 
     public var body: some View {
-        if avatar != Image("") {
+        if let avatar = avatar {
             avatar
                 .resizable()
-                .frame(width: size == .small ? Constants.sizeS : size == .m ? Constants.sizeM : Constants.sizeL,
-                       height: size == .small ? Constants.sizeS : size == .m ? Constants.sizeM : Constants.sizeL)
+                .frame(width: size == .small ? Constants.sizeS : size == .medium ? Constants.sizeM : Constants.sizeL,
+                       height: size == .small ? Constants.sizeS : size == .medium ? Constants.sizeM : Constants.sizeL)
                 .clipShape(Circle())
                 .overlay(stroke ? Circle().stroke(Constants.borderColor, lineWidth: Constants.borderLineWidth) : nil)
 
@@ -58,19 +58,19 @@ public struct AvatarView: View {
                 Circle()
                     .fill(LinearGradient(gradient:
                         Gradient(colors: [Color.warning, Color.success]), startPoint: .topLeading, endPoint: .bottom))
-                    .frame(width: size == .small ? Constants.sizeS : size == .m ? Constants.sizeM : Constants.sizeL,
-                           height: size == .small ? Constants.sizeS : size == .m ? Constants.sizeM : Constants.sizeL)
+                    .frame(width: size == .small ? Constants.sizeS : size == .medium ? Constants.sizeM : Constants.sizeL,
+                           height: size == .small ? Constants.sizeS : size == .medium ? Constants.sizeM : Constants.sizeL)
                     .overlay(stroke
                         ? Circle().stroke(Constants.borderColor, lineWidth: Constants.borderLineWidth)
                         : nil)
 
                 HStack(spacing: size == .small
                     ? Constants.avatarTextSpaceS
-                    : size == .m ? Constants.avatarTextSpaceM
+                    : size == .medium ? Constants.avatarTextSpaceM
                     : Constants.avatarTextSpaceL) {
                         if firstName != "" {
                             Text(String(firstName.dropLast(firstName.count - 1)))
-                                .fontStyle(size == .small ? .caption : size == .m
+                                .fontStyle(size == .small ? .caption : size == .medium
                                     ? .title3
                                     : .largeTitle,
                                     color: .onPrimaryHighEmphasis)
@@ -80,7 +80,7 @@ public struct AvatarView: View {
                             Text(String(lastName.dropLast(lastName.count - 1)))
                                 .fontStyle(size == .small
                                     ? .caption
-                                    : size == .m
+                                    : size == .medium
                                     ? .title3
                                     : .largeTitle,
                                     color: .onPrimaryHighEmphasis)
@@ -111,32 +111,32 @@ struct M7AvatarView_Previews: PreviewProvider {
             .background(Color.surfaceTertiary)
 
         Group {
-            AvatarView(firstName: "Jhon", size: .m)
+            AvatarView(firstName: "Jhon", size: .medium)
                 .previewDisplayName("Only firsy name")
 
-            AvatarView(firstName: "Jhon", lastName: "Smith", size: .m, stroke: true)
+            AvatarView(firstName: "Jhon", lastName: "Smith", size: .medium, stroke: true)
                 .previewDisplayName("First name, last name and storke")
 
-            AvatarView(size: .m, avatar: Image("empty", bundle: .module))
+            AvatarView(size: .medium, avatar: Image("empty", bundle: .module))
                 .previewDisplayName("Only avatar")
 
-            AvatarView(firstName: "Jhon", lastName: "Smith", size: .m, avatar: Image("empty", bundle: .module), stroke: true)
+            AvatarView(firstName: "Jhon", lastName: "Smith", size: .medium, avatar: Image("empty", bundle: .module), stroke: true)
                 .previewDisplayName("All data")
 
         }.previewLayout(.fixed(width: 48, height: 48))
             .background(Color.surfaceTertiary)
 
         Group {
-            AvatarView(firstName: "Jhon", size: .l)
+            AvatarView(firstName: "Jhon", size: .large)
                 .previewDisplayName("Only firsy name")
 
-            AvatarView(firstName: "Jhon", lastName: "Smith", size: .l, stroke: true)
+            AvatarView(firstName: "Jhon", lastName: "Smith", size: .large, stroke: true)
                 .previewDisplayName("First name, last name and storke")
 
-            AvatarView(size: .l, avatar: Image("empty", bundle: .module))
+            AvatarView(size: .large, avatar: Image("empty", bundle: .module))
                 .previewDisplayName("Only avatar")
 
-            AvatarView(firstName: "Jhon", lastName: "Smith", size: .l, avatar: Image("empty", bundle: .module), stroke: true)
+            AvatarView(firstName: "Jhon", lastName: "Smith", size: .large, avatar: Image("empty", bundle: .module), stroke: true)
                 .previewDisplayName("All data")
 
         }.previewLayout(.fixed(width: 96, height: 96))

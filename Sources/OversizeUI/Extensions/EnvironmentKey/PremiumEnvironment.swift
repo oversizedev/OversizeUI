@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-struct PremiumStateKey: EnvironmentKey {
+private struct PremiumStateKey: EnvironmentKey {
     public static var defaultValue: Bool = false
 }
 
@@ -17,7 +17,6 @@ public extension EnvironmentValues {
 }
 
 public extension View {
-    @ViewBuilder
     func premiumStatus(_ isPremium: Bool) -> some View {
         environment(\.isPremium, isPremium)
     }

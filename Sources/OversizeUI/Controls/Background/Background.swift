@@ -34,14 +34,8 @@ public struct Background<Content: View>: View {
     }
 
     private let content: Content
-
-    public var backgroundColor: Color = Constants.colorPrimary
-
-    public var background: BackgroundColor
-
+    private let background: BackgroundColor
     public var padding: BackgroundPadding
-
-    public var paddingSize: CGFloat = 0
 
     public init(background: BackgroundColor = .primary,
                 padding: BackgroundPadding = .medium,
@@ -50,9 +44,6 @@ public struct Background<Content: View>: View {
         self.content = content()
         self.padding = padding
         self.background = background
-
-        setBackground(background)
-        setPadding(padding)
     }
 
     public var body: some View {
@@ -63,23 +54,23 @@ public struct Background<Content: View>: View {
             .cornerRadius(Radius.medium)
     }
 
-    private mutating func setPadding(_ padding: BackgroundPadding) {
+    private var paddingSize: CGFloat {
         switch padding {
         case .medium:
-            paddingSize = Constants.paddingM
+            return Constants.paddingM
         case .small:
-            paddingSize = Constants.paddingS
+            return Constants.paddingS
         }
     }
 
-    private mutating func setBackground(_ background: BackgroundColor) {
+    private var backgroundColor: Color {
         switch background {
         case .primary:
-            backgroundColor = Constants.colorPrimary
+            return Constants.colorPrimary
         case .secondary:
-            backgroundColor = Constants.colorSecondary
+            return Constants.colorSecondary
         case .tertiary:
-            backgroundColor = Constants.colorTertiary
+            return Constants.colorTertiary
         }
     }
 }

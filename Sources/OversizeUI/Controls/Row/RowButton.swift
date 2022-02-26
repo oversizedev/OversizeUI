@@ -33,9 +33,11 @@ public struct RowButton: View {
             Button(action: self.tapAction) {
                 HStack {
                     if icon != .none {
-                        Surface(background: .secondary, padding: .xxSmall) {
+                        Surface {
                             Icon(icon)
                         }
+                        .surfaceStyle(.secondary)
+                        .controlPadding(.xxSmall)
                     }
 
                     Text(text)

@@ -13,7 +13,7 @@ public enum ControlSize {
     case large
 }
 
-struct ControlSizeKey: EnvironmentKey {
+private struct ControlSizeKey: EnvironmentKey {
     public static var defaultValue: ControlSize = .regular
 }
 

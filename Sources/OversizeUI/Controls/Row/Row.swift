@@ -155,9 +155,12 @@ public struct Row: View {
         case let .avatar(avatar):
             avatar
         case let .iconOnSurface(icon):
-            Surface(background: .secondary, padding: .xxSmall) {
+            Surface {
                 Icon(icon)
-            }.padding(.trailing, Constants.spacingIconAndText)
+            }
+            .surfaceStyle(.secondary)
+            .padding(.trailing, Constants.spacingIconAndText)
+            .controlPadding(.xxSmall)
         case let .systemImage(systemImage):
             Image(systemName: systemImage)
                 .foregroundColor(Color.onBackgroundHighEmphasis)
@@ -171,9 +174,7 @@ public struct Row: View {
     private func tralling() -> some View {
         switch trallingType {
         case .none:
-
             EmptyView()
-
         case let .toggle(isOn):
             Toggle(isOn: isOn) {}
                 .labelsHidden()

@@ -20,8 +20,8 @@ public struct Select<Element, Content, Selection>: View
     private let content: (Data.Element, Bool) -> Content
     @State private var selectedIndex: Data.Index? = 0
     private let selectionView: (Data.Element) -> Selection
-    @State var showModal = false
-    @State var isSelected = false
+    @State private var showModal = false
+    @State private var isSelected = false
 
     public init(_ label: String,
                 _ data: Data,
