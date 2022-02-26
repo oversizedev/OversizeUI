@@ -3,7 +3,7 @@ name: watchOS example
 jobs:
   test:
     name: Test
-    runs-on: macOS-latest
+    runs-on: macos-11
     strategy:
         matrix:
           destination: ['platform=watchOS Simulator,name=Apple Watch Series 5 - 44mm']
