@@ -8,18 +8,20 @@ import SwiftUI
 
 @main
 struct ExampleApp: App {
-    @ObservedObject var appearanceSettings = AppearanceSettings.shared
+    @Environment(\.theme) var theme
 
     #if !os(watchOS)
         var body: some Scene {
             WindowGroup {
                 #if os(iOS)
                     ComponentsList()
-                        .preferredColorScheme(appearanceSettings.appearance.colorScheme)
-                        .accentColor(appearanceSettings.accentColor)
+                        .preferredColorScheme(theme.appearance.colorScheme)
+                        .accentColor(theme.accentColor)
+                        .theme(ThemeSettings())
                 #else
                     ComponentsList()
-                        .preferredColorScheme(appearanceSettings.appearance.colorScheme)
+                        .preferredColorScheme(theme.appearance.colorScheme)
+                        .theme(ThemeSettings())
                 #endif
             }
         }
