@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-struct ElevationStateKey: EnvironmentKey {
+private struct ElevationStateKey: EnvironmentKey {
     public static var defaultValue: Elevation = .z0
 }
 
@@ -17,7 +17,6 @@ public extension EnvironmentValues {
 }
 
 public extension View {
-    @ViewBuilder
     func elevation(_ elevation: Elevation = .z0) -> some View {
         environment(\.elevation, elevation)
     }

@@ -77,21 +77,24 @@ struct SegmentedControlPreview: View {
             .previewDisplayName("Icon and subtitle")
 
             VStack {
-                SegmentedPickerSelector(items, selection: $selection, radius: .small) { item, _ in
+                SegmentedPickerSelector(items, selection: $selection) { item, _ in
+                    Text(item)
+                }
+                .controlRadius(.small)
+
+                SegmentedPickerSelector(items, selection: $selection) { item, _ in
                     Text(item)
                 }
 
                 SegmentedPickerSelector(items, selection: $selection) { item, _ in
                     Text(item)
                 }
+                .controlRadius(.large)
 
-                SegmentedPickerSelector(items, selection: $selection, radius: .large) { item, _ in
+                SegmentedPickerSelector(items, selection: $selection) { item, _ in
                     Text(item)
                 }
-
-                SegmentedPickerSelector(items, selection: $selection, radius: .xLarge) { item, _ in
-                    Text(item)
-                }
+                .controlRadius(.xLarge)
             }.previewDisplayName("Radius styles")
         }
         .previewLayout(.sizeThatFits)

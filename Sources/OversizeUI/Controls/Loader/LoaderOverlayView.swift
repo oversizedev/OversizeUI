@@ -50,7 +50,7 @@ public struct LoaderOverlayView: View {
                 Color.surfaceSecondary.opacity(0.5)
             #endif
 
-            Surface(background: .primary) {
+            Surface {
                 VStack(spacing: 20) {
                     containedView()
 
@@ -62,6 +62,7 @@ public struct LoaderOverlayView: View {
                 }
                 .padding()
             }
+            .surfaceStyle(.primary)
             .elevation(.z4)
         }
         .ignoresSafeArea()

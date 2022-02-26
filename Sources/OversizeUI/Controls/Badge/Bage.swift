@@ -7,14 +7,13 @@ import SwiftUI
 
 public struct Bage<Label: View>: View {
     @Environment(\.theme) private var theme: ThemeSettings
+    @Environment(\.controlRadius) private var controlRadius: Radius
 
     private let label: Label
-    private var color: Color
-    private var radius: Radius
+    private let color: Color
 
-    public init(color: Color = .accentColor, radius: Radius = .small, @ViewBuilder label: () -> Label) {
+    public init(color: Color = .accentColor, @ViewBuilder label: () -> Label) {
         self.color = color
-        self.radius = radius
         self.label = label()
     }
 
@@ -27,11 +26,11 @@ public struct Bage<Label: View>: View {
         .padding(.vertical, .xxxSmall)
         .padding(.horizontal, 6)
         .background(
-            RoundedRectangle(cornerRadius: radius.rawValue,
+            RoundedRectangle(cornerRadius: controlRadius.rawValue,
                              style: .circular)
                 .fill(color.opacity(0.1))
                 .overlay(
-                    RoundedRectangle(cornerRadius: radius.rawValue,
+                    RoundedRectangle(cornerRadius: controlRadius.rawValue,
                                      style: .continuous)
                         .stroke(
                             theme.borderSurface

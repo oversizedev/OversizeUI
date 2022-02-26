@@ -28,12 +28,15 @@ public struct SectionView<Content: View>: View {
                 Text(title)
                     .fontStyle(.subtitle1)
                     .foregroundColor(.onBackgroundHighEmphasis)
+                    .padding(.leading, .xxxSmall)
             }
 
-            Surface(padding: .zero) {
+            Surface {
                 content
                     .padding(.vertical, verticalPadding)
-            }.clipShape(
+            }
+            .controlPadding(.zero)
+            .clipShape(
                 RoundedRectangle(cornerRadius: Constants.radiusMedium,
                                  style: .circular)
             )

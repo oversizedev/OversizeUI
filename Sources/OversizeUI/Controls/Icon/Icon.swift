@@ -316,42 +316,42 @@ public struct Icon: View {
     }
 
     let name: Icons
-    var size: CGFloat = Constants.medium
+    let size: IconSizes
     var color: Color
 
     public init(_ name: Icons = .menu) {
         self.name = name
+        size = .medium
         color = Color.onBackgroundHighEmphasis
-        setTextStyle(IconSizes.medium)
     }
 
     public init(_ name: Icons = .menu, size: IconSizes = .medium, color: Color = .onBackgroundHighEmphasis) {
         self.name = name
         self.color = color
-        setTextStyle(size)
+        self.size = size
     }
 
     public var body: some View {
         if name != .none {
             Image(name.rawValue, bundle: .module)
                 .resizable()
-                .frame(width: size, height: size)
+                .frame(width: iconSize, height: iconSize)
                 .foregroundColor(color)
         } else {
             EmptyView()
         }
     }
 
-    private mutating func setTextStyle(_ size: IconSizes) {
+    var iconSize: CGFloat {
         switch size {
         case .medium:
-            break
+            return Constants.medium
         case .small:
-            self.size = Constants.small
+            return Constants.small
         case .large:
-            self.size = Constants.large
+            return Constants.large
         case .xLarge:
-            self.size = Constants.xLarge
+            return Constants.xLarge
         }
     }
 }

@@ -11,13 +11,13 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
     Selection: View
 {
     @Environment(\.theme) private var theme: ThemeSettings
-
     @Environment(\.segmentedControlStyle) private var style
+    @Environment(\.controlRadius) var controlRadius: Radius
+
     public typealias Data = [Element]
 
     @State private var frames: [CGRect]
     @State private var selectedIndex: Data.Index? = 0
-    private let radius: Radius
     @Binding private var selection: Data.Element
 
     private let data: Data
@@ -27,14 +27,12 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
 
     public init(_ data: Data,
                 selection: Binding<Data.Element>,
-                radius: Radius = .medium,
                 @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
                 @ViewBuilder selectionView: @escaping () -> Selection? = { nil },
                 action: (() -> Void)? = nil)
     {
         self.data = data
         self.content = content
-        self.radius = radius
         self.selectionView = selectionView
         self.action = action
         _selection = selection
@@ -50,7 +48,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                     )
                 )
             )
-            .clipBackground(style.isShowBackground, radius: radius.rawValue)
+            .clipBackground(style.isShowBackground, radius: controlRadius.rawValue)
             .onAppear {
                 let selctedValue = self.selection
                 var index = 0
@@ -186,11 +184,11 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
         switch selectionStyle {
         case .shadowSurface:
 
-            RoundedRectangle(cornerRadius: style.isShowBackground ? radius.rawValue - 4 : radius.rawValue,
+            RoundedRectangle(cornerRadius: style.isShowBackground ? controlRadius.rawValue - 4 : controlRadius.rawValue,
                              style: .continuous)
                 .fill(Color.surfacePrimary)
                 .overlay(
-                    RoundedRectangle(cornerRadius: style.isShowBackground ? radius.rawValue - 4 : radius.rawValue,
+                    RoundedRectangle(cornerRadius: style.isShowBackground ? controlRadius.rawValue - 4 : controlRadius.rawValue,
                                      style: .continuous)
                         .stroke(theme.borderControls
                             ? Color.border
@@ -200,11 +198,11 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
         case .graySurface:
 
             if style.unseletionStyle == .clean {
-                RoundedRectangle(cornerRadius: radius.rawValue,
+                RoundedRectangle(cornerRadius: controlRadius.rawValue,
                                  style: .continuous)
                     .fill(Color.surfaceSecondary)
                     .overlay(
-                        RoundedRectangle(cornerRadius: radius.rawValue,
+                        RoundedRectangle(cornerRadius: controlRadius.rawValue,
                                          style: .continuous)
                             .stroke(theme.borderControls
                                 ? Color.border
@@ -212,12 +210,12 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                     )
 
             } else {
-                RoundedRectangle(cornerRadius: style.isShowBackground ? radius.rawValue - 4 : radius.rawValue,
+                RoundedRectangle(cornerRadius: style.isShowBackground ? controlRadius.rawValue - 4 : controlRadius.rawValue,
                                  style: .continuous)
                     .strokeBorder(Color.onSurfaceMediumEmphasis, lineWidth: 2)
             }
         case .accentSurface:
-            RoundedRectangle(cornerRadius: style.isShowBackground ? radius.rawValue - 4 : radius.rawValue,
+            RoundedRectangle(cornerRadius: style.isShowBackground ? controlRadius.rawValue - 4 : controlRadius.rawValue,
                              style: .continuous)
                 .strokeBorder(Color.blue, lineWidth: 2)
         }
@@ -230,11 +228,11 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
             EmptyView()
         case .surface:
 
-            RoundedRectangle(cornerRadius: radius.rawValue,
+            RoundedRectangle(cornerRadius: controlRadius.rawValue,
                              style: .continuous)
                 .fill(Color.surfaceSecondary)
                 .overlay(
-                    RoundedRectangle(cornerRadius: radius.rawValue,
+                    RoundedRectangle(cornerRadius: controlRadius.rawValue,
                                      style: .continuous)
                         .stroke(theme.borderControls
                             ? Color.border
@@ -247,13 +245,11 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
 public extension SegmentedPickerSelector where Selection == EmptyView {
     init(_ data: Data,
          selection: Binding<Data.Element>,
-         radius: Radius = .medium,
          @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
          action: (() -> Void)? = nil)
     {
         self.data = data
         self.content = content
-        self.radius = radius
         self.action = action
         selectionView = { nil }
         _selection = selection

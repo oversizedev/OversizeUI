@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-struct LoadingStateKey: EnvironmentKey {
+private struct LoadingStateKey: EnvironmentKey {
     public static var defaultValue: Bool = false
 }
 
@@ -17,7 +17,6 @@ public extension EnvironmentValues {
 }
 
 public extension View {
-    @ViewBuilder
     func loading(_ isLoading: Bool) -> some View {
         environment(\.isLoading, isLoading)
     }

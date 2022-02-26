@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-struct ThemeStateKey: EnvironmentKey {
+private struct ThemeStateKey: EnvironmentKey {
     public static var defaultValue = ThemeSettings()
 }
 

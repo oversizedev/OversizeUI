@@ -5,16 +5,19 @@
 
 import SwiftUI
 
-public enum SurfaceColor: Int, CaseIterable {
+public enum SurfaceStyle: Int, CaseIterable {
     case primary
     case secondary
     case tertiary
+    case clear
 }
 
 // swiftlint:disable opening_brace
 public struct Surface<Label: View>: View {
     @Environment(\.elevation) private var elevation: Elevation
     @Environment(\.theme) private var theme: ThemeSettings
+    @Environment(\.controlRadius) var controlRadius: Radius
+    @Environment(\.controlPadding) var controlPadding: Space
 
     private enum Constants {
         /// Colors
@@ -23,87 +26,44 @@ public struct Surface<Label: View>: View {
         static var colorTertiary: Color { Color.surfaceTertiary }
     }
 
-    public var padding: Space
-
     private let label: Label
-
-    public var backgroundColor: Color = Constants.colorPrimary
-
-    public var background: SurfaceColor
-
-    public var radius: Radius
-
-    public var border: Color?
-
     private let action: (() -> Void)?
+    private var background: SurfaceStyle = .primary
+    private var border: Color?
 
-    public init(background: SurfaceColor = .primary,
-                padding: Space = .medium,
-                radius: Radius = .medium,
-                border: Color? = nil,
-                action: (() -> Void)? = nil,
+    public init(action: (() -> Void)? = nil,
                 @ViewBuilder label: () -> Label)
     {
         self.label = label()
-        self.padding = padding
-        self.background = background
-        self.radius = radius
-        self.border = border
         self.action = action
-        setBackground(background)
-    }
-
-    public init(background: SurfaceColor = .primary,
-                action: (() -> Void)? = nil,
-                @ViewBuilder label: () -> Label)
-    {
-        self.label = label()
-        padding = .medium
-        self.background = background
-        radius = .medium
-        self.action = action
-        setBackground(background)
-    }
-
-    public init(
-        action: (() -> Void)? = nil,
-        @ViewBuilder label: () -> Label
-    ) {
-        self.label = label()
-        padding = .medium
-        background = .primary
-        radius = .medium
-        self.action = action
-        setBackground(background)
     }
 
     public var body: some View {
-        actionableSurface()
-    }
-
-    @ViewBuilder
-    private func actionableSurface() -> some View {
         if action != nil {
-            Button {
-                action?()
-            } label: {
-                surface
-            }
-            .buttonStyle(SurfaceButtonStyle())
+            actionableSurface
         } else {
             surface
         }
     }
 
-    public var surface: some View {
+    private var actionableSurface: some View {
+        Button {
+            action?()
+        } label: {
+            surface
+        }
+        .buttonStyle(SurfaceButtonStyle())
+    }
+
+    private var surface: some View {
         label
-            .padding(.all, padding.rawValue)
+            .padding(.all, controlPadding.rawValue)
             .background(
-                RoundedRectangle(cornerRadius: radius.rawValue,
+                RoundedRectangle(cornerRadius: controlRadius.rawValue,
                                  style: .circular)
                     .fill(backgroundColor)
                     .overlay(
-                        RoundedRectangle(cornerRadius: radius.rawValue,
+                        RoundedRectangle(cornerRadius: controlRadius.rawValue,
                                          style: .continuous)
                             .stroke(
                                 border != nil ? border ?? Color.clear
@@ -116,15 +76,29 @@ public struct Surface<Label: View>: View {
             )
     }
 
-    private mutating func setBackground(_ background: SurfaceColor) {
+    private var backgroundColor: Color {
         switch background {
         case .primary:
-            backgroundColor = Constants.colorPrimary
+            return Constants.colorPrimary
         case .secondary:
-            backgroundColor = Constants.colorSecondary
+            return Constants.colorSecondary
         case .tertiary:
-            backgroundColor = Constants.colorTertiary
+            return Constants.colorTertiary
+        case .clear:
+            return Color.clear
         }
+    }
+
+    public func surfaceStyle(_ style: SurfaceStyle) -> Surface {
+        var control = self
+        control.background = style
+        return control
+    }
+
+    public func surfaceBorderColor(_ border: Color?) -> Surface {
+        var control = self
+        control.border = border
+        return control
     }
 }
 
@@ -140,16 +114,19 @@ public struct SurfaceButtonStyle: ButtonStyle {
 struct Surface_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            Surface(background: .secondary) {
+            Surface {
                 Text("Text")
                     .fontStyle(.title3, color: .onSurfaceHighEmphasis)
             }
+            .surfaceStyle(.secondary)
             .previewLayout(.fixed(width: 414, height: 200))
 
-            Surface(background: .primary, border: .surfaceSecondary) {
+            Surface {
                 Text("Text")
                     .fontStyle(.title3, color: .onSurfaceHighEmphasis)
             }
+            .surfaceStyle(.primary)
+            .surfaceBorderColor(.surfaceSecondary)
             .preferredColorScheme(.dark)
             .previewLayout(.fixed(width: 414, height: 200))
 
@@ -165,12 +142,15 @@ struct Surface_Previews: PreviewProvider {
             .surface(elevation: .z4)
             .previewLayout(.fixed(width: 414, height: 200))
 
-            Surface(background: .primary, padding: .zero, radius: .zero) { HStack {
+            Surface { HStack {
                 Spacer()
                 Text("Text")
                 Spacer()
             }}
+            .surfaceStyle(.primary)
             .elevation(.z2)
+            .controlRadius(.zero)
+            .controlPadding(.zero)
             .previewLayout(.fixed(width: 375, height: 200))
 
             Surface { HStack {
@@ -178,6 +158,7 @@ struct Surface_Previews: PreviewProvider {
                 Spacer()
             }}
             .elevation(.z1)
+            .controlPadding(.large)
             .preferredColorScheme(.dark)
             .previewLayout(.fixed(width: 320, height: 200))
         }
