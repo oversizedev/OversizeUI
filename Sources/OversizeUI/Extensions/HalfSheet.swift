@@ -72,7 +72,7 @@ public struct HalfSheet<T: View>: ViewModifier {
     }
 }
 
-// swiftlint:disable type_name
+// swiftlint:disable type_name superfluous_disable_command
 @available(iOS 15.0, *)
 public struct HalfSheetUI<Content: View>: UIViewControllerRepresentable {
     let content: Content
