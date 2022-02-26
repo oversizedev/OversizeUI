@@ -14,13 +14,13 @@ struct AvatarDemo: View {
 
                 AvatarView(firstName: "Jhon", lastName: "Smith", size: .small, stroke: true)
 
-                AvatarView(firstName: "Jhon", size: .m)
+                AvatarView(firstName: "Jhon", size: .medium)
 
-                AvatarView(firstName: "Jhon", lastName: "Smith", size: .m, stroke: true)
+                AvatarView(firstName: "Jhon", lastName: "Smith", size: .medium, stroke: true)
 
-                AvatarView(firstName: "Jhon", size: .l)
+                AvatarView(firstName: "Jhon", size: .large)
 
-                AvatarView(firstName: "Jhon", lastName: "Smith", size: .l, stroke: true)
+                AvatarView(firstName: "Jhon", lastName: "Smith", size: .large, stroke: true)
             }
         }
         .navigationBarTitle("Avatar", displayMode: .inline)

@@ -61,7 +61,10 @@ public class HUD: ObservableObject {
 }
 
 public extension View {
-    func hud<Content: View>(isPresented: Binding<Bool>, type: Binding<HUDType>, @ViewBuilder content: () -> Content) -> some View {
+    func hud<Content: View>(isPresented: Binding<Bool>,
+                            type: Binding<HUDType>,
+                            @ViewBuilder content: () -> Content) -> some View
+    {
         ZStack(alignment: type.wrappedValue == .hud ? .top : .center) {
             self
             // .blur(radius: type.wrappedValue == .alert && isPresented.wrappedValue ? 10 : 0)
@@ -96,33 +99,42 @@ public struct HUDSurfaceView<Content: View>: View {
     }
 
     public var body: some View {
-        if #available(iOS 15.0, *) {
-            content
-                .padding(.top, topPadding)
-                .padding(.horizontal, horizontalPadding)
-                .padding(.bottom, bottomPadding)
-                .background(backgroundMaterial(type: type),
-                            in: backgroundShape(type: type))
-                .shadowElevaton(type == .hud ? .z2 : .z0)
-        } else {
+        #if os(iOS)
+            if #available(iOS 15.0, *) {
+                content
+                    .padding(.top, topPadding)
+                    .padding(.horizontal, horizontalPadding)
+                    .padding(.bottom, bottomPadding)
+                    .background(backgroundMaterial(type: type),
+                                in: backgroundShape(type: type))
+                    .shadowElevaton(type == .hud ? .z2 : .z0)
+            } else {
+                content
+                    .padding(.top, topPadding)
+                    .padding(.horizontal, horizontalPadding)
+                    .padding(.bottom, bottomPadding)
+                    .background(background(type: type))
+            }
+        #else
             content
                 .padding(.top, topPadding)
                 .padding(.horizontal, horizontalPadding)
                 .padding(.bottom, bottomPadding)
                 .background(background(type: type))
-        }
+        #endif
     }
 
-    @available(iOS 15.0, *)
-    private func backgroundMaterial(type: HUDType) -> Material {
-        switch type {
-        case .hud:
-            return .regular
-
-        case .alert:
-            return .ultraThinMaterial
+    #if os(iOS)
+        @available(iOS 15.0, *)
+        private func backgroundMaterial(type: HUDType) -> Material {
+            switch type {
+            case .hud:
+                return .regular
+            case .alert:
+                return .ultraThinMaterial
+            }
         }
-    }
+    #endif
 
     private func backgroundShape(type: HUDType) -> AnyShape {
         switch type {

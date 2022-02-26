@@ -1,4 +1,4 @@
-name: CI
+name: iOS example
 
 on:
   push:
@@ -21,12 +21,12 @@ jobs:
     runs-on: macOS-latest
     strategy:
         matrix:
-          destination: ['platform=iOS Simulator,OS=14.0,name=iPhone 8','platform=iOS Simulator,OS=14.3,name=iPhone X','platform=iOS Simulator,OS=14.5,name=iPhone X']
+          destination: ['platform=iOS Simulator,OS=14.0,name=iPhone 8','platform=iOS Simulator,OS=14.5,name=iPhone X','platform=iOS Simulator,OS=14.7,name=iPhone X','platform=iOS Simulator,OS=15.3,name=iPhone X','platform=iOS Simulator,OS=15.3.1,name=iPhone 13']
     steps:
       - name: Checkout
         uses: actions/checkout@main
       - name: Build and test
         run: |
-          xcodebuild clean build test -project "Example/Example.xcodeproj" -scheme Example -sdk $TEST_SDK ONLY_ACTIVE_ARCH=NO | xcpretty
+          xcodebuild clean build test -project "Example/Example.xcodeproj" -scheme "Example (iOS)" -sdk $TEST_SDK ONLY_ACTIVE_ARCH=NO | xcpretty
         env: 
          destination: ${{ matrix.destination }}

@@ -9,11 +9,12 @@ import SwiftUI
 struct SurfaceDemo: View {
     var body: some View {
         ScrollView {
-            VStack(spacing: .large) {
-                Surface(background: .secondary) {
+            VStack {
+                Surface {
                     Text("Text")
                         .fontStyle(.title3, color: .onSurfaceHighEmphasis)
                 }
+                .surfaceStyle(.secondary)
 
                 Text("Text")
                     .surface(elevation: .z4)
@@ -26,11 +27,13 @@ struct SurfaceDemo: View {
                 }
                 .surface(elevation: .z4)
 
-                Surface(background: .primary, padding: .zero, radius: .zero) { HStack {
+                Surface { HStack {
                     Spacer()
                     Text("Text")
                     Spacer()
                 }}
+                .controlRadius(.zero)
+                .controlPadding(.zero)
                 .elevation(.z2)
 
                 Surface { HStack {

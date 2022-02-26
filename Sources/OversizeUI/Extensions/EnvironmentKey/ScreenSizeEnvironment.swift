@@ -30,7 +30,13 @@ public struct ScreenSize {
         safeAreaTrailing = 0
     }
 
-    public init(width: CGFloat, height: CGFloat, safeAreaTop: CGFloat, safeAreaBottom: CGFloat, safeAreaLeading: CGFloat, safeAreaTrailing: CGFloat) {
+    public init(width: CGFloat,
+                height: CGFloat,
+                safeAreaTop: CGFloat,
+                safeAreaBottom: CGFloat,
+                safeAreaLeading: CGFloat,
+                safeAreaTrailing: CGFloat)
+    {
         safeAreaWidth = width
         safeAreaHeight = height
         self.safeAreaTop = safeAreaTop
