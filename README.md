@@ -1,6 +1,6 @@
 # OversizeUI
 
-![Build Status](https://github.com/aromanov91/oversizeUI/actions/workflows/ci/badge.svg)
+![Build Status](https://github.com/aromanov91/oversizeUI/actions/workflows/buildExampleIOS.yml/badge.svg)
 ![GitHub](https://img.shields.io/github/license/aromanov91/oversizeUI)
 
 Yet another component library on SwiftUI
