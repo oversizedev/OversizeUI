@@ -46,7 +46,8 @@ public struct ScrollViewOffset<Content: View>: View {
 //                        GeometryReader { insideProxy in
 //                            Color.clear
 //                                .preference(key: ScrollOffsetPreferenceKey.self,
-//                                            value: [self.calculateContentOffset(fromOutsideProxy: outsideProxy, insideProxy: insideProxy)])
+//                                            value: [self.calculateContentOffset(fromOutsideProxy: outsideProxy,
+            // insideProxy: insideProxy)])
 //                        }
 //                        VStack {
 //                            self.contnt

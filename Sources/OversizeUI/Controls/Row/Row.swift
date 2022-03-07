@@ -170,6 +170,7 @@ public struct Row: View {
         }
     }
 
+    // swiftlint:disable function_body_length
     @ViewBuilder
     private func tralling() -> some View {
         switch trallingType {

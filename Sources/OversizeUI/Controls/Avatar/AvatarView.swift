@@ -58,8 +58,16 @@ public struct AvatarView: View {
                 Circle()
                     .fill(LinearGradient(gradient:
                         Gradient(colors: [Color.warning, Color.success]), startPoint: .topLeading, endPoint: .bottom))
-                    .frame(width: size == .small ? Constants.sizeS : size == .medium ? Constants.sizeM : Constants.sizeL,
-                           height: size == .small ? Constants.sizeS : size == .medium ? Constants.sizeM : Constants.sizeL)
+                    .frame(width: size == .small
+                        ? Constants.sizeS
+                        : size == .medium
+                        ? Constants.sizeM
+                        : Constants.sizeL,
+                        height: size == .small
+                            ? Constants.sizeS
+                            : size == .medium
+                            ? Constants.sizeM
+                            : Constants.sizeL)
                     .overlay(stroke
                         ? Circle().stroke(Constants.borderColor, lineWidth: Constants.borderLineWidth)
                         : nil)

@@ -13,6 +13,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.segmentedControlStyle) private var style
     @Environment(\.controlRadius) var controlRadius: Radius
+    @Environment(\.controlPadding) var controlPadding: Space
 
     public typealias Data = [Element]
 
@@ -107,7 +108,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                                    Spacer()
                                }
 
-                               .padding(.vertical, .xxSmall)
+                               .padding(.vertical, controlPadding)
                                .background(selectedIndex != index
                                    ? getUnselection(unselectionStyle: style.unseletionStyle)
                                    : nil)
@@ -136,7 +137,6 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                 HStack {
                     selectionView()
                 }
-
                 .frame(width: frames[selectedIndex].width,
                        height: frames[selectedIndex].height)
                 .alignmentGuide(.horizontalCenterAlignment) { dimensions in
@@ -157,8 +157,8 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                                           color: .onSurfaceHighEmphasis)
 
                                .multilineTextAlignment(.center)
-                               .padding(.vertical, .xxSmall)
-                               .padding(.horizontal, .small)
+                               .padding(.vertical, controlPadding)
+                               .padding(.horizontal, controlPadding)
                                .background(selectedIndex != index
                                    ? getUnselection(unselectionStyle: style.unseletionStyle)
                                    : nil)
@@ -188,8 +188,10 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                              style: .continuous)
                 .fill(Color.surfacePrimary)
                 .overlay(
-                    RoundedRectangle(cornerRadius: style.isShowBackground ? controlRadius.rawValue - 4 : controlRadius.rawValue,
-                                     style: .continuous)
+                    RoundedRectangle(cornerRadius: style.isShowBackground
+                        ? controlRadius.rawValue - 4
+                        : controlRadius.rawValue,
+                        style: .continuous)
                         .stroke(theme.borderControls
                             ? Color.border
                             : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
@@ -210,8 +212,10 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                     )
 
             } else {
-                RoundedRectangle(cornerRadius: style.isShowBackground ? controlRadius.rawValue - 4 : controlRadius.rawValue,
-                                 style: .continuous)
+                RoundedRectangle(cornerRadius: style.isShowBackground
+                    ? controlRadius.rawValue - 4
+                    : controlRadius.rawValue,
+                    style: .continuous)
                     .strokeBorder(Color.onSurfaceMediumEmphasis, lineWidth: 2)
             }
         case .accentSurface:

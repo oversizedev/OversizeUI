@@ -58,7 +58,8 @@ public struct MaterialSurface<Label: View>: View {
         if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
             label
                 .padding(.all, controlPadding.rawValue)
-                .background(backgroundMaterial, in: RoundedRectangle(cornerRadius: controlRadius.rawValue, style: .continuous))
+                .background(backgroundMaterial,
+                            in: RoundedRectangle(cornerRadius: controlRadius.rawValue, style: .continuous))
                 .overlay(overlayView)
                 .shadowElevaton(elevation)
         } else {

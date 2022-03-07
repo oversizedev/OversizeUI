@@ -2,3 +2,4 @@ disabled_rules: # rule identifiers to exclude from running
 - identifier_name
 - opening_brace
 - multiple_closures_with_trailing_closure
+- trailing_comma
