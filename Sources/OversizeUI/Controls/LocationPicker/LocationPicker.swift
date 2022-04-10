@@ -10,13 +10,15 @@ public struct LocationPicker: View {
     @Environment(\.theme) private var theme: ThemeSettings
 
     private let label: String
+    private let saveButtonText: String?
     @Binding var coordinates: CLLocationCoordinate2D
     @State var offset = CGPoint(x: 0, y: 0)
     @State private var showModal = false
     @State private var isSelected = false
 
-    public init(label: String, coordinates: Binding<CLLocationCoordinate2D>) {
+    public init(label: String, coordinates: Binding<CLLocationCoordinate2D>, saveButtonText: String? = nil) {
         self.label = label
+        self.saveButtonText = saveButtonText
         _coordinates = coordinates
     }
 
@@ -57,7 +59,7 @@ public struct LocationPicker: View {
     public var modal: some View {
         ZStack {
             MapView(centerCoordinate: $coordinates)
-                .edgesIgnoringSafeArea(.vertical)
+                .ignoresSafeArea()
 
             VStack {
                 Spacer()
@@ -71,7 +73,7 @@ public struct LocationPicker: View {
         .navigationBar(label, style: .fixed($offset)) {
             BarButton(type: .close)
         } trailingBar: {
-            BarButton(type: .secondary("Save", action: {
+            BarButton(type: .secondary(saveButtonText ?? "Save", action: {
                 isSelected = true
                 showModal.toggle()
             }))

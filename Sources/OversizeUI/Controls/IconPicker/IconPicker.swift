@@ -62,7 +62,6 @@ public struct IconPicker: View {
                             : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
                 )
         )
-
         .sheet(isPresented: $showModal) {
             modal
         }
