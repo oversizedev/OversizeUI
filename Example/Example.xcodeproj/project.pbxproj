@@ -73,6 +73,14 @@
 		11BE8B3426E95F1C0068BBE9 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D9F9E126BDE4EA00B2FCA2 /* ExampleApp.swift */; };
 		11BE8B3526E95F6C0068BBE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84D9F9E326BDE4EB00B2FCA2 /* Assets.xcassets */; };
 		11BE8B3726E962840068BBE9 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D9F9E126BDE4EA00B2FCA2 /* ExampleApp.swift */; };
+		2D7E2DBA28030EFA00B9884C /* ButtonsDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7E2DB928030EFA00B9884C /* ButtonsDemo.swift */; };
+		2D7E2DBB28030EFA00B9884C /* ButtonsDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7E2DB928030EFA00B9884C /* ButtonsDemo.swift */; };
+		2D7E2DBC28030EFA00B9884C /* ButtonsDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7E2DB928030EFA00B9884C /* ButtonsDemo.swift */; };
+		2D7E2DBD28030EFA00B9884C /* ButtonsDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7E2DB928030EFA00B9884C /* ButtonsDemo.swift */; };
+		2D7E2DBF28030F1F00B9884C /* PageDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7E2DBE28030F1F00B9884C /* PageDemo.swift */; };
+		2D7E2DC028030F1F00B9884C /* PageDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7E2DBE28030F1F00B9884C /* PageDemo.swift */; };
+		2D7E2DC128030F1F00B9884C /* PageDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7E2DBE28030F1F00B9884C /* PageDemo.swift */; };
+		2D7E2DC228030F1F00B9884C /* PageDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7E2DBE28030F1F00B9884C /* PageDemo.swift */; };
 		84D9F9F426BDE4EB00B2FCA2 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D9F9E126BDE4EA00B2FCA2 /* ExampleApp.swift */; };
 		84D9F9F526BDE4EB00B2FCA2 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D9F9E126BDE4EA00B2FCA2 /* ExampleApp.swift */; };
 		84D9F9F826BDE4EB00B2FCA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84D9F9E326BDE4EB00B2FCA2 /* Assets.xcassets */; };
@@ -173,6 +181,8 @@
 		11BE8B1226E9564B0068BBE9 /* SelectDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDemo.swift; sourceTree = "<group>"; };
 		11BE8B2426E956CD0068BBE9 /* SurfaceDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfaceDemo.swift; sourceTree = "<group>"; };
 		11BE8B2E26E957510068BBE9 /* TextFieldDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldDemo.swift; sourceTree = "<group>"; };
+		2D7E2DB928030EFA00B9884C /* ButtonsDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonsDemo.swift; sourceTree = "<group>"; };
+		2D7E2DBE28030F1F00B9884C /* PageDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageDemo.swift; sourceTree = "<group>"; };
 		84D9F9E126BDE4EA00B2FCA2 /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
 		84D9F9E326BDE4EB00B2FCA2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84D9F9E826BDE4EB00B2FCA2 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -308,8 +318,10 @@
 				11BE8AFA26E9512A0068BBE9 /* ColorSelector.swift */,
 				11BE8AFE26E954350068BBE9 /* AvatarDemo.swift */,
 				11BE8B0226E954D50068BBE9 /* GridSelectDemo.swift */,
+				2D7E2DB928030EFA00B9884C /* ButtonsDemo.swift */,
 				11BE8B2E26E957510068BBE9 /* TextFieldDemo.swift */,
 				11BE8B0626E955560068BBE9 /* IconsDemo.swift */,
+				2D7E2DBE28030F1F00B9884C /* PageDemo.swift */,
 				11BE8B0A26E9558C0068BBE9 /* RowDemo.swift */,
 				11BE8B0E26E955E20068BBE9 /* SegmentedControlDemo.swift */,
 				11BE8B1226E9564B0068BBE9 /* SelectDemo.swift */,
@@ -506,9 +518,6 @@
 				84D9F9E426BDE4EB00B2FCA2 /* Sources */,
 				84D9F9E526BDE4EB00B2FCA2 /* Frameworks */,
 				84D9F9E626BDE4EB00B2FCA2 /* Resources */,
-				11D0764626D8AA5C00C28575 /* SwiftGen */,
-				11476C9A26D825CA0030D0F1 /* SwiftFormat */,
-				11D0764526D8302400C28575 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -675,73 +684,18 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		11476C9A26D825CA0030D0F1 /* SwiftFormat */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftFormat;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "LOCALIZATION_PATH=\"$SRCROOT/..\"\ncd $LOCALIZATION_PATH\nif command -v swiftformat &> /dev/null; then\n      swiftformat .\nelse\n    echo \"Error: SwiftFormat is not installed.\"\nfi\n";
-		};
-		11D0764526D8302400C28575 /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "LOCALIZATION_PATH=\"$SRCROOT/..\"\n\n# navigate to the localization folder\ncd $LOCALIZATION_PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		11D0764626D8AA5C00C28575 /* SwiftGen */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftGen;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#LOCALIZATION_PATH=\"$SRCROOT/../Scripts\"\n#CONFIG_FILE=\"swiftgen.yml\"\n#\n## navigate to the localization folder\n#cd $LOCALIZATION_PATH\n#\n## check if SwiftGen is installed\n#if command -v swiftgen &> /dev/null; then\n#    swiftgen config run --config \"$LOCALIZATION_PATH/$CONFIG_FILE\"\n#else\n#    echo \"Error: SwiftGen is not installed.\"\n#    #exit 1\n#fi\n#\n#\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		1101695526E41DE40035CB67 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D7E2DBC28030EFA00B9884C /* ButtonsDemo.swift in Sources */,
 				1101696326E41DE40035CB67 /* NotificationController.swift in Sources */,
 				1101696726E41DE40035CB67 /* ComplicationController.swift in Sources */,
 				11BE8B2026E956A60068BBE9 /* SegmentedControlDemo.swift in Sources */,
 				11BE8B2726E956CD0068BBE9 /* SurfaceDemo.swift in Sources */,
 				11BE8B1F26E956A60068BBE9 /* RowDemo.swift in Sources */,
+				2D7E2DC128030F1F00B9884C /* PageDemo.swift in Sources */,
 				11BE8B2126E956A60068BBE9 /* GridSelectDemo.swift in Sources */,
 				11BE8B1E26E956A60068BBE9 /* IconsDemo.swift in Sources */,
 				11BE8B3726E962840068BBE9 /* ExampleApp.swift in Sources */,
@@ -777,10 +731,12 @@
 			files = (
 				11BE8B3426E95F1C0068BBE9 /* ExampleApp.swift in Sources */,
 				11BE8B1926E956A40068BBE9 /* ComponentsList.swift in Sources */,
+				2D7E2DBD28030EFA00B9884C /* ButtonsDemo.swift in Sources */,
 				11BE8AF926E950D50068BBE9 /* ButtonsDemo.swift in Sources */,
 				11BE8B0926E955560068BBE9 /* IconsDemo.swift in Sources */,
 				11BE8AFD26E9512A0068BBE9 /* ColorSelector.swift in Sources */,
 				11BE8B0526E954D50068BBE9 /* GridSelectDemo.swift in Sources */,
+				2D7E2DC228030F1F00B9884C /* PageDemo.swift in Sources */,
 				11BE8B0D26E9558C0068BBE9 /* RowDemo.swift in Sources */,
 				11BE8B1526E9564B0068BBE9 /* SelectDemo.swift in Sources */,
 				11BE8B0126E954350068BBE9 /* AvatarDemo.swift in Sources */,
@@ -796,10 +752,12 @@
 			files = (
 				11BE8B0326E954D50068BBE9 /* GridSelectDemo.swift in Sources */,
 				11BE8AFF26E954350068BBE9 /* AvatarDemo.swift in Sources */,
+				2D7E2DBA28030EFA00B9884C /* ButtonsDemo.swift in Sources */,
 				11BE8B1326E9564B0068BBE9 /* SelectDemo.swift in Sources */,
 				11BE8B0726E955560068BBE9 /* IconsDemo.swift in Sources */,
 				84D9F9F426BDE4EB00B2FCA2 /* ExampleApp.swift in Sources */,
 				11BE8B0F26E955E20068BBE9 /* SegmentedControlDemo.swift in Sources */,
+				2D7E2DBF28030F1F00B9884C /* PageDemo.swift in Sources */,
 				11BE8AF426E9509A0068BBE9 /* ComponentsList.swift in Sources */,
 				11BE8B2526E956CD0068BBE9 /* SurfaceDemo.swift in Sources */,
 				11BE8B2F26E957510068BBE9 /* TextFieldDemo.swift in Sources */,
@@ -815,10 +773,12 @@
 			files = (
 				11BE8B0426E954D50068BBE9 /* GridSelectDemo.swift in Sources */,
 				11BE8B0026E954350068BBE9 /* AvatarDemo.swift in Sources */,
+				2D7E2DBB28030EFA00B9884C /* ButtonsDemo.swift in Sources */,
 				11BE8B1426E9564B0068BBE9 /* SelectDemo.swift in Sources */,
 				11BE8B0826E955560068BBE9 /* IconsDemo.swift in Sources */,
 				84D9F9F526BDE4EB00B2FCA2 /* ExampleApp.swift in Sources */,
 				11BE8B1026E955E20068BBE9 /* SegmentedControlDemo.swift in Sources */,
+				2D7E2DC028030F1F00B9884C /* PageDemo.swift in Sources */,
 				11BE8AF526E9509A0068BBE9 /* ComponentsList.swift in Sources */,
 				11BE8B2626E956CD0068BBE9 /* SurfaceDemo.swift in Sources */,
 				11BE8B3026E957510068BBE9 /* TextFieldDemo.swift in Sources */,

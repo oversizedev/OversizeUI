@@ -332,14 +332,10 @@ public struct Icon: View {
     }
 
     public var body: some View {
-        if name != .none {
-            Image(name.rawValue, bundle: .module)
-                .resizable()
-                .frame(width: iconSize, height: iconSize)
-                .foregroundColor(color)
-        } else {
-            EmptyView()
-        }
+        Image(name.rawValue, bundle: .module)
+            .resizable()
+            .frame(width: iconSize, height: iconSize)
+            .foregroundColor(color)
     }
 
     var iconSize: CGFloat {

@@ -14,7 +14,7 @@ struct IconsDemo: View {
                 GridItem(),
                 GridItem()]
     var body: some View {
-        ScrollView {
+        PageView("Icons") {
             LazyVGrid(columns: grid) {
                 ForEach(Icons.allCases, id: \.self) { icon in
                     Icon(icon)
@@ -23,7 +23,14 @@ struct IconsDemo: View {
             }
             .padding()
         }
-        .navigationBarTitle("Icons", displayMode: .inline)
+        .modalable()
+        // .closeable()
+//
+//
+//        ScrollView {
+//
+//        }
+//        .navigationBarTitle("Icons", displayMode: .inline)
     }
 }
 

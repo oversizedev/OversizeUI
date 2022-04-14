@@ -11,9 +11,12 @@ import SwiftUI
         public let trailingBar: () -> TrailingBar?
         public let bottomBar: () -> BottomBar?
 
-        public var title: String
-        public var subtitle: String = ""
-        public var bigTitle: Bool
+        @Environment(\.screenSize) var screenSize
+
+        private var title: String
+        private var subtitle: String = ""
+        private var bigTitle: Bool
+        private var modalityPresent: Bool
 
         @Binding public var offset: CGPoint
 
@@ -93,6 +96,7 @@ import SwiftUI
                     bigTitle: Bool = true,
                     offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
                     background: Color = Color.backgroundPrimary,
+                    modalityPresent: Bool = true,
                     @ViewBuilder leadingBar: @escaping () -> LeadingBar,
                     @ViewBuilder trailingBar: @escaping () -> TrailingBar,
                     @ViewBuilder bottomBar: @escaping () -> BottomBar)
@@ -104,6 +108,7 @@ import SwiftUI
             self.trailingBar = trailingBar
             self.bottomBar = bottomBar
             self.background = background
+            self.modalityPresent = modalityPresent
         }
 
         public var body: some View {
@@ -162,7 +167,7 @@ import SwiftUI
                     bottomBar()
                 }
             }
-            .padding(.top, 20)
+            .padding(.top, modalityPresent ? screenSize.safeAreaTop + 20 : 20)
             .padding(.horizontal, 20)
             .padding(.bottom, bigTitle ? 0 : 20)
             .background(Color.surfacePrimary.opacity(smallBackgroundOpacity))
@@ -184,12 +189,14 @@ import SwiftUI
         init(title: String,
              bigTitle: Bool = true,
              background: Color = Color.backgroundPrimary,
-             offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)))
+             offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
+             modalityPresent: Bool = true)
         {
             self.title = title
             self.bigTitle = bigTitle
             self.background = background
             _offset = offset
+            self.modalityPresent = modalityPresent
             leadingBar = { nil }
             trailingBar = { nil }
             bottomBar = { nil }
@@ -204,6 +211,7 @@ import SwiftUI
              bigTitle: Bool = true,
              background: Color = Color.backgroundPrimary,
              offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
+             modalityPresent: Bool = true,
              @ViewBuilder leadingBar: @escaping () -> LeadingBar,
              @ViewBuilder trailingBar: @escaping () -> TrailingBar)
         {
@@ -213,6 +221,7 @@ import SwiftUI
             _offset = offset
             self.leadingBar = leadingBar
             self.trailingBar = trailingBar
+            self.modalityPresent = modalityPresent
             bottomBar = { nil }
         }
     }
@@ -226,6 +235,7 @@ import SwiftUI
              bigTitle: Bool = true,
              background: Color = Color.backgroundPrimary,
              offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
+             modalityPresent: Bool = true,
              @ViewBuilder leadingBar: @escaping () -> LeadingBar)
         {
             self.title = title
@@ -233,6 +243,7 @@ import SwiftUI
             self.background = background
             _offset = offset
             self.leadingBar = leadingBar
+            self.modalityPresent = modalityPresent
             trailingBar = { nil }
             bottomBar = { nil }
         }
@@ -247,12 +258,14 @@ import SwiftUI
              bigTitle: Bool = true,
              background: Color = Color.backgroundPrimary,
              offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
+             modalityPresent: Bool = true,
              @ViewBuilder trailingBar: @escaping () -> TrailingBar)
         {
             self.title = title
             self.bigTitle = bigTitle
             self.background = background
             _offset = offset
+            self.modalityPresent = modalityPresent
             leadingBar = { nil }
             self.trailingBar = trailingBar
             bottomBar = { nil }
@@ -268,12 +281,14 @@ import SwiftUI
              bigTitle: Bool = true,
              background: Color = Color.backgroundPrimary,
              offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
+             modalityPresent: Bool = true,
              @ViewBuilder bottomBar: @escaping () -> BottomBar)
         {
             self.title = title
             self.bigTitle = bigTitle
             self.background = background
             _offset = offset
+            self.modalityPresent = modalityPresent
             leadingBar = { nil }
             trailingBar = { nil }
             self.bottomBar = bottomBar
@@ -288,12 +303,14 @@ import SwiftUI
              bigTitle: Bool = true,
              background: Color = Color.backgroundPrimary,
              offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
+             modalityPresent: Bool = true,
              @ViewBuilder trailingBar: @escaping () -> TrailingBar,
              @ViewBuilder bottomBar: @escaping () -> BottomBar)
         {
             self.title = title
             self.bigTitle = bigTitle
             self.background = background
+            self.modalityPresent = modalityPresent
             _offset = offset
             leadingBar = { nil }
             self.trailingBar = trailingBar
@@ -309,12 +326,14 @@ import SwiftUI
              bigTitle: Bool = true,
              background: Color = Color.backgroundPrimary,
              offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
+             modalityPresent: Bool = true,
              @ViewBuilder leadingBar: @escaping () -> LeadingBar,
              @ViewBuilder bottomBar: @escaping () -> BottomBar)
         {
             self.title = title
             self.bigTitle = bigTitle
             self.background = background
+            self.modalityPresent = modalityPresent
             _offset = offset
             self.leadingBar = leadingBar
             trailingBar = { nil }

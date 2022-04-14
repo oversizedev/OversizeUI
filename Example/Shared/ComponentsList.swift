@@ -31,26 +31,27 @@ struct ComponentsList: View {
         Page(name: "SegmentedControl", page: AnyView(SegmentedControlDemo())),
         Page(name: "Select", page: AnyView(SelectDemo())),
         Page(name: "Surface", page: AnyView(SurfaceDemo())),
+        Page(name: "Page", page: AnyView(PageDemo())),
     ]
 
     var body: some View {
-        NavigationView {
-            List(pages) { page in
-                NavigationLink(page.name, destination: page.page)
-            }
-            .navigationTitle("Example")
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button {
-                        isShowSetting.toggle()
-                    } label: {
-                        Icon(.settings, color: .onBackgroundHighEmphasis)
-                    }
+        PageView("Example") {
+            ForEach(pages) { page in
+                HStack {
+                    NavigationLink(page.name, destination: page.page)
+                        .fontStyle(.button, color: .onSurfaceHighEmphasis)
+
+                    Spacer()
                 }
+                .padding()
             }
-            .sheet(isPresented: $isShowSetting) {
-                AppearanceSettingView()
-            }
+        }
+        .leadingBar {
+            BarButton(type: .secondary("Settings", action: { isShowSetting.toggle() }))
+        }
+        .navigationable()
+        .sheet(isPresented: $isShowSetting) {
+            AppearanceSettingView()
         }
     }
 }
