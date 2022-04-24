@@ -5,53 +5,41 @@
 
 import SwiftUI
 
+public enum ContenButtonType {
+    case close
+    case closeAction(action: () -> Void)
+    case back
+    case backAction(action: () -> Void)
+    case accent(_ text: String, action: () -> Void)
+    case primary(_ text: String, action: () -> Void)
+    case secondary(_ text: String, action: () -> Void)
+    case disabled(_ text: String)
+}
+
 public struct ContentView: View {
     @Environment(\.multilineTextAlignment) var multilineTextAlignment
+    @Environment(\.presentationMode) var presentationMode
 
     private let image: Image?
     private let title: String
     private let subtitle: String?
 
-    private let primaryButtonLabel: String?
-    private let secondaryButtonLabel: String?
+    private let primaryButton: ContenButtonType?
+    private let secondaryButton: ContenButtonType?
 
-    private let primaryAction: (() -> Void)?
-    private let secondaryAction: (() -> Void)?
 
     public init(image: Image?,
                 title: String,
                 subtitle: String?,
-                primaryButtonLabel: String? = nil,
-                secondaryButtonLabel: String? = nil,
-                primaryAction: (() -> Void)? = nil,
-                secondaryAction: (() -> Void)? = nil)
+                primaryButton: ContenButtonType? = nil,
+                secondaryButton: ContenButtonType? = nil)
     {
         self.image = image
         self.title = title
         self.subtitle = subtitle
 
-        self.primaryButtonLabel = primaryButtonLabel
-        self.secondaryButtonLabel = secondaryButtonLabel
-
-        self.primaryAction = primaryAction
-        self.secondaryAction = secondaryAction
-    }
-
-    public init(image: Image?,
-                title: String,
-                subtitle: String?,
-                primaryButtonLabel: String? = nil,
-                primaryAction: (() -> Void)? = nil)
-    {
-        self.image = image
-        self.title = title
-        self.subtitle = subtitle
-
-        self.primaryButtonLabel = primaryButtonLabel
-        secondaryButtonLabel = nil
-
-        self.primaryAction = primaryAction
-        secondaryAction = nil
+        self.primaryButton = primaryButton
+        self.secondaryButton = secondaryButton
     }
 
     public var body: some View {
@@ -62,20 +50,11 @@ public struct ContentView: View {
             }
 
             TextBox(title: title, subtitle: subtitle)
-
-            if let primaryButtonLabel = primaryButtonLabel, let primaryAction = primaryAction {
-                Button(action: primaryAction) {
-                    Text(primaryButtonLabel)
-                }
-                .buttonStyle(.accent)
-            }
-
-            if let secondaryButtonLabel = secondaryButtonLabel, let secondaryAction = secondaryAction {
-                Button(action: secondaryAction) {
-                    Text(secondaryButtonLabel)
-                }
-                .buttonStyle(.text)
-            }
+            
+            primaryButtonView()
+            
+            secondaryButtonView()
+            
         }
     }
 
@@ -90,3 +69,137 @@ public struct ContentView: View {
         }
     }
 }
+
+// swiftlint:disable multiple_closures_with_trailing_closure
+extension ContentView {
+    @ViewBuilder
+    private func primaryButtonView() -> some View {
+        switch primaryButton {
+        case .close:
+
+            Button(action: { presentationMode.wrappedValue.dismiss() }) {
+                Icon(.xMini)
+            }
+            .style(.secondary)
+
+        case .back:
+
+            Button(action: { presentationMode.wrappedValue.dismiss() }) {
+                Icon(.arrowLeft)
+            }
+            .style(.secondary)
+
+        case let .secondary(text, action: action):
+
+            Button(action: action) {
+                Text(text)
+            }
+            .style(.secondary)
+
+        case let .accent(text, action: action):
+
+            Button(action: action) {
+                Text(text)
+            }
+            .style(.accent)
+
+        case let .primary(text, action: action):
+
+            Button(action: action) {
+                Text(text)
+            }
+            .style(.primary)
+
+        case let .closeAction(action: action):
+
+            Button(action: action) {
+                Icon(.xMini)
+            }
+            .style(.secondary)
+
+        case let .backAction(action: action):
+
+            Button(action: action) {
+                Icon(.arrowLeft)
+            }
+            .style(.secondary)
+
+        case let .disabled(text):
+
+            Button(action: {}) {
+                Text(text)
+            }
+            .style(.gray)
+            .disabled(true)
+            
+        case .none:
+            EmptyView()
+        }
+    }
+    
+    @ViewBuilder
+    private func secondaryButtonView() -> some View {
+        switch secondaryButton {
+        case .close:
+
+            Button(action: { presentationMode.wrappedValue.dismiss() }) {
+                Icon(.xMini)
+            }
+            .style(.secondary)
+
+        case .back:
+
+            Button(action: { presentationMode.wrappedValue.dismiss() }) {
+                Icon(.arrowLeft)
+            }
+            .style(.secondary)
+
+        case let .secondary(text, action: action):
+
+            Button(action: action) {
+                Text(text)
+            }
+            .style(.secondary)
+
+        case let .accent(text, action: action):
+
+            Button(action: action) {
+                Text(text)
+            }
+            .style(.accent)
+
+        case let .primary(text, action: action):
+
+            Button(action: action) {
+                Text(text)
+            }
+            .style(.primary)
+
+        case let .closeAction(action: action):
+
+            Button(action: action) {
+                Icon(.xMini)
+            }
+            .style(.secondary)
+
+        case let .backAction(action: action):
+
+            Button(action: action) {
+                Icon(.arrowLeft)
+            }
+            .style(.secondary)
+
+        case let .disabled(text):
+
+            Button(action: {}) {
+                Text(text)
+            }
+            .style(.gray)
+            .disabled(true)
+            
+        case .none:
+            EmptyView()
+        }
+    }
+}
+

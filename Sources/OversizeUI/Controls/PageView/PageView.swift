@@ -11,6 +11,7 @@ public struct PageView<Label, LeadingBar, TrailingBar, TopToolbar>: View where L
     private let label: Label
     private var isModalable = false
     private var isLargeTitle = false
+    private var isAlwaysSlideSmallTile = false
     @State private var offset: CGPoint = .init(x: 0, y: 0)
 
     private var leadingBar: LeadingBar?
@@ -32,14 +33,17 @@ public struct PageView<Label, LeadingBar, TrailingBar, TopToolbar>: View where L
 
     private var content: some View {
         VStack(spacing: .zero) {
-            ModalNavigationBar(title: title ?? "",
-                               bigTitle: isLargeTitle,
-                               offset: $offset,
-                               modalityPresent: !isModalable,
-                               leadingBar: { leadingBar },
-                               trailingBar: { trailingBar },
-                               bottomBar: { topToolbar })
-                .zIndex(999_999_999)
+            if title != nil || leadingBar != nil || trailingBar != nil || topToolbar != nil {
+                ModalNavigationBar(title: title ?? "",
+                                   bigTitle: isLargeTitle,
+                                   offset: $offset,
+                                   modalityPresent: !isModalable,
+                                   alwaysSlideSmallTile: isAlwaysSlideSmallTile,
+                                   leadingBar: { leadingBar },
+                                   trailingBar: { trailingBar },
+                                   bottomBar: { topToolbar })
+                    .zIndex(999_999_999)
+            }
             ScrollViewOffset(offset: $offset) {
                 label
             }
@@ -49,6 +53,19 @@ public struct PageView<Label, LeadingBar, TrailingBar, TopToolbar>: View where L
     }
 
     public func modalable(_ isModalable: Bool = true) -> PageView {
+        var control = self
+        control.isModalable = isModalable
+        return control
+    }
+    
+    
+    public func slideSmallTile(_ isSlise: Bool = true) -> PageView {
+        var control = self
+        control.isAlwaysSlideSmallTile = isSlise
+        return control
+    }
+    
+    public func navigationBarHidden(_ isModalable: Bool = true) -> PageView {
         var control = self
         control.isModalable = isModalable
         return control
@@ -84,18 +101,40 @@ public struct PageView<Label, LeadingBar, TrailingBar, TopToolbar>: View where L
         return control
     }
 
-    public func bottomToolbar<BottomToolbar: View>(@ViewBuilder bottomToolbar: @escaping () -> BottomToolbar) -> some View {
+    public func bottomToolbar<BottomToolbar: View>(style: PageViewBottomType = .shadow, @ViewBuilder bottomToolbar: @escaping () -> BottomToolbar) -> some View {
         VStack(spacing: .zero) {
             self
+                .overlay(
+                    Group {
+                        if style == .gradient {
+                            VStack {
+                                Spacer()
+                                LinearGradient(colors: [backgroundColor.opacity(0), Color.surfacePrimary.opacity(1)],
+                                               startPoint: .top,
+                                               endPoint: .bottom)
+                                .frame(height: 60) }
+                            
+                        } else {
+                            EmptyView()
+                            
+                        }
+                    })
             HStack {
                 Spacer()
                 bottomToolbar()
                 Spacer()
             }
             .paddingContent()
-            .background(Color.surfacePrimary.shadowElevaton(.z2))
+            .background(Color.surfacePrimary.shadowElevaton(style == .shadow ? .z2 : .z0))
         }
+        
         .ignoresSafeArea(edges: .bottom)
+    }
+}
+
+extension PageView {
+    public enum PageViewBottomType {
+        case shadow, gradient
     }
 }
 
@@ -160,6 +199,16 @@ public extension PageView where TrailingBar == EmptyView, TopToolbar == EmptyVie
         self.title = title
         self.label = label()
         trailingBar = nil
+        topToolbar = nil
+    }
+}
+
+public extension PageView where TopToolbar == EmptyView {
+    init(_ title: String? = nil,
+         @ViewBuilder label: () -> Label)
+    {
+        self.title = title
+        self.label = label()
         topToolbar = nil
     }
 }

@@ -13,8 +13,8 @@ public struct FieldScreenView: View {
     @Binding public var showHelper: Bool
     @State var offset = CGPoint(x: 0, y: 0)
 
-    public var leadingImage: Icons
-    public var trallingImage: Icons
+    public var leadingImage: IconsNames
+    public var trallingImage: IconsNames
 
     public var buttonText: LocalizedStringKey
     public var action: () -> Void
@@ -28,8 +28,8 @@ public struct FieldScreenView: View {
                 text: Binding<String>,
                 helperText: Binding<String> = .constant(""),
                 showHelper: Binding<Bool> = .constant(false),
-                leadingImage: Icons = .none,
-                trallingImage: Icons = .none,
+                leadingImage: IconsNames = .none,
+                trallingImage: IconsNames = .none,
                 buttonText: LocalizedStringKey = "",
                 buttonAction: @escaping () -> Void)
     {

@@ -7,6 +7,7 @@ import SwiftUI
 
 public struct IconPicker: View {
     @Environment(\.theme) private var theme: ThemeSettings
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
 
     private let label: String
     private let icons: [Image]
@@ -17,13 +18,16 @@ public struct IconPicker: View {
     @State private var selectedIndex: Int?
 
     @State var offset = CGPoint(x: 0, y: 0)
-
-    let grid = [GridItem(),
-                GridItem(),
-                GridItem(),
-                GridItem(),
-                GridItem(),
-                GridItem()]
+    
+    private var gridPadding: CGFloat {
+        guard let sizeClass = horizontalSizeClass else { return 40 }
+        switch sizeClass {
+        case .compact:
+           return 60
+        default:
+            return 72
+        }
+    }
 
     public init(_ label: String,
                 _ icons: [Image],
@@ -68,44 +72,51 @@ public struct IconPicker: View {
     }
 
     private var modal: some View {
-        ScrollView {
-            LazyVGrid(columns: grid) {
-                ForEach(icons.indices, id: \.self) { index in
-                    Button(action: {
-                               selectedIndex = index
+        PageView(label) {
+            ScrollView {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: gridPadding))]) {
+                    ForEach(icons.indices, id: \.self) { index in
+                        Button(action: {
+                                   selectedIndex = index
 
-                           },
-                           label: {
-                               if index == selectedIndex {
-                                   Group {
+                               },
+                               label: {
+                                   if index == selectedIndex {
+                                       Group {
+                                           icons[index]
+                                               .resizable()
+
+                                               .frame(width: 24, height: 24, alignment: .center)
+                                       }
+                                       .overlay(
+                                           RoundedRectangle(cornerRadius: Radius.medium.rawValue, style: .continuous)
+                                               .strokeBorder(Color.border, lineWidth: 1)
+                                               .frame(width: 48, height: 48, alignment: .center)
+                                       )
+
+                                   } else {
                                        icons[index]
                                            .resizable()
-
                                            .frame(width: 24, height: 24, alignment: .center)
                                    }
-                                   .overlay(
-                                       RoundedRectangle(cornerRadius: Radius.medium.rawValue, style: .continuous)
-                                           .strokeBorder(Color.border, lineWidth: 1)
-                                           .frame(width: 48, height: 48, alignment: .center)
-                                   )
-
-                               } else {
-                                   icons[index]
-                                       .resizable()
-                                       .frame(width: 24, height: 24, alignment: .center)
-                               }
-                           })
+                               })
+                        .padding(.vertical, horizontalSizeClass == .compact ? 12 : 20)
+                    }
                 }
+                .padding(.top, .medium)
+                .paddingContent(.horizontal)
+                .paddingContent(.bottom)
             }
-            .paddingContent()
         }
-        .navigationBar(label,
-                       style: .fixed($offset),
-                       leadingBar: { BarButton(type: .close) },
-                       trailingBar: { BarButton(type: .secondary("Save", action: {
-                           selection = icons[selectedIndex ?? 0]
-                           isSelected = true
-                           showModal.toggle()
-                       })) })
+        .leadingBar {
+            BarButton(type: .close)
+        }
+        .trailingBar {
+            BarButton(type: .secondary("Save", action: {
+               selection = icons[selectedIndex ?? 0]
+               isSelected = true
+               showModal.toggle()
+           }))
+        }
     }
 }

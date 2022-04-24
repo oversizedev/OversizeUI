@@ -6,7 +6,7 @@
 import SwiftUI
 
 // swiftlint:disable type_body_length identifier_name
-public enum Icons: String, CaseIterable {
+public enum IconsNames: String, CaseIterable {
     case none
     case activity
     case airplay
@@ -315,17 +315,17 @@ public struct Icon: View {
         static var xLarge: CGFloat = Space.xLarge.rawValue
     }
 
-    let name: Icons
+    let name: IconsNames
     let size: IconSizes
     var color: Color
 
-    public init(_ name: Icons = .menu) {
+    public init(_ name: IconsNames = .menu) {
         self.name = name
         size = .medium
         color = Color.onBackgroundHighEmphasis
     }
 
-    public init(_ name: Icons = .menu, size: IconSizes = .medium, color: Color = .onBackgroundHighEmphasis) {
+    public init(_ name: IconsNames = .menu, size: IconSizes = .medium, color: Color = .onBackgroundHighEmphasis) {
         self.name = name
         self.color = color
         self.size = size
@@ -352,7 +352,7 @@ public struct Icon: View {
     }
 }
 
-struct Icon_Previews: PreviewProvider {
+struct IconAsset_Previews: PreviewProvider {
     static var previews: some View {
         let grid = [GridItem(),
                     GridItem(),
@@ -362,7 +362,7 @@ struct Icon_Previews: PreviewProvider {
                     GridItem()]
 
         LazyVGrid(columns: grid) {
-            ForEach(Icons.allCases, id: \.self) { icon in
+            ForEach(IconsNames.allCases, id: \.self) { icon in
                 Icon(icon)
                     .padding(.vertical)
             }

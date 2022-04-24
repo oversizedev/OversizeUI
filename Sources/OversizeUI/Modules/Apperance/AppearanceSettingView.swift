@@ -6,8 +6,10 @@
 import SwiftUI
 
 public struct AppearanceSettingView: View {
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.theme) private var theme: ThemeSettings
+    @Environment(\.isPortrait) var isPortrait
 
     public init() {}
 
@@ -32,11 +34,17 @@ public struct AppearanceSettingView: View {
 
     public var body: some View {
         #if os(iOS)
-            VStack {
+            PageView("App") {
                 iOSSettings
             }
-            .navigationBarTitle("Hidden Title")
-            .navigationBarHidden(true)
+            .leadingBar {
+                if !isPortrait, verticalSizeClass == .regular {
+                    EmptyView()
+                } else {
+                    BarButton(type: .back)
+                }
+            }
+            .backgroundSecondary()
 
         #else
             macSettings
@@ -56,10 +64,6 @@ public struct AppearanceSettingView: View {
                     appIcon
                 }
             }
-            .scrollWithNavigationBar("App", style: .fixed($offset), background: Color.backgroundSecondary) {
-                BarButton(type: .backAction(action: { presentationMode.wrappedValue.dismiss() }))
-            } trailingBar: {} bottomBar: {}
-            .background(Color.backgroundSecondary.ignoresSafeArea(.all))
             .preferredColorScheme(theme.appearance.colorScheme)
             .accentColor(theme.accentColor)
         }
