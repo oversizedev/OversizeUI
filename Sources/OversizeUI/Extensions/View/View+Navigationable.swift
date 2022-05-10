@@ -9,7 +9,9 @@ public extension View {
     func navigationable(_ navigationBarHidden: Bool = true) -> some View {
         NavigationView {
             self
-                .navigationBarHidden(navigationBarHidden)
+            #if os(iOS)
+            .navigationBarHidden(navigationBarHidden)
+            #endif
         }
     }
 }

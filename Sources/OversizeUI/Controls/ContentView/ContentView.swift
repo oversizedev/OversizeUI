@@ -27,7 +27,6 @@ public struct ContentView: View {
     private let primaryButton: ContenButtonType?
     private let secondaryButton: ContenButtonType?
 
-
     public init(image: Image?,
                 title: String,
                 subtitle: String?,
@@ -50,11 +49,10 @@ public struct ContentView: View {
             }
 
             TextBox(title: title, subtitle: subtitle)
-            
+
             primaryButtonView()
-            
+
             secondaryButtonView()
-            
         }
     }
 
@@ -131,12 +129,12 @@ extension ContentView {
             }
             .style(.gray)
             .disabled(true)
-            
+
         case .none:
             EmptyView()
         }
     }
-    
+
     @ViewBuilder
     private func secondaryButtonView() -> some View {
         switch secondaryButton {
@@ -196,10 +194,9 @@ extension ContentView {
             }
             .style(.gray)
             .disabled(true)
-            
+
         case .none:
             EmptyView()
         }
     }
 }
-

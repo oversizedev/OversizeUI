@@ -6,6 +6,7 @@
 import OversizeUI
 import SwiftUI
 
+#if os(iOS)
 struct PageDemo: View {
     @Environment(\.screenSize) var screenSize
     @State var isShowModal = false
@@ -54,3 +55,4 @@ struct PageDemo_Previews: PreviewProvider {
         PageDemo()
     }
 }
+#endif
