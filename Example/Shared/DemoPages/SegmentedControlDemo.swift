@@ -87,7 +87,7 @@ struct SegmentedControlDemo: View {
                     .controlRadius(.xLarge)
                 }
             }.padding()
-        }.navigationBarTitle("Segmented control", displayMode: .inline)
+        }.navigationTitle("Segmented control")
     }
 }
 

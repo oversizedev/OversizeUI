@@ -21,7 +21,7 @@ public struct ContentPaddingModifier: ViewModifier {
         public func body(content: Content) -> some View {
             content.padding(edges, horizontalSizeClass == .compact
                 ? length.rawValue
-                : length.rawValue + Space.xSmall.rawValue)
+                : length.rawValue + Space.large.rawValue)
         }
     #else
         let edges: Edge.Set

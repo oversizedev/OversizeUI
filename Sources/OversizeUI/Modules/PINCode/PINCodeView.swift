@@ -89,10 +89,12 @@ public struct PINCodeView: View {
 
             Spacer()
 
-            biometricImage()
-                .onTapGesture {
-                    biometricAction?()
-                }
+            #if os(iOS)
+                biometricImage()
+                    .onTapGesture {
+                        biometricAction?()
+                    }
+            #endif
 
             Spacer()
         }

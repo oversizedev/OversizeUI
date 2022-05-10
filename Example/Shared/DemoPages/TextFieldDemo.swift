@@ -32,7 +32,9 @@ struct TextFieldDemo: View {
                     .helper(.constant("Error"), style: .constant(.errorText))
 
             }.padding()
-        }.navigationBarTitle("Text fields", displayMode: .inline)
+        }
+        
+        .navigationTitle("Text fields")
     }
 }
 

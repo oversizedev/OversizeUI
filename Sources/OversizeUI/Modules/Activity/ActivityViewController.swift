@@ -16,11 +16,15 @@
         var activityItems: [Any]
         var applicationActivities: [UIActivity]?
 
-        public func makeUIViewController(context _: UIViewControllerRepresentableContext<ActivityViewController>) -> UIActivityViewController {
-            let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
+        public func makeUIViewController(context _: UIViewControllerRepresentableContext<ActivityViewController>)
+            -> UIActivityViewController
+        {
+            let controller = UIActivityViewController(activityItems: activityItems,
+                                                      applicationActivities: applicationActivities)
             return controller
         }
 
-        public func updateUIViewController(_: UIActivityViewController, context _: UIViewControllerRepresentableContext<ActivityViewController>) {}
+        public func updateUIViewController(_: UIActivityViewController,
+                                           context _: UIViewControllerRepresentableContext<ActivityViewController>) {}
     }
 #endif

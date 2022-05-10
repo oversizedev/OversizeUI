@@ -19,8 +19,8 @@ public enum RowTrailingType {
 
 public enum RowLeadingType {
     case none
-    case icon(_ name: Icons)
-    case iconOnSurface(_ name: Icons)
+    case icon(_ name: IconsNames)
+    case iconOnSurface(_ name: IconsNames)
     case image(_ image: Image)
     case systemImage(_ imageName: String)
     case avatar(_ avatar: AvatarView)
@@ -149,8 +149,10 @@ public struct Row: View {
 
         case let .image(image):
             image
+                .renderingMode(.template)
                 .resizable()
-                .frame(width: 32, height: 32)
+                .foregroundColor(.onSurfaceHighEmphasis)
+                .frame(width: 24, height: 24)
 
         case let .avatar(avatar):
             avatar
@@ -170,6 +172,7 @@ public struct Row: View {
         }
     }
 
+    // swiftlint:disable function_body_length
     @ViewBuilder
     private func tralling() -> some View {
         switch trallingType {
@@ -226,6 +229,7 @@ public struct Row: View {
             }
             .disabled(isPremiumOption && premiumStatus == false)
         case .arrowIcon:
+
             Icon(.chevronRight, color: .onSurfaceDisabled)
 //        case let .timePicker(date: date):
 //            DatePicker("", selection: date, displayedComponents: .hourAndMinute)

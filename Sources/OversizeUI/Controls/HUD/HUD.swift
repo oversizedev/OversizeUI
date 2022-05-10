@@ -12,7 +12,7 @@ public enum HUDType {
 public class HUD: ObservableObject {
     @Published public var isPresented: Bool = false
     public var title: String
-    public var icon: Icons?
+    public var icon: IconsNames?
     public var image: Image?
     @Published public var type: HUDType = .hud
 
@@ -21,7 +21,7 @@ public class HUD: ObservableObject {
         type = .hud
     }
 
-    public init(title: String = "", icon: Icons) {
+    public init(title: String = "", icon: IconsNames) {
         self.title = title
         self.icon = icon
         type = .hud
@@ -41,7 +41,7 @@ public class HUD: ObservableObject {
         }
     }
 
-    public func show(title: String, icon: Icons, type: HUDType = .hud) {
+    public func show(title: String, icon: IconsNames, type: HUDType = .hud) {
         self.title = title
         self.icon = icon
         self.type = type

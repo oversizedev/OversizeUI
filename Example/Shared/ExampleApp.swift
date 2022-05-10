@@ -13,16 +13,20 @@ struct ExampleApp: App {
     #if !os(watchOS)
         var body: some Scene {
             WindowGroup {
-                #if os(iOS)
-                    ComponentsList()
-                        .preferredColorScheme(theme.appearance.colorScheme)
-                        .accentColor(theme.accentColor)
-                        .theme(ThemeSettings())
-                #else
-                    ComponentsList()
-                        .preferredColorScheme(theme.appearance.colorScheme)
-                        .theme(ThemeSettings())
-                #endif
+                GeometryReader { geometry in
+                    #if os(iOS)
+                        ComponentsList()
+                            .preferredColorScheme(theme.appearance.colorScheme)
+                            .accentColor(theme.accentColor)
+                            .theme(ThemeSettings())
+                            .screenSize(geometry)
+                    #else
+                        ComponentsList()
+                            .preferredColorScheme(theme.appearance.colorScheme)
+                            .theme(ThemeSettings())
+                            .screenSize(geometry)
+                    #endif
+                }
             }
         }
     #else
@@ -34,3 +38,16 @@ struct ExampleApp: App {
         }
     #endif
 }
+
+#if os(iOS)
+    extension UINavigationController: UIGestureRecognizerDelegate {
+        override open func viewDidLoad() {
+            super.viewDidLoad()
+            interactivePopGestureRecognizer?.delegate = self
+        }
+
+        public func gestureRecognizerShouldBegin(_: UIGestureRecognizer) -> Bool {
+            viewControllers.count > 1
+        }
+    }
+#endif

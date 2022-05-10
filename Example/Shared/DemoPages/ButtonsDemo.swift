@@ -36,7 +36,7 @@ struct ButtonsDemo: View {
 
             }.padding()
         }
-        .navigationBarTitle("Buttons", displayMode: .inline)
+        .navigationTitle("Buttons")
     }
 }
 

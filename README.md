@@ -33,7 +33,6 @@ Colors, Typography, Spacing and other styles in [core folder](Sources/OversizeUI
 ### Install and use OversizeUI
 
 #### Requirements
-
 - iOS 14+ or macOS 11.0+
 - Xcode 13.2+
 - Swift 5.5+

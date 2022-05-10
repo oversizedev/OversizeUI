@@ -14,12 +14,12 @@ public enum RowButtonStyle {
 public struct RowButton: View {
     public var text: String
     public var style: RowButtonStyle
-    public var icon: Icons
+    public var icon: IconsNames
     public var tapAction: () -> Void
 
     public init(_ text: String,
                 style: RowButtonStyle = .row,
-                icon: Icons = .none,
+                icon: IconsNames = .none,
                 action: @escaping () -> Void)
     {
         self.text = text

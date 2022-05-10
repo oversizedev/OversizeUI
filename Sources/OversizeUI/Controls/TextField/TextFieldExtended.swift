@@ -22,8 +22,8 @@ public struct TextFieldExtended: View {
     @Binding public var helperStyle: TextFieldHelperStyle
     public var placeholderPosition: TextFieldPlaceholderPosition
 
-    public var leadingImage: Icons
-    public var trallingImage: Icons
+    public var leadingImage: IconsNames
+    public var trallingImage: IconsNames
 
     public var secure: Bool
     @State private var focused: Bool = false
@@ -32,8 +32,8 @@ public struct TextFieldExtended: View {
                 text: Binding<String>,
                 helperText: Binding<String> = .constant(""),
                 helperStyle: Binding<TextFieldHelperStyle> = .constant(.none),
-                leadingImage: Icons = .none,
-                trallingImage: Icons = .none,
+                leadingImage: IconsNames = .none,
+                trallingImage: IconsNames = .none,
                 placeholderPosition: TextFieldPlaceholderPosition = .overField,
                 secure: Bool = false
                 // contentType: UITextContentType = .

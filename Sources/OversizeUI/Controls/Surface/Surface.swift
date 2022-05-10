@@ -95,7 +95,7 @@ public struct Surface<Label: View>: View {
         return control
     }
 
-    public func surfaceBorderColor(_ border: Color?) -> Surface {
+    public func surfaceBorderColor(_ border: Color? = Color.border) -> Surface {
         var control = self
         control.border = border
         return control

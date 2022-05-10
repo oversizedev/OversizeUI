@@ -23,7 +23,7 @@ struct AvatarDemo: View {
                 AvatarView(firstName: "Jhon", lastName: "Smith", size: .large, stroke: true)
             }
         }
-        .navigationBarTitle("Avatar", displayMode: .inline)
+        .navigationTitle("Avatar")
     }
 }
 

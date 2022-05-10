@@ -26,32 +26,37 @@ struct ComponentsList: View {
         Page(name: "Avatar", page: AnyView(AvatarDemo())),
         Page(name: "GridSelect", page: AnyView(GridSelectDemo())),
         Page(name: "TextField", page: AnyView(TextFieldDemo())),
-        Page(name: "Icons", page: AnyView(IconsDemo())),
+        //Page(name: "Icons", page: AnyView(IconsDemo())),
         Page(name: "Row", page: AnyView(RowDemo())),
         Page(name: "SegmentedControl", page: AnyView(SegmentedControlDemo())),
         Page(name: "Select", page: AnyView(SelectDemo())),
         Page(name: "Surface", page: AnyView(SurfaceDemo())),
+        //Page(name: "Page", page: AnyView(PageDemo())),
     ]
 
     var body: some View {
-        NavigationView {
-            List(pages) { page in
-                NavigationLink(page.name, destination: page.page)
-            }
-            .navigationTitle("Example")
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button {
-                        isShowSetting.toggle()
-                    } label: {
-                        Icon(.settings, color: .onBackgroundHighEmphasis)
-                    }
+        #if os(iOS)
+        PageView("Example") {
+            ForEach(pages) { page in
+                HStack {
+                    NavigationLink(page.name, destination: page.page)
+                        .fontStyle(.button, color: .onSurfaceHighEmphasis)
+
+                    Spacer()
                 }
-            }
-            .sheet(isPresented: $isShowSetting) {
-                AppearanceSettingView()
+                .padding()
             }
         }
+        .leadingBar {
+            BarButton(type: .secondary("Settings", action: { isShowSetting.toggle() }))
+        }
+        .navigationable()
+        .sheet(isPresented: $isShowSetting) {
+            AppearanceSettingView()
+        }
+        #else
+        Text("Support will be in the future")
+        #endif
     }
 }
 

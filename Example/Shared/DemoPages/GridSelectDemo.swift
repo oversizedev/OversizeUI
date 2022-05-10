@@ -38,7 +38,7 @@ struct GridSelectDemo: View {
             }
             .padding()
         }
-        .navigationBarTitle("Grid select", displayMode: .inline)
+        .navigationTitle("Grid select")
     }
 }
 

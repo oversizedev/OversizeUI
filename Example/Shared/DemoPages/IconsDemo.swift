@@ -6,6 +6,7 @@
 import OversizeUI
 import SwiftUI
 
+#if os(iOS)
 struct IconsDemo: View {
     let grid = [GridItem(),
                 GridItem(),
@@ -14,16 +15,16 @@ struct IconsDemo: View {
                 GridItem(),
                 GridItem()]
     var body: some View {
-        ScrollView {
+        PageView("Icons") {
             LazyVGrid(columns: grid) {
-                ForEach(Icons.allCases, id: \.self) { icon in
+                ForEach(IconsNames.allCases, id: \.self) { icon in
                     Icon(icon)
                         .padding(.vertical)
                 }
             }
             .padding()
         }
-        .navigationBarTitle("Icons", displayMode: .inline)
+        .modalable()
     }
 }
 
@@ -32,3 +33,4 @@ struct IconsDemo_Previews: PreviewProvider {
         IconsDemo()
     }
 }
+#endif
