@@ -23,6 +23,8 @@ public enum ButtonType: Int, CaseIterable {
     case tertiary
 }
 
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct OversizeButtonStyle: ButtonStyle {
     private let type: ButtonType
     @Environment(\.isEnabled) private var isEnabled: Bool
