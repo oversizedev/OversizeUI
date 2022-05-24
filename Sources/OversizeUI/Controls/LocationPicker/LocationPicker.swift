@@ -3,6 +3,7 @@
 // LocationPicker.swift
 //
 
+import CoreLocation
 import MapKit
 import SwiftUI
 
@@ -10,17 +11,20 @@ import SwiftUI
     public struct LocationPicker: View {
         @Environment(\.theme) private var theme: ThemeSettings
 
+        @Binding private var coordinates: CLLocationCoordinate2D
+        @Binding private var positionName: String?
         private let label: String
+        
         private let saveButtonText: String?
-        @Binding var coordinates: CLLocationCoordinate2D
-        @State var offset = CGPoint(x: 0, y: 0)
+        @State private var offset = CGPoint(x: 0, y: 0)
         @State private var showModal = false
         @State private var isSelected = false
 
-        public init(label: String, coordinates: Binding<CLLocationCoordinate2D>, saveButtonText: String? = nil) {
+        public init(label: String, coordinates: Binding<CLLocationCoordinate2D>, positionName: Binding<String?>, saveButtonText: String? = nil) {
             self.label = label
             self.saveButtonText = saveButtonText
             _coordinates = coordinates
+            _positionName = positionName
         }
 
         public var body: some View {
@@ -32,8 +36,11 @@ import SwiftUI
                         .fontStyle(.subtitle1, color: .onSurfaceHighEmphasis)
                 }
                 Spacer()
-                Text(String(coordinates.latitude))
-                Text(String(coordinates.longitude))
+
+                if let positionName = positionName {
+                    Text(positionName)
+                        .fontStyle(.subtitle2, color: .onSurfaceMediumEmphasis)
+                }
 
                 Icon(.chevronDown, color: .onSurfaceHighEmphasis)
             }
@@ -51,9 +58,11 @@ import SwiftUI
                                 : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
                     )
             )
-
             .sheet(isPresented: $showModal) {
                 modal
+            }
+            .onChange(of: coordinates) {
+                updateCityName(coordinate: $0)
             }
         }
 
@@ -66,8 +75,18 @@ import SwiftUI
                     Spacer()
 
                     MaterialSurface {
-                        Text("\(coordinates.latitude), \(coordinates.longitude)")
+                        VStack(alignment: .center, spacing: .xxSmall) {
+                            if let positionName = positionName {
+                                Text(positionName)
+                                    .fontStyle(.title3, color: .onSurfaceHighEmphasis)
+                            }
+                            Text("\(coordinates.latitude), \(coordinates.longitude)")
+                                .fontStyle(.subtitle2, color: .onSurfaceMediumEmphasis)
+                        }
                     }
+                    .controlPadding(.small)
+                    .controlRadius(.large)
+                    .multilineTextAlignment(.center)
 
                 }.padding()
             }
@@ -80,5 +99,34 @@ import SwiftUI
                 }))
             }
         }
+
+        private func updateCityName(coordinate: CLLocationCoordinate2D) {
+            let loc = CLLocation(
+                latitude: coordinate.latitude,
+                longitude: coordinate.longitude
+            )
+
+            let geocoder = CLGeocoder()
+
+            geocoder.reverseGeocodeLocation(loc) { placemarks, error in
+                if error != nil { return }
+                if let firstLocation = placemarks?.first as? CLPlacemark {
+                    if let locality = firstLocation.locality {
+                        self.positionName = locality
+
+                    } else if let subLocality = firstLocation.subLocality {
+                        self.positionName = subLocality
+                    } else {
+                        self.positionName = firstLocation.name
+                    }
+                }
+            }
+        }
+    }
+
+    extension CLLocationCoordinate2D: Equatable {}
+
+    public func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
+        lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
     }
 #endif
