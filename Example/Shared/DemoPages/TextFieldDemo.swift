@@ -33,7 +33,7 @@ struct TextFieldDemo: View {
 
             }.padding()
         }
-        
+
         .navigationTitle("Text fields")
     }
 }

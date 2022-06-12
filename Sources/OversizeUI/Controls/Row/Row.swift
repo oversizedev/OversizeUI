@@ -24,6 +24,7 @@ public enum RowLeadingType {
     case image(_ image: Image)
     case systemImage(_ imageName: String)
     case avatar(_ avatar: AvatarView)
+    case view(_ view: AnyView)
 }
 
 public struct Row: View {
@@ -169,6 +170,8 @@ public struct Row: View {
                 .font(.system(size: 24))
                 .frame(width: 24, height: 24, alignment: .center)
                 .padding(.trailing, Constants.spacingIconAndText)
+        case let .view(view):
+            view
         }
     }
 
