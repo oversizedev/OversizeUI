@@ -115,7 +115,7 @@ public struct PINCodeView: View {
             Spacer()
 
             Text(errorText ?? "")
-                .fontStyle(.subtitle2, color: .error)
+                .fontStyle(.subheadline, color: .error)
                 .opacity(state == .error ? 1 : 0)
 
             Spacer()
@@ -259,7 +259,8 @@ public struct PINCodeView: View {
 public struct NumpadButtonStyle: ButtonStyle {
     public func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
-            .fontStyle(.title2, color: .onSurfaceHighEmphasis)
+            .title2()
+            .foregroundColor(.onSurfaceHighEmphasis)
             .frame(width: 72, height: 72, alignment: .center)
             .background(
                 Circle()

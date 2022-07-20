@@ -102,13 +102,13 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
 
                                    content(data[index],
                                            selectedIndex == index)
-                                       .fontStyle(.button,
-                                                  color: .onSurfaceHighEmphasis)
+                                       .body(true)
+                                       .foregroundColor(.onSurfaceHighEmphasis)
                                        .multilineTextAlignment(.center)
                                    Spacer()
                                }
 
-                               .padding(.vertical, controlPadding)
+                               .padding(.vertical, controlPadding.rawValue - Space.xxSmall.rawValue)
                                .background(selectedIndex != index
                                    ? getUnselection(unselectionStyle: style.unseletionStyle)
                                    : nil)
@@ -119,8 +119,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                                Color.clear.onAppear { frames[index] = proxy.frame(in: .global) }
                            })
                            .alignmentGuide(.horizontalCenterAlignment,
-                                           isActive: selectedIndex == index)
-                           { dimensions in
+                                           isActive: selectedIndex == index) { dimensions in
                                dimensions[HorizontalAlignment.center]
                            }
                            .padding(.trailing, style.unseletionStyle == .surface ? Space.xSmall.rawValue : 0)
@@ -153,11 +152,11 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                                action?()
                            },
                            label: { content(data[index], selectedIndex == index)
-                               .fontStyle(.button,
-                                          color: .onSurfaceHighEmphasis)
+                               .body(true)
+                               .foregroundColor(.onSurfaceHighEmphasis)
 
                                .multilineTextAlignment(.center)
-                               .padding(.vertical, controlPadding)
+                               .padding(.vertical, controlPadding.rawValue - Space.xxSmall.rawValue)
                                .padding(.horizontal, controlPadding)
                                .background(selectedIndex != index
                                    ? getUnselection(unselectionStyle: style.unseletionStyle)
@@ -168,8 +167,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                                Color.clear.onAppear { frames[index] = proxy.frame(in: .global) }
                            })
                            .alignmentGuide(.horizontalCenterAlignment,
-                                           isActive: selectedIndex == index)
-                           { dimensions in
+                                           isActive: selectedIndex == index) { dimensions in
                                dimensions[HorizontalAlignment.center]
                            }
                            .padding(.trailing, style.unseletionStyle == .surface ? Space.xSmall.rawValue : 0)

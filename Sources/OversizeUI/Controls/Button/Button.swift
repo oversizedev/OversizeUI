@@ -5,93 +5,372 @@
 
 import SwiftUI
 
-public enum ButtonBorderShape {
-    case automatic
-    case capsule
-    case roundedRectangle(radius: Radius = .medium)
-}
-
-public enum ButtonRole {
-    case destructive
-    case cancel
-}
-
 public enum ButtonType: Int, CaseIterable {
-    case accent
     case primary
     case secondary
     case tertiary
+    case quaternary
 }
 
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
 public struct OversizeButtonStyle: ButtonStyle {
-    private let type: ButtonType
+    @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.isEnabled) private var isEnabled: Bool
     @Environment(\.isLoading) private var isLoading: Bool
+    @Environment(\.isAccent) private var isAccent: Bool
     @Environment(\.elevation) private var elevation: Elevation
     @Environment(\.controlSize) var controlSize: ControlSize
-    // private let role: ButtonRole?
-    private var isRounded: Bool = false
-    private var buttonBorderShape: ButtonBorderShape = .automatic
+    @Environment(\.controlBorderShape) var controlBorderShape: ControlBorderShape
+    @Environment(\.isBordered) var isBordered: Bool
 
-    public init(_ type: ButtonType) {
+    private let type: ButtonType
+    private let isInfinityWidth: Bool?
+
+    public init(_ type: ButtonType, infinityWidth: Bool? = nil) {
         self.type = type
+        isInfinityWidth = infinityWidth
     }
-
-//    public init(type: ButtonType, role: ButtonRole? = nil) {
-//        self.type = type
-//        self.role = role
-//    }
 
     public func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
-            .frame(maxWidth: controlSize == .large ? .infinity : nil)
+            .body(true)
+            .opacity(isLoading ? 0 : 1)
+            .foregroundColor(foregroundColor(for: configuration.role).opacity(foregroundOpacity))
+            .padding(.horizontal, horizontalPadding)
+            .padding(.vertical, verticalPadding)
+            .frame(maxWidth: maxWidth)
+            .background(background(for: configuration.role))
+            .overlay(loadingView(for: configuration.role))
+            .scaleEffect(configuration.isPressed ? 0.95 : 1)
+            .shadowElevaton(elevation)
     }
 
-//    func foregroundColor(for role: ButtonRole?) -> Color? {
-//      switch (type, role) {
-//      case (.accent, .destructive?):
-//          return .red
-//        case (.increased, .destructive?):
-//          return .white
-//        case (.increased, _):
-//          return .black
-//        case (_, _):
-//          return nil
-//      }
-//    }
+    @ViewBuilder
+    func background(for role: ButtonRole?) -> some View {
+        switch controlBorderShape {
+        case .capsule:
+            Capsule()
+                .fill(backgroundColor(for: role)
+                    .opacity(backgroundOpacity))
+                .overlay {
+                    Capsule()
+                        .strokeBorder(Color.onSurfaceHighEmphasis.opacity(0.15), lineWidth: 2)
+                        .opacity(isBordered || theme.borderButtons ? 1 : 0)
+                }
 
-    public func buttonBorderShape(_ buttonBorderShape: ButtonBorderShape) -> OversizeButtonStyle {
-        var control = self
-        control.buttonBorderShape = buttonBorderShape
-        return control
+        case let .roundedRectangle(radius):
+            RoundedRectangle(cornerRadius: radius != .medium ? radius.rawValue : theme.radius, style: .continuous)
+                .fill(backgroundColor(for: role)
+                    .opacity(backgroundOpacity))
+                .overlay {
+                    RoundedRectangle(cornerRadius: radius != .medium ? radius.rawValue : theme.radius, style: .continuous)
+                        .strokeBorder(Color.onSurfaceHighEmphasis.opacity(0.15), lineWidth: 2)
+                        .opacity(isBordered || theme.borderButtons ? 1 : 0)
+                }
+        }
     }
 
-    public func buttonRounded(_ rounded: Bool) -> OversizeButtonStyle {
-        var control = self
-        control.isRounded = rounded
-        return control
+    /// Parameters
+    func backgroundColor(for role: ButtonRole?) -> Color {
+        switch type {
+        case .primary:
+            switch role {
+            case .some(.destructive): return Color.error
+            case .some(.cancel): return Color.accent
+            default:
+                if isAccent {
+                    return Color.accent
+                } else {
+                    return Color.primary
+                }
+            }
+        case .secondary:
+            return Color.surfacePrimary
+        case .tertiary:
+            return Color.surfaceSecondary
+        case .quaternary:
+            return Color.clear
+        }
+    }
+
+    func foregroundColor(for role: ButtonRole?) -> Color {
+        switch type {
+        case .primary:
+            return Color.onPrimaryHighEmphasis
+        case .secondary, .quaternary:
+            switch role {
+            case .some(.destructive): return Color.error
+            case .some(.cancel): return Color.accent
+            default:
+                if isAccent {
+                    return Color.accent
+                } else {
+                    return Color.primary
+                }
+            }
+        case .tertiary:
+            switch role {
+            case .some(.destructive): return Color.error
+            case .some(.cancel): return Color.onSurfaceHighEmphasis
+            default:
+                if isAccent {
+                    return Color.accent
+                } else {
+                    return Color.primary
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    func loadingView(for role: ButtonRole?) -> some View {
+        if isLoading {
+            ProgressView()
+                .foregroundColor(foregroundColor(for: role))
+        } else {
+            EmptyView()
+        }
+    }
+
+    var horizontalPadding: Space {
+        switch controlSize {
+        case .mini:
+            return .xxSmall
+        case .small:
+            return .small
+        case .regular:
+            return .small
+        case .large:
+            return .medium
+        @unknown default:
+            return .zero
+        }
+    }
+
+    var verticalPadding: Space {
+        switch controlSize {
+        case .mini:
+            return .xxSmall
+        case .small:
+            return .xxSmall
+        case .regular:
+            return .small
+        case .large:
+            return .medium
+        @unknown default:
+            return .zero
+        }
+    }
+
+    var backgroundOpacity: CGFloat {
+        isEnabled ? 1 : 0.5
+    }
+
+    var foregroundOpacity: CGFloat {
+        isEnabled ? 1 : 0.7
+    }
+
+    private var maxWidth: CGFloat? {
+        if isInfinityWidth == nil, controlSize == .regular {
+            return .infinity
+        } else if let infinity = isInfinityWidth, infinity == true {
+            return .infinity
+        } else {
+            return nil
+        }
     }
 }
 
-// public extension ButtonStyle where Self == OversizeButtonStyle {
-//    static var primary: OversizeButtonStyle {
-//        OversizeButtonStyle()
-//    }
-//    static var secondary: ButtonStyleExtended {
-//        ButtonStyleExtended(style: .secondary)
-//    }
-//    static var text: ButtonStyleExtended {
-//        ButtonStyleExtended(style: .text)
-//    }
-//    static var accent: ButtonStyleExtended {
-//        ButtonStyleExtended(style: .accent)
-//    }
-//    static var gray: ButtonStyleExtended {
-//        ButtonStyleExtended(style: .gray)
-//    }
-//    static var link: ButtonStyleExtended {
-//        ButtonStyleExtended(style: .link)
-//    }
-// }
+public extension ButtonStyle where Self == OversizeButtonStyle {
+    static var primary: OversizeButtonStyle {
+        OversizeButtonStyle(.primary)
+    }
+
+    static var secondary: OversizeButtonStyle {
+        OversizeButtonStyle(.secondary)
+    }
+
+    static var tertiary: OversizeButtonStyle {
+        OversizeButtonStyle(.tertiary)
+    }
+
+    static var quaternary: OversizeButtonStyle {
+        OversizeButtonStyle(.quaternary)
+    }
+
+    static func primary(infinityWidth: Bool?) -> OversizeButtonStyle {
+        OversizeButtonStyle(.primary, infinityWidth: infinityWidth)
+    }
+
+    static func secondary(infinityWidth: Bool?) -> OversizeButtonStyle {
+        OversizeButtonStyle(.secondary, infinityWidth: infinityWidth)
+    }
+
+    static func tertiary(infinityWidth: Bool?) -> OversizeButtonStyle {
+        OversizeButtonStyle(.tertiary, infinityWidth: infinityWidth)
+    }
+
+    static func quaternary(infinityWidth: Bool?) -> OversizeButtonStyle {
+        OversizeButtonStyle(.quaternary, infinityWidth: infinityWidth)
+    }
+}
+
+struct OversizeButtonStyle_Previews: PreviewProvider {
+    struct Buttons: View {
+        var body: some View {
+            Group {
+                Button(role: .cancel) {} label: {
+                    Text("Button")
+                }
+                .buttonStyle(.primary)
+
+                Button(role: .destructive) {} label: {
+                    Text("Button")
+                }
+                .buttonStyle(.primary)
+
+                Button {} label: {
+                    Text("Button")
+                }
+                .buttonStyle(.primary)
+
+                Button(role: .cancel) {} label: {
+                    Text("Button")
+                }
+                .buttonStyle(OversizeButtonStyle(.secondary))
+
+                Button(role: .destructive) {} label: {
+                    Text("Button")
+                }
+                .buttonStyle(OversizeButtonStyle(.secondary))
+
+                Button {} label: {
+                    Text("Button")
+                }
+                .buttonStyle(OversizeButtonStyle(.secondary))
+            }
+            Group {
+                Button(role: .cancel) {} label: {
+                    Text("Button")
+                }
+                .buttonStyle(OversizeButtonStyle(.tertiary))
+
+                Button(role: .destructive) {} label: {
+                    Text("Button")
+                }
+                .buttonStyle(OversizeButtonStyle(.tertiary))
+
+                Button {} label: {
+                    Text("Button")
+                }
+                .buttonStyle(OversizeButtonStyle(.tertiary))
+
+                Button(role: .cancel) {} label: {
+                    Text("Button")
+                }
+                .buttonStyle(OversizeButtonStyle(.quaternary))
+
+                Button(role: .destructive) {} label: {
+                    Text("Button")
+                }
+                .buttonStyle(OversizeButtonStyle(.quaternary))
+
+                Button {} label: {
+                    Text("Button")
+                }
+
+                .buttonStyle(OversizeButtonStyle(.quaternary))
+            }
+        }
+    }
+
+    static var previews: some View {
+        ScrollView {
+            VStack(alignment: .leading) {
+                Text("Regular")
+                    .title()
+
+                Button(role: .cancel) {} label: {
+                    Text("Button")
+                }
+                .buttonStyle(OversizeButtonStyle(.primary))
+
+                HStack {
+                    VStack(spacing: 16) {
+                        Buttons()
+                    }
+                    .controlBorderShape(.capsule)
+
+                    VStack(spacing: 16) {
+                        Buttons()
+                    }
+                    .accent()
+                    .bordered()
+
+                    VStack(spacing: 16) {
+                        Buttons()
+                    }
+                    .disabled(true)
+                }
+
+                Text("Small")
+                    .bold()
+                    .title()
+
+                HStack {
+                    VStack(spacing: 16) {
+                        Buttons()
+                    }
+                    .controlBorderShape(.capsule)
+
+                    VStack(spacing: 16) {
+                        Buttons()
+                    }
+                    .accent()
+                    .bordered()
+
+                    VStack(spacing: 16) {
+                        Buttons()
+                    }
+                    .disabled(true)
+
+                    VStack(spacing: 16) {
+                        Buttons()
+                    }
+                    .accent()
+                    .disabled(true)
+                }
+                .controlSize(.small)
+
+                Text("Mini")
+                    .title()
+
+                HStack {
+                    VStack(spacing: 16) {
+                        Buttons()
+                    }
+                    .controlBorderShape(.capsule)
+
+                    VStack(spacing: 16) {
+                        Buttons()
+                    }
+                    .accent()
+                    .bordered()
+
+                    VStack(spacing: 16) {
+                        Buttons()
+                    }
+                    .disabled(true)
+
+                    VStack(spacing: 16) {
+                        Buttons()
+                    }
+                    .accent()
+                    .disabled(true)
+                }
+                .controlSize(.mini)
+            }
+            .padding()
+        }
+        .previewLayout(.sizeThatFits)
+    }
+}

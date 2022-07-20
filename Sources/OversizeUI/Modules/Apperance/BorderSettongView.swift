@@ -26,7 +26,7 @@ public struct BorderSettingView: View {
                             theme.borderControls = value
                             theme.borderTextFields = value
                         }
-                        .fontStyle(.subtitle1)
+                        .fontStyle(.headline)
                         .foregroundColor(.onSurfaceHighEmphasis)
                         .padding(.horizontal, .medium)
                         .padding(.vertical, .small)
@@ -37,13 +37,13 @@ public struct BorderSettingView: View {
                                 VStack(spacing: Space.xxSmall.rawValue) {
                                     HStack {
                                         Text("Size")
-                                            .fontStyle(.paragraph2)
+                                            .subheadline()
                                             .foregroundColor(.onSurfaceHighEmphasis)
 
                                         Spacer()
 
                                         Text(String(format: "%.1f", theme.borderSize) + " px")
-                                            .fontStyle(.subtitle2)
+                                            .fontStyle(.subheadline)
                                             .foregroundColor(.onSurfaceHighEmphasis)
                                     }
 

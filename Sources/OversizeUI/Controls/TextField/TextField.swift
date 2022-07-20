@@ -20,7 +20,8 @@ public struct DefaultPlaceholderTextFieldStyle: TextFieldStyle {
     public func _body(configuration: TextField<_Label>) -> some View {
         VStack(alignment: .leading) {
             configuration
-                .fontStyle(.subtitle1, color: .onSurfaceHighEmphasis)
+                .headline()
+                .foregroundColor(.onSurfaceHighEmphasis)
         }
         .padding()
         .background(
@@ -52,13 +53,15 @@ public struct OverPlaceholderTextFieldStyle: TextFieldStyle {
         VStack(alignment: .leading) {
             HStack {
                 Text(placeholder)
-                    .fontStyle(.subtitle2, color: .onSurfaceHighEmphasis)
+                    .subheadline()
+                    .foregroundColor(.onSurfaceHighEmphasis)
                 Spacer()
             }
 
             VStack(alignment: .leading) {
                 configuration
-                    .fontStyle(.subtitle1, color: .onSurfaceHighEmphasis)
+                    .headline()
+                    .foregroundColor(.onSurfaceHighEmphasis)
             }
             .padding()
             .background(
@@ -92,12 +95,14 @@ public struct InsidePlaceholderTextFieldStyle: TextFieldStyle {
             VStack(alignment: .leading) {
                 HStack {
                     Text(placeholder)
-                        .fontStyle(.subtitle2, color: .onSurfaceHighEmphasis)
+                        .subheadline()
+                        .foregroundColor(.onSurfaceHighEmphasis)
                     Spacer()
                 }
 
                 configuration
-                    .fontStyle(.subtitle1, color: .onSurfaceHighEmphasis)
+                    .headline()
+                    .foregroundColor(.onSurfaceHighEmphasis)
             }
             .padding()
             .background(
@@ -131,13 +136,16 @@ public struct TextFieldModifier: ViewModifier {
             if helperText != "" {
                 if helperStyle == .helperText {
                     Text(helperText)
-                        .fontStyle(.subtitle2, color: .onSurfaceMediumEmphasis)
+                        .subheadline()
+                        .foregroundColor(.onSurfaceMediumEmphasis)
                 } else if helperStyle == .errorText {
                     Text(helperText)
-                        .fontStyle(.subtitle2, color: .error)
+                        .subheadline()
+                        .foregroundColor(.error)
                 } else if helperStyle == .sussesText {
                     Text(helperText)
-                        .fontStyle(.subtitle2, color: .success)
+                        .subheadline()
+                        .foregroundColor(.success)
                 }
             }
         }

@@ -240,10 +240,13 @@ public struct Row: View {
 
         case let .text(text):
             Text(text)
-                .fontStyle(.subtitle2, color: .onSurfaceMediumEmphasis)
+                .subheadline()
+                .foregroundColor(.onSurfaceMediumEmphasis)
+
         case let .button(text, action: action):
             Button(text, action: action)
-                .style(.gray, size: .medium, rounded: .small, width: .standart, shadow: false)
+                .buttonStyle(.tertiary)
+                .controlSize(.small)
                 .disabled(isPremiumOption && premiumStatus == false)
         }
     }
@@ -251,11 +254,12 @@ public struct Row: View {
     var text: some View {
         VStack(alignment: .leading) {
             Text(title)
-                .fontStyle(.subtitle1, color: .onSurfaceHighEmphasis)
+                .headline()
+                .foregroundColor(.onSurfaceHighEmphasis)
 
             if subtitle != "" {
                 Text(subtitle)
-                    .fontStyle(.subtitle2)
+                    .fontStyle(.subheadline)
                     .foregroundColor(.onSurfaceMediumEmphasis)
             }
         }

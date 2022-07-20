@@ -41,7 +41,7 @@ public struct RowButton: View {
                     }
 
                     Text(text)
-                        .fontStyle(.subtitle1)
+                        .fontStyle(.headline)
                         .foregroundColor(style == .link
                             ? Color.link
                             : style == .delete

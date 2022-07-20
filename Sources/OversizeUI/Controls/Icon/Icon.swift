@@ -361,12 +361,18 @@ struct IconAsset_Previews: PreviewProvider {
                     GridItem(),
                     GridItem()]
 
-        LazyVGrid(columns: grid) {
-            ForEach(IconsNames.allCases, id: \.self) { icon in
-                Icon(icon)
-                    .padding(.vertical)
-            }
-        }
+        Button(role: .cancel, action: {}, label: {
+            Text("Text")
+        })
+        .buttonStyle(.borderedProminent)
+        .controlSize(.large)
+
+//        LazyVGrid(columns: grid) {
+//            ForEach(IconsNames.allCases, id: \.self) { icon in
+//                Icon(icon)
+//                    .padding(.vertical)
+//            }
+//        }
         .padding()
         .previewLayout(.sizeThatFits)
     }

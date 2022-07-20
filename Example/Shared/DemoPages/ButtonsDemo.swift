@@ -11,28 +11,63 @@ struct ButtonsDemo: View {
         ScrollView {
             VStack(spacing: .xSmall) {
                 Button("Button") { print(#function) }
-                    .style(.primary)
+                    .buttonStyle(.primary)
+                    .elevation(.z2)
 
                 Button("Button") { print(#function) }
-                    .style(.primary)
+                    .buttonStyle(.secondary)
+                    .elevation(.z2)
 
                 Button("Button") { print(#function) }
-                    .style(.secondary)
+                    .buttonStyle(.tertiary)
 
                 Button("Button") { print(#function) }
-                    .style(.gray)
+                    .buttonStyle(.quaternary)
 
                 Button("Button") { print(#function) }
-                    .style(.text)
+                    .accent()
+                    .buttonStyle(.primary)
+                    .controlRadius(.xLarge)
 
                 Button("Button") { print(#function) }
-                    .style(.link)
+                    .buttonStyle(.quaternary)
+                    .accent()
 
-                Button("Button") { print(#function) }
-                    .style(.deleteLink)
+                Button(role: .cancel) {
+                    print(#function)
+                } label: {
+                    Text("Button")
+                }
+                .buttonStyle(.primary)
 
-                Button("Button") { print(#function) }
-                    .style(.secondary, size: .medium, rounded: .full, width: .full, shadow: true)
+                Button(role: .destructive) {
+                    print(#function)
+                } label: {
+                    Text("Button")
+                }
+                .buttonStyle(.primary)
+
+                HStack {
+                    Button("Button") { print(#function) }
+                        .buttonStyle(.secondary)
+                        .accent()
+                        .controlSize(.small)
+                        .elevation(.z2)
+
+                    Button("Button") { print(#function) }
+                        .buttonStyle(.secondary)
+                        .controlSize(.mini)
+                        .elevation(.z2)
+
+                    Button {
+                        print(#function)
+                    } label: {
+                        Image(systemName: "archivebox")
+                    }
+                    .controlSize(.small)
+                    .buttonStyle(.secondary)
+                    .elevation(.z2)
+                }
 
             }.padding()
         }

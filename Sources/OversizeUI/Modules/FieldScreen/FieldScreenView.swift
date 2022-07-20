@@ -57,7 +57,8 @@ public struct FieldScreenView: View {
                     TextField(placeholder, text: $text, onEditingChanged: { focused in
                         self.focused = focused
                     })
-                    .fontStyle(.largeTitle, color: .onSurfaceHighEmphasis)
+                    .largeTitle()
+                    .foregroundColor(.onSurfaceHighEmphasis)
                     .multilineTextAlignment(.center)
 
                     if trallingImage != .none {
@@ -69,7 +70,8 @@ public struct FieldScreenView: View {
 
             if helperText != "" {
                 Text(helperText)
-                    .fontStyle(.subtitle2, color: .onSurfaceMediumEmphasis)
+                    .subheadline()
+                    .foregroundColor(.onSurfaceMediumEmphasis)
             }
 
             Spacer()
@@ -77,7 +79,7 @@ public struct FieldScreenView: View {
             Button(action: buttonAction, label: {
                 Text(buttonText, bundle: .module)
             })
-            .style(.primary, size: .large)
+            .buttonStyle(.primary)
             .padding()
         }
         .navigationBar("App", style: .fixed($offset)) {
