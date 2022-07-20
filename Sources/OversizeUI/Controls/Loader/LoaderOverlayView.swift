@@ -56,7 +56,7 @@ public struct LoaderOverlayView: View {
 
                     if showText {
                         Text(text.isEmpty ? "Loading" : text)
-                            .fontStyle(.subtitle1, color: .onSurfaceDisabled)
+                            .fontStyle(.headline, color: .onSurfaceDisabled)
                             .offset(y: 8)
                     }
                 }

@@ -200,8 +200,7 @@ struct HalfSheetView_Previews: PreviewProvider {
                     isPresented.toggle()
                 }).sheet(isPresented: $isPresented,
                          detents: [.medium, .large],
-                         smallestUndimmedDetentIdentifier: .large)
-                {
+                         smallestUndimmedDetentIdentifier: .large) {
                     Text("Sheet content")
                 }
             }

@@ -63,7 +63,8 @@ public struct Select<Element, Content, Selection>: View
                                 : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
                     )
             )
-            .fontStyle(.subtitle1, color: .onSurfaceHighEmphasis)
+            .headline()
+            .foregroundColor(.onSurfaceHighEmphasis)
 
             .sheet(isPresented: $showModal) {
                 modal
@@ -84,7 +85,7 @@ public struct Select<Element, Content, Selection>: View
                            label: {
                                content(data[index],
                                        selectedIndex == index)
-                                   .fontStyle(.subtitle1,
+                                   .fontStyle(.headline,
                                               color: .onSurfaceHighEmphasis)
 
                            })

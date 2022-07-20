@@ -54,7 +54,7 @@ public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar:
 
                     HStack {
                         Text(title)
-                            .fontStyle(.largeTitle)
+                            .largeTitle()
                             .opacity(largeTitleOpacity)
                             .padding(.bottom, 8)
                         // .rotation3DEffect(.degrees(Double(offset.y)), axis: (x: 1, y: 0, z: 0))
@@ -84,7 +84,7 @@ public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar:
                         Spacer()
 
                         Text(title)
-                            .fontStyle(.title3)
+                            .title3()
                             .multilineTextAlignment(.center)
                             .frame(minHeight: 40)
                             .opacity(smallTitleOpacity)

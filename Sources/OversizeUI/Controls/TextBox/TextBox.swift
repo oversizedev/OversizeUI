@@ -28,7 +28,7 @@ public struct TextBox: View {
 
             if let subtitle = subtitle {
                 Text(subtitle)
-                    .fontStyle(.paragraph1, color: .onSurfaceHighEmphasis)
+                    .fontStyle(.body, color: .onSurfaceHighEmphasis)
             }
         }
         .multilineTextAlignment(multilineTextAlignment)

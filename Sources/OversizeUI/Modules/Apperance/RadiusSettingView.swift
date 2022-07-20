@@ -23,13 +23,13 @@ struct RadiusSettingView: View {
                             VStack(spacing: Space.xxSmall.rawValue) {
                                 HStack {
                                     Text("Size")
-                                        .fontStyle(.paragraph2)
+                                        .fontStyle(.subheadline)
                                         .foregroundColor(.onSurfaceHighEmphasis)
 
                                     Spacer()
 
                                     Text(String(format: "%.0f", theme.radius) + "  px")
-                                        .fontStyle(.subtitle2)
+                                        .fontStyle(.subheadline)
                                         .foregroundColor(.onSurfaceHighEmphasis)
                                 }
 

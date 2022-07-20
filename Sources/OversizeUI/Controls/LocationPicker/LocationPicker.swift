@@ -14,7 +14,7 @@ import SwiftUI
         @Binding private var coordinates: CLLocationCoordinate2D
         @Binding private var positionName: String?
         private let label: String
-        
+
         private let saveButtonText: String?
         @State private var offset = CGPoint(x: 0, y: 0)
         @State private var showModal = false
@@ -33,13 +33,16 @@ import SwiftUI
             } label: {
                 HStack(spacing: .xxSmall) {
                     Text(label)
-                        .fontStyle(.subtitle1, color: .onSurfaceHighEmphasis)
+                        .bold()
+                        .headline()
+                        .foregroundColor(.onSurfaceHighEmphasis)
                 }
                 Spacer()
 
                 if let positionName = positionName {
                     Text(positionName)
-                        .fontStyle(.subtitle2, color: .onSurfaceMediumEmphasis)
+                        .subheadline()
+                        .foregroundColor(.onPrimaryMediumEmphasis)
                 }
 
                 Icon(.chevronDown, color: .onSurfaceHighEmphasis)
@@ -78,10 +81,12 @@ import SwiftUI
                         VStack(alignment: .center, spacing: .xxSmall) {
                             if let positionName = positionName {
                                 Text(positionName)
-                                    .fontStyle(.title3, color: .onSurfaceHighEmphasis)
+                                    .title3()
+                                    .foregroundColor(.onSurfaceHighEmphasis)
                             }
                             Text("\(coordinates.latitude), \(coordinates.longitude)")
-                                .fontStyle(.subtitle2, color: .onSurfaceMediumEmphasis)
+                                .subheadline()
+                                .foregroundColor(.onSurfaceMediumEmphasis)
                         }
                     }
                     .controlPadding(.small)

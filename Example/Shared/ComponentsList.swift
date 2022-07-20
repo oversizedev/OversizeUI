@@ -40,7 +40,8 @@ struct ComponentsList: View {
                 ForEach(pages) { page in
                     HStack {
                         NavigationLink(page.name, destination: page.page)
-                            .fontStyle(.button, color: .onSurfaceHighEmphasis)
+                            .body(true)
+                            .foregroundColor(.onSurfaceHighEmphasis)
 
                         Spacer()
                     }

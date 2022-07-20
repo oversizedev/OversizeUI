@@ -25,7 +25,7 @@ public struct LibraryContent: LibraryContentProvider {
     @LibraryContentBuilder
     public func modifiers(base: Text) -> [LibraryItem] {
         LibraryItem(
-            base.fontStyle(.paragraph1, color: .onBackgroundHighEmphasis)
+            base.fontStyle(.body, color: .onBackgroundHighEmphasis)
         )
     }
 

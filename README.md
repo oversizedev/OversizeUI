@@ -1,6 +1,6 @@
 # OversizeUI
 
-![Build Status](https://github.com/aromanov91/oversizeUI/actions/workflows/buildExampleIOS.yml/badge.svg)
+![Build Status](https://github.com/oversizedev/oversizeUI/actions/workflows/buildExampleIOS.yml/badge.svg)
 ![GitHub](https://img.shields.io/github/license/aromanov91/oversizeUI)
 
 Yet another component library on SwiftUI
@@ -33,14 +33,14 @@ Colors, Typography, Spacing and other styles in [core folder](Sources/OversizeUI
 ### Install and use OversizeUI
 
 #### Requirements
-- iOS 14+ or macOS 11.0+
-- Xcode 13.2+
-- Swift 5.5+
+- iOS 15+ or macOS 12.0+
+- Xcode 13.4+
+- Swift 5.6+
 
 #### Swift Package Manager
 - File > Swift Packages > Add Package Dependency
-- Add `https://github.com/aromanov91/oversizeUI.git`
-- Select "Up to Next Major" with "1.5.2"
+- Add `https://github.com/oversizedev/OversizeUI.git`
+- Select "Up to Next Major" with "2.0.0"
 
 ### Import and use OversizeUI
 After the framework has been added you can import the module to use it:
@@ -67,12 +67,10 @@ AvatarView(firstName: "Jhon", size: .small)
 ### Buttons
 ```swift
 Button("Button") { print(#function) }
-    .style(.primary)
-```
-
-```swift
-Button("Button") { print(#function) }
-    .style(.secondary, size: .m, rounded: .full, width: .full, shadow: true)
+    .buttonStyle(.primary)
+    .accent()
+    .controlBorderShape(.capsule)
+    .bordered()
 ```
 
 ### Color selector

@@ -30,8 +30,8 @@ public struct HorizontalColorSelectorStyle: ColorSelectorStyle {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 configuration.label
-            }.padding(.horizontal)
-                .animation(.default)
+            }
+            .padding(.horizontal)
         }
         .padding(.vertical)
     }

@@ -89,7 +89,8 @@ public struct FontSettingView: View {
         VStack(alignment: .leading, spacing: Space.medium.rawValue) {
             VStack(alignment: .leading, spacing: Space.small.rawValue) {
                 Text("Button".uppercased())
-                    .fontStyle(.overline, color: .onBackgroundMediumEmphasis)
+                    .bold()
+                    .fontStyle(.caption, color: .onBackgroundMediumEmphasis)
                 SegmentedPickerSelector(FontDesignType.allCases, selection: theme.$fontButton) { fontStyle, _ in
                     VStack(alignment: .center, spacing: 8) {
                         Text("Aa")
@@ -106,7 +107,8 @@ public struct FontSettingView: View {
 
             VStack(alignment: .leading, spacing: Space.small.rawValue) {
                 Text("Overline & caption".uppercased())
-                    .fontStyle(.overline, color: .onBackgroundMediumEmphasis)
+                    .bold()
+                    .fontStyle(.caption, color: .onBackgroundMediumEmphasis)
                 SegmentedPickerSelector(FontDesignType.allCases, selection: theme.$fontOverline) { fontStyle, _ in
                     VStack(alignment: .center, spacing: 8) {
                         Text("Aa")
@@ -132,13 +134,14 @@ extension FontSettingView {
                 VStack(alignment: .leading, spacing: Space.medium.rawValue) {
                     VStack(alignment: .leading, spacing: Space.xxSmall.rawValue) {
                         Text("Overline".uppercased())
-                            .fontStyle(.overline, color: .onBackgroundMediumEmphasis)
+                            .bold()
+                            .fontStyle(.caption, color: .onBackgroundMediumEmphasis)
 
                         Text("Large title")
                             .fontStyle(.largeTitle, color: .onBackgroundHighEmphasis)
 
                         Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
-                            .fontStyle(.paragraph1, color: .onBackgroundHighEmphasis)
+                            .fontStyle(.body, color: .onBackgroundHighEmphasis)
                     }
 
                     VStack(alignment: .leading, spacing: Space.xxSmall.rawValue) {
@@ -146,13 +149,14 @@ extension FontSettingView {
                             .fontStyle(.title3, color: .onBackgroundHighEmphasis)
 
                         Text("Subtitle")
-                            .fontStyle(.subtitle1, color: .onBackgroundHighEmphasis)
+                            .fontStyle(.headline, color: .onBackgroundHighEmphasis)
 
                         Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
-                            .fontStyle(.paragraph2, color: .onBackgroundHighEmphasis)
+                            .bold()
+                            .fontStyle(.subheadline, color: .onBackgroundHighEmphasis)
 
                         Text("Button")
-                            .fontStyle(.button, color: .onBackgroundHighEmphasis)
+                            .fontStyle(.body, color: .onBackgroundHighEmphasis)
                             .padding(.top, .xxxSmall)
                     }
                 }

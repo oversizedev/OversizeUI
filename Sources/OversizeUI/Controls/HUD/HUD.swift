@@ -216,7 +216,7 @@ public struct HUDContent: View {
 //                }
 
                     Text(title)
-                        .fontStyle(.button, color: .onSurfaceHighEmphasis)
+                        .fontStyle(.body, color: .onSurfaceHighEmphasis)
                 }
             case .alert:
                 VStack(spacing: .large) {

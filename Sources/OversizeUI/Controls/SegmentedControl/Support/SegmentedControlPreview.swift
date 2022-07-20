@@ -70,7 +70,7 @@ struct SegmentedControlPreview: View {
                         .padding(.xxSmall)
                     Text(item)
                     Text("Subtitle")
-                        .fontStyle(.subtitle2, color: .onSurfaceMediumEmphasis)
+                        .fontStyle(.subheadline, color: .onSurfaceMediumEmphasis)
                 }
             }
             .segmentedControlStyle(SelectionOnlySegmentedControlStyle())

@@ -53,7 +53,7 @@ public struct TextFieldExtended: View {
             if placeholderPosition == .overField {
                 HStack {
                     Text(placeholder)
-                        .fontStyle(.subtitle2)
+                        .fontStyle(.subheadline)
                     Spacer()
                 }
             }
@@ -62,7 +62,8 @@ public struct TextFieldExtended: View {
                 if placeholderPosition == .insideFeield {
                     HStack {
                         Text(placeholder)
-                            .fontStyle(.subtitle2, color: .onSurfaceHighEmphasis)
+                            .subheadline()
+                            .foregroundColor(.onSurfaceHighEmphasis)
                         Spacer()
                     }
                     .padding(.bottom, Space.xxSmall)
@@ -80,7 +81,8 @@ public struct TextFieldExtended: View {
                                   onEditingChanged: { focused in
                                       self.focused = focused
                                   })
-                                  .fontStyle(.subtitle1, color: .onSurfaceHighEmphasis)
+                                  .headline()
+                                  .foregroundColor(.onSurfaceHighEmphasis)
                     }
 
                     if trallingImage != .none {
@@ -114,13 +116,16 @@ public struct TextFieldExtended: View {
             if helperText != "" {
                 if helperStyle == .helperText {
                     Text(helperText)
-                        .fontStyle(.subtitle2, color: .onSurfaceMediumEmphasis)
+                        .subheadline()
+                        .foregroundColor(.onSurfaceMediumEmphasis)
                 } else if helperStyle == .errorText {
                     Text(helperText)
-                        .fontStyle(.subtitle2, color: .error)
+                        .subheadline()
+                        .foregroundColor(.error)
                 } else if helperStyle == .sussesText {
                     Text(helperText)
-                        .fontStyle(.subtitle2, color: .success)
+                        .subheadline()
+                        .foregroundColor(.success)
                 }
             }
         }

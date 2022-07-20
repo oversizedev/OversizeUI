@@ -26,7 +26,7 @@ public struct SectionView<Content: View>: View {
         VStack(alignment: .leading, spacing: Space.xSmall.rawValue) {
             if title != "" {
                 Text(title)
-                    .fontStyle(.subtitle1)
+                    .fontStyle(.headline)
                     .foregroundColor(.onBackgroundHighEmphasis)
                     .padding(.leading, .xxxSmall)
             }

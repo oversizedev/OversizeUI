@@ -19,6 +19,7 @@ public struct ColorSelector: View {
     public var body: some View {
         #if os(iOS) || os(macOS)
             colorSelector
+                .animation(.default, value: selection)
         #else
             EmptyView()
         #endif
@@ -99,6 +100,7 @@ public struct ColorSelector: View {
                     ColorPicker("", selection: $selection, supportsOpacity: false)
                         .labelsHidden().opacity(0.015)
                 )
+                .animation(.default, value: selection)
         }
     }
 

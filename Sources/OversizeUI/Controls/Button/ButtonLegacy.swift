@@ -84,7 +84,7 @@ public struct ButtonStyleExtended: ButtonStyle {
         @Environment(\.isEnabled) private var isEnabled: Bool
         var body: some View {
             configuration.label
-                .fontStyle(.button)
+                .body(true)
                 .padding(.horizontal, Space.small)
                 .foregroundColor(isEnabled ? .onPrimaryHighEmphasis : .onPrimaryDisabled)
                 .frame(maxWidth: width == .full ? .infinity : width == .standart ? nil : size == .large ? Constants.heightL : Constants.heightM,
@@ -121,7 +121,7 @@ public struct ButtonStyleExtended: ButtonStyle {
         @Environment(\.isEnabled) private var isEnabled: Bool
         var body: some View {
             configuration.label
-                .fontStyle(.button)
+                .body(true)
                 .padding(.horizontal, Space.small)
                 .foregroundColor(isEnabled ? Color.backgroundPrimary : .onPrimaryDisabled)
                 .frame(maxWidth: width == .full ? .infinity : width == .standart ? nil : size == .large ? Constants.heightL : Constants.heightM,
@@ -158,7 +158,7 @@ public struct ButtonStyleExtended: ButtonStyle {
         @Environment(\.isEnabled) private var isEnabled: Bool
         var body: some View {
             configuration.label
-                .fontStyle(.button)
+                .body(true)
                 .padding(.horizontal, Space.small)
                 .foregroundColor(isEnabled ? .onSurfaceHighEmphasis : .onSurfaceDisabled)
                 .frame(maxWidth: width == .full ? .infinity : width == .standart ? nil : size == .large ? Constants.heightL : Constants.heightM,
@@ -195,7 +195,7 @@ public struct ButtonStyleExtended: ButtonStyle {
         @Environment(\.isEnabled) private var isEnabled: Bool
         var body: some View {
             configuration.label
-                .fontStyle(.button)
+                .body(true)
                 .padding(.horizontal, Space.small)
                 .foregroundColor(isEnabled ? .onBackgroundHighEmphasis : .onBackgroundDisabled)
                 .frame(maxWidth: width == .full ? .infinity : width == .standart ? nil : size == .large ? Constants.heightL : Constants.heightM,
@@ -229,7 +229,7 @@ public struct ButtonStyleExtended: ButtonStyle {
         @Environment(\.isEnabled) private var isEnabled: Bool
         var body: some View {
             configuration.label
-                .fontStyle(.button)
+                .body(true)
                 .padding(.horizontal, Space.small)
                 .foregroundColor(isEnabled ? .onSurfaceHighEmphasis : .onSurfaceDisabled)
                 .frame(maxWidth: width == .full ? .infinity : width == .standart ? nil : size == .large ? Constants.heightL : Constants.heightM,
@@ -249,7 +249,7 @@ public struct ButtonStyleExtended: ButtonStyle {
         @Environment(\.isEnabled) private var isEnabled: Bool
         var body: some View {
             configuration.label
-                .fontStyle(.button)
+                .body(true)
                 .padding(.horizontal, Space.small)
                 .foregroundColor(isEnabled ? .accent : Color.accent.opacity(0.7))
                 .frame(maxWidth: width == .full ? .infinity : width == .standart ? nil : size == .large ? Constants.heightL : Constants.heightM,
@@ -269,7 +269,7 @@ public struct ButtonStyleExtended: ButtonStyle {
         @Environment(\.isEnabled) private var isEnabled: Bool
         var body: some View {
             configuration.label
-                .fontStyle(.button)
+                .body(true)
                 .padding(.horizontal, Space.small)
                 .foregroundColor(isEnabled ? .error : Color.error.opacity(0.7))
                 .frame(maxWidth: width == .full ? .infinity : width == .standart ? nil : size == .large ? Constants.heightL : Constants.heightM,
@@ -281,94 +281,26 @@ public struct ButtonStyleExtended: ButtonStyle {
     }
 }
 
-// public struct ButtonLoadingStyle: ButtonStyle {
-//    var loading: Bool = false
-//
-//    public func makeBody(configuration: ButtonStyle.Configuration) -> some View {
-//        if loading {
-//            return configuration
-//        } else {
-//            return configuration
-//        }
-//
-//    }
-//
-//
-// }
-
 public extension Button {
     /// Changes the appearance of the button
 
+    @available(*, deprecated, message: "Use native buttonStyle")
     func style(_ style: LegacyButtonType) -> some View {
         buttonStyle(ButtonStyleExtended(style: style))
     }
 
+    @available(*, deprecated, message: "Use native buttonStyle")
     func style(_ style: LegacyButtonType, size: ButtonSize) -> some View {
         buttonStyle(ButtonStyleExtended(style: style, size: size))
     }
 
+    @available(*, deprecated, message: "Use native buttonStyle")
     func style(_ style: LegacyButtonType, size: ButtonSize, shadow: Bool) -> some View {
         buttonStyle(ButtonStyleExtended(style: style, size: size, shadow: shadow))
     }
 
+    @available(*, deprecated, message: "Use native buttonStyle")
     func style(_ style: LegacyButtonType, size: ButtonSize, rounded: ButtonRounded, width: ButtonWidth = .standart, shadow: Bool) -> some View {
         buttonStyle(ButtonStyleExtended(style: style, size: size, rounded: rounded, width: width, shadow: shadow))
-    }
-}
-
-public extension ButtonStyle where Self == ButtonStyleExtended {
-    static var primary: ButtonStyleExtended {
-        ButtonStyleExtended(style: .primary)
-    }
-
-    static var secondary: ButtonStyleExtended {
-        ButtonStyleExtended(style: .secondary)
-    }
-
-    static var text: ButtonStyleExtended {
-        ButtonStyleExtended(style: .text)
-    }
-
-    static var accent: ButtonStyleExtended {
-        ButtonStyleExtended(style: .accent)
-    }
-
-    static var gray: ButtonStyleExtended {
-        ButtonStyleExtended(style: .gray)
-    }
-
-    static var link: ButtonStyleExtended {
-        ButtonStyleExtended(style: .link)
-    }
-}
-
-struct ButtonStyle_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack(spacing: 16) {
-            Button("Button") { print(#function) }
-                .style(.primary)
-
-            Button("Button") { print(#function) }
-                .style(.primary)
-
-            Button("Button") { print(#function) }
-                .style(.secondary)
-
-            Button("Button") { print(#function) }
-                .style(.gray)
-
-            Button("Button") { print(#function) }
-                .style(.text)
-
-            Button("Button") { print(#function) }
-                .style(.link)
-
-            Button("Button") { print(#function) }
-                .style(.deleteLink)
-
-            Button("Button") { print(#function) }
-                .style(.secondary, size: .medium, rounded: .full, width: .full, shadow: true)
-
-        }.padding()
     }
 }
