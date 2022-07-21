@@ -11,17 +11,43 @@ public extension View {
         Surface { self }
     }
 
+    func surface(_ elevation: Elevation) -> some View {
+        Surface { self }
+            .elevation(elevation)
+    }
+
+    func surface(_ elevation: Elevation, background: SurfaceStyle) -> some View {
+        Surface { self }
+            .surfaceStyle(background)
+            .elevation(elevation)
+    }
+
+//    func surface(_ elevation: Elevation = .z0,
+//                 background: SurfaceStyle = .primary,
+//                 padding: Space = .medium,
+//                 radius: Radius = .medium) -> some View
+//    {
+//        Surface { self }
+//            .surfaceStyle(background)
+//            .controlPadding(padding)
+//            .controlRadius(radius)
+//            .elevation(elevation)
+//    }
+
+    @available(*, deprecated, message: "Use without elevation")
     func surface(elevation: Elevation) -> some View {
         Surface { self }
             .elevation(elevation)
     }
 
+    @available(*, deprecated, message: "Use without elevation")
     func surface(elevation: Elevation, background: SurfaceStyle) -> some View {
         Surface { self }
             .surfaceStyle(background)
             .elevation(elevation)
     }
 
+    @available(*, deprecated, message: "Use without elevation")
     func surface(elevation: Elevation = .z0,
                  background: SurfaceStyle = .primary,
                  padding: Space = .medium,

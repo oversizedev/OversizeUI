@@ -23,7 +23,7 @@ import SwiftUI
         @Environment(\.elevation) private var elevation: Elevation
         @Environment(\.theme) private var theme: ThemeSettings
         @Environment(\.controlRadius) var controlRadius: Radius
-        @Environment(\.controlPadding) var controlPadding: Space
+        @Environment(\.controlPadding) var controlPadding: ControlPadding
 
         private let label: Label
         private let action: (() -> Void)?
@@ -58,14 +58,16 @@ import SwiftUI
         private var surface: some View {
             if #available(iOS 15.0, macOS 12.0, tvOS 15.0, *) {
                 label
-                    .padding(.all, controlPadding.rawValue)
+                    .padding(.horizontal, controlPadding.horizontal)
+                    .padding(.vertical, controlPadding.vertical)
                     .background(backgroundMaterial,
                                 in: RoundedRectangle(cornerRadius: controlRadius.rawValue, style: .continuous))
                     .overlay(overlayView)
                     .shadowElevaton(elevation)
             } else {
                 label
-                    .padding(.all, controlPadding.rawValue)
+                    .padding(.horizontal, controlPadding.horizontal)
+                    .padding(.vertical, controlPadding.vertical)
                     .background(legacyBackgroundView)
                     .overlay(overlayView)
                     .shadowElevaton(elevation)
