@@ -13,7 +13,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.segmentedControlStyle) private var style
     @Environment(\.controlRadius) var controlRadius: Radius
-    @Environment(\.controlPadding) var controlPadding: Space
+    @Environment(\.controlPadding) var controlPadding: ControlPadding
 
     public typealias Data = [Element]
 
@@ -107,8 +107,11 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                                        .multilineTextAlignment(.center)
                                    Spacer()
                                }
-
-                               .padding(.vertical, controlPadding.rawValue - Space.xxSmall.rawValue)
+                               .padding(.horizontal, controlPadding.horizontal)
+                               .padding(.vertical,
+                                        controlPadding.vertical != Space.zero || controlPadding.vertical != Space.xxSmall
+                                            ? controlPadding.vertical.rawValue - Space.xxSmall.rawValue
+                                            : Space.zero.rawValue)
                                .background(selectedIndex != index
                                    ? getUnselection(unselectionStyle: style.unseletionStyle)
                                    : nil)
@@ -156,8 +159,11 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                                .foregroundColor(.onSurfaceHighEmphasis)
 
                                .multilineTextAlignment(.center)
-                               .padding(.vertical, controlPadding.rawValue - Space.xxSmall.rawValue)
-                               .padding(.horizontal, controlPadding)
+                               .padding(.horizontal, controlPadding.horizontal)
+                               .padding(.vertical,
+                                        controlPadding.vertical != Space.zero || controlPadding.vertical != Space.xxSmall
+                                            ? controlPadding.vertical.rawValue - Space.xxSmall.rawValue
+                                            : Space.zero.rawValue)
                                .background(selectedIndex != index
                                    ? getUnselection(unselectionStyle: style.unseletionStyle)
                                    : nil)

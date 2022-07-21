@@ -17,7 +17,7 @@ public struct Surface<Label: View>: View {
     @Environment(\.elevation) private var elevation: Elevation
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.controlRadius) var controlRadius: Radius
-    @Environment(\.controlPadding) var controlPadding: Space
+    @Environment(\.controlPadding) var controlPadding: ControlPadding
 
     private enum Constants {
         /// Colors
@@ -57,7 +57,8 @@ public struct Surface<Label: View>: View {
 
     private var surface: some View {
         label
-            .padding(.all, controlPadding.rawValue)
+            .padding(.horizontal, controlPadding.horizontal)
+            .padding(.vertical, controlPadding.vertical)
             .background(
                 RoundedRectangle(cornerRadius: controlRadius.rawValue,
                                  style: .circular)

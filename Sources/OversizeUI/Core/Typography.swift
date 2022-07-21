@@ -26,156 +26,98 @@ public struct Typography: ViewModifier {
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.isLoading) var isLoading
 
-    private var designTitle: Font.Design {
-        theme.fontTitle.system
-    }
+    public let fontStyle: Font.TextStyle
+    public let isBold: Bool?
 
-    private var designParagraph: Font.Design {
-        theme.fontParagraph.system
-    }
-
-    private var designOverline: Font.Design {
-        theme.fontOverline.system
-    }
-
-    private var designButton: Font.Design {
-        theme.fontButton.system
-    }
-
-    public var style: Font.TextStyle
-
-    public var isBold: Bool = false
-
-    // swiftlint:disable cyclomatic_complexity
-    @ViewBuilder
-    public func body(content: Content) -> some View {
-        switch style {
-        /// The font style for large titles.
-        case .largeTitle:
-            content
-                .font(.system(.largeTitle, design: designTitle).weight(isBold ? .heavy : .regular))
-                .redacted(reason: isLoading ? .placeholder : .init())
-
-        /// The font used for first level hierarchical headings.
-        case .title:
-            content
-                .font(.system(.title, design: designTitle).weight(isBold ? .heavy : .regular))
-                .redacted(reason: isLoading ? .placeholder : .init())
-
-        /// The font used for second level hierarchical headings.
-        case .title2:
-            content
-                .font(.system(.title2, design: designTitle).weight(isBold ? .bold : .regular))
-                .redacted(reason: isLoading ? .placeholder : .init())
-
-        /// The font used for third level hierarchical headings.
-        case .title3:
-            content
-                .font(.system(.title3, design: designTitle).weight(isBold ? .bold : .regular))
-                .redacted(reason: isLoading ? .placeholder : .init())
-
-        /// The font used for headings.
-        case .headline:
-            content
-                .font(.system(.headline, design: designTitle).weight(isBold ? .bold : .semibold))
-                .redacted(reason: isLoading ? .placeholder : .init())
-
-        /// The font used for subheadings.
-        case .subheadline:
-            content
-                .font(.system(.subheadline, design: designTitle).weight(isBold ? .bold : .regular))
-                .redacted(reason: isLoading ? .placeholder : .init())
-
-        /// The font used for body text.
+    private var fontDesign: Font.Design {
+        switch fontStyle {
+        case .largeTitle, .title, .title2, .title3, .headline, .subheadline:
+            return theme.fontTitle.system
         case .body:
-            content
-                .font(.system(.body, design: designParagraph).weight(isBold ? .bold : .regular))
-                .redacted(reason: isLoading ? .placeholder : .init())
-
-        /// The font used for callouts.
-        case .callout:
-            content
-                .font(.system(.callout, design: designOverline).weight(isBold ? .bold : .regular))
-                .redacted(reason: isLoading ? .placeholder : .init())
-
-        /// The font used in footnotes.
-        case .footnote:
-            content
-                .font(.system(.footnote, design: designOverline).weight(isBold ? .bold : .regular))
-                .redacted(reason: isLoading ? .placeholder : .init())
-
-        /// The font used for standard captions.
-        case .caption:
-            content
-                .font(.system(.caption, design: designOverline).weight(isBold ? .bold : .regular))
-                .redacted(reason: isLoading ? .placeholder : .init())
-
-        /// The font used for alternate captions.
-        case .caption2:
-            content
-                .font(.system(.caption2, design: designOverline).weight(isBold ? .bold : .regular))
-                .redacted(reason: isLoading ? .placeholder : .init())
-
-        default:
-            content
+            return theme.fontParagraph.system
+        case .caption, .caption2, .footnote, .callout:
+            return theme.fontOverline.system
+        @unknown default:
+            return .default
         }
+    }
+
+    private var fontWeight: Font.Weight {
+        switch fontStyle {
+        case .largeTitle, .title:
+            return isBold ?? true ? .heavy : .regular
+        case .headline:
+            return isBold ?? true ? .bold : .semibold
+        default:
+            return isBold ?? false ? .bold : .regular
+        }
+    }
+
+    public init(fontStyle: Font.TextStyle, isBold: Bool? = nil) {
+        self.fontStyle = fontStyle
+        self.isBold = isBold
+    }
+
+    public func body(content: Content) -> some View {
+        content
+            .font(.system(fontStyle, design: fontDesign).weight(fontWeight))
     }
 }
 
 public extension View {
     func largeTitle(_ bold: Bool = true) -> some View {
-        modifier(Typography(style: .largeTitle, isBold: bold))
+        modifier(Typography(fontStyle: .largeTitle, isBold: bold))
     }
 
     func title(_ bold: Bool = true) -> some View {
-        modifier(Typography(style: .title, isBold: bold))
+        modifier(Typography(fontStyle: .title, isBold: bold))
     }
 
     func title2(_ bold: Bool = true) -> some View {
-        modifier(Typography(style: .title2, isBold: bold))
+        modifier(Typography(fontStyle: .title2, isBold: bold))
     }
 
     func title3(_ bold: Bool = true) -> some View {
-        modifier(Typography(style: .title3, isBold: bold))
+        modifier(Typography(fontStyle: .title3, isBold: bold))
     }
 
     func headline(_ bold: Bool = true) -> some View {
-        modifier(Typography(style: .headline, isBold: bold))
+        modifier(Typography(fontStyle: .headline, isBold: bold))
     }
 
-    func subheadline(_ bold: Bool = true) -> some View {
-        modifier(Typography(style: .subheadline, isBold: bold))
+    func subheadline(_ bold: Bool = false) -> some View {
+        modifier(Typography(fontStyle: .subheadline, isBold: bold))
     }
 
     func body(_ bold: Bool = false) -> some View {
-        modifier(Typography(style: .body, isBold: bold))
+        modifier(Typography(fontStyle: .body, isBold: bold))
     }
 
     func callout(_ bold: Bool = false) -> some View {
-        modifier(Typography(style: .callout, isBold: bold))
+        modifier(Typography(fontStyle: .callout, isBold: bold))
     }
 
     func footnote(_ bold: Bool = false) -> some View {
-        modifier(Typography(style: .footnote, isBold: bold))
+        modifier(Typography(fontStyle: .footnote, isBold: bold))
     }
 
     func caption(_ bold: Bool = false) -> some View {
-        modifier(Typography(style: .caption, isBold: bold))
+        modifier(Typography(fontStyle: .caption, isBold: bold))
     }
 
     func caption2(_ bold: Bool = false) -> some View {
-        modifier(Typography(style: .caption2, isBold: bold))
+        modifier(Typography(fontStyle: .caption2, isBold: bold))
     }
 }
 
 public extension View {
     func fontStyle(_ style: Font.TextStyle) -> some View {
-        modifier(Typography(style: style))
+        modifier(Typography(fontStyle: style))
     }
 
     @available(*, deprecated, message: "Use native color modificator")
     func fontStyle(_ style: Font.TextStyle, color: Color) -> some View {
-        modifier(Typography(style: style))
+        modifier(Typography(fontStyle: style))
             .foregroundColor(color)
     }
 }
