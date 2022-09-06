@@ -204,11 +204,11 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
         case .graySurface:
 
             if style.unseletionStyle == .clean {
-                RoundedRectangle(cornerRadius: controlRadius.rawValue,
+                RoundedRectangle(cornerRadius: controlRadius,
                                  style: .continuous)
                     .fill(Color.surfaceSecondary)
                     .overlay(
-                        RoundedRectangle(cornerRadius: controlRadius.rawValue,
+                        RoundedRectangle(cornerRadius: controlRadius,
                                          style: .continuous)
                             .stroke(theme.borderControls
                                 ? Color.border
@@ -236,11 +236,11 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
             EmptyView()
         case .surface:
 
-            RoundedRectangle(cornerRadius: controlRadius.rawValue,
+            RoundedRectangle(cornerRadius: controlRadius,
                              style: .continuous)
                 .fill(Color.surfaceSecondary)
                 .overlay(
-                    RoundedRectangle(cornerRadius: controlRadius.rawValue,
+                    RoundedRectangle(cornerRadius: controlRadius,
                                      style: .continuous)
                         .stroke(theme.borderControls
                             ? Color.border

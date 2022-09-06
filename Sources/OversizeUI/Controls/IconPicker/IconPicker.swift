@@ -56,11 +56,11 @@ import SwiftUI
             .frame(minWidth: 0, maxWidth: .infinity)
             .padding()
             .background(
-                RoundedRectangle(cornerRadius: Radius.medium.rawValue,
+                RoundedRectangle(cornerRadius: Radius.medium,
                                  style: .continuous)
                     .fill(Color.surfaceSecondary)
                     .overlay(
-                        RoundedRectangle(cornerRadius: Radius.medium.rawValue,
+                        RoundedRectangle(cornerRadius: Radius.medium,
                                          style: .continuous)
                             .stroke(theme.borderTextFields
                                 ? Color.border
@@ -90,7 +90,7 @@ import SwiftUI
                                                    .frame(width: 24, height: 24, alignment: .center)
                                            }
                                            .overlay(
-                                               RoundedRectangle(cornerRadius: Radius.medium.rawValue, style: .continuous)
+                                               RoundedRectangle(cornerRadius: Radius.medium, style: .continuous)
                                                    .strokeBorder(Color.border, lineWidth: 1)
                                                    .frame(width: 48, height: 48, alignment: .center)
                                            )

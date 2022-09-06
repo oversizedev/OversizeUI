@@ -6,10 +6,11 @@
 import SwiftUI
 
 @available(iOS 14.0, *)
-public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar: View>: View {
-    public let leadingBar: () -> LeadingBar?
-    public let trailingBar: () -> TrailingBar?
-    public let bottomBar: () -> BottomBar?
+public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar: View, TitleLabel: View>: View {
+    private let leadingBar: () -> LeadingBar?
+    private let trailingBar: () -> TrailingBar?
+    private let bottomBar: () -> BottomBar?
+    private let titleLabel: () -> TitleLabel?
 
     @Environment(\.screenSize) var screenSize
 
@@ -33,7 +34,8 @@ public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar:
                 alwaysSlideSmallTile: Bool = false,
                 @ViewBuilder leadingBar: @escaping () -> LeadingBar,
                 @ViewBuilder trailingBar: @escaping () -> TrailingBar,
-                @ViewBuilder bottomBar: @escaping () -> BottomBar)
+                @ViewBuilder bottomBar: @escaping () -> BottomBar,
+                @ViewBuilder titleLabel: @escaping () -> TitleLabel)
     {
         self.title = title
         self.bigTitle = bigTitle
@@ -41,6 +43,7 @@ public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar:
         self.leadingBar = leadingBar
         self.trailingBar = trailingBar
         self.bottomBar = bottomBar
+        self.titleLabel = titleLabel
         self.background = background
         self.modalityPresent = modalityPresent
         self.alwaysSlideSmallTile = alwaysSlideSmallTile
@@ -52,12 +55,14 @@ public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar:
                 VStack(alignment: .leading) {
                     Spacer()
 
-                    HStack {
+                    HStack(spacing: .zero) {
                         Text(title)
                             .largeTitle()
                             .opacity(largeTitleOpacity)
                             .padding(.bottom, 8)
                         // .rotation3DEffect(.degrees(Double(offset.y)), axis: (x: 1, y: 0, z: 0))
+
+                        titleLabel()
 
                         Spacer()
                     }
@@ -80,7 +85,7 @@ public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar:
                         Spacer()
                     }
 
-                    HStack {
+                    HStack(spacing: .zero) {
                         Spacer()
 
                         Text(title)
@@ -89,6 +94,8 @@ public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar:
                             .frame(minHeight: 40)
                             .opacity(smallTitleOpacity)
                             .offset(y: -smmallTitleOffset)
+
+                        titleLabel()
 
                         Spacer()
                     }
@@ -190,7 +197,8 @@ public extension ModalNavigationBar
     where
     LeadingBar == EmptyView,
     TrailingBar == EmptyView,
-    BottomBar == EmptyView
+    BottomBar == EmptyView,
+    TitleLabel == EmptyView
 {
     init(title: String,
          bigTitle: Bool = true,
@@ -208,12 +216,14 @@ public extension ModalNavigationBar
         leadingBar = { nil }
         trailingBar = { nil }
         bottomBar = { nil }
+        titleLabel = { nil }
     }
 }
 
 public extension ModalNavigationBar
     where
-    BottomBar == EmptyView
+    BottomBar == EmptyView,
+    TitleLabel == EmptyView
 {
     init(title: String,
          bigTitle: Bool = true,
@@ -233,13 +243,15 @@ public extension ModalNavigationBar
         self.modalityPresent = modalityPresent
         self.alwaysSlideSmallTile = alwaysSlideSmallTile
         bottomBar = { nil }
+        titleLabel = { nil }
     }
 }
 
 public extension ModalNavigationBar
     where
     TrailingBar == EmptyView,
-    BottomBar == EmptyView
+    BottomBar == EmptyView,
+    TitleLabel == EmptyView
 {
     init(title: String,
          bigTitle: Bool = true,
@@ -258,13 +270,15 @@ public extension ModalNavigationBar
         self.alwaysSlideSmallTile = alwaysSlideSmallTile
         trailingBar = { nil }
         bottomBar = { nil }
+        titleLabel = { nil }
     }
 }
 
 public extension ModalNavigationBar
     where
     LeadingBar == EmptyView,
-    BottomBar == EmptyView
+    BottomBar == EmptyView,
+    TitleLabel == EmptyView
 {
     init(title: String,
          bigTitle: Bool = true,
@@ -283,13 +297,15 @@ public extension ModalNavigationBar
         leadingBar = { nil }
         self.trailingBar = trailingBar
         bottomBar = { nil }
+        titleLabel = { nil }
     }
 }
 
 public extension ModalNavigationBar
     where
     LeadingBar == EmptyView,
-    TrailingBar == EmptyView
+    TrailingBar == EmptyView,
+    TitleLabel == EmptyView
 {
     init(title: String,
          bigTitle: Bool = true,
@@ -308,12 +324,14 @@ public extension ModalNavigationBar
         leadingBar = { nil }
         trailingBar = { nil }
         self.bottomBar = bottomBar
+        titleLabel = { nil }
     }
 }
 
 public extension ModalNavigationBar
     where
-    LeadingBar == EmptyView
+    LeadingBar == EmptyView,
+    TitleLabel == EmptyView
 {
     init(title: String,
          bigTitle: Bool = true,
@@ -333,12 +351,14 @@ public extension ModalNavigationBar
         leadingBar = { nil }
         self.trailingBar = trailingBar
         self.bottomBar = bottomBar
+        titleLabel = { nil }
     }
 }
 
 public extension ModalNavigationBar
     where
-    TrailingBar == EmptyView
+    TrailingBar == EmptyView,
+    TitleLabel == EmptyView
 {
     init(title: String,
          bigTitle: Bool = true,
@@ -358,5 +378,141 @@ public extension ModalNavigationBar
         self.leadingBar = leadingBar
         trailingBar = { nil }
         self.bottomBar = bottomBar
+        titleLabel = { nil }
+    }
+}
+
+public extension ModalNavigationBar
+    where
+    LeadingBar == EmptyView,
+    TrailingBar == EmptyView,
+    BottomBar == EmptyView
+{
+    init(title: String,
+         bigTitle: Bool = true,
+         background: Color = Color.backgroundPrimary,
+         offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
+         modalityPresent: Bool = true,
+         alwaysSlideSmallTile: Bool = false,
+         @ViewBuilder titleLabel: @escaping () -> TitleLabel)
+    {
+        self.title = title
+        self.bigTitle = bigTitle
+        self.background = background
+        _offset = offset
+        self.modalityPresent = modalityPresent
+        self.alwaysSlideSmallTile = alwaysSlideSmallTile
+        leadingBar = { nil }
+        trailingBar = { nil }
+        bottomBar = { nil }
+        self.titleLabel = titleLabel
+    }
+}
+
+public extension ModalNavigationBar
+    where
+    TrailingBar == EmptyView
+{
+    init(title: String,
+         bigTitle: Bool = true,
+         background: Color = Color.backgroundPrimary,
+         offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
+         modalityPresent: Bool = true,
+         alwaysSlideSmallTile: Bool = false,
+         @ViewBuilder titleLabel: @escaping () -> TitleLabel,
+         @ViewBuilder bottomBar: @escaping () -> BottomBar,
+         @ViewBuilder leadingBar: @escaping () -> LeadingBar)
+    {
+        self.title = title
+        self.bigTitle = bigTitle
+        self.background = background
+        _offset = offset
+        self.modalityPresent = modalityPresent
+        self.alwaysSlideSmallTile = alwaysSlideSmallTile
+        self.leadingBar = leadingBar
+        trailingBar = { nil }
+        self.bottomBar = bottomBar
+        self.titleLabel = titleLabel
+    }
+}
+
+public extension ModalNavigationBar
+    where
+    LeadingBar == EmptyView
+{
+    init(title: String,
+         bigTitle: Bool = true,
+         background: Color = Color.backgroundPrimary,
+         offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
+         modalityPresent: Bool = true,
+         alwaysSlideSmallTile: Bool = false,
+         @ViewBuilder titleLabel: @escaping () -> TitleLabel,
+         @ViewBuilder bottomBar: @escaping () -> BottomBar,
+         @ViewBuilder trailingBar: @escaping () -> TrailingBar)
+    {
+        self.title = title
+        self.bigTitle = bigTitle
+        self.background = background
+        _offset = offset
+        self.modalityPresent = modalityPresent
+        self.alwaysSlideSmallTile = alwaysSlideSmallTile
+        self.trailingBar = trailingBar
+        leadingBar = { nil }
+        self.bottomBar = bottomBar
+        self.titleLabel = titleLabel
+    }
+}
+
+public extension ModalNavigationBar
+    where
+    TrailingBar == EmptyView,
+    BottomBar == EmptyView
+{
+    init(title: String,
+         bigTitle: Bool = true,
+         background: Color = Color.backgroundPrimary,
+         offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
+         modalityPresent: Bool = true,
+         alwaysSlideSmallTile: Bool = false,
+         @ViewBuilder titleLabel: @escaping () -> TitleLabel,
+         @ViewBuilder leadingBar: @escaping () -> LeadingBar)
+    {
+        self.title = title
+        self.bigTitle = bigTitle
+        self.background = background
+        _offset = offset
+        self.modalityPresent = modalityPresent
+        self.alwaysSlideSmallTile = alwaysSlideSmallTile
+        self.leadingBar = leadingBar
+        trailingBar = { nil }
+        bottomBar = { nil }
+        self.titleLabel = titleLabel
+    }
+}
+
+public extension ModalNavigationBar
+    where
+    LeadingBar == EmptyView,
+    BottomBar == EmptyView
+{
+    init(title: String,
+         bigTitle: Bool = true,
+         background: Color = Color.backgroundPrimary,
+         offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
+         modalityPresent: Bool = true,
+         alwaysSlideSmallTile: Bool = false,
+         @ViewBuilder titleLabel: @escaping () -> TitleLabel,
+         @ViewBuilder trailingBar: @escaping () -> TrailingBar)
+    {
+        self.title = title
+        self.bigTitle = bigTitle
+        self.background = background
+        _offset = offset
+        self.modalityPresent = modalityPresent
+        self.alwaysSlideSmallTile = alwaysSlideSmallTile
+        self.trailingBar = trailingBar
+        leadingBar = { nil }
+        bottomBar = { nil }
+        self.titleLabel = titleLabel
     }
 }

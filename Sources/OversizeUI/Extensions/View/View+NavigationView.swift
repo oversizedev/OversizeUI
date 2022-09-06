@@ -34,7 +34,7 @@ public extension View {
         case let .scroll(offset):
             #if os(iOS)
                 VStack(spacing: .zero) {
-                    ModalNavigationBar(title: title, bigTitle: true, offset: offset, leadingBar: {}, trailingBar: {}, bottomBar: {})
+                    ModalNavigationBar(title: title, bigTitle: true, offset: offset, leadingBar: {}, trailingBar: {}, bottomBar: {}, titleLabel: {})
                     self
                 }
             #else
@@ -69,7 +69,7 @@ public extension View {
         case let .fixed(offset):
             #if os(iOS)
                 VStack(spacing: .zero) {
-                    ModalNavigationBar(title: title, bigTitle: false, offset: offset, leadingBar: leadingBar, trailingBar: trailingBar, bottomBar: bottomBar)
+                    ModalNavigationBar(title: title, bigTitle: false, offset: offset, leadingBar: leadingBar, trailingBar: trailingBar, bottomBar: bottomBar, titleLabel: {})
                     self
                 }
             #else
@@ -88,7 +88,7 @@ public extension View {
         case let .scroll(offset):
             #if os(iOS)
                 VStack(spacing: .zero) {
-                    ModalNavigationBar(title: title, bigTitle: true, offset: offset, leadingBar: leadingBar, trailingBar: leadingBar, bottomBar: bottomBar)
+                    ModalNavigationBar(title: title, bigTitle: true, offset: offset, leadingBar: leadingBar, trailingBar: leadingBar, bottomBar: bottomBar, titleLabel: {})
                     self
                 }
             #else
@@ -306,7 +306,8 @@ public extension View {
                             background: background,
                             leadingBar: leadingBar,
                             trailingBar: trailingBar,
-                            bottomBar: bottomBar
+                            bottomBar: bottomBar,
+                            titleLabel: {}
                         )
                         .zIndex(99_999_999)
                         ScrollViewOffset(offset: offset) {
@@ -340,7 +341,8 @@ public extension View {
                         background: background,
                         leadingBar: leadingBar,
                         trailingBar: trailingBar,
-                        bottomBar: bottomBar
+                        bottomBar: bottomBar,
+                        titleLabel: {}
                     )
                     ScrollViewOffset(offset: offset) {
                         self

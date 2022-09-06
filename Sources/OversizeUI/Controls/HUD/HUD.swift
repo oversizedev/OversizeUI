@@ -142,7 +142,7 @@ public struct HUDSurfaceView<Content: View>: View {
             return AnyShape(Capsule())
 
         case .alert:
-            return AnyShape(RoundedRectangle(cornerRadius: Radius.medium.rawValue, style: .continuous))
+            return AnyShape(RoundedRectangle(cornerRadius: Radius.medium, style: .continuous))
         }
     }
 

@@ -106,11 +106,11 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
     private func getSelection(selectionStyle: GridSelectSeletionStyle) -> some View {
         switch selectionStyle {
         case .shadowSurface:
-            RoundedRectangle(cornerRadius: radius.rawValue,
+            RoundedRectangle(cornerRadius: radius,
                              style: .continuous)
                 .fill(Color.surfacePrimary)
                 .overlay(
-                    RoundedRectangle(cornerRadius: radius.rawValue,
+                    RoundedRectangle(cornerRadius: radius,
                                      style: .continuous)
                         .stroke(theme.borderControls
                             ? Color.border
@@ -119,7 +119,7 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
                 .shadowElevaton(.z2)
         case .graySurface:
 
-            RoundedRectangle(cornerRadius: radius.rawValue,
+            RoundedRectangle(cornerRadius: radius,
                              style: .continuous)
                 .strokeBorder(Color.onSurfaceMediumEmphasis, lineWidth: 2)
         case .accentSurface:
@@ -136,11 +136,11 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
             EmptyView()
         case .surface:
 
-            RoundedRectangle(cornerRadius: radius.rawValue,
+            RoundedRectangle(cornerRadius: radius,
                              style: .continuous)
                 .fill(Color.surfaceSecondary)
                 .overlay(
-                    RoundedRectangle(cornerRadius: radius.rawValue,
+                    RoundedRectangle(cornerRadius: radius,
                                      style: .continuous)
                         .stroke(theme.borderControls
                             ? Color.border

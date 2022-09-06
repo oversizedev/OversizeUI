@@ -25,11 +25,11 @@ public struct DefaultPlaceholderTextFieldStyle: TextFieldStyle {
         }
         .padding()
         .background(
-            RoundedRectangle(cornerRadius: Radius.medium.rawValue,
+            RoundedRectangle(cornerRadius: Radius.medium,
                              style: .continuous)
                 .fill(Color.surfaceSecondary)
                 .overlay(
-                    RoundedRectangle(cornerRadius: Radius.medium.rawValue,
+                    RoundedRectangle(cornerRadius: Radius.medium,
                                      style: .continuous)
                         .stroke(theme.borderTextFields
                             ? Color.border
@@ -65,11 +65,11 @@ public struct OverPlaceholderTextFieldStyle: TextFieldStyle {
             }
             .padding()
             .background(
-                RoundedRectangle(cornerRadius: Radius.medium.rawValue,
+                RoundedRectangle(cornerRadius: Radius.medium,
                                  style: .continuous)
                     .fill(Color.surfaceSecondary)
                     .overlay(
-                        RoundedRectangle(cornerRadius: Radius.medium.rawValue,
+                        RoundedRectangle(cornerRadius: Radius.medium,
                                          style: .continuous)
                             .stroke(theme.borderTextFields
                                 ? Color.border
@@ -106,11 +106,11 @@ public struct InsidePlaceholderTextFieldStyle: TextFieldStyle {
             }
             .padding()
             .background(
-                RoundedRectangle(cornerRadius: Radius.medium.rawValue,
+                RoundedRectangle(cornerRadius: Radius.medium,
                                  style: .continuous)
                     .fill(Color.surfaceSecondary)
                     .overlay(
-                        RoundedRectangle(cornerRadius: Radius.medium.rawValue,
+                        RoundedRectangle(cornerRadius: Radius.medium,
                                          style: .continuous)
                             .stroke(theme.borderTextFields
                                 ? Color.border

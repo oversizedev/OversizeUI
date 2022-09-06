@@ -34,6 +34,7 @@ public struct SectionView<Content: View>: View {
             Surface {
                 content
                     .padding(.vertical, verticalPadding)
+                    .controlPadding(.medium)
             }
             .controlPadding(.zero)
             .clipShape(

@@ -20,6 +20,7 @@ public enum RowLeadingType {
     case icon(_ name: IconsNames)
     case iconOnSurface(_ name: IconsNames)
     case image(_ image: Image)
+    case imageOnSurface(_ image: Image, color: Color? = nil)
     case systemImage(_ imageName: String)
     case avatar(_ avatar: AvatarView)
     case view(_ view: AnyView)
@@ -31,6 +32,7 @@ public struct Row: View {
     @Environment(\.controlPadding) var controlPadding: ControlPadding
     @Environment(\.multilineTextAlignment) var multilineTextAlignment
     @Environment(\.isPremium) var premiumStatus
+    @Environment(\.isAccent) var isAccent
 
     private enum Constants {
         /// Spacing
@@ -47,6 +49,8 @@ public struct Row: View {
 
     private var isPremiumOption: Bool = false
 
+    private var iconBackgroundColor: Color?
+
     public init(_ title: String,
                 subtitle: String? = nil,
                 action: (() -> Void)? = nil)
@@ -56,7 +60,7 @@ public struct Row: View {
         self.action = action
     }
 
-    @available(*, deprecated, message: "Use row modificators")
+    // @available(*, deprecated, message: "Use row modificators")
     public init(_ title: String,
                 subtitle: String? = nil,
                 leadingType: RowLeadingType? = nil,
@@ -90,7 +94,7 @@ public struct Row: View {
     @ViewBuilder
     private func content(_ textAlignment: TextAlignment) -> some View {
         VStack(alignment: .leading) {
-            HStack(spacing: .xSmall) {
+            HStack(spacing: .small) {
                 if let leadingType = leadingType {
                     leading(leadingType)
                 }
@@ -138,6 +142,18 @@ public struct Row: View {
                 Icon(icon)
             }
             .surfaceStyle(.secondary)
+            .surfaceBackgroundColor(iconBackgroundColor)
+            .padding(.trailing, Constants.spacingIconAndText)
+            .controlPadding(.xxSmall)
+
+        case let .imageOnSurface(image, color):
+            Surface {
+                image
+                    .renderingMode(.template)
+                    .foregroundColor(color)
+            }
+            .surfaceStyle(.secondary)
+            .surfaceBackgroundColor(iconBackgroundColor)
             .padding(.trailing, Constants.spacingIconAndText)
             .controlPadding(.xxSmall)
 
@@ -182,12 +198,12 @@ public struct Row: View {
 
         case let .checkbox(isOn: isOn):
             ZStack {
-                RoundedRectangle(cornerRadius: Radius.small.rawValue, style: .continuous)
+                RoundedRectangle(cornerRadius: Radius.small, style: .continuous)
                     .stroke(Color.onSurfaceDisabled, lineWidth: 4)
                     .frame(width: 24, height: 24)
                     .opacity(isOn.wrappedValue ? 0 : 1)
 
-                RoundedRectangle(cornerRadius: Radius.small.rawValue, style: .continuous).fill(Color.accent)
+                RoundedRectangle(cornerRadius: Radius.small, style: .continuous).fill(Color.accent)
                     .frame(width: 24, height: 24)
                     .opacity(isOn.wrappedValue ? 1 : 0)
 
@@ -231,9 +247,9 @@ public struct Row: View {
     }
 
     private var text: some View {
-        VStack(alignment: textAlignment) {
+        VStack(alignment: textAlignment, spacing: .xxxSmall) {
             Text(title)
-                .headline()
+                .headline(.semibold)
                 .foregroundColor(.onSurfaceHighEmphasis)
             if let subtitle = subtitle {
                 Text(subtitle)
@@ -282,15 +298,21 @@ public struct Row: View {
         return control
     }
 
-    public func rowLeading(_ leading: RowLeadingType) -> Row {
+    public func rowLeading(_ leading: RowLeadingType?) -> Row {
         var control = self
         control.leadingType = leading
         return control
     }
 
-    public func rowTrailing(_ trailing: RowTrailingType) -> Row {
+    public func rowTrailing(_ trailing: RowTrailingType?) -> Row {
         var control = self
         control.trallingType = trailing
+        return control
+    }
+
+    public func rowIconBackgroundColor(_ color: Color?) -> Row {
+        var control = self
+        control.iconBackgroundColor = color
         return control
     }
 }

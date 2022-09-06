@@ -333,6 +333,7 @@ public struct Icon: View {
 
     public var body: some View {
         Image(name.rawValue, bundle: .module)
+            .renderingMode(.template)
             .resizable()
             .frame(width: iconSize, height: iconSize)
             .foregroundColor(color)
@@ -367,12 +368,12 @@ struct IconAsset_Previews: PreviewProvider {
         .buttonStyle(.borderedProminent)
         .controlSize(.large)
 
-//        LazyVGrid(columns: grid) {
-//            ForEach(IconsNames.allCases, id: \.self) { icon in
-//                Icon(icon)
-//                    .padding(.vertical)
-//            }
-//        }
+        LazyVGrid(columns: grid) {
+            ForEach(IconsNames.allCases, id: \.self) { icon in
+                Icon(icon)
+                    .padding(.vertical)
+            }
+        }
         .padding()
         .previewLayout(.sizeThatFits)
     }
