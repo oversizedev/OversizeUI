@@ -12,10 +12,6 @@ public struct LibraryContent: LibraryContentProvider {
             Surface { Text("Surface") },
             category: .control
         )
-//        LibraryItem(
-//            TextFieldExtended("Text", text: .constant("Text")),
-//            category: .control
-//        )
         LibraryItem(
             Icon(.airplay),
             category: .control
@@ -28,11 +24,4 @@ public struct LibraryContent: LibraryContentProvider {
             base.fontStyle(.body, color: .onBackgroundHighEmphasis)
         )
     }
-
-//    @LibraryContentBuilder
-//    public func modifiers(base: Image) -> [LibraryItem] {
-//        LibraryItem(
-//            base.resizeToFill(width: 150, height: 150)
-//        )
-//    }
 }

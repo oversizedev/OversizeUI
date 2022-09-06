@@ -43,5 +43,5 @@ public enum Appearance: Int {
         }
     }
 
-    static var allCases: [Appearance] = [.system, .light, .dark]
+    public static var allCases: [Appearance] = [.system, .light, .dark]
 }

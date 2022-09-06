@@ -1,6 +1,6 @@
 //
 // Copyright © 2022 Alexander Romanov
-// AppStorage.swift
+// RawRepresentable.swift
 //
 
 import SwiftUI

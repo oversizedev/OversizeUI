@@ -6,11 +6,11 @@
 import SwiftUI
 
 #if os(iOS)
-    public struct PageView<Label, LeadingBar, TrailingBar, TopToolbar>: View where Label: View, LeadingBar: View, TrailingBar: View, TopToolbar: View {
+    public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>: View where Content: View, LeadingBar: View, TrailingBar: View, TopToolbar: View, TitleLabel: View {
         @Environment(\.screenSize) var screenSize
 
         private let title: String?
-        private let label: Label
+        private let content: Content
         private var isModalable = false
         private var isLargeTitle = false
         private var isAlwaysSlideSmallTile = false
@@ -19,23 +19,25 @@ import SwiftUI
         private var leadingBar: LeadingBar?
         private var trailingBar: TrailingBar?
         private var topToolbar: TopToolbar?
+        private var titleLabel: TitleLabel?
 
         private var backgroundColor: Color = .backgroundPrimary
+        private var backgroundLinerGradient: LinearGradient?
+
+        private let onOffsetChanged: (CGFloat) -> Void
 
         public init(_ title: String? = nil,
-                    @ViewBuilder label: () -> Label)
+                    onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+                    @ViewBuilder content: () -> Content)
         {
             self.title = title
-            self.label = label()
+            self.onOffsetChanged = onOffsetChanged
+            self.content = content()
         }
 
         public var body: some View {
-            content
-        }
-
-        private var content: some View {
             VStack(spacing: .zero) {
-                if title != nil || leadingBar != nil || trailingBar != nil || topToolbar != nil {
+                if title != nil || leadingBar != nil || trailingBar != nil || topToolbar != nil || titleLabel != nil {
                     ModalNavigationBar(title: title ?? "",
                                        bigTitle: isLargeTitle,
                                        offset: $offset,
@@ -43,15 +45,29 @@ import SwiftUI
                                        alwaysSlideSmallTile: isAlwaysSlideSmallTile,
                                        leadingBar: { leadingBar },
                                        trailingBar: { trailingBar },
-                                       bottomBar: { topToolbar })
+                                       bottomBar: { topToolbar },
+                                       titleLabel: { titleLabel })
                         .zIndex(999_999_999)
                 }
                 ScrollViewOffset(offset: $offset) {
-                    label
+                    content
                 }
             }
             .ignoresSafeArea(edges: .top)
-            .background(backgroundColor.ignoresSafeArea())
+            .background(background.ignoresSafeArea())
+            .onChange(of: offset) { offset in
+                onOffsetChanged(offset.y)
+            }
+        }
+
+        var background: some View {
+            Group {
+                if let backgroundLinerGradient = backgroundLinerGradient {
+                    backgroundLinerGradient
+                } else {
+                    backgroundColor
+                }
+            }
         }
 
         public func modalable(_ isModalable: Bool = true) -> PageView {
@@ -90,6 +106,12 @@ import SwiftUI
             return control
         }
 
+        public func backgroundLinerGradient(_ gradient: LinearGradient) -> PageView {
+            var control = self
+            control.backgroundLinerGradient = gradient
+            return control
+        }
+
         public func leadingBar(@ViewBuilder leadingBar: @escaping () -> LeadingBar) -> PageView {
             var control = self
             control.leadingBar = leadingBar()
@@ -108,7 +130,13 @@ import SwiftUI
             return control
         }
 
-        public func bottomToolbar<BottomToolbar: View>(style: PageViewBottomType = .shadow, @ViewBuilder bottomToolbar: @escaping () -> BottomToolbar) -> some View {
+        public func titleLabel(@ViewBuilder titleLabel: @escaping () -> TitleLabel) -> PageView {
+            var control = self
+            control.titleLabel = titleLabel()
+            return control
+        }
+
+        public func bottomToolbar<BottomToolbar: View>(style: PageViewBottomType = .shadow, ignoreSafeArea: Bool = true, @ViewBuilder bottomToolbar: @escaping () -> BottomToolbar) -> some View {
             VStack(spacing: .zero) {
                 self
                     .overlay(
@@ -121,68 +149,151 @@ import SwiftUI
                                                    endPoint: .bottom)
                                         .frame(height: 60)
                                 }
-
-                            } else {
-                                EmptyView()
+                            }
+                            if style == .none {
+                                VStack {
+                                    Spacer()
+                                    bottomToolbar()
+                                }
                             }
                         })
-                HStack {
-                    Spacer()
-                    bottomToolbar()
-                    Spacer()
+                if style != .none {
+                    HStack {
+                        Spacer()
+                        bottomToolbar()
+                        Spacer()
+                    }
+                    .background(Color.surfacePrimary.shadowElevaton(style == .shadow ? .z2 : .z0))
                 }
-                .paddingContent()
-                .background(Color.surfacePrimary.shadowElevaton(style == .shadow ? .z2 : .z0))
             }
-
-            .ignoresSafeArea(edges: .bottom)
+            .ignoresSafeArea(edges: ignoreSafeArea ? .bottom : .top)
         }
     }
 
     public extension PageView {
         enum PageViewBottomType {
-            case shadow, gradient
+            case shadow, gradient, none
         }
     }
 
-    public extension PageView where LeadingBar == EmptyView {
+    public extension PageView where LeadingBar == EmptyView, TitleLabel == EmptyView {
         init(_ title: String? = nil,
-             @ViewBuilder label: () -> Label)
+             onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+             @ViewBuilder content: () -> Content)
         {
             self.title = title
-            self.label = label()
+            self.onOffsetChanged = onOffsetChanged
+            self.content = content()
             leadingBar = nil
+            titleLabel = nil
         }
     }
 
-    public extension PageView where TrailingBar == EmptyView {
+    public extension PageView where TrailingBar == EmptyView, TitleLabel == EmptyView {
         init(_ title: String? = nil,
-             @ViewBuilder label: () -> Label)
+             onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+             @ViewBuilder content: () -> Content)
         {
             self.title = title
-            self.label = label()
+            self.onOffsetChanged = onOffsetChanged
+            self.content = content()
             trailingBar = nil
+            titleLabel = nil
         }
     }
 
-    public extension PageView where TrailingBar == EmptyView, LeadingBar == EmptyView {
+    public extension PageView where TrailingBar == EmptyView, LeadingBar == EmptyView, TitleLabel == EmptyView {
         init(_ title: String? = nil,
-             @ViewBuilder label: () -> Label)
+             onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+             @ViewBuilder content: () -> Content)
         {
             self.title = title
-            self.label = label()
+            self.onOffsetChanged = onOffsetChanged
+            self.content = content()
             leadingBar = nil
             trailingBar = nil
+            titleLabel = nil
+        }
+    }
+
+    public extension PageView where TrailingBar == EmptyView, LeadingBar == EmptyView, TopToolbar == EmptyView, TitleLabel == EmptyView {
+        init(_ title: String? = nil,
+             onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+             @ViewBuilder content: () -> Content)
+        {
+            self.title = title
+            self.onOffsetChanged = onOffsetChanged
+            self.content = content()
+            leadingBar = nil
+            trailingBar = nil
+            topToolbar = nil
+            titleLabel = nil
+        }
+    }
+
+    public extension PageView where LeadingBar == EmptyView, TopToolbar == EmptyView, TitleLabel == EmptyView {
+        init(_ title: String? = nil,
+             onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+             @ViewBuilder content: () -> Content)
+        {
+            self.title = title
+            self.onOffsetChanged = onOffsetChanged
+            self.content = content()
+            leadingBar = nil
+            topToolbar = nil
+            titleLabel = nil
+        }
+    }
+
+    public extension PageView where TrailingBar == EmptyView, TopToolbar == EmptyView, TitleLabel == EmptyView {
+        init(_ title: String? = nil,
+             onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+             @ViewBuilder content: () -> Content)
+        {
+            self.title = title
+            self.onOffsetChanged = onOffsetChanged
+            self.content = content()
+            trailingBar = nil
+            topToolbar = nil
+            titleLabel = nil
+        }
+    }
+
+    public extension PageView where TopToolbar == EmptyView, TitleLabel == EmptyView {
+        init(_ title: String? = nil,
+             onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+             @ViewBuilder content: () -> Content)
+        {
+            self.title = title
+            self.onOffsetChanged = onOffsetChanged
+            self.content = content()
+            topToolbar = nil
+            titleLabel = nil
         }
     }
 
     public extension PageView where TrailingBar == EmptyView, LeadingBar == EmptyView, TopToolbar == EmptyView {
         init(_ title: String? = nil,
-             @ViewBuilder label: () -> Label)
+             onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+             @ViewBuilder content: () -> Content)
         {
             self.title = title
-            self.label = label()
+            self.onOffsetChanged = onOffsetChanged
+            self.content = content()
             leadingBar = nil
+            trailingBar = nil
+            topToolbar = nil
+        }
+    }
+
+    public extension PageView where TrailingBar == EmptyView, TopToolbar == EmptyView {
+        init(_ title: String? = nil,
+             onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+             @ViewBuilder content: () -> Content)
+        {
+            self.title = title
+            self.onOffsetChanged = onOffsetChanged
+            self.content = content()
             trailingBar = nil
             topToolbar = nil
         }
@@ -190,33 +301,51 @@ import SwiftUI
 
     public extension PageView where LeadingBar == EmptyView, TopToolbar == EmptyView {
         init(_ title: String? = nil,
-             @ViewBuilder label: () -> Label)
+             onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+             @ViewBuilder content: () -> Content)
         {
             self.title = title
-            self.label = label()
+            self.onOffsetChanged = onOffsetChanged
+            self.content = content()
             leadingBar = nil
             topToolbar = nil
         }
     }
 
-    public extension PageView where TrailingBar == EmptyView, TopToolbar == EmptyView {
+    public extension PageView where TrailingBar == EmptyView {
         init(_ title: String? = nil,
-             @ViewBuilder label: () -> Label)
+             onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+             @ViewBuilder content: () -> Content)
         {
             self.title = title
-            self.label = label()
+            self.onOffsetChanged = onOffsetChanged
+            self.content = content()
             trailingBar = nil
-            topToolbar = nil
+        }
+    }
+
+    public extension PageView where LeadingBar == EmptyView {
+        init(_ title: String? = nil,
+             onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+             @ViewBuilder content: () -> Content)
+        {
+            self.title = title
+            self.onOffsetChanged = onOffsetChanged
+            self.content = content()
+            leadingBar = nil
         }
     }
 
     public extension PageView where TopToolbar == EmptyView {
         init(_ title: String? = nil,
-             @ViewBuilder label: () -> Label)
+             onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+             @ViewBuilder content: () -> Content)
         {
             self.title = title
-            self.label = label()
+            self.onOffsetChanged = onOffsetChanged
+            self.content = content()
             topToolbar = nil
         }
     }
+
 #endif

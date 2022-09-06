@@ -52,11 +52,11 @@ public struct Select<Element, Content, Selection>: View
             .frame(minWidth: 0, maxWidth: .infinity)
             .padding()
             .background(
-                RoundedRectangle(cornerRadius: Radius.medium.rawValue,
+                RoundedRectangle(cornerRadius: Radius.medium,
                                  style: .continuous)
                     .fill(Color.surfaceSecondary)
                     .overlay(
-                        RoundedRectangle(cornerRadius: Radius.medium.rawValue,
+                        RoundedRectangle(cornerRadius: Radius.medium,
                                          style: .continuous)
                             .stroke(theme.borderTextFields
                                 ? Color.border
@@ -85,8 +85,8 @@ public struct Select<Element, Content, Selection>: View
                            label: {
                                content(data[index],
                                        selectedIndex == index)
-                                   .fontStyle(.headline,
-                                              color: .onSurfaceHighEmphasis)
+                                   .headline()
+                                   .foregroundOnSurfaceHighEmphasis()
 
                            })
                 }

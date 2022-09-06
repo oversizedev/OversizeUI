@@ -15,8 +15,7 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "OversizeUI",
-            targets: ["OversizeUI"]
+            name: "OversizeUI", targets: ["OversizeUI"]
         ),
     ],
     dependencies: [],

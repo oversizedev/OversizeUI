@@ -13,6 +13,7 @@ public enum Palette: String {
     case blue
     case pink
     case gray
+    case violet
     case black
 
     public var color: Color {
@@ -31,6 +32,8 @@ public enum Palette: String {
             return Color.pink
         case .gray:
             return Color.gray
+        case .violet:
+            return Color.purple
         case .black:
             return Color.black
         }

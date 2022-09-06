@@ -61,7 +61,7 @@ import SwiftUI
                     .padding(.horizontal, controlPadding.horizontal)
                     .padding(.vertical, controlPadding.vertical)
                     .background(backgroundMaterial,
-                                in: RoundedRectangle(cornerRadius: controlRadius.rawValue, style: .continuous))
+                                in: RoundedRectangle(cornerRadius: controlRadius, style: .continuous))
                     .overlay(overlayView)
                     .shadowElevaton(elevation)
             } else {
@@ -117,7 +117,7 @@ import SwiftUI
         }
 
         private var legacyBackgroundView: some View {
-            RoundedRectangle(cornerRadius: controlRadius.rawValue,
+            RoundedRectangle(cornerRadius: controlRadius,
                              style: .circular)
                 .fill(legacyBackgroundViewColor)
         }

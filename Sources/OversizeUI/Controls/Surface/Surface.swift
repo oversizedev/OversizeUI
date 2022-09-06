@@ -18,6 +18,7 @@ public struct Surface<Label: View>: View {
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.controlRadius) var controlRadius: Radius
     @Environment(\.controlPadding) var controlPadding: ControlPadding
+    @Environment(\.isAccent) private var isAccent
 
     private enum Constants {
         /// Colors
@@ -29,7 +30,9 @@ public struct Surface<Label: View>: View {
     private let label: Label
     private let action: (() -> Void)?
     private var background: SurfaceStyle = .primary
+    private var backgroundColor: Color?
     private var border: Color?
+    private var borderWidth: CGFloat?
 
     public init(action: (() -> Void)? = nil,
                 @ViewBuilder label: () -> Label)
@@ -60,33 +63,39 @@ public struct Surface<Label: View>: View {
             .padding(.horizontal, controlPadding.horizontal)
             .padding(.vertical, controlPadding.vertical)
             .background(
-                RoundedRectangle(cornerRadius: controlRadius.rawValue,
+                RoundedRectangle(cornerRadius: controlRadius,
                                  style: .circular)
-                    .fill(backgroundColor)
+                    .fill(surfaceBackgroundColor)
                     .overlay(
-                        RoundedRectangle(cornerRadius: controlRadius.rawValue,
+                        RoundedRectangle(cornerRadius: controlRadius,
                                          style: .continuous)
                             .stroke(
                                 border != nil ? border ?? Color.clear
                                     : theme.borderSurface
                                     ? Color.border
-                                    : backgroundColor, lineWidth: CGFloat(theme.borderSize)
+                                    : surfaceBackgroundColor, lineWidth: borderWidth != nil ? borderWidth ?? 0 : CGFloat(theme.borderSize)
                             )
                     )
                     .shadowElevaton(elevation)
             )
     }
 
-    private var backgroundColor: Color {
-        switch background {
-        case .primary:
-            return Constants.colorPrimary
-        case .secondary:
-            return Constants.colorSecondary
-        case .tertiary:
-            return Constants.colorTertiary
-        case .clear:
-            return Color.clear
+    private var surfaceBackgroundColor: Color {
+        if let backgroundColor = backgroundColor {
+            return backgroundColor
+        } else if isAccent {
+            return Color.accent
+        } else {
+            switch background {
+            case .primary:
+                return Constants.colorPrimary
+            case .secondary:
+                return Constants.colorSecondary
+            case .tertiary:
+                return Constants.colorTertiary
+            case .clear:
+                return Color.clear
+            }
         }
     }
 
@@ -96,9 +105,16 @@ public struct Surface<Label: View>: View {
         return control
     }
 
-    public func surfaceBorderColor(_ border: Color? = Color.border) -> Surface {
+    public func surfaceBorderColor(_ border: Color? = Color.border, width: CGFloat? = nil) -> Surface {
         var control = self
         control.border = border
+        control.borderWidth = width
+        return control
+    }
+
+    public func surfaceBackgroundColor(_ color: Color?) -> Surface {
+        var control = self
+        control.backgroundColor = color
         return control
     }
 }
@@ -129,18 +145,6 @@ struct Surface_Previews: PreviewProvider {
             .surfaceStyle(.primary)
             .surfaceBorderColor(.surfaceSecondary)
             .preferredColorScheme(.dark)
-            .previewLayout(.fixed(width: 414, height: 200))
-
-            Text("Text")
-                .surface(elevation: .z4)
-                .previewLayout(.fixed(width: 414, height: 200))
-
-            HStack {
-                Text("Text")
-
-                Spacer()
-            }
-            .surface(elevation: .z4)
             .previewLayout(.fixed(width: 414, height: 200))
 
             Surface { HStack {

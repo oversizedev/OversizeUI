@@ -22,7 +22,7 @@ public enum ThemeSettingsNames {
     public static var radius = "Settings.Radius"
 }
 
-public class ThemeSettings {
+public class ThemeSettings: ObservableObject {
     public init() {}
 
     @AppStorage(ThemeSettingsNames.appearance) public var appearance: Appearance = .light

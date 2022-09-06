@@ -106,10 +106,10 @@ public struct TextFieldExtended: View {
 
             }.padding()
                 .overlay(
-                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    RoundedRectangle(cornerRadius: .medium, style: .continuous)
                         .stroke(focused ? Color.accent : Color.surfacePrimary, lineWidth: 4)
 
-                ).background(RoundedRectangle(cornerRadius: 12, style: .continuous)
+                ).background(RoundedRectangle(cornerRadius: .medium, style: .continuous)
                     .fill(focused ? Color.surfacePrimary : Color.surfaceSecondary))
                 .cornerRadius(Radius.medium)
 

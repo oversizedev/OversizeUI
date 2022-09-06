@@ -36,7 +36,7 @@ public extension View {
         environment(\.controlPadding, ControlPadding(all))
     }
 
-    func controlPadding(horizontal: Space, vertical: Space) -> some View {
+    func controlPadding(horizontal: Space = .medium, vertical: Space = .medium) -> some View {
         environment(\.controlPadding, ControlPadding(horizontal: horizontal, vertical: vertical))
     }
 }

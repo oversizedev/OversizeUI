@@ -46,26 +46,28 @@ public struct OversizeButtonStyle: ButtonStyle {
 
     @ViewBuilder
     func background(for role: ButtonRole?) -> some View {
-        switch controlBorderShape {
-        case .capsule:
-            Capsule()
-                .fill(backgroundColor(for: role)
-                    .opacity(backgroundOpacity))
-                .overlay {
-                    Capsule()
-                        .strokeBorder(Color.onSurfaceHighEmphasis.opacity(0.15), lineWidth: 2)
-                        .opacity(isBordered || theme.borderButtons ? 1 : 0)
-                }
+        if type != .tertiary {
+            switch controlBorderShape {
+            case .capsule:
+                Capsule()
+                    .fill(backgroundColor(for: role)
+                        .opacity(backgroundOpacity))
+                    .overlay {
+                        Capsule()
+                            .strokeBorder(Color.onSurfaceHighEmphasis.opacity(0.15), lineWidth: 2)
+                            .opacity(isBordered || theme.borderButtons ? 1 : 0)
+                    }
 
-        case let .roundedRectangle(radius):
-            RoundedRectangle(cornerRadius: radius != .medium ? radius.rawValue : theme.radius, style: .continuous)
-                .fill(backgroundColor(for: role)
-                    .opacity(backgroundOpacity))
-                .overlay {
-                    RoundedRectangle(cornerRadius: radius != .medium ? radius.rawValue : theme.radius, style: .continuous)
-                        .strokeBorder(Color.onSurfaceHighEmphasis.opacity(0.15), lineWidth: 2)
-                        .opacity(isBordered || theme.borderButtons ? 1 : 0)
-                }
+            case let .roundedRectangle(radius):
+                RoundedRectangle(cornerRadius: radius != .medium ? radius.rawValue : theme.radius, style: .continuous)
+                    .fill(backgroundColor(for: role)
+                        .opacity(backgroundOpacity))
+                    .overlay {
+                        RoundedRectangle(cornerRadius: radius != .medium ? radius.rawValue : theme.radius, style: .continuous)
+                            .strokeBorder(Color.onSurfaceHighEmphasis.opacity(0.15), lineWidth: 2)
+                            .opacity(isBordered || theme.borderButtons ? 1 : 0)
+                    }
+            }
         }
     }
 
@@ -104,7 +106,7 @@ public struct OversizeButtonStyle: ButtonStyle {
                 if isAccent {
                     return Color.accent
                 } else {
-                    return Color.primary
+                    return Color.onSurfaceHighEmphasis
                 }
             }
         case .tertiary:
@@ -115,7 +117,7 @@ public struct OversizeButtonStyle: ButtonStyle {
                 if isAccent {
                     return Color.accent
                 } else {
-                    return Color.primary
+                    return Color.onSurfaceHighEmphasis
                 }
             }
         }

@@ -26,8 +26,9 @@ public struct Typography: ViewModifier {
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.isLoading) var isLoading
 
-    public let fontStyle: Font.TextStyle
-    public let isBold: Bool?
+    private let fontStyle: Font.TextStyle
+    private let isBold: Bool?
+    private let weight: Font.Weight?
 
     private var fontDesign: Font.Design {
         switch fontStyle {
@@ -43,19 +44,24 @@ public struct Typography: ViewModifier {
     }
 
     private var fontWeight: Font.Weight {
-        switch fontStyle {
-        case .largeTitle, .title:
-            return isBold ?? true ? .heavy : .regular
-        case .headline:
-            return isBold ?? true ? .bold : .semibold
-        default:
-            return isBold ?? false ? .bold : .regular
+        if let weight = weight {
+            return weight
+        } else {
+            switch fontStyle {
+            case .largeTitle, .title:
+                return isBold ?? true ? .heavy : .regular
+            case .headline:
+                return isBold ?? true ? .bold : .semibold
+            default:
+                return isBold ?? false ? .bold : .regular
+            }
         }
     }
 
-    public init(fontStyle: Font.TextStyle, isBold: Bool? = nil) {
+    public init(fontStyle: Font.TextStyle, isBold: Bool? = nil, weight: Font.Weight? = nil) {
         self.fontStyle = fontStyle
         self.isBold = isBold
+        self.weight = weight
     }
 
     public func body(content: Content) -> some View {
@@ -108,6 +114,50 @@ public extension View {
     func caption2(_ bold: Bool = false) -> some View {
         modifier(Typography(fontStyle: .caption2, isBold: bold))
     }
+
+    func largeTitle(_ weight: Font.Weight) -> some View {
+        modifier(Typography(fontStyle: .largeTitle, weight: weight))
+    }
+
+    func title(_ weight: Font.Weight) -> some View {
+        modifier(Typography(fontStyle: .title, weight: weight))
+    }
+
+    func title2(_ weight: Font.Weight) -> some View {
+        modifier(Typography(fontStyle: .title2, weight: weight))
+    }
+
+    func title3(_ weight: Font.Weight) -> some View {
+        modifier(Typography(fontStyle: .title3, weight: weight))
+    }
+
+    func headline(_ weight: Font.Weight) -> some View {
+        modifier(Typography(fontStyle: .headline, weight: weight))
+    }
+
+    func subheadline(_ weight: Font.Weight) -> some View {
+        modifier(Typography(fontStyle: .subheadline, weight: weight))
+    }
+
+    func body(_ weight: Font.Weight) -> some View {
+        modifier(Typography(fontStyle: .body, weight: weight))
+    }
+
+    func callout(_ weight: Font.Weight) -> some View {
+        modifier(Typography(fontStyle: .callout, weight: weight))
+    }
+
+    func footnote(_ weight: Font.Weight) -> some View {
+        modifier(Typography(fontStyle: .footnote, weight: weight))
+    }
+
+    func caption(_ weight: Font.Weight) -> some View {
+        modifier(Typography(fontStyle: .caption, weight: weight))
+    }
+
+    func caption2(_ weight: Font.Weight) -> some View {
+        modifier(Typography(fontStyle: .caption2, weight: weight))
+    }
 }
 
 public extension View {
@@ -115,7 +165,7 @@ public extension View {
         modifier(Typography(fontStyle: style))
     }
 
-    @available(*, deprecated, message: "Use native color modificator")
+    // @available(*, deprecated, message: "Use native color modificator")
     func fontStyle(_ style: Font.TextStyle, color: Color) -> some View {
         modifier(Typography(fontStyle: style))
             .foregroundColor(color)
