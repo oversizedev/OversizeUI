@@ -16,10 +16,10 @@ import SwiftUI
         public let style: UIBlurEffect.Style
 
         public func makeUIView(context _: UIViewRepresentableContext<BlurView>) -> UIView {
-            let view = UIView(frame: .zero)
+            let view: UIView = .init(frame: .zero)
             view.backgroundColor = .clear
-            let blurEffect = UIBlurEffect(style: style)
-            let blurView = UIVisualEffectView(effect: blurEffect)
+            let blurEffect: UIBlurEffect = .init(style: style)
+            let blurView: UIVisualEffectView = .init(effect: blurEffect)
             blurView.translatesAutoresizingMaskIntoConstraints = false
             view.insertSubview(blurView, at: 0)
             NSLayoutConstraint.activate([

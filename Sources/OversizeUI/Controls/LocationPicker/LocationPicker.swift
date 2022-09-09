@@ -111,7 +111,7 @@ import SwiftUI
                 longitude: coordinate.longitude
             )
 
-            let geocoder = CLGeocoder()
+            let geocoder: CLGeocoder = .init()
 
             geocoder.reverseGeocodeLocation(loc) { placemarks, error in
                 if error != nil { return }

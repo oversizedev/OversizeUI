@@ -78,7 +78,7 @@ public extension Color {
         #if canImport(AppKit)
             let color = NSColor(self).usingColorSpace(.displayP3)!
         #elseif canImport(UIKit)
-            let color = UIColor(self)
+            let color: UIColor = .init(self)
         #endif
 
         var t = (CGFloat(), CGFloat(), CGFloat(), CGFloat())
@@ -117,7 +117,7 @@ private func hexIntFromColorComponents(rgba components: ColorComponentsRGBA) -> 
 
 struct Hex_Preview: PreviewProvider {
     static var previews: some View {
-        let green = Color(hex: "#00FF00")
+        let green: Color = .init(hex: "#00FF00")
 
         return Circle()
             .frame(width: 100, height: 100)

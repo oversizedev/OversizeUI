@@ -1,4 +1,4 @@
-// swift-tools-version: 5.6
+// swift-tools-version: 5.7
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 // swiftlint:disable all
 
@@ -14,19 +14,11 @@ let package = Package(
         .watchOS(.v8),
     ],
     products: [
-        .library(
-            name: "OversizeUI", targets: ["OversizeUI"]
-        ),
+        .library(name: "OversizeUI", targets: ["OversizeUI"]),
     ],
     dependencies: [],
     targets: [
-        .target(
-            name: "OversizeUI",
-            dependencies: []
-        ),
-        .testTarget(
-            name: "OversizeUITests",
-            dependencies: ["OversizeUI"]
-        ),
+        .target(name: "OversizeUI", dependencies: []),
+        .testTarget(name: "OversizeUITests", dependencies: ["OversizeUI"]),
     ]
 )

@@ -56,7 +56,7 @@ public struct ScreenSize {
 }
 
 private struct ScreenSizeKey: EnvironmentKey {
-    static let defaultValue = ScreenSize(width: 375, height: 667)
+    static let defaultValue: ScreenSize = .init(width: 375, height: 667)
 }
 
 public extension EnvironmentValues {
