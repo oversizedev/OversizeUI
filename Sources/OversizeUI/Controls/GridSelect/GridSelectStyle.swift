@@ -16,14 +16,14 @@ public extension View {
     func gridSelectStyle(_ style: GridSelectStyleType) -> some View {
         switch style {
         case let .default(selected: selected, icon: icon):
-            let style = IslandGridSelectStyle()
+            let style: IslandGridSelectStyle = .init()
 
             return environment(\.gridSelectStyle, AnyGridSelectStyle(seletionStyle: selected,
                                                                      unseletionStyle: style.unseletionStyle,
                                                                      icon: icon,
                                                                      style: style))
         case let .onlySelection(selected: selected, icon: icon):
-            let style = SelectionOnlyGridSelectStyle()
+            let style: SelectionOnlyGridSelectStyle = .init()
 
             return environment(\.gridSelectStyle, AnyGridSelectStyle(seletionStyle: selected,
                                                                      unseletionStyle: style.unseletionStyle,

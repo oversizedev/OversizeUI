@@ -12,16 +12,16 @@ import SwiftUI
     public struct MapView: UIViewRepresentable {
         @Binding var centerCoordinate: CLLocationCoordinate2D
 
-        let mapView = MKMapView()
+        let mapView: MKMapView = .init()
 
         public func makeUIView(context: Context) -> MKMapView {
             mapView.delegate = context.coordinator
 
             // mapView.centerCoordinate = centerCoordinate
-            let center = CLLocationCoordinate2D(latitude: centerCoordinate.latitude, longitude: centerCoordinate.longitude)
+            let center: CLLocationCoordinate2D = .init(latitude: centerCoordinate.latitude, longitude: centerCoordinate.longitude)
 
-            let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-            let region = MKCoordinateRegion(center: center, span: span)
+            let span: MKCoordinateSpan = .init(latitudeDelta: 0.1, longitudeDelta: 0.1)
+            let region: MKCoordinateRegion = .init(center: center, span: span)
             mapView.setRegion(region, animated: true)
 
             return mapView
@@ -52,10 +52,10 @@ import SwiftUI
                 let coordinate = parent.mapView.convert(location, toCoordinateFrom: parent.mapView)
 
                 withAnimation {
-                    let clObject = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
+                    let clObject: CLLocationCoordinate2D = .init(latitude: coordinate.latitude, longitude: coordinate.longitude)
                     parent.centerCoordinate = clObject
 
-                    let annotation = MKPointAnnotation()
+                    let annotation: MKPointAnnotation = .init()
                     annotation.coordinate = clObject
 
                     withAnimation {

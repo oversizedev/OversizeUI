@@ -6,7 +6,7 @@
 import SwiftUI
 
 extension Date: RawRepresentable {
-    private static let formatter = ISO8601DateFormatter()
+    private static let formatter: ISO8601DateFormatter = .init()
 
     public var rawValue: String {
         Date.formatter.string(from: self)
@@ -29,7 +29,7 @@ extension Array: RawRepresentable where Element: Codable {
 
     public var rawValue: String {
         guard let data = try? JSONEncoder().encode(self),
-              let result = String(data: data, encoding: .utf8)
+              let result: String = .init(data: data, encoding: .utf8)
         else {
             return "[]"
         }

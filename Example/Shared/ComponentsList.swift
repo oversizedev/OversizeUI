@@ -7,7 +7,7 @@ import OversizeUI
 import SwiftUI
 
 struct Page: Identifiable {
-    let id = UUID()
+    let id: UUID = .init()
     let name: String
     let page: AnyView
 }

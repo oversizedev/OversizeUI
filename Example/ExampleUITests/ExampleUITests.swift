@@ -22,7 +22,7 @@ class ExampleUITests: XCTestCase {
 
     func testExample() throws {
         // UI tests must launch the application that they test.
-        let app = XCUIApplication()
+        let app: XCUIApplication = .init()
         app.launch()
 
         // Use recording to get started writing UI tests.

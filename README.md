@@ -5,6 +5,9 @@
 
 Yet another component library on SwiftUI
 
+## Design System
+Controls and styles in [Figma](https://www.figma.com/community/file/1144847542164788208)
+
 ## Controls
 
 Some of the controls available include:
@@ -34,13 +37,13 @@ Colors, Typography, Spacing and other styles in [core folder](Sources/OversizeUI
 
 #### Requirements
 - iOS 15+ or macOS 12.0+
-- Xcode 13.4+
-- Swift 5.6+
+- Xcode 14.0+
+- Swift 5.7+
 
 #### Swift Package Manager
 - File > Swift Packages > Add Package Dependency
 - Add `https://github.com/oversizedev/OversizeUI.git`
-- Select "Up to Next Major" with "2.0.0"
+- Select "Up to Next Major" with "2.2.0"
 
 ### Import and use OversizeUI
 After the framework has been added you can import the module to use it:

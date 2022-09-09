@@ -33,7 +33,7 @@ public extension View {
     func segmentedControlStyle(_ style: SegmentedControlStyleType) -> some View {
         switch style {
         case .default:
-            let style = RectangleSegmentedControlStyle()
+            let style: RectangleSegmentedControlStyle = .init()
 
             return environment(\.segmentedControlStyle,
                                AnySegmentedControlStyle(isEquallySpacing: style.isEquallySpacing,
@@ -42,7 +42,7 @@ public extension View {
                                                         unseletionStyle: style.unseletionStyle,
                                                         style: style))
         case let .island(selected: selected):
-            let style = IslandSegmentedControlStyle()
+            let style: IslandSegmentedControlStyle = .init()
 
             return environment(\.segmentedControlStyle,
                                AnySegmentedControlStyle(isEquallySpacing: true,
@@ -51,7 +51,7 @@ public extension View {
                                                         unseletionStyle: .surface,
                                                         style: style))
         case let .islandScroll(selected: selected):
-            let style = ScrollSegmentedControlStyle()
+            let style: ScrollSegmentedControlStyle = .init()
 
             return environment(\.segmentedControlStyle,
                                AnySegmentedControlStyle(isEquallySpacing: false,
@@ -60,7 +60,7 @@ public extension View {
                                                         unseletionStyle: .surface,
                                                         style: style))
         case let .onlySelection(selected: selected):
-            let style = SelectionOnlySegmentedControlStyle()
+            let style: SelectionOnlySegmentedControlStyle = .init()
 
             return environment(\.segmentedControlStyle,
                                AnySegmentedControlStyle(isEquallySpacing: true,
@@ -69,7 +69,7 @@ public extension View {
                                                         unseletionStyle: .clean,
                                                         style: style))
         case let .onlySelectionLeading(selected: selected):
-            let style = SelectionOnlySegmentedControlStyle()
+            let style: SelectionOnlySegmentedControlStyle = .init()
 
             return environment(\.segmentedControlStyle,
                                AnySegmentedControlStyle(isEquallySpacing: false,
@@ -78,7 +78,7 @@ public extension View {
                                                         unseletionStyle: .clean,
                                                         style: style))
         case let .onlySelectionScroll(selected: selected):
-            let style = ScrollSegmentedControlStyle()
+            let style: ScrollSegmentedControlStyle = .init()
 
             return environment(\.segmentedControlStyle,
                                AnySegmentedControlStyle(isEquallySpacing: false,
@@ -87,7 +87,7 @@ public extension View {
                                                         unseletionStyle: .clean,
                                                         style: style))
         case let .islandLeading(selected: selected):
-            let style = IslandSegmentedControlStyle()
+            let style: IslandSegmentedControlStyle = .init()
 
             return environment(\.segmentedControlStyle,
                                AnySegmentedControlStyle(isEquallySpacing: false,
