@@ -124,10 +124,6 @@ struct SegmentedControlPreview: View {
                 Spacer()
             }.padding()
         }
-//            .navigationBar("Title", style: .fixed) {
-//                BarButton(type: .back)
-//            } trailingBar: {} bottomBar: {}
-
         .scrollWithNavigationBar("App", style: .fixed($offset), background: Color.backgroundSecondary) {
             BarButton(type: .back)
         } trailingBar: {} bottomBar: {}

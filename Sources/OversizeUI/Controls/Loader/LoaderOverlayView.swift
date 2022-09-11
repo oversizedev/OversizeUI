@@ -25,14 +25,14 @@ public struct LoaderOverlayView: View {
         loaderType = type
         showText = false
         text = ""
-        surface = true
+        surface = false
         _isLoading = isLoading
     }
 
     public init(type: LoaderOverlayType = .spiner,
                 showText: Bool = false,
                 text: String = "",
-                surface: Bool = true,
+                surface: Bool = false,
                 isLoading: Binding<Bool> = .constant(true))
     {
         loaderType = type
@@ -50,20 +50,43 @@ public struct LoaderOverlayView: View {
                 Color.surfaceSecondary.opacity(0.5)
             #endif
 
-            Surface {
-                VStack(spacing: 20) {
-                    containedView()
+            VStack {
+                Spacer()
 
-                    if showText {
-                        Text(text.isEmpty ? "Loading" : text)
-                            .fontStyle(.headline, color: .onSurfaceDisabled)
-                            .offset(y: 8)
+                if surface {
+                    Surface {
+                        VStack(spacing: 20) {
+                            containedView()
+
+                            if showText {
+                                Text(text.isEmpty ? "Loading" : text)
+                                    .fontStyle(.headline, color: .onSurfaceDisabled)
+                                    .offset(y: 8)
+                            }
+                        }
+                        .padding()
+                    }
+                    .surfaceStyle(.primary)
+                    .elevation(.z4)
+                } else {
+                    VStack(spacing: 20) {
+                        containedView()
+
+                        if showText {
+                            Text(text.isEmpty ? "Loading" : text)
+                                .fontStyle(.headline, color: .onSurfaceDisabled)
+                                .offset(y: 8)
+                        }
+                    }
+                    .padding()
+                    .background {
+                        Capsule()
+                            .fillSurfaceSecondary()
                     }
                 }
-                .padding()
+
+                Spacer()
             }
-            .surfaceStyle(.primary)
-            .elevation(.z4)
         }
         .ignoresSafeArea()
         .opacity(isLoading ? 1 : 0)
@@ -103,7 +126,6 @@ public struct LoaderOverlayView: View {
         case .spiner:
 
             ProgressView()
-                .scaleEffect(1.6, anchor: .center)
         }
     }
 

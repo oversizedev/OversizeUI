@@ -46,7 +46,7 @@ public struct OversizeButtonStyle: ButtonStyle {
 
     @ViewBuilder
     func background(for role: ButtonRole?) -> some View {
-        if type != .tertiary {
+        if type != .quaternary {
             switch controlBorderShape {
             case .capsule:
                 Capsule()

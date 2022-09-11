@@ -5,7 +5,6 @@
 
 import SwiftUI
 
-@available(iOS 14.0, *)
 public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar: View, TitleLabel: View>: View {
     private let leadingBar: () -> LeadingBar?
     private let trailingBar: () -> TrailingBar?
