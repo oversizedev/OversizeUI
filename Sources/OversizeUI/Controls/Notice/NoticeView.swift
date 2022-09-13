@@ -50,10 +50,10 @@ public struct NoticeView<A>: View where A: View {
                 }
 
                 if actions != nil {
-                    HStack(spacing: .xSmall) {
+                    HStack(spacing: .small) {
                         actions
                             .buttonStyle(.primary)
-                            .controlSize(.mini)
+                            .controlSize(.small)
                     }
                     .padding(.top, .xxSmall)
                 }
@@ -67,9 +67,9 @@ public struct NoticeView<A>: View where A: View {
                 } label: {
                     Icon(.xMini, color: .onSurfaceHighEmphasis)
                 }
-                .buttonStyle(.tertiary(infinityWidth: false))
+                .buttonStyle(subtitle != nil ? .tertiary(infinityWidth: false) : .quaternary(infinityWidth: false))
                 .controlBorderShape(.capsule)
-                .padding(.xSmall)
+                .padding(.small)
                 .controlSize(.mini)
             }
         }
@@ -92,42 +92,37 @@ public extension NoticeView where A == EmptyView {
 
 struct NoticeView_Previews: PreviewProvider {
     static var previews: some View {
+        VStack(spacing: .small) {
+            NoticeView("Title")
 
-           
-            VStack(spacing: .small) {
-                
-                NoticeView("Title")
+            NoticeView("Title", subtitle: "Subtitle")
 
-                NoticeView("Title", subtitle: "Subtitle")
-
-                NoticeView("Title", subtitle: "Subtitle") {
-                    print("Ok Action")
-                }
-
-                NoticeView("Title") {
-                    Button {
-                        print("Ok")
-                    } label: {
-                        Text("Primay")
-                    }
-                    .accent()
-                }
-
-                NoticeView("Title", subtitle: "Subtitle") {
-                    Button("Primay") {
-                        print("Ok")
-                    }
-                    Button("Primay") {
-                        print("Ok")
-                    }
-                    .buttonStyle(.tertiary)
-
-                } closeAction: {
-                    print("Close")
-                }
+            NoticeView("Title", subtitle: "Subtitle") {
+                print("Close action")
             }
-            .padding()
-            .background {  Color.backgroundSecondary.ignoresSafeArea(.all) }
-        
+
+            NoticeView("Title") {
+                Button {
+                    print("Primay action")
+                } label: {
+                    Text("Primay")
+                }
+                .accent()
+            }
+
+            NoticeView("Title", subtitle: "Subtitle") {
+                Button("Primay") {
+                    print("Primay action")
+                }
+                Button("Secondary") {
+                    print("Secondary action")
+                }
+                .buttonStyle(.tertiary)
+            } closeAction: {
+                print("Close")
+            }
+        }
+        .padding()
+        .background { Color.backgroundSecondary.ignoresSafeArea(.all) }
     }
 }

@@ -52,9 +52,6 @@ struct ComponentsList: View {
                 BarButton(type: .secondary("Settings", action: { isShowSetting.toggle() }))
             }
             .navigationable()
-            .sheet(isPresented: $isShowSetting) {
-                AppearanceSettingView()
-            }
         #else
             Text("Support will be in the future")
         #endif

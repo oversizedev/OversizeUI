@@ -37,13 +37,6 @@ import SwiftUI
             .trailingBar {
                 BarButton(type: .primary("Save", action: {}))
             }
-            .topToolbar {
-                Text("Top")
-            }
-            .bottomToolbar {
-                Text("Bottom")
-                    .padding(.bottom, screenSize.safeAreaBottom)
-            }
             .sheet(isPresented: $isShowModal) {
                 IconsDemo()
             }
