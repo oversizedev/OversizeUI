@@ -20,20 +20,12 @@ import SwiftUI
                 return .medium()
             }
         }
-
-        @available(iOS 16, *)
-        func convertToSUI() -> PresentationDetent {
-            if self == .medium {
-                return PresentationDetent.medium
-            } else {
-                return PresentationDetent.large
-            }
-        }
     }
 #endif
 // swiftlint:disable line_length
 #if os(iOS)
 
+    @available(iOS 15, *)
     public struct SheetModifier: ViewModifier {
         public let detents: [Detents]
         public func body(content: Content) -> some View {
@@ -46,14 +38,7 @@ import SwiftUI
     public extension View {
         @_disfavoredOverload
         func presentationDetents(_ detents: [Detents]) -> some View {
-            Group {
-                if #available(iOS 16, *) {
-                    let suiDetents: Set<PresentationDetent> = Set(detents.compactMap { $0.convertToSUI() })
-                    self.presentationDetents(suiDetents)
-                } else {
-                    modifier(SheetModifier(detents: detents))
-                }
-            }
+            modifier(SheetModifier(detents: detents))
         }
     }
 
