@@ -5,6 +5,9 @@ on:
     branches: [ develop ]
   pull_request:
     branches: [ main ]
+    
+env:
+  DEVELOPER_DIR: /Applications/Xcode_14.0.app/Contents/Developer
 
 jobs:
   build:
