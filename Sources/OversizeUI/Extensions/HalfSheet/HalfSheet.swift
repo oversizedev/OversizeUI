@@ -20,7 +20,7 @@ import SwiftUI
                 return .medium()
             }
         }
-        
+
         @available(iOS 16, *)
         func convertToSUI() -> PresentationDetent {
             if self == .medium {
