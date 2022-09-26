@@ -175,7 +175,8 @@ public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar:
 
     private var headerHeight: CGFloat {
         if offset.y > 0 {
-            return maxHeight - (offset.y / 2)
+            let height = maxHeight - (offset.y / 2)
+            return height > 0 ? height : 0
         } else {
             return maxHeight
         }
