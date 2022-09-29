@@ -71,7 +71,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
     private var equallSegmentedControl: some View {
         ZStack(alignment: Alignment(horizontal: .horizontalCenterAlignment,
                                     vertical: .center)) {
-            if let selectedIndex = selectedIndex {
+            if let selectedIndex {
                 HStack(spacing: 0) {
                     Spacer()
                     selectionView()
@@ -131,7 +131,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
     private var leadingSegmentedControl: some View {
         ZStack(alignment: Alignment(horizontal: .horizontalCenterAlignment,
                                     vertical: .center)) {
-            if let selectedIndex = selectedIndex {
+            if let selectedIndex {
                 HStack {
                     selectionView()
                 }

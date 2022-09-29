@@ -95,7 +95,7 @@ public struct Row: View {
     private func content(_ textAlignment: TextAlignment) -> some View {
         VStack(alignment: .leading) {
             HStack(spacing: .small) {
-                if let leadingType = leadingType {
+                if let leadingType {
                     leading(leadingType)
                 }
 
@@ -111,7 +111,7 @@ public struct Row: View {
                     Spacer()
                 }
 
-                if let trallingType = trallingType {
+                if let trallingType {
                     tralling(trallingType)
                 }
             }
@@ -251,7 +251,7 @@ public struct Row: View {
             Text(title)
                 .headline(.semibold)
                 .foregroundColor(.onSurfaceHighEmphasis)
-            if let subtitle = subtitle {
+            if let subtitle {
                 Text(subtitle)
                     .subheadline()
                     .foregroundColor(.onSurfaceMediumEmphasis)

@@ -258,7 +258,7 @@ public extension EnvironmentValues {
 }
 
 public extension View {
-    func segmentedControlStyle<S: SegmentedControlStyle>(_ style: S) -> some View {
+    func segmentedControlStyle(_ style: some SegmentedControlStyle) -> some View {
         environment(\.segmentedControlStyle,
                     AnySegmentedControlStyle(isEquallySpacing: style.isEquallySpacing,
                                              isShowBackground: style.isShowBackground,

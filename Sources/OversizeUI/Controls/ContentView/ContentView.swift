@@ -43,7 +43,7 @@ public struct ContentView: View {
 
     public var body: some View {
         VStack(alignment: vStackAlignment, spacing: .medium) {
-            if let image = image {
+            if let image {
                 image
                     .frame(width: 218, height: 218, alignment: .center)
             }

@@ -80,7 +80,7 @@ public extension EnvironmentValues {
 }
 
 public extension View {
-    func colorSelectorStyle<S: ColorSelectorStyle>(_ style: S) -> some View {
+    func colorSelectorStyle(_ style: some ColorSelectorStyle) -> some View {
         environment(\.colorSelectorStyle, AnyColorSelectorStyle(style: style))
     }
 }

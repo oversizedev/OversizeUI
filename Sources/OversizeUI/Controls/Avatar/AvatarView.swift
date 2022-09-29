@@ -45,7 +45,7 @@ public struct AvatarView: View {
     }
 
     public var body: some View {
-        if let avatar = avatar {
+        if let avatar {
             avatar
                 .resizable()
                 .frame(width: size == .small ? Constants.sizeS : size == .medium ? Constants.sizeM : Constants.sizeL,

@@ -62,7 +62,7 @@ import SwiftUI
 
         var background: some View {
             Group {
-                if let backgroundLinerGradient = backgroundLinerGradient {
+                if let backgroundLinerGradient {
                     backgroundLinerGradient
                 } else {
                     backgroundColor
@@ -136,7 +136,7 @@ import SwiftUI
             return control
         }
 
-        public func bottomToolbar<BottomToolbar: View>(style: PageViewBottomType = .shadow, ignoreSafeArea: Bool = true, @ViewBuilder bottomToolbar: @escaping () -> BottomToolbar) -> some View {
+        public func bottomToolbar(style: PageViewBottomType = .shadow, ignoreSafeArea: Bool = true, @ViewBuilder bottomToolbar: @escaping () -> some View) -> some View {
             VStack(spacing: .zero) {
                 self
                     .overlay(
