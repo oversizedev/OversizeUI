@@ -33,7 +33,7 @@ public struct TextBox: View {
         VStack(alignment: textStackAlignment, spacing: textSpacing) {
             titleText
 
-            if let subtitle = subtitle {
+            if let subtitle {
                 Text(subtitle)
                     .body()
                     .foregroundColor(.onSurfaceHighEmphasis)
@@ -43,7 +43,7 @@ public struct TextBox: View {
     }
 
     var textSpacing: Space {
-        if let spacing = spacing {
+        if let spacing {
             return spacing
         } else {
             switch size {

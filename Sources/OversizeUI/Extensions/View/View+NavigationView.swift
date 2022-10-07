@@ -46,12 +46,12 @@ public extension View {
     }
 
     @ViewBuilder
-    func navigationBar<LeadingBar: View, TrailingBar: View, BottomBar: View>(
+    func navigationBar(
         _ title: String,
         style: NavigationBarStyleType = .system,
-        @ViewBuilder leadingBar: @escaping () -> LeadingBar?,
-        @ViewBuilder trailingBar: @escaping () -> TrailingBar?,
-        @ViewBuilder bottomBar: @escaping () -> BottomBar?
+        @ViewBuilder leadingBar: @escaping () -> (some View)?,
+        @ViewBuilder trailingBar: @escaping () -> (some View)?,
+        @ViewBuilder bottomBar: @escaping () -> (some View)?
     ) -> some View {
         switch style {
         case .system:
@@ -108,11 +108,11 @@ public extension View {
     }
 
     @ViewBuilder
-    func navigationBar<LeadingBar: View, TrailingBar: View>(
+    func navigationBar(
         _ title: String,
         style: NavigationBarStyleType = .system,
-        @ViewBuilder leadingBar: @escaping () -> LeadingBar?,
-        @ViewBuilder trailingBar: @escaping () -> TrailingBar?
+        @ViewBuilder leadingBar: @escaping () -> (some View)?,
+        @ViewBuilder trailingBar: @escaping () -> (some View)?
     ) -> some View {
         switch style {
         case .system:
@@ -169,10 +169,10 @@ public extension View {
     }
 
     @ViewBuilder
-    func navigationBar<LeadingBar: View, TrailingBar: View>(
+    func navigationBar(
         _ title: String,
         style: NavigationBarStyleType = .system,
-        @ViewBuilder leadingBar: @escaping () -> LeadingBar?
+        @ViewBuilder leadingBar: @escaping () -> (some View)?
     ) -> some View {
         switch style {
         case .system:
@@ -220,10 +220,10 @@ public extension View {
     }
 
     @ViewBuilder
-    func navigationBar<LeadingBar: View, TrailingBar: View>(
+    func navigationBar(
         _ title: String,
         style: NavigationBarStyleType = .system,
-        @ViewBuilder trailingBar: @escaping () -> TrailingBar?
+        @ViewBuilder trailingBar: @escaping () -> (some View)?
     ) -> some View {
         switch style {
         case .system:
@@ -271,13 +271,13 @@ public extension View {
     }
 
     @ViewBuilder
-    func scrollWithNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar: View>(
+    func scrollWithNavigationBar(
         _ title: String,
         style: NavigationBarStyleType = .system,
         background: Color = Color.backgroundPrimary,
-        @ViewBuilder leadingBar: @escaping () -> LeadingBar?,
-        @ViewBuilder trailingBar: @escaping () -> TrailingBar?,
-        @ViewBuilder bottomBar: @escaping () -> BottomBar?
+        @ViewBuilder leadingBar: @escaping () -> (some View)?,
+        @ViewBuilder trailingBar: @escaping () -> (some View)?,
+        @ViewBuilder bottomBar: @escaping () -> (some View)?
     ) -> some View {
         switch style {
         case .system:

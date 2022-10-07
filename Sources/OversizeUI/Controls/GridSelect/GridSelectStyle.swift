@@ -139,7 +139,7 @@ public extension EnvironmentValues {
 }
 
 public extension View {
-    func gridSelectStyle<S: GridSelectStyle>(_ style: S) -> some View {
+    func gridSelectStyle(_ style: some GridSelectStyle) -> some View {
         environment(\.gridSelectStyle, AnyGridSelectStyle(seletionStyle: style.seletionStyle,
                                                           unseletionStyle: style.unseletionStyle,
                                                           icon: style.icon,

@@ -61,9 +61,9 @@ public class HUD: ObservableObject {
 }
 
 public extension View {
-    func hud<Content: View>(isPresented: Binding<Bool>,
-                            type: Binding<HUDType>,
-                            @ViewBuilder content: () -> Content) -> some View
+    func hud(isPresented: Binding<Bool>,
+             type: Binding<HUDType>,
+             @ViewBuilder content: () -> some View) -> some View
     {
         ZStack(alignment: type.wrappedValue == .hud ? .top : .center) {
             self
@@ -220,7 +220,7 @@ public struct HUDContent: View {
                 }
             case .alert:
                 VStack(spacing: .large) {
-                    if let image = image {
+                    if let image {
                         image
                     }
 

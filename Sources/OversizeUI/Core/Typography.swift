@@ -44,7 +44,7 @@ public struct Typography: ViewModifier {
     }
 
     private var fontWeight: Font.Weight {
-        if let weight = weight {
+        if let weight {
             return weight
         } else {
             switch fontStyle {

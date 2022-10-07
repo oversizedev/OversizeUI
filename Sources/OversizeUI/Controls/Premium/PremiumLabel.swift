@@ -30,7 +30,7 @@ public struct PremiumLabel: View {
     public var body: some View {
         HStack {
             HStack(alignment: .center, spacing: Space.xxSmall) {
-                if let image = image {
+                if let image {
                     image
                         .renderingMode(.template)
                         .foregroundColor(isMonohrom ? Color(hex: "B75375") : .onPrimaryHighEmphasis)

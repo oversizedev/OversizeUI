@@ -7,6 +7,7 @@ import SwiftUI
 
 public struct NoticeView<A>: View where A: View {
     let image: Image?
+    let imageURL: URL?
     let title: String
     let subtitle: String?
     let actions: Group<A>?
@@ -15,12 +16,14 @@ public struct NoticeView<A>: View where A: View {
     public init(_ title: String,
                 subtitle: String? = nil,
                 image: Image? = nil,
+                imageURL: URL? = nil,
                 @ViewBuilder actions: @escaping () -> A,
                 closeAction: (() -> Void)? = nil)
     {
-        self.image = image
         self.title = title
         self.subtitle = subtitle
+        self.image = image
+        self.imageURL = imageURL
         self.actions = Group { actions() }
         self.closeAction = closeAction
     }
@@ -28,11 +31,23 @@ public struct NoticeView<A>: View where A: View {
     public var body: some View {
         Surface {
             VStack(alignment: .leading, spacing: .xxSmall) {
-                HStack {
+                HStack(spacing: .xSmall) {
                     image.map {
                         $0
                             .resizable()
                             .frame(width: 32, height: 32)
+                    }
+                    
+                    imageURL.map { url in
+                        AsyncImage(url: url) {
+                            $0
+                                .resizable()
+                                .frame(width: 32, height: 32)
+                        } placeholder: {
+                             Circle()
+                                .fillBackgroundTertiary()
+                                .frame(width: 32, height: 32)
+                        }
                     }
 
                     Text(title)
@@ -80,11 +95,13 @@ public extension NoticeView where A == EmptyView {
     init(_ title: String,
          subtitle: String? = nil,
          image: Image? = nil,
+         imageURL: URL? = nil,
          closeAction: (() -> Void)? = nil)
     {
-        self.image = image
         self.title = title
         self.subtitle = subtitle
+        self.image = image
+        self.imageURL = imageURL
         actions = nil
         self.closeAction = closeAction
     }

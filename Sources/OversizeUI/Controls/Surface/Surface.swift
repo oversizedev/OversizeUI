@@ -81,7 +81,7 @@ public struct Surface<Label: View>: View {
     }
 
     private var surfaceBackgroundColor: Color {
-        if let backgroundColor = backgroundColor {
+        if let backgroundColor {
             return backgroundColor
         } else if isAccent {
             return Color.accent

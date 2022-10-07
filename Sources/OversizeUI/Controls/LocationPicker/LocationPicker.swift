@@ -39,7 +39,7 @@ import SwiftUI
                 }
                 Spacer()
 
-                if let positionName = positionName {
+                if let positionName {
                     Text(positionName)
                         .subheadline()
                         .foregroundColor(.onPrimaryMediumEmphasis)
@@ -79,7 +79,7 @@ import SwiftUI
 
                     MaterialSurface {
                         VStack(alignment: .center, spacing: .xxSmall) {
-                            if let positionName = positionName {
+                            if let positionName {
                                 Text(positionName)
                                     .title3()
                                     .foregroundColor(.onSurfaceHighEmphasis)
