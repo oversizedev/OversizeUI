@@ -37,14 +37,14 @@ public struct NoticeView<A>: View where A: View {
                             .resizable()
                             .frame(width: 32, height: 32)
                     }
-                    
+
                     imageURL.map { url in
                         AsyncImage(url: url) {
                             $0
                                 .resizable()
                                 .frame(width: 32, height: 32)
                         } placeholder: {
-                             Circle()
+                            Circle()
                                 .fillBackgroundTertiary()
                                 .frame(width: 32, height: 32)
                         }

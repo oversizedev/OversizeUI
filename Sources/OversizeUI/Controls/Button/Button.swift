@@ -127,7 +127,7 @@ public struct OversizeButtonStyle: ButtonStyle {
     func loadingView(for role: ButtonRole?) -> some View {
         if isLoading {
             ProgressView()
-                .foregroundColor(foregroundColor(for: role))
+                .progressViewStyle(CircularProgressViewStyle(tint: foregroundColor(for: role)))
         } else {
             EmptyView()
         }
