@@ -94,9 +94,10 @@ public struct Row: View {
     @ViewBuilder
     private func content(_ textAlignment: TextAlignment) -> some View {
         VStack(alignment: .leading) {
-            HStack(spacing: .small) {
+            HStack(spacing: .zero) {
                 if let leadingType {
                     leading(leadingType)
+                        .padding(.trailing, .small)
                 }
 
                 if textAlignment == .trailing || textAlignment == .center {
@@ -113,6 +114,7 @@ public struct Row: View {
 
                 if let trallingType {
                     tralling(trallingType)
+                        .padding(.leading, .xxSmall)
                 }
             }
         }
@@ -264,6 +266,7 @@ public struct Row: View {
     private func premiumLabel() -> some View {
         if isPremiumOption, premiumStatus == false {
             PremiumLabel(text: "Pro", size: .small)
+                .padding(.leading, .small)
         } else {
             EmptyView()
         }
