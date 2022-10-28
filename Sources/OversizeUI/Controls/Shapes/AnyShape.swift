@@ -12,7 +12,7 @@ public struct AnyShape: Shape {
         self.make = make
     }
 
-    public init<S: Shape>(_ shape: S) {
+    public init(_ shape: some Shape) {
         make = { rect, path in
             path = shape.path(in: rect)
         }

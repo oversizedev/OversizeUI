@@ -201,7 +201,7 @@ public protocol SegmentedControlStyle {
 
 public struct SegmentedControlConfiguration {
     public struct Label: View {
-        public init<Content: View>(content: Content) {
+        public init(content: some View) {
             body = AnyView(content)
         }
 
@@ -222,11 +222,11 @@ public struct AnySegmentedControlStyle: SegmentedControlStyle {
 
     private var _makeBody: (Configuration) -> AnyView
 
-    public init<S: SegmentedControlStyle>(isEquallySpacing: Bool,
-                                          isShowBackground: Bool,
-                                          seletionStyle: SegmentedControlSeletionStyle,
-                                          unseletionStyle: SegmentedControlUnseletionStyle,
-                                          style: S)
+    public init(isEquallySpacing: Bool,
+                isShowBackground: Bool,
+                seletionStyle: SegmentedControlSeletionStyle,
+                unseletionStyle: SegmentedControlUnseletionStyle,
+                style: some SegmentedControlStyle)
     {
         self.isEquallySpacing = isEquallySpacing
         self.isShowBackground = isShowBackground

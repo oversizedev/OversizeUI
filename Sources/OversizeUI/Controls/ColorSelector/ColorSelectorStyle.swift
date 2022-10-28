@@ -14,7 +14,7 @@ public protocol ColorSelectorStyle {
 
 public struct ColorSelectorConfiguration {
     public struct Label: View {
-        public init<Content: View>(content: Content) {
+        public init(content: some View) {
             body = AnyView(content)
         }
 
@@ -57,7 +57,7 @@ public struct DefaultColorSelectorStyle: ColorSelectorStyle {
 public struct AnyColorSelectorStyle: ColorSelectorStyle {
     private var _makeBody: (Configuration) -> AnyView
 
-    public init<S: ColorSelectorStyle>(style: S) {
+    public init(style: some ColorSelectorStyle) {
         _makeBody = { configuration in
             AnyView(style.makeBody(configuration: configuration))
         }

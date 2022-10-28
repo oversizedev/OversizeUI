@@ -10,6 +10,7 @@ public enum RowTrailingType {
     case checkbox(isOn: Binding<Bool>)
     case toggle(isOn: Binding<Bool>)
     case toggleWithArrowButton(isOn: Binding<Bool>, action: (() -> Void)? = nil)
+    @available(watchOS, unavailable)
     case timePicker(date: Binding<Date>)
     case arrowIcon
     case text(_ text: String)
@@ -230,9 +231,12 @@ public struct Row: View {
             Icon(.chevronRight, color: .onSurfaceDisabled)
 
         case let .timePicker(date: date):
-            DatePicker("", selection: date, displayedComponents: .hourAndMinute)
-                .labelsHidden()
-
+            #if os(watchOS)
+                EmptyView()
+            #elseif os(iOS)
+                DatePicker("", selection: date, displayedComponents: .hourAndMinute)
+                    .labelsHidden()
+            #endif
         case let .text(text):
             Text(text)
                 .subheadline()
@@ -375,9 +379,6 @@ struct ListRow_Previews: PreviewProvider {
 
             Row("Title", subtitle: "Subtitle")
                 .rowTrailing(.button("Button", action: {}))
-
-            Row("Title")
-                .rowTrailing(.timePicker(date: .constant(Date())))
 
             Row("Title", subtitle: "Red")
                 .premium()
