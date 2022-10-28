@@ -132,7 +132,11 @@ public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar:
     }
 
     private var smallBackgroundOpacity: Double {
-        Double(offset.y * 0.1)
+        if offset.y < 1 {
+            return 0
+        } else {
+            return Double(offset.y * 0.1)
+        }
     }
 
     private var sadowOpacity: Double {

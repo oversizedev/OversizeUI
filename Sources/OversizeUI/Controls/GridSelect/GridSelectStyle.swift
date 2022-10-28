@@ -88,7 +88,7 @@ public protocol GridSelectStyle {
 public struct GridSelectConfiguration {
     /// A type-erased content of a `Card`.
     public struct Label: View {
-        init<Content: View>(content: Content) {
+        init(content: some View) {
             body = AnyView(content)
         }
 
@@ -105,11 +105,11 @@ public struct AnyGridSelectStyle: GridSelectStyle {
 
     private var _makeBody: (Configuration) -> AnyView
 
-    public init<S: GridSelectStyle>(
+    public init(
         seletionStyle: GridSelectSeletionStyle,
         unseletionStyle: GridSelectUnseletionStyle,
         icon: GridSelectSeletionIconStyle,
-        style: S
+        style: some GridSelectStyle
     ) {
         self.seletionStyle = seletionStyle
         self.unseletionStyle = unseletionStyle
