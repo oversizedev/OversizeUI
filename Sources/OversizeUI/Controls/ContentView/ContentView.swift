@@ -27,9 +27,9 @@ public struct ContentView: View {
     private let primaryButton: ContenButtonType?
     private let secondaryButton: ContenButtonType?
 
-    public init(image: Image?,
+    public init(image: Image? = nil,
                 title: String,
-                subtitle: String?,
+                subtitle: String? = nil,
                 primaryButton: ContenButtonType? = nil,
                 secondaryButton: ContenButtonType? = nil)
     {
@@ -45,7 +45,7 @@ public struct ContentView: View {
         VStack(alignment: vStackAlignment, spacing: .medium) {
             if let image {
                 image
-                    .frame(width: 218, height: 218, alignment: .center)
+                    .frame(width: 218, height: 218, alignment: .bottom)
             }
 
             TextBox(title: title, subtitle: subtitle)

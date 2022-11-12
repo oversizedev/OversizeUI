@@ -12,6 +12,8 @@ public enum RowButtonStyle {
 }
 
 public struct RowButton: View {
+    @Environment(\.multilineTextAlignment) var multilineTextAlignment
+    @Environment(\.controlPadding) var controlPadding: ControlPadding
     public var text: String
     public var style: RowButtonStyle
     public var icon: IconsNames
@@ -30,8 +32,12 @@ public struct RowButton: View {
 
     public var body: some View {
         VStack(alignment: .leading) {
-            Button(action: self.tapAction) {
+            Button(action: tapAction) {
                 HStack {
+                    if multilineTextAlignment == .center || multilineTextAlignment == .trailing {
+                        Spacer()
+                    }
+
                     if icon != .none {
                         Surface {
                             Icon(icon)
@@ -42,16 +48,35 @@ public struct RowButton: View {
 
                     Text(text)
                         .fontStyle(.headline)
-                        .foregroundColor(style == .link
-                            ? Color.link
-                            : style == .delete
-                            ? Color.error
-                            : Color.onSurfaceHighEmphasis)
+                        .foregroundColor(foregroundColor)
 
-                    Spacer()
+                    if multilineTextAlignment == .leading || multilineTextAlignment == .center {
+                        Spacer()
+                    }
                 }
+                .padding(.vertical, verticalPadding)
+                .padding(.horizontal, controlPadding.horizontal)
             }
+            .buttonStyle(.row)
+        }
+    }
 
-        }.frame(minHeight: 70)
+    private var verticalPadding: CGFloat {
+        switch controlPadding.vertical {
+        case .zero:
+            return .zero
+        case .xxSmall:
+            return .zero
+        default:
+            return controlPadding.vertical.rawValue - Space.xxSmall.rawValue
+        }
+    }
+
+    private var foregroundColor: Color {
+        style == .link
+            ? Color.link
+            : style == .delete
+            ? Color.error
+            : Color.onSurfaceHighEmphasis
     }
 }

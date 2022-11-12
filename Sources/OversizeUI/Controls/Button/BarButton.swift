@@ -14,6 +14,8 @@ public enum BarButtonType {
     case primary(_ text: String, action: () -> Void)
     case secondary(_ text: String, action: () -> Void)
     case disabled(_ text: String)
+    case image(_ image: Image, action: () -> Void)
+    case icon(_ icon: IconsNames, action: () -> Void)
 }
 
 public struct BarButton: View {
@@ -91,6 +93,20 @@ extension BarButton {
             }
             .style(.gray, size: .medium, rounded: .full, shadow: false)
             .disabled(true)
+        case let .image(image, action):
+            Button {
+                action()
+            } label: {
+                image
+                    .renderingMode(.template)
+                    .foregroundOnSurfaceHighEmphasis()
+            }
+            .style(.secondary, size: .medium, rounded: .full, width: .round, shadow: true)
+        case let .icon(icon, action):
+            Button(action: action) {
+                Icon(icon)
+            }
+            .style(.secondary, size: .medium, rounded: .full, width: .round, shadow: true)
         }
     }
 }
