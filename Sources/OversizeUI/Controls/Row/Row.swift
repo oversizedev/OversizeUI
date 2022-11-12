@@ -20,7 +20,7 @@ public enum RowTrailingType {
 public enum RowLeadingType {
     case icon(_ name: IconsNames)
     case iconOnSurface(_ name: IconsNames)
-    case image(_ image: Image)
+    case image(_ image: Image, color: Color? = .onSurfaceHighEmphasis)
     case imageOnSurface(_ image: Image, color: Color? = nil)
     case systemImage(_ imageName: String)
     case avatar(_ avatar: AvatarView)
@@ -130,12 +130,14 @@ public struct Row: View {
             Icon(icon)
                 .padding(.trailing, Constants.spacingIconAndText)
 
-        case let .image(image):
+        case let .image(image, color):
             image
-                .renderingMode(.template)
+                .renderingMode(color != nil ? .template : .original)
                 .resizable()
-                .foregroundColor(.onSurfaceHighEmphasis)
-                .frame(width: 24, height: 24)
+                .scaledToFill()
+                .foregroundColor(color)
+                .frame(width: subtitle != nil ? 48 : 24, height: subtitle != nil ? 48 : 24)
+                .cornerRadius(subtitle != nil ? 4 : 2)
 
         case let .avatar(avatar):
             avatar

@@ -55,6 +55,11 @@ import SwiftUI
                 }
             }
         }
+        
+        @_disfavoredOverload
+        func presentationDragIndicator(_ visibility: Visibility) -> some View {
+            self
+        }
     }
 
     public struct SheetView<Content: View>: UIViewControllerRepresentable {

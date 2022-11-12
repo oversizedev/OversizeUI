@@ -25,7 +25,7 @@ public enum ThemeSettingsNames {
 public class ThemeSettings: ObservableObject {
     public init() {}
 
-    @AppStorage(ThemeSettingsNames.appearance) public var appearance: Appearance = .light
+    @AppStorage(ThemeSettingsNames.appearance) public var appearance: Appearance = .system
 
     #if os(iOS)
         @AppStorage(ThemeSettingsNames.accentColor) public var accentColor: Color = .blue
