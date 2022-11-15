@@ -65,8 +65,10 @@ public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar:
 
                         Spacer()
                     }
-
-                }.frame(maxHeight: headerHeight)
+                }
+                .frame(maxHeight: headerHeight)
+                .padding(.leading, screenSize.safeAreaLeading)
+                .padding(.trailing, screenSize.safeAreaTrailing)
 
                 Rectangle()
                     .fill(Color.surfacePrimary)
@@ -108,6 +110,8 @@ public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar:
 
                 bottomBar()
             }
+            .padding(.leading, screenSize.safeAreaLeading)
+            .padding(.trailing, screenSize.safeAreaTrailing)
         }
         .padding(.top, modalityPresent ? screenSize.safeAreaTop + 20 : 20)
         .padding(.horizontal, 20)

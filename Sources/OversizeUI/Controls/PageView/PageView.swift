@@ -46,6 +46,7 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
                                    trailingBar: { trailingBar },
                                    bottomBar: { topToolbar },
                                    titleLabel: { titleLabel })
+                    .ignoresSafeArea(edges: .horizontal)
                     .zIndex(999_999_999)
             }
             ScrollViewOffset(offset: $offset) {
