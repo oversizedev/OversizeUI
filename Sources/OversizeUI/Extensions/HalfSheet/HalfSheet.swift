@@ -55,9 +55,9 @@ import SwiftUI
                 }
             }
         }
-        
+
         @_disfavoredOverload
-        func presentationDragIndicator(_ visibility: Visibility) -> some View {
+        func presentationDragIndicator(_: Visibility) -> some View {
             self
         }
     }
