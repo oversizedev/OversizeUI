@@ -22,6 +22,7 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
 
     private var backgroundColor: Color = .backgroundPrimary
     private var backgroundLinerGradient: LinearGradient?
+    private var navigationBarDividerColor: Color?
 
     private let onOffsetChanged: (CGFloat) -> Void
 
@@ -37,17 +38,27 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
     public var body: some View {
         VStack(spacing: .zero) {
             if title != nil || leadingBar != nil || trailingBar != nil || topToolbar != nil || titleLabel != nil {
-                ModalNavigationBar(title: title ?? "",
-                                   bigTitle: isLargeTitle,
-                                   offset: $offset,
-                                   modalityPresent: !isModalable,
-                                   alwaysSlideSmallTile: isAlwaysSlideSmallTile,
-                                   leadingBar: { leadingBar },
-                                   trailingBar: { trailingBar },
-                                   bottomBar: { topToolbar },
-                                   titleLabel: { titleLabel })
-                    .ignoresSafeArea(edges: .horizontal)
-                    .zIndex(999_999_999)
+                ModalNavigationBar(
+                    title: title ?? "",
+                    bigTitle: isLargeTitle,
+                    offset: $offset,
+                    modalityPresent: !isModalable,
+                    alwaysSlideSmallTile: isAlwaysSlideSmallTile,
+                    leadingBar: { leadingBar },
+                    trailingBar: { trailingBar },
+                    bottomBar: { topToolbar },
+                    titleLabel: { titleLabel }
+                )
+                .overlay(alignment: .bottom) {
+                    if let navigationBarDividerColor {
+                        Rectangle()
+                            .fill(navigationBarDividerColor)
+                            .frame(height: 1)
+                            .offset(y: 1)
+                    }
+                }
+                .ignoresSafeArea(edges: .horizontal)
+                .zIndex(999_999_999)
             }
             ScrollViewOffset(offset: $offset) {
                 content
@@ -109,6 +120,12 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
     public func backgroundLinerGradient(_ gradient: LinearGradient) -> PageView {
         var control = self
         control.backgroundLinerGradient = gradient
+        return control
+    }
+
+    public func navigationBarDividerColor(_ color: Color) -> PageView {
+        var control = self
+        control.navigationBarDividerColor = color
         return control
     }
 

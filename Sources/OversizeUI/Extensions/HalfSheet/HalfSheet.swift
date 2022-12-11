@@ -11,6 +11,7 @@ import SwiftUI
     public enum Detents {
         case large
         case medium
+        case height(CGFloat)
 
         public var uiViewDetents: UISheetPresentationController.Detent {
             switch self {
@@ -18,15 +19,20 @@ import SwiftUI
                 return .large()
             case .medium:
                 return .medium()
+            case let .height(height):
+                return height > 560 ? .large() : .medium()
             }
         }
 
         @available(iOS 16, *)
         func convertToSUI() -> PresentationDetent {
-            if self == .medium {
-                return PresentationDetent.medium
-            } else {
+            switch self {
+            case .large:
                 return PresentationDetent.large
+            case .medium:
+                return PresentationDetent.medium
+            case let .height(height):
+                return PresentationDetent.height(height)
             }
         }
     }

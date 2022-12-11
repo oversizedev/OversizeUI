@@ -34,11 +34,7 @@ public struct Row: View {
     @Environment(\.multilineTextAlignment) var multilineTextAlignment
     @Environment(\.isPremium) var premiumStatus
     @Environment(\.isAccent) var isAccent
-
-    private enum Constants {
-        /// Spacing
-        static var spacingIconAndText: Space { Space.xxSmall }
-    }
+    @Environment(\.isLoading) var isLoading
 
     private let title: String
     private let subtitle: String?
@@ -51,6 +47,12 @@ public struct Row: View {
     private var isPremiumOption: Bool = false
 
     private var iconBackgroundColor: Color?
+
+    private var сlearAction: (() -> Void)?
+
+    private var isShowSubtitle: Bool {
+        (subtitle?.isEmpty) != nil
+    }
 
     public init(_ title: String,
                 subtitle: String? = nil,
@@ -113,6 +115,19 @@ public struct Row: View {
                     Spacer()
                 }
 
+                if сlearAction != nil {
+                    Button {
+                        сlearAction?()
+                    } label: {
+                        Icon(.xMini, color: .onSurfaceDisabled)
+                    }
+                }
+                
+                if isLoading {
+                    ProgressView()
+                        .padding(.trailing, .xSmall)
+                }
+
                 if let trallingType {
                     tralling(trallingType)
                         .padding(.leading, .xxSmall)
@@ -128,7 +143,6 @@ public struct Row: View {
         switch leadingType {
         case let .icon(icon):
             Icon(icon)
-                .padding(.trailing, Constants.spacingIconAndText)
 
         case let .image(image, color):
             image
@@ -136,8 +150,8 @@ public struct Row: View {
                 .resizable()
                 .scaledToFill()
                 .foregroundColor(color)
-                .frame(width: subtitle != nil ? 48 : 24, height: subtitle != nil ? 48 : 24)
-                .cornerRadius(subtitle != nil ? 4 : 2)
+                .frame(width: isShowSubtitle ? 48 : 24, height: isShowSubtitle ? 48 : 24)
+                .cornerRadius(isShowSubtitle ? 4 : 2)
 
         case let .avatar(avatar):
             avatar
@@ -148,7 +162,6 @@ public struct Row: View {
             }
             .surfaceStyle(.secondary)
             .surfaceBackgroundColor(iconBackgroundColor)
-            .padding(.trailing, Constants.spacingIconAndText)
             .controlPadding(.xxSmall)
 
         case let .imageOnSurface(image, color):
@@ -159,7 +172,6 @@ public struct Row: View {
             }
             .surfaceStyle(.secondary)
             .surfaceBackgroundColor(iconBackgroundColor)
-            .padding(.trailing, Constants.spacingIconAndText)
             .controlPadding(.xxSmall)
 
         case let .systemImage(systemImage):
@@ -167,7 +179,6 @@ public struct Row: View {
                 .foregroundColor(Color.onBackgroundHighEmphasis)
                 .font(.system(size: 24))
                 .frame(width: 24, height: 24, alignment: .center)
-                .padding(.trailing, Constants.spacingIconAndText)
 
         case let .view(view):
             view
@@ -204,7 +215,7 @@ public struct Row: View {
         case let .checkbox(isOn: isOn):
             ZStack {
                 RoundedRectangle(cornerRadius: Radius.small, style: .continuous)
-                    .stroke(Color.onSurfaceDisabled, lineWidth: 4)
+                    .strokeBorder(Color.onSurfaceDisabled, lineWidth: 2.5)
                     .frame(width: 24, height: 24)
                     .opacity(isOn.wrappedValue ? 0 : 1)
 
@@ -259,7 +270,7 @@ public struct Row: View {
             Text(title)
                 .headline(.semibold)
                 .foregroundColor(.onSurfaceHighEmphasis)
-            if let subtitle {
+            if let subtitle, !subtitle.isEmpty {
                 Text(subtitle)
                     .subheadline()
                     .foregroundColor(.onSurfaceMediumEmphasis)
@@ -324,13 +335,20 @@ public struct Row: View {
         control.iconBackgroundColor = color
         return control
     }
+
+    public func сlearAction(action: (() -> Void)?) -> Row {
+        var control = self
+        control.сlearAction = action
+        return control
+    }
 }
 
 public extension View {
-    func rowOnSurface(_ elevation: Elevation = .z4) -> some View {
+    func rowOnSurface(_ elevation: Elevation = .z4, backgroundColor: Color? = nil) -> some View {
         Surface {
             self.controlPadding(.zero)
         }
+        .surfaceBackgroundColor(backgroundColor)
         .elevation(elevation)
     }
 }

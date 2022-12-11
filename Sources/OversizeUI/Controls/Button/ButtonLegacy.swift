@@ -142,7 +142,7 @@ public struct ButtonStyleExtended: ButtonStyle {
                 )
                 .opacity(configuration.isPressed ? 0.9 : 1)
                 .scaleEffect(configuration.isPressed ? 0.95 : 1)
-                // .animation(.spring())
+
                 .shadowElevaton(shadow ? .z2 : .z0, color: Color.primary)
         }
     }
@@ -179,7 +179,6 @@ public struct ButtonStyleExtended: ButtonStyle {
                 )
                 .opacity(configuration.isPressed ? 0.9 : 1)
                 .scaleEffect(configuration.isPressed ? 0.95 : 1)
-                // .animation(.spring())
                 .shadowElevaton(shadow ? .z2 : .z0)
         }
     }
@@ -204,19 +203,18 @@ public struct ButtonStyleExtended: ButtonStyle {
                     RoundedRectangle(cornerRadius: rounded == .none ? 0 : rounded == .medium ? ButtonStyleExtended.Constants.radiusM : rounded == .small ? ButtonStyleExtended.Constants.radiusS :
                         size == .large ? ButtonStyleExtended.Constants.heightL / 2 : ButtonStyleExtended.Constants.heightM / 2,
                         style: .continuous)
-                        .fill(isEnabled ? Color.backgroundSecondary : Color.backgroundSecondary.opacity(0.9))
+                        .fill(isEnabled ? Color.surfaceSecondary : Color.surfaceSecondary.opacity(0.9))
                         .overlay(
                             RoundedRectangle(cornerRadius: rounded == .none ? 0 : rounded == .medium ? ButtonStyleExtended.Constants.radiusM : rounded == .small ? ButtonStyleExtended.Constants.radiusS :
                                 size == .large ? ButtonStyleExtended.Constants.heightL / 2 : ButtonStyleExtended.Constants.heightM / 2,
                                 style: .continuous)
                                 .stroke(isBordered
                                     ? Color.border
-                                    : isEnabled ? Color.backgroundSecondary : Color.backgroundSecondary.opacity(0.9), lineWidth: 1)
+                                    : isEnabled ? Color.surfaceSecondary : Color.surfaceSecondary.opacity(0.9), lineWidth: 1)
                         )
                 )
                 .opacity(configuration.isPressed ? 0.9 : 1)
                 .scaleEffect(configuration.isPressed ? 0.95 : 1)
-                // .animation(.spring())
                 .shadowElevaton(shadow ? .z2 : .z0)
         }
     }
@@ -236,7 +234,6 @@ public struct ButtonStyleExtended: ButtonStyle {
                        minHeight: size == .large ? ButtonStyleExtended.Constants.heightL : ButtonStyleExtended.Constants.heightM)
                 .opacity(configuration.isPressed ? 0.9 : 1)
                 .scaleEffect(configuration.isPressed ? 0.95 : 1)
-            // .animation(.spring())
         }
     }
 
@@ -256,7 +253,6 @@ public struct ButtonStyleExtended: ButtonStyle {
                        minHeight: size == .large ? ButtonStyleExtended.Constants.heightL : ButtonStyleExtended.Constants.heightM)
                 .opacity(configuration.isPressed ? 0.9 : 1)
                 .scaleEffect(configuration.isPressed ? 0.95 : 1)
-            // .animation(.spring())
         }
     }
 
@@ -276,7 +272,6 @@ public struct ButtonStyleExtended: ButtonStyle {
                        minHeight: size == .large ? ButtonStyleExtended.Constants.heightL : ButtonStyleExtended.Constants.heightM)
                 .opacity(configuration.isPressed ? 0.9 : 1)
                 .scaleEffect(configuration.isPressed ? 0.95 : 1)
-            // .animation(.spring())
         }
     }
 }

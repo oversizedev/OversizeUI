@@ -18,7 +18,7 @@ public enum ContenButtonType {
 
 public struct ContentView: View {
     @Environment(\.multilineTextAlignment) var multilineTextAlignment
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
 
     private let image: Image?
     private let title: String
@@ -75,14 +75,14 @@ extension ContentView {
         switch primaryButton {
         case .close:
 
-            Button(action: { presentationMode.wrappedValue.dismiss() }) {
+            Button(action: { dismiss() }) {
                 Icon(.xMini)
             }
             .style(.secondary)
 
         case .back:
 
-            Button(action: { presentationMode.wrappedValue.dismiss() }) {
+            Button(action: { dismiss() }) {
                 Icon(.arrowLeft)
             }
             .style(.secondary)
@@ -140,14 +140,14 @@ extension ContentView {
         switch secondaryButton {
         case .close:
 
-            Button(action: { presentationMode.wrappedValue.dismiss() }) {
+            Button(action: { dismiss() }) {
                 Icon(.xMini)
             }
             .style(.secondary)
 
         case .back:
 
-            Button(action: { presentationMode.wrappedValue.dismiss() }) {
+            Button(action: { dismiss() }) {
                 Icon(.arrowLeft)
             }
             .style(.secondary)
