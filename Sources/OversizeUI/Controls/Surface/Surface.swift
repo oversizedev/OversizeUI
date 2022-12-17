@@ -64,7 +64,7 @@ public struct Surface<Label: View>: View {
             .padding(.vertical, controlPadding.vertical)
             .background(
                 RoundedRectangle(cornerRadius: controlRadius,
-                                 style: .circular)
+                                 style: .continuous)
                     .fill(surfaceBackgroundColor)
                     .overlay(
                         RoundedRectangle(cornerRadius: controlRadius,
@@ -105,9 +105,14 @@ public struct Surface<Label: View>: View {
         return control
     }
 
-    public func surfaceBorderColor(_ border: Color? = Color.border, width: CGFloat? = nil) -> Surface {
+    public func surfaceBorderColor(_ border: Color? = Color.border) -> Surface {
         var control = self
         control.border = border
+        return control
+    }
+
+    public func surfaceBorderWidth(_ width: CGFloat) -> Surface {
+        var control = self
         control.borderWidth = width
         return control
     }

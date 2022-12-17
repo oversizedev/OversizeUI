@@ -38,7 +38,11 @@ public enum Radius {
 }
 
 public struct RadiusModifier: ViewModifier {
-    let radius: Radius
+    private let radius: Radius
+    public init(radius: Radius) {
+        self.radius = radius
+    }
+
     public func body(content: Content) -> some View {
         content.cornerRadius(radius.rawValue)
     }

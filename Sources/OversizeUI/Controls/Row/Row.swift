@@ -27,6 +27,10 @@ public enum RowLeadingType {
     case view(_ view: AnyView)
 }
 
+public enum RowClearIconStyle {
+    case `default`, onSurface
+}
+
 public struct Row: View {
     @Environment(\.elevation) private var elevation: Elevation
     @Environment(\.controlRadius) var controlRadius: Radius
@@ -48,6 +52,7 @@ public struct Row: View {
 
     private var iconBackgroundColor: Color?
 
+    private var сlearButtonStyle: RowClearIconStyle = .default
     private var сlearAction: (() -> Void)?
 
     private var isShowSubtitle: Bool {
@@ -109,24 +114,18 @@ public struct Row: View {
 
                 text
 
-                premiumLabel()
+                premiumLabel
 
                 if textAlignment == .leading || textAlignment == .center {
                     Spacer()
                 }
 
-                if сlearAction != nil {
-                    Button {
-                        сlearAction?()
-                    } label: {
-                        Icon(.xMini, color: .onSurfaceDisabled)
-                    }
-                }
-                
                 if isLoading {
                     ProgressView()
                         .padding(.trailing, .xSmall)
                 }
+
+                сlearButton
 
                 if let trallingType {
                     tralling(trallingType)
@@ -136,6 +135,24 @@ public struct Row: View {
         }
         .padding(.vertical, verticalPadding)
         .padding(.horizontal, controlPadding.horizontal)
+    }
+
+    @ViewBuilder
+    private var сlearButton: some View {
+        if сlearAction != nil {
+            Button {
+                сlearAction?()
+            } label: {
+                ZStack {
+                    Icon(.xMini, color: .onSurfaceDisabled)
+                        .background(
+                            RoundedRectangle(cornerRadius: .small, style: .continuous)
+                                .fillSurfaceSecondary()
+                                .opacity(сlearButtonStyle == .onSurface ? 1 : 0)
+                        )
+                }
+            }
+        }
     }
 
     @ViewBuilder
@@ -257,10 +274,9 @@ public struct Row: View {
 
         case let .button(text, action: action):
             Button(text, action: action)
-                .buttonStyle(.secondary)
+                .buttonStyle(.tertiary)
                 .controlBorderShape(.capsule)
                 .controlSize(.small)
-                .elevation(.z2)
                 .disabled(isPremiumOption && premiumStatus == false)
         }
     }
@@ -280,12 +296,10 @@ public struct Row: View {
     }
 
     @ViewBuilder
-    private func premiumLabel() -> some View {
+    private var premiumLabel: some View {
         if isPremiumOption, premiumStatus == false {
             PremiumLabel(text: "Pro", size: .small)
                 .padding(.leading, .small)
-        } else {
-            EmptyView()
         }
     }
 
@@ -336,8 +350,9 @@ public struct Row: View {
         return control
     }
 
-    public func сlearAction(action: (() -> Void)?) -> Row {
+    public func rowClearButton(style: RowClearIconStyle = .default, action: (() -> Void)?) -> Row {
         var control = self
+        control.сlearButtonStyle = style
         control.сlearAction = action
         return control
     }
