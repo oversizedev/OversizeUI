@@ -45,7 +45,7 @@ public struct OversizeButtonStyle: ButtonStyle {
     }
 
     @ViewBuilder
-    func background(for role: ButtonRole?) -> some View {
+    private func background(for role: ButtonRole?) -> some View {
         if type != .quaternary {
             switch controlBorderShape {
             case .capsule:
@@ -72,7 +72,7 @@ public struct OversizeButtonStyle: ButtonStyle {
     }
 
     /// Parameters
-    func backgroundColor(for role: ButtonRole?) -> Color {
+    private func backgroundColor(for role: ButtonRole?) -> Color {
         switch type {
         case .primary:
             switch role {
@@ -94,7 +94,7 @@ public struct OversizeButtonStyle: ButtonStyle {
         }
     }
 
-    func foregroundColor(for role: ButtonRole?) -> Color {
+    private func foregroundColor(for role: ButtonRole?) -> Color {
         switch type {
         case .primary:
             return Color.onPrimaryHighEmphasis
@@ -124,7 +124,7 @@ public struct OversizeButtonStyle: ButtonStyle {
     }
 
     @ViewBuilder
-    func loadingView(for role: ButtonRole?) -> some View {
+    private func loadingView(for role: ButtonRole?) -> some View {
         if isLoading {
             ProgressView()
                 .progressViewStyle(CircularProgressViewStyle(tint: foregroundColor(for: role)))
@@ -133,7 +133,7 @@ public struct OversizeButtonStyle: ButtonStyle {
         }
     }
 
-    var horizontalPadding: Space {
+    private var horizontalPadding: Space {
         switch controlSize {
         case .mini:
             return .xxSmall
@@ -148,7 +148,7 @@ public struct OversizeButtonStyle: ButtonStyle {
         }
     }
 
-    var verticalPadding: Space {
+    private var verticalPadding: Space {
         switch controlSize {
         case .mini:
             return .xxSmall
@@ -163,11 +163,11 @@ public struct OversizeButtonStyle: ButtonStyle {
         }
     }
 
-    var backgroundOpacity: CGFloat {
+    private var backgroundOpacity: CGFloat {
         isEnabled ? 1 : 0.5
     }
 
-    var foregroundOpacity: CGFloat {
+    private var foregroundOpacity: CGFloat {
         isEnabled ? 1 : 0.7
     }
 

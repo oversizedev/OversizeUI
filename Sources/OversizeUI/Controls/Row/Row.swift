@@ -5,28 +5,6 @@
 
 import SwiftUI
 
-public enum RowTrailingType {
-    case radio(isOn: Binding<Bool>)
-    case checkbox(isOn: Binding<Bool>)
-    case toggle(isOn: Binding<Bool>)
-    case toggleWithArrowButton(isOn: Binding<Bool>, action: (() -> Void)? = nil)
-    @available(watchOS, unavailable)
-    case timePicker(date: Binding<Date>)
-    case arrowIcon
-    case text(_ text: String)
-    case button(_ text: String, action: () -> Void)
-}
-
-public enum RowLeadingType {
-    case icon(_ name: IconsNames)
-    case iconOnSurface(_ name: IconsNames)
-    case image(_ image: Image, color: Color? = .onSurfaceHighEmphasis)
-    case imageOnSurface(_ image: Image, color: Color? = nil)
-    case systemImage(_ imageName: String)
-    case avatar(_ avatar: AvatarView)
-    case view(_ view: AnyView)
-}
-
 public enum RowClearIconStyle {
     case `default`, onSurface
 }
@@ -104,7 +82,7 @@ public struct Row: View {
         VStack(alignment: .leading) {
             HStack(spacing: .zero) {
                 if let leadingType {
-                    leading(leadingType)
+                    RowLeading(leadingType, isShowSubtitle: isShowSubtitle, iconBackgroundColor: iconBackgroundColor)
                         .padding(.trailing, .small)
                 }
 
@@ -128,13 +106,27 @@ public struct Row: View {
                 сlearButton
 
                 if let trallingType {
-                    tralling(trallingType)
+                    RowTrailing(trallingType, isPremiumOption: isPremiumOption)
                         .padding(.leading, .xxSmall)
                 }
             }
         }
         .padding(.vertical, verticalPadding)
         .padding(.horizontal, controlPadding.horizontal)
+    }
+
+    private var text: some View {
+        VStack(alignment: textAlignment, spacing: .xxxSmall) {
+            Text(title)
+                .headline(.semibold)
+                .foregroundColor(.onSurfaceHighEmphasis)
+            if let subtitle, !subtitle.isEmpty {
+                Text(subtitle)
+                    .subheadline()
+                    .foregroundColor(.onSurfaceMediumEmphasis)
+            }
+        }
+        .multilineTextAlignment(multilineTextAlignment)
     }
 
     @ViewBuilder
@@ -153,146 +145,6 @@ public struct Row: View {
                 }
             }
         }
-    }
-
-    @ViewBuilder
-    private func leading(_ leadingType: RowLeadingType) -> some View {
-        switch leadingType {
-        case let .icon(icon):
-            Icon(icon)
-
-        case let .image(image, color):
-            image
-                .renderingMode(color != nil ? .template : .original)
-                .resizable()
-                .scaledToFill()
-                .foregroundColor(color)
-                .frame(width: isShowSubtitle ? 48 : 24, height: isShowSubtitle ? 48 : 24)
-                .cornerRadius(isShowSubtitle ? 4 : 2)
-
-        case let .avatar(avatar):
-            avatar
-
-        case let .iconOnSurface(icon):
-            Surface {
-                Icon(icon)
-            }
-            .surfaceStyle(.secondary)
-            .surfaceBackgroundColor(iconBackgroundColor)
-            .controlPadding(.xxSmall)
-
-        case let .imageOnSurface(image, color):
-            Surface {
-                image
-                    .renderingMode(.template)
-                    .foregroundColor(color)
-            }
-            .surfaceStyle(.secondary)
-            .surfaceBackgroundColor(iconBackgroundColor)
-            .controlPadding(.xxSmall)
-
-        case let .systemImage(systemImage):
-            Image(systemName: systemImage)
-                .foregroundColor(Color.onBackgroundHighEmphasis)
-                .font(.system(size: 24))
-                .frame(width: 24, height: 24, alignment: .center)
-
-        case let .view(view):
-            view
-        }
-    }
-
-    // swiftlint:disable function_body_length
-    @ViewBuilder
-    private func tralling(_ trallingType: RowTrailingType) -> some View {
-        switch trallingType {
-        case let .toggle(isOn):
-            Toggle(isOn: isOn) {}
-                .labelsHidden()
-                .disabled(isPremiumOption && premiumStatus == false)
-
-        case let .radio(isOn: isOn):
-            ZStack {
-                Circle()
-                    .stroke(Color.onSurfaceDisabled, lineWidth: 4)
-                    .frame(width: 24, height: 24)
-                    .cornerRadius(12)
-                    .opacity(isOn.wrappedValue ? 0 : 1)
-
-                Circle().fill(Color.accent)
-                    .frame(width: 24, height: 24)
-                    .cornerRadius(12)
-                    .opacity(isOn.wrappedValue ? 1 : 0)
-
-                Circle().fill(Color.white).frame(width: 8, height: 8)
-                    .cornerRadius(4)
-                    .opacity(isOn.wrappedValue ? 1 : 0)
-            }
-
-        case let .checkbox(isOn: isOn):
-            ZStack {
-                RoundedRectangle(cornerRadius: Radius.small, style: .continuous)
-                    .strokeBorder(Color.onSurfaceDisabled, lineWidth: 2.5)
-                    .frame(width: 24, height: 24)
-                    .opacity(isOn.wrappedValue ? 0 : 1)
-
-                RoundedRectangle(cornerRadius: Radius.small, style: .continuous).fill(Color.accent)
-                    .frame(width: 24, height: 24)
-                    .opacity(isOn.wrappedValue ? 1 : 0)
-
-                Image(systemName: "checkmark")
-                    .font(.caption.weight(.black))
-                    .foregroundColor(.onPrimaryHighEmphasis)
-                    .opacity(isOn.wrappedValue ? 1 : 0)
-            }
-
-        case let .toggleWithArrowButton(isOn: isOn, action: action):
-            HStack {
-                Toggle(isOn: isOn) {}
-                    .labelsHidden()
-
-                Button(action: action ?? {}, label: {
-                    Icon(.chevronRight, color: .onSurfaceDisabled)
-                })
-            }
-            .disabled(isPremiumOption && premiumStatus == false)
-
-        case .arrowIcon:
-            Icon(.chevronRight, color: .onSurfaceDisabled)
-
-        case let .timePicker(date: date):
-            #if os(watchOS)
-                EmptyView()
-            #elseif os(iOS)
-                DatePicker("", selection: date, displayedComponents: .hourAndMinute)
-                    .labelsHidden()
-            #endif
-        case let .text(text):
-            Text(text)
-                .subheadline()
-                .foregroundColor(.onSurfaceMediumEmphasis)
-
-        case let .button(text, action: action):
-            Button(text, action: action)
-                .buttonStyle(.tertiary)
-                .controlBorderShape(.capsule)
-                .controlSize(.small)
-                .disabled(isPremiumOption && premiumStatus == false)
-        }
-    }
-
-    private var text: some View {
-        VStack(alignment: textAlignment, spacing: .xxxSmall) {
-            Text(title)
-                .headline(.semibold)
-                .foregroundColor(.onSurfaceHighEmphasis)
-            if let subtitle, !subtitle.isEmpty {
-                Text(subtitle)
-                    .subheadline()
-                    .foregroundColor(.onSurfaceMediumEmphasis)
-            }
-        }
-        .multilineTextAlignment(multilineTextAlignment)
     }
 
     @ViewBuilder
@@ -365,20 +217,6 @@ public extension View {
         }
         .surfaceBackgroundColor(backgroundColor)
         .elevation(elevation)
-    }
-}
-
-public struct RowActionButtonStyle: ButtonStyle {
-    public func makeBody(configuration: Self.Configuration) -> some View {
-        configuration.label
-            .background(configuration.isPressed ? Color.surfaceSecondary : Color.clear)
-            .contentShape(Rectangle())
-    }
-}
-
-public extension ButtonStyle where Self == RowActionButtonStyle {
-    static var row: RowActionButtonStyle {
-        RowActionButtonStyle()
     }
 }
 

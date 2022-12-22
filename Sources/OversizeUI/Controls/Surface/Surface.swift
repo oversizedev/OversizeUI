@@ -69,7 +69,7 @@ public struct Surface<Label: View>: View {
                     .overlay(
                         RoundedRectangle(cornerRadius: controlRadius,
                                          style: .continuous)
-                            .stroke(
+                            .strokeBorder(
                                 border != nil ? border ?? Color.clear
                                     : theme.borderSurface
                                     ? Color.border
@@ -77,6 +77,9 @@ public struct Surface<Label: View>: View {
                             )
                     )
                     .shadowElevaton(elevation)
+            )
+            .clipShape(
+                RoundedRectangle(cornerRadius: controlRadius, style: .continuous)
             )
     }
 

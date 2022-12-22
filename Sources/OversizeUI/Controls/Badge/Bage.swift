@@ -27,7 +27,7 @@ public struct Bage<Label: View>: View {
         .padding(.horizontal, 6)
         .background(
             RoundedRectangle(cornerRadius: controlRadius,
-                             style: .circular)
+                             style: .continuous)
                 .fill(color.opacity(0.1))
                 .overlay(
                     RoundedRectangle(cornerRadius: controlRadius,

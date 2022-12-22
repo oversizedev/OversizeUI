@@ -37,10 +37,6 @@ public struct SectionView<Content: View>: View {
                     .controlPadding(.medium)
             }
             .controlPadding(.zero)
-            .clipShape(
-                RoundedRectangle(cornerRadius: Constants.radiusMedium,
-                                 style: .circular)
-            )
         }
         .paddingContent(.horizontal)
         .padding(.vertical, Space.small)
