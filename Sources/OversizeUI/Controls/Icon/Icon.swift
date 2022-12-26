@@ -204,6 +204,7 @@ public enum IconsNames: String, CaseIterable {
     case plusCircle = "plus-circle"
     case plusSquare = "plus-square"
     case plus
+    case plusMini = "plus-mini"
     case pocket
     case power
     case printer
@@ -350,6 +351,12 @@ public struct Icon: View {
         case .xLarge:
             return Constants.xLarge
         }
+    }
+
+    public func iconColor(_ color: Color) -> Icon {
+        var control = self
+        control.color = color
+        return control
     }
 }
 
