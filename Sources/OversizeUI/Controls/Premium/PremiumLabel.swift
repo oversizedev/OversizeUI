@@ -33,11 +33,11 @@ public struct PremiumLabel: View {
                 if let image {
                     image
                         .renderingMode(.template)
-                        .foregroundColor(isMonohrom ? Color(hex: "B75375") : .onPrimaryHighEmphasis)
+                        .foregroundColor(isMonohrom ? Color(red: 0.718, green: 0.325, blue: 0.459) : .onPrimaryHighEmphasis)
                 }
                 Text(text)
                     .font(.system(size: fontSize, weight: .heavy))
-                    .foregroundColor(isMonohrom ? Color(hex: "B75375") : .onPrimaryHighEmphasis)
+                    .foregroundColor(isMonohrom ? Color(red: 0.718, green: 0.325, blue: 0.459) : .onPrimaryHighEmphasis)
             }
             .padding(.leading, leadingPadding)
             .padding(.trailing, trailingPadding)
@@ -50,12 +50,12 @@ public struct PremiumLabel: View {
                         .fill(Color.onPrimaryHighEmphasis)
                 } else {
                     RoundedRectangle(cornerRadius: radius, style: .continuous)
-                        .fill(LinearGradient(gradient: Gradient(
-                                colors: [Color(hex: "EAAB44"),
-                                         Color(hex: "D24A44"),
-                                         Color(hex: "9C5BA2"),
-                                         Color(hex: "4B5B94")]),
-                            startPoint: .topLeading, endPoint: .bottomTrailing))
+                        .fill(LinearGradient(gradient: Gradient( colors: [
+                                                        Color(red: 0.918, green: 0.671, blue: 0.267),
+                                                        Color(red: 0.824, green: 0.29, blue: 0.267),
+                                                        Color(red: 0.612, green: 0.357, blue: 0.635),
+                                                        Color(red: 0.294, green: 0.357, blue: 0.58)]),
+                                             startPoint: .topLeading, endPoint: .bottomTrailing))
                 }
             }
         }
