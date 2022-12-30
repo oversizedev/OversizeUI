@@ -5,7 +5,6 @@
 
 import SwiftUI
 
-
 extension Array: RawRepresentable where Element: Codable {
     public init?(rawValue: String) {
         guard let data = rawValue.data(using: .utf8),

@@ -50,12 +50,13 @@ public struct PremiumLabel: View {
                         .fill(Color.onPrimaryHighEmphasis)
                 } else {
                     RoundedRectangle(cornerRadius: radius, style: .continuous)
-                        .fill(LinearGradient(gradient: Gradient( colors: [
-                                                        Color(red: 0.918, green: 0.671, blue: 0.267),
-                                                        Color(red: 0.824, green: 0.29, blue: 0.267),
-                                                        Color(red: 0.612, green: 0.357, blue: 0.635),
-                                                        Color(red: 0.294, green: 0.357, blue: 0.58)]),
-                                             startPoint: .topLeading, endPoint: .bottomTrailing))
+                        .fill(LinearGradient(gradient: Gradient(colors: [
+                                Color(red: 0.918, green: 0.671, blue: 0.267),
+                                Color(red: 0.824, green: 0.29, blue: 0.267),
+                                Color(red: 0.612, green: 0.357, blue: 0.635),
+                                Color(red: 0.294, green: 0.357, blue: 0.58),
+                            ]),
+                            startPoint: .topLeading, endPoint: .bottomTrailing))
                 }
             }
         }
