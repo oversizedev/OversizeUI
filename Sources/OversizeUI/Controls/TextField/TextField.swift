@@ -53,7 +53,7 @@ public struct OverPlaceholderTextFieldStyle: TextFieldStyle {
         VStack(alignment: .leading) {
             HStack {
                 Text(placeholder)
-                    .subheadline()
+                    .subheadline(.semibold)
                     .foregroundColor(.onSurfaceHighEmphasis)
                 Spacer()
             }
@@ -95,7 +95,7 @@ public struct InsidePlaceholderTextFieldStyle: TextFieldStyle {
             VStack(alignment: .leading) {
                 HStack {
                     Text(placeholder)
-                        .subheadline()
+                        .subheadline(.semibold)
                         .foregroundColor(.onSurfaceHighEmphasis)
                     Spacer()
                 }
@@ -121,6 +121,24 @@ public struct InsidePlaceholderTextFieldStyle: TextFieldStyle {
     }
 }
 
+public extension TextFieldStyle where Self == DefaultPlaceholderTextFieldStyle {
+    static var `default`: DefaultPlaceholderTextFieldStyle {
+        DefaultPlaceholderTextFieldStyle()
+    }
+}
+
+public extension TextFieldStyle where Self == OverPlaceholderTextFieldStyle {
+    static func placeholder(_ placeholder: String) -> OverPlaceholderTextFieldStyle {
+        OverPlaceholderTextFieldStyle(placeholder: placeholder)
+    }
+}
+
+public extension TextFieldStyle where Self == InsidePlaceholderTextFieldStyle {
+    static func placeholderInside(_ placeholder: String) -> InsidePlaceholderTextFieldStyle {
+        InsidePlaceholderTextFieldStyle(placeholder: placeholder)
+    }
+}
+
 public struct TextFieldModifier: ViewModifier {
     @Environment(\.theme) private var theme: ThemeSettings
     @Binding public var helperText: String
@@ -136,15 +154,15 @@ public struct TextFieldModifier: ViewModifier {
             if helperText != "" {
                 if helperStyle == .helperText {
                     Text(helperText)
-                        .subheadline()
+                        .subheadline(.semibold)
                         .foregroundColor(.onSurfaceMediumEmphasis)
                 } else if helperStyle == .errorText {
                     Text(helperText)
-                        .subheadline()
+                        .subheadline(.semibold)
                         .foregroundColor(.error)
                 } else if helperStyle == .sussesText {
                     Text(helperText)
-                        .subheadline()
+                        .subheadline(.semibold)
                         .foregroundColor(.success)
                 }
             }
