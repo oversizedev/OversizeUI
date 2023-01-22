@@ -115,7 +115,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
 
                            .buttonStyle(PlainButtonStyle())
                            .background(GeometryReader { proxy in
-                               Color.clear.onAppear { frames[index] = proxy.frame(in: .global) }
+                               Color.clear.onAppear { DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { frames[index] = proxy.frame(in: .global) } }
                            })
                            .alignmentGuide(.horizontalCenterAlignment,
                                            isActive: selectedIndex == index) { dimensions in
