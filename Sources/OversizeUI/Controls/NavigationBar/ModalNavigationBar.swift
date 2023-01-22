@@ -18,6 +18,7 @@ public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar:
     private var bigTitle: Bool
     private let modalityPresent: Bool
     private let alwaysSlideSmallTile: Bool
+    private let isDisableScrollShadow: Bool
 
     @Binding public var offset: CGPoint
 
@@ -25,8 +26,11 @@ public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar:
 
     private let background: Color
 
+    @Namespace var titleName
+
     public init(title: String,
                 bigTitle: Bool = true,
+                isDisableScrollShadow: Bool = false,
                 offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
                 background: Color = Color.backgroundPrimary,
                 modalityPresent: Bool = true,
@@ -46,85 +50,99 @@ public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar:
         self.background = background
         self.modalityPresent = modalityPresent
         self.alwaysSlideSmallTile = alwaysSlideSmallTile
+        self.isDisableScrollShadow = isDisableScrollShadow
     }
 
     public var body: some View {
         ZStack(alignment: .top) {
             if bigTitle {
-                VStack(alignment: .leading) {
-                    Spacer()
-
-                    HStack(spacing: .zero) {
-                        Text(title)
-                            .largeTitle()
-                            .opacity(largeTitleOpacity)
-                            .padding(.bottom, 8)
-                        // .rotation3DEffect(.degrees(Double(offset.y)), axis: (x: 1, y: 0, z: 0))
-
-                        titleLabel()
-
-                        Spacer()
-                    }
-                }
-                .frame(maxHeight: headerHeight)
-                .padding(.leading, screenSize.safeAreaLeading)
-                .padding(.trailing, screenSize.safeAreaTrailing)
+                bigTitleView
 
                 Rectangle()
                     .fill(Color.surfacePrimary)
                     .frame(maxWidth: .infinity, maxHeight: 60, alignment: .top)
                     .blur(radius: blurValue)
                     .offset(x: -20)
-                    .opacity(smallBackgroundOpacity)
+                    .opacity(min(smallBackgroundOpacity, 1))
+                    .ignoresSafeArea(.all)
             }
 
-            VStack(spacing: 20) {
-                ZStack {
-                    HStack {
-                        leadingBar()
-
-                        Spacer()
-                    }
-
-                    HStack(spacing: .zero) {
-                        Spacer()
-
-                        Text(title)
-                            .title3()
-                            .multilineTextAlignment(.center)
-                            .frame(minHeight: 40)
-                            .opacity(smallTitleOpacity)
-                            .offset(y: -smmallTitleOffset)
-
-                        titleLabel()
-
-                        Spacer()
-                    }
-
-                    HStack {
-                        Spacer()
-
-                        trailingBar()
-                    }
-                }
-
-                bottomBar()
-            }
-            .padding(.leading, screenSize.safeAreaLeading)
-            .padding(.trailing, screenSize.safeAreaTrailing)
+            smallTitleView
         }
-        .padding(.top, modalityPresent ? screenSize.safeAreaTop + 20 : 20)
+        .padding(.top, 20)
         .padding(.horizontal, 20)
         .padding(.bottom, bigTitle ? 0 : 20)
-        .background(Color.surfacePrimary.opacity(smallBackgroundOpacity))
-        .clipped()
-        .shadow(color: Color.black.opacity(min(sadowOpacity, 0.08)),
-                radius: max(offset.y * 0, 1, 8),
-                x: 0,
-                y: 2)
+        .background {
+            Rectangle()
+                .fill(Color.surfacePrimary.opacity(min(smallBackgroundOpacity, 1)))
+                .shadow(color: Color.black.opacity(min(shadowOpacity, 0.08)),
+                        radius: max(offset.y * 0, 1, 8),
+                        x: 0,
+                        y: 2)
+                .ignoresSafeArea()
+        }
         #if os(iOS)
-            .navigationBarHidden(true)
+        .navigationBarHidden(true)
         #endif
+    }
+
+    private var smallTitleView: some View {
+        VStack(spacing: 20) {
+            ZStack {
+                HStack {
+                    leadingBar()
+
+                    Spacer()
+                }
+
+                HStack(spacing: .zero) {
+                    Spacer()
+
+                    Text(title)
+                        .title3()
+                        .multilineTextAlignment(.center)
+                        .frame(minHeight: 40)
+                        .opacity(min(smallTitleOpacity, 1))
+                        .offset(y: -smmallTitleOffset)
+                    // .matchedGeometryEffect(id: "titleName", in: titleName, properties: .position, anchor: .center, isSource: true)
+
+                    titleLabel()
+
+                    Spacer()
+                }
+
+                HStack {
+                    Spacer()
+
+                    trailingBar()
+                }
+            }
+
+            bottomBar()
+        }
+        .padding(.leading, screenSize.safeAreaLeading)
+        .padding(.trailing, screenSize.safeAreaTrailing)
+    }
+
+    private var bigTitleView: some View {
+        VStack(alignment: .leading) {
+            Spacer()
+
+            HStack(spacing: .zero) {
+                Text(title)
+                    .largeTitle()
+                    .opacity(min(largeTitleOpacity, 1))
+                    .padding(.bottom, 8)
+                // .matchedGeometryEffect(id: "titleName", in: titleName,  properties: .position, anchor: .leading, isSource: true)
+
+                titleLabel()
+
+                Spacer()
+            }
+        }
+        .frame(maxHeight: headerHeight)
+        .padding(.leading, screenSize.safeAreaLeading)
+        .padding(.trailing, screenSize.safeAreaTrailing)
     }
 
     private var smallTitleOpacity: Double {
@@ -143,8 +161,12 @@ public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar:
         }
     }
 
-    private var sadowOpacity: Double {
-        Double(offset.y * 0.001)
+    private var shadowOpacity: Double {
+        if isDisableScrollShadow {
+            return 0
+        } else {
+            return Double(offset.y * 0.001)
+        }
     }
 
     private var largeTitleOpacity: Double {
@@ -211,6 +233,7 @@ public extension ModalNavigationBar
     init(title: String,
          bigTitle: Bool = true,
          background: Color = Color.backgroundPrimary,
+         isDisableScrollShadow: Bool = false,
          offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
          modalityPresent: Bool = true,
          alwaysSlideSmallTile: Bool = false)
@@ -221,6 +244,7 @@ public extension ModalNavigationBar
         _offset = offset
         self.modalityPresent = modalityPresent
         self.alwaysSlideSmallTile = alwaysSlideSmallTile
+        self.isDisableScrollShadow = isDisableScrollShadow
         leadingBar = { nil }
         trailingBar = { nil }
         bottomBar = { nil }
@@ -236,6 +260,7 @@ public extension ModalNavigationBar
     init(title: String,
          bigTitle: Bool = true,
          background: Color = Color.backgroundPrimary,
+         isDisableScrollShadow: Bool = false,
          offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
          modalityPresent: Bool = true,
          alwaysSlideSmallTile: Bool = false,
@@ -250,6 +275,7 @@ public extension ModalNavigationBar
         self.trailingBar = trailingBar
         self.modalityPresent = modalityPresent
         self.alwaysSlideSmallTile = alwaysSlideSmallTile
+        self.isDisableScrollShadow = isDisableScrollShadow
         bottomBar = { nil }
         titleLabel = { nil }
     }
@@ -264,6 +290,7 @@ public extension ModalNavigationBar
     init(title: String,
          bigTitle: Bool = true,
          background: Color = Color.backgroundPrimary,
+         isDisableScrollShadow: Bool = false,
          offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
          modalityPresent: Bool = true,
          alwaysSlideSmallTile: Bool = false,
@@ -276,6 +303,7 @@ public extension ModalNavigationBar
         self.leadingBar = leadingBar
         self.modalityPresent = modalityPresent
         self.alwaysSlideSmallTile = alwaysSlideSmallTile
+        self.isDisableScrollShadow = isDisableScrollShadow
         trailingBar = { nil }
         bottomBar = { nil }
         titleLabel = { nil }
@@ -291,6 +319,7 @@ public extension ModalNavigationBar
     init(title: String,
          bigTitle: Bool = true,
          background: Color = Color.backgroundPrimary,
+         isDisableScrollShadow: Bool = false,
          offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
          modalityPresent: Bool = true,
          alwaysSlideSmallTile: Bool = false,
@@ -302,6 +331,7 @@ public extension ModalNavigationBar
         _offset = offset
         self.modalityPresent = modalityPresent
         self.alwaysSlideSmallTile = alwaysSlideSmallTile
+        self.isDisableScrollShadow = isDisableScrollShadow
         leadingBar = { nil }
         self.trailingBar = trailingBar
         bottomBar = { nil }
@@ -318,6 +348,7 @@ public extension ModalNavigationBar
     init(title: String,
          bigTitle: Bool = true,
          background: Color = Color.backgroundPrimary,
+         isDisableScrollShadow: Bool = false,
          offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
          modalityPresent: Bool = true,
          alwaysSlideSmallTile: Bool = false,
@@ -329,6 +360,7 @@ public extension ModalNavigationBar
         _offset = offset
         self.modalityPresent = modalityPresent
         self.alwaysSlideSmallTile = alwaysSlideSmallTile
+        self.isDisableScrollShadow = isDisableScrollShadow
         leadingBar = { nil }
         trailingBar = { nil }
         self.bottomBar = bottomBar
@@ -344,6 +376,7 @@ public extension ModalNavigationBar
     init(title: String,
          bigTitle: Bool = true,
          background: Color = Color.backgroundPrimary,
+         isDisableScrollShadow: Bool = false,
          offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
          modalityPresent: Bool = true,
          alwaysSlideSmallTile: Bool = false,
@@ -355,6 +388,7 @@ public extension ModalNavigationBar
         self.background = background
         self.modalityPresent = modalityPresent
         self.alwaysSlideSmallTile = alwaysSlideSmallTile
+        self.isDisableScrollShadow = isDisableScrollShadow
         _offset = offset
         leadingBar = { nil }
         self.trailingBar = trailingBar
@@ -371,6 +405,7 @@ public extension ModalNavigationBar
     init(title: String,
          bigTitle: Bool = true,
          background: Color = Color.backgroundPrimary,
+         isDisableScrollShadow: Bool = false,
          offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
          modalityPresent: Bool = true,
          alwaysSlideSmallTile: Bool = false,
@@ -382,6 +417,7 @@ public extension ModalNavigationBar
         self.background = background
         self.modalityPresent = modalityPresent
         self.alwaysSlideSmallTile = alwaysSlideSmallTile
+        self.isDisableScrollShadow = isDisableScrollShadow
         _offset = offset
         self.leadingBar = leadingBar
         trailingBar = { nil }
@@ -399,6 +435,7 @@ public extension ModalNavigationBar
     init(title: String,
          bigTitle: Bool = true,
          background: Color = Color.backgroundPrimary,
+         isDisableScrollShadow: Bool = false,
          offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
          modalityPresent: Bool = true,
          alwaysSlideSmallTile: Bool = false,
@@ -410,6 +447,7 @@ public extension ModalNavigationBar
         _offset = offset
         self.modalityPresent = modalityPresent
         self.alwaysSlideSmallTile = alwaysSlideSmallTile
+        self.isDisableScrollShadow = isDisableScrollShadow
         leadingBar = { nil }
         trailingBar = { nil }
         bottomBar = { nil }
@@ -424,6 +462,7 @@ public extension ModalNavigationBar
     init(title: String,
          bigTitle: Bool = true,
          background: Color = Color.backgroundPrimary,
+         isDisableScrollShadow: Bool = false,
          offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
          modalityPresent: Bool = true,
          alwaysSlideSmallTile: Bool = false,
@@ -437,6 +476,7 @@ public extension ModalNavigationBar
         _offset = offset
         self.modalityPresent = modalityPresent
         self.alwaysSlideSmallTile = alwaysSlideSmallTile
+        self.isDisableScrollShadow = isDisableScrollShadow
         self.leadingBar = leadingBar
         trailingBar = { nil }
         self.bottomBar = bottomBar
@@ -451,6 +491,7 @@ public extension ModalNavigationBar
     init(title: String,
          bigTitle: Bool = true,
          background: Color = Color.backgroundPrimary,
+         isDisableScrollShadow: Bool = false,
          offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
          modalityPresent: Bool = true,
          alwaysSlideSmallTile: Bool = false,
@@ -464,6 +505,7 @@ public extension ModalNavigationBar
         _offset = offset
         self.modalityPresent = modalityPresent
         self.alwaysSlideSmallTile = alwaysSlideSmallTile
+        self.isDisableScrollShadow = isDisableScrollShadow
         self.trailingBar = trailingBar
         leadingBar = { nil }
         self.bottomBar = bottomBar
@@ -479,6 +521,7 @@ public extension ModalNavigationBar
     init(title: String,
          bigTitle: Bool = true,
          background: Color = Color.backgroundPrimary,
+         isDisableScrollShadow: Bool = false,
          offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
          modalityPresent: Bool = true,
          alwaysSlideSmallTile: Bool = false,
@@ -491,6 +534,7 @@ public extension ModalNavigationBar
         _offset = offset
         self.modalityPresent = modalityPresent
         self.alwaysSlideSmallTile = alwaysSlideSmallTile
+        self.isDisableScrollShadow = isDisableScrollShadow
         self.leadingBar = leadingBar
         trailingBar = { nil }
         bottomBar = { nil }
@@ -506,6 +550,7 @@ public extension ModalNavigationBar
     init(title: String,
          bigTitle: Bool = true,
          background: Color = Color.backgroundPrimary,
+         isDisableScrollShadow: Bool = false,
          offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
          modalityPresent: Bool = true,
          alwaysSlideSmallTile: Bool = false,
@@ -518,6 +563,7 @@ public extension ModalNavigationBar
         _offset = offset
         self.modalityPresent = modalityPresent
         self.alwaysSlideSmallTile = alwaysSlideSmallTile
+        self.isDisableScrollShadow = isDisableScrollShadow
         self.trailingBar = trailingBar
         leadingBar = { nil }
         bottomBar = { nil }

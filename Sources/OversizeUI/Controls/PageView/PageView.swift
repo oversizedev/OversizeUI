@@ -13,6 +13,7 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
     private var isModalable = false
     private var isLargeTitle = false
     private var isAlwaysSlideSmallTile = false
+    private var isDisableScrollShadow: Bool = false
     @State private var offset: CGPoint = .init(x: 0, y: 0)
 
     private var leadingBar: LeadingBar?
@@ -36,38 +37,41 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
     }
 
     public var body: some View {
-        VStack(spacing: .zero) {
-            if title != nil || leadingBar != nil || trailingBar != nil || topToolbar != nil || titleLabel != nil {
-                ModalNavigationBar(
-                    title: title ?? "",
-                    bigTitle: isLargeTitle,
-                    offset: $offset,
-                    modalityPresent: !isModalable,
-                    alwaysSlideSmallTile: isAlwaysSlideSmallTile,
-                    leadingBar: { leadingBar },
-                    trailingBar: { trailingBar },
-                    bottomBar: { topToolbar },
-                    titleLabel: { titleLabel }
-                )
-                .overlay(alignment: .bottom) {
-                    if let navigationBarDividerColor {
-                        Rectangle()
-                            .fill(navigationBarDividerColor)
-                            .frame(height: 1)
-                            .offset(y: 1)
-                    }
-                }
-                .ignoresSafeArea(edges: .horizontal)
-                .zIndex(999_999_999)
-            }
-            ScrollViewOffset(offset: $offset) {
-                content
-            }
+        ScrollViewOffset(offset: $offset) {
+            content
         }
-        .ignoresSafeArea(edges: .top)
         .background(background.ignoresSafeArea())
+        .safeAreaInset(edge: .top) { header }
         .onChange(of: offset) { offset in
             onOffsetChanged(offset.y)
+        }
+    }
+
+    @ViewBuilder
+    var header: some View {
+        if title != nil || leadingBar != nil || trailingBar != nil || topToolbar != nil || titleLabel != nil {
+            ModalNavigationBar(
+                title: title ?? "",
+                bigTitle: isLargeTitle,
+                isDisableScrollShadow: isDisableScrollShadow,
+                offset: $offset,
+                modalityPresent: !isModalable,
+                alwaysSlideSmallTile: isAlwaysSlideSmallTile,
+                leadingBar: { leadingBar },
+                trailingBar: { trailingBar },
+                bottomBar: { topToolbar },
+                titleLabel: { titleLabel }
+            )
+            .overlay(alignment: .bottom) {
+                if let navigationBarDividerColor {
+                    Rectangle()
+                        .fill(navigationBarDividerColor)
+                        .frame(height: 1)
+                        .offset(y: 1)
+                }
+            }
+            .ignoresSafeArea(edges: .horizontal)
+            .zIndex(999_999_999)
         }
     }
 
@@ -84,6 +88,12 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
     public func modalable(_ isModalable: Bool = true) -> PageView {
         var control = self
         control.isModalable = isModalable
+        return control
+    }
+
+    public func disableScrollShadow(_ isDisableScrollShadow: Bool = true) -> PageView {
+        var control = self
+        control.isDisableScrollShadow = isDisableScrollShadow
         return control
     }
 
