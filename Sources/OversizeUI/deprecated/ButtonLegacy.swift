@@ -279,22 +279,22 @@ public struct ButtonStyleExtended: ButtonStyle {
 public extension Button {
     /// Changes the appearance of the button
 
-    // @available(*, deprecated, message: "Use native buttonStyle")
+    @available(*, deprecated, message: "Use native buttonStyle")
     func style(_ style: LegacyButtonType) -> some View {
         buttonStyle(ButtonStyleExtended(style: style))
     }
 
-    // @available(*, deprecated, message: "Use native buttonStyle")
+    @available(*, deprecated, message: "Use native buttonStyle")
     func style(_ style: LegacyButtonType, size: ButtonSize) -> some View {
         buttonStyle(ButtonStyleExtended(style: style, size: size))
     }
 
-    // @available(*, deprecated, message: "Use native buttonStyle")
+    @available(*, deprecated, message: "Use native buttonStyle")
     func style(_ style: LegacyButtonType, size: ButtonSize, shadow: Bool) -> some View {
         buttonStyle(ButtonStyleExtended(style: style, size: size, shadow: shadow))
     }
 
-    // @available(*, deprecated, message: "Use native buttonStyle")
+    @available(*, deprecated, message: "Use native buttonStyle")
     func style(_ style: LegacyButtonType, size: ButtonSize, rounded: ButtonRounded, width: ButtonWidth = .standart, shadow: Bool) -> some View {
         buttonStyle(ButtonStyleExtended(style: style, size: size, rounded: rounded, width: width, shadow: shadow))
     }

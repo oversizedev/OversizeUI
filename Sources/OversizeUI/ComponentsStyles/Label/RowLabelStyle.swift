@@ -32,7 +32,6 @@ public struct RowLabelStyle: LabelStyle {
                         .foregroundColor(.onSurfaceMediumEmphasis)
                 }
             }
-            .multilineTextAlignment(multilineTextAlignment)
         }
         .multilineTextAlignment(multilineTextAlignment)
     }

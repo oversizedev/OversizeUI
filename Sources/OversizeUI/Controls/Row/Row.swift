@@ -46,7 +46,7 @@ public struct Row: View {
         self.action = action
     }
 
-    // @available(*, deprecated, message: "Use row modificators")
+    @available(*, deprecated, message: "Use row modificators")
     public init(_ title: String,
                 subtitle: String? = nil,
                 leadingType: RowLeadingType? = nil,

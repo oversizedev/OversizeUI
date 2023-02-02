@@ -39,7 +39,7 @@ public enum Palette: String {
         }
     }
 
-    public static var base: [Palette] = [.red, .orange, .yellow, .green, .blue, pink, .gray, black]
+    public static var base: [Palette] = [.red, .orange, .yellow, .green, .blue, .pink, .gray, .black]
     public static var baseColors: [Color] = base.compactMap { color in
         color.color
     }
