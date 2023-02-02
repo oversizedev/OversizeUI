@@ -33,6 +33,7 @@ public struct ContentPaddingModifier: ViewModifier {
 }
 
 public extension View {
+    @_disfavoredOverload
     func padding(_ edges: Edge.Set, _ length: Space) -> some View {
         modifier(PaddingModifier(edges: edges, length: length))
     }

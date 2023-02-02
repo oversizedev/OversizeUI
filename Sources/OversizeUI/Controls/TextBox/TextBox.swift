@@ -42,7 +42,7 @@ public struct TextBox: View {
         .multilineTextAlignment(multilineTextAlignment)
     }
 
-    var textSpacing: Space {
+    private var textSpacing: Space {
         if let spacing {
             return spacing
         } else {
@@ -68,7 +68,7 @@ public struct TextBox: View {
         }
     }
 
-    var titleText: some View {
+    private var titleText: some View {
         Group {
             switch size {
             case .small:

@@ -144,56 +144,58 @@ extension ContentView {
             Button(action: { dismiss() }) {
                 Icon(.xMini)
             }
-            .style(.secondary)
+            .buttonStyle(.secondary)
 
         case .back:
 
             Button(action: { dismiss() }) {
                 Icon(.arrowLeft)
             }
-            .style(.secondary)
+            .buttonStyle(.secondary)
 
         case let .secondary(text, action: action):
 
             Button(action: action) {
                 Text(text)
             }
-            .style(.secondary)
+            .buttonStyle(.secondary)
 
         case let .accent(text, action: action):
 
             Button(action: action) {
                 Text(text)
             }
-            .style(.accent)
+            .buttonStyle(.primary)
+            .accent()
 
         case let .primary(text, action: action):
 
             Button(action: action) {
                 Text(text)
             }
-            .style(.primary)
+            .buttonStyle(.primary)
+            .accent()
 
         case let .closeAction(action: action):
 
             Button(action: action) {
                 Icon(.xMini)
             }
-            .style(.secondary)
+            .buttonStyle(.secondary)
 
         case let .backAction(action: action):
 
             Button(action: action) {
                 Icon(.arrowLeft)
             }
-            .style(.secondary)
+            .buttonStyle(.secondary)
 
         case let .disabled(text):
 
             Button(action: {}) {
                 Text(text)
             }
-            .style(.gray)
+            .buttonStyle(.tertiary)
             .disabled(true)
 
         case .none:

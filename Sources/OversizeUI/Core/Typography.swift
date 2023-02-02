@@ -165,7 +165,7 @@ public extension View {
         modifier(Typography(fontStyle: style))
     }
 
-    // @available(*, deprecated, message: "Use native color modificator")
+    @available(*, deprecated, message: "Use native color modificator")
     func fontStyle(_ style: Font.TextStyle, color: Color) -> some View {
         modifier(Typography(fontStyle: style))
             .foregroundColor(color)

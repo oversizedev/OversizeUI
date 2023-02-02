@@ -15,17 +15,20 @@ public struct AvatarView: View {
     let firstName: String
     let lastName: String
     let avatar: Image?
+    let icon: Image?
     var strokeColor: Color = .clear
     var background: AvatarBackgroundType = .color(.surfaceSecondary)
     var onBackgroundColor: Color = .onSurfaceMediumEmphasis
 
     public init(firstName: String = "",
                 lastName: String = "",
-                avatar: Image? = nil)
+                avatar: Image? = nil,
+                icon: Image? = nil)
     {
         self.firstName = firstName
         self.lastName = lastName
         self.avatar = avatar
+        self.icon = icon
     }
 
     public var body: some View {
@@ -41,7 +44,8 @@ public struct AvatarView: View {
                 avatarSurface
                     .frame(width: avatarSize, height: avatarSize)
                     .overlay(Circle().stroke(strokeColor, lineWidth: 2))
-                avatarText
+
+                avatarLabel
             }
         }
     }
@@ -59,16 +63,21 @@ public struct AvatarView: View {
     }
 
     @ViewBuilder
-    private var avatarText: some View {
+    private var avatarLabel: some View {
         HStack(spacing: avatarTextSpace) {
-            if firstName.isEmpty == false {
-                Text(String(firstName.dropLast(firstName.count - 1)).capitalized)
-                    .bold()
-            }
+            if let icon {
+                icon
+                    .renderingMode(.template)
+            } else {
+                if firstName.isEmpty == false {
+                    Text(String(firstName.dropLast(firstName.count - 1)).capitalized)
+                        .bold()
+                }
 
-            if lastName.isEmpty == false {
-                Text(String(lastName.dropLast(lastName.count - 1)).capitalized)
-                    .bold()
+                if lastName.isEmpty == false {
+                    Text(String(lastName.dropLast(lastName.count - 1)).capitalized)
+                        .bold()
+                }
             }
         }
         .font(avatarTextFont)

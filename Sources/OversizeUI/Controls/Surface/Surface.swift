@@ -136,19 +136,65 @@ public struct SurfaceButtonStyle: ButtonStyle {
     }
 }
 
+// swiftlint:disable opening_brace
+public extension View {
+    func surface() -> some View {
+        Surface { self }
+    }
+
+    func surface(_ elevation: Elevation) -> some View {
+        Surface { self }
+            .elevation(elevation)
+    }
+
+    func surface(_ elevation: Elevation, background: SurfaceStyle) -> some View {
+        Surface { self }
+            .surfaceStyle(background)
+            .elevation(elevation)
+    }
+
+    @available(*, deprecated, message: "Use without elevation")
+    func surface(elevation: Elevation) -> some View {
+        Surface { self }
+            .elevation(elevation)
+    }
+
+    @available(*, deprecated, message: "Use without elevation")
+    func surface(elevation: Elevation, background: SurfaceStyle) -> some View {
+        Surface { self }
+            .surfaceStyle(background)
+            .elevation(elevation)
+    }
+
+    @available(*, deprecated, message: "Use without elevation")
+    func surface(elevation: Elevation = .z0,
+                 background: SurfaceStyle = .primary,
+                 padding: Space = .medium,
+                 radius: Radius = .medium) -> some View
+    {
+        Surface { self }
+            .surfaceStyle(background)
+            .controlPadding(padding)
+            .controlRadius(radius)
+            .elevation(elevation)
+    }
+}
+
 struct Surface_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             Surface {
                 Text("Text")
-                    .fontStyle(.title3, color: .onSurfaceHighEmphasis)
+                    .title3()
+                    .foregroundOnSurfaceHighEmphasis()
             }
             .surfaceStyle(.secondary)
             .previewLayout(.fixed(width: 414, height: 200))
 
             Surface {
                 Text("Text")
-                    .fontStyle(.title3, color: .onSurfaceHighEmphasis)
+                    .title3()
+                    .foregroundOnSurfaceHighEmphasis()
             }
             .surfaceStyle(.primary)
             .surfaceBorderColor(.surfaceSecondary)

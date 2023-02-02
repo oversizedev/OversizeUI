@@ -47,14 +47,19 @@ struct SectionView_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: .zero) {
             SectionView("App") {
-                Row("Label", leadingType: .icon(.user), paddingHorizontal: .medium)
+                Row("Label")
+                    .rowLeading(.icon(.user))
+                    .controlPadding(horizontal: .medium)
             }
 
             SectionView("Feedback") {
                 VStack(spacing: .zero) {
-                    Row("Label", leadingType: .icon(.user), paddingHorizontal: .medium)
-                    Row("Label", leadingType: .icon(.user), paddingHorizontal: .medium)
+                    Row("Label")
+                        .rowLeading(.icon(.user))
+                    Row("Label")
+                        .rowLeading(.icon(.user))
                 }
+                .controlPadding(horizontal: .medium)
             }
 
             Spacer()

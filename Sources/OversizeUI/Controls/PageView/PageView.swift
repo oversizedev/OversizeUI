@@ -10,7 +10,6 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
 
     private let title: String?
     private let content: Content
-    private var isModalable = false
     private var isLargeTitle = false
     private var isAlwaysSlideSmallTile = false
     private var isDisableScrollShadow: Bool = false
@@ -25,6 +24,12 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
     private var backgroundLinerGradient: LinearGradient?
     private var navigationBarDividerColor: Color?
 
+    @Binding private var searchQuery: String
+    @Binding private var displaySearchBar: Bool
+    private var isShowSearchBar: Bool = false
+    private var searchCancelButton: PageViewSearchButtonType = .icon
+    private var prompt: String = .init()
+
     private let onOffsetChanged: (CGFloat) -> Void
 
     public init(_ title: String? = nil,
@@ -34,6 +39,8 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
         self.title = title
         self.onOffsetChanged = onOffsetChanged
         self.content = content()
+        _searchQuery = .constant(.init())
+        _displaySearchBar = .constant(false)
     }
 
     public var body: some View {
@@ -43,7 +50,11 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
         .background(background.ignoresSafeArea())
         .safeAreaInset(edge: .top) { header }
         .onChange(of: offset) { offset in
-            onOffsetChanged(offset.y)
+            if isShowSearchBar, offset.y < -60 {
+                withAnimation(.easeIn(duration: 0.2)) {
+                    displaySearchBar = true
+                }
+            }
         }
     }
 
@@ -52,14 +63,14 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
         if title != nil || leadingBar != nil || trailingBar != nil || topToolbar != nil || titleLabel != nil {
             ModalNavigationBar(
                 title: title ?? "",
-                bigTitle: isLargeTitle,
+                bigTitle: displaySearchBar ? false : isLargeTitle,
                 isDisableScrollShadow: isDisableScrollShadow,
                 offset: $offset,
-                modalityPresent: !isModalable,
+                background: isDisableScrollShadow ? backgroundColor : Color.surfacePrimary,
                 alwaysSlideSmallTile: isAlwaysSlideSmallTile,
                 leadingBar: { leadingBar },
                 trailingBar: { trailingBar },
-                bottomBar: { topToolbar },
+                bottomBar: { bottomToolBar },
                 titleLabel: { titleLabel }
             )
             .overlay(alignment: .bottom) {
@@ -75,19 +86,89 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
         }
     }
 
-    var background: some View {
-        Group {
-            if let backgroundLinerGradient {
-                backgroundLinerGradient
-            } else {
-                backgroundColor
-            }
+    @ViewBuilder
+    var bottomToolBar: some View {
+        if displaySearchBar {
+            TextField(prompt, text: $searchQuery)
+                .textFieldStyle(.default)
+                .submitLabel(.search)
+                .overlay(alignment: .trailing) {
+                    Button {
+                        searchQuery = ""
+                        withAnimation(.easeInOut(duration: 0.15)) {
+                            displaySearchBar = false
+                        }
+                    } label: {
+                        searchCancelButtonView
+                    }
+                    .buttonStyle(.scale)
+                    .padding(.trailing, searchCancelButtonPadding)
+                }
+        } else {
+            topToolbar
         }
     }
 
-    public func modalable(_ isModalable: Bool = true) -> PageView {
+    var searchCancelButtonPadding: Space {
+        switch searchCancelButton {
+        case .icon, .none:
+            return .small
+        case .label:
+            return .xxSmall
+        }
+    }
+
+    @ViewBuilder
+    var searchCancelButtonView: some View {
+        switch searchCancelButton {
+        case .none:
+            EmptyView()
+        case .icon:
+            Icon(.xMini, color: .onSurfaceMediumEmphasis)
+                .background {
+                    Circle()
+                        .fill(Color.backgroundTertiary)
+                        .frame(width: 36, height: 36)
+                }
+        case let .label(text):
+            Text(text)
+                .subheadline(.bold)
+                .foregroundColor(.onSurfaceHighEmphasis)
+                .padding(.horizontal, .xSmall)
+                .background {
+                    RoundedRectangle(cornerRadius: .small, style: .continuous)
+                        .fill(Color.backgroundTertiary)
+                        .frame(height: 40)
+                }
+        }
+    }
+
+    @ViewBuilder
+    var background: some View {
+        if let backgroundLinerGradient {
+            backgroundLinerGradient
+        } else {
+            backgroundColor
+        }
+    }
+
+    public func searchable(text: Binding<String>, prompt: String = "Search", cancelButton: PageView.PageViewSearchButtonType = .label(), isSearch: Binding<Bool>) -> PageView {
         var control = self
-        control.isModalable = isModalable
+        control._searchQuery = text
+        control._displaySearchBar = isSearch
+        control.prompt = prompt
+        control.isShowSearchBar = true
+        control.searchCancelButton = cancelButton
+        return control
+    }
+
+    public func searchable(text: Binding<String>, prompt: String = "Search") -> PageView {
+        var control = self
+        control._searchQuery = text
+        control._displaySearchBar = .constant(true)
+        control.prompt = prompt
+        control.isShowSearchBar = true
+        control.searchCancelButton = .none
         return control
     }
 
@@ -100,12 +181,6 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
     public func slideSmallTile(_ isSlise: Bool = true) -> PageView {
         var control = self
         control.isAlwaysSlideSmallTile = isSlise
-        return control
-    }
-
-    public func navigationBarHidden(_ isModalable: Bool = true) -> PageView {
-        var control = self
-        control.isModalable = isModalable
         return control
     }
 
@@ -201,6 +276,10 @@ public extension PageView {
     enum PageViewBottomType {
         case shadow, gradient, none
     }
+
+    enum PageViewSearchButtonType {
+        case none, icon, label(String = "Cancel")
+    }
 }
 
 public extension PageView where LeadingBar == EmptyView, TitleLabel == EmptyView {
@@ -213,6 +292,8 @@ public extension PageView where LeadingBar == EmptyView, TitleLabel == EmptyView
         self.content = content()
         leadingBar = nil
         titleLabel = nil
+        _searchQuery = .constant(.init())
+        _displaySearchBar = .constant(false)
     }
 }
 
@@ -226,6 +307,8 @@ public extension PageView where TrailingBar == EmptyView, TitleLabel == EmptyVie
         self.content = content()
         trailingBar = nil
         titleLabel = nil
+        _searchQuery = .constant(.init())
+        _displaySearchBar = .constant(false)
     }
 }
 
@@ -240,6 +323,8 @@ public extension PageView where TrailingBar == EmptyView, LeadingBar == EmptyVie
         leadingBar = nil
         trailingBar = nil
         titleLabel = nil
+        _searchQuery = .constant(.init())
+        _displaySearchBar = .constant(false)
     }
 }
 
@@ -255,6 +340,8 @@ public extension PageView where TrailingBar == EmptyView, LeadingBar == EmptyVie
         trailingBar = nil
         topToolbar = nil
         titleLabel = nil
+        _searchQuery = .constant(.init())
+        _displaySearchBar = .constant(false)
     }
 }
 
@@ -269,6 +356,8 @@ public extension PageView where LeadingBar == EmptyView, TopToolbar == EmptyView
         leadingBar = nil
         topToolbar = nil
         titleLabel = nil
+        _searchQuery = .constant(.init())
+        _displaySearchBar = .constant(false)
     }
 }
 
@@ -283,6 +372,8 @@ public extension PageView where TrailingBar == EmptyView, TopToolbar == EmptyVie
         trailingBar = nil
         topToolbar = nil
         titleLabel = nil
+        _searchQuery = .constant(.init())
+        _displaySearchBar = .constant(false)
     }
 }
 
@@ -296,6 +387,8 @@ public extension PageView where TopToolbar == EmptyView, TitleLabel == EmptyView
         self.content = content()
         topToolbar = nil
         titleLabel = nil
+        _searchQuery = .constant(.init())
+        _displaySearchBar = .constant(false)
     }
 }
 
@@ -310,6 +403,8 @@ public extension PageView where TrailingBar == EmptyView, LeadingBar == EmptyVie
         leadingBar = nil
         trailingBar = nil
         topToolbar = nil
+        _searchQuery = .constant(.init())
+        _displaySearchBar = .constant(false)
     }
 }
 
@@ -323,6 +418,8 @@ public extension PageView where TrailingBar == EmptyView, TopToolbar == EmptyVie
         self.content = content()
         trailingBar = nil
         topToolbar = nil
+        _searchQuery = .constant(.init())
+        _displaySearchBar = .constant(false)
     }
 }
 
@@ -336,6 +433,8 @@ public extension PageView where LeadingBar == EmptyView, TopToolbar == EmptyView
         self.content = content()
         leadingBar = nil
         topToolbar = nil
+        _searchQuery = .constant(.init())
+        _displaySearchBar = .constant(false)
     }
 }
 
@@ -348,6 +447,8 @@ public extension PageView where TrailingBar == EmptyView {
         self.onOffsetChanged = onOffsetChanged
         self.content = content()
         trailingBar = nil
+        _searchQuery = .constant(.init())
+        _displaySearchBar = .constant(false)
     }
 }
 
@@ -360,6 +461,8 @@ public extension PageView where LeadingBar == EmptyView {
         self.onOffsetChanged = onOffsetChanged
         self.content = content()
         leadingBar = nil
+        _searchQuery = .constant(.init())
+        _displaySearchBar = .constant(false)
     }
 }
 
@@ -372,6 +475,8 @@ public extension PageView where TopToolbar == EmptyView {
         self.onOffsetChanged = onOffsetChanged
         self.content = content()
         topToolbar = nil
+        _searchQuery = .constant(.init())
+        _displaySearchBar = .constant(false)
     }
 }
 
@@ -384,5 +489,7 @@ public extension PageView where TitleLabel == EmptyView {
         self.onOffsetChanged = onOffsetChanged
         self.content = content()
         titleLabel = nil
+        _searchQuery = .constant(.init())
+        _displaySearchBar = .constant(false)
     }
 }
