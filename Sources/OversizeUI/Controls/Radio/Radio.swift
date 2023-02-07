@@ -11,6 +11,7 @@ public enum RadioAlignment {
 
 public struct Radio<Label: View>: View {
     @Environment(\.isEnabled) private var isEnabled: Bool
+    @Environment(\.rowContentInset) private var contentInset: EdgeSpaceInsets
     private var isOn: Bool
     private let label: () -> Label?
     private let alignment: RadioAlignment
@@ -32,15 +33,22 @@ public struct Radio<Label: View>: View {
     }
 
     public var body: some View {
-        Button {
-            action?()
-        } label: {
+        if action != nil {
+            Button {
+                action?()
+            } label: {
+                HStack(alignment: verticalAlignment, spacing: .xSmall) {
+                    content(alignment: alignment)
+                }
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.row)
+        } else {
             HStack(alignment: verticalAlignment, spacing: .xSmall) {
                 content(alignment: alignment)
             }
             .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
     }
 
     @ViewBuilder
@@ -48,12 +56,14 @@ public struct Radio<Label: View>: View {
         switch alignment {
         case .leading:
             radioImage(isEnabled: isEnabled, isOn: isOn)
+                .padding(.leading, contentInset.leading)
             labelContent
 
         case .trailing:
             labelContent
             Spacer()
             radioImage(isEnabled: isEnabled, isOn: isOn)
+                .padding(.trailing, contentInset.trailing)
         }
     }
 
@@ -65,6 +75,7 @@ public struct Radio<Label: View>: View {
             Text(title ?? "")
                 .headline(.semibold)
                 .foregroundColor(foregroundColor)
+                .padding(contentInset)
         }
     }
 

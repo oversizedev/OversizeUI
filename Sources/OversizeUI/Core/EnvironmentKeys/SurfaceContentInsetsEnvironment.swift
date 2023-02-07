@@ -25,7 +25,7 @@ public extension View {
         environment(\.surfaceContentInsets, .init(top: insets, leading: insets, bottom: insets, trailing: insets))
     }
 
-    func surfaceRowInsets() -> some View {
+    func surfaceContentRowInsets() -> some View {
         environment(\.surfaceContentInsets, .init(top: .xxSmall, leading: .zero, bottom: .xxSmall, trailing: .zero))
     }
 }
