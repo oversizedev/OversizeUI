@@ -50,8 +50,8 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
         self.title = title
         self.subtitle = subtitle
         self.action = action
-        self.leadingLabel = leading()
-        self.trailingLabel = trailing()
+        leadingLabel = leading()
+        trailingLabel = trailing()
     }
 
     @available(*, deprecated, message: "Use leading: {} and tralling: {}")
@@ -217,7 +217,7 @@ public extension Row where TrailingLabel == EmptyView {
         self.title = title
         self.subtitle = subtitle
         self.action = action
-        self.leadingLabel = leading()
+        leadingLabel = leading()
         trailingLabel = nil
     }
 
@@ -228,7 +228,7 @@ public extension Row where TrailingLabel == EmptyView {
         self.title = title
         self.subtitle = subtitle
         action = nil
-        self.leadingLabel = leading()
+        leadingLabel = leading()
         trailingLabel = nil
     }
 }
@@ -243,7 +243,7 @@ public extension Row where LeadingLabel == EmptyView {
         self.subtitle = subtitle
         self.action = action
         leadingLabel = nil
-        self.trailingLabel = trailing()
+        trailingLabel = trailing()
     }
 }
 
@@ -344,8 +344,7 @@ struct ListRow_Previews: PreviewProvider {
     }
 }
 
-
-//public struct RowNew<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, TrailingLabel: View {
+// public struct RowNew<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, TrailingLabel: View {
 //    private let leadingLabel: LeadingLabel?
 //    private let trailingLabel: TrailingLabel?
 //
@@ -376,9 +375,9 @@ struct ListRow_Previews: PreviewProvider {
 //            trailingLabel
 //        }
 //    }
-//}
+// }
 //
-//public extension RowNew where LeadingLabel == EmptyView, TrailingLabel == EmptyView {
+// public extension RowNew where LeadingLabel == EmptyView, TrailingLabel == EmptyView {
 //    init(_ title: String,
 //         subtitle: String? = nil,
 //         action: (() -> Void)? = nil)
@@ -389,9 +388,9 @@ struct ListRow_Previews: PreviewProvider {
 //        leadingLabel = nil
 //        trailingLabel = nil
 //    }
-//}
+// }
 //
-//public extension RowNew where TrailingLabel == EmptyView {
+// public extension RowNew where TrailingLabel == EmptyView {
 //    init(_ title: String,
 //         subtitle: String? = nil,
 //         action: (() -> Void)? = nil,
@@ -414,9 +413,9 @@ struct ListRow_Previews: PreviewProvider {
 //        self.leadingLabel = leadingLabel()
 //        trailingLabel = nil
 //    }
-//}
+// }
 //
-//public extension RowNew where LeadingLabel == EmptyView {
+// public extension RowNew where LeadingLabel == EmptyView {
 //    init(_ title: String,
 //         subtitle: String? = nil,
 //         action: (() -> Void)? = nil,
@@ -428,9 +427,9 @@ struct ListRow_Previews: PreviewProvider {
 //        leadingLabel = nil
 //        self.trailingLabel = trailingLabel()
 //    }
-//}
+// }
 //
-//struct RowNew_Previews: PreviewProvider {
+// struct RowNew_Previews: PreviewProvider {
 //    static var previews: some View {
 //        VStack {
 //            VStack {
@@ -513,4 +512,4 @@ struct ListRow_Previews: PreviewProvider {
 ////            Text("Trailing")
 ////        }
 //    }
-//}
+// }

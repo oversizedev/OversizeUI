@@ -1,6 +1,6 @@
 //
 // Copyright © 2023 Alexander Romanov
-// RowNew.swift
+// RowDeprecated.swift
 //
 
 import SwiftUI
@@ -78,12 +78,10 @@ public struct RowDeprecated: View {
     private func content(_ textAlignment: TextAlignment) -> some View {
         VStack(alignment: .leading) {
             HStack(spacing: .zero) {
-            
-                 if let leadingType {
-                     RowLeading(leadingType, isShowSubtitle: isShowSubtitle, iconBackgroundColor: iconBackgroundColor)
-                         .padding(.trailing, .small)
-                 }
-                
+                if let leadingType {
+                    RowLeading(leadingType, isShowSubtitle: isShowSubtitle, iconBackgroundColor: iconBackgroundColor)
+                        .padding(.trailing, .small)
+                }
 
                 if textAlignment == .trailing || textAlignment == .center {
                     Spacer()
@@ -104,12 +102,10 @@ public struct RowDeprecated: View {
 
                 сlearButton
 
-            
-                 if let trallingType {
-                     RowTrailing(trallingType, isPremiumOption: isPremiumOption)
-                         .padding(.leading, .xxSmall)
-                 }
-        
+                if let trallingType {
+                    RowTrailing(trallingType, isPremiumOption: isPremiumOption)
+                        .padding(.leading, .xxSmall)
+                }
 
                 if isShowArrowIcon {
                     Icon(.chevronRight, color: .onSurfaceDisabled)
@@ -219,7 +215,7 @@ public extension RowDeprecated {
     }
 }
 
-//public extension View {
+// public extension View {
 //    func rowOnSurface(_ elevation: Elevation = .z4, backgroundColor: Color? = nil) -> some View {
 //        Surface {
 //            self.rowContentInset(.zero)
@@ -227,7 +223,7 @@ public extension RowDeprecated {
 //        .surfaceBackgroundColor(backgroundColor)
 //        .elevation(elevation)
 //    }
-//}
+// }
 
 // MARK: - Preview
 
