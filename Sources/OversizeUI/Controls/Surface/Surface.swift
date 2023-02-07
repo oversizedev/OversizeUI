@@ -17,8 +17,8 @@ public struct Surface<Label: View>: View {
     @Environment(\.elevation) private var elevation: Elevation
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.controlRadius) var controlRadius: Radius
-    @Environment(\.controlPadding) var controlPadding: ControlPadding
-    @Environment(\.isAccent) private var isAccent
+    @Environment(\.surfaceContentInsets) var contentInsets: EdgeSpaceInsets
+    @Environment(\.isAccent) private var isAccent: Bool
 
     private enum Constants {
         /// Colors
@@ -60,27 +60,42 @@ public struct Surface<Label: View>: View {
 
     private var surface: some View {
         label
-            .padding(.horizontal, controlPadding.horizontal)
-            .padding(.vertical, controlPadding.vertical)
+            .padding(.top, contentInsets.top)
+            .padding(.bottom, contentInsets.bottom)
+            .padding(.leading, contentInsets.leading)
+            .padding(.trailing, contentInsets.trailing)
             .background(
-                RoundedRectangle(cornerRadius: controlRadius,
-                                 style: .continuous)
+                RoundedRectangle(cornerRadius: controlRadius, style: .continuous)
                     .fill(surfaceBackgroundColor)
                     .overlay(
-                        RoundedRectangle(cornerRadius: controlRadius,
-                                         style: .continuous)
-                            .strokeBorder(
-                                border != nil ? border ?? Color.clear
-                                    : theme.borderSurface
-                                    ? Color.border
-                                    : surfaceBackgroundColor, lineWidth: borderWidth != nil ? borderWidth ?? 0 : CGFloat(theme.borderSize)
-                            )
+                        RoundedRectangle(cornerRadius: controlRadius, style: .continuous)
+                            .strokeBorder(strokeBorderColor, lineWidth: strokeBorderLineWidth)
                     )
                     .shadowElevaton(elevation)
             )
             .clipShape(
                 RoundedRectangle(cornerRadius: controlRadius, style: .continuous)
             )
+    }
+
+    private var strokeBorderColor: Color {
+        if let border {
+            return border
+        } else {
+            if theme.borderSurface {
+                return Color.border
+            } else {
+                return surfaceBackgroundColor
+            }
+        }
+    }
+
+    private var strokeBorderLineWidth: CGFloat {
+        if let borderWidth {
+            return borderWidth
+        } else {
+            return CGFloat(theme.borderSize)
+        }
     }
 
     private var surfaceBackgroundColor: Color {
@@ -132,7 +147,7 @@ public struct SurfaceButtonStyle: ButtonStyle {
 
     public func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
-            .scaleEffect(configuration.isPressed ? 0.95 : 1)
+            .scaleEffect(configuration.isPressed ? 0.96 : 1)
     }
 }
 
@@ -182,7 +197,7 @@ public extension View {
 
 struct Surface_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
+        VStack {
             Surface {
                 Text("Text")
                     .title3()
@@ -209,7 +224,6 @@ struct Surface_Previews: PreviewProvider {
             .surfaceStyle(.primary)
             .elevation(.z2)
             .controlRadius(.zero)
-            .controlPadding(.zero)
             .previewLayout(.fixed(width: 375, height: 200))
 
             Surface { HStack {
@@ -217,7 +231,7 @@ struct Surface_Previews: PreviewProvider {
                 Spacer()
             }}
             .elevation(.z1)
-            .controlPadding(.large)
+            .surfaceContentInsets(.large)
             .preferredColorScheme(.dark)
             .previewLayout(.fixed(width: 320, height: 200))
         }

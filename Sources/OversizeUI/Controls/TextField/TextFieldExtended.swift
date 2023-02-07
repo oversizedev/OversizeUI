@@ -53,7 +53,7 @@ public struct TextFieldExtended: View {
             if placeholderPosition == .overField {
                 HStack {
                     Text(placeholder)
-                        .fontStyle(.subheadline)
+                        .subheadline()
                     Spacer()
                 }
             }
