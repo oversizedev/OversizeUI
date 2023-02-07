@@ -44,8 +44,10 @@ import SwiftUI
         @ViewBuilder
         private var surface: some View {
             label
-                .padding(.horizontal, controlPadding.horizontal)
-                .padding(.vertical, controlPadding.vertical)
+                .padding(.top, controlPadding.top)
+                .padding(.bottom, controlPadding.bottom)
+                .padding(.leading, controlPadding.leading)
+                .padding(.trailing, controlPadding.trailing)
                 .background(material,
                             in: RoundedRectangle(cornerRadius: controlRadius, style: .continuous))
                 .overlay(overlayView)

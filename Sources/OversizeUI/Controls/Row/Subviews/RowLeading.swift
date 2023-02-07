@@ -12,6 +12,8 @@ public enum RowLeadingType {
     case imageOnSurface(_ image: Image, color: Color? = nil)
     case systemImage(_ imageName: String)
     case avatar(_ avatar: AvatarView)
+
+    @available(*, deprecated, message: "Use leading: {}")
     case view(_ view: AnyView)
 }
 
@@ -49,7 +51,7 @@ internal struct RowLeading: View {
             }
             .surfaceStyle(.secondary)
             .surfaceBackgroundColor(iconBackgroundColor)
-            .controlPadding(.xxSmall)
+            .surfaceContentInsets(.xxSmall)
 
         case let .imageOnSurface(image, color):
             Surface {
@@ -59,7 +61,7 @@ internal struct RowLeading: View {
             }
             .surfaceStyle(.secondary)
             .surfaceBackgroundColor(iconBackgroundColor)
-            .controlPadding(.xxSmall)
+            .surfaceContentInsets(.xxSmall)
 
         case let .systemImage(systemImage):
             Image(systemName: systemImage)

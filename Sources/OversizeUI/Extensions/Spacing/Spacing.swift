@@ -53,3 +53,9 @@ public extension RoundedRectangle {
         self = .init(cornerRadius: cornerRadius.rawValue, style: style)
     }
 }
+
+public extension EdgeInsets {
+    init(top: Space, leading: Space, bottom: Space, trailing: Space) {
+        self = .init(top: top.rawValue, leading: leading.rawValue, bottom: bottom.rawValue, trailing: trailing.rawValue)
+    }
+}

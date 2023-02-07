@@ -6,91 +6,96 @@
 import SwiftUI
 
 public extension Color {
-    /// Primary
+    // MARK: Primary
+
     static var accent: Color {
         Color.accentColor
     }
 
-    /// On Primary
+    // MARK: - On Primary
 
-    /// High Emphasis
+    /// On Primary High Emphasis
     static var onPrimaryHighEmphasis: Color {
         Color("OnPrimaryHighEmphasis", bundle: .module)
     }
 
-    /// Medium Emphasis
+    /// On Primary Medium Emphasis
     static var onPrimaryMediumEmphasis: Color {
         Color("OnPrimaryMediumEmphasis", bundle: .module)
     }
 
-    /// Disabled
+    /// On Primary Disabled
     static var onPrimaryDisabled: Color {
         Color("OnPrimaryDisabled", bundle: .module)
     }
 
-    /// Background
+    // MARK: - Background
 
-    /// High Emphasis
+    /// Background Primary
     static var backgroundPrimary: Color {
         Color("BackgroundPrimary", bundle: .module)
     }
 
-    /// Medium Emphasis
+    /// Background Secondary
     static var backgroundSecondary: Color {
         Color("BackgroundSecondary", bundle: .module)
     }
 
-    /// Disabled
+    /// Background Tertiary
     static var backgroundTertiary: Color {
         Color("BackgroundTertiary", bundle: .module)
     }
 
-    /// On Background
+    // MARK: - On Background
 
-    /// High Emphasis
+    /// On Background High Emphasis
     static var onBackgroundHighEmphasis: Color {
         Color("OnBackgroundHighEmphasis", bundle: .module)
     }
 
-    /// Medium Emphasis
+    /// On BackgroundMedium Emphasis
     static var onBackgroundMediumEmphasis: Color {
         Color("OnBackgroundMediumEmphasis", bundle: .module)
     }
 
-    /// Disabled
+    /// On Background Disabled
     static var onBackgroundDisabled: Color {
         Color("OnBackgroundDisabled", bundle: .module)
     }
 
-    /// Surface
-    /// High Emphasis
+    // MARK: - Surface
+
+    /// Surface Primary
     static var surfacePrimary: Color {
         Color("SurfacePrimary", bundle: .module)
     }
 
-    /// Medium Emphasis
+    /// Surface Secondary
     static var surfaceSecondary: Color {
         Color("SurfaceSecondary", bundle: .module)
     }
 
-    /// Disabled
+    /// Surface Tertiary
     static var surfaceTertiary: Color {
         Color("SurfaceTertiary", bundle: .module)
     }
 
+    /// On Surface High Emphasis
     static var onSurfaceHighEmphasis: Color {
         Color("OnSurfaceHighEmphasis", bundle: .module)
     }
 
-    /// Medium Emphasis
+    /// On Surface Medium Emphasis
     static var onSurfaceMediumEmphasis: Color {
         Color("OnSurfaceMediumEmphasis", bundle: .module)
     }
 
-    /// Disabled
+    /// On Surface Disabled
     static var onSurfaceDisabled: Color {
         Color("OnSurfaceDisabled", bundle: .module)
     }
+
+    // MARK: - Other
 
     /// Error
     static var error: Color {

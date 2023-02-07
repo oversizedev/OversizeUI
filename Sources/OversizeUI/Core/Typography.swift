@@ -30,6 +30,48 @@ public struct Typography: ViewModifier {
     private let isBold: Bool?
     private let weight: Font.Weight?
 
+    public init(fontStyle: Font.TextStyle, isBold: Bool? = nil, weight: Font.Weight? = nil) {
+        self.fontStyle = fontStyle
+        self.isBold = isBold
+        self.weight = weight
+    }
+
+    public func body(content: Content) -> some View {
+        content
+            .font(.system(fontStyle, design: fontDesign).weight(fontWeight).leading(.tight))
+            .frame(minHeight: lineHeight)
+        // .lineSpacing(lineHeight)
+    }
+
+    private var lineHeight: CGFloat {
+        switch fontStyle {
+        case .largeTitle:
+            return 44
+        case .title:
+            return 36
+        case .title2:
+            return 28
+        case .title3:
+            return 24
+        case .headline:
+            return 24
+        case .subheadline:
+            return 20
+        case .body:
+            return 24
+        case .callout:
+            return 20
+        case .footnote:
+            return 16
+        case .caption:
+            return 16
+        case .caption2:
+            return 12
+        @unknown default:
+            return 16
+        }
+    }
+
     private var fontDesign: Font.Design {
         switch fontStyle {
         case .largeTitle, .title, .title2, .title3, .headline, .subheadline:
@@ -56,17 +98,6 @@ public struct Typography: ViewModifier {
                 return isBold ?? false ? .bold : .regular
             }
         }
-    }
-
-    public init(fontStyle: Font.TextStyle, isBold: Bool? = nil, weight: Font.Weight? = nil) {
-        self.fontStyle = fontStyle
-        self.isBold = isBold
-        self.weight = weight
-    }
-
-    public func body(content: Content) -> some View {
-        content
-            .font(.system(fontStyle, design: fontDesign).weight(fontWeight))
     }
 }
 
@@ -161,11 +192,12 @@ public extension View {
 }
 
 public extension View {
+    @available(*, deprecated, message: "Use native modificator", renamed: "font")
     func fontStyle(_ style: Font.TextStyle) -> some View {
         modifier(Typography(fontStyle: style))
     }
 
-    @available(*, deprecated, message: "Use native color modificator")
+    @available(*, deprecated, message: "Use native color modificator", renamed: "font")
     func fontStyle(_ style: Font.TextStyle, color: Color) -> some View {
         modifier(Typography(fontStyle: style))
             .foregroundColor(color)

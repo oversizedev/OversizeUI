@@ -8,9 +8,13 @@ import SwiftUI
 import SwiftUI
 
 public enum RowTrailingType {
+    @available(*, deprecated, message: "Use Radio")
     case radio(isOn: Binding<Bool>)
+    @available(*, deprecated, message: "Use Checkbox")
     case checkbox(isOn: Binding<Bool>)
+    @available(*, deprecated, message: "Use Toogle")
     case toggle(isOn: Binding<Bool>)
+    @available(*, deprecated, message: "Use Toogle")
     case toggleWithArrowButton(isOn: Binding<Bool>, action: (() -> Void)? = nil)
     @available(watchOS, unavailable)
     case timePicker(date: Binding<Date>)

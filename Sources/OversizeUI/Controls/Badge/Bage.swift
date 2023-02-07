@@ -21,7 +21,7 @@ public struct Bage<Label: View>: View {
         HStack {
             label
                 .foregroundColor(color)
-                .fontStyle(.caption)
+                .caption()
         }
         .padding(.vertical, .xxxSmall)
         .padding(.horizontal, 6)
