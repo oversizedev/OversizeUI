@@ -10,6 +10,7 @@ public enum CheckboxAlignment {
 }
 
 public struct Checkbox<Label: View>: View {
+    @Environment(\.rowContentInset) private var contentInset: EdgeSpaceInsets
     @Environment(\.isEnabled) private var isEnabled: Bool
     @Binding var isOn: Bool
     private let label: () -> Label?
@@ -31,7 +32,7 @@ public struct Checkbox<Label: View>: View {
             }
             .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.row)
     }
 
     @ViewBuilder
@@ -39,6 +40,7 @@ public struct Checkbox<Label: View>: View {
         switch alignment {
         case .leading:
             checkboxImage(isEnabled: isEnabled, isOn: isOn)
+                .padding(.leading, contentInset.leading)
             labelContent
             Spacer()
 
@@ -46,6 +48,7 @@ public struct Checkbox<Label: View>: View {
             labelContent
             Spacer()
             checkboxImage(isEnabled: isEnabled, isOn: isOn)
+                .padding(.trailing, contentInset.trailing)
         }
     }
 
@@ -57,6 +60,7 @@ public struct Checkbox<Label: View>: View {
             Text(title ?? "")
                 .headline(.semibold)
                 .foregroundColor(foregroundColor)
+                .padding(contentInset)
         }
     }
 

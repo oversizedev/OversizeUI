@@ -91,12 +91,6 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
     private func content(_ textAlignment: TextAlignment) -> some View {
         VStack(alignment: .leading) {
             HStack(spacing: .zero) {
-                /*
-                 if let leadingType {
-                     RowLeading(leadingType, isShowSubtitle: isShowSubtitle, iconBackgroundColor: iconBackgroundColor)
-                         .padding(.trailing, .small)
-                 }
-                  */
 
                 leadingLabel
                     .padding(.trailing, .small)
@@ -120,13 +114,6 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
 
                 сlearButton
 
-                /*
-                 if let trallingType {
-                     RowTrailing(trallingType, isPremiumOption: isPremiumOption)
-                         .padding(.leading, .xxSmall)
-                 }
-                  */
-
                 trailingLabel
                     .padding(.leading, .xxSmall)
 
@@ -135,12 +122,7 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
                 }
             }
         }
-        .padding(
-            EdgeInsets(top: controlPadding.top,
-                       leading: controlPadding.leading,
-                       bottom: controlPadding.bottom,
-                       trailing: controlPadding.trailing)
-        )
+        .padding(controlPadding)
     }
 
     private var text: some View {
