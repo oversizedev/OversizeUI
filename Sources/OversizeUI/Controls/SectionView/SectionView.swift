@@ -1,12 +1,16 @@
 //
-// Copyright © 2022 Alexander Romanov
-// SectionView.swift
+// Copyright © 2021 Alexander Romanov
+// SectionView.swift, created on 07.02.2023
 //
 
 import SwiftUI
 
 public enum SectionViewTitlePosition {
     case inside, outside
+}
+
+public enum SectionViewTitleButtonPosition {
+    case leading, trailing
 }
 
 public enum SectionViewTitleButton {
@@ -19,14 +23,15 @@ public enum SectionViewStyle {
 }
 
 public struct SectionView<Content: View>: View {
-    @Environment(\.controlRadius) var controlRadius: Radius
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.controlRadius) private var controlRadius: Radius
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.sectionViewStyle) private var style: SectionViewStyle
     private let content: Content
     private let title: String
 
     private var titlePosition: SectionViewTitlePosition = .outside
     private var titleButton: SectionViewTitleButton?
-    private var style: SectionViewStyle = .default
+    private var titleButtonPosition: SectionViewTitleButtonPosition = .trailing
 
     public init(_ title: String = "", @ViewBuilder content: () -> Content) {
         self.title = title
@@ -74,10 +79,16 @@ public struct SectionView<Content: View>: View {
                 .font(titleFont)
                 .foregroundColor(titleColor)
 
-            Spacer()
+            if titleButtonPosition == .trailing {
+                Spacer()
+            }
 
             if let titleButton {
                 titleButtonView(titleButton)
+            }
+
+            if titleButtonPosition == .leading {
+                Spacer()
             }
         }
     }
@@ -168,15 +179,10 @@ public extension SectionView {
         return control
     }
 
-    func sectionTitleButton(_ button: SectionViewTitleButton) -> SectionView {
+    func sectionTitleButton(_ button: SectionViewTitleButton, position: SectionViewTitleButtonPosition = .trailing) -> SectionView {
         var control = self
         control.titleButton = button
-        return control
-    }
-
-    func sectionViewStyle(_ style: SectionViewStyle) -> SectionView {
-        var control = self
-        control.style = style
+        control.titleButtonPosition = position
         return control
     }
 }
@@ -238,8 +244,8 @@ struct SectionView_Previews: PreviewProvider {
                 }
             }
             .sectionTitlePosition(.inside)
-            .sectionViewStyle(.smallIndent)
             .sectionTitleButton(.title("All") {})
+            .sectionViewStyle(.smallIndent)
 
             SectionView("Feedback") {
                 VStack(spacing: .zero) {
@@ -272,8 +278,8 @@ struct SectionView_Previews: PreviewProvider {
                 }
             }
             .sectionTitlePosition(.inside)
-            .sectionViewStyle(.edgeToEdge)
             .sectionTitleButton(.title("All") {})
+            .sectionViewStyle(.edgeToEdge)
 
             SectionView("Feedback") {
                 VStack(spacing: .zero) {
