@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// ScrollViewOffset.swift
+// Copyright © 2021 Alexander Romanov
+// ScrollViewOffset.swift, created on 06.04.2021
 //
 
 import SwiftUI

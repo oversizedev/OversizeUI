@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// RowDemo.swift
+// Copyright © 2021 Alexander Romanov
+// RowDemo.swift, created on 27.11.2022
 //
 
 import OversizeUI

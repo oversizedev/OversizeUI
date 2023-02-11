@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// RowButtonStyle.swift
+// Copyright © 2021 Alexander Romanov
+// RowButtonStyle.swift, created on 18.12.2022
 //
 
 import SwiftUI

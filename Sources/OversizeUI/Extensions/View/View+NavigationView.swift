@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// View+NavigationView.swift
+// Copyright © 2021 Alexander Romanov
+// View+NavigationView.swift, created on 11.09.2021
 //
 
 import SwiftUI

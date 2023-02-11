@@ -1,6 +1,6 @@
 //
-// Copyright © 2023 Alexander Romanov
-// RadioPicker.swift
+// Copyright © 2021 Alexander Romanov
+// RadioPicker.swift, created on 07.02.2023
 //
 
 import SwiftUI
@@ -32,7 +32,7 @@ public struct RadioPicker<Element: Equatable, Content>: View where Content: View
 
     public var body: some View {
         VStack(spacing: 24) {
-            ForEach(data.indices) { index in
+            ForEach(data.indices, id: \.self) { index in
                 Radio(isOn: selectedIndex == index, alignment: alignment, verticalAlignment: verticalAlignment) {
                     selectedIndex = index
                     selection = data[index]

@@ -1,6 +1,6 @@
 //
-// Copyright © 2023 Alexander Romanov
-// MenuLabelStyle.swift
+// Copyright © 2021 Alexander Romanov
+// MenuLabelStyle.swift, created on 23.12.2022
 //
 
 import SwiftUI

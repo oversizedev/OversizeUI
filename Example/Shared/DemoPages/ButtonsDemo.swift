@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// ButtonsDemo.swift
+// Copyright © 2021 Alexander Romanov
+// ButtonsDemo.swift, created on 27.11.2022
 //
 
 import OversizeUI

@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// ScrollArrow.swift
+// Copyright © 2021 Alexander Romanov
+// ScrollArrow.swift, created on 06.09.2022
 //
 
 import SwiftUI

@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// AccentEnvironment.swift
+// Copyright © 2021 Alexander Romanov
+// AccentEnvironment.swift, created on 21.07.2022
 //
 
 import SwiftUI

@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// PageView.swift
+// Copyright © 2021 Alexander Romanov
+// PageView.swift, created on 14.04.2022
 //
 
 import SwiftUI
@@ -82,7 +82,6 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
                 }
             }
             .ignoresSafeArea(edges: .horizontal)
-            .zIndex(999_999_999)
         }
     }
 

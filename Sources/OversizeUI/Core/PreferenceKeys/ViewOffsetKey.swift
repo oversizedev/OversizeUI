@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// ViewOffsetKey.swift
+// Copyright © 2021 Alexander Romanov
+// ViewOffsetKey.swift, created on 22.03.2022
 //
 
 import SwiftUI

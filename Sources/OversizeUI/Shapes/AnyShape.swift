@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// AnyShape.swift
+// Copyright © 2021 Alexander Romanov
+// AnyShape.swift, created on 09.12.2021
 //
 
 import SwiftUI

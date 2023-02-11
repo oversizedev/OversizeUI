@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// SegmentedControl.swift
+// Copyright © 2021 Alexander Romanov
+// SegmentedControl.swift, created on 12.08.2021
 //
 
 import SwiftUI

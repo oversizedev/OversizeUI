@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// IconPicker.swift
+// Copyright © 2021 Alexander Romanov
+// IconPicker.swift, created on 02.04.2022
 //
 
 import SwiftUI

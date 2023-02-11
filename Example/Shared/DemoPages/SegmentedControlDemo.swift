@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// SegmentedControlDemo.swift
+// Copyright © 2021 Alexander Romanov
+// SegmentedControlDemo.swift, created on 27.11.2022
 //
 
 import OversizeUI

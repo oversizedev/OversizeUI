@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// ExampleUITests.swift
+// Copyright © 2021 Alexander Romanov
+// ExampleUITests.swift, created on 27.11.2022
 //
 
 import XCTest

@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// IconStyleEnvironment.swift
+// Copyright © 2021 Alexander Romanov
+// IconStyleEnvironment.swift, created on 06.09.2022
 //
 
 import SwiftUI

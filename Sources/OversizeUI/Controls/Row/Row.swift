@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// Row.swift
+// Copyright © 2021 Alexander Romanov
+// Row.swift, created on 14.06.2020
 //
 
 import SwiftUI
@@ -91,7 +91,6 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
     private func content(_ textAlignment: TextAlignment) -> some View {
         VStack(alignment: .leading) {
             HStack(spacing: .zero) {
-
                 leadingLabel
                     .padding(.trailing, .small)
 

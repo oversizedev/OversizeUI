@@ -1,6 +1,6 @@
 //
-// Copyright © 2023 Alexander Romanov
-// RowDeprecated.swift
+// Copyright © 2021 Alexander Romanov
+// RowDeprecated.swift, created on 11.09.2021
 //
 
 import SwiftUI

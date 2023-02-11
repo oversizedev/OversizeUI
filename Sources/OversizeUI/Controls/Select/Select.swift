@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// Select.swift
+// Copyright © 2021 Alexander Romanov
+// Select.swift, created on 16.06.2020
 //
 
 import SwiftUI
@@ -67,14 +67,20 @@ public struct Select<Element, Content, Selection>: View
             .foregroundColor(.onSurfaceHighEmphasis)
 
             .sheet(isPresented: $showModal) {
-                modal
+                if #available(iOS 16.0, *) {
+                    modal
+                        .presentationDetents(data.count < 4 ? [.medium, .large] : [.large])
+                        .presentationDragIndicator(.hidden)
+                } else {
+                    modal
+                }
             }
         }
     }
 
     private var modal: some View {
-        NavigationView {
-            List {
+        PageView(label) {
+            LazyVStack(alignment: .leading, spacing: .zero) {
                 ForEach(data.indices, id: \.self) { index in
                     Button(action: {
                                selectedIndex = index
@@ -90,8 +96,9 @@ public struct Select<Element, Content, Selection>: View
 
                            })
                 }
-            }.navigationTitle(label)
+            }
         }
+        .leadingBar { BarButton(.close) }
     }
 }
 

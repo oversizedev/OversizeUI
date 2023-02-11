@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// Button.swift
+// Copyright © 2021 Alexander Romanov
+// Button.swift, created on 10.02.2021
 //
 
 import SwiftUI

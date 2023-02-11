@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// Icon.swift
+// Copyright © 2021 Alexander Romanov
+// Icon.swift, created on 13.09.2020
 //
 
 import SwiftUI

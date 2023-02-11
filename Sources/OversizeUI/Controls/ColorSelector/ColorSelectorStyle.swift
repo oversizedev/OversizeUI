@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// ColorSelectorStyle.swift
+// Copyright © 2021 Alexander Romanov
+// ColorSelectorStyle.swift, created on 11.09.2021
 //
 
 import SwiftUI

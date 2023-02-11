@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// LoaderOverlayView.swift
+// Copyright © 2021 Alexander Romanov
+// LoaderOverlayView.swift, created on 28.03.2021
 //
 
 import SwiftUI
