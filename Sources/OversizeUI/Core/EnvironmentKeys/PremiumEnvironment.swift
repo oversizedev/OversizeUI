@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// PremiumEnvironment.swift
+// Copyright © 2021 Alexander Romanov
+// PremiumEnvironment.swift, created on 06.12.2021
 //
 
 import SwiftUI

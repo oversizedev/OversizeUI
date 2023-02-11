@@ -1,6 +1,6 @@
 //
-// Copyright © 2023 Alexander Romanov
-// BarButtonMenuStyle.swift
+// Copyright © 2021 Alexander Romanov
+// BarButtonMenuStyle.swift, created on 02.02.2023
 //
 
 import SwiftUI

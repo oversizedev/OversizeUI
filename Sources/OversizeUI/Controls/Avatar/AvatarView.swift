@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// AvatarView.swift
+// Copyright © 2021 Alexander Romanov
+// AvatarView.swift, created on 24.09.2020
 //
 
 import SwiftUI

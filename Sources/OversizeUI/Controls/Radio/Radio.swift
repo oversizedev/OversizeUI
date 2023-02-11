@@ -1,6 +1,6 @@
 //
-// Copyright © 2023 Alexander Romanov
-// Radio.swift
+// Copyright © 2021 Alexander Romanov
+// Radio.swift, created on 07.02.2023
 //
 
 import SwiftUI

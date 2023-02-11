@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// HUD.swift
+// Copyright © 2021 Alexander Romanov
+// HUD.swift, created on 26.04.2021
 //
 
 import SwiftUI

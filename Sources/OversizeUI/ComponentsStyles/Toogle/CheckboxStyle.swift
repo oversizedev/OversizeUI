@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// CheckboxStyle.swift
+// Copyright © 2021 Alexander Romanov
+// CheckboxStyle.swift, created on 23.12.2022
 //
 
 import SwiftUI

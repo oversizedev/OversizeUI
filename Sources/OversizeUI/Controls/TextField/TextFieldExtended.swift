@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// TextFieldExtended.swift
+// Copyright © 2021 Alexander Romanov
+// TextFieldExtended.swift, created on 07.06.2020
 //
 
 import Combine

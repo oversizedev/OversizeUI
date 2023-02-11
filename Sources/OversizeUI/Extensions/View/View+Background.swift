@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// View+Background.swift
+// Copyright © 2021 Alexander Romanov
+// View+Background.swift, created on 25.04.2021
 //
 
 import SwiftUI

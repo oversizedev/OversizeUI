@@ -1,6 +1,6 @@
 //
-// Copyright © 2023 Alexander Romanov
-// Switch.swift
+// Copyright © 2021 Alexander Romanov
+// Switch.swift, created on 07.02.2023
 //
 
 import SwiftUI

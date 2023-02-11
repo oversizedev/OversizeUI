@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// PortraitEnvironment.swift
+// Copyright © 2021 Alexander Romanov
+// PortraitEnvironment.swift, created on 25.04.2022
 //
 
 import SwiftUI

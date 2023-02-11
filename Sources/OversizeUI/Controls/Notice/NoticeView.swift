@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// NoticeView.swift
+// Copyright © 2021 Alexander Romanov
+// NoticeView.swift, created on 12.09.2022
 //
 
 import SwiftUI

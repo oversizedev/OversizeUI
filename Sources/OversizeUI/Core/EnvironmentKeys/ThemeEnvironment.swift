@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// ThemeEnvironment.swift
+// Copyright © 2021 Alexander Romanov
+// ThemeEnvironment.swift, created on 20.02.2022
 //
 
 import SwiftUI

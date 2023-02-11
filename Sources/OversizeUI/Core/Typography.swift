@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// Typography.swift
+// Copyright © 2021 Alexander Romanov
+// Typography.swift, created on 07.06.2020
 //
 
 import SwiftUI

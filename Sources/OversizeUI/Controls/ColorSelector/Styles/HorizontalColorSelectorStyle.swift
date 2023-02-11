@@ -1,6 +1,6 @@
 //
-// Copyright © 2023 Alexander Romanov
-// HorizontalColorSelectorStyle.swift
+// Copyright © 2021 Alexander Romanov
+// HorizontalColorSelectorStyle.swift, created on 02.02.2023
 //
 
 import SwiftUI

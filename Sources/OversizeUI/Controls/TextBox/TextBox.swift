@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// TextBox.swift
+// Copyright © 2021 Alexander Romanov
+// TextBox.swift, created on 02.04.2022
 //
 
 import SwiftUI

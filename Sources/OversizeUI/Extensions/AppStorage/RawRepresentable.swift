@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// RawRepresentable.swift
+// Copyright © 2021 Alexander Romanov
+// RawRepresentable.swift, created on 10.12.2021
 //
 
 import SwiftUI

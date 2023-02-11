@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// View+ScrollViewOffset.swift
+// Copyright © 2021 Alexander Romanov
+// View+ScrollViewOffset.swift, created on 22.03.2022
 //
 
 import SwiftUI

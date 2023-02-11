@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// String+Extensions.swift
+// Copyright © 2021 Alexander Romanov
+// String+Extensions.swift, created on 20.05.2021
 //
 
 import Foundation

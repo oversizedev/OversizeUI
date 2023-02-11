@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// AvatarDemo.swift
+// Copyright © 2021 Alexander Romanov
+// AvatarDemo.swift, created on 27.11.2022
 //
 
 import OversizeUI

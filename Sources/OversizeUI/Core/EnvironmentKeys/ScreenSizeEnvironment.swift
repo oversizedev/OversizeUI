@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// ScreenSizeEnvironment.swift
+// Copyright © 2021 Alexander Romanov
+// ScreenSizeEnvironment.swift, created on 26.02.2022
 //
 
 import SwiftUI

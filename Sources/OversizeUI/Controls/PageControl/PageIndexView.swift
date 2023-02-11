@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// PageIndexView.swift
+// Copyright © 2021 Alexander Romanov
+// PageIndexView.swift, created on 09.09.2022
 //
 
 import SwiftUI

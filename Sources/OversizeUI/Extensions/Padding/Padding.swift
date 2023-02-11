@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// Padding.swift
+// Copyright © 2021 Alexander Romanov
+// Padding.swift, created on 11.09.2021
 //
 
 import SwiftUI
@@ -12,6 +12,7 @@ public struct PaddingModifier: ViewModifier {
         self.edges = edges
         self.length = length
     }
+
     public func body(content: Content) -> some View {
         content.padding(edges, length.rawValue)
     }
@@ -22,6 +23,7 @@ public struct PaddingEdgeInsetsModifier: ViewModifier {
     public init(insets: EdgeSpaceInsets) {
         self.insets = insets
     }
+
     public func body(content: Content) -> some View {
         content.padding(
             EdgeInsets(top: insets.top.rawValue,
@@ -56,13 +58,12 @@ public extension View {
     func padding(_ edges: Edge.Set, _ length: Space) -> some View {
         modifier(PaddingModifier(edges: edges, length: length))
     }
-    
 
     @_disfavoredOverload
     func padding(_ length: Space) -> some View {
         modifier(PaddingModifier(edges: Edge.Set.all, length: length))
     }
-    
+
     func padding(_ insets: EdgeSpaceInsets) -> some View {
         modifier(PaddingEdgeInsetsModifier(insets: insets))
     }

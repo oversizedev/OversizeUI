@@ -1,15 +1,15 @@
 //
-// Copyright © 2022 Alexander Romanov
-// BarButton.swift
+// Copyright © 2021 Alexander Romanov
+// BarButton.swift, created on 10.04.2021
 //
 
 import SwiftUI
 
 public enum BarButtonType {
     case close
-    case closeAction(action: () -> Void)
+    case closeAction(_ action: () -> Void)
     case back
-    case backAction(action: () -> Void)
+    case backAction(_ action: () -> Void)
     case accent(_ text: String, action: () -> Void)
     case primary(_ text: String, action: () -> Void)
     case secondary(_ text: String, action: () -> Void)
@@ -23,6 +23,11 @@ public struct BarButton: View {
 
     private var type: BarButtonType
 
+    public init(_ type: BarButtonType) {
+        self.type = type
+    }
+
+    @available(*, deprecated, message: "Delete type prefix from init")
     public init(type: BarButtonType) {
         self.type = type
     }

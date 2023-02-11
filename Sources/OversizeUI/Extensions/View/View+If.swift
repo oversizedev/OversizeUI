@@ -1,6 +1,6 @@
 //
-// Copyright © 2023 Alexander Romanov
-// View+If.swift
+// Copyright © 2021 Alexander Romanov
+// View+If.swift, created on 07.02.2023
 //
 
 import SwiftUI

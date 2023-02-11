@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// ModalNavigationBar.swift
+// Copyright © 2021 Alexander Romanov
+// ModalNavigationBar.swift, created 11.02.2021
 //
 
 import SwiftUI

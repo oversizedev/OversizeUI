@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// ElevationEnvironment.swift
+// Copyright © 2021 Alexander Romanov
+// ElevationEnvironment.swift, created on 15.11.2021
 //
 
 import SwiftUI

@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// PremiumLabel.swift
+// Copyright © 2021 Alexander Romanov
+// PremiumLabel.swift, created on 06.12.2021
 //
 
 import SwiftUI

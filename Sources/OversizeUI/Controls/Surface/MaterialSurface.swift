@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// MaterialSurface.swift
+// Copyright © 2021 Alexander Romanov
+// MaterialSurface.swift, created on 26.02.2023
 //
 
 import SwiftUI
