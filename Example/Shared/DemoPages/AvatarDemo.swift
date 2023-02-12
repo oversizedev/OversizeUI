@@ -8,19 +8,50 @@ import SwiftUI
 
 struct AvatarDemo: View {
     var body: some View {
-        ScrollView {
-            VStack(spacing: .xSmall) {
-                AvatarView(firstName: "Jhon", size: .small)
+        PageView("Avatars") {
+            LazyVStack(spacing: .xSmall) {
+                Group {
+                    AvatarView(firstName: "Jhon")
+                        .controlSize(.small)
+                        .previewDisplayName("Only firsy name")
 
-                AvatarView(firstName: "Jhon", lastName: "Smith", size: .small, stroke: true)
+                    AvatarView(firstName: "Jhon", lastName: "Smith")
+                        .controlSize(.small)
 
-                AvatarView(firstName: "Jhon", size: .medium)
+                    AvatarView(avatar: Image("empty"))
+                        .controlSize(.small)
 
-                AvatarView(firstName: "Jhon", lastName: "Smith", size: .medium, stroke: true)
+                    AvatarView(firstName: "Jhon", lastName: "Smith", avatar: Image("empty"))
+                        .controlSize(.small)
+                }
 
-                AvatarView(firstName: "Jhon", size: .large)
+                Group {
+                    AvatarView(firstName: "Jhon")
+                        .controlSize(.regular)
+                        .previewDisplayName("Only firsy name")
 
-                AvatarView(firstName: "Jhon", lastName: "Smith", size: .large, stroke: true)
+                    AvatarView(firstName: "Jhon", lastName: "Smith")
+                        .controlSize(.regular)
+
+                    AvatarView(avatar: Image("empty"))
+                        .controlSize(.regular)
+
+                    AvatarView(firstName: "Jhon", lastName: "Smith", avatar: Image("empty"))
+                        .controlSize(.regular)
+                }
+                Group {
+                    AvatarView(firstName: "Jhon")
+                        .controlSize(.large)
+
+                    AvatarView(firstName: "Jhon", lastName: "Smith")
+                        .controlSize(.large)
+
+                    AvatarView(avatar: Image("empty"))
+                        .controlSize(.large)
+
+                    AvatarView(firstName: "Jhon", lastName: "Smith", avatar: Image("empty"))
+                        .controlSize(.large)
+                }
             }
         }
         .navigationTitle("Avatar")

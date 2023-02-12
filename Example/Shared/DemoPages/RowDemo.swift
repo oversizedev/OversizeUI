@@ -16,10 +16,6 @@ struct RowDemo: View {
             Row("Title")
 
             Row("Title", subtitle: "Subtitle")
-
-            Row("Title", subtitle: "Subtitle", leadingType: .icon(.calendar), trallingType: .radio(isOn: $radioOne), paddingVertical: .medium)
-
-            Row("Title", subtitle: "Subtitle", leadingType: .icon(.calendar), trallingType: .radio(isOn: $radioTwo), paddingVertical: .small)
         }
     }
 }

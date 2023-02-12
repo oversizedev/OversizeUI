@@ -49,7 +49,7 @@ struct ComponentsList: View {
                 }
             }
             .leadingBar {
-                BarButton(type: .secondary("Settings", action: { isShowSetting.toggle() }))
+                BarButton(.secondary("Settings", action: { isShowSetting.toggle() }))
             }
             .navigationable()
         #else
@@ -122,7 +122,7 @@ struct SegmentedControlPreview: View {
             }.padding()
         }
         .scrollWithNavigationBar("App", style: .fixed($offset), background: Color.backgroundSecondary) {
-            BarButton(type: .back)
+            BarButton(.back)
         } trailingBar: {} bottomBar: {}
     }
 }

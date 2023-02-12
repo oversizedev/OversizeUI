@@ -24,7 +24,6 @@ import SwiftUI
                 }
                 .padding()
             }
-            .modalable()
         }
     }
 
