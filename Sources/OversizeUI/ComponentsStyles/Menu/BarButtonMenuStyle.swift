@@ -5,6 +5,7 @@
 
 import SwiftUI
 
+@available(watchOS, unavailable)
 public struct BarButtonMenuStyle: MenuStyle {
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.isBordered) var isBordered: Bool
@@ -31,6 +32,7 @@ public struct BarButtonMenuStyle: MenuStyle {
     }
 }
 
+@available(watchOS, unavailable)
 public extension MenuStyle where Self == BarButtonMenuStyle {
     static var barButton: BarButtonMenuStyle {
         BarButtonMenuStyle()

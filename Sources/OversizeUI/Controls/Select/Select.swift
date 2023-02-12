@@ -67,13 +67,17 @@ public struct Select<Element, Content, Selection>: View
             .foregroundColor(.onSurfaceHighEmphasis)
 
             .sheet(isPresented: $showModal) {
-                if #available(iOS 16.0, *) {
+                #if os(iOS)
+                    if #available(iOS 16.0, *) {
+                        modal
+                            .presentationDetents(data.count < 4 ? [.medium, .large] : [.large])
+                            .presentationDragIndicator(.hidden)
+                    } else {
+                        modal
+                    }
+                #else
                     modal
-                        .presentationDetents(data.count < 4 ? [.medium, .large] : [.large])
-                        .presentationDragIndicator(.hidden)
-                } else {
-                    modal
-                }
+                #endif
             }
         }
     }
