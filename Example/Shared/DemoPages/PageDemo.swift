@@ -32,10 +32,10 @@ import SwiftUI
                 }
             }
             .leadingBar {
-                BarButton(type: .back)
+                BarButton(.back)
             }
             .trailingBar {
-                BarButton(type: .primary("Save", action: {}))
+                BarButton(.primary("Save", action: {}))
             }
             .sheet(isPresented: $isShowModal) {
                 IconsDemo()

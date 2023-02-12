@@ -8,7 +8,7 @@ import SwiftUI
 
 struct ButtonsDemo: View {
     var body: some View {
-        ScrollView {
+        PageView("Buttons") {
             VStack(spacing: .xSmall) {
                 Button("Button") { print(#function) }
                     .buttonStyle(.primary)
