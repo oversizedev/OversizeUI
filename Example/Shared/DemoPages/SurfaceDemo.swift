@@ -8,7 +8,7 @@ import SwiftUI
 
 struct SurfaceDemo: View {
     var body: some View {
-        ScrollView {
+        PageView("Surface") {
             VStack {
                 Surface {
                     Text("Text")
@@ -44,7 +44,9 @@ struct SurfaceDemo: View {
             }
             .padding()
         }
-        .navigationTitle("Surface")
+        .leadingBar {
+            BarButton(.back)
+        }
     }
 }
 

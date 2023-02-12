@@ -8,7 +8,7 @@ import SwiftUI
 
 struct TextFieldDemo: View {
     var body: some View {
-        ScrollView {
+        PageView("Text Fields") {
             VStack(spacing: .xSmall) {
                 TextField("Text", text: .constant("Placeholder"))
                     .textFieldStyle(DefaultPlaceholderTextFieldStyle())
@@ -33,8 +33,9 @@ struct TextFieldDemo: View {
 
             }.padding()
         }
-
-        .navigationTitle("Text fields")
+        .leadingBar {
+            BarButton(.back)
+        }
     }
 }
 

@@ -12,13 +12,17 @@ struct ColorSelect: View {
     @State var colorSelect2 = Color.red
 
     var body: some View {
-        VStack {
-            ColorSelector(selection: $colorSelect)
-
-            ColorSelector(selection: $colorSelect2)
-                .colorSelectorStyle(GridColorSelectorStyle())
+        PageView("Color select") {
+            
+            VStack {
+                ColorSelector(selection: $colorSelect)
+                
+                ColorSelector(selection: $colorSelect2)
+                    .colorSelectorStyle(GridColorSelectorStyle())
+            }
+        }.leadingBar {
+            BarButton(.back)
         }
-        .navigationTitle("Color select")
     }
 }
 

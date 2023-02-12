@@ -12,10 +12,15 @@ struct RowDemo: View {
     @State var radioTwo: Bool = false
 
     var body: some View {
-        VStack {
-            Row("Title")
-
-            Row("Title", subtitle: "Subtitle")
+        PageView("Rows") {
+            VStack {
+                Row("Title")
+                
+                Row("Title", subtitle: "Subtitle")
+            }
+        }
+        .leadingBar {
+            BarButton(.back)
         }
     }
 }

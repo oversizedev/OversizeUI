@@ -71,7 +71,9 @@ struct ButtonsDemo: View {
 
             }.padding()
         }
-        .navigationTitle("Buttons")
+        .leadingBar {
+            BarButton(.back)
+        }
     }
 }
 
