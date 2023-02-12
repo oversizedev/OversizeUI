@@ -54,7 +54,9 @@ struct AvatarDemo: View {
                 }
             }
         }
-        .navigationTitle("Avatar")
+        .leadingBar {
+            BarButton(.back)
+        }
     }
 }
 

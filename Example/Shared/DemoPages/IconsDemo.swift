@@ -24,6 +24,9 @@ import SwiftUI
                 }
                 .padding()
             }
+            .leadingBar {
+                BarButton(.back)
+            }
         }
     }
 

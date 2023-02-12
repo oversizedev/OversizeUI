@@ -26,12 +26,12 @@ struct ComponentsList: View {
         Page(name: "Avatar", page: AnyView(AvatarDemo())),
         Page(name: "GridSelect", page: AnyView(GridSelectDemo())),
         Page(name: "TextField", page: AnyView(TextFieldDemo())),
-        // Page(name: "Icons", page: AnyView(IconsDemo())),
+        Page(name: "Icons", page: AnyView(IconsDemo())),
         Page(name: "Row", page: AnyView(RowDemo())),
         Page(name: "SegmentedControl", page: AnyView(SegmentedControlDemo())),
         Page(name: "Select", page: AnyView(SelectDemo())),
         Page(name: "Surface", page: AnyView(SurfaceDemo())),
-        // Page(name: "Page", page: AnyView(PageDemo())),
+        Page(name: "Page", page: AnyView(PageDemo())),
     ]
 
     var body: some View {
@@ -47,9 +47,6 @@ struct ComponentsList: View {
                     }
                     .padding()
                 }
-            }
-            .leadingBar {
-                BarButton(.secondary("Settings", action: { isShowSetting.toggle() }))
             }
             .navigationable()
         #else
