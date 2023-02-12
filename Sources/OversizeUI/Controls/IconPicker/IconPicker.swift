@@ -111,10 +111,10 @@ import SwiftUI
                 }
             }
             .leadingBar {
-                BarButton(type: .close)
+                BarButton(.close)
             }
             .trailingBar {
-                BarButton(type: .secondary("Save", action: {
+                BarButton(.secondary("Save", action: {
                     selection = icons[selectedIndex ?? 0]
                     isSelected = true
                     showModal.toggle()

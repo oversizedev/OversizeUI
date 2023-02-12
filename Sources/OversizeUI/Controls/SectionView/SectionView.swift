@@ -24,7 +24,10 @@ public enum SectionViewStyle {
 
 public struct SectionView<Content: View>: View {
     @Environment(\.controlRadius) private var controlRadius: Radius
-    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+
+    #if os(iOS)
+        @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    #endif
     @Environment(\.sectionViewStyle) private var style: SectionViewStyle
     private let content: Content
     private let title: String
@@ -131,21 +134,29 @@ public struct SectionView<Content: View>: View {
     }
 
     private var titleHorizontalPadding: CGFloat {
-        if horizontalSizeClass == .regular {
-            return Space.medium.rawValue + Space.large.rawValue
-        } else {
-            return Space.medium.rawValue
-        }
-    }
-
-    private var surfaceHorizontalPadding: CGFloat {
-        switch style {
-        case .default:
+        #if os(iOS)
             if horizontalSizeClass == .regular {
                 return Space.medium.rawValue + Space.large.rawValue
             } else {
                 return Space.medium.rawValue
             }
+        #else
+            return Space.medium.rawValue
+        #endif
+    }
+
+    private var surfaceHorizontalPadding: CGFloat {
+        switch style {
+        case .default:
+            #if os(iOS)
+                if horizontalSizeClass == .regular {
+                    return Space.medium.rawValue + Space.large.rawValue
+                } else {
+                    return Space.medium.rawValue
+                }
+            #else
+                return Space.medium.rawValue
+            #endif
         case .smallIndent:
             return Space.xxSmall.rawValue
         case .edgeToEdge:
