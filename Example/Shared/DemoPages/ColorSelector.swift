@@ -13,10 +13,9 @@ struct ColorSelect: View {
 
     var body: some View {
         PageView("Color select") {
-            
             VStack {
                 ColorSelector(selection: $colorSelect)
-                
+
                 ColorSelector(selection: $colorSelect2)
                     .colorSelectorStyle(GridColorSelectorStyle())
             }

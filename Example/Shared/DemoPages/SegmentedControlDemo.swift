@@ -88,8 +88,6 @@ struct SegmentedControlDemo: View {
                     .controlRadius(.xLarge)
                 }
             }.padding()
-            
-            
         }
         .leadingBar {
             BarButton(.back)

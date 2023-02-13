@@ -296,7 +296,6 @@ public extension Shape {
 }
 
 public extension View {
-    
     @available(*, deprecated, renamed: "onPrimaryHighEmphasisForegroundColor")
     func foregroundOnPrimaryHighEmphasis() -> some View {
         foregroundColor(Color.onPrimaryHighEmphasis)
@@ -306,7 +305,7 @@ public extension View {
     func foregroundOnPrimaryMediumEmphasis() -> some View {
         foregroundColor(Color.onPrimaryMediumEmphasis)
     }
-    
+
     @available(*, deprecated, renamed: "onPrimaryDisabledForegroundColor")
     func foregroundOnPrimaryDisabled() -> some View {
         foregroundColor(Color.onPrimaryDisabled)

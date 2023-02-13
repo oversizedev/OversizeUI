@@ -217,7 +217,7 @@ public struct HUDContent: View {
 
                     Text(title)
                         .body()
-                        .foregroundOnSurfaceHighEmphasis()
+                        .onSurfaceHighEmphasisForegroundColor()
                 }
             case .alert:
                 VStack(spacing: .large) {
@@ -227,7 +227,7 @@ public struct HUDContent: View {
 
                     Text(title)
                         .title3()
-                        .foregroundOnSurfaceHighEmphasis()
+                        .onSurfaceHighEmphasisForegroundColor()
                 }
                 .frame(minWidth: 225)
             }

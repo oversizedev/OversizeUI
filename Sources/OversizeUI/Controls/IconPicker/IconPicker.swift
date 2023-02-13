@@ -46,7 +46,7 @@ import SwiftUI
                 HStack(spacing: .xxSmall) {
                     Text(label)
                         .headline()
-                        .foregroundOnSurfaceHighEmphasis()
+                        .onSurfaceHighEmphasisForegroundColor()
                 }
                 Spacer()
                 if let image = selection {

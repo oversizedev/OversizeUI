@@ -23,7 +23,7 @@ public struct LibraryContent: LibraryContentProvider {
         LibraryItem(
             base
                 .body()
-                .foregroundOnBackgroundHighEmphasis()
+                .onBackgroundHighEmphasisForegroundColor()
         )
     }
 }

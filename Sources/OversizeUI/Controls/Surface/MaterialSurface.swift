@@ -10,7 +10,7 @@ import SwiftUI
         @Environment(\.elevation) private var elevation: Elevation
         @Environment(\.theme) private var theme: ThemeSettings
         @Environment(\.controlRadius) var controlRadius: Radius
-        @Environment(\.controlPadding) var controlPadding: ControlPadding
+        @Environment(\.surfaceContentInsets) var controlPadding: EdgeSpaceInsets
 
         private let label: Label
         private let action: (() -> Void)?
@@ -44,10 +44,9 @@ import SwiftUI
         @ViewBuilder
         private var surface: some View {
             label
-                .padding(.top, controlPadding.top)
-                .padding(.bottom, controlPadding.bottom)
-                .padding(.leading, controlPadding.leading)
-                .padding(.trailing, controlPadding.trailing)
+                .padding(
+                    EdgeSpaceInsets(top: controlPadding.top, leading: controlPadding.leading, bottom: controlPadding.bottom, trailing: controlPadding.trailing)
+                )
                 .background(material,
                             in: RoundedRectangle(cornerRadius: controlRadius, style: .continuous))
                 .overlay(overlayView)

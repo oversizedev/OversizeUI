@@ -201,7 +201,7 @@ struct Surface_Previews: PreviewProvider {
             Surface {
                 Text("Text")
                     .title3()
-                    .foregroundOnSurfaceHighEmphasis()
+                    .onSurfaceHighEmphasisForegroundColor()
             }
             .surfaceStyle(.secondary)
             .previewLayout(.fixed(width: 414, height: 200))
@@ -209,7 +209,7 @@ struct Surface_Previews: PreviewProvider {
             Surface {
                 Text("Text")
                     .title3()
-                    .foregroundOnSurfaceHighEmphasis()
+                    .onSurfaceHighEmphasisForegroundColor()
             }
             .surfaceStyle(.primary)
             .surfaceBorderColor(.surfaceSecondary)

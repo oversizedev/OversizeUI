@@ -127,7 +127,7 @@ public struct BarButton: View {
         case let .image(image, _):
             image
                 .renderingMode(.template)
-                .foregroundOnSurfaceHighEmphasis()
+                .onSurfaceHighEmphasisForegroundColor()
         case let .icon(icon, _):
             Icon(icon, color: .onSurfaceMediumEmphasis)
         }
