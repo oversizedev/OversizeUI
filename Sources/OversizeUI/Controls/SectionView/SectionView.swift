@@ -24,11 +24,10 @@ public enum SectionViewStyle {
 
 public struct SectionView<Content: View>: View {
     @Environment(\.controlRadius) private var controlRadius: Radius
-
+    @Environment(\.sectionViewStyle) private var style: SectionViewStyle
     #if os(iOS)
         @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     #endif
-    @Environment(\.sectionViewStyle) private var style: SectionViewStyle
     private let content: Content
     private let title: String
 
@@ -78,10 +77,9 @@ public struct SectionView<Content: View>: View {
 
     private var titleView: some View {
         HStack {
-            Text(title)
-                .font(titleFont)
-                .foregroundColor(titleColor)
-
+            
+            titleLabelView(titleButton)
+            
             if titleButtonPosition == .trailing {
                 Spacer()
             }
@@ -111,6 +109,27 @@ public struct SectionView<Content: View>: View {
             return .onSurfaceHighEmphasis
         case .outside:
             return .onBackgroundHighEmphasis
+        }
+    }
+
+    @ViewBuilder
+    private func titleLabelView(_ button: SectionViewTitleButton?) -> some View {
+        if let button {
+            switch button {
+            case let .arrow(action), let .title(_, action):
+                Button {
+                    action()
+                } label: {
+                    Text(title)
+                        .font(titleFont)
+                        .foregroundColor(titleColor)
+                }
+                .buttonStyle(.scale)
+            }
+        } else {
+            Text(title)
+                .font(titleFont)
+                .foregroundColor(titleColor)
         }
     }
 
