@@ -37,15 +37,13 @@ struct ComponentsList: View {
     var body: some View {
         #if os(iOS)
             PageView("Example") {
-                ForEach(pages) { page in
-                    HStack {
-                        NavigationLink(page.name, destination: page.page)
-                            .body(true)
-                            .foregroundColor(.onSurfaceHighEmphasis)
-
-                        Spacer()
+                VStack(spacing: .zero) {
+                    ForEach(pages) { page in
+                        NavigationLink(destination: page.page) {
+                            Row(page.name)
+                        }
+                        .buttonStyle(.row)
                     }
-                    .padding()
                 }
             }
             .navigationable()

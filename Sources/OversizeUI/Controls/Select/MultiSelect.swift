@@ -6,7 +6,7 @@
 import SwiftUI
 
 // swiftlint:disable all
-public struct MultiSelect<Element, Content, Selection>: View
+public struct MultiSelect<Element: Equatable, Content, Selection>: View
     where
     Content: View,
     Selection: View
@@ -21,9 +21,6 @@ public struct MultiSelect<Element, Content, Selection>: View
     private let selectionView: (Data) -> Selection
     @State private var showModal = false
     @State var selectedIndexes: [Int] = []
-    private var isSelected: Bool {
-        !selectedIndexes.isEmpty
-    }
 
     public init(_ label: String,
                 _ data: Data,
@@ -43,10 +40,10 @@ public struct MultiSelect<Element, Content, Selection>: View
             Button {
                 self.showModal.toggle()
             } label: {
-                if isSelected {
-                    selectionView(selection)
-                } else {
+                if selectedIndexes.isEmpty {
                     Text(label)
+                } else {
+                    selectionView(selection)
                 }
                 Spacer()
                 Icon(.chevronDown, color: .onSurfaceHighEmphasis)
@@ -67,7 +64,6 @@ public struct MultiSelect<Element, Content, Selection>: View
             )
             .headline()
             .foregroundColor(.onSurfaceHighEmphasis)
-
             .sheet(isPresented: $showModal) {
                 #if os(iOS)
                     if #available(iOS 16.0, *) {
@@ -80,6 +76,16 @@ public struct MultiSelect<Element, Content, Selection>: View
                 #else
                     modal
                 #endif
+            }
+        }
+        .onAppear {
+            if !selection.isEmpty {
+                for dataIndex in 0 ..< data.count {
+                    let dataItem = data[dataIndex]
+                    for selectIndex in 0 ..< selection.count where dataItem == selection[selectIndex] {
+                        selectedIndexes.append(dataIndex)
+                    }
+                }
             }
         }
     }

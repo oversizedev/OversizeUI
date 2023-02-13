@@ -25,7 +25,6 @@ struct SelectDemo: View {
         .leadingBar {
             BarButton(.back)
         }
-        
     }
 }
 

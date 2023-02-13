@@ -52,7 +52,7 @@ public struct NoticeView<A>: View where A: View {
 
                     Text(title)
                         .headline(.bold)
-                        .foregroundOnSurfaceHighEmphasis()
+                        .onSurfaceHighEmphasisForegroundColor()
                         .multilineTextAlignment(.leading)
                         .padding(.trailing, closeAction != nil ? .medium : .zero)
                 }
@@ -60,7 +60,7 @@ public struct NoticeView<A>: View where A: View {
                 subtitle.map { text in
                     Text(text)
                         .body(.medium)
-                        .foregroundOnSurfaceMediumEmphasis()
+                        .onSurfaceMediumEmphasisForegroundColor()
                         .multilineTextAlignment(.leading)
                 }
 

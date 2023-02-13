@@ -61,7 +61,7 @@ public struct LoaderOverlayView: View {
                             if showText {
                                 Text(text.isEmpty ? "Loading" : text)
                                     .headline(.semibold)
-                                    .foregroundOnSurfaceDisabled()
+                                    .onSurfaceDisabledForegroundColor()
                                     .offset(y: 8)
                             }
                         }
@@ -76,7 +76,7 @@ public struct LoaderOverlayView: View {
                         if showText {
                             Text(text.isEmpty ? "Loading" : text)
                                 .headline(.semibold)
-                                .foregroundOnSurfaceDisabled()
+                                .onSurfaceDisabledForegroundColor()
                                 .offset(y: 8)
                         }
                     }

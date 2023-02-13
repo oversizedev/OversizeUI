@@ -15,7 +15,7 @@ struct RowDemo: View {
         PageView("Rows") {
             VStack {
                 Row("Title")
-                
+
                 Row("Title", subtitle: "Subtitle")
             }
         }

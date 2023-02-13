@@ -82,7 +82,7 @@ public struct TextBox: View {
                     .title(true)
             }
         }
-        .foregroundOnSurfaceHighEmphasis()
+        .onSurfaceHighEmphasisForegroundColor()
     }
 
     public func textBoxSize(_ size: TextBoxSize) -> TextBox {

@@ -96,7 +96,7 @@ public struct Select<Element, Content, Selection>: View
                                content(data[index],
                                        selectedIndex == index)
                                    .headline()
-                                   .foregroundOnSurfaceHighEmphasis()
+                                   .onSurfaceHighEmphasisForegroundColor()
 
                            })
                 }
