@@ -33,17 +33,29 @@ public struct BarButton: View {
     }
 
     public var body: some View {
-        Button(action: buttonAction) {
-            label
-        }
-        .buttonStyle(buttonStyle)
-        .controlBorderShape(.capsule)
-        .controlSize(controlSize)
-        .accent(isAccent)
-        .disabled(isDisabled)
-        .elevation(.z2)
+        #if os(tvOS)
+            Button(action: buttonAction) {
+                label
+            }
+            .buttonStyle(buttonStyle)
+            .controlBorderShape(.capsule)
+            .accent(isAccent)
+            .disabled(isDisabled)
+            .elevation(.z2)
+        #else
+            Button(action: buttonAction) {
+                label
+            }
+            .buttonStyle(buttonStyle)
+            .controlBorderShape(.capsule)
+            .controlSize(controlSize)
+            .accent(isAccent)
+            .disabled(isDisabled)
+            .elevation(.z2)
+        #endif
     }
 
+    @available(tvOS, unavailable)
     private var controlSize: ControlSize {
         switch type {
         case .close, .closeAction, .back, .backAction, .image, .icon:

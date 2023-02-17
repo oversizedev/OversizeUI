@@ -10,6 +10,7 @@ public enum AvatarBackgroundType {
 }
 
 public struct AvatarView: View {
+    @available(tvOS, unavailable)
     @Environment(\.controlSize) var controlSize: ControlSize
 
     let firstName: String
@@ -32,20 +33,49 @@ public struct AvatarView: View {
     }
 
     public var body: some View {
+        #if os(tvOS)
+            tvOSContent
+        #else
+            content
+        #endif
+    }
+
+    @available(tvOS, unavailable)
+    @ViewBuilder
+    private var content: some View {
         if let avatar {
             avatar
                 .resizable()
-                .frame(width: avatarSize, height: avatarSize)
+                .frame(width: Space.xxxLarge.rawValue, height: Space.xxxLarge.rawValue)
                 .clipShape(Circle())
                 .overlay(Circle().stroke(strokeColor, lineWidth: 2))
 
         } else {
             ZStack {
                 avatarSurface
-                    .frame(width: avatarSize, height: avatarSize)
+                    .frame(width: Space.xxxLarge.rawValue, height: Space.xxxLarge.rawValue)
                     .overlay(Circle().stroke(strokeColor, lineWidth: 2))
+            }
+        }
+    }
 
-                avatarLabel
+    @available(iOS, unavailable)
+    @available(watchOS, unavailable)
+    @available(macOS, unavailable)
+    @ViewBuilder
+    private var tvOSContent: some View {
+        if let avatar {
+            avatar
+                .resizable()
+                .frame(width: Space.xxxLarge.rawValue, height: Space.xxxLarge.rawValue)
+                .clipShape(Circle())
+                .overlay(Circle().stroke(strokeColor, lineWidth: 2))
+
+        } else {
+            ZStack {
+                avatarSurface
+                    .frame(width: Space.xxxLarge.rawValue, height: Space.xxxLarge.rawValue)
+                    .overlay(Circle().stroke(strokeColor, lineWidth: 2))
             }
         }
     }
@@ -62,12 +92,14 @@ public struct AvatarView: View {
         }
     }
 
+    @available(tvOS, unavailable)
     @ViewBuilder
     private var avatarLabel: some View {
         HStack(spacing: avatarTextSpace) {
             if let icon {
                 icon
                     .renderingMode(.template)
+                    .frame(width: 24, height: 24)
             } else {
                 if firstName.isEmpty == false {
                     Text(String(firstName.dropLast(firstName.count - 1)).capitalized)
@@ -84,6 +116,7 @@ public struct AvatarView: View {
         .foregroundColor(onBackgroundColor)
     }
 
+    @available(tvOS, unavailable)
     private var avatarTextFont: Font {
         switch controlSize {
         case .mini:
@@ -99,6 +132,7 @@ public struct AvatarView: View {
         }
     }
 
+    @available(tvOS, unavailable)
     private var avatarTextSpace: CGFloat {
         switch controlSize {
         case .mini:
@@ -114,6 +148,7 @@ public struct AvatarView: View {
         }
     }
 
+    @available(tvOS, unavailable)
     private var avatarSize: CGFloat {
         switch controlSize {
         case .mini:
@@ -149,7 +184,8 @@ public struct AvatarView: View {
 }
 
 // swiftlint:disable all
-struct åAvatarView_Previews: PreviewProvider {
+@available(tvOS, unavailable)
+struct AvatarView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             AvatarView(firstName: "Jhon")
