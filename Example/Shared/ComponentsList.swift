@@ -20,19 +20,21 @@ struct ComponentsList: View {
 
     @State var isShowSetting = false
 
-    let pages = [
-        Page(name: "Buttons", page: AnyView(ButtonsDemo())),
-        Page(name: "ColorSelector", page: AnyView(ColorSelect())),
-        Page(name: "Avatar", page: AnyView(AvatarDemo())),
-        Page(name: "GridSelect", page: AnyView(GridSelectDemo())),
-        Page(name: "TextField", page: AnyView(TextFieldDemo())),
-        Page(name: "Icons", page: AnyView(IconsDemo())),
-        Page(name: "Row", page: AnyView(RowDemo())),
-        Page(name: "SegmentedControl", page: AnyView(SegmentedControlDemo())),
-        Page(name: "Select", page: AnyView(SelectDemo())),
-        Page(name: "Surface", page: AnyView(SurfaceDemo())),
-        Page(name: "Page", page: AnyView(PageDemo())),
-    ]
+    #if os(iOS)
+        let pages = [
+            Page(name: "Buttons", page: AnyView(ButtonsDemo())),
+            Page(name: "ColorSelector", page: AnyView(ColorSelect())),
+            Page(name: "Avatar", page: AnyView(AvatarDemo())),
+            Page(name: "GridSelect", page: AnyView(GridSelectDemo())),
+            Page(name: "TextField", page: AnyView(TextFieldDemo())),
+            Page(name: "Icons", page: AnyView(IconsDemo())),
+            Page(name: "Row", page: AnyView(RowDemo())),
+            Page(name: "SegmentedControl", page: AnyView(SegmentedControlDemo())),
+            Page(name: "Select", page: AnyView(SelectDemo())),
+            Page(name: "Surface", page: AnyView(SurfaceDemo())),
+            Page(name: "Page", page: AnyView(PageDemo())),
+        ]
+    #endif
 
     var body: some View {
         #if os(iOS)

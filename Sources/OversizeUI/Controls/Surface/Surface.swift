@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-public enum SurfaceStyle: Int, CaseIterable {
+public enum SurfaceStyle {
     case primary
     case secondary
     case tertiary

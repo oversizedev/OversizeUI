@@ -76,10 +76,9 @@ public struct SectionView<Content: View>: View {
     }
 
     private var titleView: some View {
-        HStack {
-            
+        HStack(spacing: titleButtonPosition == .leading ? .zero : .xxxSmall) {
             titleLabelView(titleButton)
-            
+
             if titleButtonPosition == .trailing {
                 Spacer()
             }
@@ -142,13 +141,20 @@ public struct SectionView<Content: View>: View {
             } label: {
                 Icon(.chevronRight)
                     .iconColor(.onSurfaceMediumEmphasis)
+                    .offset(y: titleButtonPosition == .leading ? 1.5 : 0)
             }
             .buttonStyle(.scale)
         case let .title(text, action):
-            Button(text) { action() }
-                .buttonStyle(.tertiary)
-                .controlSize(.small)
-                .controlBorderShape(.capsule)
+            #if os(tvOS)
+                Button(text) { action() }
+                    .buttonStyle(.tertiary)
+                    .controlBorderShape(.capsule)
+            #else
+                Button(text) { action() }
+                    .buttonStyle(.tertiary)
+                    .controlSize(.small)
+                    .controlBorderShape(.capsule)
+            #endif
         }
     }
 

@@ -340,7 +340,7 @@ public struct Icon: View {
             .foregroundColor(color)
     }
 
-    var iconSize: CGFloat {
+    private var iconSize: CGFloat {
         switch size {
         case .medium:
             return Constants.medium
@@ -360,6 +360,7 @@ public struct Icon: View {
     }
 }
 
+@available(tvOS, unavailable)
 struct IconAsset_Previews: PreviewProvider {
     static var previews: some View {
         let grid = [GridItem(),

@@ -20,6 +20,7 @@ public enum RowTrailingType {
     case timePicker(date: Binding<Date>)
     case arrowIcon
     case text(_ text: String)
+    @available(tvOS, unavailable)
     case button(_ text: String, action: () -> Void)
 }
 
@@ -104,11 +105,15 @@ internal struct RowTrailing: View {
                 .foregroundColor(.onSurfaceMediumEmphasis)
 
         case let .button(text, action: action):
-            Button(text, action: action)
-                .buttonStyle(.tertiary)
-                .controlBorderShape(.capsule)
-                .controlSize(.small)
-                .disabled(isPremiumOption && premiumStatus == false)
+            #if os(tvOS)
+                EmptyView()
+            #else
+                Button(text, action: action)
+                    .buttonStyle(.tertiary)
+                    .controlBorderShape(.capsule)
+                    .controlSize(.small)
+                    .disabled(isPremiumOption && premiumStatus == false)
+            #endif
         }
     }
 }
