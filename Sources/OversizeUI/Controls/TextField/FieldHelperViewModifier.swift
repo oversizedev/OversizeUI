@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// TextFieldHelperModifier.swift, created on 02.02.2023
+// FieldHelperModifier.swift, created on 02.02.2023
 //
 
 import SwiftUI
@@ -12,7 +12,7 @@ public enum TextFieldHelperStyle {
     case sussesText
 }
 
-public struct TextFieldHelperModifier: ViewModifier {
+public struct FieldHelperModifier: ViewModifier {
     @Environment(\.theme) private var theme: ThemeSettings
     @Binding public var helperText: String
     @Binding public var helperStyle: TextFieldHelperStyle
@@ -45,6 +45,6 @@ public struct TextFieldHelperModifier: ViewModifier {
 
 public extension View {
     func helper(_ text: Binding<String>, style: Binding<TextFieldHelperStyle>) -> some View {
-        modifier(TextFieldHelperModifier(helperText: text, helperStyle: style))
+        modifier(FieldHelperModifier(helperText: text, helperStyle: style))
     }
 }
