@@ -19,7 +19,7 @@ public struct TextFieldExtended: View {
     public var placeholder: String
     @Binding public var text: String
     @Binding public var helperText: String
-    @Binding public var helperStyle: TextFieldHelperStyle
+    @Binding public var helperStyle: FieldHelperStyle
     public var placeholderPosition: TextFieldPlaceholderPosition
 
     public var leadingImage: IconsNames
@@ -31,7 +31,7 @@ public struct TextFieldExtended: View {
     public init(_ placeholder: String,
                 text: Binding<String>,
                 helperText: Binding<String> = .constant(""),
-                helperStyle: Binding<TextFieldHelperStyle> = .constant(.none),
+                helperStyle: Binding<FieldHelperStyle> = .constant(.none),
                 leadingImage: IconsNames = .none,
                 trallingImage: IconsNames = .none,
                 placeholderPosition: TextFieldPlaceholderPosition = .overField,

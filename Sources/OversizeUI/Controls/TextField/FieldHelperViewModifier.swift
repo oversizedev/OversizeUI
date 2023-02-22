@@ -5,18 +5,18 @@
 
 import SwiftUI
 
-public enum TextFieldHelperStyle {
+public enum FieldHelperStyle {
     case none
     case helperText
     case errorText
     case sussesText
 }
 
-public struct FieldHelperModifier: ViewModifier {
+public struct FieldHelperViewModifier: ViewModifier {
     @Environment(\.theme) private var theme: ThemeSettings
     @Binding public var helperText: String
-    @Binding public var helperStyle: TextFieldHelperStyle
-    public init(helperText: Binding<String>, helperStyle: Binding<TextFieldHelperStyle>) {
+    @Binding public var helperStyle: FieldHelperStyle
+    public init(helperText: Binding<String>, helperStyle: Binding<FieldHelperStyle>) {
         _helperText = helperText
         _helperStyle = helperStyle
     }
@@ -44,7 +44,12 @@ public struct FieldHelperModifier: ViewModifier {
 }
 
 public extension View {
-    func helper(_ text: Binding<String>, style: Binding<TextFieldHelperStyle>) -> some View {
-        modifier(FieldHelperModifier(helperText: text, helperStyle: style))
+    @available(*, deprecated, renamed: "fieldHelper")
+    func helper(_ text: Binding<String>, style: Binding<FieldHelperStyle>) -> some View {
+        modifier(FieldHelperViewModifier(helperText: text, helperStyle: style))
+    }
+
+    func fieldHelper(_ text: Binding<String>, style: Binding<FieldHelperStyle>) -> some View {
+        modifier(FieldHelperViewModifier(helperText: text, helperStyle: style))
     }
 }
