@@ -46,15 +46,17 @@ public struct AvatarView: View {
         if let avatar {
             avatar
                 .resizable()
-                .frame(width: Space.xxxLarge.rawValue, height: Space.xxxLarge.rawValue)
+                .frame(width: avatarSize, height: avatarSize)
                 .clipShape(Circle())
                 .overlay(Circle().stroke(strokeColor, lineWidth: 2))
 
         } else {
             ZStack {
                 avatarSurface
-                    .frame(width: Space.xxxLarge.rawValue, height: Space.xxxLarge.rawValue)
+                    .frame(width: avatarSize, height: avatarSize)
                     .overlay(Circle().stroke(strokeColor, lineWidth: 2))
+
+                avatarLabel
             }
         }
     }
