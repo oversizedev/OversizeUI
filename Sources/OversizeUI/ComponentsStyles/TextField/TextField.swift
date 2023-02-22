@@ -146,15 +146,15 @@ struct TextField_Previews: PreviewProvider {
 
             TextField("Text", text: .constant("Placeholder"))
                 .textFieldStyle(DefaultPlaceholderTextFieldStyle())
-                .helper(.constant("Help"), style: .constant(.helperText))
+                .fieldHelper(.constant("Help"), style: .constant(.helperText))
 
             TextField("Text", text: .constant("Placeholder"))
                 .textFieldStyle(OverPlaceholderTextFieldStyle(placeholder: "Label"))
-                .helper(.constant("Ok"), style: .constant(.sussesText))
+                .fieldHelper(.constant("Ok"), style: .constant(.sussesText))
 
             TextField("Text", text: .constant("Placeholder"))
                 .textFieldStyle(InsidePlaceholderTextFieldStyle(placeholder: "Label"))
-                .helper(.constant("Error"), style: .constant(.errorText))
+                .fieldHelper(.constant("Error"), style: .constant(.errorText))
 
         }.padding()
             .previewLayout(.sizeThatFits)
