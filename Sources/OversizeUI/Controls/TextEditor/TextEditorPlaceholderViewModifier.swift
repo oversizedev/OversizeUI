@@ -1,20 +1,19 @@
 //
 // Copyright © 2021 Alexander Romanov
-// TextFieldExtended.swift, created on20.02.2023.
+// TextEditorPlaceholderViewModifier.swift, created on20.02.2023.
 //
 
 import SwiftUI
 
-public struct TextEditorPlaceholderStyle: ViewModifier {
-    
+public struct TextEditorPlaceholderViewModifier: ViewModifier {
     private let placeholder: String
     @Binding private var text: String
-    
+
     public init(placeholder: String, text: Binding<String>) {
         self.placeholder = placeholder
-        self._text = text
+        _text = text
     }
-    
+
     public func body(content: Content) -> some View {
         content
             .padding(.horizontal, .xSmall)
@@ -40,7 +39,6 @@ public struct TextEditorPlaceholderStyle: ViewModifier {
 
 public extension View {
     func textEditorPlaceholder(_ placeholder: String, text: Binding<String>) -> some View {
-        modifier(TextEditorPlaceholderStyle(placeholder: placeholder, text: text))
+        modifier(TextEditorPlaceholderViewModifier(placeholder: placeholder, text: text))
     }
 }
-
