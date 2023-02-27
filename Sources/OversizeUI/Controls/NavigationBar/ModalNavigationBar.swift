@@ -140,11 +140,7 @@ public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar:
     }
 
     private var smallTitleOpacity: Double {
-        if bigTitle {
-            return Double((offset.y * 0.1) - 8)
-        } else {
-            return 1
-        }
+        Double((offset.y * 0.1) - 8)
     }
 
     private var smallBackgroundOpacity: Double {
