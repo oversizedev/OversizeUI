@@ -117,4 +117,11 @@ public extension View {
             previewDevice(device)
         }
     }
+
+    func previewComponent(_ name: String? = nil) -> some View {
+        previewLayout(.sizeThatFits)
+            .previewDisplayName(name)
+            .padding()
+            .background(Color.backgroundSecondary)
+    }
 }
