@@ -6,7 +6,7 @@
 import SwiftUI
 
 private struct SurfaceContentInsetsKey: EnvironmentKey {
-    static let defaultValue: EdgeSpaceInsets = .init(top: .zero, leading: .zero, bottom: .zero, trailing: .zero)
+    static let defaultValue: EdgeSpaceInsets = .init(top: .medium, leading: .medium, bottom: .medium, trailing: .medium)
 }
 
 public extension EnvironmentValues {
