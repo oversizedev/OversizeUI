@@ -82,11 +82,10 @@ public struct OverPlaceholderTextFieldStyle: TextFieldStyle {
                                  style: .continuous)
                     .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
                     .overlay(overlay)
-                    
             )
         }
     }
-    
+
     @ViewBuilder
     var overlay: some View {
         RoundedRectangle(cornerRadius: Radius.medium,
@@ -135,12 +134,12 @@ public struct InsidePlaceholderTextFieldStyle: TextFieldStyle {
             .background(
                 RoundedRectangle(cornerRadius: Radius.medium,
                                  style: .continuous)
-                .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
+                    .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
                     .overlay(overlay)
             )
         }
     }
-    
+
     @ViewBuilder
     var overlay: some View {
         RoundedRectangle(cornerRadius: Radius.medium,
