@@ -8,7 +8,12 @@ import SwiftUI
 // swiftlint:disable identifier_name
 public struct DefaultPlaceholderTextFieldStyle: TextFieldStyle {
     @Environment(\.theme) private var theme: ThemeSettings
-    public init() {}
+
+    private let isFocused: Bool
+
+    public init(focused: Bool = false) {
+        isFocused = focused
+    }
 
     public func _body(configuration: TextField<_Label>) -> some View {
         VStack(alignment: .leading) {
@@ -18,17 +23,30 @@ public struct DefaultPlaceholderTextFieldStyle: TextFieldStyle {
         }
         .padding()
         .background(
-            RoundedRectangle(cornerRadius: Radius.medium,
-                             style: .continuous)
-                .fill(Color.surfaceSecondary)
-                .overlay(
-                    RoundedRectangle(cornerRadius: Radius.medium,
-                                     style: .continuous)
-                        .stroke(theme.borderTextFields
-                            ? Color.border
-                            : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
-                )
+            RoundedRectangle(
+                cornerRadius: Radius.medium,
+                style: .continuous
+            )
+            .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
+            .overlay(overlay)
         )
+    }
+
+    @ViewBuilder
+    var overlay: some View {
+        RoundedRectangle(cornerRadius: Radius.medium,
+                         style: .continuous)
+            .stroke(overlayBorderColor, lineWidth: isFocused ? 2 : CGFloat(theme.borderSize))
+    }
+
+    var overlayBorderColor: Color {
+        if isFocused {
+            return Color.accentColor
+        } else if theme.borderTextFields {
+            return Color.border
+        } else {
+            return Color.clear
+        }
     }
 }
 
@@ -37,9 +55,11 @@ public struct OverPlaceholderTextFieldStyle: TextFieldStyle {
     @Environment(\.theme) private var theme: ThemeSettings
 
     public let placeholder: String
+    private let isFocused: Bool
 
-    public init(placeholder: String) {
+    public init(placeholder: String, focused: Bool = false) {
         self.placeholder = placeholder
+        isFocused = focused
     }
 
     public func _body(configuration: TextField<_Label>) -> some View {
@@ -60,15 +80,27 @@ public struct OverPlaceholderTextFieldStyle: TextFieldStyle {
             .background(
                 RoundedRectangle(cornerRadius: Radius.medium,
                                  style: .continuous)
-                    .fill(Color.surfaceSecondary)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: Radius.medium,
-                                         style: .continuous)
-                            .stroke(theme.borderTextFields
-                                ? Color.border
-                                : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
-                    )
+                    .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
+                    .overlay(overlay)
+                    
             )
+        }
+    }
+    
+    @ViewBuilder
+    var overlay: some View {
+        RoundedRectangle(cornerRadius: Radius.medium,
+                         style: .continuous)
+            .stroke(overlayBorderColor, lineWidth: isFocused ? 2 : CGFloat(theme.borderSize))
+    }
+
+    var overlayBorderColor: Color {
+        if isFocused {
+            return Color.accentColor
+        } else if theme.borderTextFields {
+            return Color.border
+        } else {
+            return Color.clear
         }
     }
 }
@@ -78,9 +110,11 @@ public struct InsidePlaceholderTextFieldStyle: TextFieldStyle {
     @Environment(\.theme) private var theme: ThemeSettings
 
     public let placeholder: String
+    private let isFocused: Bool
 
-    public init(placeholder: String) {
+    public init(placeholder: String, focused: Bool = false) {
         self.placeholder = placeholder
+        isFocused = focused
     }
 
     public func _body(configuration: TextField<_Label>) -> some View {
@@ -101,15 +135,26 @@ public struct InsidePlaceholderTextFieldStyle: TextFieldStyle {
             .background(
                 RoundedRectangle(cornerRadius: Radius.medium,
                                  style: .continuous)
-                    .fill(Color.surfaceSecondary)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: Radius.medium,
-                                         style: .continuous)
-                            .stroke(theme.borderTextFields
-                                ? Color.border
-                                : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
-                    )
+                .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
+                    .overlay(overlay)
             )
+        }
+    }
+    
+    @ViewBuilder
+    var overlay: some View {
+        RoundedRectangle(cornerRadius: Radius.medium,
+                         style: .continuous)
+            .stroke(overlayBorderColor, lineWidth: isFocused ? 2 : CGFloat(theme.borderSize))
+    }
+
+    var overlayBorderColor: Color {
+        if isFocused {
+            return Color.accentColor
+        } else if theme.borderTextFields {
+            return Color.border
+        } else {
+            return Color.clear
         }
     }
 }
@@ -118,17 +163,21 @@ public extension TextFieldStyle where Self == DefaultPlaceholderTextFieldStyle {
     static var `default`: DefaultPlaceholderTextFieldStyle {
         DefaultPlaceholderTextFieldStyle()
     }
+
+    static func `default`(focused: Bool) -> DefaultPlaceholderTextFieldStyle {
+        DefaultPlaceholderTextFieldStyle(focused: focused)
+    }
 }
 
 public extension TextFieldStyle where Self == OverPlaceholderTextFieldStyle {
-    static func placeholder(_ placeholder: String) -> OverPlaceholderTextFieldStyle {
-        OverPlaceholderTextFieldStyle(placeholder: placeholder)
+    static func placeholder(_ placeholder: String, focused: Bool = false) -> OverPlaceholderTextFieldStyle {
+        OverPlaceholderTextFieldStyle(placeholder: placeholder, focused: focused)
     }
 }
 
 public extension TextFieldStyle where Self == InsidePlaceholderTextFieldStyle {
-    static func placeholderInside(_ placeholder: String) -> InsidePlaceholderTextFieldStyle {
-        InsidePlaceholderTextFieldStyle(placeholder: placeholder)
+    static func placeholderInside(_ placeholder: String, focused: Bool = false) -> InsidePlaceholderTextFieldStyle {
+        InsidePlaceholderTextFieldStyle(placeholder: placeholder, focused: focused)
     }
 }
 
