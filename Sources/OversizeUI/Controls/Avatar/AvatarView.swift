@@ -21,11 +21,12 @@ public struct AvatarView: View {
     var background: AvatarBackgroundType = .color(.surfaceSecondary)
     var onBackgroundColor: Color = .onSurfaceMediumEmphasis
 
-    public init(firstName: String = "",
-                lastName: String = "",
-                avatar: Image? = nil,
-                icon: Image? = nil)
-    {
+    public init(
+        firstName: String = "",
+        lastName: String = "",
+        avatar: Image? = nil,
+        icon: Image? = nil
+    ) {
         self.firstName = firstName
         self.lastName = lastName
         self.avatar = avatar
@@ -126,7 +127,7 @@ public struct AvatarView: View {
         case .small:
             return .subheadline
         case .regular:
-            return .title2
+            return .title3
         case .large:
             return .largeTitle
         @unknown default:
