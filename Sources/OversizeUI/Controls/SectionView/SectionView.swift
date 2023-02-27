@@ -25,6 +25,8 @@ public enum SectionViewStyle {
 public struct SectionView<Content: View>: View {
     @Environment(\.controlRadius) private var controlRadius: Radius
     @Environment(\.sectionViewStyle) private var style: SectionViewStyle
+    @Environment(\.surfaceContentInsets) var surfaceContentInsets: EdgeSpaceInsets
+    @Environment(\.sectionTitleInsets) var sectionTitleInsets: EdgeSpaceInsets
     #if os(iOS)
         @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     #endif
@@ -57,18 +59,17 @@ public struct SectionView<Content: View>: View {
             if !title.isEmpty, titlePosition == .outside {
                 titleView
                     .padding(.horizontal, titleHorizontalPadding)
-                    .padding(.top, .xxSmall)
+                    .padding(sectionTitleInsets)
             }
 
             Surface {
                 VStack(alignment: .leading, spacing: Space.xSmall) {
                     if !title.isEmpty, titlePosition == .inside {
                         titleView
-                            .padding(.horizontal, .medium)
+                            .padding(sectionTitleInsets)
                     }
                     content
                 }
-                .padding(.vertical, contentVerticalPadding)
             }
             .padding(.horizontal, surfaceHorizontalPadding)
         }
@@ -185,15 +186,6 @@ public struct SectionView<Content: View>: View {
         case .smallIndent:
             return Space.xxSmall.rawValue
         case .edgeToEdge:
-            return .zero
-        }
-    }
-
-    private var contentVerticalPadding: CGFloat {
-        switch titlePosition {
-        case .inside:
-            return 20
-        case .outside:
             return .zero
         }
     }

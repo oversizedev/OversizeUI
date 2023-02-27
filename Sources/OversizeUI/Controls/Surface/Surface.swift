@@ -199,6 +199,12 @@ struct Surface_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             Surface {
+                RowDeprecated("Title") {}
+            }
+            .surfaceStyle(.primary)
+            .previewLayout(.fixed(width: 414, height: 300))
+
+            Surface {
                 Text("Text")
                     .title3()
                     .onSurfaceHighEmphasisForegroundColor()
@@ -232,7 +238,6 @@ struct Surface_Previews: PreviewProvider {
             }}
             .elevation(.z1)
             .surfaceContentInsets(.large)
-            .preferredColorScheme(.dark)
             .previewLayout(.fixed(width: 320, height: 200))
         }
         .padding()
