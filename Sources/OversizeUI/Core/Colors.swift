@@ -187,7 +187,7 @@ public extension View {
     }
 
     func accentForegroundColor() -> some View {
-        foregroundColor(Color.accent)
+        foregroundColor(Color.accentColor)
     }
 
     func errorForegroundColor() -> some View {
@@ -227,7 +227,7 @@ public extension Shape {
     }
 
     func fillAccent() -> some View {
-        fill(Color.accent)
+        fill(Color.accentColor)
     }
 
     func fillBackgroundPrimary() -> some View {
@@ -317,7 +317,7 @@ public extension View {
 
     @available(*, deprecated, renamed: "accentForegroundColor")
     func foregroundAccent() -> some View {
-        foregroundColor(Color.accent)
+        foregroundColor(Color.accentColor)
     }
 
     @available(*, deprecated, renamed: "backgroundPrimaryForegroundColor")
@@ -424,7 +424,7 @@ struct Color_Previews: PreviewProvider {
             }
             .padding(.horizontal)
         }
-        .background(Color.accent)
+        .background(Color.accentColor)
         .padding()
     }
 }
