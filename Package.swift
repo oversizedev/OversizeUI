@@ -18,7 +18,7 @@ let package = Package(
     ],
     dependencies: [],
     targets: [
-        .target(name: "OversizeUI", dependencies: []),
+        .target(name: "OversizeUI", dependencies: [], resources: [.process("Resources")]),
         .testTarget(name: "OversizeUITests", dependencies: ["OversizeUI"]),
     ]
 )
