@@ -186,6 +186,10 @@ public extension View {
         foregroundColor(Color.onSurfaceDisabled)
     }
 
+    func accentForegroundColor() -> some View {
+        foregroundColor(Color.accent)
+    }
+
     func errorForegroundColor() -> some View {
         foregroundColor(Color.error)
     }
