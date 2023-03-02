@@ -6,7 +6,7 @@
 import SwiftUI
 
 private struct SegmentedPickerInsetsKey: EnvironmentKey {
-    static let defaultValue: EdgeSpaceInsets = .init(top: .xxSmall, leading: .xxxSmall, bottom: .xxSmall, trailing: .xxxSmall)
+    static let defaultValue: EdgeSpaceInsets = .init(top: .small, leading: .xxxSmall, bottom: .small, trailing: .xxxSmall)
 }
 
 public extension EnvironmentValues {
