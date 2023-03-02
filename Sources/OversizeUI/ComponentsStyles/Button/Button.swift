@@ -33,7 +33,7 @@ public struct OversizeButtonStyle: ButtonStyle {
 
     public func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
-            .body(true)
+            .body(.bold)
             .opacity(isLoading ? 0 : 1)
             .foregroundColor(foregroundColor(for: configuration.role).opacity(foregroundOpacity))
             .padding(.horizontal, horizontalPadding)
@@ -42,7 +42,7 @@ public struct OversizeButtonStyle: ButtonStyle {
             .background(background(for: configuration.role))
             .overlay(loadingView(for: configuration.role))
             .scaleEffect(configuration.isPressed ? 0.95 : 1)
-            .shadowElevaton(elevation)
+            .shadowElevaton(isEnabled ? elevation : .z0)
     }
 
     @ViewBuilder
