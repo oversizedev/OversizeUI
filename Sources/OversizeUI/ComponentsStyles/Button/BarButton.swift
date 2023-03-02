@@ -13,6 +13,7 @@ public enum BarButtonType {
     case accent(_ text: String, action: () -> Void)
     case primary(_ text: String, action: () -> Void)
     case secondary(_ text: String, action: () -> Void)
+    @available(*, deprecated, message: "Use .disabled() modificator")
     case disabled(_ text: String)
     case image(_ image: Image, action: () -> Void)
     case icon(_ icon: IconsNames, action: () -> Void)
