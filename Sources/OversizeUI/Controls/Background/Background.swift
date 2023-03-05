@@ -47,7 +47,7 @@ public struct Background<Content: View>: View {
     }
 
     public var body: some View {
-        self.content
+        content
             .padding(.all, paddingSize)
             .frame(minWidth: 0, maxWidth: .infinity)
             .background(backgroundColor)

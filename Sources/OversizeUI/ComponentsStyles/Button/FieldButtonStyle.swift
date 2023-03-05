@@ -16,6 +16,7 @@ public struct FieldButtonStyle: ButtonStyle {
                 .headline()
                 .foregroundColor(.onSurfaceHighEmphasis)
                 .scaleEffect(configuration.isPressed ? 0.96 : 1)
+                .hLeading()
         }
         .padding()
         .background(

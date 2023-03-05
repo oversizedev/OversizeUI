@@ -38,7 +38,7 @@ public struct MultiSelect<Element: Equatable, Content, Selection>: View
     public var body: some View {
         ZStack {
             Button {
-                self.showModal.toggle()
+                showModal.toggle()
             } label: {
                 if selectedIndexes.isEmpty {
                     Text(label)
@@ -106,7 +106,7 @@ public struct MultiSelect<Element: Equatable, Content, Selection>: View
                                 selectedIndexes.append(index)
                             }
                             let selectionItems = selectedIndexes.compactMap { data[$0] }
-                            self.selection = selectionItems
+                            selection = selectionItems
                         })
 
                     ) {
