@@ -55,8 +55,9 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
     }
 
     private var gridSelect: some View {
-        LazyVGrid(columns: [GridItem(spacing: self.spacing), GridItem(spacing: self.spacing)],
-                  spacing: spacing) {
+        LazyVGrid(columns: [GridItem(spacing: spacing), GridItem(spacing: spacing)],
+                  spacing: spacing)
+        {
             ForEach(data.indices, id: \.self) { index in
 
                 Button(action: {
@@ -82,7 +83,7 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
                 .buttonStyle(PlainButtonStyle())
             }
         }.onAppear {
-            let selctedValue = self.selection
+            let selctedValue = selection
             var index = 0
             for dataValue in data {
                 if selctedValue == dataValue {

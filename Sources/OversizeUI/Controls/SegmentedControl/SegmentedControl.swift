@@ -47,7 +47,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
             )
             .clipBackground(style.isShowBackground, radius: controlRadius.rawValue)
             .onAppear {
-                let selctedValue = self.selection
+                let selctedValue = selection
                 var index = 0
                 for dataValue in data {
                     if selctedValue == dataValue {
@@ -70,7 +70,8 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
 
     private var equallSegmentedControl: some View {
         ZStack(alignment: Alignment(horizontal: .horizontalCenterAlignment,
-                                    vertical: .center)) {
+                                    vertical: .center))
+        {
             if let selectedIndex {
                 HStack(spacing: 0) {
                     Spacer()
@@ -123,10 +124,11 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                                Color.clear.onAppear { DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { frames[index] = proxy.frame(in: .global) } }
                            })
                            .alignmentGuide(.horizontalCenterAlignment,
-                                           isActive: selectedIndex == index) { dimensions in
-                               dimensions[HorizontalAlignment.center]
-                           }
-                           .padding(.trailing, style.unseletionStyle == .surface ? Space.xSmall.rawValue : 0)
+                                           isActive: selectedIndex == index)
+                    { dimensions in
+                        dimensions[HorizontalAlignment.center]
+                    }
+                    .padding(.trailing, style.unseletionStyle == .surface ? Space.xSmall.rawValue : 0)
                 }
             }
         }
@@ -135,7 +137,8 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
 
     private var leadingSegmentedControl: some View {
         ZStack(alignment: Alignment(horizontal: .horizontalCenterAlignment,
-                                    vertical: .center)) {
+                                    vertical: .center))
+        {
             if let selectedIndex {
                 HStack {
                     selectionView()
@@ -178,10 +181,11 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                                Color.clear.onAppear { frames[index] = proxy.frame(in: .global) }
                            })
                            .alignmentGuide(.horizontalCenterAlignment,
-                                           isActive: selectedIndex == index) { dimensions in
-                               dimensions[HorizontalAlignment.center]
-                           }
-                           .padding(.trailing, style.unseletionStyle == .surface ? Space.xSmall.rawValue : 0)
+                                           isActive: selectedIndex == index)
+                    { dimensions in
+                        dimensions[HorizontalAlignment.center]
+                    }
+                    .padding(.trailing, style.unseletionStyle == .surface ? Space.xSmall.rawValue : 0)
                 }
             }
         }

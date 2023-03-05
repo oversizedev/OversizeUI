@@ -39,7 +39,7 @@ public struct Select<Element, Content, Selection>: View
     public var body: some View {
         ZStack {
             Button {
-                self.showModal.toggle()
+                showModal.toggle()
             } label: {
                 if isSelected, let index = selectedIndex {
                     selectionView(data[index])

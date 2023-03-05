@@ -69,7 +69,7 @@ public struct Radio<Label: View>: View {
 
     @ViewBuilder
     private var labelContent: some View {
-        if let label = self.label() {
+        if let label = label() {
             label
         } else {
             Text(title ?? "")

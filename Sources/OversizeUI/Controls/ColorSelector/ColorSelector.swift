@@ -37,9 +37,9 @@ public struct ColorSelector: View {
                                         .padding(.horizontal, .xxxSmall)
                                         .padding(.all, .small)
 
-                                    if !self.colors.contains(selection) {
+                                    if !colors.contains(selection) {
                                         Circle()
-                                            .stroke(self.selection, lineWidth: 3)
+                                            .stroke(selection, lineWidth: 3)
                                             .frame(width: 40, height: 40)
                                     }
                                 }

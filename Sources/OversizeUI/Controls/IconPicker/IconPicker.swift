@@ -41,7 +41,7 @@ import SwiftUI
 
         public var body: some View {
             Button {
-                self.showModal.toggle()
+                showModal.toggle()
             } label: {
                 HStack(spacing: .xxSmall) {
                     Text(label)

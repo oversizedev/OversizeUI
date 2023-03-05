@@ -239,25 +239,24 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
 
     public func bottomToolbar(style: PageViewBottomType = .shadow, ignoreSafeArea: Bool = true, @ViewBuilder bottomToolbar: @escaping () -> some View) -> some View {
         VStack(spacing: .zero) {
-            self
-                .overlay(
-                    Group {
-                        if style == .gradient {
-                            VStack {
-                                Spacer()
-                                LinearGradient(colors: [backgroundColor.opacity(0), Color.surfacePrimary.opacity(1)],
-                                               startPoint: .top,
-                                               endPoint: .bottom)
-                                    .frame(height: 60)
-                            }
+            overlay(
+                Group {
+                    if style == .gradient {
+                        VStack {
+                            Spacer()
+                            LinearGradient(colors: [backgroundColor.opacity(0), Color.surfacePrimary.opacity(1)],
+                                           startPoint: .top,
+                                           endPoint: .bottom)
+                                .frame(height: 60)
                         }
-                        if style == .none {
-                            VStack {
-                                Spacer()
-                                bottomToolbar()
-                            }
+                    }
+                    if style == .none {
+                        VStack {
+                            Spacer()
+                            bottomToolbar()
                         }
-                    })
+                    }
+                })
             if style != .none {
                 HStack {
                     Spacer()
