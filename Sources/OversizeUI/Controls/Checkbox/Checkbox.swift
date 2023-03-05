@@ -16,16 +16,25 @@ public struct Checkbox<Label: View>: View {
     private let label: () -> Label?
     private let alignment: CheckboxAlignment
     private var title: String?
+    private let action: (() -> Void)?
 
-    public init(isOn: Binding<Bool>, alignment: CheckboxAlignment = .trailing, @ViewBuilder label: @escaping () -> Label? = { nil }) {
+    public init(isOn: Binding<Bool>,
+                alignment: CheckboxAlignment = .trailing,
+                action: (() -> Void)? = nil,
+                @ViewBuilder label: @escaping () -> Label? = { nil })
+    {
         _isOn = isOn
         self.alignment = alignment
+        self.action = action
         self.label = label
     }
 
     public var body: some View {
         Button {
             isOn.toggle()
+            if action != nil {
+                action?()
+            }
         } label: {
             HStack(spacing: .xSmall) {
                 content(alignment: alignment)
@@ -93,11 +102,16 @@ public struct Checkbox<Label: View>: View {
 }
 
 public extension Checkbox where Label == EmptyView {
-    init(_ title: String, isOn: Binding<Bool>, alignment: CheckboxAlignment = .trailing) {
+    init(_ title: String,
+         isOn: Binding<Bool>,
+         alignment: CheckboxAlignment = .trailing,
+         action: (() -> Void)? = nil)
+    {
         self.title = title
         _isOn = isOn
         self.alignment = alignment
         label = { nil }
+        self.action = action
     }
 }
 
