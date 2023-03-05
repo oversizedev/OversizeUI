@@ -110,8 +110,8 @@ public struct Radio<Label: View>: View {
 public extension Radio where Label == EmptyView {
     init(_ title: String,
          isOn: Bool,
-         action: (() -> Void)? = nil,
-         alignment: RadioAlignment = .trailing)
+         alignment: RadioAlignment = .trailing,
+         action: (() -> Void)? = nil)
     {
         self.title = title
         self.isOn = isOn
