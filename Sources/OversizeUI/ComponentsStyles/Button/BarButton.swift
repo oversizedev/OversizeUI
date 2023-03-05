@@ -42,7 +42,7 @@ public struct BarButton: View {
             .controlBorderShape(.capsule)
             .accent(isAccent)
             .disabled(isDisabled)
-            .elevation(.z2)
+            .elevation(isDisabled ? .z0 : .z2)
         #else
             Button(action: buttonAction) {
                 label
