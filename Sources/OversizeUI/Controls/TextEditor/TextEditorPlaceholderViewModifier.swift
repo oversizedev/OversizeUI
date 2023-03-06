@@ -1,6 +1,6 @@
 //
 // Copyright © 2021 Alexander Romanov
-// TextEditorPlaceholderViewModifier.swift, created on20.02.2023.
+// TextEditorPlaceholderViewModifier.swift, created on 20.02.2023
 //
 
 import SwiftUI
@@ -10,11 +10,10 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
     @Environment(\.fieldLabelPosition) private var fieldPlaceholderPosition: FieldLabelPosition
     @Binding private var text: String
     private let placeholder: String
-    private let isFocused: Bool
+    @FocusState var isFocused: Bool
 
-    public init(placeholder: String, text: Binding<String>, focused: Bool = false) {
+    public init(placeholder: String, text: Binding<String>) {
         self.placeholder = placeholder
-        isFocused = focused
         _text = text
     }
 
@@ -36,6 +35,8 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
                 }
             }
             .frame(minHeight: Space.xxxLarge.rawValue)
+            .focused($isFocused)
+            .scrollContentBackground(.hidden)
             .animation(.easeIn(duration: 0.15), value: text)
     }
 
@@ -44,7 +45,7 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
         case .default, .adjacent:
             return 10
         case .overInput:
-            return text.isEmpty ? 8 : 14
+            return text.isEmpty ? 8 : 22
         }
     }
 
@@ -54,7 +55,7 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
         case .default:
             if text.isEmpty {
                 Text(placeholder)
-                    .font(.headline)
+                    .subheadline(.semibold)
                     .onSurfaceDisabledForegroundColor()
                     .opacity(0.7)
                     .padding(.small)
@@ -63,11 +64,12 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
             EmptyView()
         case .overInput:
             Text(placeholder)
-                .font(text.isEmpty ? .headline : .caption)
+                .font(text.isEmpty ? .headline : .subheadline)
+                .fontWeight(text.isEmpty ? .semibold : .bold)
                 .onSurfaceDisabledForegroundColor()
                 .opacity(0.7)
                 .padding(.small)
-                .offset(y: text.isEmpty ? 0 : -8)
+                .offset(y: text.isEmpty ? 0 : -6)
         }
     }
 
@@ -89,8 +91,8 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
 }
 
 public extension View {
-    func textEditorPlaceholder(_ placeholder: String, text: Binding<String>, focused: Bool = false) -> some View {
-        modifier(TextEditorPlaceholderViewModifier(placeholder: placeholder, text: text, focused: focused))
+    func textEditorPlaceholder(_ placeholder: String, text: Binding<String>) -> some View {
+        modifier(TextEditorPlaceholderViewModifier(placeholder: placeholder, text: text))
     }
 }
 
