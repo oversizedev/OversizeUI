@@ -97,22 +97,17 @@ public extension View {
 struct TextEditor_preview: PreviewProvider {
     static var previews: some View {
         VStack {
-            if #available(iOS 16.0, *) {
-                TextEditor(text: .constant(""))
-                    .textEditorPlaceholder("Complaint", text: .constant("Text"))
-                    .fieldLabelPosition(.overInput)
-                    .scrollContentBackground(.hidden)
+            TextEditor(text: .constant(""))
+                .textEditorPlaceholder("Complaint", text: .constant("Text"))
+                .fieldLabelPosition(.overInput)
 
-                TextEditor(text: .constant(""))
-                    .textEditorPlaceholder("Complaint", text: .constant(""))
-                    .fieldLabelPosition(.overInput)
-                    .scrollContentBackground(.hidden)
+            TextEditor(text: .constant(""))
+                .textEditorPlaceholder("Complaint", text: .constant(""))
+                .fieldLabelPosition(.overInput)
 
-                TextEditor(text: .constant("Text"))
-                    .textEditorPlaceholder("Complaint", text: .constant("Text"))
-                    .fieldLabelPosition(.overInput)
-                    .scrollContentBackground(.hidden)
-            }
+            TextEditor(text: .constant("Text"))
+                .textEditorPlaceholder("Complaint", text: .constant("Text"))
+                .fieldLabelPosition(.overInput)
 
             Spacer()
         }
