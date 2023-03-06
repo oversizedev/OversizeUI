@@ -7,6 +7,7 @@ import SwiftUI
 
 public struct TextEditorPlaceholderViewModifier: ViewModifier {
     @Environment(\.theme) private var theme: ThemeSettings
+    @Environment(\.fieldLabelPosition) private var fieldPlaceholderPosition: FieldLabelPosition
     @Binding private var text: String
     private let placeholder: String
     private let isFocused: Bool
@@ -20,7 +21,8 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
     public func body(content: Content) -> some View {
         content
             .padding(.horizontal, .xSmall)
-            .padding(.vertical, 10)
+            .padding(.top, topInputPadding)
+            .padding(.bottom, 10)
             .headline()
             .onSurfaceHighEmphasisForegroundColor()
             .background {
@@ -30,16 +32,43 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
                     overlay
                 }
                 .overlay(alignment: .topLeading) {
-                    if text.isEmpty {
-                        Text(placeholder)
-                            .headline()
-                            .onSurfaceDisabledForegroundColor()
-                            .opacity(0.7)
-                            .padding(.small)
-                    }
+                    labelTextView
                 }
             }
             .frame(minHeight: Space.xxxLarge.rawValue)
+            .animation(.easeIn(duration: 0.15), value: text)
+    }
+
+    var topInputPadding: CGFloat {
+        switch fieldPlaceholderPosition {
+        case .default, .adjacent:
+            return 10
+        case .overInput:
+            return text.isEmpty ? 8 : 14
+        }
+    }
+
+    @ViewBuilder
+    var labelTextView: some View {
+        switch fieldPlaceholderPosition {
+        case .default:
+            if text.isEmpty {
+                Text(placeholder)
+                    .font(.headline)
+                    .onSurfaceDisabledForegroundColor()
+                    .opacity(0.7)
+                    .padding(.small)
+            }
+        case .adjacent:
+            EmptyView()
+        case .overInput:
+            Text(placeholder)
+                .font(text.isEmpty ? .headline : .caption)
+                .onSurfaceDisabledForegroundColor()
+                .opacity(0.7)
+                .padding(.small)
+                .offset(y: text.isEmpty ? 0 : -8)
+        }
     }
 
     @ViewBuilder
@@ -62,5 +91,32 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
 public extension View {
     func textEditorPlaceholder(_ placeholder: String, text: Binding<String>, focused: Bool = false) -> some View {
         modifier(TextEditorPlaceholderViewModifier(placeholder: placeholder, text: text, focused: focused))
+    }
+}
+
+struct TextEditor_preview: PreviewProvider {
+    static var previews: some View {
+        VStack {
+            if #available(iOS 16.0, *) {
+                TextEditor(text: .constant(""))
+                    .textEditorPlaceholder("Complaint", text: .constant("Text"))
+                    .fieldLabelPosition(.overInput)
+                    .scrollContentBackground(.hidden)
+
+                TextEditor(text: .constant(""))
+                    .textEditorPlaceholder("Complaint", text: .constant(""))
+                    .fieldLabelPosition(.overInput)
+                    .scrollContentBackground(.hidden)
+
+                TextEditor(text: .constant("Text"))
+                    .textEditorPlaceholder("Complaint", text: .constant("Text"))
+                    .fieldLabelPosition(.overInput)
+                    .scrollContentBackground(.hidden)
+            }
+
+            Spacer()
+        }
+        .padding()
+        .background(Color.backgroundTertiary)
     }
 }
