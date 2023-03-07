@@ -18,26 +18,37 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
     }
 
     public func body(content: Content) -> some View {
-        content
-            .padding(.horizontal, .xSmall)
-            .padding(.top, topInputPadding)
-            .padding(.bottom, 10)
-            .headline()
-            .onSurfaceHighEmphasisForegroundColor()
-            .background {
-                ZStack {
-                    RoundedRectangle(cornerRadius: .medium, style: .continuous)
-                        .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
-                    overlay
-                }
-                .overlay(alignment: .topLeading) {
-                    labelTextView
+        VStack(alignment: .leading, spacing: .xSmall) {
+            if fieldPlaceholderPosition == .adjacent {
+                HStack {
+                    Text(placeholder)
+                        .subheadline(.medium)
+                        .foregroundColor(.onSurfaceHighEmphasis)
+                    Spacer()
                 }
             }
-            .frame(minHeight: Space.xxxLarge.rawValue)
-            .focused($isFocused)
-            .scrollContentBackground(.hidden)
-            .animation(.easeIn(duration: 0.15), value: text)
+
+            content
+                .padding(.horizontal, .xSmall)
+                .padding(.top, topInputPadding)
+                .padding(.bottom, 10)
+                .headline(.medium)
+                .onSurfaceHighEmphasisForegroundColor()
+                .background {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: .medium, style: .continuous)
+                            .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
+                        overlay
+                    }
+                    .overlay(alignment: .topLeading) {
+                        labelTextView
+                    }
+                }
+                .frame(minHeight: Space.xxxLarge.rawValue)
+                .focused($isFocused)
+                .scrollContentBackground(.hidden)
+                .animation(.easeIn(duration: 0.15), value: text)
+        }
     }
 
     var topInputPadding: CGFloat {
@@ -55,7 +66,7 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
         case .default:
             if text.isEmpty {
                 Text(placeholder)
-                    .subheadline(.semibold)
+                    .subheadline()
                     .onSurfaceDisabledForegroundColor()
                     .opacity(0.7)
                     .padding(.small)
@@ -65,7 +76,7 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
         case .overInput:
             Text(placeholder)
                 .font(text.isEmpty ? .headline : .subheadline)
-                .fontWeight(text.isEmpty ? .semibold : .bold)
+                .fontWeight(text.isEmpty ? .medium : .semibold)
                 .onSurfaceDisabledForegroundColor()
                 .opacity(0.7)
                 .padding(.small)
