@@ -6,131 +6,38 @@
 import SwiftUI
 
 // swiftlint:disable identifier_name
-public struct DefaultPlaceholderTextFieldStyle: TextFieldStyle {
+public struct LabeledTextFieldStyle: TextFieldStyle {
     @Environment(\.theme) private var theme: ThemeSettings
+    @Environment(\.fieldLabelPosition) private var fieldPlaceholderPosition: FieldLabelPosition
+    @FocusState var isFocused: Bool
+    @Binding private var text: String
+    private let placeholder: String
 
-    private let isFocused: Bool
-
-    public init(focused: Bool = false) {
-        isFocused = focused
-    }
-
-    public func _body(configuration: TextField<_Label>) -> some View {
-        VStack(alignment: .leading) {
-            configuration
-                .headline()
-                .foregroundColor(.onSurfaceHighEmphasis)
-        }
-        .padding()
-        .background(
-            RoundedRectangle(
-                cornerRadius: Radius.medium,
-                style: .continuous
-            )
-            .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
-            .overlay(overlay)
-        )
-    }
-
-    @ViewBuilder
-    var overlay: some View {
-        RoundedRectangle(cornerRadius: Radius.medium,
-                         style: .continuous)
-            .stroke(overlayBorderColor, lineWidth: isFocused ? 2 : CGFloat(theme.borderSize))
-    }
-
-    var overlayBorderColor: Color {
-        if isFocused {
-            return Color.accentColor
-        } else if theme.borderTextFields {
-            return Color.border
-        } else {
-            return Color.clear
-        }
-    }
-}
-
-// swiftlint:disable identifier_name
-public struct OverPlaceholderTextFieldStyle: TextFieldStyle {
-    @Environment(\.theme) private var theme: ThemeSettings
-
-    public let placeholder: String
-    private let isFocused: Bool
-
-    public init(placeholder: String, focused: Bool = false) {
+    public init(placeholder: String, text: Binding<String>) {
         self.placeholder = placeholder
-        isFocused = focused
+        _text = text
     }
 
-    public func _body(configuration: TextField<_Label>) -> some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Text(placeholder)
-                    .subheadline(.semibold)
-                    .foregroundColor(.onSurfaceHighEmphasis)
-                Spacer()
-            }
-
-            VStack(alignment: .leading) {
-                configuration
-                    .headline()
-                    .foregroundColor(.onSurfaceHighEmphasis)
-            }
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: Radius.medium,
-                                 style: .continuous)
-                    .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
-                    .overlay(overlay)
-            )
-        }
-    }
-
-    @ViewBuilder
-    var overlay: some View {
-        RoundedRectangle(cornerRadius: Radius.medium,
-                         style: .continuous)
-            .stroke(overlayBorderColor, lineWidth: isFocused ? 2 : CGFloat(theme.borderSize))
-    }
-
-    var overlayBorderColor: Color {
-        if isFocused {
-            return Color.accentColor
-        } else if theme.borderTextFields {
-            return Color.border
-        } else {
-            return Color.clear
-        }
-    }
-}
-
-// swiftlint:disable identifier_name
-public struct InsidePlaceholderTextFieldStyle: TextFieldStyle {
-    @Environment(\.theme) private var theme: ThemeSettings
-
-    public let placeholder: String
-    private let isFocused: Bool
-
-    public init(placeholder: String, focused: Bool = false) {
-        self.placeholder = placeholder
-        isFocused = focused
-    }
-
-    public func _body(configuration: TextField<_Label>) -> some View {
-        VStack(alignment: .leading, spacing: .zero) {
-            VStack(alignment: .leading) {
+    public func _body(configuration: TextField<Self._Label>) -> some View {
+        VStack(alignment: .leading, spacing: .xSmall) {
+            if fieldPlaceholderPosition == .adjacent {
                 HStack {
                     Text(placeholder)
-                        .subheadline(.semibold)
+                        .subheadline(.medium)
                         .foregroundColor(.onSurfaceHighEmphasis)
                     Spacer()
                 }
-
-                configuration
-                    .headline()
-                    .foregroundColor(.onSurfaceHighEmphasis)
             }
-            .padding()
+            ZStack(alignment: .leading) {
+                labelTextView
+                configuration
+                    .headline(.medium)
+                    .foregroundColor(.onSurfaceHighEmphasis)
+                    .padding()
+                    .padding(.vertical, .xxxSmall)
+                    .offset(y: text.isEmpty ? 0 : 10)
+                    .focused($isFocused)
+            }
             .background(
                 RoundedRectangle(cornerRadius: Radius.medium,
                                  style: .continuous)
@@ -138,6 +45,7 @@ public struct InsidePlaceholderTextFieldStyle: TextFieldStyle {
                     .overlay(overlay)
             )
         }
+        .animation(.easeIn(duration: 0.15), value: text)
     }
 
     @ViewBuilder
@@ -145,6 +53,30 @@ public struct InsidePlaceholderTextFieldStyle: TextFieldStyle {
         RoundedRectangle(cornerRadius: Radius.medium,
                          style: .continuous)
             .stroke(overlayBorderColor, lineWidth: isFocused ? 2 : CGFloat(theme.borderSize))
+    }
+
+    @ViewBuilder
+    var labelTextView: some View {
+        switch fieldPlaceholderPosition {
+        case .default:
+            if isFocused {
+                Text(placeholder)
+                    .subheadline()
+                    .onSurfaceDisabledForegroundColor()
+                    .opacity(0.7)
+                    .padding(.small)
+            }
+        case .adjacent:
+            EmptyView()
+        case .overInput:
+            Text(placeholder)
+                .font(text.isEmpty ? .headline : .subheadline)
+                .fontWeight(text.isEmpty ? .medium : .semibold)
+                .onSurfaceDisabledForegroundColor()
+                .padding(.small)
+                .offset(y: text.isEmpty ? 0 : -13)
+                .opacity(text.isEmpty ? 0 : 1)
+        }
     }
 
     var overlayBorderColor: Color {
@@ -158,25 +90,13 @@ public struct InsidePlaceholderTextFieldStyle: TextFieldStyle {
     }
 }
 
-public extension TextFieldStyle where Self == DefaultPlaceholderTextFieldStyle {
-    static var `default`: DefaultPlaceholderTextFieldStyle {
-        DefaultPlaceholderTextFieldStyle()
+public extension TextFieldStyle where Self == LabeledTextFieldStyle {
+    static var `default`: LabeledTextFieldStyle {
+        LabeledTextFieldStyle(placeholder: "", text: .constant(""))
     }
 
-    static func `default`(focused: Bool) -> DefaultPlaceholderTextFieldStyle {
-        DefaultPlaceholderTextFieldStyle(focused: focused)
-    }
-}
-
-public extension TextFieldStyle where Self == OverPlaceholderTextFieldStyle {
-    static func placeholder(_ placeholder: String, focused: Bool = false) -> OverPlaceholderTextFieldStyle {
-        OverPlaceholderTextFieldStyle(placeholder: placeholder, focused: focused)
-    }
-}
-
-public extension TextFieldStyle where Self == InsidePlaceholderTextFieldStyle {
-    static func placeholderInside(_ placeholder: String, focused: Bool = false) -> InsidePlaceholderTextFieldStyle {
-        InsidePlaceholderTextFieldStyle(placeholder: placeholder, focused: focused)
+    static func placeholder(placeholder: String, text: Binding<String>) -> LabeledTextFieldStyle {
+        LabeledTextFieldStyle(placeholder: placeholder, text: text)
     }
 }
 
