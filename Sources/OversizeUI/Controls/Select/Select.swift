@@ -63,7 +63,7 @@ public struct Select<Element, Content, Selection>: View
                                 : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
                     )
             )
-            .headline()
+            .headline(.medium)
             .foregroundColor(.onSurfaceHighEmphasis)
 
             .sheet(isPresented: $showModal) {

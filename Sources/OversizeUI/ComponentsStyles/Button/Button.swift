@@ -33,7 +33,7 @@ public struct OversizeButtonStyle: ButtonStyle {
 
     public func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
-            .body(.bold)
+            .body(.semibold)
             .opacity(isLoading ? 0 : 1)
             .foregroundColor(foregroundColor(for: configuration.role).opacity(foregroundOpacity))
             .padding(.horizontal, horizontalPadding)

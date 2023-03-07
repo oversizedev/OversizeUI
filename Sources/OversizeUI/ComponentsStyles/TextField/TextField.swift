@@ -34,7 +34,7 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
                     .headline(.medium)
                     .foregroundColor(.onSurfaceHighEmphasis)
                     .padding()
-                    .padding(.vertical, .xxxSmall)
+                    .padding(.vertical, fieldPlaceholderPosition == .overInput ? .xxxSmall : .zero)
                     .offset(y: text.isEmpty ? 0 : 10)
                     .focused($isFocused)
             }

@@ -97,9 +97,9 @@ public struct SectionView<Content: View>: View {
     private var titleFont: Font {
         switch titlePosition {
         case .inside:
-            return .title2.weight(.bold)
+            return .title2.weight(.semibold)
         case .outside:
-            return .headline
+            return .headline.weight(.semibold)
         }
     }
 

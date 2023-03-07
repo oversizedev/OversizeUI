@@ -73,7 +73,7 @@ public struct TextBox: View {
             switch size {
             case .small:
                 Text(title)
-                    .headline(true)
+                    .headline(.semibold)
             case .medium:
                 Text(title)
                     .title2(true)

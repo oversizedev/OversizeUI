@@ -99,7 +99,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
 
                                    content(data[index],
                                            selectedIndex == index)
-                                       .body(true)
+                                       .body(.semibold)
                                        .foregroundColor(.onSurfaceHighEmphasis)
                                        .multilineTextAlignment(.center)
                                    Spacer()
@@ -159,7 +159,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                                action?()
                            },
                            label: { content(data[index], selectedIndex == index)
-                               .body(true)
+                               .body(.semibold)
                                .foregroundColor(.onSurfaceHighEmphasis)
                                .multilineTextAlignment(.center)
                                .padding(.leading, controlPadding.leading)

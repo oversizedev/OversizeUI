@@ -51,7 +51,7 @@ public struct NoticeView<A>: View where A: View {
                     }
 
                     Text(title)
-                        .headline(.bold)
+                        .headline(.semibold)
                         .onSurfaceHighEmphasisForegroundColor()
                         .multilineTextAlignment(.leading)
                         .padding(.trailing, closeAction != nil ? .medium : .zero)
