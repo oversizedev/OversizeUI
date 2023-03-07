@@ -127,7 +127,7 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
     private var text: some View {
         VStack(alignment: textAlignment, spacing: .xxxSmall) {
             Text(title)
-                .headline(.semibold)
+                .headline(.medium)
                 .foregroundColor(.onSurfaceHighEmphasis)
             if let subtitle, !subtitle.isEmpty {
                 Text(subtitle)

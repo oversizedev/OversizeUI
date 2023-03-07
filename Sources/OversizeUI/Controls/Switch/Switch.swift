@@ -58,7 +58,7 @@ public struct Switch<Label: View>: View {
             label
         } else {
             Text(title ?? "")
-                .headline(.semibold)
+                .headline(.medium)
                 .foregroundColor(foregroundColor)
                 .padding(contentInset)
         }

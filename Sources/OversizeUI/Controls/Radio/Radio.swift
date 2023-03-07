@@ -73,7 +73,7 @@ public struct Radio<Label: View>: View {
             label
         } else {
             Text(title ?? "")
-                .headline(.semibold)
+                .headline(.medium)
                 .foregroundColor(foregroundColor)
                 .padding(contentInset)
         }

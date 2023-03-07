@@ -15,7 +15,7 @@ public struct FieldTitleViewModifier: ViewModifier {
     public func body(content: Content) -> some View {
         VStack(alignment: .leading, spacing: .xSmall) {
             Text(title)
-                .subheadline(.semibold)
+                .subheadline(.medium)
                 .onSurfaceHighEmphasisForegroundColor()
 
             content

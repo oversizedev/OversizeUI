@@ -93,7 +93,7 @@ public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar:
                     Spacer()
 
                     Text(title)
-                        .title3()
+                        .title3(.semibold)
                         .multilineTextAlignment(.center)
                         .frame(minHeight: 40)
                         .opacity(min(smallTitleOpacity, 1))

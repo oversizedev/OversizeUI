@@ -13,16 +13,13 @@ public struct FieldButtonStyle: ButtonStyle {
     public func makeBody(configuration: Self.Configuration) -> some View {
         VStack(alignment: .leading) {
             configuration.label
-                .headline()
-                .foregroundColor(.onSurfaceHighEmphasis)
-                .scaleEffect(configuration.isPressed ? 0.96 : 1)
+                .headline(.medium)
                 .hLeading()
         }
         .padding()
         .background(
-            RoundedRectangle(cornerRadius: Radius.medium,
-                             style: .continuous)
-                .fill(Color.surfaceSecondary)
+            RoundedRectangle(cornerRadius: Radius.medium, style: .continuous)
+                .fill(configuration.isPressed ? Color.surfaceTertiary : Color.surfaceSecondary)
                 .overlay(
                     RoundedRectangle(cornerRadius: Radius.medium,
                                      style: .continuous)
