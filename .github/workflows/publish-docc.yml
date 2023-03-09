@@ -38,19 +38,39 @@ jobs:
         uses: actions/deploy-pages@v1
 =======
 name: Publish DocC
-on: [push]
-permissions:
-  contents: write
-jobs:
-  build-and-deploy:
-    concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
-    runs-on: ubuntu-latest
-    steps:
-      - name: Generate DocC
-        uses: actions/checkout@v3
 
+<<<<<<< HEAD
       - name: Deploy to Github Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: docs
 >>>>>>> 07be3de (Create publish-docc.yml)
+=======
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  documentation:
+    runs-on: macos-12
+    steps:
+    - uses: actions/checkout@v3
+    - name: Generate DocC
+      run: |
+        mkdir -p docs
+        set -o pipefail && xcodebuild docbuild \
+          -scheme OversizeUI \
+          -destination "generic/platform=iOS" \
+          OTHER_DOCC_FLAGS="--transform-for-static-hosting --hosting-base-path --output-path docs" \
+          | xcpretty
+    - name: Deploy to Github Pages
+      uses: JamesIves/github-pages-deploy-action@v4.4.1
+      with:
+        branch: docc
+        folder: docs
+        target-folder: docs
+        git-config-name: Mobile Automation
+        git-config-email: alexander@oversize.design
+        commit-message: Updated DocC documentation for version
+>>>>>>> 3aa832d (Update publish-docc.yml)
