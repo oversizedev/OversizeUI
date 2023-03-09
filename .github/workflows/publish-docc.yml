@@ -48,13 +48,12 @@ name: Publish DocC
 =======
 on:
   push:
-    branches: [ develop, main ]
-  release:
-    types: [published]
-
+    branches:
+      - main
 jobs:
-  documentation:
-    runs-on: macos-12
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    concurrency: ci-${{ github.ref }}
     steps:
     - uses: actions/checkout@v3
     - name: Generate DocC
