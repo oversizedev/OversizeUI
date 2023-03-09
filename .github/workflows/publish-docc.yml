@@ -1,30 +1,18 @@
 name: Publish DocC
-
 on:
   push:
-    branches: [ develop, main ]
-  release:
-    types: [published]
-
+    branches:
+      - main
 jobs:
-  documentation:
-    runs-on: macos-12
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    concurrency: ci-${{ github.ref }}
     steps:
-    - uses: actions/checkout@v3
-    - name: Generate DocC
-      run: |
-        mkdir -p docs
-        set -o pipefail && xcodebuild docbuild \
-          -scheme OversizeUI \
-          -destination "generic/platform=iOS" \
-          OTHER_DOCC_FLAGS="--transform-for-static-hosting --hosting-base-path --output-path docs" \
-          | xcpretty
-    - name: Deploy to Github Pages
-      uses: JamesIves/github-pages-deploy-action@v4.4.1
-      with:
-        branch: docc
-        folder: docs
-        target-folder: docs
-        git-config-name: Mobile Automation
-        git-config-email: alexander@oversize.design
-        commit-message: Updated DocC documentation for version
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: docc
+          folder: docs
