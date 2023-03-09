@@ -1,19 +1,38 @@
-name: Publish DocC
+name: Deploy DocC
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    concurrency: ci-${{ github.ref }}
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: macos-12
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v2
-
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: actions/checkout@v3
+      - name: Build DocC
+        run: |
+          xcodebuild docbuild -scheme OversizeUI \
+            -derivedDataPath /tmp/docbuild \
+            -destination 'generic/platform=iOS';
+          $(xcrun --find docc) process-archive \
+            transform-for-static-hosting /tmp/docbuild/Build/Products/Debug-iphoneos/OversizeUI.doccarchive \
+            --hosting-base-path OversizeUI \
+            --output-path docs;
+          echo "<script>window.location.href += \"/documentation/oversizeui\"</script>" > docs/index.html;
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
         with:
           branch: docc
-          folder: docs
-          target-folder: docs
+          path: 'docs'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
