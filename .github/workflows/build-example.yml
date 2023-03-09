@@ -1,4 +1,4 @@
-name: iOS example
+name: Build Example
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ main ]
     
 env:
-  DEVELOPER_DIR: /Applications/Xcode_14.0.app/Contents/Developer
+  DEVELOPER_DIR: /Applications/Xcode_14.2.app/Contents/Developer
 
 jobs:
   build:
