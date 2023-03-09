@@ -5,6 +5,8 @@
 
 import SwiftUI
 
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct TextEditorPlaceholderViewModifier: ViewModifier {
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.fieldLabelPosition) private var fieldPlaceholderPosition: FieldLabelPosition
@@ -102,11 +104,15 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
 }
 
 public extension View {
+    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
     func textEditorPlaceholder(_ placeholder: String, text: Binding<String>) -> some View {
         modifier(TextEditorPlaceholderViewModifier(placeholder: placeholder, text: text))
     }
 }
 
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 struct TextEditor_preview: PreviewProvider {
     static var previews: some View {
         VStack {

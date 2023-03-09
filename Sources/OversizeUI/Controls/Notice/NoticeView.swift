@@ -65,31 +65,31 @@ public struct NoticeView<A>: View where A: View {
                 }
 
                 #if os(iOS)
-                    if actions != nil {
-                        HStack(spacing: .small) {
-                            actions
-                                .buttonStyle(.primary)
-                                .controlSize(.small)
-                        }
-                        .padding(.top, .xxSmall)
+                if actions != nil {
+                    HStack(spacing: .small) {
+                        actions
+                            .buttonStyle(.primary)
+                            .controlSize(.small)
                     }
+                    .padding(.top, .xxSmall)
+                }
                 #endif
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
         .overlay(alignment: .topTrailing) {
             #if os(iOS)
-                if closeAction != nil {
-                    Button {
-                        closeAction?()
-                    } label: {
-                        Icon(.xMini, color: .onSurfaceHighEmphasis)
-                    }
-                    .buttonStyle(subtitle != nil ? .tertiary(infinityWidth: false) : .quaternary(infinityWidth: false))
-                    .controlBorderShape(.capsule)
-                    .padding(.small)
-                    .controlSize(.mini)
+            if closeAction != nil {
+                Button {
+                    closeAction?()
+                } label: {
+                    Icon(.xMini, color: .onSurfaceHighEmphasis)
                 }
+                .buttonStyle(subtitle != nil ? .tertiary(infinityWidth: false) : .quaternary(infinityWidth: false))
+                .controlBorderShape(.capsule)
+                .padding(.small)
+                .controlSize(.mini)
+            }
             #endif
         }
     }

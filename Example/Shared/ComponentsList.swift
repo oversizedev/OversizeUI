@@ -21,36 +21,36 @@ struct ComponentsList: View {
     @State var isShowSetting = false
 
     #if os(iOS)
-        let pages = [
-            Page(name: "Buttons", page: AnyView(ButtonsDemo())),
-            Page(name: "ColorSelector", page: AnyView(ColorSelect())),
-            Page(name: "Avatar", page: AnyView(AvatarDemo())),
-            Page(name: "GridSelect", page: AnyView(GridSelectDemo())),
-            Page(name: "TextField", page: AnyView(TextFieldDemo())),
-            Page(name: "Icons", page: AnyView(IconsDemo())),
-            Page(name: "Row", page: AnyView(RowDemo())),
-            Page(name: "SegmentedControl", page: AnyView(SegmentedControlDemo())),
-            Page(name: "Select", page: AnyView(SelectDemo())),
-            Page(name: "Surface", page: AnyView(SurfaceDemo())),
-            Page(name: "Page", page: AnyView(PageDemo())),
-        ]
+    let pages = [
+        Page(name: "Buttons", page: AnyView(ButtonsDemo())),
+        Page(name: "ColorSelector", page: AnyView(ColorSelect())),
+        Page(name: "Avatar", page: AnyView(AvatarDemo())),
+        Page(name: "GridSelect", page: AnyView(GridSelectDemo())),
+        Page(name: "TextField", page: AnyView(TextFieldDemo())),
+        Page(name: "Icons", page: AnyView(IconsDemo())),
+        Page(name: "Row", page: AnyView(RowDemo())),
+        Page(name: "SegmentedControl", page: AnyView(SegmentedControlDemo())),
+        Page(name: "Select", page: AnyView(SelectDemo())),
+        Page(name: "Surface", page: AnyView(SurfaceDemo())),
+        Page(name: "Page", page: AnyView(PageDemo())),
+    ]
     #endif
 
     var body: some View {
         #if os(iOS)
-            PageView("Example") {
-                VStack(spacing: .zero) {
-                    ForEach(pages) { page in
-                        NavigationLink(destination: page.page) {
-                            Row(page.name)
-                        }
-                        .buttonStyle(.row)
+        PageView("Example") {
+            VStack(spacing: .zero) {
+                ForEach(pages) { page in
+                    NavigationLink(destination: page.page) {
+                        Row(page.name)
                     }
+                    .buttonStyle(.row)
                 }
             }
-            .navigationable()
+        }
+        .navigationable()
         #else
-            Text("Support will be in the future")
+        Text("Support will be in the future")
         #endif
     }
 }

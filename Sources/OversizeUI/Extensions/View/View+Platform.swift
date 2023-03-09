@@ -8,9 +8,9 @@ import SwiftUI
 public extension View {
     func iOS(_ modifier: (Self) -> some View) -> some View {
         #if os(iOS)
-            return modifier(self)
+        return modifier(self)
         #else
-            return self
+        return self
         #endif
     }
 }
@@ -18,9 +18,9 @@ public extension View {
 public extension View {
     func macOS(_ modifier: (Self) -> some View) -> some View {
         #if os(macOS)
-            return modifier(self)
+        return modifier(self)
         #else
-            return self
+        return self
         #endif
     }
 }
@@ -28,9 +28,9 @@ public extension View {
 public extension View {
     func tvOS(_ modifier: (Self) -> some View) -> some View {
         #if os(tvOS)
-            return modifier(self)
+        return modifier(self)
         #else
-            return self
+        return self
         #endif
     }
 }
@@ -38,9 +38,9 @@ public extension View {
 public extension View {
     func watchOS(_ modifier: (Self) -> some View) -> some View {
         #if os(watchOS)
-            return modifier(self)
+        return modifier(self)
         #else
-            return self
+        return self
         #endif
     }
 }

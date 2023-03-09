@@ -308,16 +308,6 @@ struct ListRow_Previews: PreviewProvider {
                 .rowOnSurface()
             })
 
-//            Row("Title", subtitle: "Subtitle")
-//                .rowLeading(.avatar(AvatarView(firstName: "Name")))
-//                .rowTrailing(.text("Text"))
-
-//            Row("Title")
-//                .rowTrailing(.toggleWithArrowButton(isOn: .constant(true), action: nil))
-//
-//            Row("Title", subtitle: "Subtitle")
-//                .rowTrailing(.button("Button", action: {}))
-
             Row("Title", subtitle: "Red")
                 .premium()
         }

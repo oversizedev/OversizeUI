@@ -94,10 +94,10 @@ internal struct RowTrailing: View {
 
         case let .timePicker(date: date):
             #if os(watchOS)
-                EmptyView()
+            EmptyView()
             #elseif os(iOS)
-                DatePicker("", selection: date, displayedComponents: .hourAndMinute)
-                    .labelsHidden()
+            DatePicker("", selection: date, displayedComponents: .hourAndMinute)
+                .labelsHidden()
             #endif
         case let .text(text):
             Text(text)
@@ -106,13 +106,13 @@ internal struct RowTrailing: View {
 
         case let .button(text, action: action):
             #if os(tvOS)
-                EmptyView()
+            EmptyView()
             #else
-                Button(text, action: action)
-                    .buttonStyle(.tertiary)
-                    .controlBorderShape(.capsule)
-                    .controlSize(.small)
-                    .disabled(isPremiumOption && premiumStatus == false)
+            Button(text, action: action)
+                .buttonStyle(.tertiary)
+                .controlBorderShape(.capsule)
+                .controlSize(.small)
+                .disabled(isPremiumOption && premiumStatus == false)
             #endif
         }
     }

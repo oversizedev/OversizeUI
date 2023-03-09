@@ -36,20 +36,20 @@ public struct PaddingEdgeInsetsModifier: ViewModifier {
 
 public struct ContentPaddingModifier: ViewModifier {
     #if os(iOS)
-        @Environment(\.horizontalSizeClass) var horizontalSizeClass
-        let edges: Edge.Set
-        let length = Space.medium
-        public func body(content: Content) -> some View {
-            content.padding(edges, horizontalSizeClass == .compact
-                ? length.rawValue
-                : length.rawValue + Space.large.rawValue)
-        }
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    let edges: Edge.Set
+    let length = Space.medium
+    public func body(content: Content) -> some View {
+        content.padding(edges, horizontalSizeClass == .compact
+            ? length.rawValue
+            : length.rawValue + Space.large.rawValue)
+    }
     #else
-        let edges: Edge.Set
-        let length = Space.medium
-        public func body(content: Content) -> some View {
-            content.padding(edges, length.rawValue)
-        }
+    let edges: Edge.Set
+    let length = Space.medium
+    public func body(content: Content) -> some View {
+        content.padding(edges, length.rawValue)
+    }
     #endif
 }
 

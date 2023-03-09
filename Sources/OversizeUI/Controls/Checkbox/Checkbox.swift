@@ -115,7 +115,6 @@ public extension Checkbox where Label == EmptyView {
     }
 }
 
-@available(iOS 14.0, *)
 struct Checkbox_LibraryContent: LibraryContentProvider {
     var views: [LibraryItem] {
         LibraryItem(
