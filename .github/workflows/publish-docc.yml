@@ -47,6 +47,8 @@ name: Publish DocC
 >>>>>>> 07be3de (Create publish-docc.yml)
 =======
 on:
+  push:
+    branches: [ develop ]
   release:
     types: [published]
   workflow_dispatch:
