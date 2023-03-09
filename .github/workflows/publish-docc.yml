@@ -48,12 +48,20 @@ name: Publish DocC
 =======
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    concurrency: ci-${{ github.ref }}
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: macos-12
     steps:
     - uses: actions/checkout@v3
     - name: Generate DocC
