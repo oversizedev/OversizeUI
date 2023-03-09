@@ -25,12 +25,8 @@ public struct Background<Content: View>: View {
         static var colorTertiary: Color { Color.backgroundTertiary }
 
         /// Size
-        static var paddingM: CGFloat { Space.medium.rawValue }
-        static var paddingS: CGFloat { Space.small.rawValue }
-
-        /// Radius
-        static var radiusM: CGFloat { Radius.medium.rawValue }
-        static var radiusS: CGFloat { Radius.small.rawValue }
+        static var paddingMedium: CGFloat { Space.medium.rawValue }
+        static var paddingSmall: CGFloat { Space.small.rawValue }
     }
 
     private let content: Content
@@ -57,9 +53,9 @@ public struct Background<Content: View>: View {
     private var paddingSize: CGFloat {
         switch padding {
         case .medium:
-            return Constants.paddingM
+            return Constants.paddingMedium
         case .small:
-            return Constants.paddingS
+            return Constants.paddingSmall
         }
     }
 

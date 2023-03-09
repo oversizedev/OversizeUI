@@ -6,10 +6,11 @@
 import SwiftUI
 
 public extension View {
+    @available(tvOS, unavailable)
     @_disfavoredOverload
     @ViewBuilder
     func scrollContentBackground(_ visibility: Visibility) -> some View {
-        if #available(iOS 16, *) {
+        if #available(iOS 16, macOS 13.0, watchOS 9.0, *) {
             self.scrollContentBackground(visibility)
         } else {
             self
@@ -19,7 +20,7 @@ public extension View {
     @_disfavoredOverload
     @ViewBuilder
     func presentationDragIndicator(_ visibility: Visibility) -> some View {
-        if #available(iOS 16, *) {
+        if #available(iOS 16, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
             self.presentationDragIndicator(visibility)
         } else {
             self

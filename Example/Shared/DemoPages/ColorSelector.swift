@@ -6,6 +6,8 @@
 import OversizeUI
 import SwiftUI
 
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
 struct ColorSelect: View {
     @State var colorSelect = Color.red
 
@@ -25,6 +27,8 @@ struct ColorSelect: View {
     }
 }
 
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
 struct ColorSelect_Previews: PreviewProvider {
     static var previews: some View {
         ColorSelect()

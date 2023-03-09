@@ -4,11 +4,14 @@
 //
 
 #if os(iOS)
-    import SwiftUI
+import SwiftUI
 
-    public extension View {
-        func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-            clipShape(RoundedRectangleCorner(radius: radius, corners: corners))
-        }
+public extension View {
+    @available(macOS, unavailable)
+    @available(watchOS, unavailable)
+    @available(tvOS, unavailable)
+    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape(RoundedRectangleCorner(radius: radius, corners: corners))
     }
+}
 #endif

@@ -32,19 +32,19 @@ public struct ScrollViewOffset<Content: View>: View {
             contnt
                 .overlay(alignment: .top) {
                     #if os(iOS)
-                        GeometryReader { proxy -> Color in
-                            let rect = proxy.frame(in: coordinateSpace)
-                            if startOffset == .zero {
-                                DispatchQueue.main.async {
-                                    startOffset = CGPoint(x: rect.minX, y: rect.minY)
-                                }
-                            }
+                    GeometryReader { proxy -> Color in
+                        let rect = proxy.frame(in: coordinateSpace)
+                        if startOffset == .zero {
                             DispatchQueue.main.async {
-                                offset = CGPoint(x: startOffset.x - rect.minX, y: startOffset.y - rect.minY)
+                                startOffset = CGPoint(x: rect.minX, y: rect.minY)
                             }
-                            return Color.clear
                         }
-                        .frame(width: UIScreen.main.bounds.width, height: 0)
+                        DispatchQueue.main.async {
+                            offset = CGPoint(x: startOffset.x - rect.minX, y: startOffset.y - rect.minY)
+                        }
+                        return Color.clear
+                    }
+                    .frame(width: UIScreen.main.bounds.width, height: 0)
                     #endif
                 }
         })

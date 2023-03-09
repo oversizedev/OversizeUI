@@ -35,9 +35,9 @@ public struct AvatarView: View {
 
     public var body: some View {
         #if os(tvOS)
-            tvOSContent
+        tvOSContent
         #else
-            content
+        content
         #endif
     }
 

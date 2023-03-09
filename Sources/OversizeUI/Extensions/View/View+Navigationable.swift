@@ -6,6 +6,9 @@
 import SwiftUI
 
 public extension View {
+    @available(macOS, unavailable)
+    @available(watchOS, unavailable)
+    @available(tvOS, unavailable)
     func navigationable(_ navigationBarHidden: Bool = true) -> some View {
         NavigationView {
             self

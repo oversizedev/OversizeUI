@@ -1,2 +1,3 @@
 --swiftversion 5.7
 --disable preferKeyPath
+--ifdef no-indent

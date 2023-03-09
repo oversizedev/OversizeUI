@@ -6,23 +6,20 @@
 import SwiftUI
 
 public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar: View, TitleLabel: View>: View {
+    @Environment(\.screenSize) var screenSize
+    @Binding public var offset: CGPoint
+
     private let leadingBar: () -> LeadingBar?
     private let trailingBar: () -> TrailingBar?
     private let bottomBar: () -> BottomBar?
     private let titleLabel: () -> TitleLabel?
 
-    @Environment(\.screenSize) var screenSize
-
     private var title: String
-    private var subtitle: String = ""
     private var bigTitle: Bool
     private let alwaysSlideSmallTile: Bool
     private let isDisableScrollShadow: Bool
-
-    @Binding public var offset: CGPoint
-
-    private var maxHeight: CGFloat = 100
     private let background: Color
+    private var maxHeight: CGFloat = 100
 
     public init(title: String,
                 bigTitle: Bool = true,
