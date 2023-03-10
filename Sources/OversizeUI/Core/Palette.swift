@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// Palette.swift
+// Copyright © 2021 Alexander Romanov
+// Palette.swift, created on 11.09.2021
 //
 
 import SwiftUI
@@ -39,7 +39,7 @@ public enum Palette: String {
         }
     }
 
-    public static var base: [Palette] = [.red, .orange, .yellow, .green, .blue, pink, .gray, black]
+    public static var base: [Palette] = [.red, .orange, .yellow, .green, .blue, .pink, .gray, .black]
     public static var baseColors: [Color] = base.compactMap { color in
         color.color
     }

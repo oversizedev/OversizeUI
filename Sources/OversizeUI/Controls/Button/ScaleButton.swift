@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// ScaleButton.swift
+// Copyright © 2021 Alexander Romanov
+// ScaleButton.swift, created on 19.11.2022
 //
 
 import SwiftUI

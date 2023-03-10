@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// SegmentedControl.swift
+// Copyright © 2021 Alexander Romanov
+// SegmentedControl.swift, created on 12.08.2021
 //
 
 import SwiftUI
@@ -9,7 +9,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.segmentedControlStyle) private var style
     @Environment(\.controlRadius) var controlRadius: Radius
-    @Environment(\.controlPadding) var controlPadding: ControlPadding
+    @Environment(\.segmentedPickerInsets) var controlPadding: EdgeSpaceInsets
 
     public typealias Data = [Element]
 
@@ -47,7 +47,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
             )
             .clipBackground(style.isShowBackground, radius: controlRadius.rawValue)
             .onAppear {
-                let selctedValue = self.selection
+                let selctedValue = selection
                 var index = 0
                 for dataValue in data {
                     if selctedValue == dataValue {
@@ -70,7 +70,8 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
 
     private var equallSegmentedControl: some View {
         ZStack(alignment: Alignment(horizontal: .horizontalCenterAlignment,
-                                    vertical: .center)) {
+                                    vertical: .center))
+        {
             if let selectedIndex {
                 HStack(spacing: 0) {
                     Spacer()
@@ -98,15 +99,20 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
 
                                    content(data[index],
                                            selectedIndex == index)
-                                       .body(true)
+                                       .body(.semibold)
                                        .foregroundColor(.onSurfaceHighEmphasis)
                                        .multilineTextAlignment(.center)
                                    Spacer()
                                }
-                               .padding(.horizontal, controlPadding.horizontal)
-                               .padding(.vertical,
-                                        controlPadding.vertical != Space.zero || controlPadding.vertical != Space.xxSmall
-                                            ? controlPadding.vertical.rawValue - Space.xxSmall.rawValue
+                               .padding(.leading, controlPadding.leading)
+                               .padding(.trailing, controlPadding.trailing)
+                               .padding(.top,
+                                        controlPadding.top != Space.zero || controlPadding.top != Space.xxSmall
+                                            ? controlPadding.top.rawValue - Space.xxSmall.rawValue
+                                            : Space.zero.rawValue)
+                               .padding(.bottom,
+                                        controlPadding.bottom != Space.zero || controlPadding.bottom != Space.xxSmall
+                                            ? controlPadding.bottom.rawValue - Space.xxSmall.rawValue
                                             : Space.zero.rawValue)
                                .background(selectedIndex != index
                                    ? getUnselection(unselectionStyle: style.unseletionStyle)
@@ -118,10 +124,11 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                                Color.clear.onAppear { DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { frames[index] = proxy.frame(in: .global) } }
                            })
                            .alignmentGuide(.horizontalCenterAlignment,
-                                           isActive: selectedIndex == index) { dimensions in
-                               dimensions[HorizontalAlignment.center]
-                           }
-                           .padding(.trailing, style.unseletionStyle == .surface ? Space.xSmall.rawValue : 0)
+                                           isActive: selectedIndex == index)
+                    { dimensions in
+                        dimensions[HorizontalAlignment.center]
+                    }
+                    .padding(.trailing, style.unseletionStyle == .surface ? Space.xSmall.rawValue : 0)
                 }
             }
         }
@@ -130,7 +137,8 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
 
     private var leadingSegmentedControl: some View {
         ZStack(alignment: Alignment(horizontal: .horizontalCenterAlignment,
-                                    vertical: .center)) {
+                                    vertical: .center))
+        {
             if let selectedIndex {
                 HStack {
                     selectionView()
@@ -151,14 +159,18 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                                action?()
                            },
                            label: { content(data[index], selectedIndex == index)
-                               .body(true)
+                               .body(.semibold)
                                .foregroundColor(.onSurfaceHighEmphasis)
-
                                .multilineTextAlignment(.center)
-                               .padding(.horizontal, controlPadding.horizontal)
-                               .padding(.vertical,
-                                        controlPadding.vertical != Space.zero || controlPadding.vertical != Space.xxSmall
-                                            ? controlPadding.vertical.rawValue - Space.xxSmall.rawValue
+                               .padding(.leading, controlPadding.leading)
+                               .padding(.trailing, controlPadding.trailing)
+                               .padding(.top,
+                                        controlPadding.top != Space.zero || controlPadding.top != Space.xxSmall
+                                            ? controlPadding.top.rawValue - Space.xxSmall.rawValue
+                                            : Space.zero.rawValue)
+                               .padding(.bottom,
+                                        controlPadding.bottom != Space.zero || controlPadding.bottom != Space.xxSmall
+                                            ? controlPadding.bottom.rawValue - Space.xxSmall.rawValue
                                             : Space.zero.rawValue)
                                .background(selectedIndex != index
                                    ? getUnselection(unselectionStyle: style.unseletionStyle)
@@ -169,10 +181,11 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                                Color.clear.onAppear { frames[index] = proxy.frame(in: .global) }
                            })
                            .alignmentGuide(.horizontalCenterAlignment,
-                                           isActive: selectedIndex == index) { dimensions in
-                               dimensions[HorizontalAlignment.center]
-                           }
-                           .padding(.trailing, style.unseletionStyle == .surface ? Space.xSmall.rawValue : 0)
+                                           isActive: selectedIndex == index)
+                    { dimensions in
+                        dimensions[HorizontalAlignment.center]
+                    }
+                    .padding(.trailing, style.unseletionStyle == .surface ? Space.xSmall.rawValue : 0)
                 }
             }
         }

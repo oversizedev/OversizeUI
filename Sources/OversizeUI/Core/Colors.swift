@@ -1,96 +1,101 @@
 //
-// Copyright © 2022 Alexander Romanov
-// Colors.swift
+// Copyright © 2021 Alexander Romanov
+// Colors.swift, created on 11.09.2021
 //
 
 import SwiftUI
 
 public extension Color {
-    /// Primary
+    // MARK: Primary
+
     static var accent: Color {
         Color.accentColor
     }
 
-    /// On Primary
+    // MARK: - On Primary
 
-    /// High Emphasis
+    /// On Primary High Emphasis
     static var onPrimaryHighEmphasis: Color {
         Color("OnPrimaryHighEmphasis", bundle: .module)
     }
 
-    /// Medium Emphasis
+    /// On Primary Medium Emphasis
     static var onPrimaryMediumEmphasis: Color {
         Color("OnPrimaryMediumEmphasis", bundle: .module)
     }
 
-    /// Disabled
+    /// On Primary Disabled
     static var onPrimaryDisabled: Color {
         Color("OnPrimaryDisabled", bundle: .module)
     }
 
-    /// Background
+    // MARK: - Background
 
-    /// High Emphasis
+    /// Background Primary
     static var backgroundPrimary: Color {
         Color("BackgroundPrimary", bundle: .module)
     }
 
-    /// Medium Emphasis
+    /// Background Secondary
     static var backgroundSecondary: Color {
         Color("BackgroundSecondary", bundle: .module)
     }
 
-    /// Disabled
+    /// Background Tertiary
     static var backgroundTertiary: Color {
         Color("BackgroundTertiary", bundle: .module)
     }
 
-    /// On Background
+    // MARK: - On Background
 
-    /// High Emphasis
+    /// On Background High Emphasis
     static var onBackgroundHighEmphasis: Color {
         Color("OnBackgroundHighEmphasis", bundle: .module)
     }
 
-    /// Medium Emphasis
+    /// On BackgroundMedium Emphasis
     static var onBackgroundMediumEmphasis: Color {
         Color("OnBackgroundMediumEmphasis", bundle: .module)
     }
 
-    /// Disabled
+    /// On Background Disabled
     static var onBackgroundDisabled: Color {
         Color("OnBackgroundDisabled", bundle: .module)
     }
 
-    /// Surface
-    /// High Emphasis
+    // MARK: - Surface
+
+    /// Surface Primary
     static var surfacePrimary: Color {
         Color("SurfacePrimary", bundle: .module)
     }
 
-    /// Medium Emphasis
+    /// Surface Secondary
     static var surfaceSecondary: Color {
         Color("SurfaceSecondary", bundle: .module)
     }
 
-    /// Disabled
+    /// Surface Tertiary
     static var surfaceTertiary: Color {
         Color("SurfaceTertiary", bundle: .module)
     }
 
+    /// On Surface High Emphasis
     static var onSurfaceHighEmphasis: Color {
         Color("OnSurfaceHighEmphasis", bundle: .module)
     }
 
-    /// Medium Emphasis
+    /// On Surface Medium Emphasis
     static var onSurfaceMediumEmphasis: Color {
         Color("OnSurfaceMediumEmphasis", bundle: .module)
     }
 
-    /// Disabled
+    /// On Surface Disabled
     static var onSurfaceDisabled: Color {
         Color("OnSurfaceDisabled", bundle: .module)
     }
+
+    // MARK: - Other
 
     /// Error
     static var error: Color {
@@ -121,87 +126,87 @@ public extension Color {
 // MARK: - Foreground Color Extension
 
 public extension View {
-    func foregroundOnPrimaryHighEmphasis() -> some View {
+    func onPrimaryHighEmphasisForegroundColor() -> some View {
         foregroundColor(Color.onPrimaryHighEmphasis)
     }
 
-    func foregroundOnPrimaryMediumEmphasis() -> some View {
+    func onPrimaryMediumEmphasisForegroundColor() -> some View {
         foregroundColor(Color.onPrimaryMediumEmphasis)
     }
 
-    func foregroundOnPrimaryDisabled() -> some View {
+    func onPrimaryDisabledForegroundColor() -> some View {
         foregroundColor(Color.onPrimaryDisabled)
     }
 
-    func foregroundAccent() -> some View {
-        foregroundColor(Color.accent)
-    }
-
-    func foregroundBackgroundPrimary() -> some View {
+    func backgroundPrimaryForegroundColor() -> some View {
         foregroundColor(Color.backgroundPrimary)
     }
 
-    func foregroundBackgroundSecondary() -> some View {
+    func backgroundSecondaryForegroundColor() -> some View {
         foregroundColor(Color.backgroundSecondary)
     }
 
-    func foregroundBackgroundTertiary() -> some View {
+    func backgroundTertiaryForegroundColor() -> some View {
         foregroundColor(Color.backgroundTertiary)
     }
 
-    func foregroundOnBackgroundHighEmphasis() -> some View {
+    func onBackgroundHighEmphasisForegroundColor() -> some View {
         foregroundColor(Color.onBackgroundHighEmphasis)
     }
 
-    func foregroundOnBackgroundMediumEmphasis() -> some View {
+    func onBackgroundMediumEmphasisForegroundColor() -> some View {
         foregroundColor(Color.onBackgroundMediumEmphasis)
     }
 
-    func foregroundOnBackgroundDisabled() -> some View {
+    func onBackgroundDisabledForegroundColor() -> some View {
         foregroundColor(Color.onBackgroundDisabled)
     }
 
-    func foregroundSurfacePrimary() -> some View {
+    func surfacePrimaryForegroundColor() -> some View {
         foregroundColor(Color.surfacePrimary)
     }
 
-    func foregroundSurfaceSecondary() -> some View {
+    func surfaceSecondaryForegroundColor() -> some View {
         foregroundColor(Color.surfaceSecondary)
     }
 
-    func foregroundSurfaceTertiary() -> some View {
+    func surfaceTertiaryForegroundColor() -> some View {
         foregroundColor(Color.surfaceTertiary)
     }
 
-    func foregroundOnSurfaceHighEmphasis() -> some View {
+    func onSurfaceHighEmphasisForegroundColor() -> some View {
         foregroundColor(Color.onSurfaceHighEmphasis)
     }
 
-    func foregroundOnSurfaceMediumEmphasis() -> some View {
+    func onSurfaceMediumEmphasisForegroundColor() -> some View {
         foregroundColor(Color.onSurfaceMediumEmphasis)
     }
 
-    func foregroundOnSurfaceDisabled() -> some View {
+    func onSurfaceDisabledForegroundColor() -> some View {
         foregroundColor(Color.onSurfaceDisabled)
     }
 
-    func foregroundError() -> some View {
+    func accentForegroundColor() -> some View {
+        foregroundColor(Color.accentColor)
+    }
+
+    func errorForegroundColor() -> some View {
         foregroundColor(Color.error)
     }
 
-    func foregroundSuccess() -> some View {
+    func successForegroundColor() -> some View {
         foregroundColor(Color.success)
     }
 
-    func foregroundWarning() -> some View {
+    func warningForegroundColor() -> some View {
         foregroundColor(Color.warning)
     }
 
-    func foregroundLink() -> some View {
+    func linkForegroundColor() -> some View {
         foregroundColor(Color.link)
     }
 
-    func foregroundBorder() -> some View {
+    func borderForegroundColor() -> some View {
         foregroundColor(Color.border)
     }
 }
@@ -222,7 +227,7 @@ public extension Shape {
     }
 
     func fillAccent() -> some View {
-        fill(Color.accent)
+        fill(Color.accentColor)
     }
 
     func fillBackgroundPrimary() -> some View {
@@ -294,6 +299,113 @@ public extension Shape {
     }
 }
 
+public extension View {
+    @available(*, deprecated, renamed: "onPrimaryHighEmphasisForegroundColor")
+    func foregroundOnPrimaryHighEmphasis() -> some View {
+        foregroundColor(Color.onPrimaryHighEmphasis)
+    }
+
+    @available(*, deprecated, renamed: "onPrimaryMediumEmphasisForegroundColor")
+    func foregroundOnPrimaryMediumEmphasis() -> some View {
+        foregroundColor(Color.onPrimaryMediumEmphasis)
+    }
+
+    @available(*, deprecated, renamed: "onPrimaryDisabledForegroundColor")
+    func foregroundOnPrimaryDisabled() -> some View {
+        foregroundColor(Color.onPrimaryDisabled)
+    }
+
+    @available(*, deprecated, renamed: "accentForegroundColor")
+    func foregroundAccent() -> some View {
+        foregroundColor(Color.accentColor)
+    }
+
+    @available(*, deprecated, renamed: "backgroundPrimaryForegroundColor")
+    func foregroundBackgroundPrimary() -> some View {
+        foregroundColor(Color.backgroundPrimary)
+    }
+
+    @available(*, deprecated, renamed: "backgroundSecondaryForegroundColor")
+    func foregroundBackgroundSecondary() -> some View {
+        foregroundColor(Color.backgroundSecondary)
+    }
+
+    @available(*, deprecated, renamed: "backgroundTertiaryForegroundColor")
+    func foregroundBackgroundTertiary() -> some View {
+        foregroundColor(Color.backgroundTertiary)
+    }
+
+    @available(*, deprecated, renamed: "onBackgroundHighEmphasisForegroundColor")
+    func foregroundOnBackgroundHighEmphasis() -> some View {
+        foregroundColor(Color.onBackgroundHighEmphasis)
+    }
+
+    @available(*, deprecated, renamed: "onBackgroundMediumEmphasisForegroundColor")
+    func foregroundOnBackgroundMediumEmphasis() -> some View {
+        foregroundColor(Color.onBackgroundMediumEmphasis)
+    }
+
+    @available(*, deprecated, renamed: "onBackgroundDisabledForegroundColor")
+    func foregroundOnBackgroundDisabled() -> some View {
+        foregroundColor(Color.onBackgroundDisabled)
+    }
+
+    @available(*, deprecated, renamed: "surfacePrimaryForegroundColor")
+    func foregroundSurfacePrimary() -> some View {
+        foregroundColor(Color.surfacePrimary)
+    }
+
+    @available(*, deprecated, renamed: "surfaceSecondaryForegroundColor")
+    func foregroundSurfaceSecondary() -> some View {
+        foregroundColor(Color.surfaceSecondary)
+    }
+
+    @available(*, deprecated, renamed: "aurfaceTertiaryForegroundColor")
+    func foregroundSurfaceTertiary() -> some View {
+        foregroundColor(Color.surfaceTertiary)
+    }
+
+    @available(*, deprecated, renamed: "onSurfaceHighEmphasisForegroundColor")
+    func foregroundOnSurfaceHighEmphasis() -> some View {
+        foregroundColor(Color.onSurfaceHighEmphasis)
+    }
+
+    @available(*, deprecated, renamed: "onSurfaceMediumEmphasisForegroundColor")
+    func foregroundOnSurfaceMediumEmphasis() -> some View {
+        foregroundColor(Color.onSurfaceMediumEmphasis)
+    }
+
+    @available(*, deprecated, renamed: "onSurfaceDisabledForegroundColor")
+    func foregroundOnSurfaceDisabled() -> some View {
+        foregroundColor(Color.onSurfaceDisabled)
+    }
+
+    @available(*, deprecated, renamed: "errorForegroundColor")
+    func foregroundError() -> some View {
+        foregroundColor(Color.error)
+    }
+
+    @available(*, deprecated, renamed: "successForegroundColor")
+    func foregroundSuccess() -> some View {
+        foregroundColor(Color.success)
+    }
+
+    @available(*, deprecated, renamed: "warningForegroundColor")
+    func foregroundWarning() -> some View {
+        foregroundColor(Color.warning)
+    }
+
+    @available(*, deprecated, renamed: "linkForegroundColor")
+    func foregroundLink() -> some View {
+        foregroundColor(Color.link)
+    }
+
+    @available(*, deprecated, renamed: "borderForegroundColor")
+    func foregroundBorder() -> some View {
+        foregroundColor(Color.border)
+    }
+}
+
 struct Color_Previews: PreviewProvider {
     static var previews: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -312,7 +424,7 @@ struct Color_Previews: PreviewProvider {
             }
             .padding(.horizontal)
         }
-        .background(Color.accent)
+        .background(Color.accentColor)
         .padding()
     }
 }

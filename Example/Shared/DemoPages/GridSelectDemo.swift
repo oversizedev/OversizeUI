@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// GridSelectDemo.swift
+// Copyright © 2021 Alexander Romanov
+// GridSelectDemo.swift, created on 27.11.2022
 //
 
 import OversizeUI
@@ -14,7 +14,7 @@ struct GridSelectDemo: View {
     @State var selection = ""
 
     var body: some View {
-        ScrollView {
+        PageView("Grid select") {
             VStack(spacing: .xSmall) {
                 ScrollView {
                     GridSelect(items, selection: $selection,
@@ -38,7 +38,9 @@ struct GridSelectDemo: View {
             }
             .padding()
         }
-        .navigationTitle("Grid select")
+        .leadingBar {
+            BarButton(.back)
+        }
     }
 }
 

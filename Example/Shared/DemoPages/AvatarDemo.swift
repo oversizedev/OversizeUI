@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// AvatarDemo.swift
+// Copyright © 2021 Alexander Romanov
+// AvatarDemo.swift, created on 27.11.2022
 //
 
 import OversizeUI
@@ -8,22 +8,57 @@ import SwiftUI
 
 struct AvatarDemo: View {
     var body: some View {
-        ScrollView {
-            VStack(spacing: .xSmall) {
-                AvatarView(firstName: "Jhon", size: .small)
+        PageView("Avatars") {
+            LazyVStack(spacing: .xSmall) {
+                #if os(iOS) || os(macOS) || os(watchOS)
+                Group {
+                    Avatar(firstName: "Jhon")
+                        .controlSize(.small)
+                        .previewDisplayName("Only firsy name")
 
-                AvatarView(firstName: "Jhon", lastName: "Smith", size: .small, stroke: true)
+                    Avatar(firstName: "Jhon", lastName: "Smith")
+                        .controlSize(.small)
 
-                AvatarView(firstName: "Jhon", size: .medium)
+                    Avatar(avatar: Image("empty"))
+                        .controlSize(.small)
 
-                AvatarView(firstName: "Jhon", lastName: "Smith", size: .medium, stroke: true)
+                    Avatar(firstName: "Jhon", lastName: "Smith", avatar: Image("empty"))
+                        .controlSize(.small)
+                }
 
-                AvatarView(firstName: "Jhon", size: .large)
+                Group {
+                    Avatar(firstName: "Jhon")
+                        .controlSize(.regular)
+                        .previewDisplayName("Only firsy name")
 
-                AvatarView(firstName: "Jhon", lastName: "Smith", size: .large, stroke: true)
+                    Avatar(firstName: "Jhon", lastName: "Smith")
+                        .controlSize(.regular)
+
+                    Avatar(avatar: Image("empty"))
+                        .controlSize(.regular)
+
+                    Avatar(firstName: "Jhon", lastName: "Smith", avatar: Image("empty"))
+                        .controlSize(.regular)
+                }
+                Group {
+                    Avatar(firstName: "Jhon")
+                        .controlSize(.large)
+
+                    Avatar(firstName: "Jhon", lastName: "Smith")
+                        .controlSize(.large)
+
+                    Avatar(avatar: Image("empty"))
+                        .controlSize(.large)
+
+                    Avatar(firstName: "Jhon", lastName: "Smith", avatar: Image("empty"))
+                        .controlSize(.large)
+                }
+                #endif
             }
         }
-        .navigationTitle("Avatar")
+        .leadingBar {
+            BarButton(.back)
+        }
     }
 }
 

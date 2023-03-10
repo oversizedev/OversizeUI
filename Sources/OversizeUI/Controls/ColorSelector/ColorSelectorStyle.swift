@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// ColorSelectorStyle.swift
+// Copyright © 2021 Alexander Romanov
+// ColorSelectorStyle.swift, created on 11.09.2021
 //
 
 import SwiftUI
@@ -24,47 +24,9 @@ public struct ColorSelectorConfiguration {
     let label: ColorSelectorConfiguration.Label
 }
 
-public struct HorizontalColorSelectorStyle: ColorSelectorStyle {
-    public init() {}
-    public func makeBody(configuration: Configuration) -> some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack {
-                configuration.label
-            }
-            .padding(.horizontal)
-        }
-        .padding(.vertical)
-    }
-}
-
-public struct GridColorSelectorStyle: ColorSelectorStyle {
-    public init() {}
-    private let columns = [GridItem(.adaptive(minimum: 44))]
-
-    public func makeBody(configuration: Configuration) -> some View {
-        LazyVGrid(columns: columns, spacing: 10) {
-            configuration.label
-        }.padding()
-    }
-}
-
 public struct DefaultColorSelectorStyle: ColorSelectorStyle {
     public func makeBody(configuration: Configuration) -> some View {
         HorizontalColorSelectorStyle().makeBody(configuration: configuration)
-    }
-}
-
-public struct AnyColorSelectorStyle: ColorSelectorStyle {
-    private var _makeBody: (Configuration) -> AnyView
-
-    public init(style: some ColorSelectorStyle) {
-        _makeBody = { configuration in
-            AnyView(style.makeBody(configuration: configuration))
-        }
-    }
-
-    public func makeBody(configuration: Configuration) -> some View {
-        _makeBody(configuration)
     }
 }
 

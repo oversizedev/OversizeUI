@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// Radius.swift
+// Copyright © 2021 Alexander Romanov
+// Radius.swift, created on 27.05.2020
 //
 
 import SwiftUI

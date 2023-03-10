@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// SegmentedControlDemo.swift
+// Copyright © 2021 Alexander Romanov
+// SegmentedControlDemo.swift, created on 27.11.2022
 //
 
 import OversizeUI
@@ -11,7 +11,7 @@ struct SegmentedControlDemo: View {
     @State var selection = ""
 
     var body: some View {
-        ScrollView {
+        PageView("Segmented control") {
             VStack(spacing: .xSmall) {
                 SegmentedPickerSelector(items, selection: $selection) { item, _ in
                     Text(item)
@@ -61,7 +61,8 @@ struct SegmentedControlDemo: View {
                             .padding(.xxSmall)
                         Text(item)
                         Text("Subtitle")
-                            .fontStyle(.subheadline, color: .onSurfaceMediumEmphasis)
+                            .subheadline()
+                            .onSurfaceHighEmphasisForegroundColor()
                     }
                 }
                 .segmentedControlStyle(SelectionOnlySegmentedControlStyle())
@@ -87,7 +88,10 @@ struct SegmentedControlDemo: View {
                     .controlRadius(.xLarge)
                 }
             }.padding()
-        }.navigationTitle("Segmented control")
+        }
+        .leadingBar {
+            BarButton(.back)
+        }
     }
 }
 

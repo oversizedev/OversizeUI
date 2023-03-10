@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// SurfaceDemo.swift
+// Copyright © 2021 Alexander Romanov
+// SurfaceDemo.swift, created on 27.11.2022
 //
 
 import OversizeUI
@@ -8,16 +8,18 @@ import SwiftUI
 
 struct SurfaceDemo: View {
     var body: some View {
-        ScrollView {
+        PageView("Surface") {
             VStack {
                 Surface {
                     Text("Text")
-                        .fontStyle(.title3, color: .onSurfaceHighEmphasis)
+                        .title3()
+                        .onSurfaceHighEmphasisForegroundColor()
                 }
                 .surfaceStyle(.secondary)
 
                 Text("Text")
-                    .surface(elevation: .z4)
+                    .surface()
+                    .elevation(.z4)
                     .previewLayout(.fixed(width: 414, height: 200))
 
                 HStack {
@@ -25,7 +27,8 @@ struct SurfaceDemo: View {
 
                     Spacer()
                 }
-                .surface(elevation: .z4)
+                .surface()
+                .elevation(.z4)
 
                 Surface { HStack {
                     Spacer()
@@ -33,7 +36,7 @@ struct SurfaceDemo: View {
                     Spacer()
                 }}
                 .controlRadius(.zero)
-                .controlPadding(.zero)
+                .surfaceContentInsets(.zero)
                 .elevation(.z2)
 
                 Surface { HStack {
@@ -44,7 +47,9 @@ struct SurfaceDemo: View {
             }
             .padding()
         }
-        .navigationTitle("Surface")
+        .leadingBar {
+            BarButton(.back)
+        }
     }
 }
 

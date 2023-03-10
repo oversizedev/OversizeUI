@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// Shadow.swift
+// Copyright © 2021 Alexander Romanov
+// Shadow.swift, created on 31.05.2020
 //
 
 import SwiftUI

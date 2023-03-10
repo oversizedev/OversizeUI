@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// SelectDemo.swift
+// Copyright © 2021 Alexander Romanov
+// SelectDemo.swift, created on 27.11.2022
 //
 
 import OversizeUI
@@ -12,16 +12,19 @@ struct SelectDemo: View {
     @State var selection = ""
 
     var body: some View {
-        VStack {
-            Select("Select", items, selection: $selection) { item, _ in
-                Text(item)
-            } selectionView: { selected in
-                Text(selected)
+        PageView("Select") {
+            VStack {
+                Select("Select", items, selection: $selection) { item, isSelect in
+                    Radio(item, isOn: isSelect)
+                } selectionView: { selected in
+                    Text(selected)
+                }
             }
-            .previewDisplayName("Default")
+            .padding()
         }
-        .previewLayout(.sizeThatFits)
-        .padding()
+        .leadingBar {
+            BarButton(.back)
+        }
     }
 }
 

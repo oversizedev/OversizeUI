@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// Bage.swift
+// Copyright © 2021 Alexander Romanov
+// Bage.swift, created on 20.02.2022
 //
 
 import SwiftUI
@@ -21,7 +21,7 @@ public struct Bage<Label: View>: View {
         HStack {
             label
                 .foregroundColor(color)
-                .fontStyle(.caption)
+                .caption()
         }
         .padding(.vertical, .xxxSmall)
         .padding(.horizontal, 6)

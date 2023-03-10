@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// NoticeView.swift
+// Copyright © 2021 Alexander Romanov
+// NoticeView.swift, created on 12.09.2022
 //
 
 import SwiftUI
@@ -51,8 +51,8 @@ public struct NoticeView<A>: View where A: View {
                     }
 
                     Text(title)
-                        .headline(.bold)
-                        .foregroundOnSurfaceHighEmphasis()
+                        .headline(.semibold)
+                        .onSurfaceHighEmphasisForegroundColor()
                         .multilineTextAlignment(.leading)
                         .padding(.trailing, closeAction != nil ? .medium : .zero)
                 }
@@ -60,10 +60,11 @@ public struct NoticeView<A>: View where A: View {
                 subtitle.map { text in
                     Text(text)
                         .body(.medium)
-                        .foregroundOnSurfaceMediumEmphasis()
+                        .onSurfaceMediumEmphasisForegroundColor()
                         .multilineTextAlignment(.leading)
                 }
 
+                #if os(iOS)
                 if actions != nil {
                     HStack(spacing: .small) {
                         actions
@@ -72,10 +73,12 @@ public struct NoticeView<A>: View where A: View {
                     }
                     .padding(.top, .xxSmall)
                 }
+                #endif
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
         .overlay(alignment: .topTrailing) {
+            #if os(iOS)
             if closeAction != nil {
                 Button {
                     closeAction?()
@@ -87,6 +90,7 @@ public struct NoticeView<A>: View where A: View {
                 .padding(.small)
                 .controlSize(.mini)
             }
+            #endif
         }
     }
 }

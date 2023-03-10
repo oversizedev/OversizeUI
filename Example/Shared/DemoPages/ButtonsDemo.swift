@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// ButtonsDemo.swift
+// Copyright © 2021 Alexander Romanov
+// ButtonsDemo.swift, created on 27.11.2022
 //
 
 import OversizeUI
@@ -8,7 +8,7 @@ import SwiftUI
 
 struct ButtonsDemo: View {
     var body: some View {
-        ScrollView {
+        PageView("Buttons") {
             VStack(spacing: .xSmall) {
                 Button("Button") { print(#function) }
                     .buttonStyle(.primary)
@@ -47,6 +47,7 @@ struct ButtonsDemo: View {
                 }
                 .buttonStyle(.primary)
 
+                #if os(iOS) || os(macOS) || os(watchOS)
                 HStack {
                     Button("Button") { print(#function) }
                         .buttonStyle(.secondary)
@@ -68,10 +69,13 @@ struct ButtonsDemo: View {
                     .buttonStyle(.secondary)
                     .elevation(.z2)
                 }
+                #endif
 
             }.padding()
         }
-        .navigationTitle("Buttons")
+        .leadingBar {
+            BarButton(.back)
+        }
     }
 }
 

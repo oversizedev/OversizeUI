@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// NotificationController.swift
+// Copyright © 2021 Alexander Romanov
+// NotificationController.swift, created on 27.11.2022
 //
 
 import SwiftUI

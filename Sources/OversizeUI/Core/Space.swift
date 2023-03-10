@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// Space.swift
+// Copyright © 2021 Alexander Romanov
+// Space.swift, created on 04.11.2019
 //
 
 import SwiftUI

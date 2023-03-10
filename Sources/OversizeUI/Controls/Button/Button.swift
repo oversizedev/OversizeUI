@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// Button.swift
+// Copyright © 2021 Alexander Romanov
+// Button.swift, created on 10.02.2021
 //
 
 import SwiftUI
@@ -18,9 +18,10 @@ public struct OversizeButtonStyle: ButtonStyle {
     @Environment(\.isLoading) private var isLoading: Bool
     @Environment(\.isAccent) private var isAccent: Bool
     @Environment(\.elevation) private var elevation: Elevation
-    @Environment(\.controlSize) var controlSize: ControlSize
     @Environment(\.controlBorderShape) var controlBorderShape: ControlBorderShape
     @Environment(\.isBordered) var isBordered: Bool
+    @available(tvOS, unavailable)
+    @Environment(\.controlSize) var controlSize: ControlSize
 
     private let type: ButtonType
     private let isInfinityWidth: Bool?
@@ -32,7 +33,7 @@ public struct OversizeButtonStyle: ButtonStyle {
 
     public func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
-            .body(true)
+            .body(.semibold)
             .opacity(isLoading ? 0 : 1)
             .foregroundColor(foregroundColor(for: configuration.role).opacity(foregroundOpacity))
             .padding(.horizontal, horizontalPadding)
@@ -41,7 +42,7 @@ public struct OversizeButtonStyle: ButtonStyle {
             .background(background(for: configuration.role))
             .overlay(loadingView(for: configuration.role))
             .scaleEffect(configuration.isPressed ? 0.95 : 1)
-            .shadowElevaton(elevation)
+            .shadowElevaton(isEnabled ? elevation : .z0)
     }
 
     @ViewBuilder
@@ -134,6 +135,9 @@ public struct OversizeButtonStyle: ButtonStyle {
     }
 
     private var horizontalPadding: Space {
+        #if os(tvOS)
+        return .medium
+        #else
         switch controlSize {
         case .mini:
             return .xxSmall
@@ -146,9 +150,13 @@ public struct OversizeButtonStyle: ButtonStyle {
         @unknown default:
             return .zero
         }
+        #endif
     }
 
     private var verticalPadding: Space {
+        #if os(tvOS)
+        return .medium
+        #else
         switch controlSize {
         case .mini:
             return .xxSmall
@@ -161,6 +169,7 @@ public struct OversizeButtonStyle: ButtonStyle {
         @unknown default:
             return .zero
         }
+        #endif
     }
 
     private var backgroundOpacity: CGFloat {
@@ -172,6 +181,9 @@ public struct OversizeButtonStyle: ButtonStyle {
     }
 
     private var maxWidth: CGFloat? {
+        #if os(tvOS)
+        return nil
+        #else
         if isInfinityWidth == nil, controlSize == .regular {
             return .infinity
         } else if let infinity = isInfinityWidth, infinity == true {
@@ -179,6 +191,7 @@ public struct OversizeButtonStyle: ButtonStyle {
         } else {
             return nil
         }
+        #endif
     }
 }
 
@@ -216,6 +229,7 @@ public extension ButtonStyle where Self == OversizeButtonStyle {
     }
 }
 
+@available(tvOS, unavailable)
 struct OversizeButtonStyle_Previews: PreviewProvider {
     struct Buttons: View {
         var body: some View {

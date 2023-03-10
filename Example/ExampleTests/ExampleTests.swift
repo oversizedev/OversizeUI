@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// ExampleTests.swift
+// Copyright © 2021 Alexander Romanov
+// ExampleTests.swift, created on 27.11.2022
 //
 
 @testable import Example_WatchKit_Extension

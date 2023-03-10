@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// ThemeSettings.swift
+// Copyright © 2021 Alexander Romanov
+// ThemeSettings.swift, created on 11.09.2021
 //
 
 import SwiftUI
@@ -28,7 +28,7 @@ public class ThemeSettings: ObservableObject {
     @AppStorage(ThemeSettingsNames.appearance) public var appearance: Appearance = .system
 
     #if os(iOS)
-        @AppStorage(ThemeSettingsNames.accentColor) public var accentColor: Color = .blue
+    @AppStorage(ThemeSettingsNames.accentColor) public var accentColor: Color = .blue
     #endif
 
     @AppStorage(ThemeSettingsNames.fontTitle) public var fontTitle: FontDesignType = .default

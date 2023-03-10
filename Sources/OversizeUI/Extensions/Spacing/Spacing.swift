@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// Spacing.swift
+// Copyright © 2021 Alexander Romanov
+// Spacing.swift, created on 11.09.2021
 //
 
 import SwiftUI
@@ -51,5 +51,11 @@ public extension GridItem {
 public extension RoundedRectangle {
     @inlinable init(cornerRadius: Radius, style: RoundedCornerStyle = .circular) {
         self = .init(cornerRadius: cornerRadius.rawValue, style: style)
+    }
+}
+
+public extension EdgeInsets {
+    init(top: Space, leading: Space, bottom: Space, trailing: Space) {
+        self = .init(top: top.rawValue, leading: leading.rawValue, bottom: bottom.rawValue, trailing: trailing.rawValue)
     }
 }

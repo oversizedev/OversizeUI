@@ -1,7 +1,6 @@
 # OversizeUI
 
-![Build Status](https://github.com/oversizedev/oversizeUI/actions/workflows/buildExampleIOS.yml/badge.svg)
-![GitHub](https://img.shields.io/github/license/aromanov91/oversizeUI)
+[![Build Example](https://github.com/oversizedev/OversizeUI/actions/workflows/buildExample.yml/badge.svg)](https://github.com/oversizedev/OversizeUI/actions/workflows/buildExample.yml)
 
 Yet another component library on SwiftUI
 
@@ -63,8 +62,8 @@ To build and deploy the demo follow these steps:
 
 ### Avatars
 ```swift
-AvatarView(firstName: "Jhon", size: .small)
-
+Avatar(firstName: "Swift", lastName: "Apple")
+    .controlSize(.large)
 ```
 
 ### Buttons
@@ -112,11 +111,6 @@ Row("Title")
 
 ```
 
-```swift
-Row("Title", subtitle: "Subtitle", leadingType: .icon(.calendar), trallingType: .radio(isOn: $control), paddingVertical: .small)
-
-```
-
 ### SegmentedPickerSelector
 ```swift
 SegmentedPickerSelector(items, selection: $selection) { item, _ in
@@ -143,7 +137,7 @@ Surface(background: .secondary) {
 ### TextField
 ```swift
 TextField("Text", text: $placeholder))
-    .textFieldStyle(DefaultPlaceholderTextFieldStyle())
+    .textFieldStyle(.default)
 }
 ```
 

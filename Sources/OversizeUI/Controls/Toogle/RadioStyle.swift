@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// RadioStyle.swift
+// Copyright © 2021 Alexander Romanov
+// RadioStyle.swift, created on 23.12.2022
 //
 
 import SwiftUI
@@ -33,19 +33,10 @@ public struct RadioStyle: ToggleStyle {
                     .opacity(configuration.isOn ? 1 : 0)
             }
         }
-        .padding(.vertical, verticalPadding)
-        .padding(.horizontal, controlPadding.horizontal)
-    }
-
-    private var verticalPadding: CGFloat {
-        switch controlPadding.vertical {
-        case .zero:
-            return .zero
-        case .xxSmall:
-            return .zero
-        default:
-            return controlPadding.vertical.rawValue - Space.xxSmall.rawValue
-        }
+        .padding(.top, controlPadding.leading.rawValue - Space.xxSmall.rawValue)
+        .padding(.bottom, controlPadding.bottom.rawValue - Space.xxSmall.rawValue)
+        .padding(.leading, controlPadding.leading)
+        .padding(.trailing, controlPadding.trailing)
     }
 }
 
@@ -69,7 +60,7 @@ struct Radio_Previews: PreviewProvider {
                 }
                 .toggleStyle(.radio)
 
-                Divider()
+                Separator()
 
                 Toggle("Title", isOn: .constant(true))
                     .toggleStyle(.radio)

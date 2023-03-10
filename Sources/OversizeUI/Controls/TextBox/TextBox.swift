@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// TextBox.swift
+// Copyright © 2021 Alexander Romanov
+// TextBox.swift, created on 02.04.2022
 //
 
 import SwiftUI
@@ -42,7 +42,7 @@ public struct TextBox: View {
         .multilineTextAlignment(multilineTextAlignment)
     }
 
-    var textSpacing: Space {
+    private var textSpacing: Space {
         if let spacing {
             return spacing
         } else {
@@ -68,12 +68,12 @@ public struct TextBox: View {
         }
     }
 
-    var titleText: some View {
+    private var titleText: some View {
         Group {
             switch size {
             case .small:
                 Text(title)
-                    .headline(true)
+                    .headline(.semibold)
             case .medium:
                 Text(title)
                     .title2(true)
@@ -82,7 +82,7 @@ public struct TextBox: View {
                     .title(true)
             }
         }
-        .foregroundOnSurfaceHighEmphasis()
+        .onSurfaceHighEmphasisForegroundColor()
     }
 
     public func textBoxSize(_ size: TextBoxSize) -> TextBox {

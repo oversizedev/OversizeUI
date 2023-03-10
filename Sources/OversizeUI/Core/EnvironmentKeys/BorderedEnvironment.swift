@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// BorderedEnvironment.swift
+// Copyright © 2021 Alexander Romanov
+// BorderedEnvironment.swift, created on 21.07.2022
 //
 
 import SwiftUI

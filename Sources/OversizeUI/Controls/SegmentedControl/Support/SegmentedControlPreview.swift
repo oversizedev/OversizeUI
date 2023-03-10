@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// SegmentedControlPreview.swift
+// Copyright © 2021 Alexander Romanov
+// SegmentedControlPreview.swift, created on 11.09.2021
 //
 
 import SwiftUI
@@ -70,7 +70,8 @@ struct SegmentedControlPreview: View {
                         .padding(.xxSmall)
                     Text(item)
                     Text("Subtitle")
-                        .fontStyle(.subheadline, color: .onSurfaceMediumEmphasis)
+                        .subheadline()
+                        .onSurfaceMediumEmphasisForegroundColor()
                 }
             }
             .segmentedControlStyle(SelectionOnlySegmentedControlStyle())

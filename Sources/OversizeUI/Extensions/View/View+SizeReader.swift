@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// View+SizeReader.swift
+// Copyright © 2021 Alexander Romanov
+// View+SizeReader.swift, created on 11.09.2021
 //
 
 import SwiftUI
@@ -15,9 +15,4 @@ public extension View {
         )
         .onPreferenceChange(SizePreferenceKey.self, perform: onChange)
     }
-}
-
-private struct SizePreferenceKey: PreferenceKey {
-    static var defaultValue: CGSize = .zero
-    static func reduce(value _: inout CGSize, nextValue _: () -> CGSize) {}
 }

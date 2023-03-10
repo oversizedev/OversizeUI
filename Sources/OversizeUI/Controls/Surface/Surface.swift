@@ -1,11 +1,11 @@
 //
-// Copyright © 2022 Alexander Romanov
-// Surface.swift
+// Copyright © 2021 Alexander Romanov
+// Surface.swift, created on 14.05.2020
 //
 
 import SwiftUI
 
-public enum SurfaceStyle: Int, CaseIterable {
+public enum SurfaceStyle {
     case primary
     case secondary
     case tertiary
@@ -17,8 +17,8 @@ public struct Surface<Label: View>: View {
     @Environment(\.elevation) private var elevation: Elevation
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.controlRadius) var controlRadius: Radius
-    @Environment(\.controlPadding) var controlPadding: ControlPadding
-    @Environment(\.isAccent) private var isAccent
+    @Environment(\.surfaceContentInsets) var contentInsets: EdgeSpaceInsets
+    @Environment(\.isAccent) private var isAccent: Bool
 
     private enum Constants {
         /// Colors
@@ -60,27 +60,42 @@ public struct Surface<Label: View>: View {
 
     private var surface: some View {
         label
-            .padding(.horizontal, controlPadding.horizontal)
-            .padding(.vertical, controlPadding.vertical)
+            .padding(.top, contentInsets.top)
+            .padding(.bottom, contentInsets.bottom)
+            .padding(.leading, contentInsets.leading)
+            .padding(.trailing, contentInsets.trailing)
             .background(
-                RoundedRectangle(cornerRadius: controlRadius,
-                                 style: .continuous)
+                RoundedRectangle(cornerRadius: controlRadius, style: .continuous)
                     .fill(surfaceBackgroundColor)
                     .overlay(
-                        RoundedRectangle(cornerRadius: controlRadius,
-                                         style: .continuous)
-                            .strokeBorder(
-                                border != nil ? border ?? Color.clear
-                                    : theme.borderSurface
-                                    ? Color.border
-                                    : surfaceBackgroundColor, lineWidth: borderWidth != nil ? borderWidth ?? 0 : CGFloat(theme.borderSize)
-                            )
+                        RoundedRectangle(cornerRadius: controlRadius, style: .continuous)
+                            .strokeBorder(strokeBorderColor, lineWidth: strokeBorderLineWidth)
                     )
                     .shadowElevaton(elevation)
             )
             .clipShape(
                 RoundedRectangle(cornerRadius: controlRadius, style: .continuous)
             )
+    }
+
+    private var strokeBorderColor: Color {
+        if let border {
+            return border
+        } else {
+            if theme.borderSurface {
+                return Color.border
+            } else {
+                return surfaceBackgroundColor
+            }
+        }
+    }
+
+    private var strokeBorderLineWidth: CGFloat {
+        if let borderWidth {
+            return borderWidth
+        } else {
+            return CGFloat(theme.borderSize)
+        }
     }
 
     private var surfaceBackgroundColor: Color {
@@ -132,23 +147,75 @@ public struct SurfaceButtonStyle: ButtonStyle {
 
     public func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
-            .scaleEffect(configuration.isPressed ? 0.95 : 1)
+            .scaleEffect(configuration.isPressed ? 0.96 : 1)
+    }
+}
+
+// swiftlint:disable opening_brace
+public extension View {
+    func surface() -> some View {
+        Surface { self }
+    }
+
+    func surface(_ elevation: Elevation) -> some View {
+        Surface { self }
+            .elevation(elevation)
+    }
+
+    func surface(_ elevation: Elevation, background: SurfaceStyle) -> some View {
+        Surface { self }
+            .surfaceStyle(background)
+            .elevation(elevation)
+    }
+
+    @available(*, deprecated, message: "Use without elevation")
+    func surface(elevation: Elevation) -> some View {
+        Surface { self }
+            .elevation(elevation)
+    }
+
+    @available(*, deprecated, message: "Use without elevation")
+    func surface(elevation: Elevation, background: SurfaceStyle) -> some View {
+        Surface { self }
+            .surfaceStyle(background)
+            .elevation(elevation)
+    }
+
+    @available(*, deprecated, message: "Use without elevation")
+    func surface(elevation: Elevation = .z0,
+                 background: SurfaceStyle = .primary,
+                 padding: Space = .medium,
+                 radius: Radius = .medium) -> some View
+    {
+        Surface { self }
+            .surfaceStyle(background)
+            .controlPadding(padding)
+            .controlRadius(radius)
+            .elevation(elevation)
     }
 }
 
 struct Surface_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
+        VStack {
+            Surface {
+                RowDeprecated("Title") {}
+            }
+            .surfaceStyle(.primary)
+            .previewLayout(.fixed(width: 414, height: 300))
+
             Surface {
                 Text("Text")
-                    .fontStyle(.title3, color: .onSurfaceHighEmphasis)
+                    .title3()
+                    .onSurfaceHighEmphasisForegroundColor()
             }
             .surfaceStyle(.secondary)
             .previewLayout(.fixed(width: 414, height: 200))
 
             Surface {
                 Text("Text")
-                    .fontStyle(.title3, color: .onSurfaceHighEmphasis)
+                    .title3()
+                    .onSurfaceHighEmphasisForegroundColor()
             }
             .surfaceStyle(.primary)
             .surfaceBorderColor(.surfaceSecondary)
@@ -163,7 +230,6 @@ struct Surface_Previews: PreviewProvider {
             .surfaceStyle(.primary)
             .elevation(.z2)
             .controlRadius(.zero)
-            .controlPadding(.zero)
             .previewLayout(.fixed(width: 375, height: 200))
 
             Surface { HStack {
@@ -171,8 +237,7 @@ struct Surface_Previews: PreviewProvider {
                 Spacer()
             }}
             .elevation(.z1)
-            .controlPadding(.large)
-            .preferredColorScheme(.dark)
+            .surfaceContentInsets(.large)
             .previewLayout(.fixed(width: 320, height: 200))
         }
         .padding()

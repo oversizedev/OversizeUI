@@ -1,112 +1,148 @@
 //
-// Copyright © 2022 Alexander Romanov
-// BarButton.swift
+// Copyright © 2021 Alexander Romanov
+// BarButton.swift, created on 10.04.2021
 //
 
 import SwiftUI
 
 public enum BarButtonType {
     case close
-    case closeAction(action: () -> Void)
+    case closeAction(_ action: () -> Void)
     case back
-    case backAction(action: () -> Void)
+    case backAction(_ action: () -> Void)
     case accent(_ text: String, action: () -> Void)
     case primary(_ text: String, action: () -> Void)
     case secondary(_ text: String, action: () -> Void)
+    @available(*, deprecated, message: "Use .disabled() modificator")
     case disabled(_ text: String)
     case image(_ image: Image, action: () -> Void)
     case icon(_ icon: IconsNames, action: () -> Void)
 }
 
 public struct BarButton: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
 
     private var type: BarButtonType
 
+    public init(_ type: BarButtonType) {
+        self.type = type
+    }
+
+    @available(*, deprecated, message: "Delete type prefix from init")
     public init(type: BarButtonType) {
         self.type = type
     }
 
     public var body: some View {
-        buttonView()
+        #if os(tvOS)
+        Button(action: buttonAction) {
+            label
+        }
+        .buttonStyle(buttonStyle)
+        .controlBorderShape(.capsule)
+        .accent(isAccent)
+        .disabled(isDisabled)
+        .elevation(isDisabled ? .z0 : .z2)
+        #else
+        Button(action: buttonAction) {
+            label
+        }
+        .buttonStyle(buttonStyle)
+        .controlBorderShape(.capsule)
+        .controlSize(controlSize)
+        .accent(isAccent)
+        .disabled(isDisabled)
+        .elevation(.z2)
+        #endif
     }
-}
 
-// swiftlint:disable multiple_closures_with_trailing_closure
-extension BarButton {
+    @available(tvOS, unavailable)
+    private var controlSize: ControlSize {
+        switch type {
+        case .close, .closeAction, .back, .backAction, .image, .icon:
+            return .mini
+        default:
+            return .small
+        }
+    }
+
+    private var isAccent: Bool {
+        switch type {
+        case .accent:
+            return true
+        default:
+            return false
+        }
+    }
+
+    private var isDisabled: Bool {
+        switch type {
+        case .disabled:
+            return true
+        default:
+            return false
+        }
+    }
+
+    private var buttonStyle: OversizeButtonStyle {
+        switch type {
+        case .close, .closeAction, .back, .backAction, .image, .icon, .secondary:
+            return .secondary
+        case .accent, .primary:
+            return .primary
+        case .disabled:
+            return .tertiary
+        }
+    }
+
+    private var buttonAction: () -> Void {
+        switch type {
+        case .back, .close:
+            return { dismiss() }
+        case let .closeAction(action: action):
+            return action
+        case let .backAction(action: action):
+            return action
+        case let .accent(_, action: action):
+            return action
+        case let .primary(_, action: action):
+            return action
+        case let .secondary(_, action: action):
+            return action
+        case .disabled:
+            return {}
+        case let .image(_, action: action):
+            return action
+        case let .icon(_, action: action):
+            return action
+        }
+    }
+
     @ViewBuilder
-    private func buttonView() -> some View {
+    private var label: some View {
         switch type {
         case .close:
-
-            Button(action: { presentationMode.wrappedValue.dismiss() }) {
-                Icon(.xMini)
-            }
-            .style(.secondary, size: .medium, rounded: .full, width: .round, shadow: true)
-
+            Icon(.xMini)
         case .back:
-
-            Button(action: { presentationMode.wrappedValue.dismiss() }) {
-                Icon(.arrowLeft)
-            }
-            .style(.secondary, size: .medium, rounded: .full, width: .round, shadow: true)
-
-        case let .secondary(text, action: action):
-
-            Button(action: action) {
-                Text(text)
-            }
-            .style(.secondary, size: .medium, rounded: .full, shadow: true)
-
-        case let .accent(text, action: action):
-
-            Button(action: action) {
-                Text(text)
-            }
-            .style(.accent, size: .medium, rounded: .full, shadow: true)
-
-        case let .primary(text, action: action):
-
-            Button(action: action) {
-                Text(text)
-            }
-            .style(.primary, size: .medium, rounded: .full, shadow: true)
-
-        case let .closeAction(action: action):
-
-            Button(action: action) {
-                Icon(.xMini)
-            }
-            .style(.secondary, size: .medium, rounded: .full, width: .round, shadow: true)
-
-        case let .backAction(action: action):
-
-            Button(action: action) {
-                Icon(.arrowLeft)
-            }
-            .style(.secondary, size: .medium, rounded: .full, width: .round, shadow: true)
-
+            Icon(.arrowLeft)
+        case let .secondary(text, _):
+            Text(text)
+        case let .accent(text, _):
+            Text(text)
+        case let .primary(text, _):
+            Text(text)
+        case .closeAction:
+            Icon(.xMini, color: .onSurfaceMediumEmphasis)
+        case .backAction:
+            Icon(.arrowLeft, color: .onSurfaceMediumEmphasis)
         case let .disabled(text):
-
-            Button(action: {}) {
-                Text(text)
-            }
-            .style(.gray, size: .medium, rounded: .full, shadow: false)
-            .disabled(true)
-        case let .image(image, action):
-            Button {
-                action()
-            } label: {
-                image
-                    .renderingMode(.template)
-                    .foregroundOnSurfaceHighEmphasis()
-            }
-            .style(.secondary, size: .medium, rounded: .full, width: .round, shadow: true)
-        case let .icon(icon, action):
-            Button(action: action) {
-                Icon(icon)
-            }
-            .style(.secondary, size: .medium, rounded: .full, width: .round, shadow: true)
+            Text(text)
+        case let .image(image, _):
+            image
+                .renderingMode(.template)
+                .onSurfaceHighEmphasisForegroundColor()
+        case let .icon(icon, _):
+            Icon(icon, color: .onSurfaceMediumEmphasis)
         }
     }
 }

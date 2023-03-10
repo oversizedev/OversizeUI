@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// RowButton.swift
+// Copyright © 2021 Alexander Romanov
+// RowButton.swift, created on 20.06.2020
 //
 
 import SwiftUI
@@ -43,32 +43,23 @@ public struct RowButton: View {
                             Icon(icon)
                         }
                         .surfaceStyle(.secondary)
-                        .controlPadding(.xxSmall)
+                        .surfaceContentInsets(.xxSmall)
                     }
 
                     Text(text)
-                        .fontStyle(.headline)
+                        .headline()
                         .foregroundColor(foregroundColor)
 
                     if multilineTextAlignment == .leading || multilineTextAlignment == .center {
                         Spacer()
                     }
                 }
-                .padding(.vertical, verticalPadding)
-                .padding(.horizontal, controlPadding.horizontal)
+                .padding(.top, controlPadding.top.rawValue - Space.xxSmall.rawValue)
+                .padding(.bottom, controlPadding.bottom.rawValue - Space.xxSmall.rawValue)
+                .padding(.leading, controlPadding.leading)
+                .padding(.trailing, controlPadding.trailing)
             }
             .buttonStyle(.row)
-        }
-    }
-
-    private var verticalPadding: CGFloat {
-        switch controlPadding.vertical {
-        case .zero:
-            return .zero
-        case .xxSmall:
-            return .zero
-        default:
-            return controlPadding.vertical.rawValue - Space.xxSmall.rawValue
         }
     }
 

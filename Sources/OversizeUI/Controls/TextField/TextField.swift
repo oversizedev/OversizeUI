@@ -1,178 +1,102 @@
 //
-// Copyright © 2022 Alexander Romanov
-// TextField.swift
+// Copyright © 2021 Alexander Romanov
+// TextField.swift, created on 07.06.2020
 //
 
 import SwiftUI
 
-public enum TextFieldHelperStyle {
-    case none
-    case helperText
-    case errorText
-    case sussesText
-}
-
 // swiftlint:disable identifier_name
-public struct DefaultPlaceholderTextFieldStyle: TextFieldStyle {
+public struct LabeledTextFieldStyle: TextFieldStyle {
     @Environment(\.theme) private var theme: ThemeSettings
-    public init() {}
+    @Environment(\.fieldLabelPosition) private var fieldPlaceholderPosition: FieldLabelPosition
+    @FocusState var isFocused: Bool
+    @Binding private var text: String
+    private let placeholder: String
 
-    public func _body(configuration: TextField<_Label>) -> some View {
-        VStack(alignment: .leading) {
-            configuration
-                .headline()
-                .foregroundColor(.onSurfaceHighEmphasis)
-        }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: Radius.medium,
-                             style: .continuous)
-                .fill(Color.surfaceSecondary)
-                .overlay(
-                    RoundedRectangle(cornerRadius: Radius.medium,
-                                     style: .continuous)
-                        .stroke(theme.borderTextFields
-                            ? Color.border
-                            : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
-                )
-        )
-    }
-}
-
-// swiftlint:disable identifier_name
-public struct OverPlaceholderTextFieldStyle: TextFieldStyle {
-    @Environment(\.theme) private var theme: ThemeSettings
-
-    public let placeholder: String
-
-    public init(placeholder: String) {
+    public init(placeholder: String, text: Binding<String>) {
         self.placeholder = placeholder
+        _text = text
     }
 
-    public func _body(configuration: TextField<_Label>) -> some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Text(placeholder)
-                    .subheadline(.semibold)
-                    .foregroundColor(.onSurfaceHighEmphasis)
-                Spacer()
-            }
-
-            VStack(alignment: .leading) {
-                configuration
-                    .headline()
-                    .foregroundColor(.onSurfaceHighEmphasis)
-            }
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: Radius.medium,
-                                 style: .continuous)
-                    .fill(Color.surfaceSecondary)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: Radius.medium,
-                                         style: .continuous)
-                            .stroke(theme.borderTextFields
-                                ? Color.border
-                                : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
-                    )
-            )
-        }
-    }
-}
-
-// swiftlint:disable identifier_name
-public struct InsidePlaceholderTextFieldStyle: TextFieldStyle {
-    @Environment(\.theme) private var theme: ThemeSettings
-
-    public let placeholder: String
-
-    public init(placeholder: String) {
-        self.placeholder = placeholder
-    }
-
-    public func _body(configuration: TextField<_Label>) -> some View {
-        VStack(alignment: .leading, spacing: .zero) {
-            VStack(alignment: .leading) {
+    public func _body(configuration: TextField<Self._Label>) -> some View {
+        VStack(alignment: .leading, spacing: .xSmall) {
+            if fieldPlaceholderPosition == .adjacent {
                 HStack {
                     Text(placeholder)
-                        .subheadline(.semibold)
+                        .subheadline(.medium)
                         .foregroundColor(.onSurfaceHighEmphasis)
                     Spacer()
                 }
-
-                configuration
-                    .headline()
-                    .foregroundColor(.onSurfaceHighEmphasis)
             }
-            .padding()
+            ZStack(alignment: .leading) {
+                labelTextView
+                configuration
+                    .headline(.medium)
+                    .foregroundColor(.onSurfaceHighEmphasis)
+                    .padding()
+                    .padding(.vertical, fieldPlaceholderPosition == .overInput ? .xxxSmall : .zero)
+                    .offset(y: text.isEmpty ? 0 : 10)
+                    .focused($isFocused)
+            }
             .background(
                 RoundedRectangle(cornerRadius: Radius.medium,
                                  style: .continuous)
-                    .fill(Color.surfaceSecondary)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: Radius.medium,
-                                         style: .continuous)
-                            .stroke(theme.borderTextFields
-                                ? Color.border
-                                : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
-                    )
+                    .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
+                    .overlay(overlay)
             )
         }
-    }
-}
-
-public extension TextFieldStyle where Self == DefaultPlaceholderTextFieldStyle {
-    static var `default`: DefaultPlaceholderTextFieldStyle {
-        DefaultPlaceholderTextFieldStyle()
-    }
-}
-
-public extension TextFieldStyle where Self == OverPlaceholderTextFieldStyle {
-    static func placeholder(_ placeholder: String) -> OverPlaceholderTextFieldStyle {
-        OverPlaceholderTextFieldStyle(placeholder: placeholder)
-    }
-}
-
-public extension TextFieldStyle where Self == InsidePlaceholderTextFieldStyle {
-    static func placeholderInside(_ placeholder: String) -> InsidePlaceholderTextFieldStyle {
-        InsidePlaceholderTextFieldStyle(placeholder: placeholder)
-    }
-}
-
-public struct TextFieldModifier: ViewModifier {
-    @Environment(\.theme) private var theme: ThemeSettings
-    @Binding public var helperText: String
-    @Binding public var helperStyle: TextFieldHelperStyle
-    public init(helperText: Binding<String>, helperStyle: Binding<TextFieldHelperStyle>) {
-        _helperText = helperText
-        _helperStyle = helperStyle
+        .animation(.easeIn(duration: 0.15), value: text)
     }
 
-    public func body(content: Content) -> some View {
-        VStack(alignment: .leading) {
-            content
-            if helperText != "" {
-                if helperStyle == .helperText {
-                    Text(helperText)
-                        .subheadline(.semibold)
-                        .foregroundColor(.onSurfaceMediumEmphasis)
-                } else if helperStyle == .errorText {
-                    Text(helperText)
-                        .subheadline(.semibold)
-                        .foregroundColor(.error)
-                } else if helperStyle == .sussesText {
-                    Text(helperText)
-                        .subheadline(.semibold)
-                        .foregroundColor(.success)
-                }
+    @ViewBuilder
+    var overlay: some View {
+        RoundedRectangle(cornerRadius: Radius.medium,
+                         style: .continuous)
+            .stroke(overlayBorderColor, lineWidth: isFocused ? 2 : CGFloat(theme.borderSize))
+    }
+
+    @ViewBuilder
+    var labelTextView: some View {
+        switch fieldPlaceholderPosition {
+        case .default:
+            if isFocused {
+                Text(placeholder)
+                    .subheadline()
+                    .onSurfaceDisabledForegroundColor()
+                    .opacity(0.7)
+                    .padding(.small)
             }
+        case .adjacent:
+            EmptyView()
+        case .overInput:
+            Text(placeholder)
+                .font(text.isEmpty ? .headline : .subheadline)
+                .fontWeight(text.isEmpty ? .medium : .semibold)
+                .onSurfaceDisabledForegroundColor()
+                .padding(.small)
+                .offset(y: text.isEmpty ? 0 : -13)
+                .opacity(text.isEmpty ? 0 : 1)
+        }
+    }
+
+    var overlayBorderColor: Color {
+        if isFocused {
+            return Color.accentColor
+        } else if theme.borderTextFields {
+            return Color.border
+        } else {
+            return Color.clear
         }
     }
 }
 
-public extension View {
-    func helper(_ text: Binding<String>, style: Binding<TextFieldHelperStyle>) -> some View {
-        modifier(TextFieldModifier(helperText: text, helperStyle: style))
+public extension TextFieldStyle where Self == LabeledTextFieldStyle {
+    static var `default`: LabeledTextFieldStyle {
+        LabeledTextFieldStyle(placeholder: "", text: .constant(""))
+    }
+
+    static func placeholder(placeholder: String, text: Binding<String>) -> LabeledTextFieldStyle {
+        LabeledTextFieldStyle(placeholder: placeholder, text: text)
     }
 }
 
@@ -190,15 +114,15 @@ struct TextField_Previews: PreviewProvider {
 
             TextField("Text", text: .constant("Placeholder"))
                 .textFieldStyle(DefaultPlaceholderTextFieldStyle())
-                .helper(.constant("Help"), style: .constant(.helperText))
+                .fieldHelper(.constant("Help"), style: .constant(.helperText))
 
             TextField("Text", text: .constant("Placeholder"))
                 .textFieldStyle(OverPlaceholderTextFieldStyle(placeholder: "Label"))
-                .helper(.constant("Ok"), style: .constant(.sussesText))
+                .fieldHelper(.constant("Ok"), style: .constant(.sussesText))
 
             TextField("Text", text: .constant("Placeholder"))
                 .textFieldStyle(InsidePlaceholderTextFieldStyle(placeholder: "Label"))
-                .helper(.constant("Error"), style: .constant(.errorText))
+                .fieldHelper(.constant("Error"), style: .constant(.errorText))
 
         }.padding()
             .previewLayout(.sizeThatFits)

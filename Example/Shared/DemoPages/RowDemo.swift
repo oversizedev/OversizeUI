@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// RowDemo.swift
+// Copyright © 2021 Alexander Romanov
+// RowDemo.swift, created on 27.11.2022
 //
 
 import OversizeUI
@@ -12,14 +12,15 @@ struct RowDemo: View {
     @State var radioTwo: Bool = false
 
     var body: some View {
-        VStack {
-            Row("Title")
+        PageView("Rows") {
+            VStack {
+                Row("Title")
 
-            Row("Title", subtitle: "Subtitle")
-
-            Row("Title", subtitle: "Subtitle", leadingType: .icon(.calendar), trallingType: .radio(isOn: $radioOne), paddingVertical: .medium)
-
-            Row("Title", subtitle: "Subtitle", leadingType: .icon(.calendar), trallingType: .radio(isOn: $radioTwo), paddingVertical: .small)
+                Row("Title", subtitle: "Subtitle")
+            }
+        }
+        .leadingBar {
+            BarButton(.back)
         }
     }
 }

@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// RowLabelStyle.swift
+// Copyright © 2021 Alexander Romanov
+// RowLabelStyle.swift, created on 23.12.2022
 //
 
 import SwiftUI
@@ -32,7 +32,6 @@ public struct RowLabelStyle: LabelStyle {
                         .foregroundColor(.onSurfaceMediumEmphasis)
                 }
             }
-            .multilineTextAlignment(multilineTextAlignment)
         }
         .multilineTextAlignment(multilineTextAlignment)
     }

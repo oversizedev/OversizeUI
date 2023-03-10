@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// ComponentsList.swift
+// Copyright © 2021 Alexander Romanov
+// ComponentsList.swift, created on 27.11.2022
 //
 
 import OversizeUI
@@ -20,40 +20,37 @@ struct ComponentsList: View {
 
     @State var isShowSetting = false
 
+    #if os(iOS)
     let pages = [
         Page(name: "Buttons", page: AnyView(ButtonsDemo())),
         Page(name: "ColorSelector", page: AnyView(ColorSelect())),
         Page(name: "Avatar", page: AnyView(AvatarDemo())),
         Page(name: "GridSelect", page: AnyView(GridSelectDemo())),
         Page(name: "TextField", page: AnyView(TextFieldDemo())),
-        // Page(name: "Icons", page: AnyView(IconsDemo())),
+        Page(name: "Icons", page: AnyView(IconsDemo())),
         Page(name: "Row", page: AnyView(RowDemo())),
         Page(name: "SegmentedControl", page: AnyView(SegmentedControlDemo())),
         Page(name: "Select", page: AnyView(SelectDemo())),
         Page(name: "Surface", page: AnyView(SurfaceDemo())),
-        // Page(name: "Page", page: AnyView(PageDemo())),
+        Page(name: "Page", page: AnyView(PageDemo())),
     ]
+    #endif
 
     var body: some View {
         #if os(iOS)
-            PageView("Example") {
+        PageView("Example") {
+            VStack(spacing: .zero) {
                 ForEach(pages) { page in
-                    HStack {
-                        NavigationLink(page.name, destination: page.page)
-                            .body(true)
-                            .foregroundColor(.onSurfaceHighEmphasis)
-
-                        Spacer()
+                    NavigationLink(destination: page.page) {
+                        Row(page.name)
                     }
-                    .padding()
+                    .buttonStyle(.row)
                 }
             }
-            .leadingBar {
-                BarButton(type: .secondary("Settings", action: { isShowSetting.toggle() }))
-            }
-            .navigationable()
+        }
+        .navigationable()
         #else
-            Text("Support will be in the future")
+        Text("Support will be in the future")
         #endif
     }
 }
@@ -122,7 +119,7 @@ struct SegmentedControlPreview: View {
             }.padding()
         }
         .scrollWithNavigationBar("App", style: .fixed($offset), background: Color.backgroundSecondary) {
-            BarButton(type: .back)
+            BarButton(.back)
         } trailingBar: {} bottomBar: {}
     }
 }

@@ -1,6 +1,6 @@
 //
-// Copyright © 2022 Alexander Romanov
-// Select.swift
+// Copyright © 2021 Alexander Romanov
+// Select.swift, created on 16.06.2020
 //
 
 import SwiftUI
@@ -39,7 +39,7 @@ public struct Select<Element, Content, Selection>: View
     public var body: some View {
         ZStack {
             Button {
-                self.showModal.toggle()
+                showModal.toggle()
             } label: {
                 if isSelected, let index = selectedIndex {
                     selectionView(data[index])
@@ -63,18 +63,28 @@ public struct Select<Element, Content, Selection>: View
                                 : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
                     )
             )
-            .headline()
+            .headline(.medium)
             .foregroundColor(.onSurfaceHighEmphasis)
 
             .sheet(isPresented: $showModal) {
+                #if os(iOS)
+                if #available(iOS 16.0, *) {
+                    modal
+                        .presentationDetents(data.count < 4 ? [.medium, .large] : [.large])
+                        .presentationDragIndicator(.hidden)
+                } else {
+                    modal
+                }
+                #else
                 modal
+                #endif
             }
         }
     }
 
     private var modal: some View {
-        NavigationView {
-            List {
+        PageView(label) {
+            LazyVStack(alignment: .leading, spacing: .zero) {
                 ForEach(data.indices, id: \.self) { index in
                     Button(action: {
                                selectedIndex = index
@@ -86,12 +96,13 @@ public struct Select<Element, Content, Selection>: View
                                content(data[index],
                                        selectedIndex == index)
                                    .headline()
-                                   .foregroundOnSurfaceHighEmphasis()
+                                   .onSurfaceHighEmphasisForegroundColor()
 
                            })
                 }
-            }.navigationTitle(label)
+            }
         }
+        .leadingBar { BarButton(.close) }
     }
 }
 
