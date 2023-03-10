@@ -11,7 +11,7 @@ public enum RowLeadingType {
     case image(_ image: Image, color: Color? = .onSurfaceHighEmphasis)
     case imageOnSurface(_ image: Image, color: Color? = nil)
     case systemImage(_ imageName: String)
-    case avatar(_ avatar: AvatarView)
+    case avatar(_ avatar: Avatar)
 
     @available(*, deprecated, message: "Use leading: {}")
     case view(_ view: AnyView)

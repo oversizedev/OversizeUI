@@ -12,45 +12,45 @@ struct AvatarDemo: View {
             LazyVStack(spacing: .xSmall) {
                 #if os(iOS) || os(macOS) || os(watchOS)
                 Group {
-                    AvatarView(firstName: "Jhon")
+                    Avatar(firstName: "Jhon")
                         .controlSize(.small)
                         .previewDisplayName("Only firsy name")
 
-                    AvatarView(firstName: "Jhon", lastName: "Smith")
+                    Avatar(firstName: "Jhon", lastName: "Smith")
                         .controlSize(.small)
 
-                    AvatarView(avatar: Image("empty"))
+                    Avatar(avatar: Image("empty"))
                         .controlSize(.small)
 
-                    AvatarView(firstName: "Jhon", lastName: "Smith", avatar: Image("empty"))
+                    Avatar(firstName: "Jhon", lastName: "Smith", avatar: Image("empty"))
                         .controlSize(.small)
                 }
 
                 Group {
-                    AvatarView(firstName: "Jhon")
+                    Avatar(firstName: "Jhon")
                         .controlSize(.regular)
                         .previewDisplayName("Only firsy name")
 
-                    AvatarView(firstName: "Jhon", lastName: "Smith")
+                    Avatar(firstName: "Jhon", lastName: "Smith")
                         .controlSize(.regular)
 
-                    AvatarView(avatar: Image("empty"))
+                    Avatar(avatar: Image("empty"))
                         .controlSize(.regular)
 
-                    AvatarView(firstName: "Jhon", lastName: "Smith", avatar: Image("empty"))
+                    Avatar(firstName: "Jhon", lastName: "Smith", avatar: Image("empty"))
                         .controlSize(.regular)
                 }
                 Group {
-                    AvatarView(firstName: "Jhon")
+                    Avatar(firstName: "Jhon")
                         .controlSize(.large)
 
-                    AvatarView(firstName: "Jhon", lastName: "Smith")
+                    Avatar(firstName: "Jhon", lastName: "Smith")
                         .controlSize(.large)
 
-                    AvatarView(avatar: Image("empty"))
+                    Avatar(avatar: Image("empty"))
                         .controlSize(.large)
 
-                    AvatarView(firstName: "Jhon", lastName: "Smith", avatar: Image("empty"))
+                    Avatar(firstName: "Jhon", lastName: "Smith", avatar: Image("empty"))
                         .controlSize(.large)
                 }
                 #endif

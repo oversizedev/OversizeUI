@@ -1,29 +1,60 @@
 //
 // Copyright © 2021 Alexander Romanov
-// AvatarView.swift, created on 24.09.2020
+// Avatar.swift, created on 24.09.2020
 //
 
 import SwiftUI
 
 public enum AvatarBackgroundType {
-    case color(Color), gradient([Color])
+    case color(Color)
+    case gradient([Color])
 }
 
-public struct AvatarView: View {
+/// View that represents the avatar.
+///
+/// ```swift
+/// Avatar(firstName: "Swift", lastName: "Apple")
+/// ```
+///
+/// ```swift
+/// Avatar(avatar: Image("Avatar"))
+///     .controlSize(.large)
+/// ```
+///
+public struct Avatar: View {
     @available(tvOS, unavailable)
     @Environment(\.controlSize) var controlSize: ControlSize
 
-    let firstName: String
-    let lastName: String
+    /// The first name text of the avatar.
+    let firstName: String?
+
+    /// The last name text of the avatar.
+    let lastName: String?
+
+    /// The image used in the avatar content.
     let avatar: Image?
+
+    /// The icon used in the avatar content.
     let icon: Image?
+
+    /// Sets a  stroke color for the Avatar.
     var strokeColor: Color = .clear
+
+    /// Sets a custom background color for the Avatar.
     var background: AvatarBackgroundType = .color(.surfaceSecondary)
+
+    /// Sets a custom text and image color for the Avatar.
     var onBackgroundColor: Color = .onSurfaceMediumEmphasis
 
+    /// Creates and initializes a Avatar
+    /// - Parameters:
+    ///   - firstName: The first name text used to calculate the Avatar initials.
+    ///   - lastName: The last name text used to calculate the Avatar initials
+    ///   - avatar: The optional image that the avatar should display.
+    ///   - icon: The optional icon that the avatar should display.
     public init(
-        firstName: String = "",
-        lastName: String = "",
+        firstName: String? = nil,
+        lastName: String? = nil,
         avatar: Image? = nil,
         icon: Image? = nil
     ) {
@@ -104,12 +135,12 @@ public struct AvatarView: View {
                     .renderingMode(.template)
                     .frame(width: 24, height: 24)
             } else {
-                if firstName.isEmpty == false {
+                if let firstName, !firstName.isEmpty {
                     Text(String(firstName.dropLast(firstName.count - 1)).capitalized)
                         .bold()
                 }
 
-                if lastName.isEmpty == false {
+                if let lastName, !lastName.isEmpty {
                     Text(String(lastName.dropLast(lastName.count - 1)).capitalized)
                         .bold()
                 }
@@ -166,88 +197,11 @@ public struct AvatarView: View {
             return Space.xLarge.rawValue
         }
     }
-
-    public func avatarBackground(_ background: AvatarBackgroundType) -> AvatarView {
-        var control = self
-        control.background = background
-        return control
-    }
-
-    public func avatarOnBackground(_ color: Color) -> AvatarView {
-        var control = self
-        control.onBackgroundColor = color
-        return control
-    }
-
-    public func avatarStroke(_ strokeColor: Color = .surfacePrimary) -> AvatarView {
-        var control = self
-        control.strokeColor = strokeColor
-        return control
-    }
 }
 
-// swiftlint:disable all
-@available(tvOS, unavailable)
-struct AvatarView_Previews: PreviewProvider {
+struct Avatar_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            AvatarView(firstName: "Jhon")
-                .controlSize(.small)
-                .previewDisplayName("Only firsy name")
-
-            AvatarView(firstName: "Jhon", lastName: "Smith")
-                .controlSize(.small)
-                .previewDisplayName("First name, last name and storke")
-
-            AvatarView(avatar: Image("empty", bundle: .module))
-                .controlSize(.small)
-                .previewDisplayName("Only avatar")
-
-            AvatarView(firstName: "Jhon", lastName: "Smith", avatar: Image("empty", bundle: .module))
-                .controlSize(.small)
-                .previewDisplayName("All data")
-
-        }.previewLayout(.fixed(width: 24, height: 24))
-            .background(Color.surfaceTertiary)
-
-        Group {
-            AvatarView(firstName: "Jhon")
-                .controlSize(.regular)
-                .previewDisplayName("Only firsy name")
-
-            AvatarView(firstName: "Jhon", lastName: "Smith")
-                .controlSize(.regular)
-                .previewDisplayName("First name, last name and storke")
-
-            AvatarView(avatar: Image("empty", bundle: .module))
-                .controlSize(.regular)
-                .previewDisplayName("Only avatar")
-
-            AvatarView(firstName: "Jhon", lastName: "Smith", avatar: Image("empty", bundle: .module))
-                .controlSize(.regular)
-                .previewDisplayName("All data")
-
-        }.previewLayout(.fixed(width: 48, height: 48))
-            .background(Color.surfaceTertiary)
-
-        Group {
-            AvatarView(firstName: "Jhon")
-                .controlSize(.large)
-                .previewDisplayName("Only firsy name")
-
-            AvatarView(firstName: "Jhon", lastName: "Smith")
-                .controlSize(.large)
-                .previewDisplayName("First name, last name and storke")
-
-            AvatarView(avatar: Image("empty", bundle: .module))
-                .controlSize(.large)
-                .previewDisplayName("Only avatar")
-
-            AvatarView(firstName: "Jhon", lastName: "Smith", avatar: Image("empty", bundle: .module))
-                .controlSize(.large)
-                .previewDisplayName("All data")
-
-        }.previewLayout(.fixed(width: 96, height: 96))
-            .background(Color.surfaceTertiary)
+        AvatarPreview()
+            .previewComponent("Avatar")
     }
 }
