@@ -11,16 +11,13 @@ env:
 
 jobs:
   build:
-
     runs-on: macos-12
-
     steps:
     - uses: actions/checkout@v2
     - name: Build
       run: swift build -v
-      
-  test:
-    name: Test
+  iOStest:
+    name: Test iOS
     runs-on: macOS-latest
     strategy:
         matrix:
@@ -28,8 +25,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@main
-      - name: Build and test
+      - name: Build and test iOS
         run: |
           xcodebuild clean build test -project "Example/Example.xcodeproj" -scheme "Example (iOS)" -sdk $TEST_SDK ONLY_ACTIVE_ARCH=NO | xcpretty
+        env: 
+         destination: ${{ matrix.destination }}
+  macOStest:
+    name: Test MacOS
+    runs-on: macOS-latest
+    strategy:
+        matrix:
+          destination: ['platform=macOS,arch=x86_64']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+      - name: Build and test MacOS
+        run: |
+          xcodebuild clean build test -project "Example/Example.xcodeproj" -scheme Example -sdk $TEST_SDK ONLY_ACTIVE_ARCH=NO | xcpretty
         env: 
          destination: ${{ matrix.destination }}
