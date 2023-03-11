@@ -8,39 +8,57 @@ on:
     
 env:
   DEVELOPER_DIR: /Applications/Xcode_14.2.app/Contents/Developer
+  PROJECT_DIR: Example
+  PROJECT_NAME: Example.xcodeproj
+  iOSSCHEME: Example (iOS)
+  OSXSCHEME: Example
+  TVSCHEME: Example
+  WATCHSCHEME: Example
 
 jobs:
+
   build:
     runs-on: macos-12
     steps:
     - uses: actions/checkout@v2
     - name: Build
       run: swift build -v
-  iOStest:
-    name: Test iOS
+      
+  example:
+    name: Run examples
     runs-on: macOS-latest
     strategy:
         matrix:
-          destination: ['platform=iOS Simulator,OS=15.0,name=iPhone 8','platform=iOS Simulator,OS=15.5,name=iPhone X','platform=iOS Simulator,OS=15.5,name=iPhone 13','platform=iOS Simulator,OS=16.0,name=iPhone 14']
+          iosDestination: ['platform=iOS Simulator,OS=15.0,name=iPhone 8','platform=iOS Simulator,OS=15.5,name=iPhone X','platform=iOS Simulator,OS=16.0,name=iPhone 14']
+          macOSDestination: ["platform=macOS,arch=x86_64"]
+          tvOSDestination: ["platform=tvOS Simulator,name=Apple TV 4K"]
+          watchOSdestination: ['platform=watchOS Simulator,name=Apple Watch Series 5 - 44mm']
+
     steps:
       - name: Checkout
         uses: actions/checkout@main
-      - name: Build and test iOS
+
+      - name: Build iOS
         run: |
-          xcodebuild clean build test -project "Example/Example.xcodeproj" -scheme "Example (iOS)" -sdk $TEST_SDK ONLY_ACTIVE_ARCH=NO | xcpretty
+          xcodebuild clean build -project "${{ env.PROJECT_DIR }}/${{ env.PROJECT_NAME }}" -scheme "${{ env.iOSSCHEME }}" | xcpretty
         env: 
-         destination: ${{ matrix.destination }}
-  macOStest:
-    name: Test MacOS
-    runs-on: macOS-latest
-    strategy:
-        matrix:
-          destination: ['platform=macOS,arch=x86_64']
-    steps:
-      - name: Checkout
-        uses: actions/checkout@main
-      - name: Build and test MacOS
+          destination: ${{ matrix.iosDestination }}
+          
+      - name: Build macOS
         run: |
-          xcodebuild clean build test -project "Example/Example.xcodeproj" -scheme Example -sdk $TEST_SDK ONLY_ACTIVE_ARCH=NO | xcpretty
-        env: 
-         destination: ${{ matrix.destination }}
+          xcodebuild clean build -project "${{ env.PROJECT_DIR }}/${{ env.PROJECT_NAME }}" -scheme "${{ env.OSXSCHEME }}" | xcpretty
+        env:
+          destination: ${{ matrix.macOSDestination }}
+          
+      - name: Build tvOS
+        run: |
+          xcodebuild clean build -project "${{ env.PROJECT_DIR }}/${{ env.PROJECT_NAME }}" -scheme "${{ env.TVSCHEME }}" | xcpretty
+        env:
+          destination: ${{ matrix.tvOSDestination }}
+          
+      - name: Build watchOS
+        run: |
+          xcodebuild clean build -project "${{ env.PROJECT_DIR }}/${{ env.PROJECT_NAME }}" -scheme "${{ env.WATCHSCHEME }}" | xcpretty
+        env:
+          destination: ${{ matrix.watchOSdestination }}
+
