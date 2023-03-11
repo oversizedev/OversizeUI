@@ -95,7 +95,7 @@ public extension TextFieldStyle where Self == LabeledTextFieldStyle {
         LabeledTextFieldStyle(placeholder: "", text: .constant(""))
     }
 
-    static func placeholder(placeholder: String, text: Binding<String>) -> LabeledTextFieldStyle {
+    static func placeholder(_ placeholder: String, text: Binding<String> = .constant("")) -> LabeledTextFieldStyle {
         LabeledTextFieldStyle(placeholder: placeholder, text: text)
     }
 }

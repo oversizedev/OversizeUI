@@ -1,6 +1,6 @@
 # OversizeUI
 
-[![Build Example](https://github.com/oversizedev/OversizeUI/actions/workflows/buildExample.yml/badge.svg)](https://github.com/oversizedev/OversizeUI/actions/workflows/buildExample.yml)
+[![Build Example](https://github.com/oversizedev/OversizeUI/actions/workflows/build-example.yml/badge.svg)](https://github.com/oversizedev/OversizeUI/actions/workflows/build-example.yml)[![Deploy DocC](https://github.com/oversizedev/OversizeUI/actions/workflows/publish-docc.yml/badge.svg)](https://github.com/oversizedev/OversizeUI/actions/workflows/publish-docc.yml)
 
 Yet another component library on SwiftUI
 
@@ -42,7 +42,7 @@ Colors, Typography, Spacing and other styles in [core folder](Sources/OversizeUI
 #### Swift Package Manager
 - File > Swift Packages > Add Package Dependency
 - Add `https://github.com/oversizedev/OversizeUI.git`
-- Select "Up to Next Major" with "2.2.0"
+- Select "Up to Next Major" with "3.0.0"
 
 ### Import and use OversizeUI
 After the framework has been added you can import the module to use it:

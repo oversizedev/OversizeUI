@@ -165,13 +165,6 @@ public extension TextFieldStyle where Self == DefaultPlaceholderTextFieldStyle {
     }
 }
 
-public extension TextFieldStyle where Self == OverPlaceholderTextFieldStyle {
-    @available(*, deprecated, message: "Use .fieldLabelPosition(.adjacent)")
-    static func placeholder(_ placeholder: String, focused: Bool = false) -> OverPlaceholderTextFieldStyle {
-        OverPlaceholderTextFieldStyle(placeholder: placeholder, focused: focused)
-    }
-}
-
 public extension TextFieldStyle where Self == InsidePlaceholderTextFieldStyle {
     @available(*, deprecated, message: "Use .fieldLabelPosition(.overInput)")
     static func placeholderInside(_ placeholder: String, focused: Bool = false) -> InsidePlaceholderTextFieldStyle {
