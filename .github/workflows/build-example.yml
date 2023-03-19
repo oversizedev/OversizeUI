@@ -18,11 +18,12 @@ env:
 jobs:
 
   build:
-    runs-on: macos-12
+    name: Swift Build (SPM)
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
     - name: Build
-      run: swift build -v
+      run: swift build
       
   example:
     name: Run examples
@@ -36,7 +37,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@main
+        uses: actions/checkout@v2
 
       - name: Build iOS
         run: |

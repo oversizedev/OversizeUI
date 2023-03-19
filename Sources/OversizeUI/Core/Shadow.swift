@@ -6,9 +6,14 @@
 import SwiftUI
 
 public struct Shadow: ViewModifier {
-    var elevation: Elevation
+    private let elevation: Elevation
 
-    var color: Color = .black
+    private let color: Color
+
+    public init(elevation: Elevation, color: Color = .black) {
+        self.elevation = elevation
+        self.color = color
+    }
 
     public func body(content: Content) -> some View {
         switch elevation {
