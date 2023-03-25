@@ -16,7 +16,7 @@ public enum SurfaceStyle {
 public struct Surface<Label: View>: View {
     @Environment(\.elevation) private var elevation: Elevation
     @Environment(\.theme) private var theme: ThemeSettings
-    @Environment(\.controlRadius) var controlRadius: Radius
+    @Environment(\.surfaceRadius) var surfaceRadius: Radius
     @Environment(\.surfaceContentInsets) var contentInsets: EdgeSpaceInsets
     @Environment(\.isAccent) private var isAccent: Bool
 
@@ -65,16 +65,16 @@ public struct Surface<Label: View>: View {
             .padding(.leading, contentInsets.leading)
             .padding(.trailing, contentInsets.trailing)
             .background(
-                RoundedRectangle(cornerRadius: controlRadius, style: .continuous)
+                RoundedRectangle(cornerRadius: surfaceRadius, style: .continuous)
                     .fill(surfaceBackgroundColor)
                     .overlay(
-                        RoundedRectangle(cornerRadius: controlRadius, style: .continuous)
+                        RoundedRectangle(cornerRadius: surfaceRadius, style: .continuous)
                             .strokeBorder(strokeBorderColor, lineWidth: strokeBorderLineWidth)
                     )
                     .shadowElevaton(elevation)
             )
             .clipShape(
-                RoundedRectangle(cornerRadius: controlRadius, style: .continuous)
+                RoundedRectangle(cornerRadius: surfaceRadius, style: .continuous)
             )
     }
 
