@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px"  height="24px"  viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Iconly/Bold/Arrow - Down Square</title>
+    <g id="Iconly/Bold/Arrow---Down-Square" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Arrow---Down-Square" transform="translate(1.999900, 2.000100)" fill="#000000"  fill-rule="nonzero">
+            <path d="M14.33,0 C17.72,0 20,2.38 20,5.91 L20,5.91 L20,14.08 C20,17.62 17.72,20 14.33,20 L14.33,20 L5.66,20 C2.271,20 0,17.62 0,14.08 L0,14.08 L0,5.91 C0,2.38 2.271,0 5.66,0 L5.66,0 Z M10,5.17 C9.58,5.17 9.25,5.5 9.25,5.92 L9.25,5.92 L9.25,12.27 L6.78,9.79 C6.64,9.65 6.44,9.57 6.25,9.57 C6.061,9.57 5.87,9.65 5.72,9.79 C5.43,10.08 5.43,10.56 5.72,10.85 L5.72,10.85 L9.47,14.62 C9.75,14.9 10.25,14.9 10.53,14.62 L10.53,14.62 L14.28,10.85 C14.57,10.56 14.57,10.08 14.28,9.79 C13.98,9.5 13.51,9.5 13.21,9.79 L13.21,9.79 L10.75,12.27 L10.75,5.92 C10.75,5.5 10.41,5.17 10,5.17 Z"></path>
+        </g>
+    </g>
+</svg>

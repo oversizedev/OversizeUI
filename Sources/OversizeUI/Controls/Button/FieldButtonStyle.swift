@@ -7,6 +7,7 @@ import SwiftUI
 
 public struct FieldButtonStyle: ButtonStyle {
     @Environment(\.theme) private var theme: ThemeSettings
+    @Environment(\.fieldPosition) private var fieldPosition: FieldPosition
 
     public init() {}
 
@@ -17,9 +18,15 @@ public struct FieldButtonStyle: ButtonStyle {
                 .hLeading()
         }
         .padding()
-        .background(
+        .background(fieldBackground(isPressed: configuration.isPressed))
+    }
+
+    @ViewBuilder
+    private func fieldBackground(isPressed: Bool) -> some View {
+        switch fieldPosition {
+        case .default:
             RoundedRectangle(cornerRadius: Radius.medium, style: .continuous)
-                .fill(configuration.isPressed ? Color.surfaceTertiary : Color.surfaceSecondary)
+                .fill(isPressed ? Color.surfaceTertiary : Color.surfaceSecondary)
                 .overlay(
                     RoundedRectangle(cornerRadius: Radius.medium,
                                      style: .continuous)
@@ -27,7 +34,32 @@ public struct FieldButtonStyle: ButtonStyle {
                             ? Color.border
                             : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
                 )
-        )
+        case .top, .bottom, .center:
+            RoundedRectangleCorner(radius: Radius.medium, corners: backgroundShapeCorners)
+                .fill(isPressed ? Color.surfaceTertiary : Color.surfaceSecondary)
+                .overlay(
+                    RoundedRectangleCorner(radius: Radius.medium, corners: backgroundShapeCorners)
+                        .stroke(theme.borderTextFields
+                            ? Color.border
+                            : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
+                )
+        }
+    }
+
+    @available(macOS, unavailable)
+    @available(watchOS, unavailable)
+    @available(tvOS, unavailable)
+    private var backgroundShapeCorners: UIRectCorner {
+        switch fieldPosition {
+        case .default:
+            return [.allCorners]
+        case .top:
+            return [.topLeft, .topRight]
+        case .bottom:
+            return [.bottomLeft, .bottomRight]
+        case .center:
+            return []
+        }
     }
 }
 

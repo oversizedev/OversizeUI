@@ -63,7 +63,7 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
         if title != nil || leadingBar != nil || trailingBar != nil || topToolbar != nil || titleLabel != nil {
             ModalNavigationBar(
                 title: title ?? "",
-                bigTitle: displaySearchBar ? false : isLargeTitle,
+                largeTitle: displaySearchBar ? false : isLargeTitle,
                 isDisableScrollShadow: isDisableScrollShadow,
                 offset: $offset,
                 background: isDisableScrollShadow ? backgroundColor : Color.surfacePrimary,

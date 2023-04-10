@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px"  height="24px"  viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Iconly/Bulk/Discovery</title>
+    <g id="Iconly/Bulk/Discovery" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Discovery" transform="translate(1.999900, 1.999900)" fill="#000000"  fill-rule="nonzero">
+            <path d="M20,10 C20,15.523 15.523,20 10,20 C4.477,20 0,15.523 0,10 C0,4.478 4.477,0 10,0 C15.523,0 20,4.478 20,10" id="Fill-1" opacity="0.400000006"></path>
+            <path d="M13.8599,6.705 L12.2399,11.825 C12.1799,12.035 12.0099,12.205 11.7999,12.266 L6.6999,13.865 C6.3599,13.976 6.0299,13.645 6.1399,13.305 L7.7399,8.175 C7.7999,7.965 7.9699,7.805 8.1799,7.735 L13.2999,6.135 C13.6499,6.025 13.9699,6.355 13.8599,6.705" id="Fill-4"></path>
+        </g>
+    </g>
+</svg>

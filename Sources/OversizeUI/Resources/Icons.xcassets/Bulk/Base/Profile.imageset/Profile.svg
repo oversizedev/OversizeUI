@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px"  height="24px"  viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Iconly/Bulk/Profile</title>
+    <g id="Iconly/Bulk/Profile" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Profile" transform="translate(3.999800, 1.999700)" fill="#000000"  fill-rule="nonzero">
+            <path d="M7.997,13.1749 C3.684,13.1749 1.42108547e-14,13.8549 1.42108547e-14,16.5749 C1.42108547e-14,19.2959 3.661,19.9999 7.997,19.9999 C12.31,19.9999 15.994,19.3209 15.994,16.5999 C15.994,13.8789 12.334,13.1749 7.997,13.1749" id="Fill-1"></path>
+            <path d="M7.997,10.584 C10.935,10.584 13.289,8.229 13.289,5.292 C13.289,2.355 10.935,-5.32907052e-15 7.997,-5.32907052e-15 C5.06,-5.32907052e-15 2.705,2.355 2.705,5.292 C2.705,8.229 5.06,10.584 7.997,10.584" id="Fill-4" opacity="0.400000006"></path>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px"  height="24px"  viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Iconly/Light/Folder</title>
+    <g id="Iconly/Light/Folder" stroke="#000000"  stroke-width="1.5"  fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Folder" transform="translate(1.500000, 1.500000)" stroke="#000000"  stroke-width="1.5" >
+            <path d="M19.9189,14.2321 C19.9189,17.8101 17.8099,19.9191 14.2319,19.9191 L6.4499,19.9191 C2.8629,19.9191 0.7499,17.8101 0.7499,14.2321 L0.7499,6.4321 C0.7499,2.8591 2.0639,0.7501 5.6429,0.7501 L7.6429,0.7501 C8.3609,0.7511 9.0369,1.0881 9.4669,1.6631 L10.3799,2.8771 C10.8119,3.4511 11.4879,3.7891 12.2059,3.7901 L15.0359,3.7901 C18.6229,3.7901 19.9469,5.6161 19.9469,9.2671 L19.9189,14.2321 Z" id="Stroke-1"></path>
+            <line x1="5.981" y1="12.963" x2="14.716" y2="12.963" id="Stroke-3"></line>
+        </g>
+    </g>
+</svg>

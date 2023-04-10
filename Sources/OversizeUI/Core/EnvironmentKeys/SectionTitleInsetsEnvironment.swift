@@ -22,7 +22,7 @@ public extension View {
     }
 
     func sectionContentRowInsets() -> some View {
-        environment(\.surfaceContentInsets, .init(top: .medium, leading: .zero, bottom: .medium, trailing: .zero))
-            .environment(\.sectionTitleInsets, .init(top: .zero, leading: .medium, bottom: .zero, trailing: .medium))
+        environment(\.sectionTitleInsets, .init(top: .zero, leading: .medium, bottom: .zero, trailing: .medium))
+            .environment(\.surfaceContentInsets, .init(top: .medium, leading: .zero, bottom: .medium, trailing: .zero))
     }
 }
