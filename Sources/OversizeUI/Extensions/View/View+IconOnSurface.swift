@@ -13,5 +13,6 @@ public extension View {
         .surfaceStyle(surfaceStyle)
         .surfaceBackgroundColor(surfaceSolor)
         .surfaceContentInsets(.xxSmall)
+        .surfaceRadius(.medium)
     }
 }

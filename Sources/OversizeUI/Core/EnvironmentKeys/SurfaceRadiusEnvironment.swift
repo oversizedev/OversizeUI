@@ -1,8 +1,8 @@
 //
 // Copyright © 2023 Aleksandr Romanov
 // SurfaceRadiusEnvironment.swift, created on 25.03.2023
-//  
-    
+//
+
 import SwiftUI
 
 private struct SurfaceRadiusKey: EnvironmentKey {

@@ -5,25 +5,25 @@
 
 import SwiftUI
 
-public struct LibraryContent: LibraryContentProvider {
-    @LibraryContentBuilder
-    public var views: [LibraryItem] {
-        LibraryItem(
-            Surface { Text("Surface") },
-            category: .control
-        )
-        LibraryItem(
-            Icon(.airplay),
-            category: .control
-        )
-    }
-
-    @LibraryContentBuilder
-    public func modifiers(base: Text) -> [LibraryItem] {
-        LibraryItem(
-            base
-                .body()
-                .onBackgroundHighEmphasisForegroundColor()
-        )
-    }
-}
+// public struct LibraryContent: LibraryContentProvider {
+//    @LibraryContentBuilder
+//    public var views: [LibraryItem] {
+//        LibraryItem(
+//            Surface { Text("Surface") },
+//            category: .control
+//        )
+//        LibraryItem(
+//            Icon(Images.Solid.image),
+//            category: .control
+//        )
+//    }
+//
+//    @LibraryContentBuilder
+//    public func modifiers(base: Text) -> [LibraryItem] {
+//        LibraryItem(
+//            base
+//                .body()
+//                .onBackgroundHighEmphasisForegroundColor()
+//        )
+//    }
+// }

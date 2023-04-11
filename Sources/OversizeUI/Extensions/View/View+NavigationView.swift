@@ -23,7 +23,7 @@ public extension View {
         case let .fixed(offset):
             #if os(iOS)
             VStack(spacing: .zero) {
-                ModalNavigationBar(title: title, bigTitle: false, offset: offset)
+                ModalNavigationBar(title: title, largeTitle: false, offset: offset)
                 self
             }
             #else
@@ -34,7 +34,7 @@ public extension View {
         case let .scroll(offset):
             #if os(iOS)
             VStack(spacing: .zero) {
-                ModalNavigationBar(title: title, bigTitle: true, offset: offset, leadingBar: {}, trailingBar: {}, bottomBar: {}, titleLabel: {})
+                ModalNavigationBar(title: title, largeTitle: true, offset: offset, leadingBar: {}, trailingBar: {}, bottomBar: {}, titleLabel: {})
                 self
             }
             #else
@@ -69,7 +69,7 @@ public extension View {
         case let .fixed(offset):
             #if os(iOS)
             VStack(spacing: .zero) {
-                ModalNavigationBar(title: title, bigTitle: false, offset: offset, leadingBar: leadingBar, trailingBar: trailingBar, bottomBar: bottomBar, titleLabel: {})
+                ModalNavigationBar(title: title, largeTitle: false, offset: offset, leadingBar: leadingBar, trailingBar: trailingBar, bottomBar: bottomBar, titleLabel: {})
                 self
             }
             #else
@@ -88,7 +88,7 @@ public extension View {
         case let .scroll(offset):
             #if os(iOS)
             VStack(spacing: .zero) {
-                ModalNavigationBar(title: title, bigTitle: true, offset: offset, leadingBar: leadingBar, trailingBar: leadingBar, bottomBar: bottomBar, titleLabel: {})
+                ModalNavigationBar(title: title, largeTitle: true, offset: offset, leadingBar: leadingBar, trailingBar: leadingBar, bottomBar: bottomBar, titleLabel: {})
                 self
             }
             #else
@@ -130,7 +130,7 @@ public extension View {
         case let .fixed(offset):
             #if os(iOS)
             VStack(spacing: .zero) {
-                ModalNavigationBar(title: title, bigTitle: false, offset: offset, leadingBar: leadingBar, trailingBar: trailingBar)
+                ModalNavigationBar(title: title, largeTitle: false, offset: offset, leadingBar: leadingBar, trailingBar: trailingBar)
                 self
             }
             #else
@@ -149,7 +149,7 @@ public extension View {
         case let .scroll(offset):
             #if os(iOS)
             VStack(spacing: .zero) {
-                ModalNavigationBar(title: title, bigTitle: true, offset: offset, leadingBar: leadingBar, trailingBar: trailingBar)
+                ModalNavigationBar(title: title, largeTitle: true, offset: offset, leadingBar: leadingBar, trailingBar: trailingBar)
                 self
             }
             #else
@@ -187,7 +187,7 @@ public extension View {
         case let .fixed(offset):
             #if os(iOS)
             VStack(spacing: .zero) {
-                ModalNavigationBar(title: title, bigTitle: false, offset: offset, leadingBar: leadingBar)
+                ModalNavigationBar(title: title, largeTitle: false, offset: offset, leadingBar: leadingBar)
                 self
             }
             #else
@@ -203,7 +203,7 @@ public extension View {
         case let .scroll(offset):
             #if os(iOS)
             VStack(spacing: .zero) {
-                ModalNavigationBar(title: title, bigTitle: true, offset: offset, leadingBar: leadingBar)
+                ModalNavigationBar(title: title, largeTitle: true, offset: offset, leadingBar: leadingBar)
                 self
             }
             #else
@@ -238,7 +238,7 @@ public extension View {
         case let .fixed(offset):
             #if os(iOS)
             VStack(spacing: .zero) {
-                ModalNavigationBar(title: title, bigTitle: false, offset: offset, trailingBar: trailingBar)
+                ModalNavigationBar(title: title, largeTitle: false, offset: offset, trailingBar: trailingBar)
                 self
             }
             #else
@@ -254,7 +254,7 @@ public extension View {
         case let .scroll(offset):
             #if os(iOS)
             VStack(spacing: .zero) {
-                ModalNavigationBar(title: title, bigTitle: true, offset: offset, trailingBar: trailingBar)
+                ModalNavigationBar(title: title, largeTitle: true, offset: offset, trailingBar: trailingBar)
                 self
             }
             #else
@@ -301,7 +301,7 @@ public extension View {
                 VStack(spacing: .zero) {
                     ModalNavigationBar(
                         title: title,
-                        bigTitle: false,
+                        largeTitle: false,
                         offset: offset,
                         background: background,
                         leadingBar: leadingBar,
@@ -336,7 +336,7 @@ public extension View {
             VStack(spacing: .zero) {
                 ModalNavigationBar(
                     title: title,
-                    bigTitle: true,
+                    largeTitle: true,
                     offset: offset,
                     background: background,
                     leadingBar: leadingBar,

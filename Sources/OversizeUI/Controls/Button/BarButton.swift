@@ -16,6 +16,7 @@ public enum BarButtonType {
     @available(*, deprecated, message: "Use .disabled() modificator")
     case disabled(_ text: String)
     case image(_ image: Image, action: () -> Void)
+    @available(*, renamed: "image")
     case icon(_ icon: IconsNames, action: () -> Void)
 }
 

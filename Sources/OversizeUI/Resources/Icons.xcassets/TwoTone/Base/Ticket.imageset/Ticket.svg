@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px"  height="24px"  viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Iconly/Two-tone/Ticket</title>
+    <g id="Iconly/Two-tone/Ticket" stroke="#000000"  stroke-width="1.5"  fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Ticket" transform="translate(2.000000, 4.000000)" stroke="#000000"  stroke-width="1.5" >
+            <g id="Group" transform="translate(11.349700, 0.250300)" opacity="0.400000006">
+                <line x1="0.5" y1="3.64153152e-14" x2="0.5" y2="2.42" id="Stroke-1"></line>
+                <line x1="0.5" y1="13.5098" x2="0.5" y2="15.5338" id="Stroke-3"></line>
+                <line x1="0.5" y1="10.0743" x2="0.5" y2="5.2533" id="Stroke-6"></line>
+            </g>
+            <path d="M16.7021277,16 C18.5241969,16 20,14.5425518 20,12.7431441 L20,10.1506373 C18.7943262,10.1506373 17.8233208,9.19170851 17.8233208,8.00103 C17.8233208,6.81035149 18.7943262,5.85039269 20,5.85039269 L19.998957,3.25685593 C19.998957,1.45744818 18.522111,0 16.7010847,0 L3.29891531,0 C1.47788903,0 0.00104297038,1.45744818 0.00104297038,3.25685593 L0,5.93485258 C1.20567376,5.93485258 2.17667918,6.81035149 2.17667918,8.00103 C2.17667918,9.19170851 1.20567376,10.1506373 0,10.1506373 L0,12.7431441 C0,14.5425518 1.47580309,16 3.29787234,16 L16.7021277,16 Z" id="Stroke-7"></path>
+        </g>
+    </g>
+</svg>
