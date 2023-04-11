@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px"  height="24px"  viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Iconly/Bulk/Time Square</title>
+    <g id="Iconly/Bulk/Time-Square" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Time-Square" transform="translate(2.000000, 1.999800)" fill="#000000"  fill-rule="nonzero">
+            <path d="M14.34,0 L5.67,0 C2.28,0 0,2.38 0,5.92 L0,14.09 C0,17.62 2.28,20 5.67,20 L14.34,20 C17.73,20 20,17.62 20,14.09 L20,5.92 C20,2.38 17.73,0 14.34,0" id="Fill-3" opacity="0.400000006"></path>
+            <path d="M13.5734,13.8145 C13.4424,13.8145 13.3104,13.7805 13.1894,13.7095 L9.2634,11.3675 C9.0374,11.2315 8.8984,10.9865 8.8984,10.7225 L8.8984,5.6755 C8.8984,5.2615 9.2344,4.9255 9.6484,4.9255 C10.0624,4.9255 10.3984,5.2615 10.3984,5.6755 L10.3984,10.2965 L13.9584,12.4195 C14.3134,12.6325 14.4304,13.0925 14.2184,13.4485 C14.0774,13.6835 13.8284,13.8145 13.5734,13.8145" id="Fill-1"></path>
+        </g>
+    </g>
+</svg>

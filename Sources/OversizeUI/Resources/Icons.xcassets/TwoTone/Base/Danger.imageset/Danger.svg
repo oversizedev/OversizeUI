@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px"  height="24px"  viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Iconly/Two-tone/Danger</title>
+    <g id="Iconly/Two-tone/Danger" stroke="#000000"  stroke-width="1.5"  fill="none" fill-rule="evenodd">
+        <g id="Danger" transform="translate(2.000000, 3.000000)">
+            <path d="M9.2503,13.2696 C9.2503,12.8556 9.5863,12.5136 10.0003,12.5136 C10.4143,12.5136 10.7503,12.8446 10.7503,13.2586 L10.7503,13.2696 C10.7503,13.6836 10.4143,14.0196 10.0003,14.0196 C9.5863,14.0196 9.2503,13.6836 9.2503,13.2696 Z" id="Fill-1" fill="#000000" fill-rule="nonzero" opacity="0.400000006"></path>
+            <path d="M2.7957,17.4179 L17.2777,17.4179 C18.4247,17.3579 19.3067,16.3809 19.2477,15.2339 C19.2347,15.0019 19.1847,14.7729 19.0967,14.5589 L11.8197,1.8229 C11.2637,0.8179 9.9987,0.4539 8.9937,1.0109 C8.6517,1.1989 8.3697,1.4809 8.1807,1.8229 L0.9037,14.5589 C0.4717,15.6229 0.9837,16.8349 2.0467,17.2679 C2.2627,17.3549 2.4907,17.4049 2.7227,17.4179" id="Stroke-3" stroke="#000000"  stroke-width="1.5"  stroke-linecap="round" stroke-linejoin="round"></path>
+            <line x1="9.9899" y1="10.3961" x2="9.9899" y2="7.2961" id="Stroke-1" stroke="#000000"  stroke-width="1.5"  opacity="0.400000006" stroke-linecap="round" stroke-linejoin="round"></line>
+        </g>
+    </g>
+</svg>

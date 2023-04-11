@@ -7,35 +7,53 @@ import OversizeUI
 import SwiftUI
 
 struct TextFieldDemo: View {
+    @State var text = ""
+
     var body: some View {
         PageView("Text Fields") {
             VStack(spacing: .xSmall) {
-                TextField("Text", text: .constant("Placeholder"))
-                    .textFieldStyle(DefaultPlaceholderTextFieldStyle())
+                fields
 
-                TextField("Text", text: .constant("Placeholder"))
-                    .textFieldStyle(OverPlaceholderTextFieldStyle(placeholder: "Label"))
+                fields
+                    .fieldLabelPosition(.adjacent)
 
-                TextField("Text", text: .constant("Placeholder"))
-                    .textFieldStyle(InsidePlaceholderTextFieldStyle(placeholder: "Label"))
-
-                TextField("Text", text: .constant("Placeholder"))
-                    .textFieldStyle(DefaultPlaceholderTextFieldStyle())
-                    .helper(.constant("Help"), style: .constant(.helperText))
-
-                TextField("Text", text: .constant("Placeholder"))
-                    .textFieldStyle(OverPlaceholderTextFieldStyle(placeholder: "Label"))
-                    .helper(.constant("Ok"), style: .constant(.sussesText))
-
-                TextField("Text", text: .constant("Placeholder"))
-                    .textFieldStyle(InsidePlaceholderTextFieldStyle(placeholder: "Label"))
-                    .helper(.constant("Error"), style: .constant(.errorText))
+                fields
+                    .fieldLabelPosition(.overInput)
 
             }.padding()
         }
         .leadingBar {
             BarButton(.back)
         }
+    }
+
+    var fields: some View {
+        VStack(spacing: .xSmall) {
+            TextField("Text", text: $text)
+                .textFieldStyle(.default)
+
+            TextField("Text", text: $text)
+                .textFieldStyle(.placeholder("Placeholder"))
+
+            TextField("Text", text: $text)
+                .textFieldStyle(.placeholder("Placeholder", text: $text))
+
+            TextField("Text", text: $text, prompt: Text("Promt"))
+                .textFieldStyle(.placeholder("Placeholder", text: $text))
+
+            TextField("Text", text: $text)
+                .textFieldStyle(.placeholder("Placeholder", text: $text))
+                .fieldHelper(.constant("Help"), style: .constant(.helperText))
+
+            TextField("Text", text: $text)
+                .textFieldStyle(.placeholder("Placeholder", text: $text))
+                .fieldHelper(.constant("Ok"), style: .constant(.sussesText))
+
+            TextField("Text", text: $text)
+                .textFieldStyle(.placeholder("Placeholder", text: $text))
+                .fieldHelper(.constant("Error"), style: .constant(.errorText))
+
+        }.padding()
     }
 }
 

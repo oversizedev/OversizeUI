@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px"  height="24px"  viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Iconly/Light/Voice</title>
+    <g id="Iconly/Light/Voice" stroke="#000000"  stroke-width="1.5"  fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Voice" transform="translate(4.000000, 2.000000)" stroke="#000000"  stroke-width="1.5" >
+            <line x1="7.99979045" y1="20" x2="7.99979045" y2="16.8390306" id="Stroke-1"></line>
+            <path d="M7.99979045,12.8480829 L7.99979045,12.8480829 C5.75658438,12.8480829 3.937712,11.0218152 3.937712,8.76819031 L3.937712,4.08094524 C3.937712,1.82732033 5.75658438,-3.55271368e-15 7.99979045,-3.55271368e-15 C10.2440443,-3.55271368e-15 12.0618689,1.82732033 12.0618689,4.08094524 L12.0618689,8.76819031 C12.0618689,11.0218152 10.2440443,12.8480829 7.99979045,12.8480829 Z" id="Stroke-3"></path>
+            <path d="M16,8.80061051 C16,13.2394411 12.4188331,16.8382937 7.99947613,16.8382937 C3.58116692,16.8382937 0,13.2394411 0,8.80061051" id="Stroke-5"></path>
+        </g>
+    </g>
+</svg>

@@ -107,11 +107,9 @@ public struct MultiSelect<Element: Equatable, Content, Selection>: View
                             }
                             let selectionItems = selectedIndexes.compactMap { data[$0] }
                             selection = selectionItems
+                        }), label:  {
+                            content(data[index], isSelected)
                         })
-
-                    ) {
-                        content(data[index], isSelected)
-                    }
                 }
             }
         }

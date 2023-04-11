@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px"  height="24px"  viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Iconly/Bold/Arrow - Up Circle</title>
+    <g id="Iconly/Bold/Arrow---Up-Circle" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Arrow---Up-Circle" transform="translate(2.000000, 2.000000)" fill="#000000"  fill-rule="nonzero">
+            <path d="M10,-2.84217094e-13 C15.52,-2.84217094e-13 20,4.49 20,10 L20,10 L19.9961558,10.2797649 C19.8478368,15.6705774 15.4264407,20 10,20 C4.49,20 -1.13074514e-13,15.52 -1.13074514e-13,10 C-1.13074514e-13,4.49 4.49,-2.84217094e-13 10,-2.84217094e-13 Z M10,7.21 C9.8,7.21 9.61,7.29 9.47,7.43 L9.47,7.43 L6,10.92 C5.85,11.06 5.78,11.25 5.78,11.44 C5.78,11.64 5.85,11.83 6,11.98 C6.3,12.27 6.77,12.27 7.06,11.97 L7.06,11.97 L10,9.02 L12.94,11.97 C13.23,12.27 13.71,12.27 14,11.98 C14.3,11.68 14.3,11.21 14,10.92 L14,10.92 L10.53,7.43 C10.39,7.29 10.2,7.21 10,7.21 Z"></path>
+        </g>
+    </g>
+</svg>

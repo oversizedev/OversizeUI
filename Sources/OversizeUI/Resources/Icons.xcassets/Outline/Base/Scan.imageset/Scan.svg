@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px"  height="24px"  viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Iconly/Light/Scan</title>
+    <g id="Iconly/Light/Scan" stroke="#000000"  stroke-width="1.5"  fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Scan" transform="translate(1.500000, 3.350100)" stroke="#000000"  stroke-width="1.5" >
+            <line x1="21" y1="9.4555" x2="0" y2="9.4555" id="Stroke-1"></line>
+            <path d="M19.1299,5.245 L19.1299,3.732 C19.1299,1.671 17.4589,1.77635684e-15 15.3969,1.77635684e-15 L14.1919,1.77635684e-15" id="Stroke-3"></path>
+            <path d="M1.8701,5.245 L1.8701,3.732 C1.8701,1.671 3.5411,1.77635684e-15 5.6031,1.77635684e-15 L6.8391,1.77635684e-15" id="Stroke-5"></path>
+            <path d="M19.1299,9.4545 L19.1299,13.5285 C19.1299,15.5905 17.4589,17.2615 15.3969,17.2615 L14.1919,17.2615" id="Stroke-7"></path>
+            <path d="M1.8701,9.4545 L1.8701,13.5285 C1.8701,15.5905 3.5411,17.2615 5.6031,17.2615 L6.8391,17.2615" id="Stroke-9"></path>
+        </g>
+    </g>
+</svg>

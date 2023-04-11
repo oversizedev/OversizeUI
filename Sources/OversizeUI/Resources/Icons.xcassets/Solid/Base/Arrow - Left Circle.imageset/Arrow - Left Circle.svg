@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px"  height="24px"  viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Iconly/Bold/Arrow - Left Circle</title>
+    <g id="Iconly/Bold/Arrow---Left-Circle" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Arrow---Left-Circle" transform="translate(2.000000, 2.000000)" fill="#000000"  fill-rule="nonzero">
+            <path d="M10,-1.13686838e-13 L10.2797649,0.00384420997 C15.6705774,0.152163172 20,4.57355932 20,10 C20,15.51 15.52,20 10,20 C4.49,20 6.123234e-16,15.51 6.123234e-16,10 C6.123234e-16,4.48 4.49,-1.13686838e-13 10,-1.13686838e-13 L10,-1.13686838e-13 Z M11.98,6 C11.68,5.7 11.21,5.7 10.92,6 L10.92,6 L7.43,9.47 C7.29,9.61 7.21,9.8 7.21,10 C7.21,10.2 7.29,10.39 7.43,10.53 L7.43,10.53 L10.92,14 C11.06,14.15 11.25,14.22 11.44,14.22 C11.64,14.22 11.83,14.15 11.98,14 C12.27,13.7 12.27,13.23 11.97,12.94 L11.97,12.94 L9.02,10 L11.97,7.06 C12.27,6.77 12.27,6.29 11.98,6 Z"></path>
+        </g>
+    </g>
+</svg>
