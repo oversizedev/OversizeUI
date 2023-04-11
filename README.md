@@ -36,13 +36,13 @@ Colors, Typography, Spacing and other styles in [core folder](Sources/OversizeUI
 
 #### Requirements
 - iOS 15+ or macOS 12.0+
-- Xcode 14.0+
-- Swift 5.7+
+- Xcode 14.3+
+- Swift 5.8+
 
 #### Swift Package Manager
 - File > Swift Packages > Add Package Dependency
 - Add `https://github.com/oversizedev/OversizeUI.git`
-- Select "Up to Next Major" with "3.0.0"
+- Select "Up to Next Major" with "3.0.1"
 
 ### Import and use OversizeUI
 After the framework has been added you can import the module to use it:
