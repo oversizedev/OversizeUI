@@ -62,4 +62,3 @@ jobs:
           xcodebuild clean build -project "${{ env.PROJECT_DIR }}/${{ env.PROJECT_NAME }}" -scheme "${{ env.WATCHSCHEME }}" | xcpretty
         env:
           destination: ${{ matrix.watchOSdestination }}
-
