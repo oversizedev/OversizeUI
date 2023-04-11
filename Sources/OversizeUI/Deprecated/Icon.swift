@@ -88,56 +88,29 @@ public struct Icon: View {
     }
 }
 
-public extension Image {
-    func icon(_ color: Color = Color.onSurfaceHighEmphasis) -> some View {
-        renderingMode(.template)
-            .foregroundColor(color)
+ @available(tvOS, unavailable)
+ struct IconAsset_Previews: PreviewProvider {
+    static var previews: some View {
+        let grid = [GridItem(),
+                    GridItem(),
+                    GridItem(),
+                    GridItem(),
+                    GridItem(),
+                    GridItem()]
+
+        Button(role: .cancel, action: {}, label: {
+            Text("Text")
+        })
+        .buttonStyle(.borderedProminent)
+        .controlSize(.large)
+
+        LazyVGrid(columns: grid) {
+            ForEach(IconsNames.allCases, id: \.self) { icon in
+                Icon(icon)
+                    .padding(.vertical)
+            }
+        }
+        .padding()
+        .previewLayout(.sizeThatFits)
     }
-}
-
-public extension Image {
-    func icon(_ color: Color = Color.onSurfaceHighEmphasis, size: IconSizes) -> some View {
-        renderingMode(.template)
-            .resizable()
-            .foregroundColor(color)
-            .frame(width: size.rawValue, height: size.rawValue)
-    }
-}
-
-// public extension View {
-//    func iconOnSurface(_ surfaceStyle: SurfaceStyle = .secondary, surfaceSolor: Color? = nil) -> some View {
-//        Surface {
-//            self
-//        }
-//        .surfaceStyle(surfaceStyle)
-//        .surfaceBackgroundColor(surfaceSolor)
-//        .surfaceContentInsets(.xxSmall)
-//    }
-// }
-
-// @available(tvOS, unavailable)
-// struct IconAsset_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let grid = [GridItem(),
-//                    GridItem(),
-//                    GridItem(),
-//                    GridItem(),
-//                    GridItem(),
-//                    GridItem()]
-//
-//        Button(role: .cancel, action: {}, label: {
-//            Text("Text")
-//        })
-//        .buttonStyle(.borderedProminent)
-//        .controlSize(.large)
-//
-//        LazyVGrid(columns: grid) {
-//            ForEach(IconsNames.allCases, id: \.self) { icon in
-//                Icon(icon)
-//                    .padding(.vertical)
-//            }
-//        }
-//        .padding()
-//        .previewLayout(.sizeThatFits)
-//    }
-// }
+ }
