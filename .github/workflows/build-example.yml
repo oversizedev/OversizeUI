@@ -7,7 +7,7 @@ on:
     branches: [ main ]
     
 env:
-  XCODE_DIR: /Applications/Xcode_14.3.app/Contents/Developer
+  DEVELOPER_DIR: /Applications/Xcode_14.3.app/Contents/Developer
   PROJECT_DIR: Example
   PROJECT_NAME: Example.xcodeproj
   iOSSCHEME: Example (iOS)
@@ -38,14 +38,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        
-      - name: Select Xcode version
-        run: sudo xcode-select -s '${{ env.XCODE_DIR }}'
 
       - name: Build iOS
         run: |
           xcodebuild clean build -project "${{ env.PROJECT_DIR }}/${{ env.PROJECT_NAME }}" -scheme "${{ env.iOSSCHEME }}" | xcpretty
-        env: 
+        env:
           destination: ${{ matrix.iosDestination }}
           
       - name: Build macOS
