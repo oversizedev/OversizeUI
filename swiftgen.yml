@@ -8,3 +8,12 @@ xcassets:
           enumName: Icons
           publicAccess: 1
           forceProvidesNamespaces: true
+  - inputs:
+      - Sources/OversizeUI/Resources/Images.xcassets
+    outputs:
+      - templatePath: Templates/AssetsSwiftUI.stencil
+        output: Sources/OversizeUI/Generated/GeneratedImages.swift
+        params:
+          enumName: Images
+          publicAccess: 1
+          forceProvidesNamespaces: true
