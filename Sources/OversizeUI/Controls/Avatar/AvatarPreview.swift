@@ -5,7 +5,6 @@
 
 import SwiftUI
 
-#if DEBUG
 struct AvatarPreview: View {
     var body: some View {
         VStack(alignment: .leading) {
@@ -40,7 +39,6 @@ struct AvatarPreview: View {
         }
     }
 }
-#endif
 
 struct Avatar_Preview: PreviewProvider {
     static var previews: some View {
