@@ -118,7 +118,7 @@ public extension Checkbox where Label == EmptyView {
 struct Checkbox_LibraryContent: LibraryContentProvider {
     var views: [LibraryItem] {
         LibraryItem(
-            Checkbox(isOn: .constant(false), label:  {
+            Checkbox(isOn: .constant(false), label: {
                 Text("Text")
             }),
             title: "Checkbox", category: .control
@@ -129,7 +129,7 @@ struct Checkbox_LibraryContent: LibraryContentProvider {
 struct Checkbox_preview: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 24) {
-            Checkbox(isOn: .constant(true), label:  {
+            Checkbox(isOn: .constant(true), label: {
                 Text("Text")
             })
 
@@ -137,7 +137,7 @@ struct Checkbox_preview: PreviewProvider {
                 Text("Text")
             })
 
-            Checkbox(isOn: .constant(true), alignment: .trailing, label:  {
+            Checkbox(isOn: .constant(true), alignment: .trailing, label: {
                 Text("Text")
             })
 
