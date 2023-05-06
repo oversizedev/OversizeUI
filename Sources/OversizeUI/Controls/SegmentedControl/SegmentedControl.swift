@@ -41,8 +41,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
         style
             .makeBody(
                 configuration: SegmentedControlConfiguration(
-                    label: SegmentedControlConfiguration.Label(content: getSegmentedControl()
-                    )
+                    label: SegmentedControlConfiguration.Label(content: getSegmentedControl())
                 )
             )
             .clipBackground(style.isShowBackground, radius: controlRadius.rawValue)
@@ -100,7 +99,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                                    content(data[index],
                                            selectedIndex == index)
                                        .body(.semibold)
-                                       .foregroundColor(.onSurfaceHighEmphasis)
+                                       .foregroundColor(style.seletionStyle == .accentSurface && selectedIndex == index ? Color.onPrimaryHighEmphasis : Color.onSurfaceHighEmphasis)
                                        .multilineTextAlignment(.center)
                                    Spacer()
                                }
@@ -160,7 +159,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                            },
                            label: { content(data[index], selectedIndex == index)
                                .body(.semibold)
-                               .foregroundColor(.onSurfaceHighEmphasis)
+                               .foregroundColor(style.seletionStyle == .accentSurface && selectedIndex == index ? Color.onPrimaryHighEmphasis : Color.onSurfaceHighEmphasis)
                                .multilineTextAlignment(.center)
                                .padding(.leading, controlPadding.leading)
                                .padding(.trailing, controlPadding.trailing)
@@ -232,9 +231,11 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                     .strokeBorder(Color.onSurfaceMediumEmphasis, lineWidth: 2)
             }
         case .accentSurface:
-            RoundedRectangle(cornerRadius: style.isShowBackground ? controlRadius.rawValue - 4 : controlRadius.rawValue,
-                             style: .continuous)
-                .strokeBorder(Color.blue, lineWidth: 2)
+            RoundedRectangle(
+                cornerRadius: style.isShowBackground ? controlRadius.rawValue - 4 : controlRadius.rawValue,
+                style: .continuous
+            )
+            .fill(Color.accent)
         }
     }
 
