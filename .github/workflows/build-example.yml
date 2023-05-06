@@ -16,14 +16,6 @@ env:
   WATCHSCHEME: Example
 
 jobs:
-
-  build:
-    name: Swift Build (SPM)
-    runs-on: macOS-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build
-      run: swift build
       
   example:
     name: Run examples
