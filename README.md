@@ -141,6 +141,7 @@ TextField("Text", text: $placeholder))
 }
 ```
 
+More information on in the [DocC documentation](https://oversizedev.github.io/OversizeUI/documentation/oversizeui/)
 
 #### Swift Lint
 This project uses [SwiftLint](https://github.com/realm/SwiftLint) to automatically lint our Swift code for common errors. Please install it when developing in this repo by following the [SwiftLint Installation Instructions](https://realm.github.io/SwiftLint/).
