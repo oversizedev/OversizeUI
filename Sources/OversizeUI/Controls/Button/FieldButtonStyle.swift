@@ -35,6 +35,7 @@ public struct FieldButtonStyle: ButtonStyle {
                             : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
                 )
         case .top, .bottom, .center:
+            #if os(iOS)
             RoundedRectangleCorner(radius: Radius.medium, corners: backgroundShapeCorners)
                 .fill(isPressed ? Color.surfaceTertiary : Color.surfaceSecondary)
                 .overlay(
@@ -43,9 +44,21 @@ public struct FieldButtonStyle: ButtonStyle {
                             ? Color.border
                             : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
                 )
+            #else
+            RoundedRectangle(cornerRadius: Radius.medium, style: .continuous)
+                .fill(isPressed ? Color.surfaceTertiary : Color.surfaceSecondary)
+                .overlay(
+                    RoundedRectangle(cornerRadius: Radius.medium,
+                                     style: .continuous)
+                        .stroke(theme.borderTextFields
+                            ? Color.border
+                            : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
+                )
+            #endif
         }
     }
 
+    #if os(iOS)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
     @available(tvOS, unavailable)
@@ -61,6 +74,7 @@ public struct FieldButtonStyle: ButtonStyle {
             return []
         }
     }
+    #endif
 }
 
 public extension ButtonStyle where Self == FieldButtonStyle {

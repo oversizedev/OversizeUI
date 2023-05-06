@@ -19,7 +19,7 @@ jobs:
 
   build:
     name: Swift Build (SPM)
-    runs-on: macos-latest
+    runs-on: macOS-latest
     steps:
     - uses: actions/checkout@v2
     - name: Build

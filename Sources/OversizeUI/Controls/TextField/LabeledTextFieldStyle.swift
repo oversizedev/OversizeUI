@@ -55,11 +55,14 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
             )
             .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
         case .top, .bottom, .center:
+            #if os(iOS)
             RoundedRectangleCorner(radius: Radius.medium, corners: backgroundShapeCorners)
                 .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
+            #endif
         }
     }
 
+    #if os(iOS)
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
     @available(tvOS, unavailable)
@@ -75,6 +78,7 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
             return []
         }
     }
+    #endif
 
     private var fieldOffset: CGFloat {
         switch fieldPlaceholderPosition {
@@ -97,8 +101,16 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
             )
             .stroke(overlayBorderColor, lineWidth: isFocused ? 2 : CGFloat(theme.borderSize))
         case .top, .bottom, .center:
+            #if os(iOS)
             RoundedRectangleCorner(radius: Radius.medium, corners: backgroundShapeCorners)
                 .stroke(overlayBorderColor, lineWidth: isFocused ? 2 : CGFloat(theme.borderSize))
+            #else
+            RoundedRectangle(
+                cornerRadius: Radius.medium,
+                style: .continuous
+            )
+            .stroke(overlayBorderColor, lineWidth: isFocused ? 2 : CGFloat(theme.borderSize))
+            #endif
         }
     }
 
