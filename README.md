@@ -44,7 +44,7 @@ Colors, Typography, Spacing and other styles in [core folder](Sources/OversizeUI
 - Add `https://github.com/oversizedev/OversizeUI.git`
 - Select "Up to Next Major" with "3.0.3"
 
-### Import and use OversizeUI
+#### Import and use OversizeUI
 After the framework has been added you can import the module to use it:
 
 ```swift
@@ -141,12 +141,14 @@ TextField("Text", text: $placeholder))
 }
 ```
 
+## More
+
 More information on in the [DocC documentation](https://oversizedev.github.io/OversizeUI/documentation/oversizeui/)
 
 #### Swift Lint
 This project uses [SwiftLint](https://github.com/realm/SwiftLint) to automatically lint our Swift code for common errors. Please install it when developing in this repo by following the [SwiftLint Installation Instructions](https://realm.github.io/SwiftLint/).
 
 
-### License
+#### License
 
 OversizeUI is released under the MIT license. See LICENSE for details.
