@@ -88,8 +88,8 @@ public struct Icon: View {
     }
 }
 
- @available(tvOS, unavailable)
- struct IconAsset_Previews: PreviewProvider {
+@available(tvOS, unavailable)
+struct IconAsset_Previews: PreviewProvider {
     static var previews: some View {
         let grid = [GridItem(),
                     GridItem(),
@@ -113,4 +113,4 @@ public struct Icon: View {
         .padding()
         .previewLayout(.sizeThatFits)
     }
- }
+}

@@ -7,7 +7,7 @@ on:
     branches: [ main ]
     
 env:
-  DEVELOPER_DIR: /Applications/Xcode_14.3.app/Contents/Developer
+  DEVELOPER_DIR: /Applications/Xcode_14.2.app/Contents/Developer
   PROJECT_DIR: Example
   PROJECT_NAME: Example.xcodeproj
   iOSSCHEME: Example (iOS)
