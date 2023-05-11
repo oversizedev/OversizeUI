@@ -76,14 +76,14 @@ extension ContentView {
         case .close:
 
             Button(action: { dismiss() }) {
-                Icon(.xMini)
+                IconDeprecated(.xMini)
             }
             .buttonStyle(.secondary)
 
         case .back:
 
             Button(action: { dismiss() }) {
-                Icon(.arrowLeft)
+                IconDeprecated(.arrowLeft)
             }
             .buttonStyle(.secondary)
 
@@ -112,14 +112,14 @@ extension ContentView {
         case let .closeAction(action: action):
 
             Button(action: action) {
-                Icon(.xMini)
+                IconDeprecated(.xMini)
             }
             .buttonStyle(.secondary)
 
         case let .backAction(action: action):
 
             Button(action: action) {
-                Icon(.arrowLeft)
+                IconDeprecated(.arrowLeft)
             }
             .buttonStyle(.secondary)
 
@@ -142,14 +142,14 @@ extension ContentView {
         case .close:
 
             Button(action: { dismiss() }) {
-                Icon(.xMini)
+                IconDeprecated(.xMini)
             }
             .buttonStyle(.secondary)
 
         case .back:
 
             Button(action: { dismiss() }) {
-                Icon(.arrowLeft)
+                IconDeprecated(.arrowLeft)
             }
             .buttonStyle(.secondary)
 
@@ -179,14 +179,14 @@ extension ContentView {
         case let .closeAction(action: action):
 
             Button(action: action) {
-                Icon(.xMini)
+                IconDeprecated(.xMini)
             }
             .buttonStyle(.secondary)
 
         case let .backAction(action: action):
 
             Button(action: action) {
-                Icon(.arrowLeft)
+                IconDeprecated(.arrowLeft)
             }
             .buttonStyle(.secondary)
 

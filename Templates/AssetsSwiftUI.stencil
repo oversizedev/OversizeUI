@@ -46,7 +46,6 @@ import SwiftUI
   {% endif %}
 {% endmacro %}
 {% macro casesBlock assets %}
-
     
     {% if resourceCount.image > 0 %}
     {{accessModifier}} static let allImages: [{{imageType}}] = [

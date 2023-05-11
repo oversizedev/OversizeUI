@@ -54,7 +54,7 @@ public struct IconPicker: View {
             if let image = selection {
                 image
             }
-            Icon(.chevronDown, color: .onSurfaceHighEmphasis)
+            IconDeprecated(.chevronDown, color: .onSurfaceHighEmphasis)
         }
         .frame(minWidth: 0, maxWidth: .infinity)
         .padding()

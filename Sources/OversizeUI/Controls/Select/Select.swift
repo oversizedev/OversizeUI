@@ -47,7 +47,7 @@ public struct Select<Element, Content, Selection>: View
                     Text(label)
                 }
                 Spacer()
-                Icon(.chevronDown, color: .onSurfaceHighEmphasis)
+                IconDeprecated(.chevronDown, color: .onSurfaceHighEmphasis)
             }
             .frame(minWidth: 0, maxWidth: .infinity)
             .padding()

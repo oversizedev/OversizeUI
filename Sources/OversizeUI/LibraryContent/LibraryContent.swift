@@ -13,7 +13,7 @@ import SwiftUI
 //            category: .control
 //        )
 //        LibraryItem(
-//            Icon(Images.Solid.image),
+//            IconDeprecated(Images.Solid.image),
 //            category: .control
 //        )
 //    }

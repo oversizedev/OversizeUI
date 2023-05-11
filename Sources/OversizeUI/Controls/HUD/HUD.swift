@@ -212,7 +212,7 @@ public struct HUDContent: View {
             case .hud:
                 HStack {
 //                if let icon = hudState.icon {
-//                    Icon(icon, color: .onSurfaceHighEmphasis)
+//                    IconDeprecated(icon, color: .onSurfaceHighEmphasis)
 //                }
 
                     Text(title)

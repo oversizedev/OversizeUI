@@ -25,7 +25,7 @@ public enum IconSizes: CaseIterable {
     }
 }
 
-public struct Icon: View {
+public struct IconDeprecated: View {
     private enum Constants {
         /// Size
         static var small: CGFloat = Space.small.rawValue
@@ -81,7 +81,7 @@ public struct Icon: View {
         }
     }
 
-    public func iconColor(_ color: Color) -> Icon {
+    public func iconColor(_ color: Color) -> IconDeprecated {
         var control = self
         control.color = color
         return control
@@ -106,7 +106,7 @@ struct IconAsset_Previews: PreviewProvider {
 
         LazyVGrid(columns: grid) {
             ForEach(IconsNames.allCases, id: \.self) { icon in
-                Icon(icon)
+                IconDeprecated(icon)
                     .padding(.vertical)
             }
         }

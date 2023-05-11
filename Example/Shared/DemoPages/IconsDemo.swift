@@ -18,7 +18,7 @@ struct IconsDemo: View {
         PageView("Icons") {
             LazyVGrid(columns: grid) {
                 ForEach(IconsNames.allCases, id: \.self) { icon in
-                    Icon(icon)
+                    IconDeprecated(icon)
                         .padding(.vertical)
                 }
             }

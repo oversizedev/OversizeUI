@@ -117,7 +117,7 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
                     .padding(.leading, .xxSmall)
 
                 if isShowArrowIcon {
-                    Icon(.chevronRight, color: .onSurfaceDisabled)
+                    IconDeprecated(.chevronRight, color: .onSurfaceDisabled)
                 }
             }
         }
@@ -125,7 +125,7 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
     }
 
     private var text: some View {
-        VStack(alignment: textAlignment, spacing: .xxxSmall) {
+        VStack(alignment: textAlignment, spacing: .zero) {
             Text(title)
                 .headline(.medium)
                 .foregroundColor(.onSurfaceHighEmphasis)
@@ -145,7 +145,7 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
                 сlearAction?()
             } label: {
                 ZStack {
-                    Icon(.xMini, color: .onSurfaceDisabled)
+                    IconDeprecated(.xMini, color: .onSurfaceDisabled)
                         .background(
                             RoundedRectangle(cornerRadius: .small, style: .continuous)
                                 .fillSurfaceSecondary()
@@ -188,6 +188,38 @@ public extension Row where LeadingLabel == EmptyView, TrailingLabel == EmptyView
         trailingLabel = nil
     }
 }
+
+/*
+public extension Row where LeadingLabel == Image, TrailingLabel == EmptyView {
+    init(_ title: String,
+         subtitle: String? = nil,
+         action: (() -> Void)? = nil,
+         @ViewBuilder leading: () -> LeadingLabel)
+    {
+        self.title = title
+        self.subtitle = subtitle
+        self.action = action
+        leadingLabel = leading()
+            .resizable()
+            .renderingMode(.template)
+        trailingLabel = nil
+    }
+}
+
+public extension Row where LeadingLabel == Image, TrailingLabel == EmptyView {
+    init(_ title: String,
+         subtitle: String? = nil,
+         @ViewBuilder leading: () -> LeadingLabel)
+    {
+        self.title = title
+        self.subtitle = subtitle
+        self.action = nil
+        leadingLabel = leading().resizable()
+        trailingLabel = nil
+    }
+}
+*/
+
 
 public extension Row where TrailingLabel == EmptyView {
     init(_ title: String,
@@ -292,18 +324,18 @@ struct ListRow_Previews: PreviewProvider {
             Row("Title", subtitle: "Subtitle")
 
             Row("Title", subtitle: "Subtitle") {
-                Icon(.calendar)
+                IconDeprecated(.calendar)
             }
 
             Radio(isOn: true, label: {
                 Row("Title", subtitle: "Subtitle") {
-                    Icon(.calendar)
+                    IconDeprecated(.calendar)
                 }
             })
 
             Checkbox(isOn: .constant(true), label: {
                 Row("Title", subtitle: "Subtitle") {
-                    Icon(.calendar)
+                    IconDeprecated(.calendar)
                 }
                 .rowOnSurface()
             })

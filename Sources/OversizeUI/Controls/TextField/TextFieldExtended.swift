@@ -71,7 +71,7 @@ public struct TextFieldExtended: View {
 
                 HStack {
                     if leadingImage != .none {
-                        Icon(leadingImage)
+                        IconDeprecated(leadingImage)
                     }
 
                     if secure {
@@ -86,7 +86,7 @@ public struct TextFieldExtended: View {
                     }
 
                     if trallingImage != .none {
-                        Icon(trallingImage)
+                        IconDeprecated(trallingImage)
                     }
 
                     if helperStyle == .errorText {

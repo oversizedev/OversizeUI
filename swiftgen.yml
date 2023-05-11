@@ -2,12 +2,14 @@ xcassets:
   - inputs:
       - Sources/OversizeUI/Resources/Icons.xcassets
     outputs:
-      - templatePath: Templates/AssetsSwiftUI.stencil
+      - templatePath: Templates/Icon.stencil
         output: Sources/OversizeUI/Generated/GeneratedIcons.swift
         params:
-          enumName: Icons
+          imageTypeName: IconSymbol
+          enumName: Icon
           publicAccess: 1
-          forceProvidesNamespaces: true
+          forceProvidesNamespaces: false
+          
   - inputs:
       - Sources/OversizeUI/Resources/Images.xcassets
     outputs:
@@ -17,3 +19,15 @@ xcassets:
           enumName: Images
           publicAccess: 1
           forceProvidesNamespaces: true
+
+# Config for generate icons extension config
+#  - inputs:
+#      - Sources/OversizeUI/Resources/Icons.xcassets
+#    outputs:
+#      - templatePath: Templates/IconExtension.stencil
+#        output: Sources/OversizeUI/Generated/GeneratedIconsExtension.swift
+#        params:
+#          imageTypeName: IconSymbol
+#          enumName: Icon
+#          publicAccess: 1
+#          forceProvidesNamespaces: false

@@ -92,7 +92,7 @@ var items = ["One", "Two", "Three", "Four"]
 GridSelect(items, selection: $selection,
            content: { item, _ in
                VStack {
-                   Icon(.circle)
+                   IconDeprecated(.circle)
                    Text(item)
                }.padding()
            })
@@ -101,7 +101,7 @@ GridSelect(items, selection: $selection,
 
 ### Icon
 ```swift
-Icon(.activity)
+IconDeprecated(.activity)
 
 ```
 
