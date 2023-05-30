@@ -8,7 +8,7 @@ import SwiftUI
 // MARK: - Asset Catalogs
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
-public enum Icon {
+public enum Icons {
     public enum Base {
         public static let activity = IconSymbol(path: "Base/Activity")
         public static let addUser = IconSymbol(path: "Base/Add User")
@@ -113,48 +113,41 @@ public enum Icon {
     }
 }
 
+
 public struct IconSymbol {
-    
+
     public let path: String
 
     public init(path: String) {
         self.path = path
     }
-
     public var outline: SwiftUI.Image {
-        SwiftUI.Image(path, bundle: Bundle.module)
+        return SwiftUI.Image(path, bundle: Bundle.module)
     }
-
     public var solid: SwiftUI.Image {
-        SwiftUI.Image("Solid/" + path, bundle: Bundle.module)
+        return SwiftUI.Image("Solid/" + path, bundle: Bundle.module)
     }
-
     public var bulk: SwiftUI.Image {
-        SwiftUI.Image("Bulk/" + path, bundle: Bundle.module)
+        return SwiftUI.Image("Bulk/" + path, bundle: Bundle.module)
     }
-
     public var twoTone: SwiftUI.Image {
-        SwiftUI.Image("TwoTone/" + path, bundle: Bundle.module)
+        return SwiftUI.Image("TwoTone/" + path, bundle: Bundle.module)
     }
-
     public var categoryName: String? {
-        path.components(separatedBy: "/").first
+        return path.components(separatedBy: "/").first
     }
 
     public var name: String {
-        path.components(separatedBy: "/").last ?? ""
+        return path.components(separatedBy: "/").last ?? ""
     }
 }
 
-public struct IconView: View {
-    
+public struct Icon: View {
     @Environment(\.iconStyle) var iconStyle
     private let icon: IconSymbol
-    
     public init(_ icon: IconSymbol) {
         self.icon = icon
     }
-    
     public var body: some View {
         switch iconStyle {
         case .line: icon.outline

@@ -113,7 +113,7 @@ import SwiftUI
     }
 }
 
-{{accessModifier}} struct IconView: View {
+{{accessModifier}} struct Icon: View {
     
     @Environment(\.iconStyle) var iconStyle
     private let icon: IconSymbol

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="24px"  height="24px"  viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>Iconly/Light/Image</title>
-    <g id="Iconly/Light/Image" stroke="#000000"  stroke-width="1.5"  fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-        <g id="Image" transform="translate(2.000000, 2.000000)" stroke="#000000"  stroke-width="1.5" >
+    <g id="Iconly/Light/Image" stroke="#000000"  stroke-width="2"  fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Image" transform="translate(2.000000, 2.000000)" stroke="#000000"  stroke-width="2" >
             <path d="M19.21,5.8992 L19.21,14.0502 C19.21,17.0702 17.32,19.2002 14.3,19.2002 L5.65,19.2002 C2.63,19.2002 0.75,17.0702 0.75,14.0502 L0.75,5.8992 C0.75,2.8792 2.64,0.7502 5.65,0.7502 L14.3,0.7502 C17.32,0.7502 19.21,2.8792 19.21,5.8992 Z" id="Stroke-1"></path>
             <path d="M3.2813,14.4309 L4.8093,12.8179 C5.3403,12.2549 6.2253,12.2279 6.7893,12.7579 C6.8063,12.7749 7.7263,13.7099 7.7263,13.7099 C8.2813,14.2749 9.1883,14.2839 9.7533,13.7299 C9.7903,13.6939 12.0873,10.9079 12.0873,10.9079 C12.6793,10.1889 13.7423,10.0859 14.4623,10.6789 C14.5103,10.7189 16.6803,12.9459 16.6803,12.9459" id="Stroke-3"></path>
             <path d="M8.3126,7.1331 C8.3126,8.1021 7.5276,8.8871 6.5586,8.8871 C5.5896,8.8871 4.8046,8.1021 4.8046,7.1331 C4.8046,6.1641 5.5896,5.3791 6.5586,5.3791 C7.5276,5.3801 8.3126,6.1641 8.3126,7.1331 Z" id="Stroke-5"></path>

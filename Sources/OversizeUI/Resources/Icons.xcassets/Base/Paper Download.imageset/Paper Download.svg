@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="24px"  height="24px"  viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>Iconly/Light/Paper Download</title>
-    <g id="Iconly/Light/Paper-Download" stroke="#000000"  stroke-width="1.5"  fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-        <g id="Paper-Download" transform="translate(3.500000, 2.000000)" stroke="#000000"  stroke-width="1.5" >
+    <g id="Iconly/Light/Paper-Download" stroke="#000000"  stroke-width="2"  fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Paper-Download" transform="translate(3.500000, 2.000000)" stroke="#000000"  stroke-width="2" >
             <path d="M11.2367,0.761771154 L4.5847,0.761771154 C2.5047,0.7538 0.8007,2.4108 0.7507,4.4908 L0.7507,15.2278 C0.7057,17.3298 2.3737,19.0698 4.4747,19.1148 C4.5117,19.1148 4.5487,19.1158 4.5847,19.1148 L12.5727,19.1148 C14.6627,19.0408 16.3147,17.3188 16.302765,15.2278 L16.302765,6.0378 L11.2367,0.761771154 Z" id="Stroke-1"></path>
             <path d="M10.9749,0.7501 L10.9749,3.6591 C10.9749,5.0791 12.1239,6.2301 13.5439,6.2341 L16.2979,6.2341" id="Stroke-3"></path>
             <line x1="8.1419" y1="13.9498" x2="8.1419" y2="7.9088" id="Stroke-5"></line>
