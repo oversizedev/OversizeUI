@@ -20,7 +20,7 @@ struct GridSelectDemo: View {
                     GridSelect(items, selection: $selection,
                                content: { item, _ in
                                    VStack {
-                                       Icon(.circle)
+                                       IconDeprecated(.circle)
                                        Text(item)
                                    }.padding()
                                })
@@ -29,7 +29,7 @@ struct GridSelectDemo: View {
                 GridSelect(items2, selection: $selection,
                            content: { item, _ in
                                VStack {
-                                   Icon(.circle)
+                                   IconDeprecated(.circle)
                                    Text(item)
                                }.padding()
                            })

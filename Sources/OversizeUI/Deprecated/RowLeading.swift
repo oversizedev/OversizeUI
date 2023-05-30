@@ -31,7 +31,7 @@ internal struct RowLeading: View {
     internal var body: some View {
         switch type {
         case let .icon(icon):
-            Icon(icon)
+            IconDeprecated(icon)
 
         case let .image(image, color):
             image
@@ -47,7 +47,7 @@ internal struct RowLeading: View {
 
         case let .iconOnSurface(icon):
             Surface {
-                Icon(icon)
+                IconDeprecated(icon)
             }
             .surfaceStyle(.secondary)
             .surfaceBackgroundColor(iconBackgroundColor)

@@ -15,8 +15,10 @@ public struct LoaderOverlayView: View {
     private let showText: Bool
     private let text: String
     private let surface: Bool
+    private let isShowBackground: Bool
 
     @Binding var isLoading: Bool
+    
 
     @State private var jump = false
     @State private var rotationImage = false
@@ -26,6 +28,7 @@ public struct LoaderOverlayView: View {
         showText = false
         text = ""
         surface = false
+        isShowBackground = true
         _isLoading = isLoading
     }
 
@@ -33,22 +36,19 @@ public struct LoaderOverlayView: View {
                 showText: Bool = false,
                 text: String = "",
                 surface: Bool = false,
+                isShowBackground: Bool = true,
                 isLoading: Binding<Bool> = .constant(true))
     {
         loaderType = type
         self.showText = showText
         self.text = text
         self.surface = surface
+        self.isShowBackground = isShowBackground
         _isLoading = isLoading
     }
 
     public var body: some View {
-        ZStack {
-            #if os(iOS)
-            BlurView()
-            #else
-            Color.surfaceSecondary.opacity(0.5)
-            #endif
+
 
             VStack {
                 Spacer()
@@ -89,9 +89,16 @@ public struct LoaderOverlayView: View {
 
                 Spacer()
             }
-        }
-        .ignoresSafeArea()
-        .opacity(isLoading ? 1 : 0)
+            .frame(
+                maxWidth: .infinity,
+                maxHeight: .infinity,
+                alignment: .center
+            )
+            .background(
+                .ultraThinMaterial.opacity(isShowBackground ? 1 : 0),
+                ignoresSafeAreaEdges: .all
+            )
+            .opacity(isLoading ? 1 : 0)
     }
 
     @ViewBuilder
@@ -125,13 +132,19 @@ public struct LoaderOverlayView: View {
     }
 }
 
+public extension View {
+    func loader(_ text: String? = nil, isPresented: Binding<Bool>) -> some View {
+        self.overlay {
+            LoaderOverlayView(text: text ?? "", isLoading: isPresented)
+        }
+    }
+}
+
 struct LoaderOverlayView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            ScrollView {
-                Text("Text")
-            }
-            .loading(true)
+            Spacer()
         }
+        .loader(isPresented: .constant(true))
     }
 }

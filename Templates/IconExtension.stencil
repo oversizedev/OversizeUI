@@ -1,0 +1,83 @@
+// swiftlint:disable all
+// Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
+
+{% if catalogs %}
+{% macro hasValuesBlock assets filter %}
+  {%- for asset in assets -%}
+    {%- if asset.type == filter -%}
+      1
+    {%- elif asset.items -%}
+      {% call hasValuesBlock asset.items filter %}
+    {%- endif -%}
+  {%- endfor -%}
+{% endmacro %}
+{% set enumName %}{{param.enumName|default:"Asset"}}{% endset %}
+{% set imageType %}{{param.imageTypeName|default:"ImageAsset"}}{% endset %}
+{% set forceNamespaces %}{{param.forceProvidesNamespaces|default:"false"}}{% endset %}
+{% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
+{% set hasImage %}{% for catalog in catalogs %}{% call hasValuesBlock catalog.assets "image" %}{% endfor %}{% endset %}
+import SwiftUI
+
+// swiftlint:disable superfluous_disable_command file_length implicit_return
+
+// MARK: - Asset Catalogs
+
+{% macro enumBlock assets %}
+  {% call casesBlock assets %}
+  {% if param.allValues %}
+
+
+  {% set hasItems %}{% call hasValuesBlock assets "image" %}{% endset %}
+  {% if hasItems %}
+  @available(*, deprecated, message: "All values properties are now deprecated")
+  {{accessModifier}} static let allImages: [{{imageType}}] = [
+    {% filter indent:2," ",true %}{% call allValuesBlock assets "image" "" %}{% endfilter %}
+  ]
+  {% endif %}
+  
+  // swiftlint:enable trailing_comma
+  {% endif %}
+{% endmacro %}
+{% macro casesBlock assets %}
+  {% for asset in assets %}
+  {% if asset.type == "image" %}
+        {{accessModifier}} static let {{asset.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{imageType}}(path: "{{asset.value}}")
+  {% elif asset.items and ( forceNamespaces == "true" or asset.isNamespaced == "true" ) %}
+    {{accessModifier}} enum {{asset.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
+{% filter indent:0,"    ",true %}{% call casesBlock asset.items %}{% endfilter %}
+    }
+  {% elif asset.items %}
+  {% call casesBlock asset.items %}
+  {% endif %}
+  {% endfor %}
+{% endmacro %}
+{% macro allValuesBlock assets filter prefix %}
+  {% for asset in assets %}
+  {% if asset.type == filter %}
+  {{prefix}}{{asset.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}},
+  {% elif asset.items and ( forceNamespaces == "true" or asset.isNamespaced == "true" ) %}
+  {% set prefix2 %}{{prefix}}{{asset.name|swiftIdentifier:"pretty"|escapeReservedKeywords}}.{% endset %}
+  {% call allValuesBlock asset.items filter prefix2 %}
+  {% elif asset.items %}
+  {% call allValuesBlock asset.items filter prefix %}
+  {% endif %}
+  {% endfor %}
+{% endmacro %}
+// swiftlint:disable identifier_name line_length nesting type_body_length type_name
+{{accessModifier}} extension {{enumName}} {
+  {% if catalogs.count > 1 or param.forceFileNameEnum %}
+  {% for catalog in catalogs %}
+  {{accessModifier}} enum {{catalog.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
+    {% if catalog.assets %}
+    {% filter indent:2," ",true %}{% call enumBlock catalog.assets %}{% endfilter %}
+    {% endif %}
+  }
+  {% endfor %}
+  {% else %}
+  {% call enumBlock catalogs.first.assets %}
+  {% endif %}
+}
+
+{% else %}
+// No assets found
+{% endif %}

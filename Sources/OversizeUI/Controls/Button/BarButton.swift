@@ -123,9 +123,9 @@ public struct BarButton: View {
     private var label: some View {
         switch type {
         case .close:
-            Icon(.xMini)
+            IconDeprecated(.xMini)
         case .back:
-            Icon(.arrowLeft)
+            IconDeprecated(.arrowLeft)
         case let .secondary(text, _):
             Text(text)
         case let .accent(text, _):
@@ -133,9 +133,9 @@ public struct BarButton: View {
         case let .primary(text, _):
             Text(text)
         case .closeAction:
-            Icon(.xMini, color: .onSurfaceMediumEmphasis)
+            IconDeprecated(.xMini, color: .onSurfaceMediumEmphasis)
         case .backAction:
-            Icon(.arrowLeft, color: .onSurfaceMediumEmphasis)
+            IconDeprecated(.arrowLeft, color: .onSurfaceMediumEmphasis)
         case let .disabled(text):
             Text(text)
         case let .image(image, _):
@@ -143,7 +143,7 @@ public struct BarButton: View {
                 .renderingMode(.template)
                 .onSurfaceHighEmphasisForegroundColor()
         case let .icon(icon, _):
-            Icon(icon, color: .onSurfaceMediumEmphasis)
+            IconDeprecated(icon, color: .onSurfaceMediumEmphasis)
         }
     }
 }

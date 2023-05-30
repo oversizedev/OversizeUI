@@ -108,7 +108,7 @@ public struct RowDeprecated: View {
                 }
 
                 if isShowArrowIcon {
-                    Icon(.chevronRight, color: .onSurfaceDisabled)
+                    IconDeprecated(.chevronRight, color: .onSurfaceDisabled)
                 }
             }
         }
@@ -141,7 +141,7 @@ public struct RowDeprecated: View {
                 сlearAction?()
             } label: {
                 ZStack {
-                    Icon(.xMini, color: .onSurfaceDisabled)
+                    IconDeprecated(.xMini, color: .onSurfaceDisabled)
                         .background(
                             RoundedRectangle(cornerRadius: .small, style: .continuous)
                                 .fillSurfaceSecondary()
@@ -236,18 +236,18 @@ struct ListRowDeprecated_Previews: PreviewProvider {
             Row("Title", subtitle: "Subtitle")
 
             Row("Title", subtitle: "Subtitle") {
-                Icon(.calendar)
+                IconDeprecated(.calendar)
             }
 
             Radio(isOn: true, label: {
                 Row("Title", subtitle: "Subtitle") {
-                    Icon(.calendar)
+                    IconDeprecated(.calendar)
                 }
             })
 
             Checkbox(isOn: .constant(true), label: {
                 Row("Title", subtitle: "Subtitle") {
-                    Icon(.calendar)
+                    IconDeprecated(.calendar)
                 }
                 .rowOnSurface()
             })

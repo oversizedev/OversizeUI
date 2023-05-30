@@ -5,6 +5,21 @@
 
 import SwiftUI
 
+public protocol RowLeadingContentProtocol: View {}
+
+public struct RowLeadingContent<Content: RowLeadingContentProtocol>: View {// where Content: View {
+    
+    private let content: Content
+    
+    public init(@ViewBuilder content: () -> Content) {
+        self.content = content()
+    }
+    
+    public var body: some View {
+        content
+    }
+}
+
 public enum RowClearIconStyle {
     case `default`, onSurface
 }
@@ -20,6 +35,9 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
 
     private let title: String
     private let subtitle: String?
+    
+    private let leadingSize: CGSize?
+    private let leadingRadius: CGFloat?
 
     private let leadingLabel: LeadingLabel?
     private let trailingLabel: TrailingLabel?
@@ -52,6 +70,8 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
         self.action = action
         leadingLabel = leading()
         trailingLabel = trailing()
+        leadingSize = nil
+        leadingRadius = nil
     }
 
     @available(*, deprecated, message: "Use leading: {} and tralling: {}")
@@ -70,6 +90,8 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
         self.action = action
         leadingLabel = nil
         trailingLabel = nil
+        leadingSize = nil
+        leadingRadius = nil
     }
 
     public var body: some View {
@@ -92,6 +114,9 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
         VStack(alignment: .leading) {
             HStack(spacing: .zero) {
                 leadingLabel
+                    .scaledToFill()
+                    .frame(width: leadingSize?.width, height: leadingSize?.height)
+                    .cornerRadius(leadingRadius ?? 0)
                     .padding(.trailing, .small)
 
                 if textAlignment == .trailing || textAlignment == .center {
@@ -117,15 +142,18 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
                     .padding(.leading, .xxSmall)
 
                 if isShowArrowIcon {
-                    Icon(.chevronRight, color: .onSurfaceDisabled)
+                    Icons.Base.arrowRight2.outline
+                        .icon(.onSurfaceDisabled)
                 }
             }
         }
         .padding(controlPadding)
     }
+    
+
 
     private var text: some View {
-        VStack(alignment: textAlignment, spacing: .xxxSmall) {
+        VStack(alignment: textAlignment, spacing: .zero) {
             Text(title)
                 .headline(.medium)
                 .foregroundColor(.onSurfaceHighEmphasis)
@@ -145,7 +173,7 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
                 сlearAction?()
             } label: {
                 ZStack {
-                    Icon(.xMini, color: .onSurfaceDisabled)
+                    IconDeprecated(.xMini, color: .onSurfaceDisabled)
                         .background(
                             RoundedRectangle(cornerRadius: .small, style: .continuous)
                                 .fillSurfaceSecondary()
@@ -176,6 +204,108 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
     }
 }
 
+// MARK: - Icon init
+
+public extension Row where LeadingLabel == Icon {
+    init(_ title: String,
+         subtitle: String? = nil,
+         action: (() -> Void)? = nil,
+         @ViewBuilder leading: () -> LeadingLabel,
+         @ViewBuilder trailing: () -> TrailingLabel)
+    {
+        self.title = title
+        self.subtitle = subtitle
+        self.action = action
+        leadingLabel = leading()
+        trailingLabel = trailing()
+        leadingSize = nil
+        leadingRadius = nil
+    }
+}
+
+// MARK: - Image init
+
+public extension Row where LeadingLabel == Image, TrailingLabel == EmptyView {
+    init(_ title: String,
+         subtitle: String? = nil,
+         action: (() -> Void)? = nil,
+         @ViewBuilder leading: () -> LeadingLabel)
+    {
+        self.title = title
+        self.subtitle = subtitle
+        self.action = action
+        leadingLabel = leading().resizable()
+        trailingLabel = nil
+        leadingSize = .init(
+            width: subtitle == nil ? 24 : 48,
+            height: subtitle == nil ? 24 : 48
+        )
+        leadingRadius = 4
+    }
+}
+
+public extension Row where LeadingLabel == Image, TrailingLabel == EmptyView {
+    init(_ title: String,
+         subtitle: String? = nil,
+         @ViewBuilder leading: () -> LeadingLabel)
+    {
+        self.title = title
+        self.subtitle = subtitle
+        self.action = nil
+        leadingLabel = leading().resizable()
+        trailingLabel = nil
+        leadingSize = .init(
+            width: subtitle == nil ? 24 : 48,
+            height: subtitle == nil ? 24 : 48
+        )
+        leadingRadius = 4
+    }
+}
+
+public extension Row where LeadingLabel == Image {
+    init(_ title: String,
+         subtitle: String? = nil,
+         @ViewBuilder leading: () -> LeadingLabel,
+         @ViewBuilder trailing: () -> TrailingLabel)
+    {
+        self.title = title
+        self.subtitle = subtitle
+        self.action = nil
+        leadingLabel = leading()
+            .resizable()
+        trailingLabel = trailing()
+        leadingSize = .init(
+            width: subtitle == nil ? 24 : 48,
+            height: subtitle == nil ? 24 : 48
+        )
+        leadingRadius = 4
+    }
+}
+
+public extension Row where LeadingLabel == Image {
+    init(_ title: String,
+         subtitle: String? = nil,
+         action: (() -> Void)? = nil,
+         @ViewBuilder leading: () -> LeadingLabel,
+         @ViewBuilder trailing: () -> TrailingLabel)
+    {
+        self.title = title
+        self.subtitle = subtitle
+        self.action = action
+        leadingLabel = leading()
+            .resizable()
+            //.renderingMode(.template)
+        trailingLabel = trailing()
+        leadingSize = .init(
+            width: subtitle == nil ? 24 : 48,
+            height: subtitle == nil ? 24 : 48
+        )
+        leadingRadius = 4
+    }
+}
+
+// MARK: - EmptyView
+
 public extension Row where LeadingLabel == EmptyView, TrailingLabel == EmptyView {
     init(_ title: String,
          subtitle: String? = nil,
@@ -186,6 +316,8 @@ public extension Row where LeadingLabel == EmptyView, TrailingLabel == EmptyView
         self.action = action
         leadingLabel = nil
         trailingLabel = nil
+        leadingSize = nil
+        leadingRadius = nil
     }
 }
 
@@ -200,6 +332,8 @@ public extension Row where TrailingLabel == EmptyView {
         self.action = action
         leadingLabel = leading()
         trailingLabel = nil
+        leadingSize = nil
+        leadingRadius = nil
     }
 
     init(_ title: String,
@@ -211,6 +345,8 @@ public extension Row where TrailingLabel == EmptyView {
         action = nil
         leadingLabel = leading()
         trailingLabel = nil
+        leadingSize = nil
+        leadingRadius = nil
     }
 }
 
@@ -225,6 +361,8 @@ public extension Row where LeadingLabel == EmptyView {
         self.action = action
         leadingLabel = nil
         trailingLabel = trailing()
+        leadingSize = nil
+        leadingRadius = nil
     }
 }
 
@@ -292,18 +430,18 @@ struct ListRow_Previews: PreviewProvider {
             Row("Title", subtitle: "Subtitle")
 
             Row("Title", subtitle: "Subtitle") {
-                Icon(.calendar)
+                IconDeprecated(.calendar)
             }
 
             Radio(isOn: true, label: {
                 Row("Title", subtitle: "Subtitle") {
-                    Icon(.calendar)
+                    IconDeprecated(.calendar)
                 }
             })
 
             Checkbox(isOn: .constant(true), label: {
                 Row("Title", subtitle: "Subtitle") {
-                    Icon(.calendar)
+                    IconDeprecated(.calendar)
                 }
                 .rowOnSurface()
             })

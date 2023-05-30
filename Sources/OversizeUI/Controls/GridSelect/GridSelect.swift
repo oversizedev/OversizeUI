@@ -98,7 +98,7 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
     private var itemBackground: some View {
         ZStack {
             getSelection(selectionStyle: style.seletionStyle)
-            getSelectionIcon(icon: style.icon)
+            getSelectionIconDeprecated(icon: style.icon)
             selectionView()
         }
     }
@@ -151,7 +151,7 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
     }
 
     @ViewBuilder
-    private func getSelectionIcon(icon: GridSelectSeletionIconStyle) -> some View {
+    private func getSelectionIconDeprecated(icon: GridSelectSeletionIconStyle) -> some View {
         switch icon {
         case .none:
             EmptyView()
@@ -163,7 +163,7 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
                     Circle()
                         .foregroundColor(Color.surfacePrimary)
                         .shadowElevaton(.z2)
-                    Icon(.checkMini, color: .onSurfaceHighEmphasis)
+                    IconDeprecated(.checkMini, color: .onSurfaceHighEmphasis)
                 }.frame(width: Space.large.rawValue, height: Space.large.rawValue)
                     .padding(.small)
             }
@@ -218,7 +218,7 @@ struct GridSelect_Preview: PreviewProvider {
                 GridSelect(items, selection: $selection,
                            content: { item, _ in
                                VStack {
-                                   Icon(.circle)
+                                   IconDeprecated(.circle)
                                    Text(item)
                                }.padding()
                            })
@@ -227,7 +227,7 @@ struct GridSelect_Preview: PreviewProvider {
                 GridSelect(items, selection: $selection,
                            content: { item, _ in
                                VStack {
-                                   Icon(.circle)
+                                   IconDeprecated(.circle)
                                    Text(item)
                                }.padding()
                            })

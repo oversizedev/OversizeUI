@@ -62,7 +62,7 @@ public struct RowTitle: View {
             Button {
                 action()
             } label: {
-                Icon(.chevronRight)
+                IconDeprecated(.chevronRight)
                     .iconColor(.onSurfaceMediumEmphasis)
                     .offset(y: titleButtonPosition == .leading ? 1.5 : 0)
             }

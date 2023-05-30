@@ -140,7 +140,7 @@ public struct SectionView<Content: View>: View {
             Button {
                 action()
             } label: {
-                Icon(.chevronRight)
+                IconDeprecated(.chevronRight)
                     .iconColor(.onSurfaceMediumEmphasis)
                     .offset(y: titleButtonPosition == .leading ? 1.5 : 0)
             }
@@ -222,7 +222,7 @@ struct SectionView_Previews: PreviewProvider {
         VStack(spacing: .zero) {
             SectionView("App") {
                 Row("Label") {
-                    Icon(.user)
+                    IconDeprecated(.user)
                 }
             }
             .sectionTitlePosition(.inside)
@@ -230,10 +230,10 @@ struct SectionView_Previews: PreviewProvider {
             SectionView("Feedback") {
                 VStack(spacing: .zero) {
                     Row("Label") {
-                        Icon(.user)
+                        IconDeprecated(.user)
                     }
                     Row("Label") {
-                        Icon(.user)
+                        IconDeprecated(.user)
                     }
                 }
             }
@@ -243,11 +243,11 @@ struct SectionView_Previews: PreviewProvider {
             SectionView("Feedback") {
                 VStack(spacing: .zero) {
                     Row("Label") {
-                        Icon(.user)
+                        IconDeprecated(.user)
                     }
 
                     Row("Label") {
-                        Icon(.user)
+                        IconDeprecated(.user)
                     }
                 }
             }
@@ -268,7 +268,7 @@ struct SectionView_Previews: PreviewProvider {
         VStack(spacing: .zero) {
             SectionView("App") {
                 Row("Label") {
-                    Icon(.user)
+                    IconDeprecated(.user)
                 }
             }
             .sectionTitlePosition(.inside)
@@ -278,10 +278,10 @@ struct SectionView_Previews: PreviewProvider {
             SectionView("Feedback") {
                 VStack(spacing: .zero) {
                     Row("Label") {
-                        Icon(.user)
+                        IconDeprecated(.user)
                     }
                     Row("Label") {
-                        Icon(.user)
+                        IconDeprecated(.user)
                     }
                 }
             }
@@ -302,7 +302,7 @@ struct SectionView_Previews: PreviewProvider {
         VStack(spacing: .zero) {
             SectionView("App") {
                 Row("Label") {
-                    Icon(.user)
+                    IconDeprecated(.user)
                 }
             }
             .sectionTitlePosition(.inside)
@@ -312,10 +312,10 @@ struct SectionView_Previews: PreviewProvider {
             SectionView("Feedback") {
                 VStack(spacing: .zero) {
                     Row("Label") {
-                        Icon(.user)
+                        IconDeprecated(.user)
                     }
                     Row("Label") {
-                        Icon(.user)
+                        IconDeprecated(.user)
                     }
                 }
             }
@@ -336,17 +336,17 @@ struct SectionView_Previews: PreviewProvider {
         VStack(spacing: .zero) {
             SectionView("App") {
                 Row("Label") {
-                    Icon(.user)
+                    IconDeprecated(.user)
                 }
             }
 
             SectionView("Feedback") {
                 VStack(spacing: .zero) {
                     Row("Label") {
-                        Icon(.user)
+                        IconDeprecated(.user)
                     }
                     Row("Label") {
-                        Icon(.user)
+                        IconDeprecated(.user)
                     }
                 }
             }
@@ -364,7 +364,7 @@ struct SectionView_Previews: PreviewProvider {
         VStack(spacing: .zero) {
             SectionView("App") {
                 Row("Label") {
-                    Icon(.user)
+                    IconDeprecated(.user)
                 }
             }
             .sectionViewStyle(.smallIndent)
@@ -372,10 +372,10 @@ struct SectionView_Previews: PreviewProvider {
             SectionView("Feedback") {
                 VStack(spacing: .zero) {
                     Row("Label") {
-                        Icon(.user)
+                        IconDeprecated(.user)
                     }
                     Row("Label") {
-                        Icon(.user)
+                        IconDeprecated(.user)
                     }
                 }
             }
@@ -395,7 +395,7 @@ struct SectionView_Previews: PreviewProvider {
         VStack(spacing: .zero) {
             SectionView("App") {
                 Row("Label") {
-                    Icon(.user)
+                    IconDeprecated(.user)
                 }
             }
             .sectionViewStyle(.edgeToEdge)
@@ -403,10 +403,10 @@ struct SectionView_Previews: PreviewProvider {
             SectionView("Feedback") {
                 VStack(spacing: .zero) {
                     Row("Label") {
-                        Icon(.user)
+                        IconDeprecated(.user)
                     }
                     Row("Label") {
-                        Icon(.user)
+                        IconDeprecated(.user)
                     }
                 }
             }

@@ -123,7 +123,7 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
         case .none:
             EmptyView()
         case .icon:
-            Icon(.xMini, color: .onSurfaceMediumEmphasis)
+            IconDeprecated(.xMini, color: .onSurfaceMediumEmphasis)
                 .background {
                     Circle()
                         .fill(Color.backgroundTertiary)

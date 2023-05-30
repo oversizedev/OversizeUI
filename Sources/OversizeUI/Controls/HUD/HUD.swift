@@ -1,235 +1,170 @@
 //
-// Copyright © 2021 Alexander Romanov
-// HUD.swift, created on 26.04.2021
-//
+// Copyright © 2023 Alexander Romanov
+// File.swift, created on 22.05.2023
+//  
 
 import SwiftUI
 
-public enum HUDType {
-    case hud, alert
+public struct HUD<Title, Icon>: View where Title: View, Icon: View {
+    
+    @Environment(\.screenSize) var screenSize
+    
+    private let text: String?
+    
+    private let title: Title?
+    private let icon: Icon?
+    
+    private let isAutoHide: Bool
+    
+    @Binding private var isPresented: Bool
+    
+    @State private var bottomOffset: CGFloat = 0
+    @State private var opacity: CGFloat = 0
+    
+    // MARK: Initializers
+    public init(
+        autoHide: Bool = true,
+        isPresented: Binding<Bool>,
+        @ViewBuilder title: () -> Title,
+        @ViewBuilder icon: () -> Icon
+    ) {
+        self._isPresented = isPresented
+        self.text = nil
+        self.title = title()
+        self.icon = icon()
+        self.isAutoHide = autoHide
+    }
+    
+    
+    public var body: some View {
+        HStack(spacing: .xSmall) {
+            if icon != nil {
+                icon
+            }
+            if let text {
+                
+                Text(text)
+                    .body(.medium)
+                    .foregroundColor(.onSurfaceHighEmphasis)
+                
+            } else if let title {
+                title
+            }
+        }
+        .padding(.leading, icon == nil ? .medium : .small)
+        .padding(.trailing, .medium)
+        .padding(.vertical, .xSmall)
+        .background(
+            Capsule()
+                .foregroundColor(Color.surfacePrimary)
+                .shadowElevaton(.z2)
+        )
+        .padding(.small)
+        .opacity(opacity)
+        .offset(y: bottomOffset)
+        .onChange(of: isPresented, perform: { present in
+            if present {
+                presentAnimated()
+            } else {
+                dismissAnimated()
+            }
+        })
+    }
+    
+    private func presentAnimated() {
+        withAnimation {
+            bottomOffset = 0
+            opacity = 1
+        }
+        if isAutoHide {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                withAnimation {
+                    isPresented = false
+                }
+            }
+        }
+    }
+    
+    private func dismissAnimated() {
+        withAnimation {
+            bottomOffset = -200
+            opacity = 0
+        }
+    }
 }
 
-public class HUD: ObservableObject {
-    @Published public var isPresented: Bool = false
-    public var title: String
-    public var icon: IconsNames?
-    public var image: Image?
-    @Published public var type: HUDType = .hud
-
-    public init(title: String = "") {
-        self.title = title
-        type = .hud
+public extension HUD where Title == EmptyView, Icon == EmptyView {
+    init(
+        _ text: String,
+        autoHide: Bool = true,
+        isPresented: Binding<Bool>
+    ) {
+        self._isPresented = isPresented
+        self.text = text
+        self.title = nil
+        self.icon = nil
+        self.isAutoHide = autoHide
     }
+}
 
-    public init(title: String = "", icon: IconsNames) {
-        self.title = title
-        self.icon = icon
-        type = .hud
+public extension HUD where Title == EmptyView {
+    init(
+        _ text: String,
+        autoHide: Bool = true,
+        isPresented: Binding<Bool>,
+        @ViewBuilder icon: () -> Icon
+    ) {
+        self._isPresented = isPresented
+        self.text = text
+        self.title = nil
+        self.isAutoHide = autoHide
+        self.icon = icon()
     }
+}
 
-    public init(title: String = "", image: Image) {
-        self.title = title
-        self.image = image
-        type = .alert
-    }
-
-    public func show(title: String) {
-        self.title = title
-        type = .hud
-        withAnimation {
-            isPresented = true
-        }
-    }
-
-    public func show(title: String, icon: IconsNames, type: HUDType = .hud) {
-        self.title = title
-        self.icon = icon
-        self.type = type
-        withAnimation {
-            isPresented = true
-        }
-    }
-
-    public func show(title: String, image: Image, type: HUDType = .hud) {
-        self.title = title
-        self.image = image
-        self.type = type
-        withAnimation {
-            isPresented = true
-        }
+public extension HUD where Icon == EmptyView {
+    init(
+        autoHide: Bool = true,
+        isPresented: Binding<Bool>,
+        @ViewBuilder title: () -> Title
+    ) {
+        self._isPresented = isPresented
+        self.text = nil
+        self.title = title()
+        self.icon = nil
+        self.isAutoHide = autoHide
     }
 }
 
 public extension View {
-    func hud(isPresented: Binding<Bool>,
-             type: Binding<HUDType>,
-             @ViewBuilder content: () -> some View) -> some View
-    {
-        ZStack(alignment: type.wrappedValue == .hud ? .top : .center) {
-            self
-            // .blur(radius: type.wrappedValue == .alert && isPresented.wrappedValue ? 10 : 0)
-
-            if isPresented.wrappedValue {
-                HUDSurfaceView(type: type, content: content)
-                    .transition(
-                        type.wrappedValue == .hud
-                            ? AnyTransition.move(edge: .top).combined(with: .opacity)
-                            : AnyTransition.opacity.animation(.default)
-                    )
-                    .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                            withAnimation {
-                                isPresented.wrappedValue = false
-                            }
-                        }
-                    }
-                    .zIndex(1)
-            }
+    func hud(_ text: String, isPresented: Binding<Bool>) -> some View {
+        self.overlay(alignment: .top) {
+            HUD(text, isPresented: isPresented)
         }
     }
-}
-
-public struct HUDSurfaceView<Content: View>: View {
-    public let content: Content
-    @Binding public var type: HUDType
-
-    public init(type: Binding<HUDType>, @ViewBuilder content: () -> Content) {
-        _type = type
-        self.content = content()
-    }
-
-    public var body: some View {
-        #if os(iOS)
-        if #available(iOS 15.0, *) {
-            content
-                .padding(.top, topPadding)
-                .padding(.horizontal, horizontalPadding)
-                .padding(.bottom, bottomPadding)
-                .background(backgroundMaterial(type: type),
-                            in: backgroundShape(type: type))
-                .shadowElevaton(type == .hud ? .z2 : .z0)
-        } else {
-            content
-                .padding(.top, topPadding)
-                .padding(.horizontal, horizontalPadding)
-                .padding(.bottom, bottomPadding)
-                .background(background(type: type))
-        }
-        #else
-        content
-            .padding(.top, topPadding)
-            .padding(.horizontal, horizontalPadding)
-            .padding(.bottom, bottomPadding)
-            .background(background(type: type))
-        #endif
-    }
-
-    #if os(iOS)
-    @available(iOS 15.0, *)
-    private func backgroundMaterial(type: HUDType) -> Material {
-        switch type {
-        case .hud:
-            return .regular
-        case .alert:
-            return .ultraThinMaterial
+    
+    func hud<Icon: View>(_ text: String, isPresented: Binding<Bool>, @ViewBuilder icon: () -> Icon) -> some View {
+        self.overlay(alignment: .top) {
+            HUD(text, isPresented: isPresented, icon: icon)
         }
     }
-    #endif
-
-    private func backgroundShape(type: HUDType) -> AnyShape {
-        switch type {
-        case .hud:
-            return AnyShape(Capsule())
-
-        case .alert:
-            return AnyShape(RoundedRectangle(cornerRadius: Radius.medium, style: .continuous))
+    
+    func hud<Title: View>(isPresented: Binding<Bool>, @ViewBuilder title: () -> Title) -> some View {
+        self.overlay(alignment: .top) {
+            HUD(isPresented: isPresented, title: title)
         }
     }
-
-    @ViewBuilder
-    private func background(type: HUDType) -> some View {
-        switch type {
-        case .hud:
-            Capsule()
-                .foregroundColor(Color.surfacePrimary)
-                .shadowElevaton(.z2)
-        case .alert:
-            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .foregroundColor(Color.surfacePrimary)
-                .shadowElevaton(.z4)
+    
+    func hud<Title: View, Icon: View>(isPresented: Binding<Bool>, @ViewBuilder title: () -> Title, @ViewBuilder icon: () -> Icon) -> some View {
+        self.overlay(alignment: .top) {
+            HUD(isPresented: isPresented, title: title, icon: icon)
         }
     }
-
-    var horizontalPadding: Space {
-        switch type {
-        case .hud:
-            return .medium
-        case .alert:
-            return .medium
-        }
-    }
-
-    var topPadding: Space {
-        switch type {
-        case .hud:
-            return .small
-        case .alert:
-            return .xLarge
-        }
-    }
-
-    var bottomPadding: Space {
-        switch type {
-        case .hud:
-            return .small
-        case .alert:
-            return .xLarge
-        }
-    }
-}
-
-public struct HUDContent: View {
-    public var title: String
-    // public var icon: Icons?
-    public var image: Image?
-    public var type: HUDType
-
-    public init(title: String, image: Image?, type: HUDType = .hud) {
-        self.title = title
-        self.image = image
-        self.type = type
-    }
-
-    public var body: some View {
-        // Text(title)
-        // background(background(type: type))
-        background
-    }
-
-    private var background: some View {
-        Group {
-            switch type {
-            case .hud:
-                HStack {
-//                if let icon = hudState.icon {
-//                    Icon(icon, color: .onSurfaceHighEmphasis)
-//                }
-
-                    Text(title)
-                        .body()
-                        .onSurfaceHighEmphasisForegroundColor()
-                }
-            case .alert:
-                VStack(spacing: .large) {
-                    if let image {
-                        image
-                    }
-
-                    Text(title)
-                        .title3()
-                        .onSurfaceHighEmphasisForegroundColor()
-                }
-                .frame(minWidth: 225)
+    
+    func hudLoader(_ text: String = "Loading", isPresented: Binding<Bool>) -> some View {
+        self.overlay(alignment: .top) {
+            HUD(text, autoHide: false, isPresented: isPresented) {
+                ProgressView()
             }
         }
     }

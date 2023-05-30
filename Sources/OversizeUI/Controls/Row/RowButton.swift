@@ -40,7 +40,7 @@ public struct RowButton: View {
 
                     if icon != .none {
                         Surface {
-                            Icon(icon)
+                            IconDeprecated(icon)
                         }
                         .surfaceStyle(.secondary)
                         .surfaceContentInsets(.xxSmall)

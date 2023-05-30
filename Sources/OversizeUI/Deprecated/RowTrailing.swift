@@ -84,13 +84,13 @@ internal struct RowTrailing: View {
                     .labelsHidden()
 
                 Button(action: action ?? {}, label: {
-                    Icon(.chevronRight, color: .onSurfaceDisabled)
+                    IconDeprecated(.chevronRight, color: .onSurfaceDisabled)
                 })
             }
             .disabled(isPremiumOption && premiumStatus == false)
 
         case .arrowIcon:
-            Icon(.chevronRight, color: .onSurfaceDisabled)
+            IconDeprecated(.chevronRight, color: .onSurfaceDisabled)
 
         case let .timePicker(date: date):
             #if os(watchOS)
