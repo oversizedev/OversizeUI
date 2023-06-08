@@ -62,8 +62,8 @@ public class HUDDeprecated: ObservableObject {
 
 public extension View {
     func hudDeprecated(isPresented: Binding<Bool>,
-             type: Binding<HUDType>,
-             @ViewBuilder content: () -> some View) -> some View
+                       type: Binding<HUDType>,
+                       @ViewBuilder content: () -> some View) -> some View
     {
         ZStack(alignment: type.wrappedValue == .hud ? .top : .center) {
             self
