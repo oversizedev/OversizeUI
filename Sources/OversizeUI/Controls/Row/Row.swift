@@ -7,14 +7,13 @@ import SwiftUI
 
 public protocol RowLeadingContentProtocol: View {}
 
-public struct RowLeadingContent<Content: RowLeadingContentProtocol>: View {// where Content: View {
-    
+public struct RowLeadingContent<Content: RowLeadingContentProtocol>: View { // where Content: View {
     private let content: Content
-    
+
     public init(@ViewBuilder content: () -> Content) {
         self.content = content()
     }
-    
+
     public var body: some View {
         content
     }
@@ -35,7 +34,7 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
 
     private let title: String
     private let subtitle: String?
-    
+
     private let leadingSize: CGSize?
     private let leadingRadius: CGFloat?
 
@@ -149,8 +148,6 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
         }
         .padding(controlPadding)
     }
-    
-
 
     private var text: some View {
         VStack(alignment: textAlignment, spacing: .zero) {
@@ -204,9 +201,62 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
     }
 }
 
+// MARK: - Modificators
+
+public extension Row {
+    func premium(_ premium: Bool = true) -> Row {
+        var control = self
+        control.isPremiumOption = premium
+        return control
+    }
+
+    func rowArrow(_ showArrowIcon: Bool = true) -> Row {
+        var control = self
+        control.isShowArrowIcon = showArrowIcon
+        return control
+    }
+
+    func rowIconBackgroundColor(_ color: Color?) -> Row {
+        var control = self
+        control.iconBackgroundColor = color
+        return control
+    }
+
+    func rowClearButton(style: RowClearIconStyle = .default, action: (() -> Void)?) -> Row {
+        var control = self
+        control.сlearButtonStyle = style
+        control.сlearAction = action
+        return control
+    }
+
+    @available(*, deprecated, message: "Use leading: {} and tralling: {}")
+    func rowLeading(_ leading: RowLeadingType?) -> Row {
+        var control = self
+        control.leadingType = leading
+        return control
+    }
+
+    @available(*, deprecated, message: "Use leading: {} and tralling: {}")
+    func rowTrailing(_ trailing: RowTrailingType?) -> Row {
+        var control = self
+        control.trallingType = trailing
+        return control
+    }
+}
+
+public extension View {
+    func rowOnSurface(_ elevation: Elevation = .z4, backgroundColor: Color? = nil) -> some View {
+        Surface {
+            self.rowContentInset(.zero)
+        }
+        .surfaceBackgroundColor(backgroundColor)
+        .elevation(elevation)
+    }
+}
+
 // MARK: - Icon init
 
-public extension Row where LeadingLabel == Icon {
+public extension Row where LeadingLabel == Icon, TrailingLabel: View {
     init(_ title: String,
          subtitle: String? = nil,
          action: (() -> Void)? = nil,
@@ -251,7 +301,7 @@ public extension Row where LeadingLabel == Image, TrailingLabel == EmptyView {
     {
         self.title = title
         self.subtitle = subtitle
-        self.action = nil
+        action = nil
         leadingLabel = leading().resizable()
         trailingLabel = nil
         leadingSize = .init(
@@ -270,7 +320,7 @@ public extension Row where LeadingLabel == Image {
     {
         self.title = title
         self.subtitle = subtitle
-        self.action = nil
+        action = nil
         leadingLabel = leading()
             .resizable()
         trailingLabel = trailing()
@@ -294,7 +344,7 @@ public extension Row where LeadingLabel == Image {
         self.action = action
         leadingLabel = leading()
             .resizable()
-            //.renderingMode(.template)
+        // .renderingMode(.template)
         trailingLabel = trailing()
         leadingSize = .init(
             width: subtitle == nil ? 24 : 48,
@@ -363,59 +413,6 @@ public extension Row where LeadingLabel == EmptyView {
         trailingLabel = trailing()
         leadingSize = nil
         leadingRadius = nil
-    }
-}
-
-// MARK: - Modificators
-
-public extension Row {
-    func premium(_ premium: Bool = true) -> Row {
-        var control = self
-        control.isPremiumOption = premium
-        return control
-    }
-
-    func rowArrow(_ showArrowIcon: Bool = true) -> Row {
-        var control = self
-        control.isShowArrowIcon = showArrowIcon
-        return control
-    }
-
-    func rowIconBackgroundColor(_ color: Color?) -> Row {
-        var control = self
-        control.iconBackgroundColor = color
-        return control
-    }
-
-    func rowClearButton(style: RowClearIconStyle = .default, action: (() -> Void)?) -> Row {
-        var control = self
-        control.сlearButtonStyle = style
-        control.сlearAction = action
-        return control
-    }
-
-    @available(*, deprecated, message: "Use leading: {} and tralling: {}")
-    func rowLeading(_ leading: RowLeadingType?) -> Row {
-        var control = self
-        control.leadingType = leading
-        return control
-    }
-
-    @available(*, deprecated, message: "Use leading: {} and tralling: {}")
-    func rowTrailing(_ trailing: RowTrailingType?) -> Row {
-        var control = self
-        control.trallingType = trailing
-        return control
-    }
-}
-
-public extension View {
-    func rowOnSurface(_ elevation: Elevation = .z4, backgroundColor: Color? = nil) -> some View {
-        Surface {
-            self.rowContentInset(.zero)
-        }
-        .surfaceBackgroundColor(backgroundColor)
-        .elevation(elevation)
     }
 }
 

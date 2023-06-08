@@ -18,7 +18,6 @@ public struct LoaderOverlayView: View {
     private let isShowBackground: Bool
 
     @Binding var isLoading: Bool
-    
 
     @State private var jump = false
     @State private var rotationImage = false
@@ -48,28 +47,11 @@ public struct LoaderOverlayView: View {
     }
 
     public var body: some View {
+        VStack {
+            Spacer()
 
-
-            VStack {
-                Spacer()
-
-                if surface {
-                    Surface {
-                        VStack(spacing: 20) {
-                            containedView()
-
-                            if showText {
-                                Text(text.isEmpty ? "Loading" : text)
-                                    .headline(.semibold)
-                                    .onSurfaceDisabledForegroundColor()
-                                    .offset(y: 8)
-                            }
-                        }
-                        .padding()
-                    }
-                    .surfaceStyle(.primary)
-                    .elevation(.z4)
-                } else {
+            if surface {
+                Surface {
                     VStack(spacing: 20) {
                         containedView()
 
@@ -81,24 +63,39 @@ public struct LoaderOverlayView: View {
                         }
                     }
                     .padding()
-                    .background {
-                        Capsule()
-                            .fillSurfaceSecondary()
+                }
+                .surfaceStyle(.primary)
+                .elevation(.z4)
+            } else {
+                VStack(spacing: 20) {
+                    containedView()
+
+                    if showText {
+                        Text(text.isEmpty ? "Loading" : text)
+                            .headline(.semibold)
+                            .onSurfaceDisabledForegroundColor()
+                            .offset(y: 8)
                     }
                 }
-
-                Spacer()
+                .padding()
+                .background {
+                    Capsule()
+                        .fillSurfaceSecondary()
+                }
             }
-            .frame(
-                maxWidth: .infinity,
-                maxHeight: .infinity,
-                alignment: .center
-            )
-            .background(
-                .ultraThinMaterial.opacity(isShowBackground ? 1 : 0),
-                ignoresSafeAreaEdges: .all
-            )
-            .opacity(isLoading ? 1 : 0)
+
+            Spacer()
+        }
+        .frame(
+            maxWidth: .infinity,
+            maxHeight: .infinity,
+            alignment: .center
+        )
+        .background(
+            .ultraThinMaterial.opacity(isShowBackground ? 1 : 0),
+            ignoresSafeAreaEdges: .all
+        )
+        .opacity(isLoading ? 1 : 0)
     }
 
     @ViewBuilder
@@ -134,7 +131,7 @@ public struct LoaderOverlayView: View {
 
 public extension View {
     func loader(_ text: String? = nil, isPresented: Binding<Bool>) -> some View {
-        self.overlay {
+        overlay {
             LoaderOverlayView(text: text ?? "", isLoading: isPresented)
         }
     }

@@ -113,32 +113,35 @@ public enum Icons {
     }
 }
 
-
 public struct IconSymbol {
-
     public let path: String
 
     public init(path: String) {
         self.path = path
     }
+
     public var outline: SwiftUI.Image {
-        return SwiftUI.Image(path, bundle: Bundle.module)
+        SwiftUI.Image(path, bundle: Bundle.module)
     }
+
     public var solid: SwiftUI.Image {
-        return SwiftUI.Image("Solid/" + path, bundle: Bundle.module)
+        SwiftUI.Image("Solid/" + path, bundle: Bundle.module)
     }
+
     public var bulk: SwiftUI.Image {
-        return SwiftUI.Image("Bulk/" + path, bundle: Bundle.module)
+        SwiftUI.Image("Bulk/" + path, bundle: Bundle.module)
     }
+
     public var twoTone: SwiftUI.Image {
-        return SwiftUI.Image("TwoTone/" + path, bundle: Bundle.module)
+        SwiftUI.Image("TwoTone/" + path, bundle: Bundle.module)
     }
+
     public var categoryName: String? {
-        return path.components(separatedBy: "/").first
+        path.components(separatedBy: "/").first
     }
 
     public var name: String {
-        return path.components(separatedBy: "/").last ?? ""
+        path.components(separatedBy: "/").last ?? ""
     }
 }
 
@@ -148,6 +151,7 @@ public struct Icon: View {
     public init(_ icon: IconSymbol) {
         self.icon = icon
     }
+
     public var body: some View {
         switch iconStyle {
         case .line: icon.outline
