@@ -1,6 +1,6 @@
 //
 // Copyright © 2023 Alexander Romanov
-// File.swift, created on 22.05.2023
+// HUD.swift, created on 22.05.2023
 //
 
 import SwiftUI

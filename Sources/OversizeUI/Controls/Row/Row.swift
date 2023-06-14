@@ -5,20 +5,6 @@
 
 import SwiftUI
 
-public protocol RowLeadingContentProtocol: View {}
-
-public struct RowLeadingContent<Content: RowLeadingContentProtocol>: View { // where Content: View {
-    private let content: Content
-
-    public init(@ViewBuilder content: () -> Content) {
-        self.content = content()
-    }
-
-    public var body: some View {
-        content
-    }
-}
-
 public enum RowClearIconStyle {
     case `default`, onSurface
 }
