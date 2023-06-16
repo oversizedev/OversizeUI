@@ -73,7 +73,7 @@ public struct SectionView<Content: View>: View {
             }
             .padding(.horizontal, surfaceHorizontalPadding)
         }
-        // .padding(.vertical, surfaceVerticalPaddingSize)
+        .padding(.vertical, surfaceVerticalPaddingSize)
     }
 
     private var titleView: some View {
@@ -190,14 +190,14 @@ public struct SectionView<Content: View>: View {
         }
     }
 
-//    private var surfaceVerticalPaddingSize: CGFloat {
-//        switch style {
-//        case .default:
-//            return Space.small.rawValue
-//        case .smallIndent, .edgeToEdge:
-//            return 2
-//        }
-//    }
+    private var surfaceVerticalPaddingSize: CGFloat {
+        switch style {
+        case .default:
+            return Space.small.rawValue
+        case .smallIndent, .edgeToEdge:
+            return 2
+        }
+    }
 }
 
 public extension SectionView {
