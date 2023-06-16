@@ -237,7 +237,7 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
         return control
     }
 
-    public func bottomToolbar(style: PageViewBottomType = .shadow, ignoreSafeArea: Bool = true, @ViewBuilder bottomToolbar: @escaping () -> some View) -> some View {
+    public func bottomToolbar(style: PageViewBottomType = .shadow, @ViewBuilder bottomToolbar: @escaping () -> some View) -> some View {
         VStack(spacing: .zero) {
             overlay(
                 Group {
@@ -266,7 +266,6 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
                 .background(Color.surfacePrimary.shadowElevaton(style == .shadow ? .z2 : .z0))
             }
         }
-        .ignoresSafeArea(edges: ignoreSafeArea ? .bottom : .top)
     }
 }
 
