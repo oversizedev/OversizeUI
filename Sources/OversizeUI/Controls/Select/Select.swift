@@ -6,40 +6,55 @@
 import SwiftUI
 
 // swiftlint:disable all
-public struct Select<Element, Content, Selection>: View
+public struct Select<Element, Content, Selection, Actions, ContentUnavailable: View>: View
     where
     Content: View,
+    Actions: View,
     Selection: View
 {
     @Environment(\.theme) private var theme: ThemeSettings
     public typealias Data = [Element]
 
     @Binding private var selection: Data.Element
+    @Binding private var showModalBinding: Bool?
     private let data: Data
     private let label: String
     private let content: (Data.Element, Bool) -> Content
+    private let contentUnavailable: ContentUnavailable?
     @State private var selectedIndex: Data.Index? = 0
     private let selectionView: (Data.Element) -> Selection
-    @State private var showModal = false
+    @State private var showModal: Bool = false
     @State private var isSelected = false
+    let actions: Group<Actions>?
 
-    public init(_ label: String,
-                _ data: Data,
-                selection: Binding<Data.Element>,
-                @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
-                @ViewBuilder selectionView: @escaping (Data.Element) -> Selection)
-    {
+    public init(
+        _ label: String,
+        _ data: Data,
+        selection: Binding<Data.Element>,
+        activeModal: Binding<Bool?> = .constant(nil),
+        @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
+        @ViewBuilder selectionView: @escaping (Data.Element) -> Selection,
+        @ViewBuilder actions: @escaping () -> Actions,
+        @ViewBuilder contentUnavailable: () -> ContentUnavailable
+    ) {
         self.label = label
         self.data = data
         self.content = content
         self.selectionView = selectionView
+        self.contentUnavailable = contentUnavailable()
+        self.actions = Group { actions() }
+        _showModalBinding = activeModal
         _selection = selection
     }
 
     public var body: some View {
         ZStack {
             Button {
-                showModal.toggle()
+                if showModalBinding != nil {
+                    showModalBinding?.toggle()
+                } else {
+                    showModal.toggle()
+                }
             } label: {
                 if isSelected, let index = selectedIndex {
                     selectionView(data[index])
@@ -79,30 +94,100 @@ public struct Select<Element, Content, Selection>: View
                 modal
                 #endif
             }
+            .onChange(of: showModalBinding) { state in
+                if let state {
+                    showModal = state
+                }
+            }
         }
     }
 
     private var modal: some View {
         PageView(label) {
-            LazyVStack(alignment: .leading, spacing: .zero) {
-                ForEach(data.indices, id: \.self) { index in
-                    Button(action: {
-                               selectedIndex = index
-                               selection = data[index]
-                               isSelected = true
-                               showModal.toggle()
-                           },
-                           label: {
-                               content(data[index],
-                                       selectedIndex == index)
-                                   .headline()
-                                   .onSurfaceHighEmphasisForegroundColor()
-
-                           })
+            if data.isEmpty, let contentUnavailable {
+                contentUnavailable
+            } else {
+                LazyVStack(alignment: .leading, spacing: .zero) {
+                    ForEach(data.indices, id: \.self) { index in
+                        Radio(isOn: index == selectedIndex) {
+                            selectedIndex = index
+                            selection = data[index]
+                            isSelected = true
+                            showModal.toggle()
+                        } label: {
+                            content(data[index],
+                                    selectedIndex == index)
+                                .headline()
+                                .onSurfaceHighEmphasisForegroundColor()
+                        }
+                    }
                 }
             }
         }
         .leadingBar { BarButton(.close) }
+        .trailingBar { actions }
+    }
+}
+
+public extension Select where ContentUnavailable == Never {
+    init(
+        _ label: String,
+        _ data: Data,
+        selection: Binding<Data.Element>,
+        activeModal: Binding<Bool?> = .constant(nil),
+        @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
+        @ViewBuilder selectionView: @escaping (Data.Element) -> Selection,
+        @ViewBuilder actions: @escaping () -> Actions
+    ) {
+        self.label = label
+        self.data = data
+        self.content = content
+        self.selectionView = selectionView
+        self.actions = Group { actions() }
+        contentUnavailable = nil
+        _showModalBinding = activeModal
+        _selection = selection
+    }
+}
+
+public extension Select where Actions == Never {
+    init(
+        _ label: String,
+        _ data: Data,
+        selection: Binding<Data.Element>,
+        activeModal: Binding<Bool?> = .constant(nil),
+        @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
+        @ViewBuilder selectionView: @escaping (Data.Element) -> Selection,
+        @ViewBuilder contentUnavailable: () -> ContentUnavailable
+    ) {
+        self.label = label
+        self.data = data
+        self.content = content
+        self.selectionView = selectionView
+        actions = nil
+        self.contentUnavailable = contentUnavailable()
+        _showModalBinding = activeModal
+        _selection = selection
+    }
+}
+
+public extension Select where ContentUnavailable == Never, Actions == Never {
+    init(
+        _ label: String,
+        _ data: Data,
+        selection: Binding<Data.Element>,
+        activeModal: Binding<Bool?> = .constant(nil),
+        @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
+        @ViewBuilder selectionView: @escaping (Data.Element) -> Selection
+    ) {
+        self.label = label
+        self.data = data
+        self.content = content
+        self.selectionView = selectionView
+        actions = nil
+        contentUnavailable = nil
+        _showModalBinding = activeModal
+        _selection = selection
     }
 }
 

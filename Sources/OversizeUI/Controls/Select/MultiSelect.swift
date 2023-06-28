@@ -6,10 +6,12 @@
 import SwiftUI
 
 // swiftlint:disable all
-public struct MultiSelect<Element: Equatable, Content, Selection>: View
+public struct MultiSelect<Element: Equatable, Content, Selection, Actions, ContentUnavailable>: View
     where
     Content: View,
-    Selection: View
+    Selection: View,
+    Actions: View,
+    ContentUnavailable: View
 {
     @Environment(\.theme) private var theme: ThemeSettings
     public typealias Data = [Element]
@@ -18,27 +20,41 @@ public struct MultiSelect<Element: Equatable, Content, Selection>: View
     private let data: Data
     private let label: String
     private let content: (Data.Element, Bool) -> Content
+    private let contentUnavailable: ContentUnavailable?
     private let selectionView: (Data) -> Selection
-    @State private var showModal = false
+    @State private var showModal: Bool = false
+    @Binding private var showModalBinding: Bool?
     @State var selectedIndexes: [Int] = []
+    let actions: Group<Actions>?
 
-    public init(_ label: String,
-                _ data: Data,
-                selection: Binding<Data>,
-                @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
-                @ViewBuilder selectionView: @escaping (Data) -> Selection)
-    {
+    public init(
+        _ label: String,
+        _ data: Data,
+        selection: Binding<Data>,
+        activeModal: Binding<Bool?> = .constant(nil),
+        @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
+        @ViewBuilder selectionView: @escaping (Data) -> Selection,
+        @ViewBuilder actions: @escaping () -> Actions,
+        @ViewBuilder contentUnavailable: () -> ContentUnavailable
+    ) {
         self.label = label
         self.data = data
         self.content = content
         self.selectionView = selectionView
+        self.actions = Group { actions() }
+        self.contentUnavailable = contentUnavailable()
+        _showModalBinding = activeModal
         _selection = selection
     }
 
     public var body: some View {
         ZStack {
             Button {
-                showModal.toggle()
+                if showModalBinding != nil {
+                    showModalBinding?.toggle()
+                } else {
+                    showModal.toggle()
+                }
             } label: {
                 if selectedIndexes.isEmpty {
                     Text(label)
@@ -77,6 +93,11 @@ public struct MultiSelect<Element: Equatable, Content, Selection>: View
                 modal
                 #endif
             }
+            .onChange(of: showModalBinding) { state in
+                if let state {
+                    showModal = state
+                }
+            }
         }
         .onAppear {
             if !selection.isEmpty {
@@ -92,28 +113,95 @@ public struct MultiSelect<Element: Equatable, Content, Selection>: View
 
     private var modal: some View {
         PageView(label) {
-            LazyVStack(alignment: .leading, spacing: .zero) {
-                ForEach(data.indices, id: \.self) { index in
-                    let isSelected = selectedIndexes.contains(index)
+            if data.isEmpty, let contentUnavailable {
+                contentUnavailable
+            } else {
+                LazyVStack(alignment: .leading, spacing: .zero) {
+                    ForEach(data.indices, id: \.self) { index in
+                        let isSelected = selectedIndexes.contains(index)
 
-                    Checkbox(isOn:
-                        Binding(get: {
-                            isSelected
-                        }, set: { _ in
-                            if isSelected, let elementIndex = selectedIndexes.firstIndex(of: index) {
-                                selectedIndexes.remove(at: elementIndex)
-                            } else {
-                                selectedIndexes.append(index)
+                        Checkbox(isOn: Binding(
+                            get: { isSelected },
+                            set: { _ in
+                                if isSelected, let elementIndex = selectedIndexes.firstIndex(of: index) {
+                                    selectedIndexes.remove(at: elementIndex)
+                                } else {
+                                    selectedIndexes.append(index)
+                                }
+                                let selectionItems = selectedIndexes.compactMap { data[$0] }
+                                selection = selectionItems
                             }
-                            let selectionItems = selectedIndexes.compactMap { data[$0] }
-                            selection = selectionItems
-                        }), label: {
+                        ), label: {
                             content(data[index], isSelected)
                         })
+                    }
                 }
             }
         }
         .leadingBar { BarButton(.close) }
+        .trailingBar { actions }
+    }
+}
+
+public extension MultiSelect where ContentUnavailable == Never {
+    init(
+        _ label: String,
+        _ data: Data,
+        selection: Binding<Data>,
+        activeModal: Binding<Bool?> = .constant(nil),
+        @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
+        @ViewBuilder selectionView: @escaping (Data) -> Selection,
+        @ViewBuilder actions: @escaping () -> Actions
+    ) {
+        self.label = label
+        self.data = data
+        self.content = content
+        self.selectionView = selectionView
+        self.actions = Group { actions() }
+        contentUnavailable = nil
+        _showModalBinding = activeModal
+        _selection = selection
+    }
+}
+
+public extension MultiSelect where Actions == Never {
+    init(
+        _ label: String,
+        _ data: Data,
+        selection: Binding<Data>,
+        activeModal: Binding<Bool?> = .constant(nil),
+        @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
+        @ViewBuilder selectionView: @escaping (Data) -> Selection,
+        @ViewBuilder contentUnavailable: () -> ContentUnavailable
+    ) {
+        self.label = label
+        self.data = data
+        self.content = content
+        self.selectionView = selectionView
+        actions = nil
+        self.contentUnavailable = contentUnavailable()
+        _showModalBinding = activeModal
+        _selection = selection
+    }
+}
+
+public extension MultiSelect where ContentUnavailable == Never, Actions == Never {
+    init(
+        _ label: String,
+        _ data: Data,
+        selection: Binding<Data>,
+        activeModal: Binding<Bool?> = .constant(nil),
+        @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
+        @ViewBuilder selectionView: @escaping (Data) -> Selection
+    ) {
+        self.label = label
+        self.data = data
+        self.content = content
+        self.selectionView = selectionView
+        actions = nil
+        contentUnavailable = nil
+        _showModalBinding = activeModal
+        _selection = selection
     }
 }
 

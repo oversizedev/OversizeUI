@@ -217,6 +217,16 @@ public extension Surface where Label == Row<EmptyView, EmptyView> {
     }
 }
 
+public extension Surface where Label == Row<Image, EmptyView> {
+    init(action: (() -> Void)? = nil,
+         @ViewBuilder label: () -> Label)
+    {
+        self.label = label()
+        self.action = action
+        forceContentInsets = .init(horizontal: .zero, vertical: .small)
+    }
+}
+
 struct Surface_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
