@@ -24,7 +24,7 @@ public extension View {
             self
         }
     }
-    
+
     @_disfavoredOverload
     @ViewBuilder
     func presentationDragIndicator(_ visibility: Visibility) -> some View {
@@ -34,7 +34,7 @@ public extension View {
             self
         }
     }
-    
+
     @_disfavoredOverload
     @ViewBuilder
     func presentationContentInteraction(_ behavior: PresentationContentInteraction) -> some View {
@@ -44,7 +44,7 @@ public extension View {
             self
         }
     }
-    
+
     @_disfavoredOverload
     @ViewBuilder
     func presentationCompactAdaptation(_ adaptation: PresentationAdaptation) -> some View {
@@ -55,7 +55,7 @@ public extension View {
             self
         }
     }
-    
+
     @_disfavoredOverload
     @ViewBuilder
     func scrollDisabled(_ disabled: Bool) -> some View {
