@@ -25,7 +25,7 @@ public extension View {
         environment(\.sectionTitleInsets, .init(top: .zero, leading: .medium, bottom: .zero, trailing: .medium))
             .environment(\.surfaceContentInsets, .init(top: .medium, leading: .zero, bottom: .medium, trailing: .zero))
     }
-    
+
     func sectionContentCompactRowInsets() -> some View {
         environment(\.sectionTitleInsets, .init(top: .zero, leading: .medium, bottom: .zero, trailing: .medium))
             .environment(\.surfaceContentInsets, .init(top: .xxSmall, leading: .zero, bottom: .xxSmall, trailing: .zero))

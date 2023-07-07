@@ -47,6 +47,7 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
         ScrollViewOffset(offset: $offset) {
             content
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .background(background.ignoresSafeArea())
         .safeAreaInset(edge: .top) { header }
         .onChange(of: offset) { offset in
