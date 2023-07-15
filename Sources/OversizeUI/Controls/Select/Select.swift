@@ -6,7 +6,7 @@
 import SwiftUI
 
 // swiftlint:disable all
-public struct Select<Element, Content, Selection, Actions, ContentUnavailable: View>: View
+public struct Select<Element: Equatable, Content, Selection, Actions, ContentUnavailable: View>: View
     where
     Content: View,
     Actions: View,
@@ -80,7 +80,6 @@ public struct Select<Element, Content, Selection, Actions, ContentUnavailable: V
             )
             .headline(.medium)
             .foregroundColor(.onSurfaceHighEmphasis)
-
             .sheet(isPresented: $showModal) {
                 #if os(iOS)
                 if #available(iOS 16.0, *) {
@@ -97,6 +96,16 @@ public struct Select<Element, Content, Selection, Actions, ContentUnavailable: V
             .onChange(of: showModalBinding) { state in
                 if let state {
                     showModal = state
+                }
+            }
+            .onAppear {
+                let selctedValue = selection
+                var index = 0
+                for dataValue in data {
+                    if selctedValue == dataValue {
+                        selectedIndex = index
+                    }
+                    index += 1
                 }
             }
         }
@@ -206,7 +215,6 @@ struct Select_Preview: PreviewProvider {
                     Text(selected)
                 }
             }
-
             .padding()
         }
     }
