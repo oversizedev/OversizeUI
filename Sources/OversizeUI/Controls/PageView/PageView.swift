@@ -44,10 +44,10 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
     }
 
     public var body: some View {
-        ScrollViewOffset(offset: $offset) {
+        ScrollViewOffset(offset: $offset, coordinateSpace: .named("Page")) {
             content
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: .infinity, alignment: .center)
         .background(background.ignoresSafeArea())
         .safeAreaInset(edge: .top) { header }
         .onChange(of: offset) { offset in
@@ -57,6 +57,7 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
                 }
             }
         }
+        .coordinateSpace(name: "Page")
     }
 
     @ViewBuilder
