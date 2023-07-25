@@ -101,6 +101,7 @@ public struct Avatar: View {
         if let avatar {
             avatar
                 .resizable()
+                .scaledToFill()
                 .frame(width: Space.xxxLarge.rawValue, height: Space.xxxLarge.rawValue)
                 .clipShape(Circle())
                 .overlay(Circle().stroke(strokeColor, lineWidth: 2))
