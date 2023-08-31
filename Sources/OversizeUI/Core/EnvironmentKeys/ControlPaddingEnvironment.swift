@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-public struct ControlPadding {
+public struct ControlMargin {
     public var top: Space = .medium
     public var leading: Space = .medium
     public var bottom: Space = .medium
@@ -87,41 +87,56 @@ public struct ControlPadding {
     }
 }
 
-private struct ControlPaddingKey: EnvironmentKey {
-    public static var defaultValue: ControlPadding = .init(.medium)
+private struct ControlMarginKey: EnvironmentKey {
+    public static var defaultValue: ControlMargin = .init(.medium)
 }
 
 public extension EnvironmentValues {
-    var controlPadding: ControlPadding {
-        get { self[ControlPaddingKey.self] }
-        set { self[ControlPaddingKey.self] = newValue }
+    var controlMargin: ControlMargin {
+        get { self[ControlMarginKey.self] }
+        set { self[ControlMarginKey.self] = newValue }
     }
 }
 
 public extension View {
-    func innerPadding(_ length: Space) -> some View {
-        environment(\.controlPadding, ControlPadding(length))
+    func controlMargin(_ length: Space) -> some View {
+        environment(\.controlMargin, ControlMargin(length))
     }
 
-    func innerPadding(_ edges: Edge.Set, _ length: Space) -> some View {
-        environment(\.controlPadding, ControlPadding(edges, length))
+    func controlMargin(_ edges: Edge.Set, _ length: Space) -> some View {
+        environment(\.controlMargin, ControlMargin(edges, length))
     }
 
-    func innerPadding(_ edges: [Edge.Set], _ length: Space) -> some View {
-        environment(\.controlPadding, ControlPadding(edges, length))
+    func controlMargin(_ edges: [Edge.Set], _ length: Space) -> some View {
+        environment(\.controlMargin, ControlMargin(edges, length))
     }
 }
 
 // MARK: Deprecated methods
 
 public extension View {
-    @available(*, deprecated, renamed: "innerPadding")
+    @available(*, deprecated, renamed: "controlMargin")
     func controlPadding(_ length: Space) -> some View {
-        environment(\.controlPadding, ControlPadding(length))
+        environment(\.controlMargin, ControlMargin(length))
     }
 
-    @available(*, deprecated, renamed: "innerPadding", message: "Set paddings with Edges")
+    @available(*, deprecated, renamed: "controlMargin", message: "Set paddings with Edges")
     func controlPadding(horizontal: Space = .medium, vertical: Space = .medium) -> some View {
-        environment(\.controlPadding, ControlPadding(horizontal: horizontal, vertical: vertical))
+        environment(\.controlMargin, ControlMargin(horizontal: horizontal, vertical: vertical))
+    }
+
+    @available(*, deprecated, renamed: "controlMargin")
+    func innerPadding(_ length: Space) -> some View {
+        environment(\.controlMargin, ControlMargin(length))
+    }
+
+    @available(*, deprecated, renamed: "controlMargin")
+    func innerPadding(_ edges: Edge.Set, _ length: Space) -> some View {
+        environment(\.controlMargin, ControlMargin(edges, length))
+    }
+
+    @available(*, deprecated, renamed: "controlMargin")
+    func innerPadding(_ edges: [Edge.Set], _ length: Space) -> some View {
+        environment(\.controlMargin, ControlMargin(edges, length))
     }
 }

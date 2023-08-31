@@ -11,7 +11,7 @@ public enum RadioAlignment {
 
 public struct Radio<Label: View>: View {
     @Environment(\.isEnabled) private var isEnabled: Bool
-    @Environment(\.rowContentInset) private var contentInset: EdgeSpaceInsets
+    @Environment(\.rowContentMargins) private var contentInset: EdgeSpaceInsets
     private var isOn: Bool
     private let label: () -> Label?
     private let alignment: RadioAlignment

@@ -2,13 +2,12 @@ xcassets:
   - inputs:
       - Sources/OversizeUI/Resources/Icons.xcassets
     outputs:
-      - templatePath: Templates/Icons.stencil
+      - templatePath: Templates/IconsLibraryExtension.stencil
         output: Sources/OversizeUI/Generated/GeneratedIcons.swift
         params:
-          imageTypeName: IconSymbol
-          enumName: Icons
+          imageTypeName: Image
+          forceProvidesNamespaces: true
           publicAccess: 1
-          forceProvidesNamespaces: false
           
   - inputs:
       - Sources/OversizeUI/Resources/Images.xcassets

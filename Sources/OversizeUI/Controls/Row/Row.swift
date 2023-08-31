@@ -12,7 +12,7 @@ public enum RowClearIconStyle {
 public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, TrailingLabel: View {
     @Environment(\.elevation) private var elevation: Elevation
     @Environment(\.controlRadius) var controlRadius: Radius
-    @Environment(\.rowContentInset) var controlPadding: EdgeSpaceInsets
+    @Environment(\.rowContentMargins) var controlMargins: EdgeSpaceInsets
     @Environment(\.multilineTextAlignment) var multilineTextAlignment
     @Environment(\.isPremium) var premiumStatus
     @Environment(\.isAccent) var isAccent
@@ -127,12 +127,12 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
                     .padding(.leading, .xxSmall)
 
                 if isShowArrowIcon {
-                    Icons.Base.arrowRight2.outline
+                    Image.Base.chevronRight
                         .icon(.onSurfaceDisabled)
                 }
             }
         }
-        .padding(controlPadding)
+        .padding(controlMargins)
     }
 
     private var text: some View {
@@ -233,29 +233,10 @@ public extension Row {
 public extension View {
     func rowOnSurface(_ elevation: Elevation = .z4, backgroundColor: Color? = nil) -> some View {
         Surface {
-            self.rowContentInset(.zero)
+            self.rowContentMargins(.zero)
         }
         .surfaceBackgroundColor(backgroundColor)
         .elevation(elevation)
-    }
-}
-
-// MARK: - Icon init
-
-public extension Row where LeadingLabel == Icon, TrailingLabel: View {
-    init(_ title: String,
-         subtitle: String? = nil,
-         action: (() -> Void)? = nil,
-         @ViewBuilder leading: () -> LeadingLabel,
-         @ViewBuilder trailing: () -> TrailingLabel)
-    {
-        self.title = title
-        self.subtitle = subtitle
-        self.action = action
-        leadingLabel = leading()
-        trailingLabel = trailing()
-        leadingSize = nil
-        leadingRadius = nil
     }
 }
 

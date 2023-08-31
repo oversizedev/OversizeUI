@@ -17,7 +17,7 @@ public struct Surface<Label: View>: View {
     @Environment(\.elevation) private var elevation: Elevation
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.surfaceRadius) var surfaceRadius: Radius
-    @Environment(\.surfaceContentInsets) var contentInsets: EdgeSpaceInsets
+    @Environment(\.surfaceContentMargins) var contentInsets: EdgeSpaceInsets
     @Environment(\.isAccent) private var isAccent: Bool
 
     let forceContentInsets: EdgeSpaceInsets?
@@ -269,7 +269,7 @@ struct Surface_Previews: PreviewProvider {
                 Spacer()
             }}
             .elevation(.z1)
-            .surfaceContentInsets(.large)
+            .surfaceContentMargins(.large)
             .previewLayout(.fixed(width: 320, height: 200))
         }
         .padding()

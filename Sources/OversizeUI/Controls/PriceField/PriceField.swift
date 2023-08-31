@@ -18,20 +18,20 @@ public struct PriceField: View {
 
     public var body: some View {
         #if os(iOS)
-            TextField(
-                "0",
-                value: $amount,
-                format: .currency(code: currency.identifier)
-            )
-            .keyboardType(.decimalPad)
-            .textFieldStyle(.default)
+        TextField(
+            "0",
+            value: $amount,
+            format: .currency(code: currency.identifier)
+        )
+        .keyboardType(.decimalPad)
+        .textFieldStyle(.default)
         #else
-            TextField(
-                "0",
-                value: $amount,
-                format: .currency(code: currency.identifier)
-            )
-            .textFieldStyle(.default)
+        TextField(
+            "0",
+            value: $amount,
+            format: .currency(code: currency.identifier)
+        )
+        .textFieldStyle(.default)
         #endif
     }
 }

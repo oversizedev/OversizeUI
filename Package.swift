@@ -18,7 +18,12 @@ let package = Package(
     ],
     dependencies: [],
     targets: [
-        .target(name: "OversizeUI", dependencies: [], resources: [.process("Resources")]),
+        .target(
+            name: "OversizeUI",
+            dependencies: [],
+            resources: [.process("Resources")]
+            // swiftSettings: [.define("ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS")]
+        ),
         .testTarget(name: "OversizeUITests", dependencies: ["OversizeUI"]),
     ]
 )

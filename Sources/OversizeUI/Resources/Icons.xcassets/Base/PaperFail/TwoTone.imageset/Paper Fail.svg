@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px"  height="24px"  viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Iconly/Two-tone/Paper Fail</title>
+    <g id="Iconly/Two-tone/Paper-Fail" stroke="#000000"  stroke-width="2"  fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Paper-Fail" transform="translate(3.500000, 2.000000)" stroke="#000000"  stroke-width="2" >
+            <path d="M11.2366,0.7619 L4.4786,0.7619 C2.4196,0.7619 0.7496,2.4309 0.7496,4.4909 L0.7496,15.3399 C0.7496,17.5159 2.5136,19.1149 4.6896,19.1149 L12.5726,19.1149 C14.6326,19.1149 16.3016,17.3999 16.3016,15.3399 L16.3016,6.0379 L11.2366,0.7619 Z" id="Stroke-1"></path>
+            <path d="M10.9739,0.7502 L10.9739,3.6592 C10.9739,5.0792 12.1229,6.2312 13.5419,6.2342 C14.8589,6.2372 16.2059,6.2382 16.2969,6.2322" id="Stroke-3"></path>
+            <path d="M10.0764,12.6476 L6.6104,9.1816 M6.6106,12.6476 L10.0766,9.1816" id="Combined-Shape" opacity="0.400000006"></path>
+        </g>
+    </g>
+</svg>

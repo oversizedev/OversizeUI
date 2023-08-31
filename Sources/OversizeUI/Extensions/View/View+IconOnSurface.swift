@@ -12,7 +12,7 @@ public extension View {
         }
         .surfaceStyle(surfaceStyle)
         .surfaceBackgroundColor(surfaceSolor)
-        .surfaceContentInsets(.xxSmall)
+        .surfaceContentMargins(.xxSmall)
         .surfaceRadius(.medium)
     }
 }

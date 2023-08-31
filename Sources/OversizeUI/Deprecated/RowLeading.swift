@@ -17,18 +17,18 @@ public enum RowLeadingType {
     case view(_ view: AnyView)
 }
 
-internal struct RowLeading: View {
+struct RowLeading: View {
     private let type: RowLeadingType
     private let isShowSubtitle: Bool
     private let iconBackgroundColor: Color?
 
-    internal init(_ type: RowLeadingType, isShowSubtitle: Bool = false, iconBackgroundColor: Color? = nil) {
+    init(_ type: RowLeadingType, isShowSubtitle: Bool = false, iconBackgroundColor: Color? = nil) {
         self.type = type
         self.isShowSubtitle = isShowSubtitle
         self.iconBackgroundColor = iconBackgroundColor
     }
 
-    internal var body: some View {
+    var body: some View {
         switch type {
         case let .icon(icon):
             IconDeprecated(icon)
@@ -51,7 +51,7 @@ internal struct RowLeading: View {
             }
             .surfaceStyle(.secondary)
             .surfaceBackgroundColor(iconBackgroundColor)
-            .surfaceContentInsets(.xxSmall)
+            .surfaceContentMargins(.xxSmall)
 
         case let .imageOnSurface(image, color):
             Surface {
@@ -61,7 +61,7 @@ internal struct RowLeading: View {
             }
             .surfaceStyle(.secondary)
             .surfaceBackgroundColor(iconBackgroundColor)
-            .surfaceContentInsets(.xxSmall)
+            .surfaceContentMargins(.xxSmall)
 
         case let .systemImage(systemImage):
             Image(systemName: systemImage)

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px"  height="24px"  viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Iconly/Two-tone/Shield Done</title>
+    <g id="Iconly/Two-tone/Shield-Done" stroke="#000000"  stroke-width="2"  fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Shield-Done" transform="translate(3.500000, 2.000000)" stroke="#000000"  stroke-width="2" >
+            <path d="M15.365,3.1238 C15.802,3.2768 16.094,3.6888 16.094,4.1518 L16.094,10.9248 C16.094,12.8178 15.406,14.6248 14.191,16.0248 C13.58,16.7298 12.807,17.2788 11.986,17.7228 L8.428,19.6448 L4.864,17.7218 C4.042,17.2778 3.268,16.7298 2.656,16.0238 C1.44,14.6238 0.75,12.8158 0.75,10.9208 L0.75,4.1518 C0.75,3.6888 1.042,3.2768 1.479,3.1238 L8.061,0.8108 C8.295,0.7288 8.55,0.7288 8.783,0.8108 L15.365,3.1238 Z" id="Stroke-1"></path>
+            <polyline id="Stroke-3" opacity="0.400000006" points="5.8225 9.9177 7.7145 11.8107 11.6125 7.9127"></polyline>
+        </g>
+    </g>
+</svg>

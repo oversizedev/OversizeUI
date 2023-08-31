@@ -6,7 +6,7 @@
 import SwiftUI
 
 public struct CheckboxStyle: ToggleStyle {
-    @Environment(\.controlPadding) var controlPadding: ControlPadding
+    @Environment(\.controlMargin) var controlPadding: ControlMargin
 
     public func makeBody(configuration: Self.Configuration) -> some View {
         HStack {

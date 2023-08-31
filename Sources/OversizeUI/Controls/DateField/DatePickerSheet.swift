@@ -47,7 +47,7 @@ public struct DatePickerSheet: View {
                 .padding(.horizontal, .small)
                 .padding(.vertical, .xxxSmall)
             }
-            .surfaceContentInsets(.zero)
+            .surfaceContentMargins(.zero)
         }
         .backgroundSecondary()
         .leadingBar {

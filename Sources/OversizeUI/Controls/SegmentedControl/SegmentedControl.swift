@@ -9,7 +9,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.segmentedControlStyle) private var style
     @Environment(\.controlRadius) var controlRadius: Radius
-    @Environment(\.segmentedPickerInsets) var controlPadding: EdgeSpaceInsets
+    @Environment(\.segmentedPickerMargins) var controlPadding: EdgeSpaceInsets
 
     public typealias Data = [Element]
 

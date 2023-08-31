@@ -132,19 +132,6 @@ public extension Snackbar where Actions == EmptyView {
     }
 }
 
-public extension Snackbar where Label == Text, Actions == Button<Icon> {
-    init(
-        isPresented: Binding<Bool>,
-        @ViewBuilder label: () -> Label,
-        @ViewBuilder actions: () -> Actions
-    ) {
-        _isPresented = isPresented
-        text = nil
-        self.label = label()
-        self.actions = Group { actions() }
-    }
-}
-
 public extension Snackbar where Label == Text, Actions == Button<Text> {
     init(
         isPresented: Binding<Bool>,
@@ -193,19 +180,6 @@ public extension Snackbar where Actions == Button<Text> {
         _isPresented = isPresented
         text = nil
         self.label = label()
-        self.actions = Group { actions() }
-    }
-}
-
-public extension Snackbar where Label == EmptyView, Actions == Button<Icon> {
-    init(
-        _ text: String,
-        isPresented: Binding<Bool>,
-        @ViewBuilder actions: () -> Actions
-    ) {
-        _isPresented = isPresented
-        self.text = text
-        label = nil
         self.actions = Group { actions() }
     }
 }

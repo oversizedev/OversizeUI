@@ -10,17 +10,24 @@ public enum SwitchAlignment {
 }
 
 public struct Switch<Label: View>: View {
-    @Environment(\.rowContentInset) private var contentInset: EdgeSpaceInsets
+    @Environment(\.rowContentMargins) private var contentInset: EdgeSpaceInsets
     @Environment(\.isEnabled) private var isEnabled: Bool
     @Binding var isOn: Bool
     private let label: () -> Label?
     private let alignment: SwitchAlignment
-    private var title: String?
+    private let title: String?
+    private let subtitle: String?
 
-    public init(isOn: Binding<Bool>, alignment: SwitchAlignment = .trailing, @ViewBuilder label: @escaping () -> Label? = { nil }) {
+    public init(
+        isOn: Binding<Bool>,
+        alignment: SwitchAlignment = .trailing,
+        @ViewBuilder label: @escaping () -> Label? = { nil }
+    ) {
         _isOn = isOn
         self.alignment = alignment
         self.label = label
+        title = nil
+        subtitle = nil
     }
 
     public var body: some View {
@@ -57,10 +64,18 @@ public struct Switch<Label: View>: View {
         if let label = label() {
             label
         } else {
-            Text(title ?? "")
-                .headline(.medium)
-                .foregroundColor(foregroundColor)
-                .padding(contentInset)
+            VStack(alignment: .leading, spacing: .zero) {
+                Text(title ?? "")
+                    .headline(.medium)
+                    .foregroundColor(foregroundColor)
+
+                if let subtitle, !subtitle.isEmpty {
+                    Text(subtitle)
+                        .subheadline()
+                        .foregroundColor(.onSurfaceMediumEmphasis)
+                }
+            }
+            .padding(contentInset)
         }
     }
 
@@ -81,8 +96,14 @@ public struct Switch<Label: View>: View {
 }
 
 public extension Switch where Label == EmptyView {
-    init(_ title: String, isOn: Binding<Bool>, alignment: SwitchAlignment = .trailing) {
+    init(
+        _ title: String,
+        subtitle: String? = nil,
+        isOn: Binding<Bool>,
+        alignment: SwitchAlignment = .trailing
+    ) {
         self.title = title
+        self.subtitle = subtitle
         _isOn = isOn
         self.alignment = alignment
         label = { nil }

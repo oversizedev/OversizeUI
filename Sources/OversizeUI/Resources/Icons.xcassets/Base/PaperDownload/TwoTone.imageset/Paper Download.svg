@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px"  height="24px"  viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Iconly/Two-tone/Paper Download</title>
+    <g id="Iconly/Two-tone/Paper-Download" stroke="#000000"  stroke-width="2"  fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Paper-Download" transform="translate(3.500000, 2.000000)" stroke="#000000"  stroke-width="2" >
+            <path d="M11.2364,0.7619 L4.5844,0.7619 C2.5254,0.7619 0.7504,2.4309 0.7504,4.4909 L0.7504,15.2279 C0.7504,17.4039 2.4084,19.1149 4.5844,19.1149 L12.5724,19.1149 C14.6324,19.1149 16.3024,17.2879 16.3024,15.2279 L16.3024,6.0379 L11.2364,0.7619 Z" id="Stroke-1"></path>
+            <path d="M10.9737,0.7502 L10.9737,3.6592 C10.9737,5.0792 12.1227,6.2312 13.5427,6.2342 C14.8587,6.2372 16.2057,6.2382 16.2967,6.2322" id="Stroke-3"></path>
+            <path d="M5.3023,11.1632 L8.1403,14.0142 L10.9793,11.1632 M8.1407,14.0138 L8.1407,7.4408" id="Combined-Shape" opacity="0.400000006"></path>
+        </g>
+    </g>
+</svg>

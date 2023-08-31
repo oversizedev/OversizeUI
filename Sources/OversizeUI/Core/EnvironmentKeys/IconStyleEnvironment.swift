@@ -6,7 +6,7 @@
 import SwiftUI
 
 public enum IconStyle {
-    case line, solid, duotone
+    case line, fill, twoTone
 }
 
 private struct IconStyleKey: EnvironmentKey {
