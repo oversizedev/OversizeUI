@@ -12,7 +12,7 @@ public struct MaterialSurface<Label: View>: View {
     @Environment(\.elevation) private var elevation: Elevation
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.controlRadius) var controlRadius: Radius
-    @Environment(\.surfaceContentInsets) var controlPadding: EdgeSpaceInsets
+    @Environment(\.surfaceContentMargins) var controlPadding: EdgeSpaceInsets
 
     private let label: Label
     private let action: (() -> Void)?

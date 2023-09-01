@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px"  height="24px"  viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Iconly/Two-tone/Voice</title>
+    <g id="Iconly/Two-tone/Voice" stroke="#000000"  stroke-width="2"  fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Voice" transform="translate(4.000000, 2.000000)" stroke="#000000"  stroke-width="2" >
+            <path d="M0.71447619,8.932 C0.71447619,13.0215238 4.0287619,16.3358095 8.11828571,16.3358095 C12.2078095,16.3358095 15.5220952,13.0215238 15.5220952,8.932" id="Stroke-1" opacity="0.400000006"></path>
+            <line x1="8.11866667" y1="19.1468571" x2="8.11866667" y2="16.336381" id="Stroke-3" opacity="0.400000006"></line>
+            <path d="M8.24466667,12.584381 L7.99228571,12.584381 C5.97133333,12.584381 4.33228571,10.9462857 4.33228571,8.92438095 L4.33228571,4.37390476 C4.33228571,2.35295238 5.97133333,0.713904762 7.99228571,0.713904762 L8.24466667,0.713904762 C10.265619,0.713904762 11.9046667,2.35295238 11.9046667,4.37390476 L11.9046667,8.92438095 C11.9046667,10.9462857 10.265619,12.584381 8.24466667,12.584381 Z" id="Stroke-5"></path>
+        </g>
+    </g>
+</svg>

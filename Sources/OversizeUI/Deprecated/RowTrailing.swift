@@ -24,19 +24,19 @@ public enum RowTrailingType {
     case button(_ text: String, action: () -> Void)
 }
 
-internal struct RowTrailing: View {
+struct RowTrailing: View {
     @Environment(\.isPremium) var premiumStatus
 
     private let type: RowTrailingType
     private let isPremiumOption: Bool
 
-    internal init(_ type: RowTrailingType, isPremiumOption: Bool = false) {
+    init(_ type: RowTrailingType, isPremiumOption: Bool = false) {
         self.type = type
         self.isPremiumOption = isPremiumOption
     }
 
     // swiftlint:disable function_body_length
-    internal var body: some View {
+    var body: some View {
         switch type {
         case let .toggle(isOn):
             Toggle(isOn: isOn) {}

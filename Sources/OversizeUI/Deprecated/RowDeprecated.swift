@@ -8,7 +8,7 @@ import SwiftUI
 public struct RowDeprecated: View {
     @Environment(\.elevation) private var elevation: Elevation
     @Environment(\.controlRadius) var controlRadius: Radius
-    @Environment(\.rowContentInset) var controlPadding: EdgeSpaceInsets
+    @Environment(\.rowContentMargins) var controlPadding: EdgeSpaceInsets
     @Environment(\.multilineTextAlignment) var multilineTextAlignment
     @Environment(\.isPremium) var premiumStatus
     @Environment(\.isAccent) var isAccent

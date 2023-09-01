@@ -64,6 +64,20 @@ import SwiftUI
   {% endfor %}
 {% endmacro %}
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
+{{accessModifier}} extension Image {
+    {% if catalogs.count > 1 or param.forceFileNameEnum %}
+    {% for catalog in catalogs %}
+    enum {{catalog.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
+        {% if catalog.assets %}
+        {% filter indent:2," ",true %}{% call enumBlock catalog.assets %}{% endfilter %}
+        {% endif %}
+    }
+    {% endfor %}
+    {% else %}
+    {% call enumBlock catalogs.first.assets %}
+    {% endif %}
+}
+
 {{accessModifier}} enum {{enumName}} {
   {% if catalogs.count > 1 or param.forceFileNameEnum %}
   {% for catalog in catalogs %}
@@ -82,9 +96,9 @@ import SwiftUI
 
 {{accessModifier}} struct {{imageType}} {
 
-    public let path: String
+    {{accessModifier}} let path: String
 
-    public init(path: String) {
+    {{accessModifier}} init(path: String) {
         self.path = path
     }
     

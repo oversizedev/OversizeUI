@@ -25,8 +25,8 @@ public enum SectionViewStyle {
 public struct SectionView<Content: View>: View {
     @Environment(\.controlRadius) private var controlRadius: Radius
     @Environment(\.sectionViewStyle) private var style: SectionViewStyle
-    @Environment(\.surfaceContentInsets) var surfaceContentInsets: EdgeSpaceInsets
-    @Environment(\.sectionTitleInsets) var sectionTitleInsets: EdgeSpaceInsets
+    @Environment(\.surfaceContentMargins) var surfaceContentInsets: EdgeSpaceInsets
+    @Environment(\.sectionTitleMargins) var sectionTitleInsets: EdgeSpaceInsets
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     #endif

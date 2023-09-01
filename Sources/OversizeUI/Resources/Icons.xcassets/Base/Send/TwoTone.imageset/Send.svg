@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px"  height="24px"  viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Iconly/Two-tone/Send</title>
+    <g id="Iconly/Two-tone/Send" stroke="#000000"  stroke-width="2"  fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Send" transform="translate(2.500000, 2.500000)" stroke="#000000"  stroke-width="2" >
+            <line x1="13.2120035" y1="5.22669668" x2="7.39100352" y2="11.0476967" id="Stroke-1" opacity="0.400000006"></line>
+            <path d="M7.39120352,11.0479967 L0.576203525,6.88099668 C-0.316796475,6.33499668 -0.135796475,4.98799668 0.870203525,4.69699668 L16.9602035,0.0489966826 C17.8752035,-0.216003317 18.7212035,0.637996683 18.4472035,1.54999668 L13.6732035,17.5139967 C13.3742035,18.5139967 12.0332035,18.6859967 11.4912035,17.7939967 L7.39120352,11.0479967" id="Stroke-3"></path>
+        </g>
+    </g>
+</svg>

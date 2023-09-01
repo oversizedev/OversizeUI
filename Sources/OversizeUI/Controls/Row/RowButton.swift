@@ -13,7 +13,7 @@ public enum RowButtonStyle {
 
 public struct RowButton: View {
     @Environment(\.multilineTextAlignment) var multilineTextAlignment
-    @Environment(\.controlPadding) var controlPadding: ControlPadding
+    @Environment(\.controlMargin) var controlPadding: ControlMargin
     public var text: String
     public var style: RowButtonStyle
     public var icon: IconsNames
@@ -43,7 +43,7 @@ public struct RowButton: View {
                             IconDeprecated(icon)
                         }
                         .surfaceStyle(.secondary)
-                        .surfaceContentInsets(.xxSmall)
+                        .surfaceContentMargins(.xxSmall)
                     }
 
                     Text(text)
