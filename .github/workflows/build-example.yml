@@ -16,6 +16,20 @@ env:
   WATCHSCHEME: Example
 
 jobs:
+
+  build-package:
+
+    runs-on: macOS-13
+
+    name: Package build
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Select Xcode
+      run: sudo xcode-select -switch /Applications/Xcode_15.0.app && /usr/bin/xcodebuild -version
+      
+    - name: Build and run tests
+      run: xcodebuild clean build -scheme Example -destination 'platform=iOS Simulator,name=iPhone 14 Pro,OS=16.4' | xcpretty && exit ${PIPESTATUS[0]}
       
   example:
     name: Run examples

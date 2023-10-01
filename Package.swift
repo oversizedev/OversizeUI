@@ -16,13 +16,17 @@ let package = Package(
     products: [
         .library(name: "OversizeUI", targets: ["OversizeUI"]),
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/SwiftGen/SwiftGenPlugin", from: "6.6.2"),
+    ],
     targets: [
         .target(
             name: "OversizeUI",
             dependencies: [],
-            resources: [.process("Resources")]
-            // swiftSettings: [.define("ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS")]
+            resources: [.process("Resources")],
+            plugins: [
+                .plugin(name: "SwiftGenPlugin", package: "SwiftGenPlugin"),
+            ]
         ),
         .testTarget(name: "OversizeUITests", dependencies: ["OversizeUI"]),
     ]

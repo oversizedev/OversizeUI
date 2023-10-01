@@ -161,7 +161,7 @@ public struct Avatar: View {
             return .subheadline
         case .regular:
             return .title3
-        case .large:
+        case .large, .extraLarge:
             return .largeTitle
         @unknown default:
             return .title2
@@ -177,7 +177,7 @@ public struct Avatar: View {
             return 1
         case .regular:
             return 2
-        case .large:
+        case .large, .extraLarge:
             return 2
         @unknown default:
             return 0
@@ -195,6 +195,8 @@ public struct Avatar: View {
             return Space.xLarge.rawValue
         case .large:
             return Space.xxxLarge.rawValue
+        case .extraLarge:
+            return 128
         @unknown default:
             return Space.xLarge.rawValue
         }
