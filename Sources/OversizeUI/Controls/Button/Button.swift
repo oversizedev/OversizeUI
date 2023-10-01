@@ -145,7 +145,7 @@ public struct OversizeButtonStyle: ButtonStyle {
             return .small
         case .regular:
             return .small
-        case .large, .extraLarge:
+        case .large:
             return .medium
         @unknown default:
             return .zero
@@ -164,7 +164,7 @@ public struct OversizeButtonStyle: ButtonStyle {
             return .xxSmall
         case .regular:
             return .small
-        case .large, .extraLarge:
+        case .large:
             return .medium
         @unknown default:
             return .zero
