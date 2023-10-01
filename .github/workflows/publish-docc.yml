@@ -1,7 +1,7 @@
 name: Deploy DocC
 on:
-  push:
-    branches: ["main"]
+  workflow_dispatch:
+  workflow_call:
 permissions:
   contents: read
   pages: write

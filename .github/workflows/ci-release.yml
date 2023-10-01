@@ -1,0 +1,33 @@
+name: CI - Release
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+  workflow_dispatch:
+jobs:
+  build-swiftpm:
+    name: Build SwiftPM
+    uses: ./.github/workflows/build-swiftpm.yml
+    secrets: inherit
+  build-example:
+    name: Build Examples
+    needs: build-swiftpm
+    uses: ./.github/workflows/build-example.yml
+    secrets: inherit
+  bump:
+    name: Bump version
+    needs: [build-swiftpm, build-example]
+    uses: ./.github/workflows/bump.yml
+    secrets: inherit
+  release:
+    name: Release
+    needs: [build-swiftpm, build-example, bump]
+    uses: ./.github/workflows/release.yml
+    secrets: inherit
+  publish-docc:
+    name: Publish docc
+    needs: [build-swiftpm, build-example, bump]
+    uses: ./.github/workflows/publish-docc.yml
+    secrets: inherit
