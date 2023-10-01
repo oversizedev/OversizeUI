@@ -5,7 +5,11 @@ on:
     branches: [ develop ]
   pull_request:
     branches: [ main ]
-    
+
+concurrency:
+  group: ${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
 env:
   DEVELOPER_DIR: /Applications/Xcode_14.2.app/Contents/Developer
   PROJECT_DIR: Example
@@ -14,32 +18,41 @@ env:
   OSXSCHEME: Example
   TVSCHEME: Example
   WATCHSCHEME: Example
+  PACKAGE_NAME: OversizeUI
 
-jobs:
+jobs: 
 
-  build-package:
+  # build-package:
 
-    runs-on: macOS-13
+  #   runs-on: macOS-13
 
-    name: Package build
+  #   name: Package build
+
+  #   steps:
+  #   - uses: actions/checkout@v3
+  #   - name: Select Xcode
+  #     run: sudo xcode-select -switch /Applications/Xcode_14.4.app && /usr/bin/xcodebuild -version
+      
+  #   - name: Build and run tests
+  #     run: xcodebuild clean build -scheme  ${{ env.PACKAGE_NAME }} -destination 'platform=iOS Simulator,name=iPhone 14 Pro,OS=16.4' | xcpretty && exit ${PIPESTATUS[0]}
+
+  swiftpm:
+    name: Build SwiftPM
+    runs-on: macOS-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Select Xcode
-      run: sudo xcode-select -switch /Applications/Xcode_15.0.app && /usr/bin/xcodebuild -version
-      
-    - name: Build and run tests
-      run: xcodebuild clean build -scheme Example -destination 'platform=iOS Simulator,name=iPhone 14 Pro,OS=16.4' | xcpretty && exit ${PIPESTATUS[0]}
-      
-  example:
-    name: Run examples
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Build Package
+        run: xcodebuild clean build -skipPackagePluginValidation -scheme ${{ env.PACKAGE_NAME }} -destination 'platform=iOS Simulator,name=iPhone 8,OS=16.2' | xcpretty && exit ${PIPESTATUS[0]}
+
+  build-iOS-example:
+    name: Build iOS examples
     runs-on: macOS-latest
     strategy:
         matrix:
           iosDestination: ['platform=iOS Simulator,OS=15.0,name=iPhone 8','platform=iOS Simulator,OS=15.5,name=iPhone X','platform=iOS Simulator,OS=16.0,name=iPhone 14']
-          macOSDestination: ["platform=macOS,arch=x86_64"]
-          tvOSDestination: ["platform=tvOS Simulator,name=Apple TV 4K"]
-          watchOSdestination: ['platform=watchOS Simulator,name=Apple Watch Series 5 - 44mm']
 
     steps:
       - name: Checkout
@@ -50,21 +63,55 @@ jobs:
           xcodebuild clean build -project "${{ env.PROJECT_DIR }}/${{ env.PROJECT_NAME }}" -scheme "${{ env.iOSSCHEME }}" | xcpretty
         env:
           destination: ${{ matrix.iosDestination }}
+
+  build-macOS-example:
+    name: Build macOS examples
+    runs-on: macOS-latest
+    strategy:
+        matrix:
+          macOSDestination: ["platform=macOS,arch=x86_64"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
           
       - name: Build macOS
         run: |
           xcodebuild clean build -project "${{ env.PROJECT_DIR }}/${{ env.PROJECT_NAME }}" -scheme "${{ env.OSXSCHEME }}" | xcpretty
         env:
           destination: ${{ matrix.macOSDestination }}
+
+  build-tvOS-example:
+    name: Build tvOS examples
+    runs-on: macOS-latest
+    strategy:
+        matrix:
+          tvOSDestination: ["platform=tvOS Simulator,name=Apple TV 4K"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
           
       - name: Build tvOS
         run: |
           xcodebuild clean build -project "${{ env.PROJECT_DIR }}/${{ env.PROJECT_NAME }}" -scheme "${{ env.TVSCHEME }}" | xcpretty
         env:
           destination: ${{ matrix.tvOSDestination }}
+
+  build-watchOS-example:
+    name: Build watchOS examples
+    runs-on: macOS-latest
+    strategy:
+        matrix:
+          watchOSdestination: ['platform=watchOS Simulator,name=Apple Watch Series 5 - 44mm']
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
           
       - name: Build watchOS
         run: |
           xcodebuild clean build -project "${{ env.PROJECT_DIR }}/${{ env.PROJECT_NAME }}" -scheme "${{ env.WATCHSCHEME }}" | xcpretty
         env:
           destination: ${{ matrix.watchOSdestination }}
+
