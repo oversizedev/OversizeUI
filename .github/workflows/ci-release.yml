@@ -30,10 +30,4 @@ jobs:
     needs: bump
     uses: ./.github/workflows/publish-docc.yml
     secrets: inherit
-    
-  release:
-    name: Release
-    needs: bump
-    uses: ./.github/workflows/release.yml
-    secrets: inherit
 
