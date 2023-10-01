@@ -5,7 +5,11 @@ on:
     branches: [ develop ]
   pull_request:
     branches: [ main ]
-    
+
+concurrency:
+  group: ${{ github.head_ref || github.ref_name }} 
+  cancel-in-progress: true
+
 env:
   DEVELOPER_DIR: /Applications/Xcode_14.2.app/Contents/Developer
   PROJECT_DIR: Example
@@ -33,15 +37,15 @@ jobs:
   #     run: xcodebuild clean build -scheme  ${{ env.PACKAGE_NAME }} -destination 'platform=iOS Simulator,name=iPhone 14 Pro,OS=16.4' | xcpretty && exit ${PIPESTATUS[0]}
 
   swiftpm:
-    runs-on: macos-14
+    name: Build SwiftPM
+    runs-on: macOS-latest
 
     steps:
-      - uses: maxim-lobanov/setup-xcode@v1.1
-        with:
-          xcode-version: "15.0"
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+        
       - name: Build Package
-        run: xcodebuild -scheme ${{ env.PACKAGE_NAME }} -destination 'platform=iOS Simulator,name=iPhone 8,OS=16.2' | xcpretty
+        run: xcodebuild clean build -scheme ${{ env.PACKAGE_NAME }} -destination 'platform=iOS Simulator,name=iPhone 8,OS=16.2' | xcpretty
 
   build-iOS-example:
     name: Build iOS examples
