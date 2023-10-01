@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "tabler-icon-link.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

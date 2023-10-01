@@ -1,32 +1,23 @@
+input_dir: Sources/OversizeUI/Resources
+output_dir: ${DERIVED_SOURCES_DIR}
+
 xcassets:
   - inputs:
-      - Sources/OversizeUI/Resources/Icons.xcassets
+      - Icons.xcassets
     outputs:
       - templatePath: Templates/IconsLibraryExtension.stencil
-        output: Sources/OversizeUI/Generated/GeneratedIcons.swift
+        output: GeneratedIcons.swift
         params:
           imageTypeName: Image
           forceProvidesNamespaces: true
           publicAccess: 1
           
   - inputs:
-      - Sources/OversizeUI/Resources/Images.xcassets
+      - Images.xcassets
     outputs:
       - templatePath: Templates/AssetsSwiftUI.stencil
-        output: Sources/OversizeUI/Generated/GeneratedImages.swift
+        output: GeneratedImages.swift
         params:
           enumName: Images
           publicAccess: 1
           forceProvidesNamespaces: true
-
-# Config for generate icons extension config
-#  - inputs:
-#      - Sources/OversizeUI/Resources/Icons.xcassets
-#    outputs:
-#      - templatePath: Templates/IconExtension.stencil
-#        output: Sources/OversizeUI/Generated/GeneratedIconsExtension.swift
-#        params:
-#          imageTypeName: IconSymbol
-#          enumName: Icon
-#          publicAccess: 1
-#          forceProvidesNamespaces: false

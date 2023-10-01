@@ -1,0 +1,16 @@
+name: CI - Pull Request
+on:
+  pull_request:
+    branches:
+      - 'main'
+  workflow_dispatch:
+jobs:
+  build-swiftpm:
+    name: Build SwiftPM
+    uses: ./.github/workflows/build-swiftpm.yml
+    secrets: inherit
+  build-example:
+    name: Build Examples
+    needs: build-swiftpm
+    uses: ./.github/workflows/build-example.yml
+    secrets: inherit
