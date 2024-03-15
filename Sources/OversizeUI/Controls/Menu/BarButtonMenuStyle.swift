@@ -5,6 +5,7 @@
 
 import SwiftUI
 
+#if !os(tvOS)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 public struct BarButtonMenuStyle: MenuStyle {
@@ -40,3 +41,4 @@ public extension MenuStyle where Self == BarButtonMenuStyle {
         BarButtonMenuStyle()
     }
 }
+#endif

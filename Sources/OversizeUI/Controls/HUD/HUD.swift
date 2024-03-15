@@ -9,10 +9,8 @@ public struct HUD<Title, Icon>: View where Title: View, Icon: View {
     @Environment(\.screenSize) var screenSize
 
     private let text: String?
-
     private let title: Title?
     private let icon: Icon?
-
     private let isAutoHide: Bool
 
     @Binding private var isPresented: Bool

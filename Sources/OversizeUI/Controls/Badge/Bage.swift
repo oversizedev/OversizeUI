@@ -21,10 +21,10 @@ public struct Bage<Label: View>: View {
         HStack {
             label
                 .foregroundColor(color)
-                .caption()
+                .caption(.medium)
         }
         .padding(.vertical, .xxxSmall)
-        .padding(.horizontal, 6)
+        .padding(.horizontal, .xxSmall)
         .background(
             RoundedRectangle(cornerRadius: controlRadius,
                              style: .continuous)

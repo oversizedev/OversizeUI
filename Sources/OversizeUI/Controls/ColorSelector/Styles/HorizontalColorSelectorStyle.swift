@@ -12,7 +12,7 @@ public struct HorizontalColorSelectorStyle: ColorSelectorStyle {
             HStack {
                 configuration.label
             }
-            .padding(.horizontal)
+            .padding(.horizontal, .medium)
         }
         .padding(.vertical)
     }

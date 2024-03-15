@@ -4,6 +4,7 @@
 //
 
 import Foundation
+
 // swiftlint:disable type_body_length identifier_name
 public enum IconsNames: String, CaseIterable {
     case none

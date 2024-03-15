@@ -9,7 +9,7 @@ public struct RowActionButtonStyle: ButtonStyle {
     public init() {}
     public func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
-            .background(configuration.isPressed ? Color.surfaceSecondary : Color.clear)
+            .background(configuration.isPressed ? Color.surfaceSecondary.opacity(0.7) : Color.clear)
             .contentShape(Rectangle())
     }
 }

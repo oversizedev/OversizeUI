@@ -22,8 +22,10 @@ public enum AvatarBackgroundType {
 /// ```
 ///
 public struct Avatar: View {
-    @available(tvOS, unavailable)
+
+    #if !os(tvOS)
     @Environment(\.controlSize) var controlSize: ControlSize
+    #endif
 
     /// The first name text of the avatar.
     let firstName: String?
@@ -152,8 +154,10 @@ public struct Avatar: View {
         .foregroundColor(onBackgroundColor)
     }
 
-    @available(tvOS, unavailable)
     private var avatarTextFont: Font {
+        #if os(tvOS)
+        return .largeTitle
+        #else
         switch controlSize {
         case .mini:
             return .caption
@@ -161,15 +165,18 @@ public struct Avatar: View {
             return .subheadline
         case .regular:
             return .title3
-        case .large:
+        case .large, .extraLarge:
             return .largeTitle
         @unknown default:
             return .title2
         }
+        #endif
     }
 
-    @available(tvOS, unavailable)
     private var avatarTextSpace: CGFloat {
+        #if os(tvOS)
+        return 2
+        #else
         switch controlSize {
         case .mini:
             return 0
@@ -177,15 +184,18 @@ public struct Avatar: View {
             return 1
         case .regular:
             return 2
-        case .large:
+        case .large, .extraLarge:
             return 2
         @unknown default:
             return 0
         }
+        #endif
     }
 
-    @available(tvOS, unavailable)
     private var avatarSize: CGFloat {
+        #if os(tvOS)
+        return Space.xLarge.rawValue
+        #else
         switch controlSize {
         case .mini:
             return Space.medium.rawValue
@@ -193,11 +203,12 @@ public struct Avatar: View {
             return Space.large.rawValue
         case .regular:
             return Space.xLarge.rawValue
-        case .large:
+        case .large, .extraLarge:
             return Space.xxxLarge.rawValue
         @unknown default:
             return Space.xLarge.rawValue
         }
+        #endif
     }
 }
 

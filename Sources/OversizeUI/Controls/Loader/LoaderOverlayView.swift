@@ -10,6 +10,7 @@ public enum LoaderOverlayType {
     case spiner
 }
 
+#if !os(watchOS)
 public struct LoaderOverlayView: View {
     private var loaderType: LoaderOverlayType
     private let showText: Bool
@@ -145,3 +146,4 @@ struct LoaderOverlayView_Previews: PreviewProvider {
         .loader(isPresented: .constant(true))
     }
 }
+#endif

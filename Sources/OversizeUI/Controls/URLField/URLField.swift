@@ -23,20 +23,29 @@ public struct URLField: View {
     }
 
     public var body: some View {
-        if #available(iOS 16.0, *) {
-            TextField(title, value: $url, format: .url)
-                .keyboardType(.URL)
-                .textContentType(.URL)
-                .textInputAutocapitalization(.never)
-                .autocorrectionDisabled()
-        } else {
-            TextField(title, text: $urlString)
-                .keyboardType(.URL)
-                .textContentType(.URL)
-                .textInputAutocapitalization(.never)
-                .autocorrectionDisabled()
-                .fieldHelper(.constant("Invalid URL"), style: $textFieldHelper)
-        }
+        TextField(title, text: $urlString, onEditingChanged: { state in
+            if state {
+                textFieldHelper = .none
+            } else if let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) {
+                textFieldHelper = .none
+                self.url = url
+            } else {
+                textFieldHelper = .errorText
+                urlString = ""
+            }
+        }, onCommit: {
+            if let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) {
+                textFieldHelper = .none
+                self.url = url
+            } else {
+                textFieldHelper = .errorText
+            }
+        })
+        .keyboardType(.URL)
+        .textContentType(.URL)
+        .textInputAutocapitalization(.never)
+        .autocorrectionDisabled()
+        .fieldHelper(.constant("Invalid URL"), style: $textFieldHelper)
     }
 }
 #endif

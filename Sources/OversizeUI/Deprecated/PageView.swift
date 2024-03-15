@@ -59,7 +59,7 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
         }
         .coordinateSpace(name: "Page")
     }
-
+   
     @ViewBuilder
     var header: some View {
         if title != nil || leadingBar != nil || trailingBar != nil || topToolbar != nil || titleLabel != nil {

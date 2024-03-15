@@ -36,7 +36,7 @@ struct SurfaceDemo: View {
                     Spacer()
                 }}
                 .controlRadius(.zero)
-                .surfaceContentInsets(.zero)
+                .surfaceContentMargins(.zero)
                 .elevation(.z2)
 
                 Surface { HStack {

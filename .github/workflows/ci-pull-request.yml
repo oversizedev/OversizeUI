@@ -4,13 +4,60 @@ on:
     branches:
       - 'main'
   workflow_dispatch:
+  
 jobs:
   build-swiftpm:
     name: Build SwiftPM
-    uses: ./.github/workflows/build-swiftpm.yml
+    uses: oversizedev/GithubWorkflows/.github/workflows/build-swiftpm.yml@main
+    with:
+      package: OversizeUI
     secrets: inherit
-  build-example:
-    name: Build Examples
+    
+  build-iOS-example:
+    name: Build iOS example
     needs: build-swiftpm
-    uses: ./.github/workflows/build-example.yml
+    uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
+    strategy:
+      matrix:
+        destination: ['platform=iOS Simulator,name=iPhone 15 Pro,OS=17.2', 'platform=iOS Simulator,name=iPad Pro (12.9-inch) (6th generation),OS=17.2']
+    with:
+      path: Example/Example
+      scheme: Example (iOS)
+      destination: ${{ matrix.destination }}
+    secrets: inherit
+    
+  build-macOS-example:
+    name: Build macOS examples
+    needs: build-swiftpm
+    uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
+    with:
+      path: Example/Example
+      scheme: Example (macOS)
+      destination: platform=macOS,arch=arm64
+    secrets: inherit
+    
+  build-tvOS-example:
+    name: Build tvOS examples
+    needs: build-swiftpm
+    uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
+    strategy:
+      matrix:
+        destination: ['platform=tvOS Simulator,name=Apple TV 4K (3rd generation) (at 1080p),OS=17.2', 'platform=tvOS Simulator,name=Apple TV 4K (3rd generation) (at 1080p),OS=16.4']
+    with:
+      path: Example/Example
+      scheme: Example (tvOS)
+      destination: ${{ matrix.destination }}
+    secrets: inherit
+    
+  build-watchOS-example:
+    name: Build watchOS examples
+    needs: build-swiftpm
+    uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
+    strategy:
+      matrix:
+        destination: ['platform=watchOS Simulator,name=Apple Watch Ultra 2 (49mm),OS=10.2', 'platform=watchOS Simulator,name=Apple Watch Series 8 (45mm),OS=9.4']
+    with:
+      path: Example/Example
+      scheme: Example (watchOS)
+      destination: ${{ matrix.destination }}
     secrets: inherit

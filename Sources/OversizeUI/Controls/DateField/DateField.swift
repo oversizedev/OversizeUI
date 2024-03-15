@@ -70,7 +70,7 @@ public struct DateField: View {
                             Text(selection.formatted(date: .long, time: .shortened))
                         }
                         Spacer()
-                        Image.Base.calendar
+                        Image.Base.Calendar.fill.icon()
                     }
                 }
             }
