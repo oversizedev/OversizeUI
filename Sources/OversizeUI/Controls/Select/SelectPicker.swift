@@ -90,7 +90,7 @@ public struct SelectPicker<Element: Hashable, Content, Actions, ContentUnavailab
         }
     }
 
-    #if os(iOS)
+    @available(macOS, unavailable)
     private func wheelList(_ data: Data) -> some View {
         Picker("", selection: $selection) {
             ForEach(data, id: \.self) { item in
@@ -100,7 +100,6 @@ public struct SelectPicker<Element: Hashable, Content, Actions, ContentUnavailab
         .labelsHidden()
         .pickerStyle(.wheel)
     }
-    #endif
     
     private func rowsList(_ data: Data) -> some View {
         LazyVStack(alignment: .leading, spacing: .zero) {
