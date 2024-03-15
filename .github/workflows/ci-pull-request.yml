@@ -54,10 +54,10 @@ jobs:
     uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
     strategy:
       matrix:
-        destination: ["platform=watchOS Simulator,name=Apple Watch Series 5 - 44mm,OS=10.0"]
+        destination: ["platform=watchOS Simulator,name=Apple Watch Ultra 2 (49mm),OS=10.2"]
     with:
       folder: Example
       project: Example
       scheme: Example (watchOS)
-      destination: platform=watchOS Simulator,name=Apple Watch Series 5 - 44mm,OS=10.0
+      destination: platform=watchOS Simulator,name=Apple Watch Ultra 2 (49mm),OS=10.2
     secrets: inherit
