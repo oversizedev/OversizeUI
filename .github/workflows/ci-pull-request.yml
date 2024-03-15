@@ -14,16 +14,12 @@ jobs:
     secrets: inherit
     
   build-iOS-example:
-    name: Build iOS example
+    name: Build iOS Example
     needs: build-swiftpm
-    uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
-    strategy:
-      matrix:
-        destination: ['platform=iOS Simulator,name=iPhone 15 Pro,OS=17.2', 'platform=iOS Simulator,name=iPad Pro (12.9-inch) (6th generation),OS=17.2']
+    uses: oversizedev/GithubWorkflows/.github/workflows/build-ios-app.yml@main
     with:
-      path: Example/Example
-      scheme: Example (iOS)
-      destination: ${{ matrix.destination }}
+      folder: Example
+      app: Example (iOS)
     secrets: inherit
     
   build-macOS-example:
@@ -31,21 +27,21 @@ jobs:
     needs: build-swiftpm
     uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
     with:
-      path: Example/Example
-      scheme: Example (macOS)
-      destination: platform=macOS,arch=arm64
+      folder: Example
+      app: Example
+      destination: platform=macOS,arch=x86_64
     secrets: inherit
-    
+
   build-tvOS-example:
     name: Build tvOS examples
     needs: build-swiftpm
     uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
     strategy:
       matrix:
-        destination: ['platform=tvOS Simulator,name=Apple TV 4K (3rd generation) (at 1080p),OS=17.2', 'platform=tvOS Simulator,name=Apple TV 4K (3rd generation) (at 1080p),OS=16.4']
+        destination: ["platform=tvOS Simulator,name=Apple TV 4K"]
     with:
-      path: Example/Example
-      scheme: Example (tvOS)
+      folder: Example
+      app: Example
       destination: ${{ matrix.destination }}
     secrets: inherit
     
@@ -55,9 +51,9 @@ jobs:
     uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
     strategy:
       matrix:
-        destination: ['platform=watchOS Simulator,name=Apple Watch Ultra 2 (49mm),OS=10.2', 'platform=watchOS Simulator,name=Apple Watch Series 8 (45mm),OS=9.4']
+        destination: ['platform=watchOS Simulator,name=Apple Watch Series 5 - 44mm']
     with:
-      path: Example/Example
-      scheme: Example (watchOS)
+      folder: Example
+      app: Example
       destination: ${{ matrix.destination }}
     secrets: inherit
