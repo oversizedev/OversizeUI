@@ -40,7 +40,7 @@ jobs:
     uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
     strategy:
       matrix:
-        destination: ["platform=tvOS Simulator,name=Apple TV 4K,OS=17.0"]
+        destination: ["platform=tvOS Simulator,name=Apple TV 4K (3rd generation) (at 1080p),OS=17.2"]
     with:
       folder: Example
       project: Example
