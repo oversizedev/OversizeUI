@@ -5,6 +5,7 @@
 
 import SwiftUI
 
+#if os(iOS)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
@@ -78,3 +79,4 @@ public struct MaterialSurface<Label: View>: View {
         return control
     }
 }
+#endif

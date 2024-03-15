@@ -22,17 +22,42 @@ jobs:
       project: Example
       scheme: Example (iOS)
     secrets: inherit
-
-  build-examples:
-    name: Build macOS, tvOS and watchOS examples
+    
+  build-macOS-example:
+    name: Build macOS examples
+    needs: build-swiftpm
+    uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
+    with:
+      folder: Example
+      project: Example
+      scheme: Example (macOS)
+      destination: platform=macOS,arch=x86_64
+    secrets: inherit
+    
+  build-tvOS-example:
+    name: Build tvOS examples
     needs: build-swiftpm
     uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
     strategy:
       matrix:
-        destination: ["platform=tvOS Simulator,name=Apple TV 4K", "platform=macOS,arch=x86_64", "platform=watchOS Simulator,name=Apple Watch Series 5 - 44mm"]
+        destination: ["platform=tvOS Simulator,name=Apple TV 4K"]
     with:
       folder: Example
       project: Example
-      scheme: Example
+      scheme: Example (tvOS)
+      destination: ${{ matrix.destination }}
+    secrets: inherit
+    
+  build-watchOS-example:
+    name: Build watchOS examples
+    needs: build-swiftpm
+    uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
+    strategy:
+      matrix:
+        destination: ['platform=watchOS Simulator,name=Apple Watch Series 5 - 44mm']
+    with:
+      folder: Example
+      project: Example
+      scheme: Example (watchOS)
       destination: ${{ matrix.destination }}
     secrets: inherit

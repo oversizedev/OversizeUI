@@ -20,8 +20,9 @@ public struct OversizeButtonStyle: ButtonStyle {
     @Environment(\.elevation) private var elevation: Elevation
     @Environment(\.controlBorderShape) var controlBorderShape: ControlBorderShape
     @Environment(\.isBordered) var isBordered: Bool
-    @available(tvOS, unavailable)
+    #if !os(tvOS)
     @Environment(\.controlSize) var controlSize: ControlSize
+    #endif
 
     private let type: ButtonType
     private let isInfinityWidth: Bool?

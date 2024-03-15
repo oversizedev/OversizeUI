@@ -24,7 +24,9 @@ public struct KeyboardToolbar<A>: View where A: View {
                     actions
                         .buttonStyle(.quaternary)
                         .controlBorderShape(.capsule)
+                        #if !os(tvOS)
                         .controlSize(.mini)
+                        #endif
                 }
             }
 
@@ -39,7 +41,9 @@ public struct KeyboardToolbar<A>: View where A: View {
                 .buttonStyle(.quaternary)
                 .controlBorderShape(.capsule)
                 .accent()
+                #if !os(tvOS)
                 .controlSize(.mini)
+                #endif
             }
         }
         .padding(.horizontal, .small)

@@ -79,6 +79,7 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
             navbarOverlay
         }
         .prefersNavigationBarHidden()
+        #if os(iOS) || os(macOS)
         .toolbar {
             if let title {
                 ToolbarItem(placement: .principal) {
@@ -88,7 +89,10 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
                 }
             }
         }
+        #endif
+        #if !os(tvOS)
         .toolbarBackground(.hidden)
+        #endif
         .onChange(of: focusStateSearchBar, perform: onChangeFocusSearchBar)
         .onChange(of: displaySearchBar, perform: onChangeDisplaySearchBar)
         #if os(iOS)
@@ -211,7 +215,9 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
     private var searchHeader: some View {
         ZStack(alignment: .bottomLeading) {
             Rectangle()
+                #if os(iOS) || os(macOS)
                 .fill(Material.bar)
+                #endif
                 .overlay(alignment: .bottom) {
                     Divider().opacity(visibleRatio > 0 ? 0 : -5 * visibleRatio)
                 }
@@ -229,7 +235,9 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
                         displaySearchBar = false
                     }
                     .buttonStyle(.quaternary(infinityWidth: false))
+                    #if !os(tvOS)
                     .controlSize(.mini)
+                    #endif
                     .offset(x: 8)
                 }
             }
