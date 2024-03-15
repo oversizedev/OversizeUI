@@ -4,13 +4,56 @@ on:
     branches:
       - 'main'
   workflow_dispatch:
+  
 jobs:
   build-swiftpm:
     name: Build SwiftPM
-    uses: ./.github/workflows/build-swiftpm.yml
+    uses: oversizedev/GithubWorkflows/.github/workflows/build-swiftpm.yml@main
+    with:
+      package: OversizeUI
     secrets: inherit
-  build-example:
-    name: Build Examples
+    
+  build-iOS-example:
+    name: Build iOS Example
     needs: build-swiftpm
-    uses: ./.github/workflows/build-example.yml
+    uses: oversizedev/GithubWorkflows/.github/workflows/build-ios-app.yml@main
+    with:
+      folder: Example
+      app: Example (iOS)
+    secrets: inherit
+    
+  build-macOS-example:
+    name: Build macOS examples
+    needs: build-swiftpm
+    uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
+    with:
+      folder: Example
+      app: Example
+      destination: platform=macOS,arch=x86_64
+    secrets: inherit
+
+  build-tvOS-example:
+    name: Build tvOS examples
+    needs: build-swiftpm
+    uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
+    strategy:
+      matrix:
+        destination: ["platform=tvOS Simulator,name=Apple TV 4K"]
+    with:
+      folder: Example
+      app: Example
+      destination: ${{ matrix.destination }}
+    secrets: inherit
+    
+  build-watchOS-example:
+    name: Build watchOS examples
+    needs: build-swiftpm
+    uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
+    strategy:
+      matrix:
+        destination: ['platform=watchOS Simulator,name=Apple Watch Series 5 - 44mm']
+    with:
+      folder: Example
+      app: Example
+      destination: ${{ matrix.destination }}
     secrets: inherit
