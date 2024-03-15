@@ -142,7 +142,6 @@ public struct ButtonStyleExtended: ButtonStyle {
                 )
                 .opacity(configuration.isPressed ? 0.9 : 1)
                 .scaleEffect(configuration.isPressed ? 0.95 : 1)
-
                 .shadowElevaton(shadow ? .z2 : .z0, color: Color.primary)
         }
     }

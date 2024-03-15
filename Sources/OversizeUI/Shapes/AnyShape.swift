@@ -6,9 +6,9 @@
 import SwiftUI
 
 public struct AnyShape: Shape {
-    public var make: (CGRect, inout Path) -> Void
-
-    public init(_ make: @escaping (CGRect, inout Path) -> Void) {
+    public var make: @Sendable (CGRect, inout Path) -> Void
+    
+    public init(_ make: @escaping @Sendable (CGRect, inout Path) -> Void) {
         self.make = make
     }
 

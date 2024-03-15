@@ -98,7 +98,15 @@ public struct OversizeButtonStyle: ButtonStyle {
     private func foregroundColor(for role: ButtonRole?) -> Color {
         switch type {
         case .primary:
-            return Color.onPrimaryHighEmphasis
+            switch role {
+            case .some(.destructive), .some(.cancel): return Color.onPrimaryHighEmphasis
+            default:
+                if isAccent {
+                    return Color.onPrimaryHighEmphasis
+                } else {
+                    return Color.backgroundPrimary
+                }
+            }
         case .secondary, .quaternary:
             switch role {
             case .some(.destructive): return Color.error
@@ -145,7 +153,7 @@ public struct OversizeButtonStyle: ButtonStyle {
             return .small
         case .regular:
             return .small
-        case .large:
+        case .large, .extraLarge:
             return .medium
         @unknown default:
             return .zero
@@ -164,7 +172,7 @@ public struct OversizeButtonStyle: ButtonStyle {
             return .xxSmall
         case .regular:
             return .small
-        case .large:
+        case .large, .extraLarge:
             return .medium
         @unknown default:
             return .zero

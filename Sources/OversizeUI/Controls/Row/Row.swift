@@ -39,6 +39,8 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
 
     private var сlearButtonStyle: RowClearIconStyle = .default
     private var сlearAction: (() -> Void)?
+    
+    private var leadingSpace: Space = .small
 
     private var isShowSubtitle: Bool {
         (subtitle?.isEmpty) != nil
@@ -102,7 +104,8 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
                     .scaledToFill()
                     .frame(width: leadingSize?.width, height: leadingSize?.height)
                     .cornerRadius(leadingRadius ?? 0)
-                    .padding(.trailing, .small)
+                    .padding(.trailing, leadingSpace)
+                
 
                 if textAlignment == .trailing || textAlignment == .center {
                     Spacer()
@@ -212,6 +215,12 @@ public extension Row {
         var control = self
         control.сlearButtonStyle = style
         control.сlearAction = action
+        return control
+    }
+    
+    func leadingContentMargin(_ margin: Space = .small) -> Row {
+        var control = self
+        control.leadingSpace = margin
         return control
     }
 

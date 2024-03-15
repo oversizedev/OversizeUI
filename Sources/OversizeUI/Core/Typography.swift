@@ -91,7 +91,7 @@ public struct Typography: ViewModifier {
         } else {
             switch fontStyle {
             case .largeTitle, .title:
-                return isBold ?? true ? .heavy : .regular
+                return isBold ?? true ? .bold : .regular
             case .headline:
                 return isBold ?? true ? .bold : .semibold
             default:

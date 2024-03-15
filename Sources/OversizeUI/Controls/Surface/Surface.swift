@@ -14,13 +14,11 @@ public enum SurfaceStyle {
 
 // swiftlint:disable opening_brace
 public struct Surface<Label: View>: View {
-    @Environment(\.elevation) private var elevation: Elevation
     @Environment(\.theme) private var theme: ThemeSettings
+    @Environment(\.isAccent) private var isAccent: Bool
     @Environment(\.surfaceRadius) var surfaceRadius: Radius
     @Environment(\.surfaceContentMargins) var contentInsets: EdgeSpaceInsets
-    @Environment(\.isAccent) private var isAccent: Bool
-
-    let forceContentInsets: EdgeSpaceInsets?
+    @Environment(\.surfaceElevation) private var elevation: Elevation
 
     private enum Constants {
         /// Colors
@@ -35,10 +33,13 @@ public struct Surface<Label: View>: View {
     private var backgroundColor: Color?
     private var border: Color?
     private var borderWidth: CGFloat?
+    private let forceContentInsets: EdgeSpaceInsets?
+    private var isSurfaceClipped: Bool = false
 
-    public init(action: (() -> Void)? = nil,
-                @ViewBuilder label: () -> Label)
-    {
+    public init(
+        action: (() -> Void)? = nil,
+        @ViewBuilder label: () -> Label
+    ) {
         self.label = label()
         self.action = action
         forceContentInsets = nil
@@ -76,9 +77,11 @@ public struct Surface<Label: View>: View {
                     )
                     .shadowElevaton(elevation)
             )
-            .clipShape(
-                RoundedRectangle(cornerRadius: surfaceRadius, style: .continuous)
-            )
+            .if(isSurfaceClipped) { view in
+                view.clipShape(
+                    RoundedRectangle(cornerRadius: surfaceRadius, style: .continuous)
+                )
+            }
     }
 
     private var strokeBorderColor: Color {
@@ -143,6 +146,12 @@ public struct Surface<Label: View>: View {
         control.backgroundColor = color
         return control
     }
+
+    public func surfaceClip(_ surfaceClipped: Bool = true) -> Surface {
+        var control = self
+        control.isSurfaceClipped = surfaceClipped
+        return control
+    }
 }
 
 public struct SurfaceButtonStyle: ButtonStyle {
@@ -197,7 +206,7 @@ public extension View {
     }
 }
 
-public extension Surface where Label == VStack<TupleView<(Row<Image, EmptyView>, Row<Image, EmptyView>)>> {
+ public extension Surface where Label == VStack<TupleView<(Row<Image, EmptyView>, Row<Image, EmptyView>)>> {
     init(action: (() -> Void)? = nil,
          @ViewBuilder label: () -> Label)
     {
@@ -205,9 +214,9 @@ public extension Surface where Label == VStack<TupleView<(Row<Image, EmptyView>,
         self.action = action
         forceContentInsets = .init(horizontal: .zero, vertical: .small)
     }
-}
+ }
 
-public extension Surface where Label == Row<EmptyView, EmptyView> {
+ public extension Surface where Label == Row<EmptyView, EmptyView> {
     init(action: (() -> Void)? = nil,
          @ViewBuilder label: () -> Label)
     {
@@ -215,9 +224,9 @@ public extension Surface where Label == Row<EmptyView, EmptyView> {
         self.action = action
         forceContentInsets = .init(horizontal: .zero, vertical: .small)
     }
-}
+ }
 
-public extension Surface where Label == Row<Image, EmptyView> {
+ public extension Surface where Label == Row<Image, EmptyView> {
     init(action: (() -> Void)? = nil,
          @ViewBuilder label: () -> Label)
     {
@@ -225,7 +234,7 @@ public extension Surface where Label == Row<Image, EmptyView> {
         self.action = action
         forceContentInsets = .init(horizontal: .zero, vertical: .small)
     }
-}
+ }
 
 struct Surface_Previews: PreviewProvider {
     static var previews: some View {

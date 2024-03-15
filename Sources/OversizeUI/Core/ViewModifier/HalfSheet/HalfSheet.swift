@@ -42,7 +42,6 @@ public enum Detents: Hashable {
 
 // swiftlint:disable line_length
 #if os(iOS)
-
 public struct SheetModifier: ViewModifier {
     public let detents: [Detents]
     public func body(content: Content) -> some View {
@@ -56,7 +55,7 @@ public extension View {
     @_disfavoredOverload
     func presentationDetents(_ detents: [Detents]) -> some View {
         Group {
-            if #available(iOS 16, *) {
+            if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
                 let suiDetents: Set<PresentationDetent> = Set(detents.compactMap { $0.convertToSUI() })
                 self.presentationDetents(suiDetents)
             } else {
