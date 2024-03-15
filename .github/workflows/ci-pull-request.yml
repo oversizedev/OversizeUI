@@ -19,7 +19,8 @@ jobs:
     uses: oversizedev/GithubWorkflows/.github/workflows/build-ios-app.yml@main
     with:
       folder: Example
-      app: Example (iOS)
+      project: Example
+      scheme: Example (iOS)
     secrets: inherit
     
   build-macOS-example:
@@ -28,7 +29,8 @@ jobs:
     uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
     with:
       folder: Example
-      app: Example
+      project: Example
+      scheme: Example
       destination: platform=macOS,arch=x86_64
     secrets: inherit
 
@@ -41,7 +43,8 @@ jobs:
         destination: ["platform=tvOS Simulator,name=Apple TV 4K"]
     with:
       folder: Example
-      app: Example
+      project: Example
+      scheme: Example
       destination: ${{ matrix.destination }}
     secrets: inherit
     
@@ -54,6 +57,7 @@ jobs:
         destination: ['platform=watchOS Simulator,name=Apple Watch Series 5 - 44mm']
     with:
       folder: Example
-      app: Example
+      project: Example
+      scheme: Example
       destination: ${{ matrix.destination }}
     secrets: inherit
