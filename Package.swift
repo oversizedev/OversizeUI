@@ -19,17 +19,11 @@ let package = Package(
             targets: ["OversizeUI"]
         ),
     ],
-    dependencies: [
-        .package(url: "https://github.com/SwiftGen/SwiftGenPlugin", .upToNextMajor(from: "6.6.2")),
-    ],
     targets: [
         .target(
             name: "OversizeUI",
             dependencies: [],
-            resources: [.process("Resources")],
-            plugins: [
-                .plugin(name: "SwiftGenPlugin", package: "SwiftGenPlugin"),
-            ]
+            resources: [.process("Resources")]
         ),
         .testTarget(name: "OversizeUITests", dependencies: ["OversizeUI"]),
     ]

@@ -8,6 +8,7 @@ import SwiftUI
 public enum MultiSelectStyle {
     case `default`, section
 }
+
 private struct MultiSelectStyleKey: EnvironmentKey {
     public static var defaultValue: MultiSelectStyle = .default
 }

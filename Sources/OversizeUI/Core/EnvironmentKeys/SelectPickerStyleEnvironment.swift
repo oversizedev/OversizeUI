@@ -11,6 +11,7 @@ public enum SelectStyle {
     @available(macOS, unavailable)
     case wheel
 }
+
 private struct SelectStyleKey: EnvironmentKey {
     public static var defaultValue: SelectStyle = .default
 }

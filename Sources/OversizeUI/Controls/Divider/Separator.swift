@@ -31,15 +31,15 @@ public struct Separator: View {
 
     private func insets(_ isHorizontal: Bool) -> EdgeInsets {
         if isHorizontal {
-            return EdgeInsets(top: 0.5,
-                              leading: padding.rawValue,
-                              bottom: 0,
-                              trailing: padding.rawValue)
+            EdgeInsets(top: 0.5,
+                       leading: padding.rawValue,
+                       bottom: 0,
+                       trailing: padding.rawValue)
         } else {
-            return EdgeInsets(top: padding.rawValue,
-                              leading: 0.5,
-                              bottom: padding.rawValue,
-                              trailing: 0)
+            EdgeInsets(top: padding.rawValue,
+                       leading: 0.5,
+                       bottom: padding.rawValue,
+                       trailing: 0)
         }
     }
 }

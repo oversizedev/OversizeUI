@@ -70,4 +70,8 @@ public extension View {
     func screenSize(_ geometry: GeometryProxy) -> some View {
         environment(\.screenSize, ScreenSize(geometry: geometry))
     }
+
+    func screenSize(_ screenSize: ScreenSize) -> some View {
+        environment(\.screenSize, screenSize)
+    }
 }

@@ -11,13 +11,13 @@ public enum FontDesignType: String, CaseIterable {
     public var system: Font.Design {
         switch self {
         case .default:
-            return .default
+            .default
         case .serif:
-            return .serif
+            .serif
         case .round:
-            return .rounded
+            .rounded
         case .mono:
-            return .monospaced
+            .monospaced
         }
     }
 }
@@ -87,15 +87,15 @@ public struct Typography: ViewModifier {
 
     private var fontWeight: Font.Weight {
         if let weight {
-            return weight
+            weight
         } else {
             switch fontStyle {
             case .largeTitle, .title:
-                return isBold ?? true ? .bold : .regular
+                isBold ?? true ? .bold : .regular
             case .headline:
-                return isBold ?? true ? .bold : .semibold
+                isBold ?? true ? .bold : .semibold
             default:
-                return isBold ?? false ? .bold : .regular
+                isBold ?? false ? .bold : .regular
             }
         }
     }

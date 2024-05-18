@@ -13,33 +13,33 @@ public enum Appearance: Int {
     public var colorScheme: ColorScheme? {
         switch self {
         case .system:
-            return nil
+            nil
         case .light:
-            return .light
+            .light
         case .dark:
-            return .dark
+            .dark
         }
     }
 
     public var name: String {
         switch self {
         case .system:
-            return "System"
+            "System"
         case .light:
-            return "Light"
+            "Light"
         case .dark:
-            return "Dark"
+            "Dark"
         }
     }
 
     public var image: Image {
         switch self {
         case .system:
-            return Image("System", bundle: .module)
+            Image("System", bundle: .module)
         case .light:
-            return Image("Light", bundle: .module)
+            Image("Light", bundle: .module)
         case .dark:
-            return Image("Dark", bundle: .module)
+            Image("Dark", bundle: .module)
         }
     }
 

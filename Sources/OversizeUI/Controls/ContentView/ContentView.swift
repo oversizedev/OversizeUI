@@ -48,7 +48,11 @@ public struct ContentView: View {
                     .frame(width: 218, height: 218, alignment: .bottom)
             }
 
-            TextBox(title: title, subtitle: subtitle)
+            TextBox(
+                title: title,
+                subtitle: subtitle,
+                spacing: .xxSmall
+            )
 
             primaryButtonView()
 
@@ -59,11 +63,11 @@ public struct ContentView: View {
     var vStackAlignment: HorizontalAlignment {
         switch multilineTextAlignment {
         case .leading:
-            return .leading
+            .leading
         case .center:
-            return .center
+            .center
         case .trailing:
-            return .trailing
+            .trailing
         }
     }
 }
@@ -78,59 +82,96 @@ extension ContentView {
             Button(action: { dismiss() }) {
                 IconDeprecated(.xMini)
             }
+            #if os(iOS)
             .buttonStyle(.secondary)
+            #endif
+            #if os(macOS)
+            .controlSize(.large)
+            #endif
 
         case .back:
 
             Button(action: { dismiss() }) {
                 IconDeprecated(.arrowLeft)
             }
+            #if os(iOS)
             .buttonStyle(.secondary)
-
+            #endif
+            #if os(macOS)
+            .controlSize(.large)
+            #endif
         case let .secondary(text, action: action):
 
             Button(action: action) {
                 Text(text)
             }
+            #if os(iOS)
             .buttonStyle(.secondary)
-
+            #endif
+            #if os(macOS)
+            .controlSize(.large)
+            #endif
         case let .accent(text, action: action):
 
             Button(action: action) {
                 Text(text)
             }
+            #if os(iOS)
             .buttonStyle(.primary)
             .accent()
-
+            #endif
+            #if os(macOS)
+            .controlSize(.large)
+            .buttonStyle(.borderedProminent)
+            .keyboardShortcut(.defaultAction)
+            #endif
         case let .primary(text, action: action):
 
             Button(action: action) {
                 Text(text)
             }
+            #if os(iOS)
             .buttonStyle(.primary)
-
+            #endif
+            #if os(macOS)
+            .controlSize(.large)
+            .buttonStyle(.borderedProminent)
+            .keyboardShortcut(.defaultAction)
+            #endif
         case let .closeAction(action: action):
 
             Button(action: action) {
                 IconDeprecated(.xMini)
             }
+            #if os(iOS)
             .buttonStyle(.secondary)
-
+            #endif
+            #if os(macOS)
+            .controlSize(.large)
+            #endif
         case let .backAction(action: action):
 
             Button(action: action) {
                 IconDeprecated(.arrowLeft)
             }
+            #if os(iOS)
             .buttonStyle(.secondary)
-
+            #endif
+            #if os(macOS)
+            .controlSize(.large)
+            #endif
         case let .disabled(text):
 
             Button(action: {}) {
                 Text(text)
             }
+            #if os(iOS)
             .buttonStyle(.quaternary)
             .disabled(true)
-
+            #endif
+            #if os(macOS)
+            .controlSize(.large)
+            #endif
         case .none:
             EmptyView()
         }
@@ -144,58 +185,67 @@ extension ContentView {
             Button(action: { dismiss() }) {
                 IconDeprecated(.xMini)
             }
+            #if os(iOS)
             .buttonStyle(.secondary)
-
+            #endif
         case .back:
 
             Button(action: { dismiss() }) {
                 IconDeprecated(.arrowLeft)
             }
+            #if os(iOS)
             .buttonStyle(.secondary)
-
+            #endif
         case let .secondary(text, action: action):
 
             Button(action: action) {
                 Text(text)
             }
+            #if os(iOS)
             .buttonStyle(.secondary)
-
+            #endif
         case let .accent(text, action: action):
 
             Button(action: action) {
                 Text(text)
             }
+            #if os(iOS)
             .buttonStyle(.primary)
             .accent()
-
+            #endif
         case let .primary(text, action: action):
 
             Button(action: action) {
                 Text(text)
             }
+            #if os(iOS)
             .buttonStyle(.primary)
             .accent()
-
+            #endif
         case let .closeAction(action: action):
 
             Button(action: action) {
                 IconDeprecated(.xMini)
             }
+            #if os(iOS)
             .buttonStyle(.secondary)
-
+            #endif
         case let .backAction(action: action):
 
             Button(action: action) {
                 IconDeprecated(.arrowLeft)
             }
+            #if os(iOS)
             .buttonStyle(.secondary)
-
+            #endif
         case let .disabled(text):
 
             Button(action: {}) {
                 Text(text)
             }
+            #if os(iOS)
             .buttonStyle(.tertiary)
+            #endif
             .disabled(true)
 
         case .none:

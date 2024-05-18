@@ -18,11 +18,11 @@ public enum Detents: Hashable {
     public var uiViewDetents: UISheetPresentationController.Detent {
         switch self {
         case .large:
-            return .large()
+            .large()
         case .medium:
-            return .medium()
+            .medium()
         case let .height(height):
-            return height > 560 ? .large() : .medium()
+            height > 560 ? .large() : .medium()
         }
     }
 
@@ -30,11 +30,11 @@ public enum Detents: Hashable {
     func convertToSUI() -> PresentationDetent {
         switch self {
         case .large:
-            return PresentationDetent.large
+            PresentationDetent.large
         case .medium:
-            return PresentationDetent.medium
+            PresentationDetent.medium
         case let .height(height):
-            return PresentationDetent.height(height)
+            PresentationDetent.height(height)
         }
     }
     #endif

@@ -53,20 +53,20 @@ public struct Background<Content: View>: View {
     private var paddingSize: CGFloat {
         switch padding {
         case .medium:
-            return Constants.paddingMedium
+            Constants.paddingMedium
         case .small:
-            return Constants.paddingSmall
+            Constants.paddingSmall
         }
     }
 
     private var backgroundColor: Color {
         switch background {
         case .primary:
-            return Constants.colorPrimary
+            Constants.colorPrimary
         case .secondary:
-            return Constants.colorSecondary
+            Constants.colorSecondary
         case .tertiary:
-            return Constants.colorTertiary
+            Constants.colorTertiary
         }
     }
 }
