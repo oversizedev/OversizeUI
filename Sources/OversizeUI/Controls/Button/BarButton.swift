@@ -61,61 +61,61 @@ public struct BarButton: View {
     private var controlSize: ControlSize {
         switch type {
         case .close, .closeAction, .back, .backAction, .image, .icon:
-            return .mini
+            .mini
         default:
-            return .small
+            .small
         }
     }
 
     private var isAccent: Bool {
         switch type {
         case .accent:
-            return true
+            true
         default:
-            return false
+            false
         }
     }
 
     private var isDisabled: Bool {
         switch type {
         case .disabled:
-            return true
+            true
         default:
-            return false
+            false
         }
     }
 
     private var buttonStyle: OversizeButtonStyle {
         switch type {
         case .close, .closeAction, .back, .backAction, .image, .icon, .secondary:
-            return .secondary
+            .secondary
         case .accent, .primary:
-            return .primary
+            .primary
         case .disabled:
-            return .tertiary
+            .tertiary
         }
     }
 
     private var buttonAction: () -> Void {
         switch type {
         case .back, .close:
-            return { dismiss() }
+            { dismiss() }
         case let .closeAction(action: action):
-            return action
+            action
         case let .backAction(action: action):
-            return action
+            action
         case let .accent(_, action: action):
-            return action
+            action
         case let .primary(_, action: action):
-            return action
+            action
         case let .secondary(_, action: action):
-            return action
+            action
         case .disabled:
-            return {}
+            {}
         case let .image(_, action: action):
-            return action
+            action
         case let .icon(_, action: action):
-            return action
+            action
         }
     }
 

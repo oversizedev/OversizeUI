@@ -44,15 +44,15 @@ public struct TextBox: View {
 
     private var textSpacing: Space {
         if let spacing {
-            return spacing
+            spacing
         } else {
             switch size {
             case .small:
-                return .xxxSmall
+                .xxxSmall
             case .medium:
-                return .small
+                .small
             case .large:
-                return .medium
+                .medium
             }
         }
     }
@@ -60,11 +60,11 @@ public struct TextBox: View {
     private var textStackAlignment: HorizontalAlignment {
         switch multilineTextAlignment {
         case .leading:
-            return .leading
+            .leading
         case .center:
-            return .center
+            .center
         case .trailing:
-            return .trailing
+            .trailing
         }
     }
 

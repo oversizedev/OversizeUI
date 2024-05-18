@@ -65,45 +65,45 @@ public struct PremiumLabel: View {
     var fontSize: CGFloat {
         switch size {
         case .small:
-            return 12
+            12
         case .medium:
-            return 20
+            20
         }
     }
 
     var leadingPadding: Space {
         switch size {
         case .small:
-            return Space.xxSmall
+            Space.xxSmall
         case .medium:
-            return Space.xSmall
+            Space.xSmall
         }
     }
 
     var trailingPadding: Space {
         switch size {
         case .small:
-            return image == .none ? .xxSmall : .xSmall
+            image == .none ? .xxSmall : .xSmall
         case .medium:
-            return image == .none ? .xSmall : .small
+            image == .none ? .xSmall : .small
         }
     }
 
     var verticalPadding: Space {
         switch size {
         case .small:
-            return Space.xxxSmall
+            Space.xxxSmall
         case .medium:
-            return Space.xxSmall
+            Space.xxSmall
         }
     }
 
     var radius: Radius {
         switch size {
         case .small:
-            return Radius.small
+            Radius.small
         case .medium:
-            return Radius.medium
+            Radius.medium
         }
     }
 

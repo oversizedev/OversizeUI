@@ -86,39 +86,39 @@ public struct Surface<Label: View>: View {
 
     private var strokeBorderColor: Color {
         if let border {
-            return border
+            border
         } else {
             if theme.borderSurface {
-                return Color.border
+                Color.border
             } else {
-                return surfaceBackgroundColor
+                surfaceBackgroundColor
             }
         }
     }
 
     private var strokeBorderLineWidth: CGFloat {
         if let borderWidth {
-            return borderWidth
+            borderWidth
         } else {
-            return CGFloat(theme.borderSize)
+            CGFloat(theme.borderSize)
         }
     }
 
     private var surfaceBackgroundColor: Color {
         if let backgroundColor {
-            return backgroundColor
+            backgroundColor
         } else if isAccent {
-            return Color.accent
+            Color.accent
         } else {
             switch background {
             case .primary:
-                return Constants.colorPrimary
+                Constants.colorPrimary
             case .secondary:
-                return Constants.colorSecondary
+                Constants.colorSecondary
             case .tertiary:
-                return Constants.colorTertiary
+                Constants.colorTertiary
             case .clear:
-                return Color.clear
+                Color.clear
             }
         }
     }
@@ -206,7 +206,7 @@ public extension View {
     }
 }
 
- public extension Surface where Label == VStack<TupleView<(Row<Image, EmptyView>, Row<Image, EmptyView>)>> {
+public extension Surface where Label == VStack<TupleView<(Row<Image, EmptyView>, Row<Image, EmptyView>)>> {
     init(action: (() -> Void)? = nil,
          @ViewBuilder label: () -> Label)
     {
@@ -214,9 +214,9 @@ public extension View {
         self.action = action
         forceContentInsets = .init(horizontal: .zero, vertical: .small)
     }
- }
+}
 
- public extension Surface where Label == Row<EmptyView, EmptyView> {
+public extension Surface where Label == Row<EmptyView, EmptyView> {
     init(action: (() -> Void)? = nil,
          @ViewBuilder label: () -> Label)
     {
@@ -224,9 +224,9 @@ public extension View {
         self.action = action
         forceContentInsets = .init(horizontal: .zero, vertical: .small)
     }
- }
+}
 
- public extension Surface where Label == Row<Image, EmptyView> {
+public extension Surface where Label == Row<Image, EmptyView> {
     init(action: (() -> Void)? = nil,
          @ViewBuilder label: () -> Label)
     {
@@ -234,7 +234,7 @@ public extension View {
         self.action = action
         forceContentInsets = .init(horizontal: .zero, vertical: .small)
     }
- }
+}
 
 struct Surface_Previews: PreviewProvider {
     static var previews: some View {

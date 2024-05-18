@@ -5,9 +5,8 @@
 
 import SwiftUI
 
-#if os(iOS)
+#if os(iOS) || os(macOS)
 @available(iOS 15.0, *)
-@available(macOS, unavailable)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 public struct URLField: View {
@@ -24,6 +23,7 @@ public struct URLField: View {
 
     public var body: some View {
         TextField(title, text: $urlString, onEditingChanged: { state in
+            #if os(iOS)
             if state {
                 textFieldHelper = .none
             } else if let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) {
@@ -33,17 +33,41 @@ public struct URLField: View {
                 textFieldHelper = .errorText
                 urlString = ""
             }
+            #else
+
+            if state {
+                textFieldHelper = .none
+            } else if let url = URL(string: urlString) {
+                textFieldHelper = .none
+                self.url = url
+            } else {
+                textFieldHelper = .errorText
+                urlString = ""
+            }
+            #endif
+
         }, onCommit: {
+            #if os(iOS)
             if let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) {
                 textFieldHelper = .none
                 self.url = url
             } else {
                 textFieldHelper = .errorText
             }
+            #else
+            if let url = URL(string: urlString) {
+                textFieldHelper = .none
+                self.url = url
+            } else {
+                textFieldHelper = .errorText
+            }
+            #endif
         })
+        #if os(iOS)
         .keyboardType(.URL)
-        .textContentType(.URL)
         .textInputAutocapitalization(.never)
+        .textContentType(.URL)
+        #endif
         .autocorrectionDisabled()
         .fieldHelper(.constant("Invalid URL"), style: $textFieldHelper)
     }

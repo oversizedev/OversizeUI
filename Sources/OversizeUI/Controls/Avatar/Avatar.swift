@@ -22,7 +22,6 @@ public enum AvatarBackgroundType {
 /// ```
 ///
 public struct Avatar: View {
-
     #if !os(tvOS)
     @Environment(\.controlSize) var controlSize: ControlSize
     #endif

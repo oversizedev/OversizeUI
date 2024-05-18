@@ -11,17 +11,17 @@ import SwiftUI
 public struct IconPicker: View {
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    
+
     private let label: String
     private let icons: [Image]
     @Binding private var selection: Image?
     @State private var showModal = false
     @State private var isSelected = false
-    
+
     @State private var selectedIndex: Int?
-    
+
     @State var offset = CGPoint(x: 0, y: 0)
-    
+
     private var gridPadding: CGFloat {
         guard let sizeClass = horizontalSizeClass else { return 40 }
         switch sizeClass {
@@ -31,7 +31,7 @@ public struct IconPicker: View {
             return 72
         }
     }
-    
+
     public init(_ label: String,
                 _ icons: [Image],
                 selection: Binding<Image?>)
@@ -40,7 +40,7 @@ public struct IconPicker: View {
         self.icons = icons
         _selection = selection
     }
-    
+
     public var body: some View {
         Button {
             showModal.toggle()
@@ -48,7 +48,7 @@ public struct IconPicker: View {
             HStack(spacing: .xxSmall) {
                 Text(label)
                     .onSurfaceHighEmphasisForegroundColor()
-                
+
                 Spacer()
                 if let image = selection {
                     image
@@ -61,14 +61,14 @@ public struct IconPicker: View {
             modal
         }
     }
-    
+
     private var modal: some View {
         PageView(label) {
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: gridPadding))]) {
                     ForEach(icons.indices, id: \.self) { index in
                         Button(
-                            action: {  selectedIndex = index },
+                            action: { selectedIndex = index },
                             label: {
                                 if index == selectedIndex {
                                     Group {
@@ -81,7 +81,7 @@ public struct IconPicker: View {
                                             .strokeBorder(Color.border, lineWidth: 1)
                                             .frame(width: 48, height: 48, alignment: .center)
                                     )
-                                    
+
                                 } else {
                                     icons[index]
                                         .resizable()

@@ -35,9 +35,8 @@ public struct TextFieldExtended: View {
                 leadingImage: IconsNames = .none,
                 trallingImage: IconsNames = .none,
                 placeholderPosition: TextFieldPlaceholderPosition = .overField,
-                secure: Bool = false
-                // contentType: UITextContentType = .
-    ) {
+                secure: Bool = false)
+    {
         self.placeholder = placeholder
         _text = text
         _helperText = helperText

@@ -19,23 +19,23 @@ public enum Palette: String {
     public var color: Color {
         switch self {
         case .red:
-            return Color.red
+            Color.red
         case .orange:
-            return Color.orange
+            Color.orange
         case .yellow:
-            return Color.yellow
+            Color.yellow
         case .green:
-            return Color.green
+            Color.green
         case .blue:
-            return Color.blue
+            Color.blue
         case .pink:
-            return Color.pink
+            Color.pink
         case .gray:
-            return Color.gray
+            Color.gray
         case .violet:
-            return Color.purple
+            Color.purple
         case .black:
-            return Color.black
+            Color.black
         }
     }
 

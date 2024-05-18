@@ -65,13 +65,13 @@ public struct FieldButtonStyle: ButtonStyle {
     private var backgroundShapeCorners: UIRectCorner {
         switch fieldPosition {
         case .default:
-            return [.allCorners]
+            [.allCorners]
         case .top:
-            return [.topLeft, .topRight]
+            [.topLeft, .topRight]
         case .bottom:
-            return [.bottomLeft, .bottomRight]
+            [.bottomLeft, .bottomRight]
         case .center:
-            return []
+            []
         }
     }
     #endif

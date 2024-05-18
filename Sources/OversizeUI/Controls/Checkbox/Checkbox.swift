@@ -94,9 +94,9 @@ public struct Checkbox<Label: View>: View {
 
     private var foregroundColor: Color {
         if isEnabled {
-            return Color.onSurfaceHighEmphasis
+            Color.onSurfaceHighEmphasis
         } else {
-            return Color.onSurfaceDisabled
+            Color.onSurfaceDisabled
         }
     }
 }

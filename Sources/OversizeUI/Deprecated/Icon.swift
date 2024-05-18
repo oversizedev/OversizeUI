@@ -14,13 +14,17 @@ public enum IconSizes: CaseIterable {
     public var rawValue: CGFloat {
         switch self {
         case .small:
-            return Space.small.rawValue
+            Space.small.rawValue
         case .medium:
-            return Space.medium.rawValue
+            #if os(macOS)
+            20
+            #else
+            Space.medium.rawValue
+            #endif
         case .large:
-            return Space.large.rawValue
+            Space.large.rawValue
         case .xLarge:
-            return Space.xLarge.rawValue
+            Space.xLarge.rawValue
         }
     }
 }
@@ -71,13 +75,13 @@ public struct IconDeprecated: View {
     private var iconSize: CGFloat {
         switch size {
         case .medium:
-            return Constants.medium
+            Constants.medium
         case .small:
-            return Constants.small
+            Constants.small
         case .large:
-            return Constants.large
+            Constants.large
         case .xLarge:
-            return Constants.xLarge
+            Constants.xLarge
         }
     }
 

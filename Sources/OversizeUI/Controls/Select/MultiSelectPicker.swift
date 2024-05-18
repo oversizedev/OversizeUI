@@ -41,7 +41,7 @@ public struct MultiSelectPicker<Element: Equatable, Content, Actions, ContentUna
         self.contentUnavailable = contentUnavailable()
         _selection = selection
     }
-    
+
     public var body: some View {
         Page(title) {
             if data.isEmpty, let contentUnavailable {
@@ -49,7 +49,6 @@ public struct MultiSelectPicker<Element: Equatable, Content, Actions, ContentUna
             } else {
                 pageContent(data, selectStyle: multiSelectStyle)
             }
-    
         }
         .backgroundSecondary()
         .toolbar {
@@ -60,7 +59,7 @@ public struct MultiSelectPicker<Element: Equatable, Content, Actions, ContentUna
                     Image.Base.close.icon()
                 }
             }
-            
+
             ToolbarItem(placement: .confirmationAction) {
                 actions
             }
@@ -69,7 +68,7 @@ public struct MultiSelectPicker<Element: Equatable, Content, Actions, ContentUna
             defaultSelect()
         }
     }
-    
+
     private func defaultSelect() {
         if !selection.isEmpty {
             for dataIndex in 0 ..< data.count {
@@ -80,7 +79,7 @@ public struct MultiSelectPicker<Element: Equatable, Content, Actions, ContentUna
             }
         }
     }
-    
+
     @ViewBuilder
     private func pageContent(_ data: Data, selectStyle: MultiSelectStyle) -> some View {
         switch selectStyle {
@@ -93,7 +92,7 @@ public struct MultiSelectPicker<Element: Equatable, Content, Actions, ContentUna
             .sectionContentCompactRowMargins()
         }
     }
-    
+
     private func rowsList(_ data: Data) -> some View {
         LazyVStack(alignment: .leading, spacing: .zero) {
             ForEach(data.indices, id: \.self) { index in
