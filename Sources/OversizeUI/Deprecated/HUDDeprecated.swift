@@ -129,9 +129,9 @@ public struct HUDSurfaceView<Content: View>: View {
     private func backgroundMaterial(type: HUDType) -> Material {
         switch type {
         case .hud:
-            return .regular
+            .regular
         case .alert:
-            return .ultraThinMaterial
+            .ultraThinMaterial
         }
     }
     #endif
@@ -139,10 +139,10 @@ public struct HUDSurfaceView<Content: View>: View {
     private func backgroundShape(type: HUDType) -> AnyShape {
         switch type {
         case .hud:
-            return AnyShape(Capsule())
+            AnyShape(Capsule())
 
         case .alert:
-            return AnyShape(RoundedRectangle(cornerRadius: Radius.medium, style: .continuous))
+            AnyShape(RoundedRectangle(cornerRadius: Radius.medium, style: .continuous))
         }
     }
 
@@ -163,27 +163,27 @@ public struct HUDSurfaceView<Content: View>: View {
     var horizontalPadding: Space {
         switch type {
         case .hud:
-            return .medium
+            .medium
         case .alert:
-            return .medium
+            .medium
         }
     }
 
     var topPadding: Space {
         switch type {
         case .hud:
-            return .small
+            .small
         case .alert:
-            return .xLarge
+            .xLarge
         }
     }
 
     var bottomPadding: Space {
         switch type {
         case .hud:
-            return .small
+            .small
         case .alert:
-            return .xLarge
+            .xLarge
         }
     }
 }

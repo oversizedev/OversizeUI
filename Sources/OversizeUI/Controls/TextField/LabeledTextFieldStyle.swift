@@ -34,10 +34,16 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
                 configuration
                     .headline(.medium)
                     .foregroundColor(.onSurfaceHighEmphasis)
-                    .padding()
-                    .padding(.vertical, fieldPlaceholderPosition == .overInput ? .xxxSmall : .zero)
                     .offset(y: fieldOffset)
                     .focused($isFocused)
+                #if os(macOS)
+                    .textFieldStyle(.plain)
+                    .padding(.xxSmall)
+                #else
+                    .padding(.vertical, fieldPlaceholderPosition == .overInput ? .xxxSmall : .zero)
+                    .padding()
+
+                #endif
             }
             .background(fieldBackground)
             .overlay(overlay)
@@ -69,13 +75,13 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
     private var backgroundShapeCorners: UIRectCorner {
         switch fieldPosition {
         case .default:
-            return [.allCorners]
+            [.allCorners]
         case .top:
-            return [.topLeft, .topRight]
+            [.topLeft, .topRight]
         case .bottom:
-            return [.bottomLeft, .bottomRight]
+            [.bottomLeft, .bottomRight]
         case .center:
-            return []
+            []
         }
     }
     #endif
@@ -83,11 +89,11 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
     private var fieldOffset: CGFloat {
         switch fieldPlaceholderPosition {
         case .default:
-            return 0
+            0
         case .adjacent:
-            return 0
+            0
         case .overInput:
-            return text.isEmpty ? 0 : 10
+            text.isEmpty ? 0 : 10
         }
     }
 
@@ -140,11 +146,11 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
 
     private var overlayBorderColor: Color {
         if isFocused {
-            return Color.accentColor
+            Color.accentColor
         } else if theme.borderTextFields {
-            return Color.border
+            Color.border
         } else {
-            return Color.clear
+            Color.clear
         }
     }
 }

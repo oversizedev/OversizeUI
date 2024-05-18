@@ -23,7 +23,7 @@ public struct Select<Element: Equatable, Content, Selection, Actions, ContentUna
     private let contentUnavailable: ContentUnavailable?
     @State private var selectedIndex: Data.Index? = 0
     private let selectionView: (Data.Element) -> Selection
-    @State private var showModal: Bool = false
+    @State private var showModal = false
     @State private var isSelected = false
     let actions: Group<Actions>?
 

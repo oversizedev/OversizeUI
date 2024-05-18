@@ -78,21 +78,21 @@ public struct OversizeButtonStyle: ButtonStyle {
         switch type {
         case .primary:
             switch role {
-            case .some(.destructive): return Color.error
-            case .some(.cancel): return Color.accent
+            case .some(.destructive): Color.error
+            case .some(.cancel): Color.accent
             default:
                 if isAccent {
-                    return Color.accent
+                    Color.accent
                 } else {
-                    return Color.primary
+                    Color.primary
                 }
             }
         case .secondary:
-            return Color.surfacePrimary
+            Color.surfacePrimary
         case .tertiary:
-            return Color.surfaceSecondary
+            Color.surfaceSecondary
         case .quaternary:
-            return Color.clear
+            Color.clear
         }
     }
 
@@ -100,34 +100,34 @@ public struct OversizeButtonStyle: ButtonStyle {
         switch type {
         case .primary:
             switch role {
-            case .some(.destructive), .some(.cancel): return Color.onPrimaryHighEmphasis
+            case .some(.destructive), .some(.cancel): Color.onPrimaryHighEmphasis
             default:
                 if isAccent {
-                    return Color.onPrimaryHighEmphasis
+                    Color.onPrimaryHighEmphasis
                 } else {
-                    return Color.backgroundPrimary
+                    Color.backgroundPrimary
                 }
             }
         case .secondary, .quaternary:
             switch role {
-            case .some(.destructive): return Color.error
-            case .some(.cancel): return Color.accent
+            case .some(.destructive): Color.error
+            case .some(.cancel): Color.accent
             default:
                 if isAccent {
-                    return Color.accent
+                    Color.accent
                 } else {
-                    return Color.onSurfaceHighEmphasis
+                    Color.onSurfaceHighEmphasis
                 }
             }
         case .tertiary:
             switch role {
-            case .some(.destructive): return Color.error
-            case .some(.cancel): return Color.onSurfaceHighEmphasis
+            case .some(.destructive): Color.error
+            case .some(.cancel): Color.onSurfaceHighEmphasis
             default:
                 if isAccent {
-                    return Color.accent
+                    Color.accent
                 } else {
-                    return Color.onSurfaceHighEmphasis
+                    Color.onSurfaceHighEmphasis
                 }
             }
         }

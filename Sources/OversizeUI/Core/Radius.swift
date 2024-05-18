@@ -24,15 +24,15 @@ public enum Radius {
     public var rawValue: CGFloat {
         switch self {
         case .zero:
-            return .zero
+            .zero
         case .small:
-            return CGFloat(theme.radius)
+            CGFloat(theme.radius)
         case .medium:
-            return theme.radius == .zero ?.zero : CGFloat(theme.radius) * 1.5
+            theme.radius == .zero ?.zero : CGFloat(theme.radius) * 1.5
         case .large:
-            return theme.radius == .zero ?.zero : CGFloat(theme.radius) * 2
+            theme.radius == .zero ?.zero : CGFloat(theme.radius) * 2
         case .xLarge:
-            return theme.radius == .zero ?.zero : CGFloat(theme.radius) * 3
+            theme.radius == .zero ?.zero : CGFloat(theme.radius) * 3
         }
     }
 }

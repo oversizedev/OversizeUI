@@ -24,7 +24,7 @@ public extension Image {
     func icon(_ color: Color = Color.onSurfaceHighEmphasis, size: IconSizes) -> some View {
         renderingMode(.template)
             .resizable()
-            .foregroundColor(color)
             .frame(width: size.rawValue, height: size.rawValue)
+            .foregroundColor(color)
     }
 }

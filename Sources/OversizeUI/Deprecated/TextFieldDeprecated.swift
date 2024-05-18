@@ -41,11 +41,11 @@ public struct DefaultPlaceholderTextFieldStyle: TextFieldStyle {
 
     var overlayBorderColor: Color {
         if isFocused {
-            return Color.accentColor
+            Color.accentColor
         } else if theme.borderTextFields {
-            return Color.border
+            Color.border
         } else {
-            return Color.clear
+            Color.clear
         }
     }
 }
@@ -95,11 +95,11 @@ public struct OverPlaceholderTextFieldStyle: TextFieldStyle {
 
     var overlayBorderColor: Color {
         if isFocused {
-            return Color.accentColor
+            Color.accentColor
         } else if theme.borderTextFields {
-            return Color.border
+            Color.border
         } else {
-            return Color.clear
+            Color.clear
         }
     }
 }
@@ -149,11 +149,11 @@ public struct InsidePlaceholderTextFieldStyle: TextFieldStyle {
 
     var overlayBorderColor: Color {
         if isFocused {
-            return Color.accentColor
+            Color.accentColor
         } else if theme.borderTextFields {
-            return Color.border
+            Color.border
         } else {
-            return Color.clear
+            Color.clear
         }
     }
 }

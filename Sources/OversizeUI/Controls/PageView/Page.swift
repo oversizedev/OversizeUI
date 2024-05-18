@@ -24,7 +24,7 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
     }
 
     @State
-    private var isShowSearchBar: Bool = false
+    private var isShowSearchBar = false
 
     @Environment(\.screenSize) private var screenSize
 
@@ -45,8 +45,8 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
     @Binding private var searchQuery: String
     @Binding private var displaySearchBar: Bool
     @FocusState private var focusStateSearchBar: Bool
-    @State private var isFocusSearchBar: Bool = false
-    private var isEnableSearchBar: Bool = false
+    @State private var isFocusSearchBar = false
+    private var isEnableSearchBar = false
     private var prompt: String = .init()
     private var searchCancelButton: PageViewSearchButtonType = .icon
     @Namespace private var searchAnimation
@@ -79,25 +79,24 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
             navbarOverlay
         }
         .prefersNavigationBarHidden()
-        #if os(iOS) || os(macOS)
-        .toolbar {
-            if let title {
-                ToolbarItem(placement: .principal) {
-                    Text(title)
-                        .font(.headline)
-                        .opacity(isLargeTitle ? 1 - visibleRatio : 1) // .opacity(isLargeTitle ? visibleRatio > 0 ? 0 : -5 * visibleRatio : 1)
-                }
-            }
-        }
-        #endif
-        #if !os(tvOS)
-        .toolbarBackground(.hidden)
-        #endif
         .onChange(of: focusStateSearchBar, perform: onChangeFocusSearchBar)
         .onChange(of: displaySearchBar, perform: onChangeDisplaySearchBar)
         #if os(iOS)
+            .toolbar {
+                if let title {
+                    ToolbarItem(placement: .principal) {
+                        Text(title)
+                            .font(.headline)
+                            .opacity(isLargeTitle ? 1 - visibleRatio : 1) // .opacity(isLargeTitle ? visibleRatio > 0 ? 0 : -5 * visibleRatio : 1)
+                    }
+                }
+            }
+            .toolbarBackground(.hidden)
             .toolbar(isFocusSearchBar ? .hidden : .automatic, for: .navigationBar)
             .navigationBarTitleDisplayMode(.inline)
+        #endif
+        #if os(macOS)
+        .navigationTitle(title ?? "")
         #endif
     }
 
@@ -126,7 +125,6 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
                 }
             }
             .background(background.ignoresSafeArea())
-           
         }
     }
 
@@ -137,7 +135,9 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
     }
 
     func handleOffset(_ scrollOffset: CGPoint) {
-        offset = scrollOffset
+        DispatchQueue.main.async {
+            offset = scrollOffset
+        }
         if isEnableSearchBar, scrollOffset.y > 95, !isShowSearchBar {
             withAnimation(.easeOut(duration: 0.30)) {
                 isShowSearchBar = true
@@ -170,7 +170,7 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
             } else {
                 Rectangle()
                     .fill(Color.surfacePrimary.opacity(visibleRatio > 0 ? 0 : -5 * visibleRatio))
-                    //.fill(Material.bar.opacity(visibleRatio > 0 ? 0 : -5 * visibleRatio))
+                    // .fill(Material.bar.opacity(visibleRatio > 0 ? 0 : -5 * visibleRatio))
                     .overlay(alignment: .bottom) {
                         Divider().opacity(visibleRatio > 0 ? 0 : -5 * visibleRatio)
                     }
@@ -215,9 +215,9 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
     private var searchHeader: some View {
         ZStack(alignment: .bottomLeading) {
             Rectangle()
-                #if os(iOS) || os(macOS)
+            #if os(iOS) || os(macOS)
                 .fill(Material.bar)
-                #endif
+            #endif
                 .overlay(alignment: .bottom) {
                     Divider().opacity(visibleRatio > 0 ? 0 : -5 * visibleRatio)
                 }
@@ -236,9 +236,9 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
                     }
                     .buttonStyle(.quaternary(infinityWidth: false))
                     #if !os(tvOS)
-                    .controlSize(.mini)
+                        .controlSize(.mini)
                     #endif
-                    .offset(x: 8)
+                        .offset(x: 8)
                 }
             }
             .padding(.horizontal, .small)
@@ -259,9 +259,9 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
     private var searchCancelButtonPadding: Space {
         switch searchCancelButton {
         case .icon, .none:
-            return .xSmall
+            .xSmall
         case .label:
-            return .xxSmall
+            .xxSmall
         }
     }
 

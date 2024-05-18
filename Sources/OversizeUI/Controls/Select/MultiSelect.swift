@@ -22,7 +22,7 @@ public struct MultiSelect<Element: Equatable, Content, Selection, Actions, Conte
     private let content: (Data.Element, Bool) -> Content
     private let contentUnavailable: ContentUnavailable?
     private let selectionView: (Data) -> Selection
-    @State private var showModal: Bool = false
+    @State private var showModal = false
     @Binding private var showModalBinding: Bool?
     @State var selectedIndexes: [Int] = []
     let actions: Group<Actions>?

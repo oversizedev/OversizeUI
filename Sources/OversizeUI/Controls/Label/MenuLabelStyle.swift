@@ -39,11 +39,11 @@ public struct MenuLabelStyle: LabelStyle {
     private var textAlignment: HorizontalAlignment {
         switch multilineTextAlignment {
         case .leading:
-            return .leading
+            .leading
         case .center:
-            return .center
+            .center
         case .trailing:
-            return .trailing
+            .trailing
         }
     }
 }

@@ -97,18 +97,18 @@ public struct SectionView<Content: View>: View {
     private var titleFont: Font {
         switch titlePosition {
         case .inside:
-            return .title2.weight(.semibold)
+            .title2.weight(.semibold)
         case .outside:
-            return .headline.weight(.semibold)
+            .headline.weight(.semibold)
         }
     }
 
     private var titleColor: Color {
         switch titlePosition {
         case .inside:
-            return .onSurfaceHighEmphasis
+            .onSurfaceHighEmphasis
         case .outside:
-            return .onBackgroundHighEmphasis
+            .onBackgroundHighEmphasis
         }
     }
 
@@ -193,9 +193,9 @@ public struct SectionView<Content: View>: View {
     private var surfaceVerticalPaddingSize: CGFloat {
         switch style {
         case .default:
-            return Space.small.rawValue
+            Space.small.rawValue
         case .smallIndent, .edgeToEdge:
-            return 2
+            2
         }
     }
 }

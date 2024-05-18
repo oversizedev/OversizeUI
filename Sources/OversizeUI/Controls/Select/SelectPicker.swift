@@ -48,7 +48,6 @@ public struct SelectPicker<Element: Hashable, Content, Actions, ContentUnavailab
             } else {
                 pageContent(data, selectStyle: selectStyle)
             }
-    
         }
         .backgroundSecondary()
         .toolbar {
@@ -59,7 +58,7 @@ public struct SelectPicker<Element: Hashable, Content, Actions, ContentUnavailab
                     Image.Base.close.icon()
                 }
             }
-            
+
             ToolbarItem(placement: .confirmationAction) {
                 actions
             }
@@ -68,7 +67,7 @@ public struct SelectPicker<Element: Hashable, Content, Actions, ContentUnavailab
             defaultSelect()
         }
     }
-    
+
     @ViewBuilder
     private func pageContent(_ data: Data, selectStyle: SelectStyle) -> some View {
         switch selectStyle {
@@ -95,13 +94,13 @@ public struct SelectPicker<Element: Hashable, Content, Actions, ContentUnavailab
         Picker("", selection: $selection) {
             ForEach(data, id: \.self) { item in
                 content(item, selection == item)
-           }
+            }
         }
         .labelsHidden()
         .pickerStyle(.wheel)
     }
     #endif
-    
+
     private func rowsList(_ data: Data) -> some View {
         LazyVStack(alignment: .leading, spacing: .zero) {
             ForEach(data.indices, id: \.self) { index in
@@ -112,13 +111,13 @@ public struct SelectPicker<Element: Hashable, Content, Actions, ContentUnavailab
                 } label: {
                     content(data[index],
                             selectedIndex == index)
-                    .headline()
-                    .onSurfaceHighEmphasisForegroundColor()
+                        .headline()
+                        .onSurfaceHighEmphasisForegroundColor()
                 }
             }
         }
     }
-    
+
     private func defaultSelect() {
         var index = 0
         for dataValue in data {
@@ -154,7 +153,7 @@ public extension SelectPicker where Actions == Never {
         _ title: String? = nil,
         _ data: Data,
         selection: Binding<Data.Element>,
-        activeModal: Binding<Bool?> = .constant(nil),
+        activeModal _: Binding<Bool?> = .constant(nil),
         @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
         @ViewBuilder contentUnavailable: () -> ContentUnavailable
     ) {
@@ -173,7 +172,7 @@ public extension SelectPicker where ContentUnavailable == Never, Actions == Neve
         _ title: String? = nil,
         _ data: Data,
         selection: Binding<Data.Element>,
-        activeModal: Binding<Bool?> = .constant(nil),
+        activeModal _: Binding<Bool?> = .constant(nil),
         @ViewBuilder content: @escaping (Data.Element, Bool) -> Content
     ) {
         self.title = title

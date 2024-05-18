@@ -15,7 +15,6 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
     @Environment(\.rowContentMargins) var controlMargins: EdgeSpaceInsets
     @Environment(\.multilineTextAlignment) var multilineTextAlignment
     @Environment(\.isPremium) var premiumStatus
-    @Environment(\.isAccent) var isAccent
     @Environment(\.isLoading) var isLoading
 
     private let title: String
@@ -32,15 +31,17 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
 
     private let action: (() -> Void)?
 
-    private var isPremiumOption: Bool = false
-    private var isShowArrowIcon: Bool = false
+    private var isPremiumOption = false
+    private var isShowArrowIcon = false
 
     private var iconBackgroundColor: Color?
 
     private var сlearButtonStyle: RowClearIconStyle = .default
     private var сlearAction: (() -> Void)?
-    
+
     private var leadingSpace: Space = .small
+
+    private var textColor: Color? = nil
 
     private var isShowSubtitle: Bool {
         (subtitle?.isEmpty) != nil
@@ -105,7 +106,6 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
                     .frame(width: leadingSize?.width, height: leadingSize?.height)
                     .cornerRadius(leadingRadius ?? 0)
                     .padding(.trailing, leadingSpace)
-                
 
                 if textAlignment == .trailing || textAlignment == .center {
                     Spacer()
@@ -142,11 +142,11 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
         VStack(alignment: textAlignment, spacing: .zero) {
             Text(title)
                 .headline(.medium)
-                .foregroundColor(.onSurfaceHighEmphasis)
+                .foregroundColor(titleTextColor)
             if let subtitle, !subtitle.isEmpty {
                 Text(subtitle)
                     .subheadline()
-                    .foregroundColor(.onSurfaceMediumEmphasis)
+                    .foregroundColor(subtitleTextColor)
             }
         }
         .multilineTextAlignment(multilineTextAlignment)
@@ -178,14 +178,30 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
         }
     }
 
+    private var titleTextColor: Color {
+        if let textColor {
+            textColor
+        } else {
+            Color.onSurfaceHighEmphasis
+        }
+    }
+
+    private var subtitleTextColor: Color {
+        if let textColor {
+            textColor
+        } else {
+            Color.onSurfaceMediumEmphasis
+        }
+    }
+
     private var textAlignment: HorizontalAlignment {
         switch multilineTextAlignment {
         case .leading:
-            return .leading
+            .leading
         case .center:
-            return .center
+            .center
         case .trailing:
-            return .trailing
+            .trailing
         }
     }
 }
@@ -217,10 +233,16 @@ public extension Row {
         control.сlearAction = action
         return control
     }
-    
+
     func leadingContentMargin(_ margin: Space = .small) -> Row {
         var control = self
         control.leadingSpace = margin
+        return control
+    }
+
+    func rowTextColor(_ color: Color?) -> Row {
+        var control = self
+        control.textColor = color
         return control
     }
 

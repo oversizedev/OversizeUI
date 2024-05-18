@@ -12,7 +12,7 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
     private let content: Content
     private var isLargeTitle = false
     private var isAlwaysSlideSmallTile = false
-    private var isDisableScrollShadow: Bool = false
+    private var isDisableScrollShadow = false
     @State private var offset: CGPoint = .init(x: 0, y: 0)
 
     private var leadingBar: LeadingBar?
@@ -26,7 +26,7 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
 
     @Binding private var searchQuery: String
     @Binding private var displaySearchBar: Bool
-    private var isShowSearchBar: Bool = false
+    private var isShowSearchBar = false
     private var searchCancelButton: PageViewSearchButtonType = .icon
     private var prompt: String = .init()
 
@@ -59,7 +59,7 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
         }
         .coordinateSpace(name: "Page")
     }
-   
+
     @ViewBuilder
     var header: some View {
         if title != nil || leadingBar != nil || trailingBar != nil || topToolbar != nil || titleLabel != nil {
@@ -113,9 +113,9 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
     var searchCancelButtonPadding: Space {
         switch searchCancelButton {
         case .icon, .none:
-            return .small
+            .small
         case .label:
-            return .xxSmall
+            .xxSmall
         }
     }
 

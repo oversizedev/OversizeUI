@@ -56,9 +56,9 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
     var topInputPadding: CGFloat {
         switch fieldPlaceholderPosition {
         case .default, .adjacent:
-            return 10
+            10
         case .overInput:
-            return text.isEmpty ? 8 : 22
+            text.isEmpty ? 8 : 22
         }
     }
 
@@ -94,11 +94,11 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
 
     var overlayBorderColor: Color {
         if isFocused {
-            return Color.accentColor
+            Color.accentColor
         } else if theme.borderTextFields {
-            return Color.border
+            Color.border
         } else {
-            return Color.clear
+            Color.clear
         }
     }
 }

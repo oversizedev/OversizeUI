@@ -138,59 +138,59 @@ public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar:
 
     private var smallTitleOpacity: Double {
         if alwaysSlideSmallTile || largeTitle {
-            return Double((offset.y * 0.1) - 8)
+            Double((offset.y * 0.1) - 8)
         } else {
-            return 1
+            1
         }
     }
 
     private var smallBackgroundOpacity: Double {
         if offset.y < 1 {
-            return 0
+            0
         } else {
-            return Double(offset.y * 0.1)
+            Double(offset.y * 0.1)
         }
     }
 
     private var shadowOpacity: Double {
         if isDisableScrollShadow {
-            return 0
+            0
         } else {
-            return Double(offset.y * 0.001)
+            Double(offset.y * 0.001)
         }
     }
 
     private var largeTitleOpacity: Double {
         if offset.y < 0 {
-            return 1
+            1
         } else if offset.y > maxHeight {
-            return 0
+            0
         } else {
-            return Double(1 / (offset.y * 0.01))
+            Double(1 / (offset.y * 0.01))
         }
     }
 
     private var smmallTitleOffset: CGFloat {
         if largeTitle || alwaysSlideSmallTile {
             if offset.y < 50 {
-                return -50
+                -50
             } else if offset.y > 50 * 2 {
-                return 0
+                0
             } else {
-                return offset.y - (50 * 2)
+                offset.y - (50 * 2)
             }
         } else {
-            return 1
+            1
         }
     }
 
     private var blurValue: CGFloat {
         if offset.y < 1 {
-            return 0
+            0
         } else if offset.y < 70 {
-            return offset.y * 0.01
+            offset.y * 0.01
         } else {
-            return 0
+            0
         }
     }
 
