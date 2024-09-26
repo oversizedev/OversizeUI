@@ -1,0 +1,66 @@
+name: CI
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+  push:
+    branches:
+      - '**'
+  workflow_dispatch:
+  
+jobs:
+  build-swiftpm:
+    name: Build SwiftPM
+    uses: oversizedev/GithubWorkflows/.github/workflows/build-swiftpm.yml@main
+    strategy:
+      matrix:
+        destination:
+          - platform=iOS Simulator,name=iPhone 16,OS=18.0
+          - platform=watchOS Simulator,name=Apple Watch SE (40mm) (2nd generation),OS=11.0
+          - platform=tvOS Simulator,name=Apple TV 4K (3rd generation) (at 1080p),OS=18.0
+          - platform=macOS,arch=arm64
+    with:
+      package: OversizeUI
+      destination: ${{ matrix.destination }}
+    secrets: inherit
+    
+  build-app:
+    name: Build examples
+    needs: build-swiftpm
+    uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
+    strategy:
+      matrix:
+        platform:
+          - { name: "iOS Simulator", os: "iPhone 16,OS=18.0", scheme: "Example (iOS)" }
+          - { name: "iPad (10th generation)", os: "OS=18.0", scheme: "Example (iOS)" }
+          - { name: "watchOS Simulator", os: "Apple Watch SE (40mm) (2nd generation),OS=11.0", scheme: "Example (watchOS)" }
+          - { name: "tvOS Simulator", os: "Apple TV 4K (3rd generation) (at 1080p),OS=18.0", scheme: "Example (tvOS)" }
+          - { name: "macOS", os: "macOS,arch=arm64", scheme: "Example (macOS)" }
+    with:
+      path: Example/Example
+      scheme: ${{ matrix.platform.scheme }}
+      destination: platform=${{ matrix.platform.os }}
+    secrets: inherit
+
+  bump:
+    name: Bump version
+    if: github.ref == 'refs/heads/main'
+    needs:
+      - build-swiftpm
+      - build-iOS-example
+      - build-macOS-example
+      - build-tvOS-example
+      - build-watchOS-example
+
+    uses: oversizedev/GithubWorkflows/.github/workflows/bump.yml@main
+    secrets: inherit
+    
+  publish-docc:
+    name: Publish docc
+    if: github.ref == 'refs/heads/main'
+    needs: bump
+    uses: ./.github/workflows/publish-docc.yml
+    secrets: inherit
+
