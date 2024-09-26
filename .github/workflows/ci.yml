@@ -84,11 +84,6 @@ jobs:
     name: Bump version
     if: github.ref == 'refs/heads/main'
     needs:
-      - build-swiftpm
-      - build-iOS-example
-      - build-macOS-example
-      - build-tvOS-example
-      - build-watchOS-example
-
+      - build-app
     uses: oversizedev/GithubWorkflows/.github/workflows/bump.yml@main
     secrets: inherit
