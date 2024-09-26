@@ -27,7 +27,9 @@ jobs:
     uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
     strategy:
       matrix:
-        destination: ['platform=iOS Simulator,name=iPhone 16 Pro,OS=18.0', 'platform=iOS Simulator,name=iPad (10th generation),OS=18.0']
+        destination: 
+          - platform=iOS Simulator,name=iPhone 16 Pro,OS=18.0
+          - platform=iOS Simulator,name=iPad (10th generation),OS=18.0
     with:
       path: Example/Example
       scheme: Example (iOS)
@@ -50,7 +52,9 @@ jobs:
     uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
     strategy:
       matrix:
-        destination: ['platform=tvOS Simulator,name=Apple TV 4K (3rd generation) (at 1080p),OS=18.0', 'platform=tvOS Simulator,name=Apple TV 4K (3rd generation),OS=18.0']
+        destination: 
+          - platform=tvOS Simulator,name=Apple TV 4K (3rd generation) (at 1080p),OS=18.0
+          - platform=tvOS Simulator,name=Apple TV 4K (3rd generation),OS=18.0
     with:
       path: Example/Example
       scheme: Example (tvOS)
@@ -63,7 +67,8 @@ jobs:
     uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
     strategy:
       matrix:
-        destination: ['platform=watchOS Simulator,name=Apple Watch SE (40mm) (2nd generation),OS=11.0']
+        destination: 
+          - platform=watchOS Simulator,name=Apple Watch SE (40mm) (2nd generation),OS=11.0
     with:
       path: Example/Example
       scheme: Example (watchOS)
