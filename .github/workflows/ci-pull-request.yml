@@ -55,7 +55,7 @@ jobs:
     uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
     strategy:
       matrix:
-        destination: ['platform=watchOS Simulator,name=Apple Watch Series 10 (42mm),OS=11.0']
+        destination: ['platform=watchOS Simulator,name=Apple Watch SE (40mm) (2nd generation),OS=11.0']
     with:
       path: Example/Example
       scheme: Example (watchOS)
