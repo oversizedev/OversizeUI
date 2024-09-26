@@ -14,13 +14,7 @@ public enum Platform {
 
 private struct PlatformKey: EnvironmentKey {
     static let defaultValue: Platform = {
-        #if os(macOS) || targetEnvironment(macCatalyst)
-        return .mac
-        #elseif os(watchOS)
-        return .watch
-        #elseif os(visionOS)
-        return .vision
-        #elseif canImport(UIKit)
+        #if canImport(UIKit)
         switch UIDevice.current.userInterfaceIdiom {
         case .phone:
             return .iPhone
@@ -39,6 +33,12 @@ private struct PlatformKey: EnvironmentKey {
         @unknown default:
             return .other
         }
+        #elseif os(watchOS)
+        return .watch
+        #elseif os(visionOS)
+        return .vision
+        #elseif os(macOS) || targetEnvironment(macCatalyst)
+        return .mac
         #else
         return .other
         #endif
