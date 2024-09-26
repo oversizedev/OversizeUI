@@ -92,11 +92,4 @@ jobs:
 
     uses: oversizedev/GithubWorkflows/.github/workflows/bump.yml@main
     secrets: inherit
-    
-  publish-docc:
-    name: Publish docc
-    if: github.ref == 'refs/heads/main'
-    needs: bump
-    uses: ./.github/workflows/publish-docc.yml
-    secrets: inherit
 
