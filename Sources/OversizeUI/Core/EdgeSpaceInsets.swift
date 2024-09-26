@@ -24,4 +24,11 @@ public struct EdgeSpaceInsets {
         bottom = vertical
         trailing = horizontal
     }
+
+    public init(_ all: Space) {
+        top = all
+        leading = all
+        bottom = all
+        trailing = all
+    }
 }

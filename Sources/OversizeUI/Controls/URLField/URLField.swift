@@ -7,6 +7,7 @@ import SwiftUI
 
 #if os(iOS) || os(macOS)
 @available(iOS 15.0, *)
+@available(macOS 14.0, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 public struct URLField: View {
@@ -37,7 +38,7 @@ public struct URLField: View {
 
             if state {
                 textFieldHelper = .none
-            } else if let url = URL(string: urlString) {
+            } else if let url = URL(string: urlString), NSWorkspace.shared.urlForApplication(toOpen: url) != nil {
                 textFieldHelper = .none
                 self.url = url
             } else {
@@ -55,7 +56,7 @@ public struct URLField: View {
                 textFieldHelper = .errorText
             }
             #else
-            if let url = URL(string: urlString) {
+            if let url = URL(string: urlString), NSWorkspace.shared.urlForApplication(toOpen: url) != nil {
                 textFieldHelper = .none
                 self.url = url
             } else {
@@ -66,8 +67,8 @@ public struct URLField: View {
         #if os(iOS)
         .keyboardType(.URL)
         .textInputAutocapitalization(.never)
-        .textContentType(.URL)
         #endif
+        .textContentType(.URL)
         .autocorrectionDisabled()
         .fieldHelper(.constant("Invalid URL"), style: $textFieldHelper)
     }

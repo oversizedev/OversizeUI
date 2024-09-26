@@ -3,28 +3,19 @@
 // RoundedRectangleCorner.swift, created on 11.09.2021
 //
 
-#if os(iOS)
+#if canImport(UIKit)
 import SwiftUI
 
-@available(watchOS, unavailable)
-@available(tvOS, unavailable)
-@available(macOS, unavailable)
 public struct RoundedRectangleCorner: Shape {
     private var radius: CGFloat = .infinity
 
     private var corners: UIRectCorner = .allCorners
 
-    @available(watchOS, unavailable)
-    @available(tvOS, unavailable)
-    @available(macOS, unavailable)
     public init(radius: CGFloat, corners: UIRectCorner) {
         self.radius = radius
         self.corners = corners
     }
 
-    @available(watchOS, unavailable)
-    @available(tvOS, unavailable)
-    @available(macOS, unavailable)
     public init(radius: Radius, corners: UIRectCorner) {
         self.radius = radius.rawValue
         self.corners = corners

@@ -16,6 +16,13 @@ public extension Image {
 public extension Image {
     func icon(_ color: Color = Color.onSurfaceHighEmphasis) -> some View {
         renderingMode(.template)
+        #if os(macOS)
+            .resizable()
+            .frame(
+                width: IconSizes.medium.rawValue,
+                height: IconSizes.medium.rawValue
+            )
+        #endif
             .foregroundColor(color)
     }
 }
@@ -24,7 +31,10 @@ public extension Image {
     func icon(_ color: Color = Color.onSurfaceHighEmphasis, size: IconSizes) -> some View {
         renderingMode(.template)
             .resizable()
-            .frame(width: size.rawValue, height: size.rawValue)
+            .frame(
+                width: size.rawValue,
+                height: size.rawValue
+            )
             .foregroundColor(color)
     }
 }

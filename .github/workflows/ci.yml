@@ -1,10 +1,13 @@
-name: CI - Release
+name: CI
 on:
   pull_request:
     types:
       - closed
     branches:
       - main
+  push:
+    branches:
+      - '**'
   workflow_dispatch:
   
 jobs:
@@ -13,9 +16,14 @@ jobs:
     uses: oversizedev/GithubWorkflows/.github/workflows/build-swiftpm.yml@main
     strategy:
       matrix:
-        packages: [OversizeUI]
+        destination:
+          - platform=iOS Simulator,name=iPhone 16,OS=18.0
+          - platform=watchOS Simulator,name=Apple Watch SE (40mm) (2nd generation),OS=11.0
+          - platform=tvOS Simulator,name=Apple TV 4K (3rd generation) (at 1080p),OS=18.0
+          - platform=macOS,arch=arm64
     with:
-      package: ${{ matrix.packages }}
+      package: OversizeUI
+      destination: ${{ matrix.destination }}
     secrets: inherit
     
   build-iOS-example:
@@ -24,7 +32,9 @@ jobs:
     uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
     strategy:
       matrix:
-        destination: ['platform=iOS Simulator,name=iPhone 15 Pro,OS=17.2', 'platform=iOS Simulator,name=iPad Pro (12.9-inch) (6th generation),OS=17.2']
+        destination:
+          - platform=iOS Simulator,name=iPhone 16 Pro,OS=18.0
+          - platform=iOS Simulator,name=iPad (10th generation),OS=18.0
     with:
       path: Example/Example
       scheme: Example (iOS)
@@ -47,7 +57,9 @@ jobs:
     uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
     strategy:
       matrix:
-        destination: ['platform=tvOS Simulator,name=Apple TV 4K (3rd generation) (at 1080p),OS=17.2', 'platform=tvOS Simulator,name=Apple TV 4K (3rd generation) (at 1080p),OS=16.4']
+        destination:
+          - platform=tvOS Simulator,name=Apple TV 4K (3rd generation) (at 1080p),OS=18.0
+          - platform=tvOS Simulator,name=Apple TV 4K (3rd generation),OS=18.0
     with:
       path: Example/Example
       scheme: Example (tvOS)
@@ -60,22 +72,23 @@ jobs:
     uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
     strategy:
       matrix:
-        destination: ['platform=watchOS Simulator,name=Apple Watch SE (44mm) (2nd generation),OS=10.5']
+        destination:
+          - platform=watchOS Simulator,name=Apple Watch SE (40mm) (2nd generation),OS=11.0
     with:
       path: Example/Example
       scheme: Example (watchOS)
       destination: ${{ matrix.destination }}
     secrets: inherit
-    
+
   bump:
     name: Bump version
-    needs: [build-swiftpm, build-iOS-example, build-macOS-example, build-tvOS-example, build-watchOS-example]
+    if: github.ref == 'refs/heads/main'
+    needs:
+      - build-swiftpm
+      - build-iOS-example
+      - build-macOS-example
+      - build-tvOS-example
+      - build-watchOS-example
+
     uses: oversizedev/GithubWorkflows/.github/workflows/bump.yml@main
     secrets: inherit
-    
-  publish-docc:
-    name: Publish docc
-    needs: bump
-    uses: ./.github/workflows/publish-docc.yml
-    secrets: inherit
-

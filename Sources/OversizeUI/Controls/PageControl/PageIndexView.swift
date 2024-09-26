@@ -6,11 +6,11 @@
 import SwiftUI
 
 public struct PageIndexView: View {
-    @Binding private var index: Int
+    private var index: Int
     private let maxIndex: Int
 
-    public init(_ index: Binding<Int>, maxIndex: Int) {
-        _index = index
+    public init(_ index: Int, maxIndex: Int) {
+        self.index = index
         self.maxIndex = maxIndex
     }
 

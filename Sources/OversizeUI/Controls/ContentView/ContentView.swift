@@ -88,7 +88,6 @@ extension ContentView {
             #if os(macOS)
             .controlSize(.large)
             #endif
-
         case .back:
 
             Button(action: { dismiss() }) {
@@ -247,7 +246,6 @@ extension ContentView {
             .buttonStyle(.tertiary)
             #endif
             .disabled(true)
-
         case .none:
             EmptyView()
         }

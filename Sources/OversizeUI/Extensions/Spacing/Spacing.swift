@@ -59,3 +59,15 @@ public extension EdgeInsets {
         self = .init(top: top.rawValue, leading: leading.rawValue, bottom: bottom.rawValue, trailing: trailing.rawValue)
     }
 }
+
+public extension EdgeInsets {
+    init(_ all: Space) {
+        self = .init(top: all.rawValue, leading: all.rawValue, bottom: all.rawValue, trailing: all.rawValue)
+    }
+}
+
+public extension EdgeInsets {
+    init(horizontal: Space, vertical: Space) {
+        self = .init(top: vertical.rawValue, leading: horizontal.rawValue, bottom: vertical.rawValue, trailing: horizontal.rawValue)
+    }
+}

@@ -14,6 +14,7 @@ public enum FieldHelperStyle {
 
 public struct FieldHelperViewModifier: ViewModifier {
     @Environment(\.theme) private var theme: ThemeSettings
+    @Environment(\.platform) private var platform: Platform
     @Binding public var helperText: String
     @Binding public var helperStyle: FieldHelperStyle
     public init(helperText: Binding<String>, helperStyle: Binding<FieldHelperStyle>) {
@@ -22,23 +23,28 @@ public struct FieldHelperViewModifier: ViewModifier {
     }
 
     public func body(content: Content) -> some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: platform == .mac ? .xxxSmall : .xSmall) {
             content
-            if helperText != "" {
-                if helperStyle == .helperText {
-                    Text(helperText)
-                        .subheadline(.semibold)
-                        .foregroundColor(.onSurfaceMediumEmphasis)
-                } else if helperStyle == .errorText {
-                    Text(helperText)
-                        .subheadline(.semibold)
-                        .foregroundColor(.error)
-                } else if helperStyle == .sussesText {
-                    Text(helperText)
-                        .subheadline(.semibold)
-                        .foregroundColor(.success)
-                }
+            if helperText.isEmpty == false, helperStyle != .none {
+                Text(helperText)
+                    .subheadline(.medium)
+                    .foregroundColor(helperForegroundColor)
+                    .offset(x: platform == .mac ? 4 : 0)
             }
+        }
+        .animation(.easeIn(duration: 0.15), value: helperStyle)
+    }
+
+    private var helperForegroundColor: Color {
+        switch helperStyle {
+        case .helperText:
+            Color.onSurfaceMediumEmphasis
+        case .errorText:
+            Color.error
+        case .sussesText:
+            Color.success
+        case .none:
+            Color.clear
         }
     }
 }

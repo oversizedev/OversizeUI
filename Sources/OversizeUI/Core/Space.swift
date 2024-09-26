@@ -21,8 +21,13 @@ public enum Space: CGFloat {
     /// 16
     case small = 16
 
+    #if os(macOS)
+    /// 20
+    case medium = 20
+    #else
     /// 24
     case medium = 24
+    #endif
 
     /// 32
     case large = 32
