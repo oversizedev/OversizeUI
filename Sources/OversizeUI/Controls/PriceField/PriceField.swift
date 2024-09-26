@@ -22,17 +22,16 @@ public struct PriceField: View {
         return formatter
     }
 
-    private var strValue2: String { value.components(separatedBy: CharacterSet(charactersIn: "0123456789").inverted).joined() } // value.filter { !$0.isWhitespace } }
-    private var doubleValue2: Double { .init((Double(strValue2) ?? 0) / 100.0) ?? 0 }
+    private var stringValue2: String { value.components(separatedBy: CharacterSet(charactersIn: "0123456789").inverted).joined() }
+    private var doubleValue2: Double { .init((Double(stringValue2) ?? 0) / 100.0) ?? 0 }
 
-    private var strValue3: String { value.components(separatedBy: CharacterSet(charactersIn: "0123456789").inverted).joined() } // value.filter { !$0.isWhitespace } }
-    private var doubleValue3: Double { .init((Double(strValue3) ?? 0) * 100) ?? 0 }
+    private var stringValue3: String { value.components(separatedBy: CharacterSet(charactersIn: "0123456789").inverted).joined() }
+    private var doubleValue3: Double { .init((Double(stringValue3) ?? 0) * 100) ?? 0 }
 
     private var strValue: String { value.filter { !$0.isWhitespace } }
     private var doubleValue: Double { .init(strValue) ?? 0 }
     private var formattedValue: String {
         let value = doubleValue
-
         return formatter.string(for: value) ?? ""
     }
 
@@ -80,7 +79,6 @@ public struct PriceField: View {
                     .padding(.leading, .xSmall)
 
                 Text(dispalySymbol)
-
                     .onChange(of: currency) { _ in
                         validate()
                     }

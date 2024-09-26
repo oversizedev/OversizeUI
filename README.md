@@ -1,6 +1,6 @@
 # OversizeUI
 
-[![Build Example](https://github.com/oversizedev/OversizeUI/actions/workflows/build-example.yml/badge.svg)](https://github.com/oversizedev/OversizeUI/actions/workflows/build-example.yml) [![Deploy DocC](https://github.com/oversizedev/OversizeUI/actions/workflows/publish-docc.yml/badge.svg)](https://github.com/oversizedev/OversizeUI/actions/workflows/publish-docc.yml)
+[![Build Example](https://github.com/oversizedev/OversizeUI/actions/workflows/build-example.yml/badge.svg)](https://github.com/oversizedev/OversizeUI/actions/workflows/ci-release.yml)
 
 Yet another component library on SwiftUI
 

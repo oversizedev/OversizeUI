@@ -8,7 +8,7 @@ import Foundation
 import SwiftUI
 import UIKit
 
-extension Color: RawRepresentable {
+extension Color: @retroactive RawRepresentable {
     @available(macOS, unavailable)
     @available(watchOS, unavailable)
     @available(tvOS, unavailable)

@@ -47,12 +47,13 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
         (subtitle?.isEmpty) != nil
     }
 
-    public init(_ title: String,
-                subtitle: String? = nil,
-                action: (() -> Void)? = nil,
-                @ViewBuilder leading: () -> LeadingLabel,
-                @ViewBuilder trailing: () -> TrailingLabel)
-    {
+    public init(
+        _ title: String,
+        subtitle: String? = nil,
+        action: (() -> Void)? = nil,
+        @ViewBuilder leading: () -> LeadingLabel,
+        @ViewBuilder trailing: () -> TrailingLabel
+    ) {
         self.title = title
         self.subtitle = subtitle
         self.action = action

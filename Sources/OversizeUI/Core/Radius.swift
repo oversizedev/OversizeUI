@@ -12,6 +12,8 @@ public enum Radius {
 
     /// 0
     case zero
+    /// 4
+    case xSmall
     /// 8
     case small
     /// 12
@@ -25,6 +27,8 @@ public enum Radius {
         switch self {
         case .zero:
             .zero
+        case .xSmall:
+            CGFloat(theme.radius / 2)
         case .small:
             CGFloat(theme.radius)
         case .medium:

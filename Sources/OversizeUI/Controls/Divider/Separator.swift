@@ -24,23 +24,39 @@ public struct Separator: View {
 
         return Rectangle()
             .fill(Color.border)
-            .frame(width: isHorizontal ? nil : 0.5,
-                   height: isHorizontal ? 0.5 : nil)
+            .frame(
+                width: isHorizontal ? nil : lineWidth,
+                height: isHorizontal ? lineWidth : nil
+            )
+        #if !os(macOS)
             .padding(insets(isHorizontal))
+        #endif
     }
 
     private func insets(_ isHorizontal: Bool) -> EdgeInsets {
         if isHorizontal {
-            EdgeInsets(top: 0.5,
-                       leading: padding.rawValue,
-                       bottom: 0,
-                       trailing: padding.rawValue)
+            EdgeInsets(
+                top: 0.5,
+                leading: padding.rawValue,
+                bottom: 0,
+                trailing: padding.rawValue
+            )
         } else {
-            EdgeInsets(top: padding.rawValue,
-                       leading: 0.5,
-                       bottom: padding.rawValue,
-                       trailing: 0)
+            EdgeInsets(
+                top: padding.rawValue,
+                leading: 0.5,
+                bottom: padding.rawValue,
+                trailing: 0
+            )
         }
+    }
+
+    var lineWidth: CGFloat {
+        #if os(macOS)
+        return 1
+        #else
+        return 0.5
+        #endif
     }
 }
 

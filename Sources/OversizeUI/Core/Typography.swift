@@ -40,7 +40,7 @@ public struct Typography: ViewModifier {
         content
             .font(.system(fontStyle, design: fontDesign).weight(fontWeight).leading(.tight))
             .frame(minHeight: lineHeight)
-        // .lineSpacing(lineHeight)
+            .lineSpacing(lineHeight * 0.2)
     }
 
     private var lineHeight: CGFloat {

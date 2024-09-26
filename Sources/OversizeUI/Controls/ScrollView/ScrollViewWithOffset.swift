@@ -6,6 +6,14 @@
 import SwiftUI
 
 public struct ScrollViewWithOffsetTracking<Content: View>: View {
+    public typealias ScrollAction = (_ offset: CGPoint) -> Void
+
+    private let axes: Axis.Set
+    private let showsIndicators: Bool
+    private let cordinateSpaceName: String
+    private let onScroll: ScrollAction
+    private let content: () -> Content
+
     public init(
         _ axes: Axis.Set = .vertical,
         showsIndicators: Bool = true,
@@ -19,14 +27,6 @@ public struct ScrollViewWithOffsetTracking<Content: View>: View {
         self.onScroll = onScroll ?? { _ in }
         self.content = content
     }
-
-    public typealias ScrollAction = (_ offset: CGPoint) -> Void
-
-    private let axes: Axis.Set
-    private let showsIndicators: Bool
-    private let cordinateSpaceName: String
-    private let onScroll: ScrollAction
-    private let content: () -> Content
 
     public var body: some View {
         ScrollView(axes, showsIndicators: showsIndicators) {

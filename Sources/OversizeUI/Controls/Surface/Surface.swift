@@ -69,17 +69,29 @@ public struct Surface<Label: View>: View {
             .padding(.leading, forceContentInsets?.leading ?? contentInsets.leading)
             .padding(.trailing, forceContentInsets?.trailing ?? contentInsets.trailing)
             .background(
-                RoundedRectangle(cornerRadius: surfaceRadius, style: .continuous)
-                    .fill(surfaceBackgroundColor)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: surfaceRadius, style: .continuous)
-                            .strokeBorder(strokeBorderColor, lineWidth: strokeBorderLineWidth)
-                    )
-                    .shadowElevaton(elevation)
+                RoundedRectangle(
+                    cornerRadius: surfaceRadius,
+                    style: .continuous
+                )
+                .fill(surfaceBackgroundColor)
+                .shadowElevaton(elevation)
+            )
+            .overlay(
+                RoundedRectangle(
+                    cornerRadius: surfaceRadius,
+                    style: .continuous
+                )
+                .strokeBorder(
+                    strokeBorderColor,
+                    lineWidth: strokeBorderLineWidth
+                )
             )
             .if(isSurfaceClipped) { view in
                 view.clipShape(
-                    RoundedRectangle(cornerRadius: surfaceRadius, style: .continuous)
+                    RoundedRectangle(
+                        cornerRadius: surfaceRadius,
+                        style: .continuous
+                    )
                 )
             }
     }
