@@ -9,8 +9,16 @@ jobs:
   build-swiftpm:
     name: Build SwiftPM
     uses: oversizedev/GithubWorkflows/.github/workflows/build-swiftpm.yml@main
+    strategy:
+      matrix:
+        destination:
+          - platform=iOS Simulator,name=iPhone 16,OS=18.0
+          - platform=watchOS Simulator,name=Apple Watch SE (40mm) (2nd generation),OS=11.0
+          - platform=tvOS Simulator,name=Apple TV 4K (3rd generation) (at 1080p),OS=18.0
+          - platform=macOS,arch=arm64
     with:
       package: OversizeUI
+      destination: ${{ matrix.destination }}
     secrets: inherit
     
   build-iOS-example:
