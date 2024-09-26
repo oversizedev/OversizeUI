@@ -26,28 +26,69 @@ jobs:
       destination: ${{ matrix.destination }}
     secrets: inherit
     
-  build-app:
-    name: Build examples
+  build-iOS-example:
+    name: Build iOS example
     needs: build-swiftpm
     uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
     strategy:
       matrix:
-        platform:
-          - { name: "iOS Simulator", os: "iPhone 16,OS=18.0", scheme: "Example (iOS)" }
-          - { name: "iPad (10th generation)", os: "OS=18.0", scheme: "Example (iOS)" }
-          - { name: "watchOS Simulator", os: "Apple Watch SE (40mm) (2nd generation),OS=11.0", scheme: "Example (watchOS)" }
-          - { name: "tvOS Simulator", os: "Apple TV 4K (3rd generation) (at 1080p),OS=18.0", scheme: "Example (tvOS)" }
-          - { name: "macOS", os: "macOS,arch=arm64", scheme: "Example (macOS)" }
+        destination:
+          - platform=iOS Simulator,name=iPhone 16 Pro,OS=18.0
+          - platform=iOS Simulator,name=iPad (10th generation),OS=18.0
     with:
       path: Example/Example
-      scheme: ${{ matrix.platform.scheme }}
-      destination: platform=${{ matrix.platform.os }}
+      scheme: Example (iOS)
+      destination: ${{ matrix.destination }}
+    secrets: inherit
+    
+  build-macOS-example:
+    name: Build macOS examples
+    needs: build-swiftpm
+    uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
+    with:
+      path: Example/Example
+      scheme: Example (macOS)
+      destination: platform=macOS,arch=arm64
+    secrets: inherit
+    
+  build-tvOS-example:
+    name: Build tvOS examples
+    needs: build-swiftpm
+    uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
+    strategy:
+      matrix:
+        destination:
+          - platform=tvOS Simulator,name=Apple TV 4K (3rd generation) (at 1080p),OS=18.0
+          - platform=tvOS Simulator,name=Apple TV 4K (3rd generation),OS=18.0
+    with:
+      path: Example/Example
+      scheme: Example (tvOS)
+      destination: ${{ matrix.destination }}
+    secrets: inherit
+    
+  build-watchOS-example:
+    name: Build watchOS examples
+    needs: build-swiftpm
+    uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
+    strategy:
+      matrix:
+        destination:
+          - platform=watchOS Simulator,name=Apple Watch SE (40mm) (2nd generation),OS=11.0
+    with:
+      path: Example/Example
+      scheme: Example (watchOS)
+      destination: ${{ matrix.destination }}
     secrets: inherit
 
   bump:
     name: Bump version
     if: github.ref == 'refs/heads/main'
     needs:
-      - build-app
+      - build-swiftpm
+      - build-iOS-example
+      - build-macOS-example
+      - build-tvOS-example
+      - build-watchOS-example
+
     uses: oversizedev/GithubWorkflows/.github/workflows/bump.yml@main
     secrets: inherit
