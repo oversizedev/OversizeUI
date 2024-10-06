@@ -38,35 +38,71 @@ public struct Typography: ViewModifier {
 
     public func body(content: Content) -> some View {
         content
-            .font(.system(fontStyle, design: fontDesign).weight(fontWeight).leading(.tight))
-            .frame(minHeight: lineHeight)
+            .font(
+                .system(fontStyle, design: fontDesign)
+                    .weight(fontWeight)
+                    .leading(.tight)
+            )
             .lineSpacing(lineHeight * 0.2)
+            .frame(minHeight: lineHeight)
     }
 
     private var lineHeight: CGFloat {
         switch fontStyle {
         case .largeTitle:
+            #if os(macOS)
+            return 40
+            #else
             return 44
+            #endif
         case .title:
+            #if os(macOS)
+            return 32
+            #else
             return 36
+            #endif
         case .title2:
+            #if os(macOS)
+            return 24
+            #else
             return 28
+            #endif
         case .title3:
+            #if os(macOS)
+            return 20
+            #else
             return 24
+            #endif
         case .headline:
+            #if os(macOS)
+            return 20
+            #else
             return 24
+            #endif
         case .subheadline:
+            #if os(macOS)
+            return 16
+            #else
             return 20
+            #endif
         case .body:
-            return 24
-        case .callout:
+            #if os(macOS)
             return 20
+            #else
+            return 24
+            #endif
+        case .callout:
+            #if os(macOS)
+            return 16
+            #else
+            return 20
+            #endif
         case .footnote:
             return 16
         case .caption:
             return 16
         case .caption2:
-            return 12
+            return 16
         @unknown default:
             return 16
         }
