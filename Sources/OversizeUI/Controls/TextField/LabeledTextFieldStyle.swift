@@ -131,14 +131,14 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
     #if canImport(UIKit)
     private var backgroundShapeCorners: UIRectCorner {
         switch fieldPosition {
-        case .default:
-            [.allCorners]
         case .top:
             [.topLeft, .topRight]
         case .bottom:
             [.bottomLeft, .bottomRight]
         case .center:
             []
+        default:
+            [.allCorners]
         }
     }
     #endif
