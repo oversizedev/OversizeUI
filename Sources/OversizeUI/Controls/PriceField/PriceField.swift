@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 #endif
 
-@available(macOS 13, iOS 16, tvOS 16, watchOS 9, *)
+@available(macOS 14, iOS 16, tvOS 16, watchOS 9, *)
 public struct PriceField: View {
     private var formatter: NumberFormatter {
         let formatter = NumberFormatter()

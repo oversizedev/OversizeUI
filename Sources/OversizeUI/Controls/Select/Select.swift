@@ -6,6 +6,7 @@
 import SwiftUI
 
 // swiftlint:disable all
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public struct Select<Element: Equatable, Content, Selection, Actions, ContentUnavailable: View>: View
     where
     Content: View,
@@ -138,6 +139,7 @@ public struct Select<Element: Equatable, Content, Selection, Actions, ContentUna
     }
 }
 
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension Select where ContentUnavailable == Never {
     init(
         _ label: String,
@@ -159,6 +161,7 @@ public extension Select where ContentUnavailable == Never {
     }
 }
 
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension Select where Actions == Never {
     init(
         _ label: String,
@@ -180,6 +183,7 @@ public extension Select where Actions == Never {
     }
 }
 
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension Select where ContentUnavailable == Never, Actions == Never {
     init(
         _ label: String,
@@ -201,6 +205,7 @@ public extension Select where ContentUnavailable == Never, Actions == Never {
 }
 
 // swiftlint:disable all
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 struct Select_Preview: PreviewProvider {
     struct SelectPreview: View {
         var items = ["One", "Two", "Three", "Four"]

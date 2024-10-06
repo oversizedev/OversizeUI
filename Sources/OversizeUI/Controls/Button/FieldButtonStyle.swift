@@ -7,7 +7,7 @@ import SwiftUI
 
 public struct FieldButtonStyle: ButtonStyle {
     @Environment(\.theme) private var theme: ThemeSettings
-    @Environment(\.fieldPosition) private var fieldPosition: FieldPosition
+    @Environment(\.fieldPosition) private var fieldPosition: VerticalAlignment?
 
     public init() {}
 
@@ -24,16 +24,6 @@ public struct FieldButtonStyle: ButtonStyle {
     @ViewBuilder
     private func fieldBackground(isPressed: Bool) -> some View {
         switch fieldPosition {
-        case .default:
-            RoundedRectangle(cornerRadius: Radius.medium, style: .continuous)
-                .fill(isPressed ? Color.surfaceTertiary : Color.surfaceSecondary)
-                .overlay(
-                    RoundedRectangle(cornerRadius: Radius.medium,
-                                     style: .continuous)
-                        .stroke(theme.borderTextFields
-                            ? Color.border
-                            : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
-                )
         case .top, .bottom, .center:
             #if os(iOS)
             RoundedRectangleCorner(radius: Radius.medium, corners: backgroundShapeCorners)
@@ -55,6 +45,17 @@ public struct FieldButtonStyle: ButtonStyle {
                             : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
                 )
             #endif
+
+        default:
+            RoundedRectangle(cornerRadius: Radius.medium, style: .continuous)
+                .fill(isPressed ? Color.surfaceTertiary : Color.surfaceSecondary)
+                .overlay(
+                    RoundedRectangle(cornerRadius: Radius.medium,
+                                     style: .continuous)
+                        .stroke(theme.borderTextFields
+                            ? Color.border
+                            : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
+                )
         }
     }
 
@@ -64,14 +65,14 @@ public struct FieldButtonStyle: ButtonStyle {
     @available(tvOS, unavailable)
     private var backgroundShapeCorners: UIRectCorner {
         switch fieldPosition {
-        case .default:
-            [.allCorners]
         case .top:
             [.topLeft, .topRight]
         case .bottom:
             [.bottomLeft, .bottomRight]
         case .center:
             []
+        default:
+            [.allCorners]
         }
     }
     #endif

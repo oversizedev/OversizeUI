@@ -38,8 +38,14 @@ public class ThemeSettings: ObservableObject {
 
     @AppStorage(ThemeSettingsNames.borderApp) public var borderApp: Bool = false
     @AppStorage(ThemeSettingsNames.borderButtons) public var borderButtons: Bool = false
+    #if os(macOS)
+    @AppStorage(ThemeSettingsNames.borderTextFields) public var borderTextFields: Bool = true
+    @AppStorage(ThemeSettingsNames.borderSurface) public var borderSurface: Bool = true
+    #else
     @AppStorage(ThemeSettingsNames.borderSurface) public var borderSurface: Bool = false
     @AppStorage(ThemeSettingsNames.borderTextFields) public var borderTextFields: Bool = false
+    #endif
+
     @AppStorage(ThemeSettingsNames.borderControls) public var borderControls: Bool = false
 
     @AppStorage(ThemeSettingsNames.borderSize) public var borderSize: Double = 0.5

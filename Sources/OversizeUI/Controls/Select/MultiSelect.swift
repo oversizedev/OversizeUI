@@ -6,6 +6,7 @@
 import SwiftUI
 
 // swiftlint:disable all
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public struct MultiSelect<Element: Equatable, Content, Selection, Actions, ContentUnavailable>: View
     where
     Content: View,
@@ -143,6 +144,7 @@ public struct MultiSelect<Element: Equatable, Content, Selection, Actions, Conte
     }
 }
 
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension MultiSelect where ContentUnavailable == Never {
     init(
         _ label: String,
@@ -164,6 +166,7 @@ public extension MultiSelect where ContentUnavailable == Never {
     }
 }
 
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension MultiSelect where Actions == Never {
     init(
         _ label: String,
@@ -185,6 +188,7 @@ public extension MultiSelect where Actions == Never {
     }
 }
 
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension MultiSelect where ContentUnavailable == Never, Actions == Never {
     init(
         _ label: String,
@@ -206,6 +210,7 @@ public extension MultiSelect where ContentUnavailable == Never, Actions == Never
 }
 
 // swiftlint:disable all
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 struct MultiSelect_Preview: PreviewProvider {
     struct SelectPreview: View {
         var items = ["One", "Two", "Three", "Four"]
