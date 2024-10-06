@@ -5,9 +5,7 @@
 
 import SwiftUI
 
-@available(macOS, unavailable)
-@available(watchOS, unavailable)
-@available(tvOS, unavailable)
+#if os(iOS)
 public struct IconPicker: View {
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
@@ -109,3 +107,4 @@ public struct IconPicker: View {
         }
     }
 }
+#endif

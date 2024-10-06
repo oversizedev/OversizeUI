@@ -9,15 +9,15 @@ import UIKit
 #endif
 
 public enum Platform {
-    case iPhone, iPad, mac, tv, watch, vision, carPlay, other
+    case iPhone, iPadOS, macOS, tvOS, watchOS, visionOS, carPlay, other
 }
 
 private struct PlatformKey: EnvironmentKey {
     static let defaultValue: Platform = {
         #if os(macOS) || targetEnvironment(macCatalyst)
-        return .mac
+        return .macOS
         #elseif os(watchOS)
-        return .watch
+        return .watchOS
         #elseif os(visionOS)
         return .vision
         #elseif canImport(UIKit)
@@ -25,15 +25,15 @@ private struct PlatformKey: EnvironmentKey {
         case .phone:
             return .iPhone
         case .pad:
-            return .iPad
+            return .iPadOS
         case .tv:
-            return .tv
+            return .tvOS
         case .carPlay:
             return .carPlay
         case .mac:
-            return .mac
+            return .macOS
         case .vision:
-            return .vision
+            return .visionOS
         case .unspecified:
             return .other
         @unknown default:

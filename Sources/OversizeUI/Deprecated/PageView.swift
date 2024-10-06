@@ -5,6 +5,7 @@
 
 import SwiftUI
 
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>: View where Content: View, LeadingBar: View, TrailingBar: View, TopToolbar: View, TitleLabel: View {
     @Environment(\.screenSize) var screenSize
 
@@ -271,6 +272,7 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
     }
 }
 
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView {
     enum PageViewBottomType {
         case shadow, gradient, none
@@ -281,6 +283,7 @@ public extension PageView {
     }
 }
 
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where LeadingBar == EmptyView, TitleLabel == EmptyView {
     init(_ title: String? = nil,
          onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
@@ -296,6 +299,7 @@ public extension PageView where LeadingBar == EmptyView, TitleLabel == EmptyView
     }
 }
 
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TrailingBar == EmptyView, TitleLabel == EmptyView {
     init(_ title: String? = nil,
          onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
@@ -311,6 +315,7 @@ public extension PageView where TrailingBar == EmptyView, TitleLabel == EmptyVie
     }
 }
 
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TrailingBar == EmptyView, LeadingBar == EmptyView, TitleLabel == EmptyView {
     init(_ title: String? = nil,
          onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
@@ -327,6 +332,7 @@ public extension PageView where TrailingBar == EmptyView, LeadingBar == EmptyVie
     }
 }
 
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TrailingBar == EmptyView, LeadingBar == EmptyView, TopToolbar == EmptyView, TitleLabel == EmptyView {
     init(_ title: String? = nil,
          onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
@@ -344,6 +350,7 @@ public extension PageView where TrailingBar == EmptyView, LeadingBar == EmptyVie
     }
 }
 
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where LeadingBar == EmptyView, TopToolbar == EmptyView, TitleLabel == EmptyView {
     init(_ title: String? = nil,
          onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
@@ -360,6 +367,7 @@ public extension PageView where LeadingBar == EmptyView, TopToolbar == EmptyView
     }
 }
 
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TrailingBar == EmptyView, TopToolbar == EmptyView, TitleLabel == EmptyView {
     init(_ title: String? = nil,
          onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
@@ -376,6 +384,7 @@ public extension PageView where TrailingBar == EmptyView, TopToolbar == EmptyVie
     }
 }
 
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TopToolbar == EmptyView, TitleLabel == EmptyView {
     init(_ title: String? = nil,
          onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
@@ -391,6 +400,7 @@ public extension PageView where TopToolbar == EmptyView, TitleLabel == EmptyView
     }
 }
 
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TrailingBar == EmptyView, LeadingBar == EmptyView, TopToolbar == EmptyView {
     init(_ title: String? = nil,
          onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
@@ -407,6 +417,7 @@ public extension PageView where TrailingBar == EmptyView, LeadingBar == EmptyVie
     }
 }
 
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TrailingBar == EmptyView, TopToolbar == EmptyView {
     init(_ title: String? = nil,
          onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
@@ -422,6 +433,7 @@ public extension PageView where TrailingBar == EmptyView, TopToolbar == EmptyVie
     }
 }
 
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where LeadingBar == EmptyView, TopToolbar == EmptyView {
     init(_ title: String? = nil,
          onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
@@ -437,6 +449,7 @@ public extension PageView where LeadingBar == EmptyView, TopToolbar == EmptyView
     }
 }
 
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TrailingBar == EmptyView {
     init(_ title: String? = nil,
          onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
@@ -451,6 +464,7 @@ public extension PageView where TrailingBar == EmptyView {
     }
 }
 
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where LeadingBar == EmptyView {
     init(_ title: String? = nil,
          onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
@@ -465,6 +479,7 @@ public extension PageView where LeadingBar == EmptyView {
     }
 }
 
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TopToolbar == EmptyView {
     init(_ title: String? = nil,
          onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
@@ -479,6 +494,7 @@ public extension PageView where TopToolbar == EmptyView {
     }
 }
 
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TitleLabel == EmptyView {
     init(_ title: String? = nil,
          onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },

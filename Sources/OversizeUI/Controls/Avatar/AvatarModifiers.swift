@@ -27,9 +27,10 @@ public extension Avatar {
     /// Sets a stroke for the Avatar
     /// - Parameter strokeColor: Color for Avatar stroke
     /// - Returns: The modified view with stroke.
-    func avatarStroke(_ strokeColor: Color = .surfacePrimary) -> Avatar {
+    func avatarStroke(_ strokeColor: Color = .surfacePrimary, lineWidth: CGFloat = 2) -> Avatar {
         var control = self
         control.strokeColor = strokeColor
+        control.strokeLineWidth = lineWidth
         return control
     }
 }
