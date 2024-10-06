@@ -65,14 +65,14 @@ public struct FieldButtonStyle: ButtonStyle {
     @available(tvOS, unavailable)
     private var backgroundShapeCorners: UIRectCorner {
         switch fieldPosition {
-        case .default:
-            [.allCorners]
         case .top:
             [.topLeft, .topRight]
         case .bottom:
             [.bottomLeft, .bottomRight]
         case .center:
             []
+        default:
+            [.allCorners]
         }
     }
     #endif
