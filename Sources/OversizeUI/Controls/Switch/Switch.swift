@@ -110,17 +110,19 @@ public extension Switch where Label == EmptyView {
     }
 }
 
-@available(iOS 14.0, *)
-struct Switch_LibraryContent: LibraryContentProvider {
-    var views: [LibraryItem] {
-        LibraryItem(
-            Switch(isOn: .constant(false)) {
-                Text("Text")
-            },
-            title: "Checkbox", category: .control
-        )
-    }
-}
+/*
+ @available(iOS 14.0, *)
+ struct Switch_LibraryContent: LibraryContentProvider {
+     var views: [LibraryItem] {
+         LibraryItem(
+             Switch(isOn: .constant(false)) {
+                 Text("Text")
+             },
+             title: "Checkbox", category: .control
+         )
+     }
+ }
+ */
 
 struct Switch_preview: PreviewProvider {
     static var previews: some View {

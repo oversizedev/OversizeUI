@@ -5,24 +5,24 @@
 
 import SwiftUI
 
-public enum ThemeSettingsNames {
-    public static var appearance = "Settings.Appearance"
-    public static var accentColor = "Settings.AccentColor"
-    public static var fontTitle = "Settings.FontTitle"
-    public static var fontParagraph = "Settings.FontParagraph"
-    public static var fontButton = "Settings.FontButton"
-    public static var fontOverline = "Settings.FontOverline"
-    public static var borderApp = "Settings.BorderApp"
-    public static var borderButtons = "Settings.BorderButtons"
-    public static var borderSurface = "Settings.BorderSurface"
-    public static var borderTextFields = "Settings.BorderTextFields"
-    public static var borderControls = "Settings.BorderControls"
-    public static var borderSize = "Settings.BorderSize"
-    public static var theme = "Settings.Theme"
-    public static var radius = "Settings.Radius"
+public enum ThemeSettingsNames: Sendable {
+    public static let appearance = "Settings.Appearance"
+    public static let accentColor = "Settings.AccentColor"
+    public static let fontTitle = "Settings.FontTitle"
+    public static let fontParagraph = "Settings.FontParagraph"
+    public static let fontButton = "Settings.FontButton"
+    public static let fontOverline = "Settings.FontOverline"
+    public static let borderApp = "Settings.BorderApp"
+    public static let borderButtons = "Settings.BorderButtons"
+    public static let borderSurface = "Settings.BorderSurface"
+    public static let borderTextFields = "Settings.BorderTextFields"
+    public static let borderControls = "Settings.BorderControls"
+    public static let borderSize = "Settings.BorderSize"
+    public static let theme = "Settings.Theme"
+    public static let radius = "Settings.Radius"
 }
 
-public class ThemeSettings: ObservableObject {
+public class ThemeSettings: ObservableObject, @unchecked Sendable {
     public init() {}
 
     @AppStorage(ThemeSettingsNames.appearance) public var appearance: Appearance = .system

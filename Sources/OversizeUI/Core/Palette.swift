@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-public enum Palette: String {
+public enum Palette: String, Sendable {
     case red
     case orange
     case yellow
@@ -39,8 +39,8 @@ public enum Palette: String {
         }
     }
 
-    public static var base: [Palette] = [.red, .orange, .yellow, .green, .blue, .pink, .gray, .black]
-    public static var baseColors: [Color] = base.compactMap { color in
+    public static let base: [Palette] = [.red, .orange, .yellow, .green, .blue, .pink, .gray, .black]
+    public static let baseColors: [Color] = base.compactMap { color in
         color.color
     }
 }

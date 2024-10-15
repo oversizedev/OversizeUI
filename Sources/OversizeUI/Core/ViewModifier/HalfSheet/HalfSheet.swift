@@ -8,13 +8,14 @@ import SwiftUI
 import UIKit
 #endif
 
-public enum Detents: Hashable {
+public enum Detents: Hashable, Sendable {
     case large
     case medium
     case height(CGFloat)
 
     #if os(iOS)
     @available(iOS 15, *)
+    @MainActor
     public var uiViewDetents: UISheetPresentationController.Detent {
         switch self {
         case .large:
@@ -44,6 +45,7 @@ public enum Detents: Hashable {
 #if os(iOS)
 public struct SheetModifier: ViewModifier {
     public let detents: [Detents]
+
     public func body(content: Content) -> some View {
         SheetView(detents: detents) {
             content

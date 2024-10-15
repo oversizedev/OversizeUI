@@ -5,12 +5,12 @@
 
 import SwiftUI
 
-public enum FieldLabelPosition {
+public enum FieldLabelPosition: Sendable {
     case `default`, adjacent, overInput
 }
 
 private struct FieldLabelPositionKey: EnvironmentKey {
-    public static var defaultValue: FieldLabelPosition = .default
+    public static let defaultValue: FieldLabelPosition = .default
 }
 
 public extension EnvironmentValues {

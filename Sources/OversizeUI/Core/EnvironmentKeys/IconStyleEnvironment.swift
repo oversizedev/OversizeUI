@@ -5,12 +5,12 @@
 
 import SwiftUI
 
-public enum IconStyle {
+public enum IconStyle: Sendable {
     case line, fill, twoTone
 }
 
 private struct IconStyleKey: EnvironmentKey {
-    public static var defaultValue: IconStyle = .line
+    public static let defaultValue: IconStyle = .line
 }
 
 public extension EnvironmentValues {

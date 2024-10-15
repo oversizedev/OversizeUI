@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-public struct ControlMargin {
+public struct ControlMargin: Sendable {
     public var top: Space = .medium
     public var leading: Space = .medium
     public var bottom: Space = .medium
@@ -88,7 +88,7 @@ public struct ControlMargin {
 }
 
 private struct ControlMarginKey: EnvironmentKey {
-    public static var defaultValue: ControlMargin = .init(.medium)
+    public static let defaultValue: ControlMargin = .init(.medium)
 }
 
 public extension EnvironmentValues {

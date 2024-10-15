@@ -7,49 +7,49 @@ import SwiftUI
 
 // swiftlint:disable line_length
 public extension HStack {
-    @inlinable init(alignment: VerticalAlignment = .center, spacing: Space, @ViewBuilder content: () -> Content) {
+    @inlinable nonisolated init(alignment: VerticalAlignment = .center, spacing: Space, @ViewBuilder content: () -> Content) {
         self = .init(alignment: alignment, spacing: spacing.rawValue, content: content)
     }
 }
 
 public extension VStack {
-    @inlinable init(alignment: HorizontalAlignment = .center, spacing: Space, @ViewBuilder content: () -> Content) {
+    @inlinable nonisolated init(alignment: HorizontalAlignment = .center, spacing: Space, @ViewBuilder content: () -> Content) {
         self = .init(alignment: alignment, spacing: spacing.rawValue, content: content)
     }
 }
 
 public extension LazyHStack {
-    @inlinable init(alignment: VerticalAlignment = .center, spacing: Space, @ViewBuilder content: () -> Content) {
+    @inlinable nonisolated init(alignment: VerticalAlignment = .center, spacing: Space, @ViewBuilder content: () -> Content) {
         self = .init(alignment: alignment, spacing: spacing.rawValue, content: content)
     }
 }
 
 public extension LazyVStack {
-    @inlinable init(alignment: HorizontalAlignment = .center, spacing: Space, @ViewBuilder content: () -> Content) {
+    @inlinable nonisolated init(alignment: HorizontalAlignment = .center, spacing: Space, @ViewBuilder content: () -> Content) {
         self = .init(alignment: alignment, spacing: spacing.rawValue, content: content)
     }
 }
 
 public extension LazyVGrid {
-    @inlinable init(columns: [GridItem], alignment: HorizontalAlignment = .center, spacing: Space, pinnedViews: PinnedScrollableViews = .init(), @ViewBuilder content: () -> Content) {
+    @inlinable nonisolated init(columns: [GridItem], alignment: HorizontalAlignment = .center, spacing: Space, pinnedViews: PinnedScrollableViews = .init(), @ViewBuilder content: () -> Content) {
         self = .init(columns: columns, alignment: alignment, spacing: spacing.rawValue, pinnedViews: pinnedViews, content: content)
     }
 }
 
 public extension Spacer {
-    @inlinable init(minLength: Space) {
+    @MainActor @inlinable @preconcurrency init(minLength: Space) {
         self = .init(minLength: minLength.rawValue)
     }
 }
 
 public extension GridItem {
-    @inlinable init(_ size: GridItem.Size = .flexible(), spacing: Space, alignment: Alignment? = nil) {
+    @inlinable nonisolated init(_ size: GridItem.Size = .flexible(), spacing: Space, alignment: Alignment? = nil) {
         self = .init(size, spacing: spacing.rawValue, alignment: alignment)
     }
 }
 
 public extension RoundedRectangle {
-    @inlinable init(cornerRadius: Radius, style: RoundedCornerStyle = .circular) {
+    @inlinable nonisolated init(cornerRadius: Radius, style: RoundedCornerStyle = .circular) {
         self = .init(cornerRadius: cornerRadius.rawValue, style: style)
     }
 }

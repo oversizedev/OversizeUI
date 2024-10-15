@@ -5,13 +5,13 @@
 
 import SwiftUI
 
-public enum ControlBorderShape {
+public enum ControlBorderShape: Sendable {
     case capsule
     case roundedRectangle(radius: Radius = .medium)
 }
 
 private struct ControlBorderShapeKey: EnvironmentKey {
-    public static var defaultValue: ControlBorderShape = .roundedRectangle(radius: .medium)
+    public static let defaultValue: ControlBorderShape = .roundedRectangle(radius: .medium)
 }
 
 public extension EnvironmentValues {

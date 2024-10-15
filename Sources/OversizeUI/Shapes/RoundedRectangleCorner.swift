@@ -66,7 +66,7 @@ public struct RoundedRectangleCorner: Shape {
                        controlPoint1: CGPoint(x: rect.maxX, y: rect.maxY - bottomRightRadius / 2),
                        controlPoint2: CGPoint(x: rect.maxX - bottomRightRadius / 2, y: rect.maxY))
         }
-        
+
         path.line(to: CGPoint(x: rect.minX + bottomLeftRadius, y: rect.maxY))
         if bottomLeftRadius > 0 {
             path.curve(to: CGPoint(x: rect.minX, y: rect.maxY - bottomLeftRadius),

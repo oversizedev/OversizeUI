@@ -6,7 +6,7 @@
 import SwiftUI
 
 public struct AnyColorSelectorStyle: ColorSelectorStyle {
-    private var _makeBody: (Configuration) -> AnyView
+    private var _makeBody: @Sendable (Configuration) -> AnyView
 
     public init(style: some ColorSelectorStyle) {
         _makeBody = { configuration in

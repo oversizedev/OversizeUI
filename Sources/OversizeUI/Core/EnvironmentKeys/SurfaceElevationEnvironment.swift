@@ -6,7 +6,7 @@
 import SwiftUI
 
 private struct SurfaceElevationStateKey: EnvironmentKey {
-    public static var defaultValue: Elevation = .z0
+    public static let defaultValue: Elevation = .z0
 }
 
 public extension EnvironmentValues {

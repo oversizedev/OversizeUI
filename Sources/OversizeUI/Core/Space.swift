@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-public enum Space: CGFloat {
+public enum Space: CGFloat, Sendable {
     /// 0
     case zero = 0
 

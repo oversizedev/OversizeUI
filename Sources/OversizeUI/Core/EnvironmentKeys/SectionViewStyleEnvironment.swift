@@ -6,7 +6,7 @@
 import SwiftUI
 
 private struct SectionViewStyleKey: EnvironmentKey {
-    public static var defaultValue: SectionViewStyle = .default
+    public static let defaultValue: SectionViewStyle = .default
 }
 
 public extension EnvironmentValues {

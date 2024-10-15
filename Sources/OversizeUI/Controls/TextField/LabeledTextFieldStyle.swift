@@ -263,33 +263,3 @@ public extension TextFieldStyle where Self == LabeledTextFieldStyle {
         LabeledTextFieldStyle(placeholder: placeholder, text: text)
     }
 }
-
-@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
-struct LabeledTextFieldStyle_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack(spacing: 32) {
-            TextField("Text", text: .constant("Placeholder"))
-                .textFieldStyle(.default)
-
-            TextField("Text", text: .constant("Placeholder"))
-                .textFieldStyle(OverPlaceholderTextFieldStyle(placeholder: "Label"))
-
-            TextField("Text", text: .constant("Placeholder"))
-                .textFieldStyle(InsidePlaceholderTextFieldStyle(placeholder: "Label"))
-
-            TextField("Text", text: .constant("Placeholder"))
-                .textFieldStyle(DefaultPlaceholderTextFieldStyle())
-                .fieldHelper(.constant("Help"), style: .constant(.helperText))
-
-            TextField("Text", text: .constant("Placeholder"))
-                .textFieldStyle(OverPlaceholderTextFieldStyle(placeholder: "Label"))
-                .fieldHelper(.constant("Ok"), style: .constant(.sussesText))
-
-            TextField("Text", text: .constant("Placeholder"))
-                .textFieldStyle(InsidePlaceholderTextFieldStyle(placeholder: "Label"))
-                .fieldHelper(.constant("Error"), style: .constant(.errorText))
-
-        }.padding()
-            .previewLayout(.sizeThatFits)
-    }
-}

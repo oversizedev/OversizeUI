@@ -5,20 +5,20 @@
 
 import SwiftUI
 
-public enum SectionViewTitlePosition {
+public enum SectionViewTitlePosition: Sendable {
     case inside, outside
 }
 
-public enum SectionViewTitleButtonPosition {
+public enum SectionViewTitleButtonPosition: Sendable {
     case leading, trailing
 }
 
-public enum SectionViewTitleButton {
-    case arrow(_ action: () -> Void)
-    case title(_ title: String, _ action: () -> Void)
+public enum SectionViewTitleButton: Sendable {
+    case arrow(_ action: @Sendable () -> Void)
+    case title(_ title: String, _ action: @Sendable () -> Void)
 }
 
-public enum SectionViewStyle {
+public enum SectionViewStyle: Sendable {
     case `default`, smallIndent, edgeToEdge
 }
 

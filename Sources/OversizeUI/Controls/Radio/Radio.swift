@@ -121,16 +121,18 @@ public extension Radio where Label == EmptyView {
     }
 }
 
-struct Radio_LibraryContent: LibraryContentProvider {
-    var views: [LibraryItem] {
-        LibraryItem(
-            Radio(isOn: false, alignment: .leading, label: {
-                Text("Text")
-            }),
-            title: "Chip", category: .control
-        )
-    }
-}
+/*
+ struct Radio_LibraryContent: LibraryContentProvider {
+     var views: [LibraryItem] {
+         LibraryItem(
+             Radio(isOn: false, alignment: .leading, label: {
+                 Text("Text")
+             }),
+             title: "Chip", category: .control
+         )
+     }
+ }
+ */
 
 struct Radio_preview: PreviewProvider {
     struct RadioPreview: View {

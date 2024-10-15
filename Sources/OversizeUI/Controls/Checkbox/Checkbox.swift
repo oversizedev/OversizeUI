@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-public enum CheckboxAlignment {
+public enum CheckboxAlignment: Sendable {
     case leading, trailing
 }
 
@@ -115,16 +115,18 @@ public extension Checkbox where Label == EmptyView {
     }
 }
 
-struct Checkbox_LibraryContent: LibraryContentProvider {
-    var views: [LibraryItem] {
-        LibraryItem(
-            Checkbox(isOn: .constant(false), label: {
-                Text("Text")
-            }),
-            title: "Checkbox", category: .control
-        )
-    }
-}
+/*
+ struct Checkbox_LibraryContent: LibraryContentProvider {
+     var views: [LibraryItem] {
+         LibraryItem(
+             Checkbox(isOn: .constant(false), label: {
+                 Text("Text")
+             }),
+             title: "Checkbox", category: .control
+         )
+     }
+ }
+ */
 
 struct Checkbox_preview: PreviewProvider {
     static var previews: some View {

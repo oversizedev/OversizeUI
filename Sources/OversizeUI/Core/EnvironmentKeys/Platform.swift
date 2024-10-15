@@ -8,7 +8,7 @@ import SwiftUI
 import UIKit
 #endif
 
-public enum Platform {
+public enum Platform: Sendable {
     case iPhone, iPadOS, macOS, tvOS, watchOS, visionOS, carPlay, other
 }
 
@@ -21,29 +21,47 @@ private struct PlatformKey: EnvironmentKey {
         #elseif os(visionOS)
         return .vision
         #elseif canImport(UIKit)
-        switch UIDevice.current.userInterfaceIdiom {
-        case .phone:
-            return .iPhone
-        case .pad:
-            return .iPadOS
-        case .tv:
-            return .tvOS
-        case .carPlay:
-            return .carPlay
-        case .mac:
-            return .macOS
-        case .vision:
-            return .visionOS
-        case .unspecified:
-            return .other
-        @unknown default:
-            return .other
+        MainActor.assumeIsolated {
+            switch UIDevice.current.userInterfaceIdiom {
+            case .phone:
+                return .iPhone
+            case .pad:
+                return .iPadOS
+            case .tv:
+                return .tvOS
+            case .carPlay:
+                return .carPlay
+            case .mac:
+                return .macOS
+            case .vision:
+                return .visionOS
+            case .unspecified:
+                return .other
+            @unknown default:
+                return .other
+            }
         }
         #else
         return .other
         #endif
     }()
 }
+
+// private struct PlatformKey: EnvironmentKey {
+//
+// #if os(macOS) || targetEnvironment(macCatalyst)
+//    static let defaultValue: Platform = .macOS
+// #elseif os(watchOS)
+//    static let defaultValue: Platform = .watchOS
+// #elseif os(visionOS)
+//    static let defaultValue: Platform = .vision
+// #elseif os(iOS)
+//    static let defaultValue: Platform = .iPhone
+// #else
+//    static let defaultValue: Platform = .other
+// #endif
+//
+// }
 
 public extension EnvironmentValues {
     var platform: Platform {

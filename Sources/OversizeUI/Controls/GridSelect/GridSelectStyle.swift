@@ -57,24 +57,24 @@ public struct SelectionOnlyGridSelectStyle: GridSelectStyle {
 
 // MARK: - Support
 
-public enum GridSelectSeletionIconStyle {
+public enum GridSelectSeletionIconStyle: Sendable {
     case none
     case checkbox(alignment: Alignment = .bottomTrailing)
     case radio(alignment: Alignment = .bottomTrailing)
 }
 
-public enum GridSelectSeletionStyle {
+public enum GridSelectSeletionStyle: Sendable {
     case shadowSurface
     case graySurface
     case accentSurface
 }
 
-public enum GridSelectUnseletionStyle {
+public enum GridSelectUnseletionStyle: Sendable {
     case clean
     case surface
 }
 
-public protocol GridSelectStyle {
+public protocol GridSelectStyle: Sendable {
     associatedtype Body: View
     typealias Configuration = GridSelectConfiguration
 
@@ -103,7 +103,7 @@ public struct AnyGridSelectStyle: GridSelectStyle {
     public var unseletionStyle: GridSelectUnseletionStyle
     public var icon: GridSelectSeletionIconStyle
 
-    private var _makeBody: (Configuration) -> AnyView
+    private var _makeBody: @Sendable (Configuration) -> AnyView
 
     public init(
         seletionStyle: GridSelectSeletionStyle,
@@ -125,7 +125,7 @@ public struct AnyGridSelectStyle: GridSelectStyle {
 }
 
 struct GridSelectStyleKey: EnvironmentKey {
-    public static var defaultValue = AnyGridSelectStyle(seletionStyle: .accentSurface,
+    public static let defaultValue = AnyGridSelectStyle(seletionStyle: .accentSurface,
                                                         unseletionStyle: .surface,
                                                         icon: .none,
                                                         style: IslandGridSelectStyle())

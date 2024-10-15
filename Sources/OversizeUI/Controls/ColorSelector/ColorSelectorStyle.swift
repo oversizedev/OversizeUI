@@ -5,14 +5,14 @@
 
 import SwiftUI
 
-public protocol ColorSelectorStyle {
+public protocol ColorSelectorStyle: Sendable {
     associatedtype Body: View
     typealias Configuration = ColorSelectorConfiguration
 
     func makeBody(configuration: Self.Configuration) -> Self.Body
 }
 
-public struct ColorSelectorConfiguration {
+public struct ColorSelectorConfiguration: Sendable {
     public struct Label: View {
         public init(content: some View) {
             body = AnyView(content)
@@ -31,7 +31,7 @@ public struct DefaultColorSelectorStyle: ColorSelectorStyle {
 }
 
 struct ColorSelectorStyleStyleKey: EnvironmentKey {
-    public static var defaultValue = AnyColorSelectorStyle(style: DefaultColorSelectorStyle())
+    public static let defaultValue = AnyColorSelectorStyle(style: DefaultColorSelectorStyle())
 }
 
 public extension EnvironmentValues {

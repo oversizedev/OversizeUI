@@ -6,7 +6,7 @@
 import SwiftUI
 
 // swiftlint:disable identifier_name
-public enum Elevation: Int, CaseIterable {
+public enum Elevation: Int, CaseIterable, Sendable {
     case z0
     case z1
     case z2

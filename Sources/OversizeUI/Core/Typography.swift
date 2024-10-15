@@ -1,11 +1,6 @@
-//
-// Copyright © 2021 Alexander Romanov
-// Typography.swift, created on 07.06.2020
-//
-
 import SwiftUI
 
-public enum FontDesignType: String, CaseIterable {
+public enum FontDesignType: String, CaseIterable, Sendable {
     case `default`, serif, round, mono
 
     public var system: Font.Design {
@@ -24,13 +19,12 @@ public enum FontDesignType: String, CaseIterable {
 
 public struct Typography: ViewModifier {
     @Environment(\.theme) private var theme: ThemeSettings
-    @Environment(\.isLoading) var isLoading
 
     private let fontStyle: Font.TextStyle
     private let isBold: Bool?
     private let weight: Font.Weight?
 
-    public init(fontStyle: Font.TextStyle, isBold: Bool? = nil, weight: Font.Weight? = nil) {
+    public nonisolated init(fontStyle: Font.TextStyle, isBold: Bool? = nil, weight: Font.Weight? = nil) {
         self.fontStyle = fontStyle
         self.isBold = isBold
         self.weight = weight
@@ -49,62 +43,13 @@ public struct Typography: ViewModifier {
 
     private var lineHeight: CGFloat {
         switch fontStyle {
-        case .largeTitle:
-            #if os(macOS)
-            return 40
-            #else
-            return 44
-            #endif
-        case .title:
-            #if os(macOS)
-            return 32
-            #else
-            return 36
-            #endif
-        case .title2:
-            #if os(macOS)
-            return 24
-            #else
-            return 28
-            #endif
-        case .title3:
-            #if os(macOS)
-            return 20
-            #else
-            return 24
-            #endif
-        case .headline:
-            #if os(macOS)
-            return 20
-            #else
-            return 24
-            #endif
-        case .subheadline:
-            #if os(macOS)
-            return 16
-            #else
-            return 20
-            #endif
-        case .body:
-            #if os(macOS)
-            return 20
-            #else
-            return 24
-            #endif
-        case .callout:
-            #if os(macOS)
-            return 16
-            #else
-            return 20
-            #endif
-        case .footnote:
-            return 16
-        case .caption:
-            return 16
-        case .caption2:
-            return 16
-        @unknown default:
-            return 16
+        case .largeTitle: return 44
+        case .title: return 36
+        case .title2: return 28
+        case .title3, .headline: return 24
+        case .subheadline, .body: return 20
+        case .callout, .footnote, .caption, .caption2: return 16
+        @unknown default: return 16
         }
     }
 
@@ -123,119 +68,116 @@ public struct Typography: ViewModifier {
 
     private var fontWeight: Font.Weight {
         if let weight {
-            weight
-        } else {
-            switch fontStyle {
-            case .largeTitle, .title:
-                isBold ?? true ? .bold : .regular
-            case .headline:
-                isBold ?? true ? .bold : .semibold
-            default:
-                isBold ?? false ? .bold : .regular
-            }
+            return weight
+        }
+        switch fontStyle {
+        case .largeTitle, .title:
+            return (isBold ?? true) ? .bold : .regular
+        case .headline:
+            return (isBold ?? true) ? .bold : .semibold
+        default:
+            return (isBold ?? false) ? .bold : .regular
         }
     }
 }
 
 public extension View {
-    func largeTitle(_ bold: Bool = true) -> some View {
+    // Large Title
+    nonisolated func largeTitle(_ bold: Bool = true) -> some View {
         modifier(Typography(fontStyle: .largeTitle, isBold: bold))
     }
 
-    func title(_ bold: Bool = true) -> some View {
-        modifier(Typography(fontStyle: .title, isBold: bold))
-    }
-
-    func title2(_ bold: Bool = true) -> some View {
-        modifier(Typography(fontStyle: .title2, isBold: bold))
-    }
-
-    func title3(_ bold: Bool = true) -> some View {
-        modifier(Typography(fontStyle: .title3, isBold: bold))
-    }
-
-    func headline(_ bold: Bool = true) -> some View {
-        modifier(Typography(fontStyle: .headline, isBold: bold))
-    }
-
-    func subheadline(_ bold: Bool = false) -> some View {
-        modifier(Typography(fontStyle: .subheadline, isBold: bold))
-    }
-
-    func body(_ bold: Bool = false) -> some View {
-        modifier(Typography(fontStyle: .body, isBold: bold))
-    }
-
-    func callout(_ bold: Bool = false) -> some View {
-        modifier(Typography(fontStyle: .callout, isBold: bold))
-    }
-
-    func footnote(_ bold: Bool = false) -> some View {
-        modifier(Typography(fontStyle: .footnote, isBold: bold))
-    }
-
-    func caption(_ bold: Bool = false) -> some View {
-        modifier(Typography(fontStyle: .caption, isBold: bold))
-    }
-
-    func caption2(_ bold: Bool = false) -> some View {
-        modifier(Typography(fontStyle: .caption2, isBold: bold))
-    }
-
-    func largeTitle(_ weight: Font.Weight) -> some View {
+    nonisolated func largeTitle(_ weight: Font.Weight) -> some View {
         modifier(Typography(fontStyle: .largeTitle, weight: weight))
     }
 
-    func title(_ weight: Font.Weight) -> some View {
+    // Title
+    nonisolated func title(_ bold: Bool = true) -> some View {
+        modifier(Typography(fontStyle: .title, isBold: bold))
+    }
+
+    nonisolated func title(_ weight: Font.Weight) -> some View {
         modifier(Typography(fontStyle: .title, weight: weight))
     }
 
-    func title2(_ weight: Font.Weight) -> some View {
+    // Title 2
+    nonisolated func title2(_ bold: Bool = true) -> some View {
+        modifier(Typography(fontStyle: .title2, isBold: bold))
+    }
+
+    nonisolated func title2(_ weight: Font.Weight) -> some View {
         modifier(Typography(fontStyle: .title2, weight: weight))
     }
 
-    func title3(_ weight: Font.Weight) -> some View {
+    // Title 3
+    nonisolated func title3(_ bold: Bool = true) -> some View {
+        modifier(Typography(fontStyle: .title3, isBold: bold))
+    }
+
+    nonisolated func title3(_ weight: Font.Weight) -> some View {
         modifier(Typography(fontStyle: .title3, weight: weight))
     }
 
-    func headline(_ weight: Font.Weight) -> some View {
+    // Headline
+    nonisolated func headline(_ bold: Bool = true) -> some View {
+        modifier(Typography(fontStyle: .headline, isBold: bold))
+    }
+
+    nonisolated func headline(_ weight: Font.Weight) -> some View {
         modifier(Typography(fontStyle: .headline, weight: weight))
     }
 
-    func subheadline(_ weight: Font.Weight) -> some View {
+    // Subheadline
+    nonisolated func subheadline(_ bold: Bool = false) -> some View {
+        modifier(Typography(fontStyle: .subheadline, isBold: bold))
+    }
+
+    nonisolated func subheadline(_ weight: Font.Weight) -> some View {
         modifier(Typography(fontStyle: .subheadline, weight: weight))
     }
 
-    func body(_ weight: Font.Weight) -> some View {
+    // Body
+    nonisolated func body(_ bold: Bool = false) -> some View {
+        modifier(Typography(fontStyle: .body, isBold: bold))
+    }
+
+    nonisolated func body(_ weight: Font.Weight) -> some View {
         modifier(Typography(fontStyle: .body, weight: weight))
     }
 
-    func callout(_ weight: Font.Weight) -> some View {
+    // Callout
+    nonisolated func callout(_ bold: Bool = false) -> some View {
+        modifier(Typography(fontStyle: .callout, isBold: bold))
+    }
+
+    nonisolated func callout(_ weight: Font.Weight) -> some View {
         modifier(Typography(fontStyle: .callout, weight: weight))
     }
 
-    func footnote(_ weight: Font.Weight) -> some View {
+    // Footnote
+    nonisolated func footnote(_ bold: Bool = false) -> some View {
+        modifier(Typography(fontStyle: .footnote, isBold: bold))
+    }
+
+    nonisolated func footnote(_ weight: Font.Weight) -> some View {
         modifier(Typography(fontStyle: .footnote, weight: weight))
     }
 
-    func caption(_ weight: Font.Weight) -> some View {
+    // Caption
+    nonisolated func caption(_ bold: Bool = false) -> some View {
+        modifier(Typography(fontStyle: .caption, isBold: bold))
+    }
+
+    nonisolated func caption(_ weight: Font.Weight) -> some View {
         modifier(Typography(fontStyle: .caption, weight: weight))
     }
 
-    func caption2(_ weight: Font.Weight) -> some View {
+    // Caption 2
+    nonisolated func caption2(_ bold: Bool = false) -> some View {
+        modifier(Typography(fontStyle: .caption2, isBold: bold))
+    }
+
+    nonisolated func caption2(_ weight: Font.Weight) -> some View {
         modifier(Typography(fontStyle: .caption2, weight: weight))
-    }
-}
-
-public extension View {
-    @available(*, deprecated, message: "Use native modificator", renamed: "font")
-    func fontStyle(_ style: Font.TextStyle) -> some View {
-        modifier(Typography(fontStyle: style))
-    }
-
-    @available(*, deprecated, message: "Use native color modificator", renamed: "font")
-    func fontStyle(_ style: Font.TextStyle, color: Color) -> some View {
-        modifier(Typography(fontStyle: style))
-            .foregroundColor(color)
     }
 }

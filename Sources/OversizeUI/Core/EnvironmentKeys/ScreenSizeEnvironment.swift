@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-public struct ScreenSize {
+public struct ScreenSize: Sendable {
     public let safeAreaWidth: CGFloat
     public let safeAreaHeight: CGFloat
     public let safeAreaTop: CGFloat
