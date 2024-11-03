@@ -51,7 +51,7 @@ public struct Typography: ViewModifier {
         case .headline: return 16
         case .subheadline: return 20
         case .body, .callout, .footnote, .caption, .caption2: return 16
-        @unknown default: return 16
+        default: return 16
         }
     }
     #else
@@ -63,10 +63,9 @@ public struct Typography: ViewModifier {
         case .title3, .headline: return 24
         case .subheadline, .body: return 20
         case .callout, .footnote, .caption, .caption2: return 16
-        @unknown default: return 16
+        default: return 16
         }
     }
-
     #endif
 
     private var fontDesign: Font.Design {
@@ -77,7 +76,7 @@ public struct Typography: ViewModifier {
             return theme.fontParagraph.system
         case .caption, .caption2, .footnote, .callout:
             return theme.fontOverline.system
-        @unknown default:
+        default:
             return .default
         }
     }
