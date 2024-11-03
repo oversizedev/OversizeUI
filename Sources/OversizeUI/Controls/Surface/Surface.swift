@@ -63,9 +63,11 @@ public struct Surface<Label: View>: View {
                 .contentShape(Rectangle())
         }
         .buttonStyle(SurfaceButtonStyle())
-        .onHover { hover in
-            isHover = hover
-        }
+        #if os(macOS)
+            .onHover { hover in
+                isHover = hover
+            }
+        #endif
     }
 
     private var surface: some View {
