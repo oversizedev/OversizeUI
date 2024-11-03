@@ -14,8 +14,12 @@ public struct HUD<Title, Icon>: View where Title: View, Icon: View {
     private let isAutoHide: Bool
 
     @Binding private var isPresented: Bool
+    #if os(macOS)
+    @State private var offset: CGFloat = 200
+    #else
+    @State private var offset: CGFloat = -200
+    #endif
 
-    @State private var bottomOffset: CGFloat = 0
     @State private var opacity: CGFloat = 0
 
     // MARK: Initializers
@@ -41,7 +45,12 @@ public struct HUD<Title, Icon>: View where Title: View, Icon: View {
             if let text {
                 Text(text)
                     .body(.medium)
-                    .foregroundColor(.onSurfaceHighEmphasis)
+                #if os(macOS)
+                    .foregroundColor(Color.onPrimaryHighEmphasis)
+                #else
+                    .foregroundColor(Color.onSurfaceHighEmphasis)
+
+                #endif
 
             } else if let title {
                 title
@@ -50,26 +59,41 @@ public struct HUD<Title, Icon>: View where Title: View, Icon: View {
         .padding(.leading, icon == nil ? .medium : .small)
         .padding(.trailing, .medium)
         .padding(.vertical, .xSmall)
-        .background(
-            Capsule()
-                .foregroundColor(Color.surfacePrimary)
-                .shadowElevaton(.z2)
-        )
-        .padding(.small)
-        .opacity(opacity)
-        .offset(y: bottomOffset)
-        .onChange(of: isPresented, perform: { present in
-            if present {
-                presentAnimated()
-            } else {
-                dismissAnimated()
+        #if os(macOS)
+            .background(
+                RoundedRectangle(cornerRadius: .small, style: .continuous)
+                    .foregroundColor(Color.onBackgroundHighEmphasis)
+                    .shadowElevaton(.z2)
+            )
+        #else
+            .background(
+                Capsule()
+                    .foregroundColor(Color.surfacePrimary)
+                    .shadowElevaton(.z2)
+            )
+        #endif
+            .padding(.small)
+            .opacity(opacity)
+            .offset(y: offset)
+            .onChange(of: isPresented) { present in
+                if present {
+                    if offset == 0 {
+                        dismissAnimated()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            presentAnimated()
+                        }
+                    } else {
+                        presentAnimated()
+                    }
+                } else {
+                    dismissAnimated()
+                }
             }
-        })
     }
 
     private func presentAnimated() {
         withAnimation {
-            bottomOffset = 0
+            offset = 0
             opacity = 1
         }
         if isAutoHide {
@@ -83,7 +107,11 @@ public struct HUD<Title, Icon>: View where Title: View, Icon: View {
 
     private func dismissAnimated() {
         withAnimation {
-            bottomOffset = -200
+            #if os(macOS)
+            offset = 200
+            #else
+            offset = -200
+            #endif
             opacity = 0
         }
     }
@@ -132,6 +160,42 @@ public extension HUD where Icon == EmptyView {
     }
 }
 
+#if os(macOS)
+@MainActor
+public extension View {
+    func hud(_ text: String, autoHide: Bool = true, isPresented: Binding<Bool>) -> some View {
+        overlay(alignment: .bottomTrailing) {
+            HUD(text, autoHide: autoHide, isPresented: isPresented)
+        }
+    }
+
+    func hud(_ text: String, isPresented: Binding<Bool>, @ViewBuilder icon: () -> some View) -> some View {
+        overlay(alignment: .bottomTrailing) {
+            HUD(text, isPresented: isPresented, icon: icon)
+        }
+    }
+
+    func hud(isPresented: Binding<Bool>, @ViewBuilder title: () -> some View) -> some View {
+        overlay(alignment: .bottomTrailing) {
+            HUD(isPresented: isPresented, title: title)
+        }
+    }
+
+    func hud(isPresented: Binding<Bool>, @ViewBuilder title: () -> some View, @ViewBuilder icon: () -> some View) -> some View {
+        overlay(alignment: .bottomTrailing) {
+            HUD(isPresented: isPresented, title: title, icon: icon)
+        }
+    }
+
+    func hudLoader(_ text: String = "Loading", isPresented: Binding<Bool>) -> some View {
+        overlay(alignment: .bottomTrailing) {
+            HUD(text, autoHide: false, isPresented: isPresented) {
+                ProgressView()
+            }
+        }
+    }
+}
+#else
 public extension View {
     func hud(_ text: String, isPresented: Binding<Bool>) -> some View {
         overlay(alignment: .top) {
@@ -165,3 +229,4 @@ public extension View {
         }
     }
 }
+#endif

@@ -41,6 +41,20 @@ public struct Typography: ViewModifier {
             .frame(minHeight: lineHeight)
     }
 
+    #if os(macOS)
+    private var lineHeight: CGFloat {
+        switch fontStyle {
+        case .largeTitle: return 32
+        case .title: return 28
+        case .title2: return 24
+        case .title3: return 20
+        case .headline: return 16
+        case .subheadline: return 20
+        case .body, .callout, .footnote, .caption, .caption2: return 16
+        @unknown default: return 16
+        }
+    }
+    #else
     private var lineHeight: CGFloat {
         switch fontStyle {
         case .largeTitle: return 44
@@ -52,6 +66,8 @@ public struct Typography: ViewModifier {
         @unknown default: return 16
         }
     }
+
+    #endif
 
     private var fontDesign: Font.Design {
         switch fontStyle {

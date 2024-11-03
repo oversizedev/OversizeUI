@@ -55,7 +55,6 @@ public struct Snackbar<Label, Actions>: View where Label: View, Actions: View {
                 }
             }
         }
-
         .padding(.leading, .medium)
         .padding(.trailing, .xSmall)
         .padding(.vertical, .xSmall)

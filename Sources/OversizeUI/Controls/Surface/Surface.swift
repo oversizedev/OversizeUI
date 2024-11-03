@@ -36,6 +36,8 @@ public struct Surface<Label: View>: View {
     private let forceContentInsets: EdgeSpaceInsets?
     private var isSurfaceClipped: Bool = false
 
+    @State var isHover = false
+
     public init(
         action: (() -> Void)? = nil,
         @ViewBuilder label: () -> Label
@@ -58,8 +60,12 @@ public struct Surface<Label: View>: View {
             action?()
         } label: {
             surface
+                .contentShape(Rectangle())
         }
         .buttonStyle(SurfaceButtonStyle())
+        .onHover { hover in
+            isHover = hover
+        }
     }
 
     private var surface: some View {
@@ -68,14 +74,33 @@ public struct Surface<Label: View>: View {
             .padding(.bottom, forceContentInsets?.bottom ?? contentInsets.bottom)
             .padding(.leading, forceContentInsets?.leading ?? contentInsets.leading)
             .padding(.trailing, forceContentInsets?.trailing ?? contentInsets.trailing)
-            .background(
+            .background {
+                #if os(macOS)
+                ZStack {
+                    RoundedRectangle(
+                        cornerRadius: surfaceRadius,
+                        style: .continuous
+                    )
+                    .fill(surfaceBackgroundColor)
+                    .shadowElevaton(elevation)
+
+                    if isHover {
+                        RoundedRectangle(
+                            cornerRadius: surfaceRadius,
+                            style: .continuous
+                        )
+                        .fill(Color.onSurfaceDisabled.opacity(0.04))
+                    }
+                }
+                #else
                 RoundedRectangle(
                     cornerRadius: surfaceRadius,
                     style: .continuous
                 )
                 .fill(surfaceBackgroundColor)
                 .shadowElevaton(elevation)
-            )
+                #endif
+            }
             .overlay(
                 RoundedRectangle(
                     cornerRadius: surfaceRadius,
@@ -171,7 +196,11 @@ public struct SurfaceButtonStyle: ButtonStyle {
 
     public func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
+        #if os(macOS)
+            .scaleEffect(configuration.isPressed ? 0.98 : 1)
+        #else
             .scaleEffect(configuration.isPressed ? 0.96 : 1)
+        #endif
     }
 }
 

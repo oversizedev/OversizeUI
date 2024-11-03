@@ -4,6 +4,8 @@ import SwiftUI
 public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLabel>: View
     where Content: View, Header: View, LeadingBar: View, TrailingBar: View, TopToolbar: View, TitleLabel: View
 {
+    @Environment(\.platform) var platform
+
     public typealias ScrollAction = (_ offset: CGPoint, _ headerVisibleRatio: CGFloat) -> Void
 
     private let title: String?
@@ -103,7 +105,7 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
     var scrollView: some View {
         GeometryReader { proxy in
             ScrollViewWithOffsetTracking(
-                showsIndicators: false,
+                showsIndicators: platform == .macOS,
                 onScroll: handleOffset
             ) {
                 VStack(spacing: 0) {

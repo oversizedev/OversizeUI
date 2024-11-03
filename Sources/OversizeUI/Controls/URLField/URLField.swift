@@ -20,6 +20,7 @@ public struct URLField: View {
     public init(_ title: String = "URL", url: Binding<URL?>) {
         self.title = title
         _url = url
+        _urlString = .init(initialValue: url.wrappedValue?.absoluteString ?? "")
     }
 
     public var body: some View {
@@ -38,7 +39,7 @@ public struct URLField: View {
 
             if state {
                 textFieldHelper = .none
-            } else if let url = URL(string: urlString), NSWorkspace.shared.urlForApplication(toOpen: url) != nil {
+            } else if let url = URL(string: urlString) { // , NSWorkspace.shared.urlForApplication(toOpen: url) != nil {
                 textFieldHelper = .none
                 self.url = url
             } else {
@@ -56,7 +57,7 @@ public struct URLField: View {
                 textFieldHelper = .errorText
             }
             #else
-            if let url = URL(string: urlString), NSWorkspace.shared.urlForApplication(toOpen: url) != nil {
+            if let url = URL(string: urlString) { // , NSWorkspace.shared.urlForApplication(toOpen: url) != nil {
                 textFieldHelper = .none
                 self.url = url
             } else {
@@ -71,6 +72,11 @@ public struct URLField: View {
         .textContentType(.URL)
         .autocorrectionDisabled()
         .fieldHelper(.constant("Invalid URL"), style: $textFieldHelper)
+        .onChange(of: url) { newValue in
+            if let newValue, newValue.absoluteString != urlString {
+                urlString = newValue.absoluteString
+            }
+        }
     }
 }
 #endif
