@@ -26,9 +26,6 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
     private let leadingLabel: LeadingLabel?
     private let trailingLabel: TrailingLabel?
 
-//    private var leadingType: RowLeadingType?
-//    private var trallingType: RowTrailingType?
-
     private let action: (() -> Void)?
 
     private var isPremiumOption = false
@@ -59,26 +56,6 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
         self.action = action
         leadingLabel = leading()
         trailingLabel = trailing()
-        leadingSize = nil
-        leadingRadius = nil
-    }
-
-    @available(*, deprecated, message: "Use leading: {} and tralling: {}")
-    public init(_ title: String,
-                subtitle: String? = nil,
-//                leadingType: RowLeadingType? = nil,
-//                trallingType: RowTrailingType? = nil,
-                paddingHorizontal _: Space = .medium,
-                paddingVertical _: Space = .small,
-                action: (() -> Void)? = nil)
-    {
-        self.title = title
-        self.subtitle = subtitle
-//        self.leadingType = leadingType
-//        self.trallingType = trallingType
-        self.action = action
-        leadingLabel = nil
-        trailingLabel = nil
         leadingSize = nil
         leadingRadius = nil
     }
@@ -246,20 +223,6 @@ public extension Row {
         control.textColor = color
         return control
     }
-//
-//    @available(*, deprecated, message: "Use leading: {} and tralling: {}")
-//    func rowLeading(_ leading: RowLeadingType?) -> Row {
-//        var control = self
-//        control.leadingType = leading
-//        return control
-//    }
-//
-//    @available(*, deprecated, message: "Use leading: {} and tralling: {}")
-//    func rowTrailing(_ trailing: RowTrailingType?) -> Row {
-//        var control = self
-//        control.trallingType = trailing
-//        return control
-//    }
 }
 
 public extension View {

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1101694E26E41DE10035CB67 /* Example (watchOS).app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 1101694D26E41DE10035CB67 /* Example (watchOS).app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1101695326E41DE30035CB67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1101695226E41DE30035CB67 /* Assets.xcassets */; };
-		1101695A26E41DE40035CB67 /* Example WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1101695926E41DE40035CB67 /* Example WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1101696326E41DE40035CB67 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1101696226E41DE40035CB67 /* NotificationController.swift */; };
 		1101696526E41DE40035CB67 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1101696426E41DE40035CB67 /* NotificationView.swift */; };
 		1101696726E41DE40035CB67 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1101696626E41DE40035CB67 /* ComplicationController.swift */; };
@@ -91,26 +90,19 @@
 			remoteGlobalIDString = 1101694C26E41DE10035CB67;
 			remoteInfo = "Example WatchKit App";
 		};
-		1101695B26E41DE40035CB67 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 84D9F9DC26BDE4EA00B2FCA2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1101695826E41DE40035CB67;
-			remoteInfo = "Example WatchKit Extension";
-		};
-		1101697426E41DE50035CB67 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 84D9F9DC26BDE4EA00B2FCA2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1101695826E41DE40035CB67;
-			remoteInfo = "Example WatchKit Extension";
-		};
 		1101697F26E41DE50035CB67 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 84D9F9DC26BDE4EA00B2FCA2 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1101694C26E41DE10035CB67;
 			remoteInfo = "Example WatchKit App";
+		};
+		848111842CDFFFDE004D65FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84D9F9DC26BDE4EA00B2FCA2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1101694C26E41DE10035CB67;
+			remoteInfo = "Example (watchOS)";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -126,17 +118,6 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1101698A26E41DE50035CB67 /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				1101695A26E41DE40035CB67 /* Example WatchKit Extension.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -144,7 +125,6 @@
 		1101694D26E41DE10035CB67 /* Example (watchOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example (watchOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1101695226E41DE30035CB67 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1101695426E41DE30035CB67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1101695926E41DE40035CB67 /* Example WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Example WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1101696226E41DE40035CB67 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		1101696426E41DE40035CB67 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		1101696626E41DE40035CB67 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
@@ -369,7 +349,6 @@
 				84D9F9F026BDE4EB00B2FCA2 /* Example.app */,
 				1101694A26E41DE10035CB67 /* Example.app */,
 				1101694D26E41DE10035CB67 /* Example (watchOS).app */,
-				1101695926E41DE40035CB67 /* Example WatchKit Extension.appex */,
 				1101697326E41DE40035CB67 /* ExampleTests.xctest */,
 				1101697E26E41DE50035CB67 /* ExampleUITests.xctest */,
 				1101699E26E423260035CB67 /* Example (tvOS).app */,
@@ -419,37 +398,17 @@
 			buildConfigurationList = 1101699226E41DE50035CB67 /* Build configuration list for PBXNativeTarget "Example (watchOS)" */;
 			buildPhases = (
 				1101694B26E41DE10035CB67 /* Resources */,
-				1101698A26E41DE50035CB67 /* Embed App Extensions */,
+				1101695526E41DE40035CB67 /* Sources */,
+				1101695626E41DE40035CB67 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				1101695C26E41DE40035CB67 /* PBXTargetDependency */,
 			);
 			name = "Example (watchOS)";
 			productName = "Example WatchKit App";
 			productReference = 1101694D26E41DE10035CB67 /* Example (watchOS).app */;
-			productType = "com.apple.product-type.application.watchapp2";
-		};
-		1101695826E41DE40035CB67 /* Example WatchKit Extension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1101699126E41DE50035CB67 /* Build configuration list for PBXNativeTarget "Example WatchKit Extension" */;
-			buildPhases = (
-				1101695526E41DE40035CB67 /* Sources */,
-				1101695626E41DE40035CB67 /* Frameworks */,
-				1101695726E41DE40035CB67 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Example WatchKit Extension";
-			packageProductDependencies = (
-				114C9CCA26ECC74A00520E04 /* OversizeUI */,
-			);
-			productName = "Example WatchKit Extension";
-			productReference = 1101695926E41DE40035CB67 /* Example WatchKit Extension.appex */;
-			productType = "com.apple.product-type.watchkit2-extension";
+			productType = "com.apple.product-type.application";
 		};
 		1101697226E41DE40035CB67 /* ExampleTests */ = {
 			isa = PBXNativeTarget;
@@ -462,7 +421,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				1101697526E41DE50035CB67 /* PBXTargetDependency */,
+				848111852CDFFFDE004D65FE /* PBXTargetDependency */,
 			);
 			name = ExampleTests;
 			productName = ExampleTests;
@@ -553,8 +512,9 @@
 		84D9F9DC26BDE4EA00B2FCA2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1330;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					1101694926E41DE10035CB67 = {
 						CreatedOnToolsVersion = 12.5.1;
@@ -563,12 +523,9 @@
 						CreatedOnToolsVersion = 12.5.1;
 						LastSwiftMigration = 1250;
 					};
-					1101695826E41DE40035CB67 = {
-						CreatedOnToolsVersion = 12.5.1;
-					};
 					1101697226E41DE40035CB67 = {
 						CreatedOnToolsVersion = 12.5.1;
-						TestTargetID = 1101695826E41DE40035CB67;
+						TestTargetID = 1101694C26E41DE10035CB67;
 					};
 					1101697D26E41DE50035CB67 = {
 						CreatedOnToolsVersion = 12.5.1;
@@ -602,7 +559,6 @@
 				84D9F9EF26BDE4EB00B2FCA2 /* Example (macOS) */,
 				1101694926E41DE10035CB67 /* Example */,
 				1101694C26E41DE10035CB67 /* Example (watchOS) */,
-				1101695826E41DE40035CB67 /* Example WatchKit Extension */,
 				1101697226E41DE40035CB67 /* ExampleTests */,
 				1101697D26E41DE50035CB67 /* ExampleUITests */,
 				1101699D26E423260035CB67 /* Example (tvOS) */,
@@ -622,16 +578,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1101695326E41DE30035CB67 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1101695726E41DE40035CB67 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 				1101696C26E41DE40035CB67 /* Preview Assets.xcassets in Resources */,
 				1101696926E41DE40035CB67 /* Assets.xcassets in Resources */,
+				1101695326E41DE30035CB67 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -788,20 +737,15 @@
 			target = 1101694C26E41DE10035CB67 /* Example (watchOS) */;
 			targetProxy = 1101694F26E41DE10035CB67 /* PBXContainerItemProxy */;
 		};
-		1101695C26E41DE40035CB67 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1101695826E41DE40035CB67 /* Example WatchKit Extension */;
-			targetProxy = 1101695B26E41DE40035CB67 /* PBXContainerItemProxy */;
-		};
-		1101697526E41DE50035CB67 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1101695826E41DE40035CB67 /* Example WatchKit Extension */;
-			targetProxy = 1101697426E41DE50035CB67 /* PBXContainerItemProxy */;
-		};
 		1101698026E41DE50035CB67 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1101694C26E41DE10035CB67 /* Example (watchOS) */;
 			targetProxy = 1101697F26E41DE50035CB67 /* PBXContainerItemProxy */;
+		};
+		848111852CDFFFDE004D65FE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1101694C26E41DE10035CB67 /* Example (watchOS) */;
+			targetProxy = 848111842CDFFFDE004D65FE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -817,7 +761,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = romanov.cc.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -832,7 +776,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = romanov.cc.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -840,25 +784,23 @@
 		1101698826E41DE50035CB67 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ER582ZK85C;
-				IBSC_MODULE = Example_WatchKit_Extension;
 				INFOPLIST_FILE = "Example WatchKit App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = romanov.cc.Example.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -867,73 +809,22 @@
 		1101698926E41DE50035CB67 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ER582ZK85C;
-				IBSC_MODULE = Example_WatchKit_Extension;
 				INFOPLIST_FILE = "Example WatchKit App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = romanov.cc.Example.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 9.0;
-			};
-			name = Release;
-		};
-		1101698B26E41DE50035CB67 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Example WatchKit Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = ER582ZK85C;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Example WatchKit Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = romanov.cc.Example.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 9.0;
-			};
-			name = Debug;
-		};
-		1101698C26E41DE50035CB67 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Example WatchKit Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = ER582ZK85C;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Example WatchKit Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = romanov.cc.Example.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
 				WATCHOS_DEPLOYMENT_TARGET = 9.0;
@@ -943,7 +834,6 @@
 		1101698D26E41DE50035CB67 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ER582ZK85C;
@@ -956,9 +846,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = romanov.cc.ExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Example WatchKit Extension.appex/Example WatchKit Extension";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Example (watchOS).app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Example (watchOS)";
 				WATCHOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
@@ -966,7 +856,6 @@
 		1101698E26E41DE50035CB67 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ER582ZK85C;
@@ -979,9 +868,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = romanov.cc.ExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Example WatchKit Extension.appex/Example WatchKit Extension";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Example (watchOS).app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Example (watchOS)";
 				VALIDATE_PRODUCT = YES;
 				WATCHOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -1001,7 +890,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = romanov.cc.ExampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				TEST_TARGET_NAME = "Example WatchKit App";
 				WATCHOS_DEPLOYMENT_TARGET = 9.0;
@@ -1022,7 +911,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = romanov.cc.ExampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				TEST_TARGET_NAME = "Example WatchKit App";
 				VALIDATE_PRODUCT = YES;
@@ -1045,7 +934,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = romanov.cc.ExampletvOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 15.0;
 			};
@@ -1066,7 +955,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = romanov.cc.ExampletvOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 15.0;
 				VALIDATE_PRODUCT = YES;
@@ -1077,6 +966,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1107,9 +997,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1136,6 +1028,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1166,9 +1059,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1201,7 +1096,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = romanov.cc.Example;
 				PRODUCT_NAME = Example;
 				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1223,7 +1118,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = romanov.cc.Example;
 				PRODUCT_NAME = Example;
 				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1238,6 +1133,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = ER582ZK85C;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1250,7 +1146,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = romanov.cc.Example;
 				PRODUCT_NAME = Example;
 				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -1263,6 +1159,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = ER582ZK85C;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1275,22 +1172,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = romanov.cc.Example;
 				PRODUCT_NAME = Example;
 				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1101699126E41DE50035CB67 /* Build configuration list for PBXNativeTarget "Example WatchKit Extension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1101698B26E41DE50035CB67 /* Debug */,
-				1101698C26E41DE50035CB67 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		1101699226E41DE50035CB67 /* Build configuration list for PBXNativeTarget "Example (watchOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

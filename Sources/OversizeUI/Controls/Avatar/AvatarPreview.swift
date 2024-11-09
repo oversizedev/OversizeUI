@@ -1,6 +1,6 @@
 //
 // Copyright © 2023 Aleksandr Romanov
-// File.swift, created on 10.03.2023
+// AvatarPreview.swift, created on 10.03.2023
 //
 
 import SwiftUI

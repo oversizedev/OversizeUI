@@ -48,7 +48,6 @@ struct ComponentsList: View {
                 }
             }
         }
-        .navigationable()
         #else
         Text("Support will be in the future")
         #endif

@@ -1,7 +1,7 @@
-////
-//// Copyright © 2023 Alexander Romanov
-//// File.swift, created on 26.11.2023
-////
+//
+// Copyright © 2023 Alexander Romanov
+// ScrollViewHeader.swift, created on 26.11.2023
+//
 //
 
 import SwiftUI

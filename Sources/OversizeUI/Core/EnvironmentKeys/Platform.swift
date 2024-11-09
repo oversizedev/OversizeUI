@@ -47,22 +47,6 @@ private struct PlatformKey: EnvironmentKey {
     }()
 }
 
-// private struct PlatformKey: EnvironmentKey {
-//
-// #if os(macOS) || targetEnvironment(macCatalyst)
-//    static let defaultValue: Platform = .macOS
-// #elseif os(watchOS)
-//    static let defaultValue: Platform = .watchOS
-// #elseif os(visionOS)
-//    static let defaultValue: Platform = .vision
-// #elseif os(iOS)
-//    static let defaultValue: Platform = .iPhone
-// #else
-//    static let defaultValue: Platform = .other
-// #endif
-//
-// }
-
 public extension EnvironmentValues {
     var platform: Platform {
         get { self[PlatformKey.self] }

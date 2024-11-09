@@ -39,7 +39,7 @@ public struct URLField: View {
 
             if state {
                 textFieldHelper = .none
-            } else if let url = URL(string: urlString) { // , NSWorkspace.shared.urlForApplication(toOpen: url) != nil {
+            } else if let url = URL(string: urlString) {
                 textFieldHelper = .none
                 self.url = url
             } else {
@@ -57,7 +57,7 @@ public struct URLField: View {
                 textFieldHelper = .errorText
             }
             #else
-            if let url = URL(string: urlString) { // , NSWorkspace.shared.urlForApplication(toOpen: url) != nil {
+            if let url = URL(string: urlString) {
                 textFieldHelper = .none
                 self.url = url
             } else {
