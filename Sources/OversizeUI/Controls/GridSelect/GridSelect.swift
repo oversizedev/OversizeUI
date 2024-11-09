@@ -122,7 +122,7 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
 
             RoundedRectangle(cornerRadius: radius,
                              style: .continuous)
-                .strokeBorder(Color.onSurfaceMediumEmphasis, lineWidth: 2)
+                .strokeBorder(Color.onSurfaceSecondary, lineWidth: 2)
         case .accentSurface:
             RoundedRectangle(cornerRadius: radius.rawValue,
                              style: .continuous)
@@ -163,7 +163,7 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
                     Circle()
                         .foregroundColor(Color.surfacePrimary)
                         .shadowElevaton(.z2)
-                    IconDeprecated(.checkMini, color: .onSurfaceHighEmphasis)
+                    IconDeprecated(.checkMini, color: .onSurfacePrimary)
                 }.frame(width: Space.large.rawValue, height: Space.large.rawValue)
                     .padding(.small)
             }

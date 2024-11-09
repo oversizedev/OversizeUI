@@ -33,12 +33,12 @@ public struct TextBox: View {
         VStack(alignment: textStackAlignment, spacing: textSpacing) {
             Text(title)
                 .font(titleFont)
-                .onSurfaceHighEmphasisForegroundColor()
+                .onSurfacePrimaryForeground()
 
             subtitle.map {
                 Text($0)
                     .font(subtitleFont)
-                    .onSurfaceMediumEmphasisForegroundColor()
+                    .onSurfaceSecondaryForeground()
             }
         }
         .multilineTextAlignment(multilineTextAlignment)

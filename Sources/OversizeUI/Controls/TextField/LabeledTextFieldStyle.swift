@@ -26,7 +26,7 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
             if fieldPlaceholderPosition == .adjacent {
                 Text(placeholder)
                     .subheadline(.medium)
-                    .foregroundColor(platform == .macOS ? .onSurfaceMediumEmphasis : .onSurfaceHighEmphasis)
+                    .foregroundColor(platform == .macOS ? .onSurfaceSecondary : .onSurfacePrimary)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .offset(x: platform == .macOS ? 4 : 0)
             }
@@ -34,7 +34,7 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
                 labelTextView
                 configuration
                     .headline(.medium)
-                    .foregroundColor(.onSurfaceHighEmphasis)
+                    .foregroundColor(.onSurfacePrimary)
                     .padding(padding)
                     .offset(y: fieldOffset)
                     .focused($isFocused)
@@ -216,7 +216,7 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
             if isFocused {
                 Text(placeholder)
                     .subheadline()
-                    .onSurfaceDisabledForegroundColor()
+                    .onSurfaceTertiaryForeground()
                     .opacity(0.7)
                 #if os(macOS)
                     .padding(.xSmall)
@@ -230,7 +230,7 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
             Text(placeholder)
                 .font(text.isEmpty ? .headline : .subheadline)
                 .fontWeight(text.isEmpty ? .medium : .semibold)
-                .onSurfaceDisabledForegroundColor()
+                .onSurfaceTertiaryForeground()
             #if os(macOS)
                 .padding(.xSmall)
                 .offset(y: text.isEmpty ? 0 : -10)

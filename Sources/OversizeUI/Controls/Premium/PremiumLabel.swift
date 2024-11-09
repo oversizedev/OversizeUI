@@ -33,11 +33,11 @@ public struct PremiumLabel: View {
                 if let image {
                     image
                         .renderingMode(.template)
-                        .foregroundColor(isMonohrom ? Color(red: 0.718, green: 0.325, blue: 0.459) : .onPrimaryHighEmphasis)
+                        .foregroundColor(isMonohrom ? Color(red: 0.718, green: 0.325, blue: 0.459) : .onPrimary)
                 }
                 Text(text)
                     .font(.system(size: fontSize, weight: .heavy))
-                    .foregroundColor(isMonohrom ? Color(red: 0.718, green: 0.325, blue: 0.459) : .onPrimaryHighEmphasis)
+                    .foregroundColor(isMonohrom ? Color(red: 0.718, green: 0.325, blue: 0.459) : .onPrimary)
             }
             .padding(.leading, leadingPadding)
             .padding(.trailing, trailingPadding)
@@ -47,7 +47,7 @@ public struct PremiumLabel: View {
             Group {
                 if isMonohrom {
                     RoundedRectangle(cornerRadius: radius, style: .continuous)
-                        .fill(Color.onPrimaryHighEmphasis)
+                        .fill(Color.onPrimary)
                 } else {
                     RoundedRectangle(cornerRadius: radius, style: .continuous)
                         .fill(LinearGradient(gradient: Gradient(colors: [

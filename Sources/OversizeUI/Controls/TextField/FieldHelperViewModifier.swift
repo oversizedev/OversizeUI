@@ -38,7 +38,7 @@ public struct FieldHelperViewModifier: ViewModifier {
     private var helperForegroundColor: Color {
         switch helperStyle {
         case .helperText:
-            Color.onSurfaceMediumEmphasis
+            Color.onSurfaceSecondary
         case .errorText:
             Color.error
         case .sussesText:

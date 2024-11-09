@@ -273,7 +273,7 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
         case .none:
             EmptyView()
         case .icon:
-            IconDeprecated(.xMini, color: .onSurfaceMediumEmphasis)
+            IconDeprecated(.xMini, color: .onSurfaceSecondary)
                 .background {
                     Circle()
                         .fill(Color.backgroundTertiary)
@@ -282,7 +282,7 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
         case let .label(text):
             Text(text)
                 .subheadline(.bold)
-                .foregroundColor(.onSurfaceHighEmphasis)
+                .foregroundColor(.onSurfacePrimary)
                 .padding(.horizontal, .xSmall)
                 .background {
                     RoundedRectangle(cornerRadius: .small, style: .continuous)
@@ -1055,11 +1055,11 @@ struct SeartchTextFieldStyle: TextFieldStyle {
         HStack(spacing: .xxSmall) {
             Image.Base.search
                 .renderingMode(.template)
-                .onSurfaceDisabledForegroundColor()
+                .onSurfaceTertiaryForeground()
 
             configuration
         }
-        .onSurfaceHighEmphasisForegroundColor()
+        .onSurfacePrimaryForeground()
         .callout(.semibold)
         .padding(.horizontal, 12)
         .padding(.vertical, .xSmall)
@@ -1068,7 +1068,7 @@ struct SeartchTextFieldStyle: TextFieldStyle {
                 cornerRadius: .medium,
                 style: .continuous
             )
-            .fill(Color.onSurfaceHighEmphasis.opacity(0.07))
+            .fill(Color.onSurfacePrimary.opacity(0.07))
         )
         .submitLabel(.search)
     }
@@ -1087,11 +1087,11 @@ struct SeartchTextFieldButtonStyle: ButtonStyle {
         HStack(spacing: .xxSmall) {
             Image.Base.search
                 .renderingMode(.template)
-                .foregroundColor(Color.onSurfaceDisabled.opacity(height > 20 ? opacity : 0))
+                .foregroundColor(Color.onSurfaceTertiary.opacity(height > 20 ? opacity : 0))
 
             configuration.label
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .foregroundColor(Color.onSurfaceDisabled.opacity(height > 20 ? opacity : 0))
+                .foregroundColor(Color.onSurfaceTertiary.opacity(height > 20 ? opacity : 0))
         }
 
         .callout(.semibold)
@@ -1102,7 +1102,7 @@ struct SeartchTextFieldButtonStyle: ButtonStyle {
                 cornerRadius: .medium,
                 style: .continuous
             )
-            .fill(Color.onSurfaceHighEmphasis.opacity(0.07))
+            .fill(Color.onSurfacePrimary.opacity(0.07))
         )
         .submitLabel(.search)
     }

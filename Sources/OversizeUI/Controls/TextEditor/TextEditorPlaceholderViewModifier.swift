@@ -25,7 +25,7 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
                 HStack {
                     Text(placeholder)
                         .subheadline(.medium)
-                        .foregroundColor(.onSurfaceHighEmphasis)
+                        .foregroundColor(.onSurfacePrimary)
                     Spacer()
                 }
             }
@@ -33,7 +33,7 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
             content
                 .padding(padding)
                 .headline(.medium)
-                .onSurfaceHighEmphasisForegroundColor()
+                .onSurfacePrimaryForeground()
                 .background {
                     ZStack {
                         RoundedRectangle(cornerRadius: fieldRadius, style: .continuous)
@@ -121,7 +121,7 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
             if text.isEmpty {
                 Text(placeholder)
                     .subheadline()
-                    .onSurfaceDisabledForegroundColor()
+                    .onSurfaceTertiaryForeground()
                     .opacity(0.7)
                     .padding(labelPadding)
             }
@@ -131,7 +131,7 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
             Text(placeholder)
                 .font(text.isEmpty ? .headline : .subheadline)
                 .fontWeight(text.isEmpty ? .medium : .semibold)
-                .onSurfaceDisabledForegroundColor()
+                .onSurfaceTertiaryForeground()
                 .opacity(0.7)
                 .padding(labelPadding)
                 .offset(y: text.isEmpty ? 0 : -6)

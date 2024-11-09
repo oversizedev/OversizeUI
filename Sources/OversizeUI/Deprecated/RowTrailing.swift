@@ -46,7 +46,7 @@ struct RowTrailing: View {
         case let .radio(isOn: isOn):
             ZStack {
                 Circle()
-                    .stroke(Color.onSurfaceDisabled, lineWidth: 4)
+                    .stroke(Color.onSurfaceTertiary, lineWidth: 4)
                     .frame(width: 24, height: 24)
                     .cornerRadius(12)
                     .opacity(isOn.wrappedValue ? 0 : 1)
@@ -64,7 +64,7 @@ struct RowTrailing: View {
         case let .checkbox(isOn: isOn):
             ZStack {
                 RoundedRectangle(cornerRadius: Radius.small, style: .continuous)
-                    .strokeBorder(Color.onSurfaceDisabled, lineWidth: 2.5)
+                    .strokeBorder(Color.onSurfaceTertiary, lineWidth: 2.5)
                     .frame(width: 24, height: 24)
                     .opacity(isOn.wrappedValue ? 0 : 1)
 
@@ -74,7 +74,7 @@ struct RowTrailing: View {
 
                 Image(systemName: "checkmark")
                     .font(.caption.weight(.black))
-                    .foregroundColor(.onPrimaryHighEmphasis)
+                    .foregroundColor(.onPrimary)
                     .opacity(isOn.wrappedValue ? 1 : 0)
             }
 
@@ -84,13 +84,13 @@ struct RowTrailing: View {
                     .labelsHidden()
 
                 Button(action: action ?? {}, label: {
-                    IconDeprecated(.chevronRight, color: .onSurfaceDisabled)
+                    IconDeprecated(.chevronRight, color: .onSurfaceTertiary)
                 })
             }
             .disabled(isPremiumOption && premiumStatus == false)
 
         case .arrowIcon:
-            IconDeprecated(.chevronRight, color: .onSurfaceDisabled)
+            IconDeprecated(.chevronRight, color: .onSurfaceTertiary)
 
         case let .timePicker(date: date):
             #if os(watchOS)
@@ -102,7 +102,7 @@ struct RowTrailing: View {
         case let .text(text):
             Text(text)
                 .subheadline()
-                .foregroundColor(.onSurfaceMediumEmphasis)
+                .foregroundColor(.onSurfaceSecondary)
 
         case let .button(text, action: action):
             #if os(tvOS)

@@ -14,7 +14,7 @@ public extension Image {
 }
 
 public extension Image {
-    func icon(_ color: Color = Color.onSurfaceHighEmphasis) -> some View {
+    func icon(_ color: Color = Color.onSurfacePrimary) -> some View {
         renderingMode(.template)
         #if os(macOS)
             .resizable()
@@ -28,7 +28,7 @@ public extension Image {
 }
 
 public extension Image {
-    func icon(_ color: Color = Color.onSurfaceHighEmphasis, size: IconSizes) -> some View {
+    func icon(_ color: Color = Color.onSurfacePrimary, size: IconSizes) -> some View {
         renderingMode(.template)
             .resizable()
             .frame(

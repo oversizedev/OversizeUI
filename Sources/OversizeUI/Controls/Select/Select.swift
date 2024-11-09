@@ -63,7 +63,7 @@ public struct Select<Element: Equatable, Content, Selection, Actions, ContentUna
                     Text(label)
                 }
                 Spacer()
-                IconDeprecated(.chevronDown, color: .onSurfaceHighEmphasis)
+                IconDeprecated(.chevronDown, color: .onSurfacePrimary)
             }
             .frame(minWidth: 0, maxWidth: .infinity)
             .padding()
@@ -80,7 +80,7 @@ public struct Select<Element: Equatable, Content, Selection, Actions, ContentUna
                     )
             )
             .headline(.medium)
-            .foregroundColor(.onSurfaceHighEmphasis)
+            .foregroundColor(.onSurfacePrimary)
             .sheet(isPresented: $showModal) {
                 #if os(iOS)
                 if #available(iOS 16.0, *) {
@@ -128,7 +128,7 @@ public struct Select<Element: Equatable, Content, Selection, Actions, ContentUna
                             content(data[index],
                                     selectedIndex == index)
                                 .headline()
-                                .onSurfaceHighEmphasisForegroundColor()
+                                .onSurfacePrimaryForeground()
                         }
                     }
                 }

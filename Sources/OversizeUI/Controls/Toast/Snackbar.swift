@@ -36,7 +36,7 @@ public struct Snackbar<Label, Actions>: View where Label: View, Actions: View {
             if let text {
                 Text(text)
                     .body(.medium)
-                    .foregroundColor(.onPrimaryHighEmphasis)
+                    .foregroundColor(.onPrimary)
 
             } else if let label {
                 label

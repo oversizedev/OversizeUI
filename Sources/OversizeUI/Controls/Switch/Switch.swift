@@ -72,7 +72,7 @@ public struct Switch<Label: View>: View {
                 if let subtitle, !subtitle.isEmpty {
                     Text(subtitle)
                         .subheadline()
-                        .foregroundColor(.onSurfaceMediumEmphasis)
+                        .foregroundColor(.onSurfaceSecondary)
                 }
             }
             .padding(contentInset)
@@ -88,9 +88,9 @@ public struct Switch<Label: View>: View {
 
     private var foregroundColor: Color {
         if isEnabled {
-            Color.onSurfaceHighEmphasis
+            Color.onSurfacePrimary
         } else {
-            Color.onSurfaceDisabled
+            Color.onSurfaceTertiary
         }
     }
 }

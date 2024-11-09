@@ -86,7 +86,7 @@ public struct ButtonStyleExtended: ButtonStyle {
             configuration.label
                 .body(true)
                 .padding(.horizontal, Space.small)
-                .foregroundColor(isEnabled ? .onPrimaryHighEmphasis : .onPrimaryDisabled)
+                .foregroundColor(isEnabled ? .onPrimary : .onPrimaryTertiary)
                 .frame(maxWidth: width == .full ? .infinity : width == .standart ? nil : size == .large ? Constants.heightL : Constants.heightM,
                        minHeight: size == .large ? ButtonStyleExtended.Constants.heightL : ButtonStyleExtended.Constants.heightM)
                 .background(
@@ -123,7 +123,7 @@ public struct ButtonStyleExtended: ButtonStyle {
             configuration.label
                 .body(true)
                 .padding(.horizontal, Space.small)
-                .foregroundColor(isEnabled ? Color.backgroundPrimary : .onPrimaryDisabled)
+                .foregroundColor(isEnabled ? Color.backgroundPrimary : .onPrimaryTertiary)
                 .frame(maxWidth: width == .full ? .infinity : width == .standart ? nil : size == .large ? Constants.heightL : Constants.heightM,
                        minHeight: size == .large ? ButtonStyleExtended.Constants.heightL : ButtonStyleExtended.Constants.heightM)
                 .background(
@@ -159,7 +159,7 @@ public struct ButtonStyleExtended: ButtonStyle {
             configuration.label
                 .body(true)
                 .padding(.horizontal, Space.small)
-                .foregroundColor(isEnabled ? .onSurfaceHighEmphasis : .onSurfaceDisabled)
+                .foregroundColor(isEnabled ? .onSurfacePrimary : .onSurfaceTertiary)
                 .frame(maxWidth: width == .full ? .infinity : width == .standart ? nil : size == .large ? Constants.heightL : Constants.heightM,
                        minHeight: size == .large ? ButtonStyleExtended.Constants.heightL : ButtonStyleExtended.Constants.heightM)
                 .background(
@@ -195,7 +195,7 @@ public struct ButtonStyleExtended: ButtonStyle {
             configuration.label
                 .body(true)
                 .padding(.horizontal, Space.small)
-                .foregroundColor(isEnabled ? .onBackgroundHighEmphasis : .onBackgroundDisabled)
+                .foregroundColor(isEnabled ? .onBackgroundPrimary : .onBackgroundTertiary)
                 .frame(maxWidth: width == .full ? .infinity : width == .standart ? nil : size == .large ? Constants.heightL : Constants.heightM,
                        minHeight: size == .large ? ButtonStyleExtended.Constants.heightL : ButtonStyleExtended.Constants.heightM)
                 .background(
@@ -228,7 +228,7 @@ public struct ButtonStyleExtended: ButtonStyle {
             configuration.label
                 .body(true)
                 .padding(.horizontal, Space.small)
-                .foregroundColor(isEnabled ? .onSurfaceHighEmphasis : .onSurfaceDisabled)
+                .foregroundColor(isEnabled ? .onSurfacePrimary : .onSurfaceTertiary)
                 .frame(maxWidth: width == .full ? .infinity : width == .standart ? nil : size == .large ? Constants.heightL : Constants.heightM,
                        minHeight: size == .large ? ButtonStyleExtended.Constants.heightL : ButtonStyleExtended.Constants.heightM)
                 .opacity(configuration.isPressed ? 0.9 : 1)

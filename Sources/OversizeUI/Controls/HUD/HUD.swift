@@ -46,7 +46,7 @@ public struct HUD<Title, Icon>: View where Title: View, Icon: View {
                 Text(text)
                     .body(.medium)
                 #if os(macOS)
-                    .foregroundColor(Color.onPrimaryHighEmphasis)
+                    .foregroundColor(Color.onPrimary)
                 #else
                     .foregroundColor(Color.onSurfaceHighEmphasis)
 
@@ -62,7 +62,7 @@ public struct HUD<Title, Icon>: View where Title: View, Icon: View {
         #if os(macOS)
             .background(
                 RoundedRectangle(cornerRadius: .small, style: .continuous)
-                    .foregroundColor(Color.onBackgroundHighEmphasis)
+                    .foregroundColor(Color.onBackgroundPrimary)
                     .shadowElevaton(.z2)
             )
         #else

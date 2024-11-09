@@ -91,7 +91,7 @@ public struct Surface<Label: View>: View {
                             cornerRadius: surfaceRadius,
                             style: .continuous
                         )
-                        .fill(Color.onSurfaceDisabled.opacity(0.04))
+                        .fill(Color.onSurfaceTertiary.opacity(0.04))
                     }
                 }
                 #else
@@ -291,7 +291,7 @@ struct Surface_Previews: PreviewProvider {
             Surface {
                 Text("Text")
                     .title3()
-                    .onSurfaceHighEmphasisForegroundColor()
+                    .onSurfacePrimaryForeground()
             }
             .surfaceStyle(.secondary)
             .previewLayout(.fixed(width: 414, height: 200))
@@ -299,7 +299,7 @@ struct Surface_Previews: PreviewProvider {
             Surface {
                 Text("Text")
                     .title3()
-                    .onSurfaceHighEmphasisForegroundColor()
+                    .onSurfacePrimaryForeground()
             }
             .surfaceStyle(.primary)
             .surfaceBorderColor(.surfaceSecondary)

@@ -63,7 +63,7 @@ public struct MultiSelect<Element: Equatable, Content, Selection, Actions, Conte
                     selectionView(selection)
                 }
                 Spacer()
-                IconDeprecated(.chevronDown, color: .onSurfaceHighEmphasis)
+                IconDeprecated(.chevronDown, color: .onSurfacePrimary)
             }
             .frame(minWidth: 0, maxWidth: .infinity)
             .padding()
@@ -80,7 +80,7 @@ public struct MultiSelect<Element: Equatable, Content, Selection, Actions, Conte
                     )
             )
             .headline()
-            .foregroundColor(.onSurfaceHighEmphasis)
+            .foregroundColor(.onSurfacePrimary)
             .sheet(isPresented: $showModal) {
                 #if os(iOS)
                 if #available(iOS 16.0, *) {

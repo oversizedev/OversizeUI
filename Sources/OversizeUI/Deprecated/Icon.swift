@@ -46,18 +46,18 @@ public struct IconDeprecated: View {
     public init(_ image: Image) {
         self.image = image
         size = .medium
-        color = Color.onBackgroundHighEmphasis
+        color = Color.onBackgroundPrimary
         name = nil
     }
 
     public init(_ name: IconsNames = .menu) {
         self.name = name
         size = .medium
-        color = Color.onBackgroundHighEmphasis
+        color = Color.onBackgroundPrimary
         image = nil
     }
 
-    public init(_ name: IconsNames = .menu, size: IconSizes = .medium, color: Color = .onBackgroundHighEmphasis) {
+    public init(_ name: IconsNames = .menu, size: IconSizes = .medium, color: Color = .onBackgroundPrimary) {
         self.name = name
         self.color = color
         self.size = size

@@ -108,7 +108,7 @@ public struct RowDeprecated: View {
                 }
 
                 if isShowArrowIcon {
-                    IconDeprecated(.chevronRight, color: .onSurfaceDisabled)
+                    IconDeprecated(.chevronRight, color: .onSurfaceTertiary)
                 }
             }
         }
@@ -124,11 +124,11 @@ public struct RowDeprecated: View {
         VStack(alignment: textAlignment, spacing: .xxxSmall) {
             Text(title)
                 .headline(.semibold)
-                .foregroundColor(.onSurfaceHighEmphasis)
+                .foregroundColor(.onSurfacePrimary)
             if let subtitle, !subtitle.isEmpty {
                 Text(subtitle)
                     .subheadline()
-                    .foregroundColor(.onSurfaceMediumEmphasis)
+                    .foregroundColor(.onSurfaceSecondary)
             }
         }
         .multilineTextAlignment(multilineTextAlignment)
@@ -141,7 +141,7 @@ public struct RowDeprecated: View {
                 сlearAction?()
             } label: {
                 ZStack {
-                    IconDeprecated(.xMini, color: .onSurfaceDisabled)
+                    IconDeprecated(.xMini, color: .onSurfaceTertiary)
                         .background(
                             RoundedRectangle(cornerRadius: .small, style: .continuous)
                                 .fillSurfaceSecondary()

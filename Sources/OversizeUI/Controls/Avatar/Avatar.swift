@@ -48,7 +48,7 @@ public struct Avatar: View {
     var background: AvatarBackgroundType = .color(.surfaceSecondary)
 
     /// Sets a custom text and image color for the Avatar.
-    var onBackgroundColor: Color = .onSurfaceMediumEmphasis
+    var onBackgroundColor: Color = .onSurfaceSecondary
 
     /// Creates and initializes a Avatar
     /// - Parameters:

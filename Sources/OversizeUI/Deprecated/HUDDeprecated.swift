@@ -212,12 +212,12 @@ public struct HUDContent: View {
             case .hud:
                 HStack {
 //                if let icon = hudState.icon {
-//                    IconDeprecated(icon, color: .onSurfaceHighEmphasis)
+//                    IconDeprecated(icon, color: .onSurfacePrimary)
 //                }
 
                     Text(title)
                         .body()
-                        .onSurfaceHighEmphasisForegroundColor()
+                        .onSurfacePrimaryForeground()
                 }
             case .alert:
                 VStack(spacing: .large) {
@@ -227,7 +227,7 @@ public struct HUDContent: View {
 
                     Text(title)
                         .title3()
-                        .onSurfaceHighEmphasisForegroundColor()
+                        .onSurfacePrimaryForeground()
                 }
                 .frame(minWidth: 225)
             }

@@ -62,7 +62,7 @@ public struct TextFieldExtended: View {
                     HStack {
                         Text(placeholder)
                             .subheadline()
-                            .foregroundColor(.onSurfaceHighEmphasis)
+                            .foregroundColor(.onSurfacePrimary)
                         Spacer()
                     }
                     .padding(.bottom, Space.xxSmall)
@@ -81,7 +81,7 @@ public struct TextFieldExtended: View {
                                       self.focused = focused
                                   })
                                   .headline()
-                                  .foregroundColor(.onSurfaceHighEmphasis)
+                                  .foregroundColor(.onSurfacePrimary)
                     }
 
                     if trallingImage != .none {
@@ -116,7 +116,7 @@ public struct TextFieldExtended: View {
                 if helperStyle == .helperText {
                     Text(helperText)
                         .subheadline()
-                        .foregroundColor(.onSurfaceMediumEmphasis)
+                        .foregroundColor(.onSurfaceSecondary)
                 } else if helperStyle == .errorText {
                     Text(helperText)
                         .subheadline()

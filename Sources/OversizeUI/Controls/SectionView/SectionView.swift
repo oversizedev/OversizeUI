@@ -106,9 +106,9 @@ public struct SectionView<Content: View>: View {
     private var titleColor: Color {
         switch titlePosition {
         case .inside:
-            .onSurfaceHighEmphasis
+            .onSurfacePrimary
         case .outside:
-            .onBackgroundHighEmphasis
+            .onBackgroundPrimary
         }
     }
 
@@ -141,7 +141,7 @@ public struct SectionView<Content: View>: View {
                 action()
             } label: {
                 IconDeprecated(.chevronRight)
-                    .iconColor(.onSurfaceMediumEmphasis)
+                    .iconColor(.onSurfaceSecondary)
                     .offset(y: titleButtonPosition == .leading ? 1.5 : 0)
             }
             .buttonStyle(.scale)

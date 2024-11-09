@@ -126,7 +126,7 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
         case .none:
             EmptyView()
         case .icon:
-            IconDeprecated(.xMini, color: .onSurfaceMediumEmphasis)
+            IconDeprecated(.xMini, color: .onSurfaceSecondary)
                 .background {
                     Circle()
                         .fill(Color.backgroundTertiary)
@@ -135,7 +135,7 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
         case let .label(text):
             Text(text)
                 .subheadline(.bold)
-                .foregroundColor(.onSurfaceHighEmphasis)
+                .foregroundColor(.onSurfacePrimary)
                 .padding(.horizontal, .xSmall)
                 .background {
                     RoundedRectangle(cornerRadius: .small, style: .continuous)

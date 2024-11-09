@@ -68,6 +68,6 @@ public struct RowButton: View {
             ? Color.link
             : style == .delete
             ? Color.error
-            : Color.onSurfaceHighEmphasis
+            : Color.onSurfacePrimary
     }
 }

@@ -8,7 +8,7 @@ import SwiftUI
 public enum RowLeadingType {
     case icon(_ name: IconsNames)
     case iconOnSurface(_ name: IconsNames)
-    case image(_ image: Image, color: Color? = .onSurfaceHighEmphasis)
+    case image(_ image: Image, color: Color? = .onSurfacePrimary)
     case imageOnSurface(_ image: Image, color: Color? = nil)
     case systemImage(_ imageName: String)
     case avatar(_ avatar: Avatar)
@@ -65,7 +65,7 @@ struct RowLeading: View {
 
         case let .systemImage(systemImage):
             Image(systemName: systemImage)
-                .foregroundColor(Color.onBackgroundHighEmphasis)
+                .foregroundColor(Color.onBackgroundPrimary)
                 .font(.system(size: 24))
                 .frame(width: 24, height: 24, alignment: .center)
 

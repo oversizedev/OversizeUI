@@ -77,7 +77,7 @@ public struct Checkbox<Label: View>: View {
     private func checkboxImage(isEnabled: Bool, isOn: Bool) -> some View {
         ZStack {
             RoundedRectangle(cornerRadius: Radius.small, style: .continuous)
-                .strokeBorder(Color.onSurfaceDisabled.opacity(isEnabled ? 1 : 0.5), lineWidth: 2.5)
+                .strokeBorder(Color.onSurfaceTertiary.opacity(isEnabled ? 1 : 0.5), lineWidth: 2.5)
                 .frame(width: 24, height: 24)
                 .opacity(isOn ? 0 : 1)
 
@@ -87,16 +87,16 @@ public struct Checkbox<Label: View>: View {
 
             Image(systemName: "checkmark")
                 .font(.caption.weight(.black))
-                .foregroundColor(.onPrimaryHighEmphasis.opacity(isEnabled ? 1 : 0.5))
+                .foregroundColor(.onPrimary.opacity(isEnabled ? 1 : 0.5))
                 .opacity(isOn ? 1 : 0)
         }
     }
 
     private var foregroundColor: Color {
         if isEnabled {
-            Color.onSurfaceHighEmphasis
+            Color.onSurfacePrimary
         } else {
-            Color.onSurfaceDisabled
+            Color.onSurfaceTertiary
         }
     }
 }

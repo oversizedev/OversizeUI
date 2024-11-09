@@ -19,17 +19,17 @@ public struct RowLabelStyle: LabelStyle {
         HStack(spacing: .xSmall) {
             configuration.icon
                 .headline()
-                .foregroundColor(.onSurfaceHighEmphasis)
+                .foregroundColor(.onSurfacePrimary)
 
             VStack(alignment: textAlignment, spacing: .xxxSmall) {
                 configuration.title
                     .headline(.semibold)
-                    .foregroundColor(.onSurfaceHighEmphasis)
+                    .foregroundColor(.onSurfacePrimary)
 
                 if let subtitle, !subtitle.isEmpty {
                     Text(subtitle)
                         .subheadline()
-                        .foregroundColor(.onSurfaceMediumEmphasis)
+                        .foregroundColor(.onSurfaceSecondary)
                 }
             }
         }

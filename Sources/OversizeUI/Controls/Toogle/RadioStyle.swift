@@ -12,13 +12,13 @@ public struct RadioStyle: ToggleStyle {
         HStack {
             configuration.label
                 .headline(.semibold)
-                .foregroundColor(.onSurfaceHighEmphasis)
+                .foregroundColor(.onSurfacePrimary)
 
             Spacer()
 
             ZStack {
                 Circle()
-                    .stroke(Color.onSurfaceDisabled, lineWidth: 4)
+                    .stroke(Color.onSurfaceTertiary, lineWidth: 4)
                     .frame(width: 24, height: 24)
                     .cornerRadius(12)
                     .opacity(configuration.isOn ? 0 : 1)

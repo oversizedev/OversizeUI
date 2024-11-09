@@ -132,7 +132,7 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
 
                 if isShowArrowIcon {
                     Image.Base.chevronRight
-                        .icon(.onSurfaceDisabled)
+                        .icon(.onSurfaceTertiary)
                 }
             }
         }
@@ -160,7 +160,7 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
                 сlearAction?()
             } label: {
                 ZStack {
-                    IconDeprecated(.xMini, color: .onSurfaceDisabled)
+                    IconDeprecated(.xMini, color: .onSurfaceTertiary)
                         .background(
                             RoundedRectangle(cornerRadius: .small, style: .continuous)
                                 .fillSurfaceSecondary()
@@ -183,7 +183,7 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
         if let textColor {
             textColor
         } else {
-            Color.onSurfaceHighEmphasis
+            Color.onSurfacePrimary
         }
     }
 
@@ -191,7 +191,7 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
         if let textColor {
             textColor
         } else {
-            Color.onSurfaceMediumEmphasis
+            Color.onSurfaceSecondary
         }
     }
 

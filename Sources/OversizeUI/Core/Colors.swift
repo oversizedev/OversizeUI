@@ -15,17 +15,17 @@ public extension Color {
     // MARK: - On Primary
 
     /// On Primary High Emphasis
-    static var onPrimaryHighEmphasis: Color {
+    static var onPrimary: Color {
         Color("OnPrimaryHighEmphasis", bundle: .module)
     }
 
     /// On Primary Medium Emphasis
-    static var onPrimaryMediumEmphasis: Color {
+    static var onPrimarySecondary: Color {
         Color("OnPrimaryMediumEmphasis", bundle: .module)
     }
 
     /// On Primary Disabled
-    static var onPrimaryDisabled: Color {
+    static var onPrimaryTertiary: Color {
         Color("OnPrimaryDisabled", bundle: .module)
     }
 
@@ -49,17 +49,17 @@ public extension Color {
     // MARK: - On Background
 
     /// On Background High Emphasis
-    static var onBackgroundHighEmphasis: Color {
+    static var onBackgroundPrimary: Color {
         Color("OnBackgroundHighEmphasis", bundle: .module)
     }
 
     /// On BackgroundMedium Emphasis
-    static var onBackgroundMediumEmphasis: Color {
+    static var onBackgroundSecondary: Color {
         Color("OnBackgroundMediumEmphasis", bundle: .module)
     }
 
     /// On Background Disabled
-    static var onBackgroundDisabled: Color {
+    static var onBackgroundTertiary: Color {
         Color("OnBackgroundDisabled", bundle: .module)
     }
 
@@ -81,17 +81,17 @@ public extension Color {
     }
 
     /// On Surface High Emphasis
-    static var onSurfaceHighEmphasis: Color {
+    static var onSurfacePrimary: Color {
         Color("OnSurfaceHighEmphasis", bundle: .module)
     }
 
     /// On Surface Medium Emphasis
-    static var onSurfaceMediumEmphasis: Color {
+    static var onSurfaceSecondary: Color {
         Color("OnSurfaceMediumEmphasis", bundle: .module)
     }
 
     /// On Surface Disabled
-    static var onSurfaceDisabled: Color {
+    static var onSurfaceTertiary: Color {
         Color("OnSurfaceDisabled", bundle: .module)
     }
 
@@ -126,87 +126,87 @@ public extension Color {
 // MARK: - Foreground Color Extension
 
 public extension View {
-    nonisolated func onPrimaryHighEmphasisForegroundColor() -> some View {
-        foregroundColor(Color.onPrimaryHighEmphasis)
+    nonisolated func onPrimaryForeground() -> some View {
+        foregroundColor(Color.onPrimary)
     }
 
-    nonisolated func onPrimaryMediumEmphasisForegroundColor() -> some View {
-        foregroundColor(Color.onPrimaryMediumEmphasis)
+    nonisolated func onPrimarySecondaryForeground() -> some View {
+        foregroundColor(Color.onPrimarySecondary)
     }
 
-    nonisolated func onPrimaryDisabledForegroundColor() -> some View {
-        foregroundColor(Color.onPrimaryDisabled)
+    nonisolated func onPrimaryTertiaryForeground() -> some View {
+        foregroundColor(Color.onPrimaryTertiary)
     }
 
-    nonisolated func backgroundPrimaryForegroundColor() -> some View {
+    nonisolated func backgroundPrimary() -> some View {
         foregroundColor(Color.backgroundPrimary)
     }
 
-    nonisolated func backgroundSecondaryForegroundColor() -> some View {
+    nonisolated func backgroundSecondaryForeground() -> some View {
         foregroundColor(Color.backgroundSecondary)
     }
 
-    nonisolated func backgroundTertiaryForegroundColor() -> some View {
+    nonisolated func backgroundTertiaryForeground() -> some View {
         foregroundColor(Color.backgroundTertiary)
     }
 
-    nonisolated func onBackgroundHighEmphasisForegroundColor() -> some View {
-        foregroundColor(Color.onBackgroundHighEmphasis)
+    nonisolated func onBackgroundPrimaryForeground() -> some View {
+        foregroundColor(Color.onBackgroundPrimary)
     }
 
-    nonisolated func onBackgroundMediumEmphasisForegroundColor() -> some View {
-        foregroundColor(Color.onBackgroundMediumEmphasis)
+    nonisolated func onBackgroundSecondaryForeground() -> some View {
+        foregroundColor(Color.onBackgroundSecondary)
     }
 
-    nonisolated func onBackgroundDisabledForegroundColor() -> some View {
-        foregroundColor(Color.onBackgroundDisabled)
+    nonisolated func onBackgroundTertiaryForeground() -> some View {
+        foregroundColor(Color.onBackgroundTertiary)
     }
 
-    nonisolated func surfacePrimaryForegroundColor() -> some View {
+    nonisolated func surfacePrimaryForeground() -> some View {
         foregroundColor(Color.surfacePrimary)
     }
 
-    nonisolated func surfaceSecondaryForegroundColor() -> some View {
+    nonisolated func surfaceSecondaryForeground() -> some View {
         foregroundColor(Color.surfaceSecondary)
     }
 
-    nonisolated func surfaceTertiaryForegroundColor() -> some View {
+    nonisolated func surfaceTertiaryForeground() -> some View {
         foregroundColor(Color.surfaceTertiary)
     }
 
-    nonisolated func onSurfaceHighEmphasisForegroundColor() -> some View {
-        foregroundColor(Color.onSurfaceHighEmphasis)
+    nonisolated func onSurfacePrimaryForeground() -> some View {
+        foregroundColor(Color.onSurfacePrimary)
     }
 
-    nonisolated func onSurfaceMediumEmphasisForegroundColor() -> some View {
-        foregroundColor(Color.onSurfaceMediumEmphasis)
+    nonisolated func onSurfaceSecondaryForeground() -> some View {
+        foregroundColor(Color.onSurfaceSecondary)
     }
 
-    nonisolated func onSurfaceDisabledForegroundColor() -> some View {
-        foregroundColor(Color.onSurfaceDisabled)
+    nonisolated func onSurfaceTertiaryForeground() -> some View {
+        foregroundColor(Color.onSurfaceTertiary)
     }
 
-    nonisolated func accentForegroundColor() -> some View {
+    nonisolated func accentForeground() -> some View {
         foregroundColor(Color.accentColor)
     }
 
-    nonisolated func errorForegroundColor() -> some View {
+    nonisolated func errorForeground() -> some View {
         foregroundColor(Color.error)
     }
 
-    nonisolated func successForegroundColor() -> some View {
+    nonisolated func successForeground() -> some View {
         foregroundColor(Color.success)
     }
 
-    nonisolated func warningForegroundColor() -> some View {
+    nonisolated func warningForeground() -> some View {
         foregroundColor(Color.warning)
     }
 
-    nonisolated func linkForegroundColor() -> some View {
+    nonisolated func linkForeground() -> some View {
         foregroundColor(Color.link)
     }
 
-    nonisolated func borderForegroundColor() -> some View {
+    nonisolated func borderForeground() -> some View {
         foregroundColor(Color.border)
     }
 }
@@ -214,16 +214,16 @@ public extension View {
 // MARK: - Fill Color Extension
 
 public extension Shape {
-    nonisolated func fillOnPrimaryHighEmphasis() -> some View {
-        fill(Color.onPrimaryHighEmphasis)
+    nonisolated func fillOnPrimary() -> some View {
+        fill(Color.onPrimary)
     }
 
-    nonisolated func fillOnPrimaryMediumEmphasis() -> some View {
-        fill(Color.onPrimaryMediumEmphasis)
+    nonisolated func fillOnPrimarySecondary() -> some View {
+        fill(Color.onPrimarySecondary)
     }
 
-    nonisolated func fillOnPrimaryDisabled() -> some View {
-        fill(Color.onPrimaryDisabled)
+    nonisolated func fillOnPrimaryTertiary() -> some View {
+        fill(Color.onPrimaryTertiary)
     }
 
     nonisolated func fillAccent() -> some View {
@@ -242,16 +242,16 @@ public extension Shape {
         fill(Color.backgroundTertiary)
     }
 
-    nonisolated func fillOnBackgroundHighEmphasis() -> some View {
-        fill(Color.onBackgroundHighEmphasis)
+    nonisolated func fillOnBackgroundPrimary() -> some View {
+        fill(Color.onBackgroundPrimary)
     }
 
-    nonisolated func fillOnBackgroundMediumEmphasis() -> some View {
-        fill(Color.onBackgroundMediumEmphasis)
+    nonisolated func fillOnBackgroundSecondary() -> some View {
+        fill(Color.onBackgroundSecondary)
     }
 
-    nonisolated func fillOnBackgroundDisabled() -> some View {
-        fill(Color.onBackgroundDisabled)
+    nonisolated func fillOnBackgroundTertiary() -> some View {
+        fill(Color.onBackgroundTertiary)
     }
 
     nonisolated func fillSurfacePrimary() -> some View {
@@ -266,16 +266,16 @@ public extension Shape {
         fill(Color.surfaceTertiary)
     }
 
-    nonisolated func fillOnSurfaceHighEmphasis() -> some View {
-        fill(Color.onSurfaceHighEmphasis)
+    nonisolated func fillOnSurfacePrimary() -> some View {
+        fill(Color.onSurfacePrimary)
     }
 
-    nonisolated func fillOnSurfaceMediumEmphasis() -> some View {
-        fill(Color.onSurfaceMediumEmphasis)
+    nonisolated func fillOnSurfaceSecondary() -> some View {
+        fill(Color.onSurfaceSecondary)
     }
 
-    nonisolated func fillOnSurfaceDisabled() -> some View {
-        fill(Color.onSurfaceDisabled)
+    nonisolated func fillOnSurfaceTertiary() -> some View {
+        fill(Color.onSurfaceTertiary)
     }
 
     nonisolated func fillError() -> some View {
@@ -300,62 +300,62 @@ public extension Shape {
 }
 
 public extension View {
-    @available(*, deprecated, renamed: "onPrimaryHighEmphasisForegroundColor")
+    @available(*, deprecated, renamed: "onPrimaryForeground")
     nonisolated func foregroundOnPrimaryHighEmphasis() -> some View {
-        foregroundColor(Color.onPrimaryHighEmphasis)
+        foregroundColor(Color.onPrimary)
     }
 
-    @available(*, deprecated, renamed: "onPrimaryMediumEmphasisForegroundColor")
+    @available(*, deprecated, renamed: "onPrimarySecondaryForeground")
     nonisolated func foregroundOnPrimaryMediumEmphasis() -> some View {
-        foregroundColor(Color.onPrimaryMediumEmphasis)
+        foregroundColor(Color.onPrimarySecondary)
     }
 
-    @available(*, deprecated, renamed: "onPrimaryDisabledForegroundColor")
+    @available(*, deprecated, renamed: "onPrimaryTertiaryForeground")
     nonisolated func foregroundOnPrimaryDisabled() -> some View {
-        foregroundColor(Color.onPrimaryDisabled)
+        foregroundColor(Color.onPrimaryTertiary)
     }
 
-    @available(*, deprecated, renamed: "accentForegroundColor")
+    @available(*, deprecated, renamed: "accentForeground")
     nonisolated func foregroundAccent() -> some View {
         foregroundColor(Color.accentColor)
     }
 
-    @available(*, deprecated, renamed: "backgroundPrimaryForegroundColor")
+    @available(*, deprecated, renamed: "backgroundPrimary")
     nonisolated func foregroundBackgroundPrimary() -> some View {
         foregroundColor(Color.backgroundPrimary)
     }
 
-    @available(*, deprecated, renamed: "backgroundSecondaryForegroundColor")
+    @available(*, deprecated, renamed: "backgroundSecondaryForeground")
     nonisolated func foregroundBackgroundSecondary() -> some View {
         foregroundColor(Color.backgroundSecondary)
     }
 
-    @available(*, deprecated, renamed: "backgroundTertiaryForegroundColor")
+    @available(*, deprecated, renamed: "backgroundTertiaryForeground")
     nonisolated func foregroundBackgroundTertiary() -> some View {
         foregroundColor(Color.backgroundTertiary)
     }
 
-    @available(*, deprecated, renamed: "onBackgroundHighEmphasisForegroundColor")
+    @available(*, deprecated, renamed: "onBackgroundPrimaryForeground")
     nonisolated func foregroundOnBackgroundHighEmphasis() -> some View {
-        foregroundColor(Color.onBackgroundHighEmphasis)
+        foregroundColor(Color.onBackgroundPrimary)
     }
 
-    @available(*, deprecated, renamed: "onBackgroundMediumEmphasisForegroundColor")
+    @available(*, deprecated, renamed: "onBackgroundSecondaryForeground")
     nonisolated func foregroundOnBackgroundMediumEmphasis() -> some View {
-        foregroundColor(Color.onBackgroundMediumEmphasis)
+        foregroundColor(Color.onBackgroundSecondary)
     }
 
-    @available(*, deprecated, renamed: "onBackgroundDisabledForegroundColor")
+    @available(*, deprecated, renamed: "onBackgroundTertiaryForeground")
     nonisolated func foregroundOnBackgroundDisabled() -> some View {
-        foregroundColor(Color.onBackgroundDisabled)
+        foregroundColor(Color.onBackgroundTertiary)
     }
 
-    @available(*, deprecated, renamed: "surfacePrimaryForegroundColor")
+    @available(*, deprecated, renamed: "surfacePrimaryForeground")
     nonisolated func foregroundSurfacePrimary() -> some View {
         foregroundColor(Color.surfacePrimary)
     }
 
-    @available(*, deprecated, renamed: "surfaceSecondaryForegroundColor")
+    @available(*, deprecated, renamed: "surfaceSecondaryForeground")
     nonisolated func foregroundSurfaceSecondary() -> some View {
         foregroundColor(Color.surfaceSecondary)
     }
@@ -367,40 +367,40 @@ public extension View {
 
     @available(*, deprecated, renamed: "onSurfaceHighEmphasisForegroundColor")
     nonisolated func foregroundOnSurfaceHighEmphasis() -> some View {
-        foregroundColor(Color.onSurfaceHighEmphasis)
+        foregroundColor(Color.onSurfacePrimary)
     }
 
-    @available(*, deprecated, renamed: "onSurfaceMediumEmphasisForegroundColor")
+    @available(*, deprecated, renamed: "onSurfaceSecondaryForeground")
     nonisolated func foregroundOnSurfaceMediumEmphasis() -> some View {
-        foregroundColor(Color.onSurfaceMediumEmphasis)
+        foregroundColor(Color.onSurfaceSecondary)
     }
 
-    @available(*, deprecated, renamed: "onSurfaceDisabledForegroundColor")
+    @available(*, deprecated, renamed: "onSurfaceTertiaryForeground")
     nonisolated func foregroundOnSurfaceDisabled() -> some View {
-        foregroundColor(Color.onSurfaceDisabled)
+        foregroundColor(Color.onSurfaceTertiary)
     }
 
-    @available(*, deprecated, renamed: "errorForegroundColor")
+    @available(*, deprecated, renamed: "errorForeground")
     nonisolated func foregroundError() -> some View {
         foregroundColor(Color.error)
     }
 
-    @available(*, deprecated, renamed: "successForegroundColor")
+    @available(*, deprecated, renamed: "successForeground")
     nonisolated func foregroundSuccess() -> some View {
         foregroundColor(Color.success)
     }
 
-    @available(*, deprecated, renamed: "warningForegroundColor")
+    @available(*, deprecated, renamed: "warningForeground")
     nonisolated func foregroundWarning() -> some View {
         foregroundColor(Color.warning)
     }
 
-    @available(*, deprecated, renamed: "linkForegroundColor")
+    @available(*, deprecated, renamed: "linkForeground")
     nonisolated func foregroundLink() -> some View {
         foregroundColor(Color.link)
     }
 
-    @available(*, deprecated, renamed: "borderForegroundColor")
+    @available(*, deprecated, renamed: "borderForeground")
     nonisolated func foregroundBorder() -> some View {
         foregroundColor(Color.border)
     }
@@ -410,16 +410,16 @@ struct Color_Previews: PreviewProvider {
     static var previews: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("Accent")
-                .foregroundColor(Color.onPrimaryMediumEmphasis)
+                .foregroundColor(Color.onPrimarySecondary)
                 .padding()
 
             HStack {
                 Rectangle().size(CGSize(width: 50, height: 50))
-                    .foregroundColor(Color.onPrimaryHighEmphasis)
+                    .foregroundColor(Color.onPrimary)
                 Rectangle().size(CGSize(width: 50, height: 50))
-                    .foregroundColor(Color.onPrimaryMediumEmphasis)
+                    .foregroundColor(Color.onPrimarySecondary)
                 Rectangle().size(CGSize(width: 50, height: 50))
-                    .foregroundColor(Color.onPrimaryDisabled)
+                    .foregroundColor(Color.onPrimaryTertiary)
                 Rectangle().size(CGSize(width: 50, height: 50))
             }
             .padding(.horizontal)
