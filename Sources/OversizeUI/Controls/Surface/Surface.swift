@@ -199,7 +199,7 @@ public struct SurfaceButtonStyle: ButtonStyle {
     public func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
         #if os(macOS)
-            .scaleEffect(configuration.isPressed ? 0.98 : 1)
+            .scaleEffect(configuration.isPressed ? 0.99 : 1)
         #else
             .scaleEffect(configuration.isPressed ? 0.96 : 1)
         #endif

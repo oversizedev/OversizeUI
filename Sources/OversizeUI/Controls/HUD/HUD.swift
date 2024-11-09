@@ -197,9 +197,9 @@ public extension View {
 }
 #else
 public extension View {
-    func hud(_ text: String, isPresented: Binding<Bool>) -> some View {
+    func hud(_ text: String, autoHide: Bool = true, isPresented: Binding<Bool>) -> some View {
         overlay(alignment: .top) {
-            HUD(text, isPresented: isPresented)
+            HUD(text, autoHide: autoHide, isPresented: isPresented)
         }
     }
 

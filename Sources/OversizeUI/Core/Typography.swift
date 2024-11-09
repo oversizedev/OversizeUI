@@ -44,26 +44,26 @@ public struct Typography: ViewModifier {
     #if os(macOS)
     private var lineHeight: CGFloat {
         switch fontStyle {
-        case .largeTitle: return 32
-        case .title: return 28
-        case .title2: return 24
-        case .title3: return 20
-        case .headline: return 16
-        case .subheadline: return 20
-        case .body, .callout, .footnote, .caption, .caption2: return 16
-        default: return 16
+        case .largeTitle: 32
+        case .title: 28
+        case .title2: 24
+        case .title3: 20
+        case .headline: 16
+        case .subheadline: 20
+        case .body, .callout, .footnote, .caption, .caption2: 16
+        default: 16
         }
     }
     #else
     private var lineHeight: CGFloat {
         switch fontStyle {
-        case .largeTitle: return 44
-        case .title: return 36
-        case .title2: return 28
-        case .title3, .headline: return 24
-        case .subheadline, .body: return 20
-        case .callout, .footnote, .caption, .caption2: return 16
-        default: return 16
+        case .largeTitle: 44
+        case .title: 36
+        case .title2: 28
+        case .title3, .headline: 24
+        case .subheadline, .body: 20
+        case .callout, .footnote, .caption, .caption2: 16
+        default: 16
         }
     }
     #endif
@@ -71,13 +71,13 @@ public struct Typography: ViewModifier {
     private var fontDesign: Font.Design {
         switch fontStyle {
         case .largeTitle, .title, .title2, .title3, .headline, .subheadline:
-            return theme.fontTitle.system
+            theme.fontTitle.system
         case .body:
-            return theme.fontParagraph.system
+            theme.fontParagraph.system
         case .caption, .caption2, .footnote, .callout:
-            return theme.fontOverline.system
+            theme.fontOverline.system
         default:
-            return .default
+            .default
         }
     }
 
