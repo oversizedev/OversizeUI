@@ -31,12 +31,14 @@ public struct TextBox: View {
 
     public var body: some View {
         VStack(alignment: textStackAlignment, spacing: textSpacing) {
-            titleText
+            Text(title)
+                .font(titleFont)
+                .onSurfacePrimaryForeground()
 
-            if let subtitle {
-                Text(subtitle)
-                    .body(.medium)
-                    .foregroundColor(.onSurfaceMediumEmphasis)
+            subtitle.map {
+                Text($0)
+                    .font(subtitleFont)
+                    .onSurfaceSecondaryForeground()
             }
         }
         .multilineTextAlignment(multilineTextAlignment)
@@ -68,21 +70,26 @@ public struct TextBox: View {
         }
     }
 
-    private var titleText: some View {
-        Group {
-            switch size {
-            case .small:
-                Text(title)
-                    .headline(.semibold)
-            case .medium:
-                Text(title)
-                    .title2(true)
-            case .large:
-                Text(title)
-                    .title(true)
-            }
+    private var titleFont: Font {
+        switch size {
+        case .small:
+            .headline.weight(.semibold)
+
+        case .medium:
+            .title2.weight(.bold)
+
+        case .large:
+            .title.weight(.semibold)
         }
-        .onSurfaceHighEmphasisForegroundColor()
+    }
+
+    private var subtitleFont: Font {
+        switch size {
+        case .small:
+            .callout.weight(.regular)
+        default:
+            .body.weight(.medium)
+        }
     }
 
     public func textBoxSize(_ size: TextBoxSize) -> TextBox {

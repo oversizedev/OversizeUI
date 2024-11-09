@@ -133,17 +133,17 @@ public struct BarButton: View {
         case let .primary(text, _):
             Text(text)
         case .closeAction:
-            IconDeprecated(.xMini, color: .onSurfaceMediumEmphasis)
+            IconDeprecated(.xMini, color: .onSurfaceSecondary)
         case .backAction:
-            IconDeprecated(.arrowLeft, color: .onSurfaceMediumEmphasis)
+            IconDeprecated(.arrowLeft, color: .onSurfaceSecondary)
         case let .disabled(text):
             Text(text)
         case let .image(image, _):
             image
                 .renderingMode(.template)
-                .onSurfaceHighEmphasisForegroundColor()
+                .onSurfacePrimaryForeground()
         case let .icon(icon, _):
-            IconDeprecated(icon, color: .onSurfaceMediumEmphasis)
+            IconDeprecated(icon, color: .onSurfaceSecondary)
         }
     }
 }

@@ -25,20 +25,18 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
                 HStack {
                     Text(placeholder)
                         .subheadline(.medium)
-                        .foregroundColor(.onSurfaceHighEmphasis)
+                        .foregroundColor(.onSurfacePrimary)
                     Spacer()
                 }
             }
 
             content
-                .padding(.horizontal, .xSmall)
-                .padding(.top, topInputPadding)
-                .padding(.bottom, 10)
+                .padding(padding)
                 .headline(.medium)
-                .onSurfaceHighEmphasisForegroundColor()
+                .onSurfacePrimaryForeground()
                 .background {
                     ZStack {
-                        RoundedRectangle(cornerRadius: .medium, style: .continuous)
+                        RoundedRectangle(cornerRadius: fieldRadius, style: .continuous)
                             .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
                         overlay
                     }
@@ -53,12 +51,66 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
         }
     }
 
-    var topInputPadding: CGFloat {
+    private var fieldRadius: Radius {
+        #if os(macOS)
+        return .xSmall
+        #else
+        return .medium
+        #endif
+    }
+
+    var padding: EdgeInsets {
         switch fieldPlaceholderPosition {
         case .default, .adjacent:
-            10
+            #if os(macOS)
+            return .init(
+                top: 10,
+                leading: Space.xSmall.rawValue,
+                bottom: 10,
+                trailing: Space.xSmall.rawValue
+            )
+            #else
+            return .init(
+                top: 10,
+                leading: Space.xSmall.rawValue,
+                bottom: 10,
+                trailing: Space.xSmall.rawValue
+            )
+            #endif
         case .overInput:
-            text.isEmpty ? 8 : 22
+            #if os(macOS)
+            return .init(
+                top: text.isEmpty ? 13 : 22,
+                leading: Space.xxSmall.rawValue,
+                bottom: 10,
+                trailing: Space.xxSmall.rawValue
+            )
+            #else
+            return .init(
+                top: text.isEmpty ? 8 : 22,
+                leading: Space.xSmall.rawValue,
+                bottom: 10,
+                trailing: Space.xSmall.rawValue
+            )
+
+            #endif
+        }
+    }
+
+    var labelPadding: EdgeInsets {
+        switch fieldPlaceholderPosition {
+        case .default, .adjacent:
+            #if os(macOS)
+            return .init(Space.xSmall)
+            #else
+            return .init(Space.xSmall)
+            #endif
+        case .overInput:
+            #if os(macOS)
+            return .init(horizontal: Space.xSmall, vertical: Space.xSmall)
+            #else
+            return .init(Space.xxSmall)
+            #endif
         }
     }
 
@@ -69,9 +121,9 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
             if text.isEmpty {
                 Text(placeholder)
                     .subheadline()
-                    .onSurfaceDisabledForegroundColor()
+                    .onSurfaceTertiaryForeground()
                     .opacity(0.7)
-                    .padding(.small)
+                    .padding(labelPadding)
             }
         case .adjacent:
             EmptyView()
@@ -79,16 +131,16 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
             Text(placeholder)
                 .font(text.isEmpty ? .headline : .subheadline)
                 .fontWeight(text.isEmpty ? .medium : .semibold)
-                .onSurfaceDisabledForegroundColor()
+                .onSurfaceTertiaryForeground()
                 .opacity(0.7)
-                .padding(.small)
+                .padding(labelPadding)
                 .offset(y: text.isEmpty ? 0 : -6)
         }
     }
 
     @ViewBuilder
     var overlay: some View {
-        RoundedRectangle(cornerRadius: Radius.medium, style: .continuous)
+        RoundedRectangle(cornerRadius: fieldRadius, style: .continuous)
             .stroke(overlayBorderColor, lineWidth: isFocused ? 2 : CGFloat(theme.borderSize))
     }
 
@@ -123,10 +175,12 @@ struct TextEditor_preview: PreviewProvider {
             TextEditor(text: .constant(""))
                 .textEditorPlaceholder("Complaint", text: .constant(""))
                 .fieldLabelPosition(.overInput)
+                .fieldPosition(.top)
 
             TextEditor(text: .constant("Text"))
                 .textEditorPlaceholder("Complaint", text: .constant("Text"))
                 .fieldLabelPosition(.overInput)
+                .fieldPosition(.bottom)
 
             Spacer()
         }

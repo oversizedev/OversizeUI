@@ -8,36 +8,38 @@ import SwiftUI
 import UIKit
 #endif
 
-public enum Platform {
-    case iPhone, iPad, mac, tv, watch, vision, carPlay, other
+public enum Platform: Sendable {
+    case iPhone, iPadOS, macOS, tvOS, watchOS, visionOS, carPlay, other
 }
 
 private struct PlatformKey: EnvironmentKey {
     static let defaultValue: Platform = {
         #if os(macOS) || targetEnvironment(macCatalyst)
-        return .mac
+        return .macOS
         #elseif os(watchOS)
-        return .watch
+        return .watchOS
         #elseif os(visionOS)
         return .vision
         #elseif canImport(UIKit)
-        switch UIDevice.current.userInterfaceIdiom {
-        case .phone:
-            return .iPhone
-        case .pad:
-            return .iPad
-        case .tv:
-            return .tv
-        case .carPlay:
-            return .carPlay
-        case .mac:
-            return .mac
-        case .vision:
-            return .vision
-        case .unspecified:
-            return .other
-        @unknown default:
-            return .other
+        MainActor.assumeIsolated {
+            switch UIDevice.current.userInterfaceIdiom {
+            case .phone:
+                return .iPhone
+            case .pad:
+                return .iPadOS
+            case .tv:
+                return .tvOS
+            case .carPlay:
+                return .carPlay
+            case .mac:
+                return .macOS
+            case .vision:
+                return .visionOS
+            case .unspecified:
+                return .other
+            @unknown default:
+                return .other
+            }
         }
         #else
         return .other

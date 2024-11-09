@@ -4,6 +4,8 @@ import SwiftUI
 public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLabel>: View
     where Content: View, Header: View, LeadingBar: View, TrailingBar: View, TopToolbar: View, TitleLabel: View
 {
+    @Environment(\.platform) var platform
+
     public typealias ScrollAction = (_ offset: CGPoint, _ headerVisibleRatio: CGFloat) -> Void
 
     private let title: String?
@@ -103,7 +105,7 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
     var scrollView: some View {
         GeometryReader { proxy in
             ScrollViewWithOffsetTracking(
-                showsIndicators: false,
+                showsIndicators: platform == .macOS,
                 onScroll: handleOffset
             ) {
                 VStack(spacing: 0) {
@@ -271,7 +273,7 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
         case .none:
             EmptyView()
         case .icon:
-            IconDeprecated(.xMini, color: .onSurfaceMediumEmphasis)
+            IconDeprecated(.xMini, color: .onSurfaceSecondary)
                 .background {
                     Circle()
                         .fill(Color.backgroundTertiary)
@@ -280,7 +282,7 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
         case let .label(text):
             Text(text)
                 .subheadline(.bold)
-                .foregroundColor(.onSurfaceHighEmphasis)
+                .foregroundColor(.onSurfacePrimary)
                 .padding(.horizontal, .xSmall)
                 .background {
                     RoundedRectangle(cornerRadius: .small, style: .continuous)
@@ -430,7 +432,7 @@ public extension Page where LeadingBar == EmptyView, TitleLabel == EmptyView, He
         leadingBar = nil
         titleLabel = nil
         header = nil
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -452,7 +454,7 @@ public extension Page where TrailingBar == EmptyView, TitleLabel == EmptyView, H
         trailingBar = nil
         titleLabel = nil
         header = nil
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -475,7 +477,7 @@ public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, T
         trailingBar = nil
         titleLabel = nil
         header = nil
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -499,7 +501,7 @@ public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, T
         topToolbar = nil
         titleLabel = nil
         header = nil
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -522,7 +524,7 @@ public extension Page where LeadingBar == EmptyView, TopToolbar == EmptyView, Ti
         topToolbar = nil
         titleLabel = nil
         header = nil
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -545,7 +547,7 @@ public extension Page where TrailingBar == EmptyView, TopToolbar == EmptyView, T
         topToolbar = nil
         titleLabel = nil
         header = nil
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -567,7 +569,7 @@ public extension Page where TopToolbar == EmptyView, TitleLabel == EmptyView, He
         topToolbar = nil
         titleLabel = nil
         header = nil
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -590,7 +592,7 @@ public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, T
         trailingBar = nil
         topToolbar = nil
         header = nil
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -612,7 +614,7 @@ public extension Page where TrailingBar == EmptyView, TopToolbar == EmptyView, H
         trailingBar = nil
         topToolbar = nil
         header = nil
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -634,7 +636,7 @@ public extension Page where LeadingBar == EmptyView, TopToolbar == EmptyView, He
         leadingBar = nil
         topToolbar = nil
         header = nil
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -655,7 +657,7 @@ public extension Page where TrailingBar == EmptyView, Header == EmptyView {
         self.content = content()
         trailingBar = nil
         header = nil
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -676,7 +678,7 @@ public extension Page where LeadingBar == EmptyView, Header == EmptyView {
         self.content = content()
         leadingBar = nil
         header = nil
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -697,7 +699,7 @@ public extension Page where TopToolbar == EmptyView, Header == EmptyView {
         self.content = content()
         topToolbar = nil
         header = nil
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -718,7 +720,7 @@ public extension Page where TitleLabel == EmptyView, Header == EmptyView {
         self.content = content()
         titleLabel = nil
         header = nil
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -741,7 +743,7 @@ public extension Page where LeadingBar == EmptyView, TitleLabel == EmptyView {
         leadingBar = nil
         titleLabel = nil
         self.header = header()
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -764,7 +766,7 @@ public extension Page where TrailingBar == EmptyView, TitleLabel == EmptyView {
         trailingBar = nil
         titleLabel = nil
         self.header = header()
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -788,7 +790,7 @@ public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, T
         trailingBar = nil
         titleLabel = nil
         self.header = header()
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -813,7 +815,7 @@ public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, T
         topToolbar = nil
         titleLabel = nil
         self.header = header()
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -837,7 +839,7 @@ public extension Page where LeadingBar == EmptyView, TopToolbar == EmptyView, Ti
         topToolbar = nil
         titleLabel = nil
         self.header = header()
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -861,7 +863,7 @@ public extension Page where TrailingBar == EmptyView, TopToolbar == EmptyView, T
         topToolbar = nil
         titleLabel = nil
         self.header = header()
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -884,7 +886,7 @@ public extension Page where TopToolbar == EmptyView, TitleLabel == EmptyView {
         topToolbar = nil
         titleLabel = nil
         self.header = header()
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -908,7 +910,7 @@ public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, T
         trailingBar = nil
         topToolbar = nil
         self.header = header()
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -931,7 +933,7 @@ public extension Page where TrailingBar == EmptyView, TopToolbar == EmptyView {
         trailingBar = nil
         topToolbar = nil
         self.header = header()
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -954,7 +956,7 @@ public extension Page where LeadingBar == EmptyView, TopToolbar == EmptyView {
         leadingBar = nil
         topToolbar = nil
         self.header = header()
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -976,7 +978,7 @@ public extension Page where TrailingBar == EmptyView {
         self.content = content()
         trailingBar = nil
         self.header = header()
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -998,7 +1000,7 @@ public extension Page where LeadingBar == EmptyView {
         self.content = content()
         leadingBar = nil
         self.header = header()
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -1020,7 +1022,7 @@ public extension Page where TopToolbar == EmptyView {
         self.content = content()
         topToolbar = nil
         self.header = header()
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -1042,7 +1044,7 @@ public extension Page where TitleLabel == EmptyView {
         self.content = content()
         titleLabel = nil
         self.header = header()
-        // smallHeader = nil
+
         _searchQuery = .constant(.init())
         _displaySearchBar = .constant(false)
     }
@@ -1053,11 +1055,11 @@ struct SeartchTextFieldStyle: TextFieldStyle {
         HStack(spacing: .xxSmall) {
             Image.Base.search
                 .renderingMode(.template)
-                .onSurfaceDisabledForegroundColor()
+                .onSurfaceTertiaryForeground()
 
             configuration
         }
-        .onSurfaceHighEmphasisForegroundColor()
+        .onSurfacePrimaryForeground()
         .callout(.semibold)
         .padding(.horizontal, 12)
         .padding(.vertical, .xSmall)
@@ -1066,7 +1068,7 @@ struct SeartchTextFieldStyle: TextFieldStyle {
                 cornerRadius: .medium,
                 style: .continuous
             )
-            .fill(Color.onSurfaceHighEmphasis.opacity(0.07))
+            .fill(Color.onSurfacePrimary.opacity(0.07))
         )
         .submitLabel(.search)
     }
@@ -1085,11 +1087,11 @@ struct SeartchTextFieldButtonStyle: ButtonStyle {
         HStack(spacing: .xxSmall) {
             Image.Base.search
                 .renderingMode(.template)
-                .foregroundColor(Color.onSurfaceDisabled.opacity(height > 20 ? opacity : 0))
+                .foregroundColor(Color.onSurfaceTertiary.opacity(height > 20 ? opacity : 0))
 
             configuration.label
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .foregroundColor(Color.onSurfaceDisabled.opacity(height > 20 ? opacity : 0))
+                .foregroundColor(Color.onSurfaceTertiary.opacity(height > 20 ? opacity : 0))
         }
 
         .callout(.semibold)
@@ -1100,7 +1102,7 @@ struct SeartchTextFieldButtonStyle: ButtonStyle {
                 cornerRadius: .medium,
                 style: .continuous
             )
-            .fill(Color.onSurfaceHighEmphasis.opacity(0.07))
+            .fill(Color.onSurfacePrimary.opacity(0.07))
         )
         .submitLabel(.search)
     }
@@ -1109,7 +1111,7 @@ struct SeartchTextFieldButtonStyle: ButtonStyle {
 private extension View {
     @ViewBuilder
     func prefersNavigationBarHidden() -> some View {
-        #if os(watchOS)
+        #if os(watchOS) || os(macOS)
         self
         #else
         if #available(iOS 16.0, macOS 13.0, tvOS 16.0, *) {

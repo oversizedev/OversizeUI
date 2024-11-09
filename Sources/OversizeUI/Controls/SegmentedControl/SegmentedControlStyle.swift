@@ -7,7 +7,7 @@ import SwiftUI
 
 // MARK: - Styles
 
-public enum SegmentedControlStyleType {
+public enum SegmentedControlStyleType: Sendable {
     case `default`
     case island(selected: SegmentedControlSeletionStyle = .shadowSurface)
     case islandLeading(selected: SegmentedControlSeletionStyle = .shadowSurface)
@@ -17,13 +17,13 @@ public enum SegmentedControlStyleType {
     case onlySelectionScroll(selected: SegmentedControlSeletionStyle = .shadowSurface)
 }
 
-public enum SegmentedControlSeletionStyle {
+public enum SegmentedControlSeletionStyle: Sendable {
     case shadowSurface
     case graySurface
     case accentSurface
 }
 
-public enum SegmentedControlUnseletionStyle {
+public enum SegmentedControlUnseletionStyle: Sendable {
     case clean
     case surface
 }
@@ -35,66 +35,94 @@ public extension View {
         case .default:
             let style: RectangleSegmentedControlStyle = .init()
 
-            return environment(\.segmentedControlStyle,
-                               AnySegmentedControlStyle(isEquallySpacing: style.isEquallySpacing,
-                                                        isShowBackground: style.isShowBackground,
-                                                        seletionStyle: style.seletionStyle,
-                                                        unseletionStyle: style.unseletionStyle,
-                                                        style: style))
+            return environment(
+                \.segmentedControlStyle,
+                AnySegmentedControlStyle(
+                    isEquallySpacing: style.isEquallySpacing,
+                    isShowBackground: style.isShowBackground,
+                    seletionStyle: style.seletionStyle,
+                    unseletionStyle: style.unseletionStyle,
+                    style: style
+                )
+            )
         case let .island(selected: selected):
             let style: IslandSegmentedControlStyle = .init()
 
-            return environment(\.segmentedControlStyle,
-                               AnySegmentedControlStyle(isEquallySpacing: true,
-                                                        isShowBackground: false,
-                                                        seletionStyle: selected,
-                                                        unseletionStyle: .surface,
-                                                        style: style))
+            return environment(
+                \.segmentedControlStyle,
+                AnySegmentedControlStyle(
+                    isEquallySpacing: true,
+                    isShowBackground: false,
+                    seletionStyle: selected,
+                    unseletionStyle: .surface,
+                    style: style
+                )
+            )
         case let .islandScroll(selected: selected):
             let style: ScrollSegmentedControlStyle = .init()
 
-            return environment(\.segmentedControlStyle,
-                               AnySegmentedControlStyle(isEquallySpacing: false,
-                                                        isShowBackground: false,
-                                                        seletionStyle: selected,
-                                                        unseletionStyle: .surface,
-                                                        style: style))
+            return environment(
+                \.segmentedControlStyle,
+                AnySegmentedControlStyle(
+                    isEquallySpacing: false,
+                    isShowBackground: false,
+                    seletionStyle: selected,
+                    unseletionStyle: .surface,
+                    style: style
+                )
+            )
         case let .onlySelection(selected: selected):
             let style: SelectionOnlySegmentedControlStyle = .init()
 
-            return environment(\.segmentedControlStyle,
-                               AnySegmentedControlStyle(isEquallySpacing: true,
-                                                        isShowBackground: false,
-                                                        seletionStyle: selected,
-                                                        unseletionStyle: .clean,
-                                                        style: style))
+            return environment(
+                \.segmentedControlStyle,
+                AnySegmentedControlStyle(
+                    isEquallySpacing: true,
+                    isShowBackground: false,
+                    seletionStyle: selected,
+                    unseletionStyle: .clean,
+                    style: style
+                )
+            )
         case let .onlySelectionLeading(selected: selected):
             let style: SelectionOnlySegmentedControlStyle = .init()
 
-            return environment(\.segmentedControlStyle,
-                               AnySegmentedControlStyle(isEquallySpacing: false,
-                                                        isShowBackground: false,
-                                                        seletionStyle: selected,
-                                                        unseletionStyle: .clean,
-                                                        style: style))
+            return environment(
+                \.segmentedControlStyle,
+                AnySegmentedControlStyle(
+                    isEquallySpacing: false,
+                    isShowBackground: false,
+                    seletionStyle: selected,
+                    unseletionStyle: .clean,
+                    style: style
+                )
+            )
         case let .onlySelectionScroll(selected: selected):
             let style: ScrollSegmentedControlStyle = .init()
 
-            return environment(\.segmentedControlStyle,
-                               AnySegmentedControlStyle(isEquallySpacing: false,
-                                                        isShowBackground: false,
-                                                        seletionStyle: selected,
-                                                        unseletionStyle: .clean,
-                                                        style: style))
+            return environment(
+                \.segmentedControlStyle,
+                AnySegmentedControlStyle(
+                    isEquallySpacing: false,
+                    isShowBackground: false,
+                    seletionStyle: selected,
+                    unseletionStyle: .clean,
+                    style: style
+                )
+            )
         case let .islandLeading(selected: selected):
             let style: IslandSegmentedControlStyle = .init()
 
-            return environment(\.segmentedControlStyle,
-                               AnySegmentedControlStyle(isEquallySpacing: false,
-                                                        isShowBackground: false,
-                                                        seletionStyle: selected,
-                                                        unseletionStyle: .surface,
-                                                        style: style))
+            return environment(
+                \.segmentedControlStyle,
+                AnySegmentedControlStyle(
+                    isEquallySpacing: false,
+                    isShowBackground: false,
+                    seletionStyle: selected,
+                    unseletionStyle: .surface,
+                    style: style
+                )
+            )
         }
     }
 }
@@ -187,7 +215,7 @@ public struct IslandSegmentedControlStyle: SegmentedControlStyle {
 
 // MARK: - Support
 
-public protocol SegmentedControlStyle {
+public protocol SegmentedControlStyle: Sendable {
     associatedtype Body: View
     typealias Configuration = SegmentedControlConfiguration
 
@@ -199,7 +227,7 @@ public protocol SegmentedControlStyle {
     func makeBody(configuration: Self.Configuration) -> Self.Body
 }
 
-public struct SegmentedControlConfiguration {
+public struct SegmentedControlConfiguration: Sendable {
     public struct Label: View {
         public init(content: some View) {
             body = AnyView(content)
@@ -211,7 +239,7 @@ public struct SegmentedControlConfiguration {
     public let label: SegmentedControlConfiguration.Label
 }
 
-public struct AnySegmentedControlStyle: SegmentedControlStyle {
+public struct AnySegmentedControlStyle: SegmentedControlStyle, Sendable {
     public var isEquallySpacing: Bool
 
     public var isShowBackground: Bool
@@ -220,7 +248,7 @@ public struct AnySegmentedControlStyle: SegmentedControlStyle {
 
     public var unseletionStyle: SegmentedControlUnseletionStyle
 
-    private var _makeBody: (Configuration) -> AnyView
+    private var _makeBody: @Sendable (Configuration) -> AnyView
 
     public init(isEquallySpacing: Bool,
                 isShowBackground: Bool,
@@ -243,11 +271,13 @@ public struct AnySegmentedControlStyle: SegmentedControlStyle {
 }
 
 public struct SegmentedControlKey: EnvironmentKey {
-    public static var defaultValue = AnySegmentedControlStyle(isEquallySpacing: true,
-                                                              isShowBackground: true,
-                                                              seletionStyle: .shadowSurface,
-                                                              unseletionStyle: .clean,
-                                                              style: RectangleSegmentedControlStyle())
+    public static let defaultValue = AnySegmentedControlStyle(
+        isEquallySpacing: true,
+        isShowBackground: true,
+        seletionStyle: .shadowSurface,
+        unseletionStyle: .clean,
+        style: RectangleSegmentedControlStyle()
+    )
 }
 
 public extension EnvironmentValues {
@@ -259,11 +289,15 @@ public extension EnvironmentValues {
 
 public extension View {
     func segmentedControlStyle(_ style: some SegmentedControlStyle) -> some View {
-        environment(\.segmentedControlStyle,
-                    AnySegmentedControlStyle(isEquallySpacing: style.isEquallySpacing,
-                                             isShowBackground: style.isShowBackground,
-                                             seletionStyle: style.seletionStyle,
-                                             unseletionStyle: style.unseletionStyle,
-                                             style: style))
+        environment(
+            \.segmentedControlStyle,
+            AnySegmentedControlStyle(
+                isEquallySpacing: style.isEquallySpacing,
+                isShowBackground: style.isShowBackground,
+                seletionStyle: style.seletionStyle,
+                unseletionStyle: style.unseletionStyle,
+                style: style
+            )
+        )
     }
 }

@@ -62,7 +62,7 @@ struct SegmentedControlDemo: View {
                         Text(item)
                         Text("Subtitle")
                             .subheadline()
-                            .onSurfaceHighEmphasisForegroundColor()
+                            .onSurfacePrimaryForeground()
                     }
                 }
                 .segmentedControlStyle(SelectionOnlySegmentedControlStyle())

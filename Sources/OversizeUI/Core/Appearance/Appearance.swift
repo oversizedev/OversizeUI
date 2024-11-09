@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-public enum Appearance: Int {
+public enum Appearance: Int, Sendable {
     case system
     case light
     case dark
@@ -43,5 +43,5 @@ public enum Appearance: Int {
         }
     }
 
-    public static var allCases: [Appearance] = [.system, .light, .dark]
+    public static let allCases: [Appearance] = [.system, .light, .dark]
 }

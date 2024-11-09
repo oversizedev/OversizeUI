@@ -5,12 +5,12 @@
 
 import SwiftUI
 
-public enum MultiSelectStyle {
+public enum MultiSelectStyle: Sendable {
     case `default`, section
 }
 
 private struct MultiSelectStyleKey: EnvironmentKey {
-    public static var defaultValue: MultiSelectStyle = .default
+    public static let defaultValue: MultiSelectStyle = .default
 }
 
 public extension EnvironmentValues {

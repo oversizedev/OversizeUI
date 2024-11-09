@@ -16,7 +16,7 @@ public struct FieldTitleViewModifier: ViewModifier {
         VStack(alignment: .leading, spacing: .xSmall) {
             Text(title)
                 .subheadline(.medium)
-                .onSurfaceHighEmphasisForegroundColor()
+                .onSurfacePrimaryForeground()
 
             content
         }

@@ -7,7 +7,7 @@ import SwiftUI
 
 public extension View {
     @ViewBuilder
-    func `if`(_ condition: Bool, _ modifications: (Self) -> some View) -> some View {
+    nonisolated func `if`(_ condition: Bool, _ modifications: (Self) -> some View) -> some View {
         if condition {
             modifications(self)
         } else {

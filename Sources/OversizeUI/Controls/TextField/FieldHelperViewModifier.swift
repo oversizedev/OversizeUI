@@ -23,13 +23,13 @@ public struct FieldHelperViewModifier: ViewModifier {
     }
 
     public func body(content: Content) -> some View {
-        VStack(alignment: .leading, spacing: platform == .mac ? .xxxSmall : .xSmall) {
+        VStack(alignment: .leading, spacing: platform == .macOS ? .xxxSmall : .xSmall) {
             content
             if helperText.isEmpty == false, helperStyle != .none {
                 Text(helperText)
                     .subheadline(.medium)
                     .foregroundColor(helperForegroundColor)
-                    .offset(x: platform == .mac ? 4 : 0)
+                    .offset(x: platform == .macOS ? 4 : 0)
             }
         }
         .animation(.easeIn(duration: 0.15), value: helperStyle)
@@ -38,7 +38,7 @@ public struct FieldHelperViewModifier: ViewModifier {
     private var helperForegroundColor: Color {
         switch helperStyle {
         case .helperText:
-            Color.onSurfaceMediumEmphasis
+            Color.onSurfaceSecondary
         case .errorText:
             Color.error
         case .sussesText:

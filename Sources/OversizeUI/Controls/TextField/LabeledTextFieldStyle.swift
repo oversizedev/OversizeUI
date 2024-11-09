@@ -6,10 +6,11 @@
 import SwiftUI
 
 // swiftlint:disable identifier_name
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public struct LabeledTextFieldStyle: TextFieldStyle {
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.fieldLabelPosition) private var fieldPlaceholderPosition: FieldLabelPosition
-    @Environment(\.fieldPosition) private var fieldPosition: FieldPosition
+    @Environment(\.fieldPosition) private var fieldPosition: VerticalAlignment?
     @Environment(\.platform) private var platform: Platform
     @FocusState private var isFocused: Bool
     @Binding private var text: String
@@ -21,19 +22,19 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
     }
 
     public func _body(configuration: TextField<Self._Label>) -> some View {
-        VStack(alignment: .leading, spacing: platform == .mac ? .xxxSmall : .xSmall) {
+        VStack(alignment: .leading, spacing: platform == .macOS ? .xxxSmall : .xSmall) {
             if fieldPlaceholderPosition == .adjacent {
                 Text(placeholder)
                     .subheadline(.medium)
-                    .foregroundColor(platform == .mac ? .onSurfaceMediumEmphasis : .onSurfaceHighEmphasis)
+                    .foregroundColor(platform == .macOS ? .onSurfaceSecondary : .onSurfacePrimary)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .offset(x: platform == .mac ? 4 : 0)
+                    .offset(x: platform == .macOS ? 4 : 0)
             }
             ZStack(alignment: .leading) {
                 labelTextView
                 configuration
                     .headline(.medium)
-                    .foregroundColor(.onSurfaceHighEmphasis)
+                    .foregroundColor(.onSurfacePrimary)
                     .padding(padding)
                     .offset(y: fieldOffset)
                     .focused($isFocused)
@@ -62,7 +63,7 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
             #endif
         case .overInput:
             #if os(macOS)
-            return .init(horizontal: .xxSmall, vertical: .xSmall)
+            return .init(.xSmall)
             #else
             return .init(
                 top: Space.xxxSmall.rawValue + Space.small.rawValue,
@@ -83,7 +84,24 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
     @ViewBuilder
     private var fieldBackground: some View {
         switch fieldPosition {
-        case .default:
+        case .top, .bottom, .center:
+            #if canImport(UIKit)
+            RoundedRectangleCorner(
+                radius: fieldRadius,
+                corners: backgroundShapeCorners
+            )
+            .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
+            #else
+            if fieldPlaceholderPosition != .adjacent {
+                RoundedRectangleCorner(
+                    radius: fieldRadius,
+                    corners: backgroundShapeCorners
+                )
+                .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
+            }
+            #endif
+
+        default:
             #if canImport(UIKit)
             RoundedRectangle(
                 cornerRadius: fieldRadius,
@@ -99,26 +117,10 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
                 .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
             }
             #endif
-        case .top, .bottom, .center:
-            #if canImport(UIKit)
-            RoundedRectangleCorner(
-                radius: fieldRadius,
-                corners: backgroundShapeCorners
-            )
-            .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
-            #else
-            if fieldPlaceholderPosition != .adjacent {
-                RoundedRectangle(
-                    cornerRadius: fieldRadius,
-                    style: .continuous
-                )
-                .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
-            }
-            #endif
         }
     }
 
-    var fieldRadius: Radius {
+    private var fieldRadius: Radius {
         #if os(macOS)
         return .xSmall
         #else
@@ -129,14 +131,29 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
     #if canImport(UIKit)
     private var backgroundShapeCorners: UIRectCorner {
         switch fieldPosition {
-        case .default:
-            [.allCorners]
         case .top:
             [.topLeft, .topRight]
         case .bottom:
             [.bottomLeft, .bottomRight]
         case .center:
             []
+        default:
+            [.allCorners]
+        }
+    }
+    #endif
+
+    #if canImport(AppKit)
+    private var backgroundShapeCorners: RectCorner {
+        switch fieldPosition {
+        case .top:
+            [.topLeft, .topRight]
+        case .bottom:
+            [.bottomLeft, .bottomRight]
+        case .center:
+            []
+        default:
+            [.allCorners]
         }
     }
     #endif
@@ -147,7 +164,7 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
             .zero
         case .overInput:
             #if os(macOS)
-            text.isEmpty ? 0 : 8
+            text.isEmpty && !isFocused ? -2 : text.isEmpty ? 0 : isFocused ? 9 : 7
             #else
             text.isEmpty ? 0 : 10
             #endif
@@ -157,23 +174,6 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
     @ViewBuilder
     private var overlay: some View {
         switch fieldPosition {
-        case .default:
-            #if canImport(UIKit)
-            RoundedRectangle(
-                cornerRadius: fieldRadius,
-                style: .continuous
-            )
-            .stroke(overlayBorderColor, lineWidth: isFocused ? 2 : CGFloat(theme.borderSize))
-            #else
-            if fieldPlaceholderPosition != .adjacent {
-                RoundedRectangle(
-                    cornerRadius: fieldRadius,
-                    style: .continuous
-                )
-                .stroke(overlayBorderColor, lineWidth: isFocused ? 2 : CGFloat(theme.borderSize))
-            }
-            #endif
-
         case .top, .bottom, .center:
             #if canImport(UIKit)
             RoundedRectangleCorner(radius: fieldRadius, corners: backgroundShapeCorners)
@@ -181,6 +181,22 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
                     overlayBorderColor,
                     lineWidth: isFocused ? 2 : CGFloat(theme.borderSize)
                 )
+            #elseif canImport(AppKit)
+            if fieldPlaceholderPosition != .adjacent {
+                RoundedRectangleCorner(radius: fieldRadius, corners: backgroundShapeCorners)
+                    .stroke(
+                        overlayBorderColor,
+                        lineWidth: isFocused ? 2 : CGFloat(theme.borderSize)
+                    )
+            }
+            #endif
+        default:
+            #if canImport(UIKit)
+            RoundedRectangle(
+                cornerRadius: fieldRadius,
+                style: .continuous
+            )
+            .stroke(overlayBorderColor, lineWidth: isFocused ? 2 : CGFloat(theme.borderSize))
             #else
             if fieldPlaceholderPosition != .adjacent {
                 RoundedRectangle(
@@ -200,7 +216,7 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
             if isFocused {
                 Text(placeholder)
                     .subheadline()
-                    .onSurfaceDisabledForegroundColor()
+                    .onSurfaceTertiaryForeground()
                     .opacity(0.7)
                 #if os(macOS)
                     .padding(.xSmall)
@@ -214,7 +230,7 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
             Text(placeholder)
                 .font(text.isEmpty ? .headline : .subheadline)
                 .fontWeight(text.isEmpty ? .medium : .semibold)
-                .onSurfaceDisabledForegroundColor()
+                .onSurfaceTertiaryForeground()
             #if os(macOS)
                 .padding(.xSmall)
                 .offset(y: text.isEmpty ? 0 : -10)
@@ -237,6 +253,7 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
     }
 }
 
+@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension TextFieldStyle where Self == LabeledTextFieldStyle {
     static var `default`: LabeledTextFieldStyle {
         LabeledTextFieldStyle(placeholder: "", text: .constant(""))
@@ -244,34 +261,5 @@ public extension TextFieldStyle where Self == LabeledTextFieldStyle {
 
     static func placeholder(_ placeholder: String, text: Binding<String> = .constant("")) -> LabeledTextFieldStyle {
         LabeledTextFieldStyle(placeholder: placeholder, text: text)
-    }
-}
-
-struct LabeledTextFieldStyle_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack(spacing: 32) {
-            TextField("Text", text: .constant("Placeholder"))
-                .textFieldStyle(.default)
-
-            TextField("Text", text: .constant("Placeholder"))
-                .textFieldStyle(OverPlaceholderTextFieldStyle(placeholder: "Label"))
-
-            TextField("Text", text: .constant("Placeholder"))
-                .textFieldStyle(InsidePlaceholderTextFieldStyle(placeholder: "Label"))
-
-            TextField("Text", text: .constant("Placeholder"))
-                .textFieldStyle(DefaultPlaceholderTextFieldStyle())
-                .fieldHelper(.constant("Help"), style: .constant(.helperText))
-
-            TextField("Text", text: .constant("Placeholder"))
-                .textFieldStyle(OverPlaceholderTextFieldStyle(placeholder: "Label"))
-                .fieldHelper(.constant("Ok"), style: .constant(.sussesText))
-
-            TextField("Text", text: .constant("Placeholder"))
-                .textFieldStyle(InsidePlaceholderTextFieldStyle(placeholder: "Label"))
-                .fieldHelper(.constant("Error"), style: .constant(.errorText))
-
-        }.padding()
-            .previewLayout(.sizeThatFits)
     }
 }

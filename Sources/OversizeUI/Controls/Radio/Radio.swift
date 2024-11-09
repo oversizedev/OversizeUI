@@ -82,7 +82,7 @@ public struct Radio<Label: View>: View {
     private func radioImage(isEnabled: Bool, isOn: Bool) -> some View {
         ZStack {
             Circle()
-                .stroke(Color.onSurfaceDisabled.opacity(isEnabled ? 1 : 0.5), lineWidth: 4)
+                .stroke(Color.onSurfaceTertiary.opacity(isEnabled ? 1 : 0.5), lineWidth: 4)
                 .frame(width: 24, height: 24)
                 .cornerRadius(12)
                 .opacity(isOn ? 0 : 1)
@@ -100,9 +100,9 @@ public struct Radio<Label: View>: View {
 
     private var foregroundColor: Color {
         if isEnabled {
-            Color.onSurfaceHighEmphasis
+            Color.onSurfacePrimary
         } else {
-            Color.onSurfaceDisabled
+            Color.onSurfaceTertiary
         }
     }
 }
@@ -121,16 +121,18 @@ public extension Radio where Label == EmptyView {
     }
 }
 
-struct Radio_LibraryContent: LibraryContentProvider {
-    var views: [LibraryItem] {
-        LibraryItem(
-            Radio(isOn: false, alignment: .leading, label: {
-                Text("Text")
-            }),
-            title: "Chip", category: .control
-        )
-    }
-}
+/*
+ struct Radio_LibraryContent: LibraryContentProvider {
+     var views: [LibraryItem] {
+         LibraryItem(
+             Radio(isOn: false, alignment: .leading, label: {
+                 Text("Text")
+             }),
+             title: "Chip", category: .control
+         )
+     }
+ }
+ */
 
 struct Radio_preview: PreviewProvider {
     struct RadioPreview: View {

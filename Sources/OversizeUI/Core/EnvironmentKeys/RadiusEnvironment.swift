@@ -6,7 +6,7 @@
 import SwiftUI
 
 private struct ControlRadiusKey: EnvironmentKey {
-    public static var defaultValue: Radius = .medium
+    public static let defaultValue: Radius = .medium
 }
 
 public extension EnvironmentValues {

@@ -6,7 +6,7 @@
 import SwiftUI
 
 private struct AccentStateKey: EnvironmentKey {
-    public static var defaultValue: Bool = false
+    public static let defaultValue: Bool = false
 }
 
 public extension EnvironmentValues {

@@ -13,7 +13,7 @@ struct SurfaceDemo: View {
                 Surface {
                     Text("Text")
                         .title3()
-                        .onSurfaceHighEmphasisForegroundColor()
+                        .onSurfacePrimaryForeground()
                 }
                 .surfaceStyle(.secondary)
 

@@ -56,7 +56,7 @@ public struct OversizeButtonStyle: ButtonStyle {
                         .opacity(backgroundOpacity))
                     .overlay {
                         Capsule()
-                            .strokeBorder(Color.onSurfaceHighEmphasis.opacity(0.15), lineWidth: 2)
+                            .strokeBorder(Color.onSurfacePrimary.opacity(0.15), lineWidth: 2)
                             .opacity(isBordered || theme.borderButtons ? 1 : 0)
                     }
 
@@ -66,7 +66,7 @@ public struct OversizeButtonStyle: ButtonStyle {
                         .opacity(backgroundOpacity))
                     .overlay {
                         RoundedRectangle(cornerRadius: radius != .medium ? radius.rawValue : theme.radius, style: .continuous)
-                            .strokeBorder(Color.onSurfaceHighEmphasis.opacity(0.15), lineWidth: 2)
+                            .strokeBorder(Color.onSurfacePrimary.opacity(0.15), lineWidth: 2)
                             .opacity(isBordered || theme.borderButtons ? 1 : 0)
                     }
             }
@@ -100,10 +100,10 @@ public struct OversizeButtonStyle: ButtonStyle {
         switch type {
         case .primary:
             switch role {
-            case .some(.destructive), .some(.cancel): Color.onPrimaryHighEmphasis
+            case .some(.destructive), .some(.cancel): Color.onPrimary
             default:
                 if isAccent {
-                    Color.onPrimaryHighEmphasis
+                    Color.onPrimary
                 } else {
                     Color.backgroundPrimary
                 }
@@ -116,18 +116,18 @@ public struct OversizeButtonStyle: ButtonStyle {
                 if isAccent {
                     Color.accent
                 } else {
-                    Color.onSurfaceHighEmphasis
+                    Color.onSurfacePrimary
                 }
             }
         case .tertiary:
             switch role {
             case .some(.destructive): Color.error
-            case .some(.cancel): Color.onSurfaceHighEmphasis
+            case .some(.cancel): Color.onSurfacePrimary
             default:
                 if isAccent {
                     Color.accent
                 } else {
-                    Color.onSurfaceHighEmphasis
+                    Color.onSurfacePrimary
                 }
             }
         }

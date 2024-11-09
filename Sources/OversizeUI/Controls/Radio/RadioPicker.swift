@@ -54,16 +54,18 @@ public struct RadioPicker<Element: Equatable, Content>: View where Content: View
     }
 }
 
-struct RadioPicker_LibraryContent: LibraryContentProvider {
-    var views: [LibraryItem] {
-        LibraryItem(
-            RadioPicker(["One", "Two"], selection: .constant("One")) { item in
-                Text(item)
-            },
-            title: "Radio Picker", category: .control
-        )
-    }
-}
+/*
+ struct RadioPicker_LibraryContent: LibraryContentProvider {
+     var views: [LibraryItem] {
+         LibraryItem(
+             RadioPicker(["One", "Two"], selection: .constant("One")) { item in
+                 Text(item)
+             },
+             title: "Radio Picker", category: .control
+         )
+     }
+ }
+ */
 
 struct RadioPicker_previw: PreviewProvider {
     struct RadioPickerPreview: View {

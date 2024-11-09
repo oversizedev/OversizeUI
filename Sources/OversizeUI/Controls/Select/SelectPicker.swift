@@ -112,7 +112,7 @@ public struct SelectPicker<Element: Hashable, Content, Actions, ContentUnavailab
                     content(data[index],
                             selectedIndex == index)
                         .headline()
-                        .onSurfaceHighEmphasisForegroundColor()
+                        .onSurfacePrimaryForeground()
                 }
             }
         }

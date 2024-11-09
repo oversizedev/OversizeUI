@@ -8,7 +8,7 @@ import SwiftUI
 public struct PaddingModifier: ViewModifier {
     private let edges: Edge.Set
     private let length: Space
-    public init(edges: Edge.Set, length: Space) {
+    public nonisolated init(edges: Edge.Set, length: Space) {
         self.edges = edges
         self.length = length
     }
@@ -20,7 +20,7 @@ public struct PaddingModifier: ViewModifier {
 
 public struct PaddingEdgeInsetsModifier: ViewModifier {
     private let insets: EdgeSpaceInsets
-    public init(insets: EdgeSpaceInsets) {
+    public nonisolated init(insets: EdgeSpaceInsets) {
         self.insets = insets
     }
 
@@ -55,22 +55,22 @@ public struct ContentPaddingModifier: ViewModifier {
 
 public extension View {
     @_disfavoredOverload
-    func padding(_ edges: Edge.Set, _ length: Space) -> some View {
+    nonisolated func padding(_ edges: Edge.Set, _ length: Space) -> some View {
         modifier(PaddingModifier(edges: edges, length: length))
     }
 
     @_disfavoredOverload
-    func padding(_ length: Space) -> some View {
+    nonisolated func padding(_ length: Space) -> some View {
         modifier(PaddingModifier(edges: Edge.Set.all, length: length))
     }
 
-    func padding(_ insets: EdgeSpaceInsets) -> some View {
+    nonisolated func padding(_ insets: EdgeSpaceInsets) -> some View {
         modifier(PaddingEdgeInsetsModifier(insets: insets))
     }
 }
 
 public extension View {
-    func paddingContent(_ edges: Edge.Set = .all) -> some View {
+    nonisolated func paddingContent(_ edges: Edge.Set = .all) -> some View {
         modifier(ContentPaddingModifier(edges: edges))
     }
 }

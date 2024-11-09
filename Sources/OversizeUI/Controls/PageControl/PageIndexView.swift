@@ -19,7 +19,11 @@ public struct PageIndexView: View {
             ForEach(0 ..< maxIndex, id: \.self) { index in
                 Capsule()
                     .fill(index == self.index ? Color.accent : Color.surfaceTertiary)
+                #if os(iOS)
                     .frame(width: index == self.index ? 28 : 8, height: 8)
+                #else
+                    .frame(width: index == self.index ? 24 : 6, height: 6)
+                #endif
                     .animation(.default, value: index)
             }
         }

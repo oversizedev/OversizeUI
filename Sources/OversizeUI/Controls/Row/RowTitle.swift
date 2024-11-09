@@ -44,14 +44,14 @@ public struct RowTitle: View {
                 } label: {
                     Text(title)
                         .font(.title2.bold())
-                        .foregroundColor(.onSurfaceHighEmphasis)
+                        .foregroundColor(.onSurfacePrimary)
                 }
                 .buttonStyle(.scale)
             }
         } else {
             Text(title)
                 .font(.title2.bold())
-                .foregroundColor(.onSurfaceHighEmphasis)
+                .foregroundColor(.onSurfacePrimary)
         }
     }
 
@@ -63,7 +63,7 @@ public struct RowTitle: View {
                 action()
             } label: {
                 IconDeprecated(.chevronRight)
-                    .iconColor(.onSurfaceMediumEmphasis)
+                    .iconColor(.onSurfaceSecondary)
                     .offset(y: titleButtonPosition == .leading ? 1.5 : 0)
             }
             .buttonStyle(.scale)

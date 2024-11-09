@@ -72,7 +72,7 @@ public struct Switch<Label: View>: View {
                 if let subtitle, !subtitle.isEmpty {
                     Text(subtitle)
                         .subheadline()
-                        .foregroundColor(.onSurfaceMediumEmphasis)
+                        .foregroundColor(.onSurfaceSecondary)
                 }
             }
             .padding(contentInset)
@@ -88,9 +88,9 @@ public struct Switch<Label: View>: View {
 
     private var foregroundColor: Color {
         if isEnabled {
-            Color.onSurfaceHighEmphasis
+            Color.onSurfacePrimary
         } else {
-            Color.onSurfaceDisabled
+            Color.onSurfaceTertiary
         }
     }
 }
@@ -110,17 +110,19 @@ public extension Switch where Label == EmptyView {
     }
 }
 
-@available(iOS 14.0, *)
-struct Switch_LibraryContent: LibraryContentProvider {
-    var views: [LibraryItem] {
-        LibraryItem(
-            Switch(isOn: .constant(false)) {
-                Text("Text")
-            },
-            title: "Checkbox", category: .control
-        )
-    }
-}
+/*
+ @available(iOS 14.0, *)
+ struct Switch_LibraryContent: LibraryContentProvider {
+     var views: [LibraryItem] {
+         LibraryItem(
+             Switch(isOn: .constant(false)) {
+                 Text("Text")
+             },
+             title: "Checkbox", category: .control
+         )
+     }
+ }
+ */
 
 struct Switch_preview: PreviewProvider {
     static var previews: some View {

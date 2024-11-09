@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-public enum Radius {
+public enum Radius: Sendable {
     private var theme: ThemeSettings {
         ThemeSettings()
     }

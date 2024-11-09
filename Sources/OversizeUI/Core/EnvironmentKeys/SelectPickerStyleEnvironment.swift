@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-public enum SelectStyle {
+public enum SelectStyle: Sendable {
     case `default`
     case section
     @available(macOS, unavailable)
@@ -13,7 +13,7 @@ public enum SelectStyle {
 }
 
 private struct SelectStyleKey: EnvironmentKey {
-    public static var defaultValue: SelectStyle = .default
+    public static let defaultValue: SelectStyle = .default
 }
 
 public extension EnvironmentValues {

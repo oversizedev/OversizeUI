@@ -41,11 +41,14 @@ public struct Avatar: View {
     /// Sets a  stroke color for the Avatar.
     var strokeColor: Color = .clear
 
+    /// Sets a  stroke width for the Avatar.
+    var strokeLineWidth: CGFloat = 2
+
     /// Sets a custom background color for the Avatar.
     var background: AvatarBackgroundType = .color(.surfaceSecondary)
 
     /// Sets a custom text and image color for the Avatar.
-    var onBackgroundColor: Color = .onSurfaceMediumEmphasis
+    var onBackgroundColor: Color = .onSurfaceSecondary
 
     /// Creates and initializes a Avatar
     /// - Parameters:
@@ -82,13 +85,23 @@ public struct Avatar: View {
                 .scaledToFill()
                 .frame(width: avatarSize, height: avatarSize)
                 .clipShape(Circle())
-                .overlay(Circle().stroke(strokeColor, lineWidth: 2))
+                .overlay(
+                    Circle().stroke(
+                        strokeColor,
+                        lineWidth: strokeLineWidth
+                    )
+                )
 
         } else {
             ZStack {
                 avatarSurface
                     .frame(width: avatarSize, height: avatarSize)
-                    .overlay(Circle().stroke(strokeColor, lineWidth: 2))
+                    .overlay(
+                        Circle().stroke(
+                            strokeColor,
+                            lineWidth: strokeLineWidth
+                        )
+                    )
 
                 avatarLabel
             }
@@ -106,13 +119,23 @@ public struct Avatar: View {
                 .scaledToFill()
                 .frame(width: Space.xxxLarge.rawValue, height: Space.xxxLarge.rawValue)
                 .clipShape(Circle())
-                .overlay(Circle().stroke(strokeColor, lineWidth: 2))
+                .overlay(
+                    Circle().stroke(
+                        strokeColor,
+                        lineWidth: strokeLineWidth
+                    )
+                )
 
         } else {
             ZStack {
                 avatarSurface
                     .frame(width: Space.xxxLarge.rawValue, height: Space.xxxLarge.rawValue)
-                    .overlay(Circle().stroke(strokeColor, lineWidth: 2))
+                    .overlay(
+                        Circle().stroke(
+                            strokeColor,
+                            lineWidth: strokeLineWidth
+                        )
+                    )
             }
         }
     }

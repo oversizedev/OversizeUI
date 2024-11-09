@@ -30,12 +30,12 @@ public enum IconSizes: CaseIterable {
 }
 
 public struct IconDeprecated: View {
-    private enum Constants {
+    private enum Constants: Sendable {
         /// Size
-        static var small: CGFloat = Space.small.rawValue
-        static var medium: CGFloat = Space.medium.rawValue
-        static var large: CGFloat = Space.large.rawValue
-        static var xLarge: CGFloat = Space.xLarge.rawValue
+        static let small: CGFloat = Space.small.rawValue
+        static let medium: CGFloat = Space.medium.rawValue
+        static let large: CGFloat = Space.large.rawValue
+        static let xLarge: CGFloat = Space.xLarge.rawValue
     }
 
     let name: IconsNames?
@@ -46,18 +46,18 @@ public struct IconDeprecated: View {
     public init(_ image: Image) {
         self.image = image
         size = .medium
-        color = Color.onBackgroundHighEmphasis
+        color = Color.onBackgroundPrimary
         name = nil
     }
 
     public init(_ name: IconsNames = .menu) {
         self.name = name
         size = .medium
-        color = Color.onBackgroundHighEmphasis
+        color = Color.onBackgroundPrimary
         image = nil
     }
 
-    public init(_ name: IconsNames = .menu, size: IconSizes = .medium, color: Color = .onBackgroundHighEmphasis) {
+    public init(_ name: IconsNames = .menu, size: IconSizes = .medium, color: Color = .onBackgroundPrimary) {
         self.name = name
         self.color = color
         self.size = size

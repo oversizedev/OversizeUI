@@ -6,7 +6,7 @@
 import SwiftUI
 
 // swiftlint:disable identifier_name
-public struct Theme: Identifiable {
+public struct Theme: Identifiable, Sendable {
     public let id: Int
     public let name: String
     public let accentColor: Color

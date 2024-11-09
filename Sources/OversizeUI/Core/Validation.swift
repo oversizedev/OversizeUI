@@ -5,7 +5,7 @@
 
 import Foundation
 
-public enum Validation {
+public enum Validation: Sendable {
     case success
     case failure(message: String)
 

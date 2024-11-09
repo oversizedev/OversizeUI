@@ -105,7 +105,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                                 content(data[index],
                                         selectedIndex == index)
                                     .body(.semibold)
-                                    .foregroundColor(style.seletionStyle == .accentSurface && selectedIndex == index ? Color.onPrimaryHighEmphasis : Color.onSurfaceHighEmphasis)
+                                    .foregroundColor(style.seletionStyle == .accentSurface && selectedIndex == index ? Color.onPrimary : Color.onSurfacePrimary)
                                     .multilineTextAlignment(.center)
                                     .contentShape(Rectangle())
                                     .frame(
@@ -173,7 +173,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                         },
                         label: { content(data[index], selectedIndex == index)
                             .body(.semibold)
-                            .foregroundColor(style.seletionStyle == .accentSurface && selectedIndex == index ? Color.onPrimaryHighEmphasis : Color.onSurfaceHighEmphasis)
+                            .foregroundColor(style.seletionStyle == .accentSurface && selectedIndex == index ? Color.onPrimary : Color.onSurfacePrimary)
                             .multilineTextAlignment(.center)
                             .padding(.leading, controlPadding.leading)
                             .padding(.trailing, controlPadding.trailing)
@@ -244,7 +244,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                     ? controlRadius.rawValue - 4
                     : controlRadius.rawValue,
                     style: .continuous)
-                    .strokeBorder(Color.onSurfaceMediumEmphasis, lineWidth: 2)
+                    .strokeBorder(Color.onSurfaceSecondary, lineWidth: 2)
             }
         case .accentSurface:
             RoundedRectangle(

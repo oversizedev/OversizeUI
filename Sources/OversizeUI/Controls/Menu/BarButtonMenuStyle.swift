@@ -17,7 +17,7 @@ public struct BarButtonMenuStyle: MenuStyle {
     public func makeBody(configuration: Configuration) -> some View {
         Menu(configuration)
             .body(true)
-            .foregroundColor(Color.onPrimaryHighEmphasis)
+            .foregroundColor(Color.onPrimary)
             .padding(.xxSmall)
             .background(background)
             .shadowElevaton(.z2)
@@ -28,7 +28,7 @@ public struct BarButtonMenuStyle: MenuStyle {
             .fill(Color.surfacePrimary)
             .overlay {
                 Capsule()
-                    .strokeBorder(Color.onSurfaceHighEmphasis.opacity(0.15), lineWidth: 2)
+                    .strokeBorder(Color.onSurfacePrimary.opacity(0.15), lineWidth: 2)
                     .opacity(isBordered || theme.borderButtons ? 1 : 0)
             }
     }

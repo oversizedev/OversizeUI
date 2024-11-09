@@ -6,7 +6,7 @@
 import SwiftUI
 
 private struct ThemeStateKey: EnvironmentKey {
-    public static var defaultValue = ThemeSettings()
+    public static let defaultValue = ThemeSettings()
 }
 
 public extension EnvironmentValues {

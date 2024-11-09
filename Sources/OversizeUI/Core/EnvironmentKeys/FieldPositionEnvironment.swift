@@ -5,23 +5,19 @@
 
 import SwiftUI
 
-public enum FieldPosition {
-    case `default`, top, bottom, center
-}
-
 private struct FieldPositionKey: EnvironmentKey {
-    public static var defaultValue: FieldPosition = .default
+    public static let defaultValue: VerticalAlignment? = nil
 }
 
 public extension EnvironmentValues {
-    var fieldPosition: FieldPosition {
+    var fieldPosition: VerticalAlignment? {
         get { self[FieldPositionKey.self] }
         set { self[FieldPositionKey.self] = newValue }
     }
 }
 
 public extension View {
-    func fieldPosition(_ position: FieldPosition) -> some View {
+    func fieldPosition(_ position: VerticalAlignment?) -> some View {
         environment(\.fieldPosition, position)
     }
 }

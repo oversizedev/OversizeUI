@@ -12,13 +12,13 @@ public struct CheckboxStyle: ToggleStyle {
         HStack {
             configuration.label
                 .headline(.semibold)
-                .foregroundColor(.onSurfaceHighEmphasis)
+                .foregroundColor(.onSurfacePrimary)
 
             Spacer()
 
             ZStack {
                 RoundedRectangle(cornerRadius: Radius.small, style: .continuous)
-                    .strokeBorder(Color.onSurfaceDisabled, lineWidth: 2.5)
+                    .strokeBorder(Color.onSurfaceTertiary, lineWidth: 2.5)
                     .frame(width: 24, height: 24)
                     .opacity(configuration.isOn ? 0 : 1)
 
@@ -28,7 +28,7 @@ public struct CheckboxStyle: ToggleStyle {
 
                 Image(systemName: "checkmark")
                     .font(.caption.weight(.black))
-                    .foregroundColor(.onPrimaryHighEmphasis)
+                    .foregroundColor(.onPrimary)
                     .opacity(configuration.isOn ? 1 : 0)
             }
         }

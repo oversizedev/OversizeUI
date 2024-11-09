@@ -71,7 +71,7 @@ struct SegmentedControlPreview: View {
                     Text(item)
                     Text("Subtitle")
                         .subheadline()
-                        .onSurfaceMediumEmphasisForegroundColor()
+                        .onSurfaceSecondaryForeground()
                 }
             }
             .segmentedControlStyle(SelectionOnlySegmentedControlStyle())
