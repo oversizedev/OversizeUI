@@ -283,7 +283,7 @@ struct Surface_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             Surface {
-                RowDeprecated("Title") {}
+                Row("Title") {}
             }
             .surfaceStyle(.primary)
             .previewLayout(.fixed(width: 414, height: 300))

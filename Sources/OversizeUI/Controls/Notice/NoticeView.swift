@@ -83,7 +83,7 @@ public struct NoticeView<A>: View where A: View {
                 Button {
                     closeAction?()
                 } label: {
-                    IconDeprecated(.xMini, color: .onSurfaceHighEmphasis)
+                    IconDeprecated(.xMini, color: .onSurfacePrimary)
                 }
                 .buttonStyle(subtitle != nil ? .tertiary(infinityWidth: false) : .quaternary(infinityWidth: false))
                 .controlBorderShape(.capsule)

@@ -46,7 +46,7 @@ public struct DateField: View {
                 HStack {
                     Text(label)
                         .subheadline(.medium)
-                        .foregroundColor(.onSurfaceHighEmphasis)
+                        .foregroundColor(.onSurfacePrimary)
                     Spacer()
                 }
             }
@@ -58,7 +58,7 @@ public struct DateField: View {
                         Text(label)
                             .font(.subheadline)
                             .fontWeight(.semibold)
-                            .onSurfaceDisabledForegroundColor()
+                            .onSurfaceTertiaryForeground()
                     }
 
                     HStack {

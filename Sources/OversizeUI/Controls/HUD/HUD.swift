@@ -48,7 +48,7 @@ public struct HUD<Title, Icon>: View where Title: View, Icon: View {
                 #if os(macOS)
                     .foregroundColor(Color.onPrimary)
                 #else
-                    .foregroundColor(Color.onSurfaceHighEmphasis)
+                    .foregroundColor(Color.onSurfacePrimary)
 
                 #endif
 
