@@ -6,6 +6,7 @@
 import SwiftUI
 
 public enum IconSizes: CaseIterable {
+    case xSmall
     case small
     case medium
     case large
@@ -13,6 +14,8 @@ public enum IconSizes: CaseIterable {
 
     public var rawValue: CGFloat {
         switch self {
+        case .xSmall:
+            Space.xSmall.rawValue
         case .small:
             Space.small.rawValue
         case .medium:
@@ -32,6 +35,7 @@ public enum IconSizes: CaseIterable {
 public struct IconDeprecated: View {
     private enum Constants: Sendable {
         /// Size
+        static let xSmall: CGFloat = Space.xSmall.rawValue
         static let small: CGFloat = Space.small.rawValue
         static let medium: CGFloat = Space.medium.rawValue
         static let large: CGFloat = Space.large.rawValue
@@ -74,10 +78,12 @@ public struct IconDeprecated: View {
 
     private var iconSize: CGFloat {
         switch size {
-        case .medium:
-            Constants.medium
+        case .xSmall:
+            Constants.xSmall
         case .small:
             Constants.small
+        case .medium:
+            Constants.medium
         case .large:
             Constants.large
         case .xLarge:
@@ -95,12 +101,14 @@ public struct IconDeprecated: View {
 @available(tvOS, unavailable)
 struct IconAsset_Previews: PreviewProvider {
     static var previews: some View {
-        let grid = [GridItem(),
-                    GridItem(),
-                    GridItem(),
-                    GridItem(),
-                    GridItem(),
-                    GridItem()]
+        let grid = [
+            GridItem(),
+            GridItem(),
+            GridItem(),
+            GridItem(),
+            GridItem(),
+            GridItem(),
+        ]
 
         Button(role: .cancel, action: {}, label: {
             Text("Text")
