@@ -96,9 +96,8 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
             .toolbarBackground(.hidden)
             .toolbar(isFocusSearchBar ? .hidden : .automatic, for: .navigationBar)
             .navigationBarTitleDisplayMode(.inline)
-        #endif
-        #if os(macOS)
-        .navigationTitle(title ?? "")
+        #elseif os(macOS)
+            .navigationTitle(title ?? "")
         #endif
     }
 

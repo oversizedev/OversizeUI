@@ -10,6 +10,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
     @Environment(\.segmentedControlStyle) private var style
     @Environment(\.controlRadius) var controlRadius: Radius
     @Environment(\.segmentedPickerMargins) var controlPadding: EdgeSpaceInsets
+    @Environment(\.platform) var platform: Platform
 
     public typealias Data = [Element]
 
@@ -224,7 +225,8 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                             ? Color.border
                             : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
                 )
-                .shadowElevaton(.z2)
+                .shadowElevaton(platform == .macOS ? .z0 : .z2)
+
         case .graySurface:
 
             if style.unseletionStyle == .clean {
@@ -246,6 +248,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                     style: .continuous)
                     .strokeBorder(Color.onSurfaceSecondary, lineWidth: 2)
             }
+
         case .accentSurface:
             RoundedRectangle(
                 cornerRadius: style.isShowBackground ? controlRadius.rawValue - 4 : controlRadius.rawValue,
@@ -261,17 +264,23 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
         case .clean:
             EmptyView()
         case .surface:
-
-            RoundedRectangle(cornerRadius: controlRadius,
-                             style: .continuous)
-                .fill(Color.surfaceSecondary)
-                .overlay(
-                    RoundedRectangle(cornerRadius: controlRadius,
-                                     style: .continuous)
-                        .stroke(theme.borderControls
-                            ? Color.border
-                            : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
+            RoundedRectangle(
+                cornerRadius: controlRadius,
+                style: .continuous
+            )
+            .fill(Color.surfaceSecondary)
+            .overlay(
+                RoundedRectangle(
+                    cornerRadius: controlRadius,
+                    style: .continuous
                 )
+                .stroke(
+                    theme.borderControls
+                        ? Color.border
+                        : Color.surfaceSecondary,
+                    lineWidth: CGFloat(theme.borderSize)
+                )
+            )
         }
     }
 }

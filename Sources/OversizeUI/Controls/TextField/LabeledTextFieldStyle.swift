@@ -122,7 +122,7 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
 
     private var fieldRadius: Radius {
         #if os(macOS)
-        return .xSmall
+        return .small
         #else
         return .medium
         #endif

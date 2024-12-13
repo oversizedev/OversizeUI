@@ -43,14 +43,14 @@ public class ThemeSettings: ObservableObject, @unchecked Sendable {
     @AppStorage(ThemeSettingsNames.borderTextFields) public var borderTextFields: Bool = true
     @AppStorage(ThemeSettingsNames.borderSurface) public var borderSurface: Bool = true
     @AppStorage(ThemeSettingsNames.radius) public var radius: Double = 4
+    @AppStorage(ThemeSettingsNames.borderControls) public var borderControls: Bool = true
     #else
     @AppStorage(ThemeSettingsNames.borderSurface) public var borderSurface: Bool = false
     @AppStorage(ThemeSettingsNames.borderTextFields) public var borderTextFields: Bool = false
     @AppStorage(ThemeSettingsNames.borderSize) public var borderSize: Double = 0.5
     @AppStorage(ThemeSettingsNames.radius) public var radius: Double = 8
-    #endif
-
     @AppStorage(ThemeSettingsNames.borderControls) public var borderControls: Bool = false
+    #endif
 
     @AppStorage(ThemeSettingsNames.theme) public var theme: Int = 0
 
