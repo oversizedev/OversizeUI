@@ -15,13 +15,14 @@ public struct RadioPicker<Element: Equatable, Content>: View where Content: View
     private let verticalAlignment: VerticalAlignment
     private let content: (Data.Element) -> Content
 
-    public init(_ data: Data,
-                selection: Binding<Data.Element>,
-                defaultSelection: Bool = true,
-                alignment: RadioAlignment = .trailing,
-                verticalAlignment: VerticalAlignment = .center,
-                @ViewBuilder content: @escaping (Data.Element) -> Content)
-    {
+    public init(
+        _ data: Data,
+        selection: Binding<Data.Element>,
+        defaultSelection: Bool = true,
+        alignment: RadioAlignment = .trailing,
+        verticalAlignment: VerticalAlignment = .center,
+        @ViewBuilder content: @escaping (Data.Element) -> Content
+    ) {
         self.data = data
         _selection = selection
         self.defaultSelection = defaultSelection

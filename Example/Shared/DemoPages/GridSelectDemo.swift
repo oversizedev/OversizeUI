@@ -17,24 +17,30 @@ struct GridSelectDemo: View {
         PageView("Grid select") {
             VStack(spacing: .xSmall) {
                 ScrollView {
-                    GridSelect(items, selection: $selection,
-                               content: { item, _ in
-                                   VStack {
-                                       IconDeprecated(.circle)
-                                       Text(item)
-                                   }.padding()
-                               })
+                    GridSelect(
+                        items,
+                        selection: $selection,
+                        content: { item, _ in
+                            VStack {
+                                IconDeprecated(.circle)
+                                Text(item)
+                            }.padding()
+                        }
+                    )
                 }
 
-                GridSelect(items2, selection: $selection,
-                           content: { item, _ in
-                               VStack {
-                                   IconDeprecated(.circle)
-                                   Text(item)
-                               }.padding()
-                           })
+                GridSelect(
+                    items2,
+                    selection: $selection,
+                    content: { item, _ in
+                        VStack {
+                            IconDeprecated(.circle)
+                            Text(item)
+                        }.padding()
+                    }
+                )
 
-                           .gridSelectStyle(SelectionOnlyGridSelectStyle())
+                .gridSelectStyle(SelectionOnlyGridSelectStyle())
             }
             .padding()
         }

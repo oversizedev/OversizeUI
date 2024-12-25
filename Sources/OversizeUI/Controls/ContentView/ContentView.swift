@@ -27,12 +27,13 @@ public struct ContentView: View {
     private let primaryButton: ContenButtonType?
     private let secondaryButton: ContenButtonType?
 
-    public init(image: Image? = nil,
-                title: String,
-                subtitle: String? = nil,
-                primaryButton: ContenButtonType? = nil,
-                secondaryButton: ContenButtonType? = nil)
-    {
+    public init(
+        image: Image? = nil,
+        title: String,
+        subtitle: String? = nil,
+        primaryButton: ContenButtonType? = nil,
+        secondaryButton: ContenButtonType? = nil
+    ) {
         self.image = image
         self.title = title
         self.subtitle = subtitle
@@ -45,7 +46,8 @@ public struct ContentView: View {
         VStack(alignment: vStackAlignment, spacing: .large) {
             if let image {
                 image
-                    .frame(width: 218, height: 218, alignment: .bottom)
+                    .resizable()
+                    .frame(width: 128, height: 128, alignment: .bottom)
             }
 
             TextBox(

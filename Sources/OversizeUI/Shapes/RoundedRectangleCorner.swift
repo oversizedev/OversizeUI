@@ -40,8 +40,11 @@ public struct RoundedRectangleCorner: Shape {
 
     public func path(in rect: CGRect) -> Path {
         #if canImport(UIKit)
-        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners,
-                                cornerRadii: CGSize(width: radius, height: radius))
+        let path = UIBezierPath(
+            roundedRect: rect,
+            byRoundingCorners: corners,
+            cornerRadii: CGSize(width: radius, height: radius)
+        )
         return Path(path.cgPath)
         #else
         let path = NSBezierPath()
@@ -55,30 +58,38 @@ public struct RoundedRectangleCorner: Shape {
 
         path.line(to: CGPoint(x: rect.maxX - topRightRadius, y: rect.minY))
         if topRightRadius > 0 {
-            path.curve(to: CGPoint(x: rect.maxX, y: rect.minY + topRightRadius),
-                       controlPoint1: CGPoint(x: rect.maxX - topRightRadius / 2, y: rect.minY),
-                       controlPoint2: CGPoint(x: rect.maxX, y: rect.minY + topRightRadius / 2))
+            path.curve(
+                to: CGPoint(x: rect.maxX, y: rect.minY + topRightRadius),
+                controlPoint1: CGPoint(x: rect.maxX - topRightRadius / 2, y: rect.minY),
+                controlPoint2: CGPoint(x: rect.maxX, y: rect.minY + topRightRadius / 2)
+            )
         }
 
         path.line(to: CGPoint(x: rect.maxX, y: rect.maxY - bottomRightRadius))
         if bottomRightRadius > 0 {
-            path.curve(to: CGPoint(x: rect.maxX - bottomRightRadius, y: rect.maxY),
-                       controlPoint1: CGPoint(x: rect.maxX, y: rect.maxY - bottomRightRadius / 2),
-                       controlPoint2: CGPoint(x: rect.maxX - bottomRightRadius / 2, y: rect.maxY))
+            path.curve(
+                to: CGPoint(x: rect.maxX - bottomRightRadius, y: rect.maxY),
+                controlPoint1: CGPoint(x: rect.maxX, y: rect.maxY - bottomRightRadius / 2),
+                controlPoint2: CGPoint(x: rect.maxX - bottomRightRadius / 2, y: rect.maxY)
+            )
         }
 
         path.line(to: CGPoint(x: rect.minX + bottomLeftRadius, y: rect.maxY))
         if bottomLeftRadius > 0 {
-            path.curve(to: CGPoint(x: rect.minX, y: rect.maxY - bottomLeftRadius),
-                       controlPoint1: CGPoint(x: rect.minX + bottomLeftRadius / 2, y: rect.maxY),
-                       controlPoint2: CGPoint(x: rect.minX, y: rect.maxY - bottomLeftRadius / 2))
+            path.curve(
+                to: CGPoint(x: rect.minX, y: rect.maxY - bottomLeftRadius),
+                controlPoint1: CGPoint(x: rect.minX + bottomLeftRadius / 2, y: rect.maxY),
+                controlPoint2: CGPoint(x: rect.minX, y: rect.maxY - bottomLeftRadius / 2)
+            )
         }
 
         path.line(to: CGPoint(x: rect.minX, y: rect.minY + topLeftRadius))
         if topLeftRadius > 0 {
-            path.curve(to: CGPoint(x: rect.minX + topLeftRadius, y: rect.minY),
-                       controlPoint1: CGPoint(x: rect.minX, y: rect.minY + topLeftRadius / 2),
-                       controlPoint2: CGPoint(x: rect.minX + topLeftRadius / 2, y: rect.minY))
+            path.curve(
+                to: CGPoint(x: rect.minX + topLeftRadius, y: rect.minY),
+                controlPoint1: CGPoint(x: rect.minX, y: rect.minY + topLeftRadius / 2),
+                controlPoint2: CGPoint(x: rect.minX + topLeftRadius / 2, y: rect.minY)
+            )
         }
 
         path.close()

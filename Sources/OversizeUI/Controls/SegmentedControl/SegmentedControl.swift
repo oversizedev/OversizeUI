@@ -23,19 +23,22 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
     private let content: (Data.Element, Bool) -> Content
     private let action: (() -> Void)?
 
-    public init(_ data: Data,
-                selection: Binding<Data.Element>,
-                @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
-                @ViewBuilder selectionView: @escaping () -> Selection? = { nil },
-                action: (() -> Void)? = nil)
-    {
+    public init(
+        _ data: Data,
+        selection: Binding<Data.Element>,
+        @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
+        @ViewBuilder selectionView: @escaping () -> Selection? = { nil },
+        action: (() -> Void)? = nil
+    ) {
         self.data = data
         self.content = content
         self.selectionView = selectionView
         self.action = action
         _selection = selection
-        _frames = State(wrappedValue: Array(repeating: .zero,
-                                            count: data.count))
+        _frames = State(wrappedValue: Array(
+            repeating: .zero,
+            count: data.count
+        ))
     }
 
     public var body: some View {
@@ -103,27 +106,33 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                         },
                         label: {
                             HStack(spacing: 0) {
-                                content(data[index],
-                                        selectedIndex == index)
-                                    .body(.semibold)
-                                    .foregroundColor(style.seletionStyle == .accentSurface && selectedIndex == index ? Color.onPrimary : Color.onSurfacePrimary)
-                                    .multilineTextAlignment(.center)
-                                    .contentShape(Rectangle())
-                                    .frame(
-                                        maxWidth: .infinity,
-                                        alignment: .center
-                                    )
+                                content(
+                                    data[index],
+                                    selectedIndex == index
+                                )
+                                .body(.semibold)
+                                .foregroundColor(style.seletionStyle == .accentSurface && selectedIndex == index ? Color.onPrimary : Color.onSurfacePrimary)
+                                .multilineTextAlignment(.center)
+                                .contentShape(Rectangle())
+                                .frame(
+                                    maxWidth: .infinity,
+                                    alignment: .center
+                                )
                             }
                             .padding(.leading, controlPadding.leading)
                             .padding(.trailing, controlPadding.trailing)
-                            .padding(.top,
-                                     controlPadding.top != Space.zero || controlPadding.top != Space.xxSmall
-                                         ? controlPadding.top.rawValue - Space.xxSmall.rawValue
-                                         : Space.zero.rawValue)
-                            .padding(.bottom,
-                                     controlPadding.bottom != Space.zero || controlPadding.bottom != Space.xxSmall
-                                         ? controlPadding.bottom.rawValue - Space.xxSmall.rawValue
-                                         : Space.zero.rawValue)
+                            .padding(
+                                .top,
+                                controlPadding.top != Space.zero || controlPadding.top != Space.xxSmall
+                                    ? controlPadding.top.rawValue - Space.xxSmall.rawValue
+                                    : Space.zero.rawValue
+                            )
+                            .padding(
+                                .bottom,
+                                controlPadding.bottom != Space.zero || controlPadding.bottom != Space.xxSmall
+                                    ? controlPadding.bottom.rawValue - Space.xxSmall.rawValue
+                                    : Space.zero.rawValue
+                            )
                             .background(selectedIndex != index
                                 ? getUnselection(unselectionStyle: style.unseletionStyle)
                                 : nil)
@@ -148,16 +157,19 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
     }
 
     private var leadingSegmentedControl: some View {
-        ZStack(alignment: Alignment(horizontal: .horizontalCenterAlignment,
-                                    vertical: .center))
-        {
+        ZStack(alignment: Alignment(
+            horizontal: .horizontalCenterAlignment,
+            vertical: .center
+        )) {
             if let selectedIndex {
                 HStack {
                     selectionView()
                         .contentShape(Rectangle())
                 }
-                .frame(width: frames[selectedIndex].width,
-                       height: frames[selectedIndex].height)
+                .frame(
+                    width: frames[selectedIndex].width,
+                    height: frames[selectedIndex].height
+                )
                 .alignmentGuide(.horizontalCenterAlignment) { dimensions in
                     dimensions[HorizontalAlignment.center]
                 }
@@ -178,14 +190,18 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                             .multilineTextAlignment(.center)
                             .padding(.leading, controlPadding.leading)
                             .padding(.trailing, controlPadding.trailing)
-                            .padding(.top,
-                                     controlPadding.top != Space.zero || controlPadding.top != Space.xxSmall
-                                         ? controlPadding.top.rawValue - Space.xxSmall.rawValue
-                                         : Space.zero.rawValue)
-                            .padding(.bottom,
-                                     controlPadding.bottom != Space.zero || controlPadding.bottom != Space.xxSmall
-                                         ? controlPadding.bottom.rawValue - Space.xxSmall.rawValue
-                                         : Space.zero.rawValue)
+                            .padding(
+                                .top,
+                                controlPadding.top != Space.zero || controlPadding.top != Space.xxSmall
+                                    ? controlPadding.top.rawValue - Space.xxSmall.rawValue
+                                    : Space.zero.rawValue
+                            )
+                            .padding(
+                                .bottom,
+                                controlPadding.bottom != Space.zero || controlPadding.bottom != Space.xxSmall
+                                    ? controlPadding.bottom.rawValue - Space.xxSmall.rawValue
+                                    : Space.zero.rawValue
+                            )
                             .background(selectedIndex != index
                                 ? getUnselection(unselectionStyle: style.unseletionStyle)
                                 : nil)
@@ -213,40 +229,56 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
         switch selectionStyle {
         case .shadowSurface:
 
-            RoundedRectangle(cornerRadius: style.isShowBackground ? controlRadius.rawValue - 4 : controlRadius.rawValue,
-                             style: .continuous)
-                .fill(Color.surfacePrimary)
-                .overlay(
-                    RoundedRectangle(cornerRadius: style.isShowBackground
+            RoundedRectangle(
+                cornerRadius: style.isShowBackground ? controlRadius.rawValue - 4 : controlRadius.rawValue,
+                style: .continuous
+            )
+            .fill(Color.surfacePrimary)
+            .overlay(
+                RoundedRectangle(
+                    cornerRadius: style.isShowBackground
                         ? controlRadius.rawValue - 4
                         : controlRadius.rawValue,
-                        style: .continuous)
-                        .stroke(theme.borderControls
-                            ? Color.border
-                            : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
+                    style: .continuous
                 )
-                .shadowElevaton(platform == .macOS ? .z0 : .z2)
+                .stroke(
+                    theme.borderControls
+                        ? Color.border
+                        : Color.surfaceSecondary,
+                    lineWidth: CGFloat(theme.borderSize)
+                )
+            )
+            .shadowElevaton(platform == .macOS ? .z0 : .z2)
 
         case .graySurface:
 
             if style.unseletionStyle == .clean {
-                RoundedRectangle(cornerRadius: controlRadius,
-                                 style: .continuous)
-                    .fill(Color.surfaceSecondary)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: controlRadius,
-                                         style: .continuous)
-                            .stroke(theme.borderControls
-                                ? Color.border
-                                : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
+                RoundedRectangle(
+                    cornerRadius: controlRadius,
+                    style: .continuous
+                )
+                .fill(Color.surfaceSecondary)
+                .overlay(
+                    RoundedRectangle(
+                        cornerRadius: controlRadius,
+                        style: .continuous
                     )
+                    .stroke(
+                        theme.borderControls
+                            ? Color.border
+                            : Color.surfaceSecondary,
+                        lineWidth: CGFloat(theme.borderSize)
+                    )
+                )
 
             } else {
-                RoundedRectangle(cornerRadius: style.isShowBackground
-                    ? controlRadius.rawValue - 4
-                    : controlRadius.rawValue,
-                    style: .continuous)
-                    .strokeBorder(Color.onSurfaceSecondary, lineWidth: 2)
+                RoundedRectangle(
+                    cornerRadius: style.isShowBackground
+                        ? controlRadius.rawValue - 4
+                        : controlRadius.rawValue,
+                    style: .continuous
+                )
+                .strokeBorder(Color.onSurfaceSecondary, lineWidth: 2)
             }
 
         case .accentSurface:
@@ -286,18 +318,21 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
 }
 
 public extension SegmentedPickerSelector where Selection == EmptyView {
-    init(_ data: Data,
-         selection: Binding<Data.Element>,
-         @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
-         action: (() -> Void)? = nil)
-    {
+    init(
+        _ data: Data,
+        selection: Binding<Data.Element>,
+        @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
+        action: (() -> Void)? = nil
+    ) {
         self.data = data
         self.content = content
         self.action = action
         selectionView = { nil }
         _selection = selection
-        _frames = State(wrappedValue: Array(repeating: .zero,
-                                            count: data.count))
+        _frames = State(wrappedValue: Array(
+            repeating: .zero,
+            count: data.count
+        ))
     }
 }
 

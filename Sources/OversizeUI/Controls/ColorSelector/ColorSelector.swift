@@ -90,9 +90,13 @@ public struct ColorPickerWithoutBorder: View {
             .cornerRadius(19.0)
             .background(
                 ZStack {
-                    AngularGradient(gradient: Gradient(colors:
-                        [.red, .yellow, .green, .blue, .purple, .red]),
-                    center: .center, startAngle: .zero, endAngle: .degrees(360)).cornerRadius(16)
+                    AngularGradient(
+                        gradient: Gradient(colors:
+                            [.red, .yellow, .green, .blue, .purple, .red]),
+                        center: .center,
+                        startAngle: .zero,
+                        endAngle: .degrees(360)
+                    ).cornerRadius(16)
                         .frame(width: 32, height: 32)
 
                     Circle()

@@ -30,10 +30,11 @@ public struct IconPicker: View {
         }
     }
 
-    public init(_ label: String,
-                _ icons: [Image],
-                selection: Binding<Image?>)
-    {
+    public init(
+        _ label: String,
+        _ icons: [Image],
+        selection: Binding<Image?>
+    ) {
         self.label = label
         self.icons = icons
         _selection = selection

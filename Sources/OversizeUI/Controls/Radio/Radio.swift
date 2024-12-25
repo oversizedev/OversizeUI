@@ -19,12 +19,13 @@ public struct Radio<Label: View>: View {
     private var title: String?
     private let action: (() -> Void)?
 
-    public init(isOn: Bool,
-                alignment: RadioAlignment = .trailing,
-                verticalAlignment: VerticalAlignment = .center,
-                action: (() -> Void)? = nil,
-                @ViewBuilder label: @escaping () -> Label? = { nil })
-    {
+    public init(
+        isOn: Bool,
+        alignment: RadioAlignment = .trailing,
+        verticalAlignment: VerticalAlignment = .center,
+        action: (() -> Void)? = nil,
+        @ViewBuilder label: @escaping () -> Label? = { nil }
+    ) {
         self.isOn = isOn
         self.alignment = alignment
         self.verticalAlignment = verticalAlignment
@@ -108,11 +109,12 @@ public struct Radio<Label: View>: View {
 }
 
 public extension Radio where Label == EmptyView {
-    init(_ title: String,
-         isOn: Bool,
-         alignment: RadioAlignment = .trailing,
-         action: (() -> Void)? = nil)
-    {
+    init(
+        _ title: String,
+        isOn: Bool,
+        alignment: RadioAlignment = .trailing,
+        action: (() -> Void)? = nil
+    ) {
         self.title = title
         self.isOn = isOn
         self.alignment = alignment

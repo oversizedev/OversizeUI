@@ -26,10 +26,12 @@ public struct PaddingEdgeInsetsModifier: ViewModifier {
 
     public func body(content: Content) -> some View {
         content.padding(
-            EdgeInsets(top: insets.top.rawValue,
-                       leading: insets.leading.rawValue,
-                       bottom: insets.bottom.rawValue,
-                       trailing: insets.trailing.rawValue)
+            EdgeInsets(
+                top: insets.top.rawValue,
+                leading: insets.leading.rawValue,
+                bottom: insets.bottom.rawValue,
+                trailing: insets.trailing.rawValue
+            )
         )
     }
 }
@@ -40,9 +42,12 @@ public struct ContentPaddingModifier: ViewModifier {
     let edges: Edge.Set
     let length = Space.medium
     public func body(content: Content) -> some View {
-        content.padding(edges, horizontalSizeClass == .compact
-            ? length.rawValue
-            : length.rawValue + Space.large.rawValue)
+        content.padding(
+            edges,
+            horizontalSizeClass == .compact
+                ? length.rawValue
+                : length.rawValue + Space.large.rawValue
+        )
     }
     #else
     let edges: Edge.Set

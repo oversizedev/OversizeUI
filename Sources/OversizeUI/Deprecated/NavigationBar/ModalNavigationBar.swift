@@ -21,17 +21,18 @@ public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar:
     private let background: Color
     private var maxHeight: CGFloat = 100
 
-    public init(title: String,
-                largeTitle: Bool = true,
-                isDisableScrollShadow: Bool = false,
-                offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
-                background: Color = Color.backgroundPrimary,
-                alwaysSlideSmallTile: Bool = false,
-                @ViewBuilder leadingBar: @escaping () -> LeadingBar,
-                @ViewBuilder trailingBar: @escaping () -> TrailingBar,
-                @ViewBuilder bottomBar: @escaping () -> BottomBar,
-                @ViewBuilder titleLabel: @escaping () -> TitleLabel)
-    {
+    public init(
+        title: String,
+        largeTitle: Bool = true,
+        isDisableScrollShadow: Bool = false,
+        offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
+        background: Color = Color.backgroundPrimary,
+        alwaysSlideSmallTile: Bool = false,
+        @ViewBuilder leadingBar: @escaping () -> LeadingBar,
+        @ViewBuilder trailingBar: @escaping () -> TrailingBar,
+        @ViewBuilder bottomBar: @escaping () -> BottomBar,
+        @ViewBuilder titleLabel: @escaping () -> TitleLabel
+    ) {
         self.title = title
         self.largeTitle = largeTitle
         _offset = offset
@@ -66,10 +67,12 @@ public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar:
         .background {
             Rectangle()
                 .fill(background.opacity(min(smallBackgroundOpacity, 1)))
-                .shadow(color: Color.black.opacity(min(shadowOpacity, 0.08)),
-                        radius: max(offset.y * 0, 1, 8),
-                        x: 0,
-                        y: 2)
+                .shadow(
+                    color: Color.black.opacity(min(shadowOpacity, 0.08)),
+                    radius: max(offset.y * 0, 1, 8),
+                    x: 0,
+                    y: 2
+                )
                 .ignoresSafeArea()
         }
         #if os(iOS)
@@ -211,13 +214,14 @@ public extension ModalNavigationBar
     BottomBar == EmptyView,
     TitleLabel == EmptyView
 {
-    init(title: String,
-         largeTitle: Bool = true,
-         background: Color = Color.backgroundPrimary,
-         isDisableScrollShadow: Bool = false,
-         offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
-         alwaysSlideSmallTile: Bool = false)
-    {
+    init(
+        title: String,
+        largeTitle: Bool = true,
+        background: Color = Color.backgroundPrimary,
+        isDisableScrollShadow: Bool = false,
+        offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
+        alwaysSlideSmallTile: Bool = false
+    ) {
         self.title = title
         self.largeTitle = largeTitle
         self.background = background
@@ -236,15 +240,16 @@ public extension ModalNavigationBar
     BottomBar == EmptyView,
     TitleLabel == EmptyView
 {
-    init(title: String,
-         largeTitle: Bool = true,
-         background: Color = Color.backgroundPrimary,
-         isDisableScrollShadow: Bool = false,
-         offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
-         alwaysSlideSmallTile: Bool = false,
-         @ViewBuilder leadingBar: @escaping () -> LeadingBar,
-         @ViewBuilder trailingBar: @escaping () -> TrailingBar)
-    {
+    init(
+        title: String,
+        largeTitle: Bool = true,
+        background: Color = Color.backgroundPrimary,
+        isDisableScrollShadow: Bool = false,
+        offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
+        alwaysSlideSmallTile: Bool = false,
+        @ViewBuilder leadingBar: @escaping () -> LeadingBar,
+        @ViewBuilder trailingBar: @escaping () -> TrailingBar
+    ) {
         self.title = title
         self.largeTitle = largeTitle
         self.background = background
@@ -264,15 +269,16 @@ public extension ModalNavigationBar
     BottomBar == EmptyView,
     TitleLabel == EmptyView
 {
-    init(title: String,
-         largeTitle: Bool = true,
-         background: Color = Color.backgroundPrimary,
-         isDisableScrollShadow: Bool = false,
-         offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
-         modalityPresent _: Bool = true,
-         alwaysSlideSmallTile: Bool = false,
-         @ViewBuilder leadingBar: @escaping () -> LeadingBar)
-    {
+    init(
+        title: String,
+        largeTitle: Bool = true,
+        background: Color = Color.backgroundPrimary,
+        isDisableScrollShadow: Bool = false,
+        offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
+        modalityPresent _: Bool = true,
+        alwaysSlideSmallTile: Bool = false,
+        @ViewBuilder leadingBar: @escaping () -> LeadingBar
+    ) {
         self.title = title
         self.largeTitle = largeTitle
         self.background = background
@@ -292,15 +298,16 @@ public extension ModalNavigationBar
     BottomBar == EmptyView,
     TitleLabel == EmptyView
 {
-    init(title: String,
-         largeTitle: Bool = true,
-         background: Color = Color.backgroundPrimary,
-         isDisableScrollShadow: Bool = false,
-         offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
-         modalityPresent _: Bool = true,
-         alwaysSlideSmallTile: Bool = false,
-         @ViewBuilder trailingBar: @escaping () -> TrailingBar)
-    {
+    init(
+        title: String,
+        largeTitle: Bool = true,
+        background: Color = Color.backgroundPrimary,
+        isDisableScrollShadow: Bool = false,
+        offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
+        modalityPresent _: Bool = true,
+        alwaysSlideSmallTile: Bool = false,
+        @ViewBuilder trailingBar: @escaping () -> TrailingBar
+    ) {
         self.title = title
         self.largeTitle = largeTitle
         self.background = background
@@ -320,15 +327,16 @@ public extension ModalNavigationBar
     TrailingBar == EmptyView,
     TitleLabel == EmptyView
 {
-    init(title: String,
-         largeTitle: Bool = true,
-         background: Color = Color.backgroundPrimary,
-         isDisableScrollShadow: Bool = false,
-         offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
-         modalityPresent _: Bool = true,
-         alwaysSlideSmallTile: Bool = false,
-         @ViewBuilder bottomBar: @escaping () -> BottomBar)
-    {
+    init(
+        title: String,
+        largeTitle: Bool = true,
+        background: Color = Color.backgroundPrimary,
+        isDisableScrollShadow: Bool = false,
+        offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
+        modalityPresent _: Bool = true,
+        alwaysSlideSmallTile: Bool = false,
+        @ViewBuilder bottomBar: @escaping () -> BottomBar
+    ) {
         self.title = title
         self.largeTitle = largeTitle
         self.background = background
@@ -347,15 +355,16 @@ public extension ModalNavigationBar
     LeadingBar == EmptyView,
     TitleLabel == EmptyView
 {
-    init(title: String,
-         largeTitle: Bool = true,
-         background: Color = Color.backgroundPrimary,
-         isDisableScrollShadow: Bool = false,
-         offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
-         alwaysSlideSmallTile: Bool = false,
-         @ViewBuilder trailingBar: @escaping () -> TrailingBar,
-         @ViewBuilder bottomBar: @escaping () -> BottomBar)
-    {
+    init(
+        title: String,
+        largeTitle: Bool = true,
+        background: Color = Color.backgroundPrimary,
+        isDisableScrollShadow: Bool = false,
+        offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
+        alwaysSlideSmallTile: Bool = false,
+        @ViewBuilder trailingBar: @escaping () -> TrailingBar,
+        @ViewBuilder bottomBar: @escaping () -> BottomBar
+    ) {
         self.title = title
         self.largeTitle = largeTitle
         self.background = background
@@ -374,15 +383,16 @@ public extension ModalNavigationBar
     TrailingBar == EmptyView,
     TitleLabel == EmptyView
 {
-    init(title: String,
-         largeTitle: Bool = true,
-         background: Color = Color.backgroundPrimary,
-         isDisableScrollShadow: Bool = false,
-         offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
-         alwaysSlideSmallTile: Bool = false,
-         @ViewBuilder leadingBar: @escaping () -> LeadingBar,
-         @ViewBuilder bottomBar: @escaping () -> BottomBar)
-    {
+    init(
+        title: String,
+        largeTitle: Bool = true,
+        background: Color = Color.backgroundPrimary,
+        isDisableScrollShadow: Bool = false,
+        offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
+        alwaysSlideSmallTile: Bool = false,
+        @ViewBuilder leadingBar: @escaping () -> LeadingBar,
+        @ViewBuilder bottomBar: @escaping () -> BottomBar
+    ) {
         self.title = title
         self.largeTitle = largeTitle
         self.background = background
@@ -402,14 +412,15 @@ public extension ModalNavigationBar
     TrailingBar == EmptyView,
     BottomBar == EmptyView
 {
-    init(title: String,
-         largeTitle: Bool = true,
-         background: Color = Color.backgroundPrimary,
-         isDisableScrollShadow: Bool = false,
-         offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
-         alwaysSlideSmallTile: Bool = false,
-         @ViewBuilder titleLabel: @escaping () -> TitleLabel)
-    {
+    init(
+        title: String,
+        largeTitle: Bool = true,
+        background: Color = Color.backgroundPrimary,
+        isDisableScrollShadow: Bool = false,
+        offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
+        alwaysSlideSmallTile: Bool = false,
+        @ViewBuilder titleLabel: @escaping () -> TitleLabel
+    ) {
         self.title = title
         self.largeTitle = largeTitle
         self.background = background
@@ -427,16 +438,17 @@ public extension ModalNavigationBar
     where
     TrailingBar == EmptyView
 {
-    init(title: String,
-         largeTitle: Bool = true,
-         background: Color = Color.backgroundPrimary,
-         isDisableScrollShadow: Bool = false,
-         offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
-         alwaysSlideSmallTile: Bool = false,
-         @ViewBuilder titleLabel: @escaping () -> TitleLabel,
-         @ViewBuilder bottomBar: @escaping () -> BottomBar,
-         @ViewBuilder leadingBar: @escaping () -> LeadingBar)
-    {
+    init(
+        title: String,
+        largeTitle: Bool = true,
+        background: Color = Color.backgroundPrimary,
+        isDisableScrollShadow: Bool = false,
+        offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
+        alwaysSlideSmallTile: Bool = false,
+        @ViewBuilder titleLabel: @escaping () -> TitleLabel,
+        @ViewBuilder bottomBar: @escaping () -> BottomBar,
+        @ViewBuilder leadingBar: @escaping () -> LeadingBar
+    ) {
         self.title = title
         self.largeTitle = largeTitle
         self.background = background
@@ -454,16 +466,17 @@ public extension ModalNavigationBar
     where
     LeadingBar == EmptyView
 {
-    init(title: String,
-         largeTitle: Bool = true,
-         background: Color = Color.backgroundPrimary,
-         isDisableScrollShadow: Bool = false,
-         offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
-         alwaysSlideSmallTile: Bool = false,
-         @ViewBuilder titleLabel: @escaping () -> TitleLabel,
-         @ViewBuilder bottomBar: @escaping () -> BottomBar,
-         @ViewBuilder trailingBar: @escaping () -> TrailingBar)
-    {
+    init(
+        title: String,
+        largeTitle: Bool = true,
+        background: Color = Color.backgroundPrimary,
+        isDisableScrollShadow: Bool = false,
+        offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
+        alwaysSlideSmallTile: Bool = false,
+        @ViewBuilder titleLabel: @escaping () -> TitleLabel,
+        @ViewBuilder bottomBar: @escaping () -> BottomBar,
+        @ViewBuilder trailingBar: @escaping () -> TrailingBar
+    ) {
         self.title = title
         self.largeTitle = largeTitle
         self.background = background
@@ -482,15 +495,16 @@ public extension ModalNavigationBar
     TrailingBar == EmptyView,
     BottomBar == EmptyView
 {
-    init(title: String,
-         largeTitle: Bool = true,
-         background: Color = Color.backgroundPrimary,
-         isDisableScrollShadow: Bool = false,
-         offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
-         alwaysSlideSmallTile: Bool = false,
-         @ViewBuilder titleLabel: @escaping () -> TitleLabel,
-         @ViewBuilder leadingBar: @escaping () -> LeadingBar)
-    {
+    init(
+        title: String,
+        largeTitle: Bool = true,
+        background: Color = Color.backgroundPrimary,
+        isDisableScrollShadow: Bool = false,
+        offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
+        alwaysSlideSmallTile: Bool = false,
+        @ViewBuilder titleLabel: @escaping () -> TitleLabel,
+        @ViewBuilder leadingBar: @escaping () -> LeadingBar
+    ) {
         self.title = title
         self.largeTitle = largeTitle
         self.background = background
@@ -509,15 +523,16 @@ public extension ModalNavigationBar
     LeadingBar == EmptyView,
     BottomBar == EmptyView
 {
-    init(title: String,
-         largeTitle: Bool = true,
-         background: Color = Color.backgroundPrimary,
-         isDisableScrollShadow: Bool = false,
-         offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
-         alwaysSlideSmallTile: Bool = false,
-         @ViewBuilder titleLabel: @escaping () -> TitleLabel,
-         @ViewBuilder trailingBar: @escaping () -> TrailingBar)
-    {
+    init(
+        title: String,
+        largeTitle: Bool = true,
+        background: Color = Color.backgroundPrimary,
+        isDisableScrollShadow: Bool = false,
+        offset: Binding<CGPoint> = .constant(CGPoint(x: 0, y: 0)),
+        alwaysSlideSmallTile: Bool = false,
+        @ViewBuilder titleLabel: @escaping () -> TitleLabel,
+        @ViewBuilder trailingBar: @escaping () -> TrailingBar
+    ) {
         self.title = title
         self.largeTitle = largeTitle
         self.background = background

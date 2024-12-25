@@ -30,13 +30,14 @@ public struct ScreenSize: Sendable {
         safeAreaTrailing = 0
     }
 
-    public init(width: CGFloat,
-                height: CGFloat,
-                safeAreaTop: CGFloat,
-                safeAreaBottom: CGFloat,
-                safeAreaLeading: CGFloat,
-                safeAreaTrailing: CGFloat)
-    {
+    public init(
+        width: CGFloat,
+        height: CGFloat,
+        safeAreaTop: CGFloat,
+        safeAreaBottom: CGFloat,
+        safeAreaLeading: CGFloat,
+        safeAreaTrailing: CGFloat
+    ) {
         safeAreaWidth = width
         safeAreaHeight = height
         self.safeAreaTop = safeAreaTop
@@ -46,12 +47,14 @@ public struct ScreenSize: Sendable {
     }
 
     public init(geometry: GeometryProxy) {
-        self.init(width: geometry.size.width,
-                  height: geometry.size.height,
-                  safeAreaTop: geometry.safeAreaInsets.top,
-                  safeAreaBottom: geometry.safeAreaInsets.bottom,
-                  safeAreaLeading: geometry.safeAreaInsets.leading,
-                  safeAreaTrailing: geometry.safeAreaInsets.trailing)
+        self.init(
+            width: geometry.size.width,
+            height: geometry.size.height,
+            safeAreaTop: geometry.safeAreaInsets.top,
+            safeAreaBottom: geometry.safeAreaInsets.bottom,
+            safeAreaLeading: geometry.safeAreaInsets.leading,
+            safeAreaTrailing: geometry.safeAreaInsets.trailing
+        )
     }
 }
 

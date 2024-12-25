@@ -236,11 +236,12 @@ public extension View {
     }
 
     @available(*, deprecated, message: "Use without elevation")
-    func surface(elevation: Elevation = .z0,
-                 background: SurfaceStyle = .primary,
-                 padding: Space = .medium,
-                 radius: Radius = .medium) -> some View
-    {
+    func surface(
+        elevation: Elevation = .z0,
+        background: SurfaceStyle = .primary,
+        padding: Space = .medium,
+        radius: Radius = .medium
+    ) -> some View {
         Surface { self }
             .surfaceStyle(background)
             .controlPadding(padding)
@@ -250,9 +251,10 @@ public extension View {
 }
 
 public extension Surface where Label == VStack<TupleView<(Row<Image, EmptyView>, Row<Image, EmptyView>)>> {
-    init(action: (() -> Void)? = nil,
-         @ViewBuilder label: () -> Label)
-    {
+    init(
+        action: (() -> Void)? = nil,
+        @ViewBuilder label: () -> Label
+    ) {
         self.label = label()
         self.action = action
         forceContentInsets = .init(horizontal: .zero, vertical: .small)
@@ -260,9 +262,10 @@ public extension Surface where Label == VStack<TupleView<(Row<Image, EmptyView>,
 }
 
 public extension Surface where Label == Row<EmptyView, EmptyView> {
-    init(action: (() -> Void)? = nil,
-         @ViewBuilder label: () -> Label)
-    {
+    init(
+        action: (() -> Void)? = nil,
+        @ViewBuilder label: () -> Label
+    ) {
         self.label = label()
         self.action = action
         forceContentInsets = .init(horizontal: .zero, vertical: .small)
@@ -270,9 +273,10 @@ public extension Surface where Label == Row<EmptyView, EmptyView> {
 }
 
 public extension Surface where Label == Row<Image, EmptyView> {
-    init(action: (() -> Void)? = nil,
-         @ViewBuilder label: () -> Label)
-    {
+    init(
+        action: (() -> Void)? = nil,
+        @ViewBuilder label: () -> Label
+    ) {
         self.label = label()
         self.action = action
         forceContentInsets = .init(horizontal: .zero, vertical: .small)

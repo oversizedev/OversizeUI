@@ -28,15 +28,16 @@ public struct TextFieldExtended: View {
     public var secure: Bool
     @State private var focused: Bool = false
 
-    public init(_ placeholder: String,
-                text: Binding<String>,
-                helperText: Binding<String> = .constant(""),
-                helperStyle: Binding<FieldHelperStyle> = .constant(.none),
-                leadingImage: IconsNames = .none,
-                trallingImage: IconsNames = .none,
-                placeholderPosition: TextFieldPlaceholderPosition = .overField,
-                secure: Bool = false)
-    {
+    public init(
+        _ placeholder: String,
+        text: Binding<String>,
+        helperText: Binding<String> = .constant(""),
+        helperStyle: Binding<FieldHelperStyle> = .constant(.none),
+        leadingImage: IconsNames = .none,
+        trallingImage: IconsNames = .none,
+        placeholderPosition: TextFieldPlaceholderPosition = .overField,
+        secure: Bool = false
+    ) {
         self.placeholder = placeholder
         _text = text
         _helperText = helperText
@@ -76,12 +77,15 @@ public struct TextFieldExtended: View {
                     if secure {
                         SecureField(placeholderPosition == .standart ? placeholder : "", text: $text)
                     } else {
-                        TextField(placeholderPosition == .standart ? placeholder : "", text: $text,
-                                  onEditingChanged: { focused in
-                                      self.focused = focused
-                                  })
-                                  .headline()
-                                  .foregroundColor(.onSurfacePrimary)
+                        TextField(
+                            placeholderPosition == .standart ? placeholder : "",
+                            text: $text,
+                            onEditingChanged: { focused in
+                                self.focused = focused
+                            }
+                        )
+                        .headline()
+                        .foregroundColor(.onSurfacePrimary)
                     }
 
                     if trallingImage != .none {

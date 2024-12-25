@@ -30,19 +30,27 @@ public struct FieldButtonStyle: ButtonStyle {
                 .fill(isPressed ? Color.surfaceTertiary : Color.surfaceSecondary)
                 .overlay(
                     RoundedRectangleCorner(radius: Radius.medium, corners: backgroundShapeCorners)
-                        .stroke(theme.borderTextFields
-                            ? Color.border
-                            : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
+                        .stroke(
+                            theme.borderTextFields
+                                ? Color.border
+                                : Color.surfaceSecondary,
+                            lineWidth: CGFloat(theme.borderSize)
+                        )
                 )
             #else
             RoundedRectangle(cornerRadius: Radius.medium, style: .continuous)
                 .fill(isPressed ? Color.surfaceTertiary : Color.surfaceSecondary)
                 .overlay(
-                    RoundedRectangle(cornerRadius: Radius.medium,
-                                     style: .continuous)
-                        .stroke(theme.borderTextFields
+                    RoundedRectangle(
+                        cornerRadius: Radius.medium,
+                        style: .continuous
+                    )
+                    .stroke(
+                        theme.borderTextFields
                             ? Color.border
-                            : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
+                            : Color.surfaceSecondary,
+                        lineWidth: CGFloat(theme.borderSize)
+                    )
                 )
             #endif
 
@@ -50,11 +58,16 @@ public struct FieldButtonStyle: ButtonStyle {
             RoundedRectangle(cornerRadius: Radius.medium, style: .continuous)
                 .fill(isPressed ? Color.surfaceTertiary : Color.surfaceSecondary)
                 .overlay(
-                    RoundedRectangle(cornerRadius: Radius.medium,
-                                     style: .continuous)
-                        .stroke(theme.borderTextFields
+                    RoundedRectangle(
+                        cornerRadius: Radius.medium,
+                        style: .continuous
+                    )
+                    .stroke(
+                        theme.borderTextFields
                             ? Color.border
-                            : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
+                            : Color.surfaceSecondary,
+                        lineWidth: CGFloat(theme.borderSize)
+                    )
                 )
         }
     }

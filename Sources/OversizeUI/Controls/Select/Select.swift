@@ -68,16 +68,23 @@ public struct Select<Element: Equatable, Content, Selection, Actions, ContentUna
             .frame(minWidth: 0, maxWidth: .infinity)
             .padding()
             .background(
-                RoundedRectangle(cornerRadius: Radius.medium,
-                                 style: .continuous)
-                    .fill(Color.surfaceSecondary)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: Radius.medium,
-                                         style: .continuous)
-                            .stroke(theme.borderTextFields
-                                ? Color.border
-                                : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
+                RoundedRectangle(
+                    cornerRadius: Radius.medium,
+                    style: .continuous
+                )
+                .fill(Color.surfaceSecondary)
+                .overlay(
+                    RoundedRectangle(
+                        cornerRadius: Radius.medium,
+                        style: .continuous
                     )
+                    .stroke(
+                        theme.borderTextFields
+                            ? Color.border
+                            : Color.surfaceSecondary,
+                        lineWidth: CGFloat(theme.borderSize)
+                    )
+                )
             )
             .headline(.medium)
             .foregroundColor(.onSurfacePrimary)
@@ -125,10 +132,12 @@ public struct Select<Element: Equatable, Content, Selection, Actions, ContentUna
                             isSelected = true
                             showModal.toggle()
                         } label: {
-                            content(data[index],
-                                    selectedIndex == index)
-                                .headline()
-                                .onSurfacePrimaryForeground()
+                            content(
+                                data[index],
+                                selectedIndex == index
+                            )
+                            .headline()
+                            .onSurfacePrimaryForeground()
                         }
                     }
                 }
