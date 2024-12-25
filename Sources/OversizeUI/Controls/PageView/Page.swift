@@ -353,10 +353,12 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
                     if style == .gradient {
                         VStack {
                             Spacer()
-                            LinearGradient(colors: [backgroundColor.opacity(0), Color.surfacePrimary.opacity(1)],
-                                           startPoint: .top,
-                                           endPoint: .bottom)
-                                .frame(height: 60)
+                            LinearGradient(
+                                colors: [backgroundColor.opacity(0), Color.surfacePrimary.opacity(1)],
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                            .frame(height: 60)
                         }
                     }
                     if style == .none {
@@ -417,12 +419,13 @@ public extension Page {
 
 @available(iOS 16.0, *)
 public extension Page where LeadingBar == EmptyView, TitleLabel == EmptyView, Header == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -439,12 +442,13 @@ public extension Page where LeadingBar == EmptyView, TitleLabel == EmptyView, He
 
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView, TitleLabel == EmptyView, Header == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -461,12 +465,13 @@ public extension Page where TrailingBar == EmptyView, TitleLabel == EmptyView, H
 
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, TitleLabel == EmptyView, Header == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -484,12 +489,13 @@ public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, T
 
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, TopToolbar == EmptyView, TitleLabel == EmptyView, Header == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -508,12 +514,13 @@ public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, T
 
 @available(iOS 16.0, *)
 public extension Page where LeadingBar == EmptyView, TopToolbar == EmptyView, TitleLabel == EmptyView, Header == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -531,12 +538,13 @@ public extension Page where LeadingBar == EmptyView, TopToolbar == EmptyView, Ti
 
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView, TopToolbar == EmptyView, TitleLabel == EmptyView, Header == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -554,12 +562,13 @@ public extension Page where TrailingBar == EmptyView, TopToolbar == EmptyView, T
 
 @available(iOS 16.0, *)
 public extension Page where TopToolbar == EmptyView, TitleLabel == EmptyView, Header == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -576,12 +585,13 @@ public extension Page where TopToolbar == EmptyView, TitleLabel == EmptyView, He
 
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, TopToolbar == EmptyView, Header == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -599,12 +609,13 @@ public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, T
 
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView, TopToolbar == EmptyView, Header == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -621,12 +632,13 @@ public extension Page where TrailingBar == EmptyView, TopToolbar == EmptyView, H
 
 @available(iOS 16.0, *)
 public extension Page where LeadingBar == EmptyView, TopToolbar == EmptyView, Header == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -643,12 +655,13 @@ public extension Page where LeadingBar == EmptyView, TopToolbar == EmptyView, He
 
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView, Header == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -664,12 +677,13 @@ public extension Page where TrailingBar == EmptyView, Header == EmptyView {
 
 @available(iOS 16.0, *)
 public extension Page where LeadingBar == EmptyView, Header == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -685,12 +699,13 @@ public extension Page where LeadingBar == EmptyView, Header == EmptyView {
 
 @available(iOS 16.0, *)
 public extension Page where TopToolbar == EmptyView, Header == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -706,12 +721,13 @@ public extension Page where TopToolbar == EmptyView, Header == EmptyView {
 
 @available(iOS 16.0, *)
 public extension Page where TitleLabel == EmptyView, Header == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -727,13 +743,14 @@ public extension Page where TitleLabel == EmptyView, Header == EmptyView {
 
 @available(iOS 16.0, *)
 public extension Page where LeadingBar == EmptyView, TitleLabel == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content,
-         @ViewBuilder header: () -> Header)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content,
+        @ViewBuilder header: () -> Header
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -750,13 +767,14 @@ public extension Page where LeadingBar == EmptyView, TitleLabel == EmptyView {
 
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView, TitleLabel == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content,
-         @ViewBuilder header: () -> Header)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content,
+        @ViewBuilder header: () -> Header
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -773,13 +791,14 @@ public extension Page where TrailingBar == EmptyView, TitleLabel == EmptyView {
 
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, TitleLabel == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content,
-         @ViewBuilder header: () -> Header)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content,
+        @ViewBuilder header: () -> Header
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -797,13 +816,14 @@ public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, T
 
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, TopToolbar == EmptyView, TitleLabel == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content,
-         @ViewBuilder header: () -> Header)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content,
+        @ViewBuilder header: () -> Header
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -822,13 +842,14 @@ public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, T
 
 @available(iOS 16.0, *)
 public extension Page where LeadingBar == EmptyView, TopToolbar == EmptyView, TitleLabel == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content,
-         @ViewBuilder header: () -> Header)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content,
+        @ViewBuilder header: () -> Header
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -846,13 +867,14 @@ public extension Page where LeadingBar == EmptyView, TopToolbar == EmptyView, Ti
 
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView, TopToolbar == EmptyView, TitleLabel == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content,
-         @ViewBuilder header: () -> Header)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content,
+        @ViewBuilder header: () -> Header
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -870,13 +892,14 @@ public extension Page where TrailingBar == EmptyView, TopToolbar == EmptyView, T
 
 @available(iOS 16.0, *)
 public extension Page where TopToolbar == EmptyView, TitleLabel == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content,
-         @ViewBuilder header: () -> Header)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content,
+        @ViewBuilder header: () -> Header
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -893,13 +916,14 @@ public extension Page where TopToolbar == EmptyView, TitleLabel == EmptyView {
 
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, TopToolbar == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content,
-         @ViewBuilder header: () -> Header)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content,
+        @ViewBuilder header: () -> Header
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -917,13 +941,14 @@ public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, T
 
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView, TopToolbar == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content,
-         @ViewBuilder header: () -> Header)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content,
+        @ViewBuilder header: () -> Header
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -940,13 +965,14 @@ public extension Page where TrailingBar == EmptyView, TopToolbar == EmptyView {
 
 @available(iOS 16.0, *)
 public extension Page where LeadingBar == EmptyView, TopToolbar == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content,
-         @ViewBuilder header: () -> Header)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content,
+        @ViewBuilder header: () -> Header
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -963,13 +989,14 @@ public extension Page where LeadingBar == EmptyView, TopToolbar == EmptyView {
 
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content,
-         @ViewBuilder header: () -> Header)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content,
+        @ViewBuilder header: () -> Header
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -985,13 +1012,14 @@ public extension Page where TrailingBar == EmptyView {
 
 @available(iOS 16.0, *)
 public extension Page where LeadingBar == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content,
-         @ViewBuilder header: () -> Header)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content,
+        @ViewBuilder header: () -> Header
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -1007,13 +1035,14 @@ public extension Page where LeadingBar == EmptyView {
 
 @available(iOS 16.0, *)
 public extension Page where TopToolbar == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content,
-         @ViewBuilder header: () -> Header)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content,
+        @ViewBuilder header: () -> Header
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight
@@ -1029,13 +1058,14 @@ public extension Page where TopToolbar == EmptyView {
 
 @available(iOS 16.0, *)
 public extension Page where TitleLabel == EmptyView {
-    init(_ title: String? = nil,
-         headerHeight: CGFloat = 0,
-         headerMinHeight: CGFloat? = nil,
-         onScroll: ScrollAction? = nil,
-         @ViewBuilder content: () -> Content,
-         @ViewBuilder header: () -> Header)
-    {
+    init(
+        _ title: String? = nil,
+        headerHeight: CGFloat = 0,
+        headerMinHeight: CGFloat? = nil,
+        onScroll: ScrollAction? = nil,
+        @ViewBuilder content: () -> Content,
+        @ViewBuilder header: () -> Header
+    ) {
         self.title = title
         self.onScroll = onScroll
         custumHeaderHeight = headerHeight

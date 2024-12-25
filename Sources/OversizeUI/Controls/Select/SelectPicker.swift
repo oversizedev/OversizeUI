@@ -109,10 +109,12 @@ public struct SelectPicker<Element: Hashable, Content, Actions, ContentUnavailab
                     selection = data[index]
                     dismiss()
                 } label: {
-                    content(data[index],
-                            selectedIndex == index)
-                        .headline()
-                        .onSurfacePrimaryForeground()
+                    content(
+                        data[index],
+                        selectedIndex == index
+                    )
+                    .headline()
+                    .onSurfacePrimaryForeground()
                 }
             }
         }

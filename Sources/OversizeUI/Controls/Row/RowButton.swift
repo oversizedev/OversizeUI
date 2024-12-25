@@ -19,11 +19,12 @@ public struct RowButton: View {
     public var icon: IconsNames
     public var tapAction: () -> Void
 
-    public init(_ text: String,
-                style: RowButtonStyle = .row,
-                icon: IconsNames = .none,
-                action: @escaping () -> Void)
-    {
+    public init(
+        _ text: String,
+        style: RowButtonStyle = .row,
+        icon: IconsNames = .none,
+        action: @escaping () -> Void
+    ) {
         self.text = text
         self.style = style
         self.icon = icon

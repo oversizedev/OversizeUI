@@ -26,14 +26,15 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
     private let content: (Data.Element, Bool) -> Content
     private let action: (() -> Void)?
 
-    public init(_ data: Data,
-                selection: Binding<Data.Element>,
-                radius: Radius = .medium,
-                spacing: Space = .xSmall,
-                @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
-                @ViewBuilder selectionView: @escaping () -> Selection? = { nil },
-                action: (() -> Void)? = nil)
-    {
+    public init(
+        _ data: Data,
+        selection: Binding<Data.Element>,
+        radius: Radius = .medium,
+        spacing: Space = .xSmall,
+        @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
+        @ViewBuilder selectionView: @escaping () -> Selection? = { nil },
+        action: (() -> Void)? = nil
+    ) {
         self.data = data
         self.content = content
         self.selectionView = selectionView
@@ -41,8 +42,10 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
         self.spacing = spacing
         self.action = action
         _selection = selection
-        _frames = State(wrappedValue: Array(repeating: .zero,
-                                            count: data.count))
+        _frames = State(wrappedValue: Array(
+            repeating: .zero,
+            count: data.count
+        ))
     }
 
     public var body: some View {
@@ -55,9 +58,10 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
     }
 
     private var gridSelect: some View {
-        LazyVGrid(columns: [GridItem(spacing: spacing), GridItem(spacing: spacing)],
-                  spacing: spacing)
-        {
+        LazyVGrid(
+            columns: [GridItem(spacing: spacing), GridItem(spacing: spacing)],
+            spacing: spacing
+        ) {
             ForEach(data.indices, id: \.self) { index in
 
                 Button(action: {
@@ -70,8 +74,10 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
                             // .animation(.easeInOut(duration: 0.3))
                             .overlay(selectedIndex == index
                                 ? itemBackground
-                                .frame(width: frames[selectedIndex ?? 0].width,
-                                       height: frames[selectedIndex ?? 0].height)
+                                .frame(
+                                    width: frames[selectedIndex ?? 0].width,
+                                    height: frames[selectedIndex ?? 0].height
+                                )
                                 : nil)
                     }
                     .background(getUnselection(unselectionStyle: style.unseletionStyle))
@@ -107,26 +113,37 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
     private func getSelection(selectionStyle: GridSelectSeletionStyle) -> some View {
         switch selectionStyle {
         case .shadowSurface:
-            RoundedRectangle(cornerRadius: radius,
-                             style: .continuous)
-                .fill(Color.surfacePrimary)
-                .overlay(
-                    RoundedRectangle(cornerRadius: radius,
-                                     style: .continuous)
-                        .stroke(theme.borderControls
-                            ? Color.border
-                            : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
+            RoundedRectangle(
+                cornerRadius: radius,
+                style: .continuous
+            )
+            .fill(Color.surfacePrimary)
+            .overlay(
+                RoundedRectangle(
+                    cornerRadius: radius,
+                    style: .continuous
                 )
-                .shadowElevaton(.z2)
+                .stroke(
+                    theme.borderControls
+                        ? Color.border
+                        : Color.surfaceSecondary,
+                    lineWidth: CGFloat(theme.borderSize)
+                )
+            )
+            .shadowElevaton(.z2)
         case .graySurface:
 
-            RoundedRectangle(cornerRadius: radius,
-                             style: .continuous)
-                .strokeBorder(Color.onSurfaceSecondary, lineWidth: 2)
+            RoundedRectangle(
+                cornerRadius: radius,
+                style: .continuous
+            )
+            .strokeBorder(Color.onSurfaceSecondary, lineWidth: 2)
         case .accentSurface:
-            RoundedRectangle(cornerRadius: radius.rawValue,
-                             style: .continuous)
-                .strokeBorder(Color.blue, lineWidth: 2)
+            RoundedRectangle(
+                cornerRadius: radius.rawValue,
+                style: .continuous
+            )
+            .strokeBorder(Color.blue, lineWidth: 2)
         }
     }
 
@@ -137,16 +154,23 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
             EmptyView()
         case .surface:
 
-            RoundedRectangle(cornerRadius: radius,
-                             style: .continuous)
-                .fill(Color.surfaceSecondary)
-                .overlay(
-                    RoundedRectangle(cornerRadius: radius,
-                                     style: .continuous)
-                        .stroke(theme.borderControls
-                            ? Color.border
-                            : Color.surfaceSecondary, lineWidth: CGFloat(theme.borderSize))
+            RoundedRectangle(
+                cornerRadius: radius,
+                style: .continuous
+            )
+            .fill(Color.surfaceSecondary)
+            .overlay(
+                RoundedRectangle(
+                    cornerRadius: radius,
+                    style: .continuous
                 )
+                .stroke(
+                    theme.borderControls
+                        ? Color.border
+                        : Color.surfaceSecondary,
+                    lineWidth: CGFloat(theme.borderSize)
+                )
+            )
         }
     }
 
@@ -185,14 +209,14 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
 }
 
 public extension GridSelect where Selection == EmptyView {
-    init(_ data: Data,
-         selection: Binding<Data.Element>,
-         radius: Radius = .medium,
-         spacing: Space = .xSmall,
-         @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
-         action: (() -> Void)? = nil)
-
-    {
+    init(
+        _ data: Data,
+        selection: Binding<Data.Element>,
+        radius: Radius = .medium,
+        spacing: Space = .xSmall,
+        @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
+        action: (() -> Void)? = nil
+    ) {
         self.data = data
         self.content = content
         self.radius = radius
@@ -201,8 +225,10 @@ public extension GridSelect where Selection == EmptyView {
         self.action = action
 
         _selection = selection
-        _frames = State(wrappedValue: Array(repeating: .zero,
-                                            count: data.count))
+        _frames = State(wrappedValue: Array(
+            repeating: .zero,
+            count: data.count
+        ))
     }
 }
 
@@ -215,24 +241,30 @@ struct GridSelect_Preview: PreviewProvider {
 
         var body: some View {
             Group {
-                GridSelect(items, selection: $selection,
-                           content: { item, _ in
-                               VStack {
-                                   IconDeprecated(.circle)
-                                   Text(item)
-                               }.padding()
-                           })
-                           .previewDisplayName("Default")
+                GridSelect(
+                    items,
+                    selection: $selection,
+                    content: { item, _ in
+                        VStack {
+                            IconDeprecated(.circle)
+                            Text(item)
+                        }.padding()
+                    }
+                )
+                .previewDisplayName("Default")
 
-                GridSelect(items, selection: $selection,
-                           content: { item, _ in
-                               VStack {
-                                   IconDeprecated(.circle)
-                                   Text(item)
-                               }.padding()
-                           })
-                           .previewDisplayName("Selection Only")
-                           .gridSelectStyle(SelectionOnlyGridSelectStyle())
+                GridSelect(
+                    items,
+                    selection: $selection,
+                    content: { item, _ in
+                        VStack {
+                            IconDeprecated(.circle)
+                            Text(item)
+                        }.padding()
+                    }
+                )
+                .previewDisplayName("Selection Only")
+                .gridSelectStyle(SelectionOnlyGridSelectStyle())
             }
             .previewLayout(.sizeThatFits)
             .padding()

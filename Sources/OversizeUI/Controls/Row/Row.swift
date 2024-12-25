@@ -238,11 +238,12 @@ public extension View {
 // MARK: - Image init
 
 public extension Row where LeadingLabel == Image, TrailingLabel == EmptyView {
-    init(_ title: String,
-         subtitle: String? = nil,
-         action: (() -> Void)? = nil,
-         @ViewBuilder leading: () -> LeadingLabel)
-    {
+    init(
+        _ title: String,
+        subtitle: String? = nil,
+        action: (() -> Void)? = nil,
+        @ViewBuilder leading: () -> LeadingLabel
+    ) {
         self.title = title
         self.subtitle = subtitle
         self.action = action
@@ -257,10 +258,11 @@ public extension Row where LeadingLabel == Image, TrailingLabel == EmptyView {
 }
 
 public extension Row where LeadingLabel == Image, TrailingLabel == EmptyView {
-    init(_ title: String,
-         subtitle: String? = nil,
-         @ViewBuilder leading: () -> LeadingLabel)
-    {
+    init(
+        _ title: String,
+        subtitle: String? = nil,
+        @ViewBuilder leading: () -> LeadingLabel
+    ) {
         self.title = title
         self.subtitle = subtitle
         action = nil
@@ -275,11 +277,12 @@ public extension Row where LeadingLabel == Image, TrailingLabel == EmptyView {
 }
 
 public extension Row where LeadingLabel == Image {
-    init(_ title: String,
-         subtitle: String? = nil,
-         @ViewBuilder leading: () -> LeadingLabel,
-         @ViewBuilder trailing: () -> TrailingLabel)
-    {
+    init(
+        _ title: String,
+        subtitle: String? = nil,
+        @ViewBuilder leading: () -> LeadingLabel,
+        @ViewBuilder trailing: () -> TrailingLabel
+    ) {
         self.title = title
         self.subtitle = subtitle
         action = nil
@@ -295,12 +298,13 @@ public extension Row where LeadingLabel == Image {
 }
 
 public extension Row where LeadingLabel == Image {
-    init(_ title: String,
-         subtitle: String? = nil,
-         action: (() -> Void)? = nil,
-         @ViewBuilder leading: () -> LeadingLabel,
-         @ViewBuilder trailing: () -> TrailingLabel)
-    {
+    init(
+        _ title: String,
+        subtitle: String? = nil,
+        action: (() -> Void)? = nil,
+        @ViewBuilder leading: () -> LeadingLabel,
+        @ViewBuilder trailing: () -> TrailingLabel
+    ) {
         self.title = title
         self.subtitle = subtitle
         self.action = action
@@ -319,10 +323,11 @@ public extension Row where LeadingLabel == Image {
 // MARK: - EmptyView
 
 public extension Row where LeadingLabel == EmptyView, TrailingLabel == EmptyView {
-    init(_ title: String,
-         subtitle: String? = nil,
-         action: (() -> Void)? = nil)
-    {
+    init(
+        _ title: String,
+        subtitle: String? = nil,
+        action: (() -> Void)? = nil
+    ) {
         self.title = title
         self.subtitle = subtitle
         self.action = action
@@ -334,11 +339,12 @@ public extension Row where LeadingLabel == EmptyView, TrailingLabel == EmptyView
 }
 
 public extension Row where TrailingLabel == EmptyView {
-    init(_ title: String,
-         subtitle: String? = nil,
-         action: (() -> Void)? = nil,
-         @ViewBuilder leading: () -> LeadingLabel)
-    {
+    init(
+        _ title: String,
+        subtitle: String? = nil,
+        action: (() -> Void)? = nil,
+        @ViewBuilder leading: () -> LeadingLabel
+    ) {
         self.title = title
         self.subtitle = subtitle
         self.action = action
@@ -348,10 +354,11 @@ public extension Row where TrailingLabel == EmptyView {
         leadingRadius = nil
     }
 
-    init(_ title: String,
-         subtitle: String? = nil,
-         @ViewBuilder leading: () -> LeadingLabel)
-    {
+    init(
+        _ title: String,
+        subtitle: String? = nil,
+        @ViewBuilder leading: () -> LeadingLabel
+    ) {
         self.title = title
         self.subtitle = subtitle
         action = nil
@@ -363,11 +370,12 @@ public extension Row where TrailingLabel == EmptyView {
 }
 
 public extension Row where LeadingLabel == EmptyView {
-    init(_ title: String,
-         subtitle: String? = nil,
-         action: (() -> Void)? = nil,
-         @ViewBuilder trailing: () -> TrailingLabel)
-    {
+    init(
+        _ title: String,
+        subtitle: String? = nil,
+        action: (() -> Void)? = nil,
+        @ViewBuilder trailing: () -> TrailingLabel
+    ) {
         self.title = title
         self.subtitle = subtitle
         self.action = action

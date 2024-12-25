@@ -14,12 +14,13 @@ public struct ScrollViewOffset<Content: View>: View {
     @State private var startOffset: CGPoint = .zero
     private let coordinateSpace: CoordinateSpace
 
-    public init(offset: Binding<CGPoint>,
-                showIndicators: Bool = false,
-                axis: Axis.Set = .vertical,
-                coordinateSpace: CoordinateSpace = .global,
-                @ViewBuilder content: () -> Content)
-    {
+    public init(
+        offset: Binding<CGPoint>,
+        showIndicators: Bool = false,
+        axis: Axis.Set = .vertical,
+        coordinateSpace: CoordinateSpace = .global,
+        @ViewBuilder content: () -> Content
+    ) {
         contnt = content()
         _offset = offset
         self.showIndicators = showIndicators

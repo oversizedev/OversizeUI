@@ -129,11 +129,12 @@ public extension View {
 
 // swiftlint:disable function_body_length superfluous_disable_command
 public struct RectangleSegmentedControlStyle: SegmentedControlStyle {
-    public init(isEquallySpacing: Bool = true,
-                isShowBackground: Bool = true,
-                seletionStyle: SegmentedControlSeletionStyle = .shadowSurface,
-                unseletionStyle: SegmentedControlUnseletionStyle = .clean)
-    {
+    public init(
+        isEquallySpacing: Bool = true,
+        isShowBackground: Bool = true,
+        seletionStyle: SegmentedControlSeletionStyle = .shadowSurface,
+        unseletionStyle: SegmentedControlUnseletionStyle = .clean
+    ) {
         self.isEquallySpacing = isEquallySpacing
         self.isShowBackground = isShowBackground
         self.seletionStyle = seletionStyle
@@ -173,11 +174,12 @@ public struct ScrollSegmentedControlStyle: SegmentedControlStyle {
     public var seletionStyle: SegmentedControlSeletionStyle = .graySurface
     public var unseletionStyle: SegmentedControlUnseletionStyle = .clean
 
-    public init(isEquallySpacing: Bool = false,
-                isShowBackground: Bool = false,
-                seletionStyle: SegmentedControlSeletionStyle = .graySurface,
-                unseletionStyle: SegmentedControlUnseletionStyle = .clean)
-    {
+    public init(
+        isEquallySpacing: Bool = false,
+        isShowBackground: Bool = false,
+        seletionStyle: SegmentedControlSeletionStyle = .graySurface,
+        unseletionStyle: SegmentedControlUnseletionStyle = .clean
+    ) {
         self.isEquallySpacing = isEquallySpacing
         self.isShowBackground = isShowBackground
         self.seletionStyle = seletionStyle
@@ -197,11 +199,12 @@ public struct IslandSegmentedControlStyle: SegmentedControlStyle {
     public var seletionStyle: SegmentedControlSeletionStyle = .shadowSurface
     public var unseletionStyle: SegmentedControlUnseletionStyle = .surface
 
-    public init(isEquallySpacing: Bool = false,
-                isShowBackground: Bool = false,
-                seletionStyle: SegmentedControlSeletionStyle = .shadowSurface,
-                unseletionStyle: SegmentedControlUnseletionStyle = .surface)
-    {
+    public init(
+        isEquallySpacing: Bool = false,
+        isShowBackground: Bool = false,
+        seletionStyle: SegmentedControlSeletionStyle = .shadowSurface,
+        unseletionStyle: SegmentedControlUnseletionStyle = .surface
+    ) {
         self.isEquallySpacing = isEquallySpacing
         self.isShowBackground = isShowBackground
         self.seletionStyle = seletionStyle
@@ -250,12 +253,13 @@ public struct AnySegmentedControlStyle: SegmentedControlStyle, Sendable {
 
     private var _makeBody: @Sendable (Configuration) -> AnyView
 
-    public init(isEquallySpacing: Bool,
-                isShowBackground: Bool,
-                seletionStyle: SegmentedControlSeletionStyle,
-                unseletionStyle: SegmentedControlUnseletionStyle,
-                style: some SegmentedControlStyle)
-    {
+    public init(
+        isEquallySpacing: Bool,
+        isShowBackground: Bool,
+        seletionStyle: SegmentedControlSeletionStyle,
+        unseletionStyle: SegmentedControlUnseletionStyle,
+        style: some SegmentedControlStyle
+    ) {
         self.isEquallySpacing = isEquallySpacing
         self.isShowBackground = isShowBackground
         self.seletionStyle = seletionStyle

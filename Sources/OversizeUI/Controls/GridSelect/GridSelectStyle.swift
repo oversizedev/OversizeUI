@@ -18,17 +18,21 @@ public extension View {
         case let .default(selected: selected, icon: icon):
             let style: IslandGridSelectStyle = .init()
 
-            return environment(\.gridSelectStyle, AnyGridSelectStyle(seletionStyle: selected,
-                                                                     unseletionStyle: style.unseletionStyle,
-                                                                     icon: icon,
-                                                                     style: style))
+            return environment(\.gridSelectStyle, AnyGridSelectStyle(
+                seletionStyle: selected,
+                unseletionStyle: style.unseletionStyle,
+                icon: icon,
+                style: style
+            ))
         case let .onlySelection(selected: selected, icon: icon):
             let style: SelectionOnlyGridSelectStyle = .init()
 
-            return environment(\.gridSelectStyle, AnyGridSelectStyle(seletionStyle: selected,
-                                                                     unseletionStyle: style.unseletionStyle,
-                                                                     icon: icon,
-                                                                     style: style))
+            return environment(\.gridSelectStyle, AnyGridSelectStyle(
+                seletionStyle: selected,
+                unseletionStyle: style.unseletionStyle,
+                icon: icon,
+                style: style
+            ))
         }
     }
 }
@@ -125,10 +129,12 @@ public struct AnyGridSelectStyle: GridSelectStyle {
 }
 
 struct GridSelectStyleKey: EnvironmentKey {
-    public static let defaultValue = AnyGridSelectStyle(seletionStyle: .accentSurface,
-                                                        unseletionStyle: .surface,
-                                                        icon: .none,
-                                                        style: IslandGridSelectStyle())
+    public static let defaultValue = AnyGridSelectStyle(
+        seletionStyle: .accentSurface,
+        unseletionStyle: .surface,
+        icon: .none,
+        style: IslandGridSelectStyle()
+    )
 }
 
 public extension EnvironmentValues {
@@ -140,9 +146,11 @@ public extension EnvironmentValues {
 
 public extension View {
     func gridSelectStyle(_ style: some GridSelectStyle) -> some View {
-        environment(\.gridSelectStyle, AnyGridSelectStyle(seletionStyle: style.seletionStyle,
-                                                          unseletionStyle: style.unseletionStyle,
-                                                          icon: style.icon,
-                                                          style: style))
+        environment(\.gridSelectStyle, AnyGridSelectStyle(
+            seletionStyle: style.seletionStyle,
+            unseletionStyle: style.unseletionStyle,
+            icon: style.icon,
+            style: style
+        ))
     }
 }

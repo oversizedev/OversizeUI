@@ -13,13 +13,14 @@ public struct NoticeView<A>: View where A: View {
     let actions: Group<A>?
     let closeAction: (() -> Void)?
 
-    public init(_ title: String,
-                subtitle: String? = nil,
-                image: Image? = nil,
-                imageURL: URL? = nil,
-                @ViewBuilder actions: @escaping () -> A,
-                closeAction: (() -> Void)? = nil)
-    {
+    public init(
+        _ title: String,
+        subtitle: String? = nil,
+        image: Image? = nil,
+        imageURL: URL? = nil,
+        @ViewBuilder actions: @escaping () -> A,
+        closeAction: (() -> Void)? = nil
+    ) {
         self.title = title
         self.subtitle = subtitle
         self.image = image
@@ -96,12 +97,13 @@ public struct NoticeView<A>: View where A: View {
 }
 
 public extension NoticeView where A == EmptyView {
-    init(_ title: String,
-         subtitle: String? = nil,
-         image: Image? = nil,
-         imageURL: URL? = nil,
-         closeAction: (() -> Void)? = nil)
-    {
+    init(
+        _ title: String,
+        subtitle: String? = nil,
+        image: Image? = nil,
+        imageURL: URL? = nil,
+        closeAction: (() -> Void)? = nil
+    ) {
         self.title = title
         self.subtitle = subtitle
         self.image = image

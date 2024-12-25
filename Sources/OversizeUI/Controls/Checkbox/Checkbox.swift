@@ -18,11 +18,12 @@ public struct Checkbox<Label: View>: View {
     private var title: String?
     private let action: (() -> Void)?
 
-    public init(isOn: Binding<Bool>,
-                alignment: CheckboxAlignment = .trailing,
-                action: (() -> Void)? = nil,
-                @ViewBuilder label: @escaping () -> Label? = { nil })
-    {
+    public init(
+        isOn: Binding<Bool>,
+        alignment: CheckboxAlignment = .trailing,
+        action: (() -> Void)? = nil,
+        @ViewBuilder label: @escaping () -> Label? = { nil }
+    ) {
         _isOn = isOn
         self.alignment = alignment
         self.action = action
@@ -102,11 +103,12 @@ public struct Checkbox<Label: View>: View {
 }
 
 public extension Checkbox where Label == EmptyView {
-    init(_ title: String,
-         isOn: Binding<Bool>,
-         alignment: CheckboxAlignment = .trailing,
-         action: (() -> Void)? = nil)
-    {
+    init(
+        _ title: String,
+        isOn: Binding<Bool>,
+        alignment: CheckboxAlignment = .trailing,
+        action: (() -> Void)? = nil
+    ) {
         self.title = title
         _isOn = isOn
         self.alignment = alignment

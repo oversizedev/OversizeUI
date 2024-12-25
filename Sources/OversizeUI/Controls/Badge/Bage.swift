@@ -26,18 +26,22 @@ public struct Bage<Label: View>: View {
         .padding(.vertical, .xxxSmall)
         .padding(.horizontal, .xxSmall)
         .background(
-            RoundedRectangle(cornerRadius: controlRadius,
-                             style: .continuous)
-                .fill(color.opacity(0.1))
-                .overlay(
-                    RoundedRectangle(cornerRadius: controlRadius,
-                                     style: .continuous)
-                        .stroke(
-                            theme.borderSurface
-                                ? Color.border
-                                : Color.clear
-                        )
+            RoundedRectangle(
+                cornerRadius: controlRadius,
+                style: .continuous
+            )
+            .fill(color.opacity(0.1))
+            .overlay(
+                RoundedRectangle(
+                    cornerRadius: controlRadius,
+                    style: .continuous
                 )
+                .stroke(
+                    theme.borderSurface
+                        ? Color.border
+                        : Color.clear
+                )
+            )
         )
     }
 }

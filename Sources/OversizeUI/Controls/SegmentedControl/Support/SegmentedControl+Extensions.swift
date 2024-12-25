@@ -19,10 +19,11 @@ extension HorizontalAlignment {
 
 extension View {
     @ViewBuilder
-    @inlinable func alignmentGuide(_ alignment: HorizontalAlignment,
-                                   isActive: Bool,
-                                   computeValue: @Sendable @escaping (ViewDimensions) -> CGFloat) -> some View
-    {
+    @inlinable func alignmentGuide(
+        _ alignment: HorizontalAlignment,
+        isActive: Bool,
+        computeValue: @Sendable @escaping (ViewDimensions) -> CGFloat
+    ) -> some View {
         if isActive {
             alignmentGuide(alignment, computeValue: computeValue)
         } else {
@@ -31,10 +32,11 @@ extension View {
     }
 
     @ViewBuilder
-    @inlinable func alignmentGuide(_ alignment: VerticalAlignment,
-                                   isActive: Bool,
-                                   computeValue: @Sendable @escaping (ViewDimensions) -> CGFloat) -> some View
-    {
+    @inlinable func alignmentGuide(
+        _ alignment: VerticalAlignment,
+        isActive: Bool,
+        computeValue: @Sendable @escaping (ViewDimensions) -> CGFloat
+    ) -> some View {
         if isActive {
             alignmentGuide(alignment, computeValue: computeValue)
         } else {

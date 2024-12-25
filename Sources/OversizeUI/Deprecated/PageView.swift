@@ -33,10 +33,11 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
 
     private let onOffsetChanged: (CGFloat) -> Void
 
-    public init(_ title: String? = nil,
-                onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
-                @ViewBuilder content: () -> Content)
-    {
+    public init(
+        _ title: String? = nil,
+        onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onOffsetChanged = onOffsetChanged
         self.content = content()
@@ -247,10 +248,12 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
                     if style == .gradient {
                         VStack {
                             Spacer()
-                            LinearGradient(colors: [backgroundColor.opacity(0), Color.surfacePrimary.opacity(1)],
-                                           startPoint: .top,
-                                           endPoint: .bottom)
-                                .frame(height: 60)
+                            LinearGradient(
+                                colors: [backgroundColor.opacity(0), Color.surfacePrimary.opacity(1)],
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                            .frame(height: 60)
                         }
                     }
                     if style == .none {
@@ -285,10 +288,11 @@ public extension PageView {
 
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where LeadingBar == EmptyView, TitleLabel == EmptyView {
-    init(_ title: String? = nil,
-         onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onOffsetChanged = onOffsetChanged
         self.content = content()
@@ -301,10 +305,11 @@ public extension PageView where LeadingBar == EmptyView, TitleLabel == EmptyView
 
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TrailingBar == EmptyView, TitleLabel == EmptyView {
-    init(_ title: String? = nil,
-         onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onOffsetChanged = onOffsetChanged
         self.content = content()
@@ -317,10 +322,11 @@ public extension PageView where TrailingBar == EmptyView, TitleLabel == EmptyVie
 
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TrailingBar == EmptyView, LeadingBar == EmptyView, TitleLabel == EmptyView {
-    init(_ title: String? = nil,
-         onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onOffsetChanged = onOffsetChanged
         self.content = content()
@@ -334,10 +340,11 @@ public extension PageView where TrailingBar == EmptyView, LeadingBar == EmptyVie
 
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TrailingBar == EmptyView, LeadingBar == EmptyView, TopToolbar == EmptyView, TitleLabel == EmptyView {
-    init(_ title: String? = nil,
-         onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onOffsetChanged = onOffsetChanged
         self.content = content()
@@ -352,10 +359,11 @@ public extension PageView where TrailingBar == EmptyView, LeadingBar == EmptyVie
 
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where LeadingBar == EmptyView, TopToolbar == EmptyView, TitleLabel == EmptyView {
-    init(_ title: String? = nil,
-         onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onOffsetChanged = onOffsetChanged
         self.content = content()
@@ -369,10 +377,11 @@ public extension PageView where LeadingBar == EmptyView, TopToolbar == EmptyView
 
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TrailingBar == EmptyView, TopToolbar == EmptyView, TitleLabel == EmptyView {
-    init(_ title: String? = nil,
-         onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onOffsetChanged = onOffsetChanged
         self.content = content()
@@ -386,10 +395,11 @@ public extension PageView where TrailingBar == EmptyView, TopToolbar == EmptyVie
 
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TopToolbar == EmptyView, TitleLabel == EmptyView {
-    init(_ title: String? = nil,
-         onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onOffsetChanged = onOffsetChanged
         self.content = content()
@@ -402,10 +412,11 @@ public extension PageView where TopToolbar == EmptyView, TitleLabel == EmptyView
 
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TrailingBar == EmptyView, LeadingBar == EmptyView, TopToolbar == EmptyView {
-    init(_ title: String? = nil,
-         onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onOffsetChanged = onOffsetChanged
         self.content = content()
@@ -419,10 +430,11 @@ public extension PageView where TrailingBar == EmptyView, LeadingBar == EmptyVie
 
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TrailingBar == EmptyView, TopToolbar == EmptyView {
-    init(_ title: String? = nil,
-         onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onOffsetChanged = onOffsetChanged
         self.content = content()
@@ -435,10 +447,11 @@ public extension PageView where TrailingBar == EmptyView, TopToolbar == EmptyVie
 
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where LeadingBar == EmptyView, TopToolbar == EmptyView {
-    init(_ title: String? = nil,
-         onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onOffsetChanged = onOffsetChanged
         self.content = content()
@@ -451,10 +464,11 @@ public extension PageView where LeadingBar == EmptyView, TopToolbar == EmptyView
 
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TrailingBar == EmptyView {
-    init(_ title: String? = nil,
-         onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onOffsetChanged = onOffsetChanged
         self.content = content()
@@ -466,10 +480,11 @@ public extension PageView where TrailingBar == EmptyView {
 
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where LeadingBar == EmptyView {
-    init(_ title: String? = nil,
-         onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onOffsetChanged = onOffsetChanged
         self.content = content()
@@ -481,10 +496,11 @@ public extension PageView where LeadingBar == EmptyView {
 
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TopToolbar == EmptyView {
-    init(_ title: String? = nil,
-         onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onOffsetChanged = onOffsetChanged
         self.content = content()
@@ -496,10 +512,11 @@ public extension PageView where TopToolbar == EmptyView {
 
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TitleLabel == EmptyView {
-    init(_ title: String? = nil,
-         onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
-         @ViewBuilder content: () -> Content)
-    {
+    init(
+        _ title: String? = nil,
+        onOffsetChanged: @escaping (CGFloat) -> Void = { _ in },
+        @ViewBuilder content: () -> Content
+    ) {
         self.title = title
         self.onOffsetChanged = onOffsetChanged
         self.content = content()

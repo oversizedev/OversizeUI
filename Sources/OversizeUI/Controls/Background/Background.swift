@@ -33,10 +33,11 @@ public struct Background<Content: View>: View {
     private let background: BackgroundColor
     public var padding: BackgroundPadding
 
-    public init(background: BackgroundColor = .primary,
-                padding: BackgroundPadding = .medium,
-                @ViewBuilder content: () -> Content)
-    {
+    public init(
+        background: BackgroundColor = .primary,
+        padding: BackgroundPadding = .medium,
+        @ViewBuilder content: () -> Content
+    ) {
         self.content = content()
         self.padding = padding
         self.background = background

@@ -20,9 +20,10 @@ public struct MaterialSurface<Label: View>: View {
     private var border: Color?
     private var material: Material = .regular
 
-    public init(action: (() -> Void)? = nil,
-                @ViewBuilder label: () -> Label)
-    {
+    public init(
+        action: (() -> Void)? = nil,
+        @ViewBuilder label: () -> Label
+    ) {
         self.label = label()
         self.action = action
     }
@@ -50,8 +51,10 @@ public struct MaterialSurface<Label: View>: View {
             .padding(
                 EdgeSpaceInsets(top: controlPadding.top, leading: controlPadding.leading, bottom: controlPadding.bottom, trailing: controlPadding.trailing)
             )
-            .background(material,
-                        in: RoundedRectangle(cornerRadius: controlRadius, style: .continuous))
+            .background(
+                material,
+                in: RoundedRectangle(cornerRadius: controlRadius, style: .continuous)
+            )
             .overlay(overlayView)
             .shadowElevaton(elevation)
     }

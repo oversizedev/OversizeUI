@@ -32,13 +32,14 @@ public struct LoaderOverlayView: View {
         _isLoading = isLoading
     }
 
-    public init(type: LoaderOverlayType = .spiner,
-                showText: Bool = false,
-                text: String = "",
-                surface: Bool = false,
-                isShowBackground: Bool = true,
-                isLoading: Binding<Bool> = .constant(true))
-    {
+    public init(
+        type: LoaderOverlayType = .spiner,
+        showText: Bool = false,
+        text: String = "",
+        surface: Bool = false,
+        isShowBackground: Bool = true,
+        isLoading: Binding<Bool> = .constant(true)
+    ) {
         loaderType = type
         self.showText = showText
         self.text = text
