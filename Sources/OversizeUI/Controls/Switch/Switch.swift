@@ -38,6 +38,14 @@ public struct Switch<Label: View>: View {
                 content(alignment: alignment)
             }
             .contentShape(Rectangle())
+            .padding(
+                EdgeSpaceInsets(
+                    top: contentInset.top,
+                    leading: .zero,
+                    bottom: contentInset.bottom,
+                    trailing: .zero
+                )
+            )
         }
         .buttonStyle(.row)
     }
@@ -75,7 +83,6 @@ public struct Switch<Label: View>: View {
                         .foregroundColor(.onSurfaceSecondary)
                 }
             }
-            .padding(contentInset)
         }
     }
 
