@@ -1,5 +1,5 @@
 //
-// Copyright © 2023 Aleksandr Romanov
+// Copyright © 2023 Alexander Romanov
 // SurfaceRadiusEnvironment.swift, created on 25.03.2023
 //
 

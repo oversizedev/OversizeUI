@@ -1,5 +1,5 @@
 //
-// Copyright © 2023 Aleksandr Romanov
+// Copyright © 2023 Alexander Romanov
 // IconsNames.swift, created on 19.03.2023
 //
 

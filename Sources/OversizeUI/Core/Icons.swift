@@ -723,6 +723,7 @@ public extension SwiftUI.Image {
 
         public static let send = Image("Base/Send", bundle: .module)
         public enum Setting {
+            public static let mini = Image("Base/Setting/Mini", bundle: .module)
             public static let fill = Image("Base/Setting/Fill", bundle: .module)
             public enum TwoTone {
                 public static let fill = Image("Base/Setting/TwoTone/Fill", bundle: .module)

@@ -1,5 +1,5 @@
 //
-// Copyright © 2021 Aleksandr Romanov
+// Copyright © 2021 Alexander Romanov
 // RowTitle.swift, created on 04.04.2023
 //
 

@@ -1,5 +1,5 @@
 //
-// Copyright © 2023 Aleksandr Romanov
+// Copyright © 2023 Alexander Romanov
 // AvatarPreview.swift, created on 10.03.2023
 //
 

@@ -38,6 +38,14 @@ public struct Switch<Label: View>: View {
                 content(alignment: alignment)
             }
             .contentShape(Rectangle())
+            .padding(
+                EdgeSpaceInsets(
+                    top: title == nil ? .zero : contentInset.top,
+                    leading: .zero,
+                    bottom: title == nil ? .zero : contentInset.bottom,
+                    trailing: .zero
+                )
+            )
         }
         .buttonStyle(.row)
     }
@@ -75,7 +83,6 @@ public struct Switch<Label: View>: View {
                         .foregroundColor(.onSurfaceSecondary)
                 }
             }
-            .padding(contentInset)
         }
     }
 
@@ -84,6 +91,10 @@ public struct Switch<Label: View>: View {
         Toggle("", isOn: $isOn)
             .labelsHidden()
             .disabled(!isEnabled)
+        #if os(macOS)
+            .toggleStyle(.switch)
+            .controlSize(.small)
+        #endif
     }
 
     private var foregroundColor: Color {

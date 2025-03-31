@@ -7,5 +7,8 @@ import SwiftUI
 
 public struct ScrollOffsetPreferenceKey: PreferenceKey {
     public static let defaultValue: CGPoint = .zero
-    public static func reduce(value _: inout CGPoint, nextValue _: () -> CGPoint) {}
+
+    public static func reduce(value: inout CGPoint, nextValue: () -> CGPoint) {
+        value = nextValue()
+    }
 }
