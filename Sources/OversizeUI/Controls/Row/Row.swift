@@ -249,10 +249,17 @@ public extension Row where LeadingLabel == Image, TrailingLabel == EmptyView {
         self.action = action
         leadingLabel = leading().resizable()
         trailingLabel = nil
+        #if os(macOS)
+        leadingSize = .init(
+            width: subtitle == nil ? 20 : 40,
+            height: subtitle == nil ? 20 : 40
+        )
+        #else
         leadingSize = .init(
             width: subtitle == nil ? 24 : 48,
             height: subtitle == nil ? 24 : 48
         )
+        #endif
         leadingRadius = 4
     }
 }
@@ -268,10 +275,17 @@ public extension Row where LeadingLabel == Image, TrailingLabel == EmptyView {
         action = nil
         leadingLabel = leading().resizable()
         trailingLabel = nil
+        #if os(macOS)
+        leadingSize = .init(
+            width: subtitle == nil ? 20 : 40,
+            height: subtitle == nil ? 20 : 40
+        )
+        #else
         leadingSize = .init(
             width: subtitle == nil ? 24 : 48,
             height: subtitle == nil ? 24 : 48
         )
+        #endif
         leadingRadius = 4
     }
 }
@@ -289,10 +303,17 @@ public extension Row where LeadingLabel == Image {
         leadingLabel = leading()
             .resizable()
         trailingLabel = trailing()
+        #if os(macOS)
+        leadingSize = .init(
+            width: subtitle == nil ? 20 : 40,
+            height: subtitle == nil ? 20 : 40
+        )
+        #else
         leadingSize = .init(
             width: subtitle == nil ? 24 : 48,
             height: subtitle == nil ? 24 : 48
         )
+        #endif
         leadingRadius = 4
     }
 }
@@ -312,10 +333,17 @@ public extension Row where LeadingLabel == Image {
             .resizable()
         // .renderingMode(.template)
         trailingLabel = trailing()
+        #if os(macOS)
+        leadingSize = .init(
+            width: subtitle == nil ? 20 : 40,
+            height: subtitle == nil ? 20 : 40
+        )
+        #else
         leadingSize = .init(
             width: subtitle == nil ? 24 : 48,
             height: subtitle == nil ? 24 : 48
         )
+        #endif
         leadingRadius = 4
     }
 }

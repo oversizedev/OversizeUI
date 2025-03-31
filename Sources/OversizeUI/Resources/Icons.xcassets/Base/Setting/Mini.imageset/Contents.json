@@ -1,16 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "Light.pdf",
+      "filename" : "Mini.svg",
       "idiom" : "universal"
-    },
-    {
-      "filename" : "Light 1.pdf",
-      "idiom" : "mac"
     }
   ],
   "info" : {
     "author" : "xcode",
     "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
   }
 }

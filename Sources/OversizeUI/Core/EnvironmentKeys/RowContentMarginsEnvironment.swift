@@ -6,7 +6,11 @@
 import SwiftUI
 
 private struct RowContentMarginsKey: EnvironmentKey {
+    #if os(macOS)
+    static let defaultValue: EdgeSpaceInsets = .init(top: .xSmall, leading: .small, bottom: .xSmall, trailing: .small)
+    #else
     static let defaultValue: EdgeSpaceInsets = .init(top: .small, leading: .medium, bottom: .small, trailing: .medium)
+    #endif
 }
 
 public extension EnvironmentValues {

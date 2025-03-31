@@ -60,6 +60,9 @@ public struct SectionView<Content: View>: View {
                 titleView
                     .padding(.horizontal, titleHorizontalPadding)
                     .padding(sectionTitleInsets)
+                #if os(macOS)
+                    .padding(.leading, .xxSmall)
+                #endif
             }
 
             Surface {

@@ -1,5 +1,5 @@
 //
-// Copyright © 2023 Aleksandr Romanov
+// Copyright © 2023 Alexander Romanov
 // FieldLabelPositionEnvironment.swift, created on 06.03.2023
 //
 

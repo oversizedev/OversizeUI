@@ -40,9 +40,9 @@ public struct Switch<Label: View>: View {
             .contentShape(Rectangle())
             .padding(
                 EdgeSpaceInsets(
-                    top: contentInset.top,
+                    top: title == nil ? .zero : contentInset.top,
                     leading: .zero,
-                    bottom: contentInset.bottom,
+                    bottom: title == nil ? .zero : contentInset.bottom,
                     trailing: .zero
                 )
             )
@@ -91,6 +91,10 @@ public struct Switch<Label: View>: View {
         Toggle("", isOn: $isOn)
             .labelsHidden()
             .disabled(!isEnabled)
+        #if os(macOS)
+            .toggleStyle(.switch)
+            .controlSize(.small)
+        #endif
     }
 
     private var foregroundColor: Color {

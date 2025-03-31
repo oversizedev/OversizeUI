@@ -3,6 +3,10 @@
     {
       "filename" : "System.pdf",
       "idiom" : "universal"
+    },
+    {
+      "filename" : "System 1.pdf",
+      "idiom" : "mac"
     }
   ],
   "info" : {

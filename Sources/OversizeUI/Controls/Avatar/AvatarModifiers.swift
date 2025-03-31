@@ -1,5 +1,5 @@
 //
-// Copyright © 2021 Aleksandr Romanov
+// Copyright © 2021 Alexander Romanov
 // AvatarModifiers.swift, created on 10.03.2023
 //
 
