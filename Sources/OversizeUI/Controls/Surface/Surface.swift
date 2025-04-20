@@ -78,29 +78,29 @@ public struct Surface<Label: View>: View {
             .padding(.trailing, forceContentInsets?.trailing ?? contentInsets.trailing)
             .background {
                 #if os(macOS)
-                ZStack {
+                    ZStack {
+                        RoundedRectangle(
+                            cornerRadius: surfaceRadius,
+                            style: .continuous
+                        )
+                        .fill(surfaceBackgroundColor)
+                        .shadowElevaton(elevation)
+
+                        if isHover {
+                            RoundedRectangle(
+                                cornerRadius: surfaceRadius,
+                                style: .continuous
+                            )
+                            .fill(Color.onSurfaceTertiary.opacity(0.04))
+                        }
+                    }
+                #else
                     RoundedRectangle(
                         cornerRadius: surfaceRadius,
                         style: .continuous
                     )
                     .fill(surfaceBackgroundColor)
                     .shadowElevaton(elevation)
-
-                    if isHover {
-                        RoundedRectangle(
-                            cornerRadius: surfaceRadius,
-                            style: .continuous
-                        )
-                        .fill(Color.onSurfaceTertiary.opacity(0.04))
-                    }
-                }
-                #else
-                RoundedRectangle(
-                    cornerRadius: surfaceRadius,
-                    style: .continuous
-                )
-                .fill(surfaceBackgroundColor)
-                .shadowElevaton(elevation)
                 #endif
             }
             .overlay(

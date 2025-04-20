@@ -57,26 +57,26 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
         switch fieldPlaceholderPosition {
         case .default:
             #if os(macOS)
-            return .init(.xxSmall)
+                return .init(.xxSmall)
             #else
-            return .init(.small)
+                return .init(.small)
             #endif
         case .overInput:
             #if os(macOS)
-            return .init(.xSmall)
+                return .init(.xSmall)
             #else
-            return .init(
-                top: Space.xxxSmall.rawValue + Space.small.rawValue,
-                leading: Space.small.rawValue,
-                bottom: Space.xxxSmall.rawValue + Space.small.rawValue,
-                trailing: Space.small.rawValue
-            )
+                return .init(
+                    top: Space.xxxSmall.rawValue + Space.small.rawValue,
+                    leading: Space.small.rawValue,
+                    bottom: Space.xxxSmall.rawValue + Space.small.rawValue,
+                    trailing: Space.small.rawValue
+                )
             #endif
         case .adjacent:
             #if os(macOS)
-            return .init(.zero)
+                return .init(.zero)
             #else
-            return .init(.small)
+                return .init(.small)
             #endif
         }
     }
@@ -86,76 +86,76 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
         switch fieldPosition {
         case .top, .bottom, .center:
             #if canImport(UIKit)
-            RoundedRectangleCorner(
-                radius: fieldRadius,
-                corners: backgroundShapeCorners
-            )
-            .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
-            #else
-            if fieldPlaceholderPosition != .adjacent {
                 RoundedRectangleCorner(
                     radius: fieldRadius,
                     corners: backgroundShapeCorners
                 )
                 .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
-            }
+            #else
+                if fieldPlaceholderPosition != .adjacent {
+                    RoundedRectangleCorner(
+                        radius: fieldRadius,
+                        corners: backgroundShapeCorners
+                    )
+                    .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
+                }
             #endif
 
         default:
             #if canImport(UIKit)
-            RoundedRectangle(
-                cornerRadius: fieldRadius,
-                style: .continuous
-            )
-            .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
-            #else
-            if fieldPlaceholderPosition != .adjacent {
                 RoundedRectangle(
                     cornerRadius: fieldRadius,
                     style: .continuous
                 )
                 .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
-            }
+            #else
+                if fieldPlaceholderPosition != .adjacent {
+                    RoundedRectangle(
+                        cornerRadius: fieldRadius,
+                        style: .continuous
+                    )
+                    .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
+                }
             #endif
         }
     }
 
     private var fieldRadius: Radius {
         #if os(macOS)
-        return .small
+            return .small
         #else
-        return .medium
+            return .medium
         #endif
     }
 
     #if canImport(UIKit)
-    private var backgroundShapeCorners: UIRectCorner {
-        switch fieldPosition {
-        case .top:
-            [.topLeft, .topRight]
-        case .bottom:
-            [.bottomLeft, .bottomRight]
-        case .center:
-            []
-        default:
-            [.allCorners]
+        private var backgroundShapeCorners: UIRectCorner {
+            switch fieldPosition {
+            case .top:
+                [.topLeft, .topRight]
+            case .bottom:
+                [.bottomLeft, .bottomRight]
+            case .center:
+                []
+            default:
+                [.allCorners]
+            }
         }
-    }
     #endif
 
     #if canImport(AppKit)
-    private var backgroundShapeCorners: RectCorner {
-        switch fieldPosition {
-        case .top:
-            [.topLeft, .topRight]
-        case .bottom:
-            [.bottomLeft, .bottomRight]
-        case .center:
-            []
-        default:
-            [.allCorners]
+        private var backgroundShapeCorners: RectCorner {
+            switch fieldPosition {
+            case .top:
+                [.topLeft, .topRight]
+            case .bottom:
+                [.bottomLeft, .bottomRight]
+            case .center:
+                []
+            default:
+                [.allCorners]
+            }
         }
-    }
     #endif
 
     private var fieldOffset: CGFloat {
@@ -164,9 +164,9 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
             .zero
         case .overInput:
             #if os(macOS)
-            text.isEmpty && !isFocused ? -2 : text.isEmpty ? 0 : isFocused ? 9 : 7
+                text.isEmpty && !isFocused ? -2 : text.isEmpty ? 0 : isFocused ? 9 : 7
             #else
-            text.isEmpty ? 0 : 10
+                text.isEmpty ? 0 : 10
             #endif
         }
     }
@@ -176,35 +176,35 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
         switch fieldPosition {
         case .top, .bottom, .center:
             #if canImport(UIKit)
-            RoundedRectangleCorner(radius: fieldRadius, corners: backgroundShapeCorners)
-                .stroke(
-                    overlayBorderColor,
-                    lineWidth: isFocused ? 2 : CGFloat(theme.borderSize)
-                )
-            #elseif canImport(AppKit)
-            if fieldPlaceholderPosition != .adjacent {
                 RoundedRectangleCorner(radius: fieldRadius, corners: backgroundShapeCorners)
                     .stroke(
                         overlayBorderColor,
                         lineWidth: isFocused ? 2 : CGFloat(theme.borderSize)
                     )
-            }
+            #elseif canImport(AppKit)
+                if fieldPlaceholderPosition != .adjacent {
+                    RoundedRectangleCorner(radius: fieldRadius, corners: backgroundShapeCorners)
+                        .stroke(
+                            overlayBorderColor,
+                            lineWidth: isFocused ? 2 : CGFloat(theme.borderSize)
+                        )
+                }
             #endif
         default:
             #if canImport(UIKit)
-            RoundedRectangle(
-                cornerRadius: fieldRadius,
-                style: .continuous
-            )
-            .stroke(overlayBorderColor, lineWidth: isFocused ? 2 : CGFloat(theme.borderSize))
-            #else
-            if fieldPlaceholderPosition != .adjacent {
                 RoundedRectangle(
                     cornerRadius: fieldRadius,
                     style: .continuous
                 )
                 .stroke(overlayBorderColor, lineWidth: isFocused ? 2 : CGFloat(theme.borderSize))
-            }
+            #else
+                if fieldPlaceholderPosition != .adjacent {
+                    RoundedRectangle(
+                        cornerRadius: fieldRadius,
+                        style: .continuous
+                    )
+                    .stroke(overlayBorderColor, lineWidth: isFocused ? 2 : CGFloat(theme.borderSize))
+                }
             #endif
         }
     }

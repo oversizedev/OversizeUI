@@ -6,15 +6,15 @@
 import SwiftUI
 
 #if os(macOS)
-public extension View {
-    func cursor(_ cursor: NSCursor) -> some View {
-        onHover { inside in
-            if inside {
-                cursor.push()
-            } else {
-                NSCursor.pop()
+    public extension View {
+        func cursor(_ cursor: NSCursor) -> some View {
+            onHover { inside in
+                if inside {
+                    cursor.push()
+                } else {
+                    NSCursor.pop()
+                }
             }
         }
     }
-}
 #endif

@@ -20,9 +20,9 @@ public enum IconSizes: CaseIterable {
             Space.small.rawValue
         case .medium:
             #if os(macOS)
-            20
+                20
             #else
-            Space.medium.rawValue
+                Space.medium.rawValue
             #endif
         case .large:
             Space.large.rawValue

@@ -9,19 +9,19 @@ struct AvatarPreview: View {
     var body: some View {
         VStack(alignment: .leading) {
             #if os(tvOS)
-            avatarsStack
+                avatarsStack
             #else
-            avatarsStack
-                .controlSize(.mini)
+                avatarsStack
+                    .controlSize(.mini)
 
-            avatarsStack
-                .controlSize(.small)
+                avatarsStack
+                    .controlSize(.small)
 
-            avatarsStack
-                .controlSize(.regular)
+                avatarsStack
+                    .controlSize(.regular)
 
-            avatarsStack
-                .controlSize(.large)
+                avatarsStack
+                    .controlSize(.large)
 
             #endif
         }

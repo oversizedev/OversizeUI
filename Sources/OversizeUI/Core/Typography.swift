@@ -42,30 +42,30 @@ public struct Typography: ViewModifier {
     }
 
     #if os(macOS)
-    private var lineHeight: CGFloat {
-        switch fontStyle {
-        case .largeTitle: 32
-        case .title: 28
-        case .title2: 24
-        case .title3: 20
-        case .headline: 16
-        case .subheadline: 20
-        case .body, .callout, .footnote, .caption, .caption2: 16
-        default: 16
+        private var lineHeight: CGFloat {
+            switch fontStyle {
+            case .largeTitle: 32
+            case .title: 28
+            case .title2: 24
+            case .title3: 20
+            case .headline: 16
+            case .subheadline: 20
+            case .body, .callout, .footnote, .caption, .caption2: 16
+            default: 16
+            }
         }
-    }
     #else
-    private var lineHeight: CGFloat {
-        switch fontStyle {
-        case .largeTitle: 44
-        case .title: 36
-        case .title2: 28
-        case .title3, .headline: 24
-        case .subheadline, .body: 20
-        case .callout, .footnote, .caption, .caption2: 16
-        default: 16
+        private var lineHeight: CGFloat {
+            switch fontStyle {
+            case .largeTitle: 44
+            case .title: 36
+            case .title2: 28
+            case .title3, .headline: 24
+            case .subheadline, .body: 20
+            case .callout, .footnote, .caption, .caption2: 16
+            default: 16
+            }
         }
-    }
     #endif
 
     private var fontDesign: Font.Design {

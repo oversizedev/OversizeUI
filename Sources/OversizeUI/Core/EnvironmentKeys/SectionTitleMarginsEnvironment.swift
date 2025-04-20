@@ -28,11 +28,11 @@ public extension View {
 
     func sectionContentCompactRowMargins() -> some View {
         #if os(macOS)
-        environment(\.sectionTitleMargins, .init(top: .zero, leading: .medium, bottom: .zero, trailing: .medium))
-            .environment(\.surfaceContentMargins, .init(top: .xxxSmall, leading: .zero, bottom: .xxxSmall, trailing: .zero))
+            environment(\.sectionTitleMargins, .init(top: .zero, leading: .medium, bottom: .zero, trailing: .medium))
+                .environment(\.surfaceContentMargins, .init(top: .xxxSmall, leading: .zero, bottom: .xxxSmall, trailing: .zero))
         #else
-        environment(\.sectionTitleMargins, .init(top: .zero, leading: .medium, bottom: .zero, trailing: .medium))
-            .environment(\.surfaceContentMargins, .init(top: .xxSmall, leading: .zero, bottom: .xxSmall, trailing: .zero))
+            environment(\.sectionTitleMargins, .init(top: .zero, leading: .medium, bottom: .zero, trailing: .medium))
+                .environment(\.surfaceContentMargins, .init(top: .xxSmall, leading: .zero, bottom: .xxSmall, trailing: .zero))
         #endif
     }
 }

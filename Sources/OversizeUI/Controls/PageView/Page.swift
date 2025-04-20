@@ -1141,13 +1141,13 @@ private extension View {
     @ViewBuilder
     func prefersNavigationBarHidden() -> some View {
         #if os(watchOS) || os(macOS)
-        self
-        #else
-        if #available(iOS 16.0, macOS 13.0, tvOS 16.0, *) {
-            self.toolbarBackground(.hidden)
-        } else {
             self
-        }
+        #else
+            if #available(iOS 16.0, macOS 13.0, tvOS 16.0, *) {
+                self.toolbarBackground(.hidden)
+            } else {
+                self
+            }
         #endif
     }
 }

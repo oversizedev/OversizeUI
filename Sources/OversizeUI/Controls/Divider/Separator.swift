@@ -53,9 +53,9 @@ public struct Separator: View {
 
     var lineWidth: CGFloat {
         #if os(macOS)
-        return 1
+            return 1
         #else
-        return 0.5
+            return 0.5
         #endif
     }
 }

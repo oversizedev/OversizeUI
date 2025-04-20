@@ -11,48 +11,48 @@ struct AvatarDemo: View {
         PageView("Avatars") {
             LazyVStack(spacing: .xSmall) {
                 #if os(iOS) || os(macOS) || os(watchOS)
-                Group {
-                    Avatar(firstName: "Jhon")
-                        .controlSize(.small)
-                        .previewDisplayName("Only firsy name")
+                    Group {
+                        Avatar(firstName: "Jhon")
+                            .controlSize(.small)
+                            .previewDisplayName("Only firsy name")
 
-                    Avatar(firstName: "Jhon", lastName: "Smith")
-                        .controlSize(.small)
+                        Avatar(firstName: "Jhon", lastName: "Smith")
+                            .controlSize(.small)
 
-                    Avatar(avatar: Image("empty"))
-                        .controlSize(.small)
+                        Avatar(avatar: Image("empty"))
+                            .controlSize(.small)
 
-                    Avatar(firstName: "Jhon", lastName: "Smith", avatar: Image("empty"))
-                        .controlSize(.small)
-                }
+                        Avatar(firstName: "Jhon", lastName: "Smith", avatar: Image("empty"))
+                            .controlSize(.small)
+                    }
 
-                Group {
-                    Avatar(firstName: "Jhon")
-                        .controlSize(.regular)
-                        .previewDisplayName("Only firsy name")
+                    Group {
+                        Avatar(firstName: "Jhon")
+                            .controlSize(.regular)
+                            .previewDisplayName("Only firsy name")
 
-                    Avatar(firstName: "Jhon", lastName: "Smith")
-                        .controlSize(.regular)
+                        Avatar(firstName: "Jhon", lastName: "Smith")
+                            .controlSize(.regular)
 
-                    Avatar(avatar: Image("empty"))
-                        .controlSize(.regular)
+                        Avatar(avatar: Image("empty"))
+                            .controlSize(.regular)
 
-                    Avatar(firstName: "Jhon", lastName: "Smith", avatar: Image("empty"))
-                        .controlSize(.regular)
-                }
-                Group {
-                    Avatar(firstName: "Jhon")
-                        .controlSize(.large)
+                        Avatar(firstName: "Jhon", lastName: "Smith", avatar: Image("empty"))
+                            .controlSize(.regular)
+                    }
+                    Group {
+                        Avatar(firstName: "Jhon")
+                            .controlSize(.large)
 
-                    Avatar(firstName: "Jhon", lastName: "Smith")
-                        .controlSize(.large)
+                        Avatar(firstName: "Jhon", lastName: "Smith")
+                            .controlSize(.large)
 
-                    Avatar(avatar: Image("empty"))
-                        .controlSize(.large)
+                        Avatar(avatar: Image("empty"))
+                            .controlSize(.large)
 
-                    Avatar(firstName: "Jhon", lastName: "Smith", avatar: Image("empty"))
-                        .controlSize(.large)
-                }
+                        Avatar(firstName: "Jhon", lastName: "Smith", avatar: Image("empty"))
+                            .controlSize(.large)
+                    }
                 #endif
             }
         }

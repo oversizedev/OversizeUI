@@ -28,7 +28,7 @@ public class ThemeSettings: ObservableObject, @unchecked Sendable {
     @AppStorage(ThemeSettingsNames.appearance) public var appearance: Appearance = .system
 
     #if os(iOS)
-    @AppStorage(ThemeSettingsNames.accentColor) public var accentColor: Color = .blue
+        @AppStorage(ThemeSettingsNames.accentColor) public var accentColor: Color = .blue
     #endif
 
     @AppStorage(ThemeSettingsNames.fontTitle) public var fontTitle: FontDesignType = .default
@@ -39,17 +39,17 @@ public class ThemeSettings: ObservableObject, @unchecked Sendable {
     @AppStorage(ThemeSettingsNames.borderApp) public var borderApp: Bool = false
     @AppStorage(ThemeSettingsNames.borderButtons) public var borderButtons: Bool = false
     #if os(macOS)
-    @AppStorage(ThemeSettingsNames.borderSize) public var borderSize: Double = 1
-    @AppStorage(ThemeSettingsNames.borderTextFields) public var borderTextFields: Bool = true
-    @AppStorage(ThemeSettingsNames.borderSurface) public var borderSurface: Bool = true
-    @AppStorage(ThemeSettingsNames.radius) public var radius: Double = 4
-    @AppStorage(ThemeSettingsNames.borderControls) public var borderControls: Bool = true
+        @AppStorage(ThemeSettingsNames.borderSize) public var borderSize: Double = 1
+        @AppStorage(ThemeSettingsNames.borderTextFields) public var borderTextFields: Bool = true
+        @AppStorage(ThemeSettingsNames.borderSurface) public var borderSurface: Bool = true
+        @AppStorage(ThemeSettingsNames.radius) public var radius: Double = 4
+        @AppStorage(ThemeSettingsNames.borderControls) public var borderControls: Bool = true
     #else
-    @AppStorage(ThemeSettingsNames.borderSurface) public var borderSurface: Bool = false
-    @AppStorage(ThemeSettingsNames.borderTextFields) public var borderTextFields: Bool = false
-    @AppStorage(ThemeSettingsNames.borderSize) public var borderSize: Double = 0.5
-    @AppStorage(ThemeSettingsNames.radius) public var radius: Double = 8
-    @AppStorage(ThemeSettingsNames.borderControls) public var borderControls: Bool = false
+        @AppStorage(ThemeSettingsNames.borderSurface) public var borderSurface: Bool = false
+        @AppStorage(ThemeSettingsNames.borderTextFields) public var borderTextFields: Bool = false
+        @AppStorage(ThemeSettingsNames.borderSize) public var borderSize: Double = 0.5
+        @AppStorage(ThemeSettingsNames.radius) public var radius: Double = 8
+        @AppStorage(ThemeSettingsNames.borderControls) public var borderControls: Bool = false
     #endif
 
     @AppStorage(ThemeSettingsNames.theme) public var theme: Int = 0

@@ -7,32 +7,32 @@ import OversizeUI
 import SwiftUI
 
 #if os(iOS)
-struct IconsDemo: View {
-    let grid = [GridItem(),
-                GridItem(),
-                GridItem(),
-                GridItem(),
-                GridItem(),
-                GridItem()]
-    var body: some View {
-        PageView("Icons") {
-            LazyVGrid(columns: grid) {
-                ForEach(IconsNames.allCases, id: \.self) { icon in
-                    IconDeprecated(icon)
-                        .padding(.vertical)
+    struct IconsDemo: View {
+        let grid = [GridItem(),
+                    GridItem(),
+                    GridItem(),
+                    GridItem(),
+                    GridItem(),
+                    GridItem()]
+        var body: some View {
+            PageView("Icons") {
+                LazyVGrid(columns: grid) {
+                    ForEach(IconsNames.allCases, id: \.self) { icon in
+                        IconDeprecated(icon)
+                            .padding(.vertical)
+                    }
                 }
+                .padding()
             }
-            .padding()
-        }
-        .leadingBar {
-            BarButton(.back)
+            .leadingBar {
+                BarButton(.back)
+            }
         }
     }
-}
 
-struct IconsDemo_Previews: PreviewProvider {
-    static var previews: some View {
-        IconsDemo()
+    struct IconsDemo_Previews: PreviewProvider {
+        static var previews: some View {
+            IconsDemo()
+        }
     }
-}
 #endif

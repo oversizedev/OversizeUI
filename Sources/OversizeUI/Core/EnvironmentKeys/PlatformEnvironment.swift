@@ -5,7 +5,7 @@
 
 import SwiftUI
 #if canImport(UIKit)
-import UIKit
+    import UIKit
 #endif
 
 public enum Platform: Sendable {
@@ -15,34 +15,34 @@ public enum Platform: Sendable {
 private struct PlatformKey: EnvironmentKey {
     static let defaultValue: Platform = {
         #if os(macOS) || targetEnvironment(macCatalyst)
-        return .macOS
+            return .macOS
         #elseif os(watchOS)
-        return .watchOS
+            return .watchOS
         #elseif os(visionOS)
-        return .vision
+            return .vision
         #elseif canImport(UIKit)
-        MainActor.assumeIsolated {
-            switch UIDevice.current.userInterfaceIdiom {
-            case .phone:
-                return .iPhone
-            case .pad:
-                return .iPadOS
-            case .tv:
-                return .tvOS
-            case .carPlay:
-                return .carPlay
-            case .mac:
-                return .macOS
-            case .vision:
-                return .visionOS
-            case .unspecified:
-                return .other
-            @unknown default:
-                return .other
+            MainActor.assumeIsolated {
+                switch UIDevice.current.userInterfaceIdiom {
+                case .phone:
+                    return .iPhone
+                case .pad:
+                    return .iPadOS
+                case .tv:
+                    return .tvOS
+                case .carPlay:
+                    return .carPlay
+                case .mac:
+                    return .macOS
+                case .vision:
+                    return .visionOS
+                case .unspecified:
+                    return .other
+                @unknown default:
+                    return .other
+                }
             }
-        }
         #else
-        return .other
+            return .other
         #endif
     }()
 }

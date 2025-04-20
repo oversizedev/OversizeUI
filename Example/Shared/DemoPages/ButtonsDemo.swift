@@ -48,27 +48,27 @@ struct ButtonsDemo: View {
                 .buttonStyle(.primary)
 
                 #if os(iOS) || os(macOS) || os(watchOS)
-                HStack {
-                    Button("Button") { print(#function) }
-                        .buttonStyle(.secondary)
-                        .accent()
+                    HStack {
+                        Button("Button") { print(#function) }
+                            .buttonStyle(.secondary)
+                            .accent()
+                            .controlSize(.small)
+                            .elevation(.z2)
+
+                        Button("Button") { print(#function) }
+                            .buttonStyle(.secondary)
+                            .controlSize(.mini)
+                            .elevation(.z2)
+
+                        Button {
+                            print(#function)
+                        } label: {
+                            Image(systemName: "archivebox")
+                        }
                         .controlSize(.small)
-                        .elevation(.z2)
-
-                    Button("Button") { print(#function) }
                         .buttonStyle(.secondary)
-                        .controlSize(.mini)
                         .elevation(.z2)
-
-                    Button {
-                        print(#function)
-                    } label: {
-                        Image(systemName: "archivebox")
                     }
-                    .controlSize(.small)
-                    .buttonStyle(.secondary)
-                    .elevation(.z2)
-                }
                 #endif
 
             }.padding()
