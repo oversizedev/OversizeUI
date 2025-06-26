@@ -26,32 +26,32 @@ public struct FieldButtonStyle: ButtonStyle {
         switch fieldPosition {
         case .top, .bottom, .center:
             #if os(iOS)
-                RoundedRectangleCorner(radius: Radius.medium, corners: backgroundShapeCorners)
-                    .fill(isPressed ? Color.surfaceTertiary : Color.surfaceSecondary)
-                    .overlay(
-                        RoundedRectangleCorner(radius: Radius.medium, corners: backgroundShapeCorners)
-                            .stroke(
-                                theme.borderTextFields
-                                    ? Color.border
-                                    : Color.surfaceSecondary,
-                                lineWidth: CGFloat(theme.borderSize)
-                            )
-                    )
-            #else
-                RoundedRectangle(cornerRadius: Radius.medium, style: .continuous)
-                    .fill(isPressed ? Color.surfaceTertiary : Color.surfaceSecondary)
-                    .overlay(
-                        RoundedRectangle(
-                            cornerRadius: Radius.medium,
-                            style: .continuous
-                        )
+            RoundedRectangleCorner(radius: Radius.medium, corners: backgroundShapeCorners)
+                .fill(isPressed ? Color.surfaceTertiary : Color.surfaceSecondary)
+                .overlay(
+                    RoundedRectangleCorner(radius: Radius.medium, corners: backgroundShapeCorners)
                         .stroke(
                             theme.borderTextFields
                                 ? Color.border
                                 : Color.surfaceSecondary,
                             lineWidth: CGFloat(theme.borderSize)
                         )
+                )
+            #else
+            RoundedRectangle(cornerRadius: Radius.medium, style: .continuous)
+                .fill(isPressed ? Color.surfaceTertiary : Color.surfaceSecondary)
+                .overlay(
+                    RoundedRectangle(
+                        cornerRadius: Radius.medium,
+                        style: .continuous
                     )
+                    .stroke(
+                        theme.borderTextFields
+                            ? Color.border
+                            : Color.surfaceSecondary,
+                        lineWidth: CGFloat(theme.borderSize)
+                    )
+                )
             #endif
 
         default:
@@ -73,21 +73,21 @@ public struct FieldButtonStyle: ButtonStyle {
     }
 
     #if os(iOS)
-        @available(macOS, unavailable)
-        @available(watchOS, unavailable)
-        @available(tvOS, unavailable)
-        private var backgroundShapeCorners: UIRectCorner {
-            switch fieldPosition {
-            case .top:
-                [.topLeft, .topRight]
-            case .bottom:
-                [.bottomLeft, .bottomRight]
-            case .center:
-                []
-            default:
-                [.allCorners]
-            }
+    @available(macOS, unavailable)
+    @available(watchOS, unavailable)
+    @available(tvOS, unavailable)
+    private var backgroundShapeCorners: UIRectCorner {
+        switch fieldPosition {
+        case .top:
+            [.topLeft, .topRight]
+        case .bottom:
+            [.bottomLeft, .bottomRight]
+        case .center:
+            []
+        default:
+            [.allCorners]
         }
+    }
     #endif
 }
 

@@ -80,25 +80,25 @@ public struct SelectPicker<Element: Hashable, Content, Actions, ContentUnavailab
             .sectionContentCompactRowMargins()
         case .wheel:
             #if os(iOS)
-                SectionView {
-                    wheelList(data)
-                }
+            SectionView {
+                wheelList(data)
+            }
             #else
-                EmptyView()
+            EmptyView()
             #endif
         }
     }
 
     #if os(iOS)
-        private func wheelList(_ data: Data) -> some View {
-            Picker("", selection: $selection) {
-                ForEach(data, id: \.self) { item in
-                    content(item, selection == item)
-                }
+    private func wheelList(_ data: Data) -> some View {
+        Picker("", selection: $selection) {
+            ForEach(data, id: \.self) { item in
+                content(item, selection == item)
             }
-            .labelsHidden()
-            .pickerStyle(.wheel)
         }
+        .labelsHidden()
+        .pickerStyle(.wheel)
+    }
     #endif
 
     private func rowsList(_ data: Data) -> some View {

@@ -53,9 +53,9 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
 
     private var fieldRadius: Radius {
         #if os(macOS)
-            return .xSmall
+        return .xSmall
         #else
-            return .medium
+        return .medium
         #endif
     }
 
@@ -63,35 +63,35 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
         switch fieldPlaceholderPosition {
         case .default, .adjacent:
             #if os(macOS)
-                return .init(
-                    top: 10,
-                    leading: Space.xSmall.rawValue,
-                    bottom: 10,
-                    trailing: Space.xSmall.rawValue
-                )
+            return .init(
+                top: 10,
+                leading: Space.xSmall.rawValue,
+                bottom: 10,
+                trailing: Space.xSmall.rawValue
+            )
             #else
-                return .init(
-                    top: 10,
-                    leading: Space.xSmall.rawValue,
-                    bottom: 10,
-                    trailing: Space.xSmall.rawValue
-                )
+            return .init(
+                top: 10,
+                leading: Space.xSmall.rawValue,
+                bottom: 10,
+                trailing: Space.xSmall.rawValue
+            )
             #endif
         case .overInput:
             #if os(macOS)
-                return .init(
-                    top: text.isEmpty ? 13 : 22,
-                    leading: Space.xxSmall.rawValue,
-                    bottom: 10,
-                    trailing: Space.xxSmall.rawValue
-                )
+            return .init(
+                top: text.isEmpty ? 13 : 22,
+                leading: Space.xxSmall.rawValue,
+                bottom: 10,
+                trailing: Space.xxSmall.rawValue
+            )
             #else
-                return .init(
-                    top: text.isEmpty ? 8 : 22,
-                    leading: Space.xSmall.rawValue,
-                    bottom: 10,
-                    trailing: Space.xSmall.rawValue
-                )
+            return .init(
+                top: text.isEmpty ? 8 : 22,
+                leading: Space.xSmall.rawValue,
+                bottom: 10,
+                trailing: Space.xSmall.rawValue
+            )
 
             #endif
         }
@@ -101,15 +101,15 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
         switch fieldPlaceholderPosition {
         case .default, .adjacent:
             #if os(macOS)
-                return .init(Space.xSmall)
+            return .init(Space.xSmall)
             #else
-                return .init(Space.xSmall)
+            return .init(Space.xSmall)
             #endif
         case .overInput:
             #if os(macOS)
-                return .init(horizontal: Space.xSmall, vertical: Space.xSmall)
+            return .init(horizontal: Space.xSmall, vertical: Space.xSmall)
             #else
-                return .init(Space.xxSmall)
+            return .init(Space.xxSmall)
             #endif
         }
     }

@@ -22,11 +22,11 @@ public enum Space: CGFloat, Sendable {
     case small = 16
 
     #if os(macOS)
-        /// 20
-        case medium = 20
+    /// 20
+    case medium = 20
     #else
-        /// 24
-        case medium = 24
+    /// 24
+    case medium = 24
     #endif
 
     /// 32

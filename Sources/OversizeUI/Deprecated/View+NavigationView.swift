@@ -22,25 +22,25 @@ public extension View {
             }
         case let .fixed(offset):
             #if os(iOS)
-                VStack(spacing: .zero) {
-                    ModalNavigationBar(title: title, largeTitle: false, offset: offset)
-                    self
-                }
+            VStack(spacing: .zero) {
+                ModalNavigationBar(title: title, largeTitle: false, offset: offset)
+                self
+            }
             #else
-                NavigationView { self
-                    .navigationTitle(title)
-                }
+            NavigationView { self
+                .navigationTitle(title)
+            }
             #endif
         case let .scroll(offset):
             #if os(iOS)
-                VStack(spacing: .zero) {
-                    ModalNavigationBar(title: title, largeTitle: true, offset: offset, leadingBar: {}, trailingBar: {}, bottomBar: {}, titleLabel: {})
-                    self
-                }
+            VStack(spacing: .zero) {
+                ModalNavigationBar(title: title, largeTitle: true, offset: offset, leadingBar: {}, trailingBar: {}, bottomBar: {}, titleLabel: {})
+                self
+            }
             #else
-                NavigationView { self
-                    .navigationTitle(title)
-                }
+            NavigationView { self
+                .navigationTitle(title)
+            }
             #endif
         }
     }
@@ -68,41 +68,41 @@ public extension View {
             }
         case let .fixed(offset):
             #if os(iOS)
-                VStack(spacing: .zero) {
-                    ModalNavigationBar(title: title, largeTitle: false, offset: offset, leadingBar: leadingBar, trailingBar: trailingBar, bottomBar: bottomBar, titleLabel: {})
-                    self
-                }
+            VStack(spacing: .zero) {
+                ModalNavigationBar(title: title, largeTitle: false, offset: offset, leadingBar: leadingBar, trailingBar: trailingBar, bottomBar: bottomBar, titleLabel: {})
+                self
+            }
             #else
-                NavigationView { self
-                    .navigationTitle(title)
-                    .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
-                            leadingBar()
-                        }
-                        ToolbarItem(placement: .confirmationAction) {
-                            trailingBar()
-                        }
+            NavigationView { self
+                .navigationTitle(title)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        leadingBar()
+                    }
+                    ToolbarItem(placement: .confirmationAction) {
+                        trailingBar()
                     }
                 }
+            }
             #endif
         case let .scroll(offset):
             #if os(iOS)
-                VStack(spacing: .zero) {
-                    ModalNavigationBar(title: title, largeTitle: true, offset: offset, leadingBar: leadingBar, trailingBar: leadingBar, bottomBar: bottomBar, titleLabel: {})
-                    self
-                }
+            VStack(spacing: .zero) {
+                ModalNavigationBar(title: title, largeTitle: true, offset: offset, leadingBar: leadingBar, trailingBar: leadingBar, bottomBar: bottomBar, titleLabel: {})
+                self
+            }
             #else
-                NavigationView { self
-                    .navigationTitle(title)
-                    .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
-                            leadingBar()
-                        }
-                        ToolbarItem(placement: .confirmationAction) {
-                            trailingBar()
-                        }
+            NavigationView { self
+                .navigationTitle(title)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        leadingBar()
+                    }
+                    ToolbarItem(placement: .confirmationAction) {
+                        trailingBar()
                     }
                 }
+            }
             #endif
         }
     }
@@ -129,41 +129,41 @@ public extension View {
             }
         case let .fixed(offset):
             #if os(iOS)
-                VStack(spacing: .zero) {
-                    ModalNavigationBar(title: title, largeTitle: false, offset: offset, leadingBar: leadingBar, trailingBar: trailingBar)
-                    self
-                }
+            VStack(spacing: .zero) {
+                ModalNavigationBar(title: title, largeTitle: false, offset: offset, leadingBar: leadingBar, trailingBar: trailingBar)
+                self
+            }
             #else
-                NavigationView { self
-                    .navigationTitle(title)
-                    .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
-                            leadingBar()
-                        }
-                        ToolbarItem(placement: .confirmationAction) {
-                            trailingBar()
-                        }
+            NavigationView { self
+                .navigationTitle(title)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        leadingBar()
+                    }
+                    ToolbarItem(placement: .confirmationAction) {
+                        trailingBar()
                     }
                 }
+            }
             #endif
         case let .scroll(offset):
             #if os(iOS)
-                VStack(spacing: .zero) {
-                    ModalNavigationBar(title: title, largeTitle: true, offset: offset, leadingBar: leadingBar, trailingBar: trailingBar)
-                    self
-                }
+            VStack(spacing: .zero) {
+                ModalNavigationBar(title: title, largeTitle: true, offset: offset, leadingBar: leadingBar, trailingBar: trailingBar)
+                self
+            }
             #else
-                NavigationView { self
-                    .navigationTitle(title)
-                    .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
-                            leadingBar()
-                        }
-                        ToolbarItem(placement: .confirmationAction) {
-                            trailingBar()
-                        }
+            NavigationView { self
+                .navigationTitle(title)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        leadingBar()
+                    }
+                    ToolbarItem(placement: .confirmationAction) {
+                        trailingBar()
                     }
                 }
+            }
             #endif
         }
     }
@@ -186,35 +186,35 @@ public extension View {
             }
         case let .fixed(offset):
             #if os(iOS)
-                VStack(spacing: .zero) {
-                    ModalNavigationBar(title: title, largeTitle: false, offset: offset, leadingBar: leadingBar)
-                    self
-                }
+            VStack(spacing: .zero) {
+                ModalNavigationBar(title: title, largeTitle: false, offset: offset, leadingBar: leadingBar)
+                self
+            }
             #else
-                NavigationView { self
-                    .navigationTitle(title)
-                    .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
-                            leadingBar()
-                        }
+            NavigationView { self
+                .navigationTitle(title)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        leadingBar()
                     }
                 }
+            }
             #endif
         case let .scroll(offset):
             #if os(iOS)
-                VStack(spacing: .zero) {
-                    ModalNavigationBar(title: title, largeTitle: true, offset: offset, leadingBar: leadingBar)
-                    self
-                }
+            VStack(spacing: .zero) {
+                ModalNavigationBar(title: title, largeTitle: true, offset: offset, leadingBar: leadingBar)
+                self
+            }
             #else
-                NavigationView { self
-                    .navigationTitle(title)
-                    .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
-                            leadingBar()
-                        }
+            NavigationView { self
+                .navigationTitle(title)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        leadingBar()
                     }
                 }
+            }
             #endif
         }
     }
@@ -237,35 +237,35 @@ public extension View {
             }
         case let .fixed(offset):
             #if os(iOS)
-                VStack(spacing: .zero) {
-                    ModalNavigationBar(title: title, largeTitle: false, offset: offset, trailingBar: trailingBar)
-                    self
-                }
+            VStack(spacing: .zero) {
+                ModalNavigationBar(title: title, largeTitle: false, offset: offset, trailingBar: trailingBar)
+                self
+            }
             #else
-                NavigationView { self
-                    .navigationTitle(title)
-                    .toolbar {
-                        ToolbarItem(placement: .confirmationAction) {
-                            trailingBar()
-                        }
+            NavigationView { self
+                .navigationTitle(title)
+                .toolbar {
+                    ToolbarItem(placement: .confirmationAction) {
+                        trailingBar()
                     }
                 }
+            }
             #endif
         case let .scroll(offset):
             #if os(iOS)
-                VStack(spacing: .zero) {
-                    ModalNavigationBar(title: title, largeTitle: true, offset: offset, trailingBar: trailingBar)
-                    self
-                }
+            VStack(spacing: .zero) {
+                ModalNavigationBar(title: title, largeTitle: true, offset: offset, trailingBar: trailingBar)
+                self
+            }
             #else
-                NavigationView { self
-                    .navigationTitle(title)
-                    .toolbar {
-                        ToolbarItem(placement: .confirmationAction) {
-                            trailingBar()
-                        }
+            NavigationView { self
+                .navigationTitle(title)
+                .toolbar {
+                    ToolbarItem(placement: .confirmationAction) {
+                        trailingBar()
                     }
                 }
+            }
             #endif
         }
     }
@@ -297,46 +297,11 @@ public extension View {
             }
         case let .fixed(offset):
             #if os(iOS)
-                NavigationView {
-                    VStack(spacing: .zero) {
-                        ModalNavigationBar(
-                            title: title,
-                            largeTitle: false,
-                            offset: offset,
-                            background: background,
-                            leadingBar: leadingBar,
-                            trailingBar: trailingBar,
-                            bottomBar: bottomBar,
-                            titleLabel: {}
-                        )
-                        .zIndex(99_999_999)
-                        ScrollViewOffset(offset: offset) {
-                            self
-                        }
-                    }.background(background.ignoresSafeArea())
-                }
-            #else
-                NavigationView {
-                    ScrollView {
-                        self
-                    }
-                    .navigationTitle(title)
-                    .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
-                            leadingBar()
-                        }
-                        ToolbarItem(placement: .confirmationAction) {
-                            trailingBar()
-                        }
-                    }
-                }
-            #endif
-        case let .scroll(offset):
-            #if os(iOS)
+            NavigationView {
                 VStack(spacing: .zero) {
                     ModalNavigationBar(
                         title: title,
-                        largeTitle: true,
+                        largeTitle: false,
                         offset: offset,
                         background: background,
                         leadingBar: leadingBar,
@@ -344,25 +309,60 @@ public extension View {
                         bottomBar: bottomBar,
                         titleLabel: {}
                     )
+                    .zIndex(99_999_999)
                     ScrollViewOffset(offset: offset) {
                         self
                     }
                 }.background(background.ignoresSafeArea())
+            }
             #else
-                NavigationView {
-                    ScrollView {
-                        self
+            NavigationView {
+                ScrollView {
+                    self
+                }
+                .navigationTitle(title)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        leadingBar()
                     }
-                    .navigationTitle(title)
-                    .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
-                            leadingBar()
-                        }
-                        ToolbarItem(placement: .confirmationAction) {
-                            trailingBar()
-                        }
+                    ToolbarItem(placement: .confirmationAction) {
+                        trailingBar()
                     }
                 }
+            }
+            #endif
+        case let .scroll(offset):
+            #if os(iOS)
+            VStack(spacing: .zero) {
+                ModalNavigationBar(
+                    title: title,
+                    largeTitle: true,
+                    offset: offset,
+                    background: background,
+                    leadingBar: leadingBar,
+                    trailingBar: trailingBar,
+                    bottomBar: bottomBar,
+                    titleLabel: {}
+                )
+                ScrollViewOffset(offset: offset) {
+                    self
+                }
+            }.background(background.ignoresSafeArea())
+            #else
+            NavigationView {
+                ScrollView {
+                    self
+                }
+                .navigationTitle(title)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        leadingBar()
+                    }
+                    ToolbarItem(placement: .confirmationAction) {
+                        trailingBar()
+                    }
+                }
+            }
             #endif
         }
     }

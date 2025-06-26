@@ -36,33 +36,33 @@ public struct BarButton: View {
 
     public var body: some View {
         #if os(tvOS)
-            Button(action: buttonAction) {
-                label
-            }
-            .buttonStyle(buttonStyle)
-            .controlBorderShape(.capsule)
-            .accent(isAccent)
-            .disabled(isDisabled)
-            .elevation(isDisabled ? .z0 : .z2)
+        Button(action: buttonAction) {
+            label
+        }
+        .buttonStyle(buttonStyle)
+        .controlBorderShape(.capsule)
+        .accent(isAccent)
+        .disabled(isDisabled)
+        .elevation(isDisabled ? .z0 : .z2)
         #else
-            Group {
-                if isIconButtonStyle {
-                    Button(action: buttonAction) {
-                        label
-                    }
-                    .buttonStyle(iconButtonStyle)
-                } else {
-                    Button(action: buttonAction) {
-                        label
-                    }
-                    .buttonStyle(buttonStyle)
+        Group {
+            if isIconButtonStyle {
+                Button(action: buttonAction) {
+                    label
                 }
+                .buttonStyle(iconButtonStyle)
+            } else {
+                Button(action: buttonAction) {
+                    label
+                }
+                .buttonStyle(buttonStyle)
             }
-            .controlBorderShape(.capsule)
-            .controlSize(.small)
-            .accent(isAccent)
-            .disabled(isDisabled)
-            .elevation(.z2)
+        }
+        .controlBorderShape(.capsule)
+        .controlSize(.small)
+        .accent(isAccent)
+        .disabled(isDisabled)
+        .elevation(.z2)
         #endif
     }
 

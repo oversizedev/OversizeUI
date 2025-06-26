@@ -21,7 +21,7 @@ public struct OversizeButtonStyle: ButtonStyle {
     @Environment(\.controlBorderShape) var controlBorderShape: ControlBorderShape
     @Environment(\.isBordered) var isBordered: Bool
     #if !os(tvOS)
-        @Environment(\.controlSize) var controlSize: ControlSize
+    @Environment(\.controlSize) var controlSize: ControlSize
     #endif
 
     private let type: ButtonType
@@ -145,46 +145,46 @@ public struct OversizeButtonStyle: ButtonStyle {
 
     private var horizontalPadding: Space {
         #if os(tvOS)
-            return .medium
+        return .medium
         #else
-            switch controlSize {
-            case .mini:
-                switch controlBorderShape {
-                case .capsule:
-                    return .xSmall
-                case .roundedRectangle:
-                    return .xxSmall
-                }
-            case .small:
-                return .small
-            case .regular:
-                return .small
-            case .large, .extraLarge:
-                return .medium
-            @unknown default:
-                return .zero
+        switch controlSize {
+        case .mini:
+            switch controlBorderShape {
+            case .capsule:
+                return .xSmall
+            case .roundedRectangle:
+                return .xxSmall
             }
+        case .small:
+            return .small
+        case .regular:
+            return .small
+        case .large, .extraLarge:
+            return .medium
+        @unknown default:
+            return .zero
+        }
         #endif
     }
 
     private var verticalPadding: Space {
         #if os(tvOS)
-            return .medium
+        return .medium
         #else
-            switch controlSize {
-            case .mini:
-                return .xxxSmall
-            case .small:
-                return .xxSmall
-            case .regular:
-                return .xSmall
-            case .large:
-                return .small
-            case .extraLarge:
-                return .medium
-            @unknown default:
-                return .zero
-            }
+        switch controlSize {
+        case .mini:
+            return .xxxSmall
+        case .small:
+            return .xxSmall
+        case .regular:
+            return .xSmall
+        case .large:
+            return .small
+        case .extraLarge:
+            return .medium
+        @unknown default:
+            return .zero
+        }
         #endif
     }
 
@@ -198,15 +198,15 @@ public struct OversizeButtonStyle: ButtonStyle {
 
     private var maxWidth: CGFloat? {
         #if os(tvOS)
-            return nil
+        return nil
         #else
-            if isInfinityWidth == nil, controlSize == .regular {
-                return .infinity
-            } else if let infinity = isInfinityWidth, infinity == true {
-                return .infinity
-            } else {
-                return nil
-            }
+        if isInfinityWidth == nil, controlSize == .regular {
+            return .infinity
+        } else if let infinity = isInfinityWidth, infinity == true {
+            return .infinity
+        } else {
+            return nil
+        }
         #endif
     }
 }

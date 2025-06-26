@@ -28,7 +28,7 @@ public struct SectionView<Content: View>: View {
     @Environment(\.surfaceContentMargins) var surfaceContentInsets: EdgeSpaceInsets
     @Environment(\.sectionTitleMargins) var sectionTitleInsets: EdgeSpaceInsets
     #if os(iOS)
-        @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     #endif
     private let content: Content
     private let title: String
@@ -150,27 +150,27 @@ public struct SectionView<Content: View>: View {
             .buttonStyle(.scale)
         case let .title(text, action):
             #if os(tvOS)
-                Button(text) { action() }
-                    .buttonStyle(.tertiary)
-                    .controlBorderShape(.capsule)
+            Button(text) { action() }
+                .buttonStyle(.tertiary)
+                .controlBorderShape(.capsule)
             #else
-                Button(text) { action() }
-                    .buttonStyle(.tertiary)
-                    .controlSize(.small)
-                    .controlBorderShape(.capsule)
+            Button(text) { action() }
+                .buttonStyle(.tertiary)
+                .controlSize(.small)
+                .controlBorderShape(.capsule)
             #endif
         }
     }
 
     private var titleHorizontalPadding: CGFloat {
         #if os(iOS)
-            if horizontalSizeClass == .regular {
-                return Space.medium.rawValue + Space.large.rawValue
-            } else {
-                return Space.medium.rawValue
-            }
-        #else
+        if horizontalSizeClass == .regular {
+            return Space.medium.rawValue + Space.large.rawValue
+        } else {
             return Space.medium.rawValue
+        }
+        #else
+        return Space.medium.rawValue
         #endif
     }
 
@@ -178,13 +178,13 @@ public struct SectionView<Content: View>: View {
         switch style {
         case .default:
             #if os(iOS)
-                if horizontalSizeClass == .regular {
-                    return Space.medium.rawValue + Space.large.rawValue
-                } else {
-                    return Space.medium.rawValue
-                }
-            #else
+            if horizontalSizeClass == .regular {
+                return Space.medium.rawValue + Space.large.rawValue
+            } else {
                 return Space.medium.rawValue
+            }
+            #else
+            return Space.medium.rawValue
             #endif
         case .smallIndent:
             return Space.xxSmall.rawValue

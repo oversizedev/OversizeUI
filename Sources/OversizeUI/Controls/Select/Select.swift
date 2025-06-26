@@ -90,15 +90,15 @@ public struct Select<Element: Equatable, Content, Selection, Actions, ContentUna
             .foregroundColor(.onSurfacePrimary)
             .sheet(isPresented: $showModal) {
                 #if os(iOS)
-                    if #available(iOS 16.0, *) {
-                        modal
-                            .presentationDetents(data.count < 4 ? [.medium, .large] : [.large])
-                            .presentationDragIndicator(.hidden)
-                    } else {
-                        modal
-                    }
-                #else
+                if #available(iOS 16.0, *) {
                     modal
+                        .presentationDetents(data.count < 4 ? [.medium, .large] : [.large])
+                        .presentationDragIndicator(.hidden)
+                } else {
+                    modal
+                }
+                #else
+                modal
                 #endif
             }
             .onChange(of: showModalBinding) { state in

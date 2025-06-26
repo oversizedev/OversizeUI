@@ -13,7 +13,7 @@ public struct IconButtonStyle: ButtonStyle {
     @Environment(\.elevation) private var elevation: Elevation
     @Environment(\.isBordered) var isBordered: Bool
     #if !os(tvOS)
-        @Environment(\.controlSize) var controlSize: ControlSize
+    @Environment(\.controlSize) var controlSize: ControlSize
     #endif
 
     private let type: ButtonType
@@ -120,22 +120,22 @@ public struct IconButtonStyle: ButtonStyle {
 
     private var padding: Space {
         #if os(tvOS)
-            return .medium
+        return .medium
         #else
-            switch controlSize {
-            case .mini:
-                return .xxxSmall
-            case .small:
-                return .xxSmall
-            case .regular:
-                return .xSmall
-            case .large:
-                return .small
-            case .extraLarge:
-                return .medium
-            @unknown default:
-                return .zero
-            }
+        switch controlSize {
+        case .mini:
+            return .xxxSmall
+        case .small:
+            return .xxSmall
+        case .regular:
+            return .xSmall
+        case .large:
+            return .small
+        case .extraLarge:
+            return .medium
+        @unknown default:
+            return .zero
+        }
         #endif
     }
 

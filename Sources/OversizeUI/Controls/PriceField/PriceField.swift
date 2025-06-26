@@ -6,7 +6,7 @@
 import Foundation
 import SwiftUI
 #if canImport(UIKit)
-    import UIKit
+import UIKit
 #endif
 
 @available(macOS 14, iOS 16, tvOS 16, watchOS 9, *)

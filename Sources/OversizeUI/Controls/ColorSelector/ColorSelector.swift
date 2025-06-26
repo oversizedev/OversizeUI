@@ -48,17 +48,17 @@ public struct ColorSelector: View {
                             ForEach(colors, id: \.self) { color in
                                 ZStack {
                                     #if os(iOS) || os(macOS)
-                                        Circle()
-                                            .fill(color)
-                                            .frame(width: 32, height: 32)
-                                            .overlay(
-                                                Circle()
-                                                    .strokeBorder(Color.border, lineWidth: 1)
-                                            )
-                                            .onTapGesture {
-                                                selection = color
-                                            }
-                                            .padding(6)
+                                    Circle()
+                                        .fill(color)
+                                        .frame(width: 32, height: 32)
+                                        .overlay(
+                                            Circle()
+                                                .strokeBorder(Color.border, lineWidth: 1)
+                                        )
+                                        .onTapGesture {
+                                            selection = color
+                                        }
+                                        .padding(6)
                                     #endif
 
                                     if color == selection {

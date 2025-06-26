@@ -23,7 +23,7 @@ public enum AvatarBackgroundType {
 ///
 public struct Avatar: View {
     #if !os(tvOS)
-        @Environment(\.controlSize) var controlSize: ControlSize
+    @Environment(\.controlSize) var controlSize: ControlSize
     #endif
 
     /// The first name text of the avatar.
@@ -70,9 +70,9 @@ public struct Avatar: View {
 
     public var body: some View {
         #if os(tvOS)
-            tvOSContent
+        tvOSContent
         #else
-            content
+        content
         #endif
     }
 
@@ -178,58 +178,58 @@ public struct Avatar: View {
 
     private var avatarTextFont: Font {
         #if os(tvOS)
-            return .largeTitle
+        return .largeTitle
         #else
-            switch controlSize {
-            case .mini:
-                return .caption
-            case .small:
-                return .subheadline
-            case .regular:
-                return .title3
-            case .large, .extraLarge:
-                return .largeTitle
-            @unknown default:
-                return .title2
-            }
+        switch controlSize {
+        case .mini:
+            return .caption
+        case .small:
+            return .subheadline
+        case .regular:
+            return .title3
+        case .large, .extraLarge:
+            return .largeTitle
+        @unknown default:
+            return .title2
+        }
         #endif
     }
 
     private var avatarTextSpace: CGFloat {
         #if os(tvOS)
-            return 2
+        return 2
         #else
-            switch controlSize {
-            case .mini:
-                return 0
-            case .small:
-                return 1
-            case .regular:
-                return 2
-            case .large, .extraLarge:
-                return 2
-            @unknown default:
-                return 0
-            }
+        switch controlSize {
+        case .mini:
+            return 0
+        case .small:
+            return 1
+        case .regular:
+            return 2
+        case .large, .extraLarge:
+            return 2
+        @unknown default:
+            return 0
+        }
         #endif
     }
 
     private var avatarSize: CGFloat {
         #if os(tvOS)
-            return Space.xLarge.rawValue
+        return Space.xLarge.rawValue
         #else
-            switch controlSize {
-            case .mini:
-                return Space.medium.rawValue
-            case .small:
-                return Space.large.rawValue
-            case .regular:
-                return Space.xLarge.rawValue
-            case .large, .extraLarge:
-                return Space.xxxLarge.rawValue
-            @unknown default:
-                return Space.xLarge.rawValue
-            }
+        switch controlSize {
+        case .mini:
+            return Space.medium.rawValue
+        case .small:
+            return Space.large.rawValue
+        case .regular:
+            return Space.xLarge.rawValue
+        case .large, .extraLarge:
+            return Space.xxxLarge.rawValue
+        @unknown default:
+            return Space.xLarge.rawValue
+        }
         #endif
     }
 }

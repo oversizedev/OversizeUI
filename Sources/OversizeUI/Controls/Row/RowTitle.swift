@@ -69,14 +69,14 @@ public struct RowTitle: View {
             .buttonStyle(.scale)
         case let .title(text, action):
             #if os(tvOS)
-                Button(text) { action() }
-                    .buttonStyle(.tertiary)
-                    .controlBorderShape(.capsule)
+            Button(text) { action() }
+                .buttonStyle(.tertiary)
+                .controlBorderShape(.capsule)
             #else
-                Button(text) { action() }
-                    .buttonStyle(.tertiary)
-                    .controlSize(.small)
-                    .controlBorderShape(.capsule)
+            Button(text) { action() }
+                .buttonStyle(.tertiary)
+                .controlSize(.small)
+                .controlBorderShape(.capsule)
             #endif
         }
     }
