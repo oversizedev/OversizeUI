@@ -63,7 +63,6 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
             spacing: spacing
         ) {
             ForEach(data.indices, id: \.self) { index in
-
                 Button(action: {
                     selectedIndex = index
                     selection = data[index]
@@ -132,7 +131,6 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
             )
             .shadowElevaton(.z2)
         case .graySurface:
-
             RoundedRectangle(
                 cornerRadius: radius,
                 style: .continuous
@@ -153,7 +151,6 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
         case .clean:
             EmptyView()
         case .surface:
-
             RoundedRectangle(
                 cornerRadius: radius,
                 style: .continuous

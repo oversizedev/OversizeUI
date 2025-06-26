@@ -83,6 +83,7 @@ public struct Switch<Label: View>: View {
                         .foregroundColor(.onSurfaceSecondary)
                 }
             }
+            .padding(.leading, contentInset.leading)
         }
     }
 

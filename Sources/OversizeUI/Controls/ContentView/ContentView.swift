@@ -80,7 +80,6 @@ extension ContentView {
     private func primaryButtonView() -> some View {
         switch primaryButton {
         case .close:
-
             Button(action: { dismiss() }) {
                 IconDeprecated(.xMini)
             }
@@ -91,7 +90,6 @@ extension ContentView {
             .controlSize(.large)
             #endif
         case .back:
-
             Button(action: { dismiss() }) {
                 IconDeprecated(.arrowLeft)
             }
@@ -102,7 +100,6 @@ extension ContentView {
             .controlSize(.large)
             #endif
         case let .secondary(text, action: action):
-
             Button(action: action) {
                 Text(text)
             }
@@ -113,7 +110,6 @@ extension ContentView {
             .controlSize(.large)
             #endif
         case let .accent(text, action: action):
-
             Button(action: action) {
                 Text(text)
             }
@@ -127,7 +123,6 @@ extension ContentView {
             .keyboardShortcut(.defaultAction)
             #endif
         case let .primary(text, action: action):
-
             Button(action: action) {
                 Text(text)
             }
@@ -140,7 +135,6 @@ extension ContentView {
             .keyboardShortcut(.defaultAction)
             #endif
         case let .closeAction(action: action):
-
             Button(action: action) {
                 IconDeprecated(.xMini)
             }
@@ -151,7 +145,6 @@ extension ContentView {
             .controlSize(.large)
             #endif
         case let .backAction(action: action):
-
             Button(action: action) {
                 IconDeprecated(.arrowLeft)
             }
@@ -162,7 +155,6 @@ extension ContentView {
             .controlSize(.large)
             #endif
         case let .disabled(text):
-
             Button(action: {}) {
                 Text(text)
             }
@@ -182,7 +174,6 @@ extension ContentView {
     private func secondaryButtonView() -> some View {
         switch secondaryButton {
         case .close:
-
             Button(action: { dismiss() }) {
                 IconDeprecated(.xMini)
             }
@@ -190,7 +181,6 @@ extension ContentView {
             .buttonStyle(.secondary)
             #endif
         case .back:
-
             Button(action: { dismiss() }) {
                 IconDeprecated(.arrowLeft)
             }
@@ -198,7 +188,6 @@ extension ContentView {
             .buttonStyle(.secondary)
             #endif
         case let .secondary(text, action: action):
-
             Button(action: action) {
                 Text(text)
             }
@@ -206,7 +195,6 @@ extension ContentView {
             .buttonStyle(.secondary)
             #endif
         case let .accent(text, action: action):
-
             Button(action: action) {
                 Text(text)
             }
@@ -215,7 +203,6 @@ extension ContentView {
             .accent()
             #endif
         case let .primary(text, action: action):
-
             Button(action: action) {
                 Text(text)
             }
@@ -224,7 +211,6 @@ extension ContentView {
             .accent()
             #endif
         case let .closeAction(action: action):
-
             Button(action: action) {
                 IconDeprecated(.xMini)
             }
@@ -232,7 +218,6 @@ extension ContentView {
             .buttonStyle(.secondary)
             #endif
         case let .backAction(action: action):
-
             Button(action: action) {
                 IconDeprecated(.arrowLeft)
             }
@@ -240,7 +225,6 @@ extension ContentView {
             .buttonStyle(.secondary)
             #endif
         case let .disabled(text):
-
             Button(action: {}) {
                 Text(text)
             }

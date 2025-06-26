@@ -25,6 +25,22 @@ public extension Image {
         #endif
             .foregroundColor(color)
     }
+
+    var icon: some View {
+        renderingMode(.template)
+        #if os(macOS)
+            .resizable()
+            .frame(
+                width: IconSizes.medium.rawValue,
+                height: IconSizes.medium.rawValue
+            )
+        #endif
+            .foregroundColor(Color.onSurfacePrimary)
+    }
+
+    var templated: some View {
+        renderingMode(.template)
+    }
 }
 
 public extension Image {

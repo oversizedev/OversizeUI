@@ -21,7 +21,6 @@ import SwiftUI
                     }
 
                     ForEach((1 ... 100).reversed(), id: \.self) { item in
-
                         HStack {
                             Spacer()
                             Text("Item number \(item)")

@@ -60,8 +60,8 @@ public struct Typography: ViewModifier {
             case .largeTitle: 44
             case .title: 36
             case .title2: 28
-            case .title3, .headline: 24
-            case .subheadline, .body: 20
+            case .title3, .headline, .body: 24
+            case .subheadline: 20
             case .callout, .footnote, .caption, .caption2: 16
             default: 16
             }

@@ -6,7 +6,7 @@
 import SwiftUI
 
 public struct ScrollViewWithOffsetTracking<Content: View>: View {
-    public typealias ScrollAction = (_ offset: CGPoint) -> Void
+    public typealias ScrollAction = @MainActor @Sendable (_ offset: CGPoint) -> Void
 
     private let axes: Axis.Set
     private let showsIndicators: Bool
@@ -72,9 +72,13 @@ struct ScrollViewOffsetTracker<Content: View>: View {
 private extension ScrollView {
     func withOffsetTracking(
         coordinateSpaceName: String,
-        action: @escaping (_ offset: CGPoint) -> Void
+        action: @escaping @MainActor @Sendable (_ offset: CGPoint) -> Void
     ) -> some View {
         coordinateSpace(name: coordinateSpaceName)
-            .onPreferenceChange(ScrollOffsetPreferenceKey.self, perform: action)
+            .onPreferenceChange(ScrollOffsetPreferenceKey.self) { offset in
+                DispatchQueue.main.async {
+                    action(offset)
+                }
+            }
     }
 }
