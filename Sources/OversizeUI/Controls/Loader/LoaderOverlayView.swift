@@ -104,7 +104,6 @@ public struct LoaderOverlayView: View {
     private func containedView() -> some View {
         switch loaderType {
         case let .image(image: image):
-
             image
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -116,7 +115,6 @@ public struct LoaderOverlayView: View {
                 }
 
         case .spiner:
-
             ProgressView()
         }
     }

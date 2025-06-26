@@ -228,7 +228,6 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
     private func getSelection(selectionStyle: SegmentedControlSeletionStyle) -> some View {
         switch selectionStyle {
         case .shadowSurface:
-
             RoundedRectangle(
                 cornerRadius: style.isShowBackground ? controlRadius.rawValue - 4 : controlRadius.rawValue,
                 style: .continuous
@@ -251,7 +250,6 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
             .shadowElevaton(platform == .macOS ? .z0 : .z2)
 
         case .graySurface:
-
             if style.unseletionStyle == .clean {
                 RoundedRectangle(
                     cornerRadius: controlRadius,

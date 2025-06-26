@@ -45,26 +45,25 @@ public struct BarButton: View {
         .disabled(isDisabled)
         .elevation(isDisabled ? .z0 : .z2)
         #else
-        Button(action: buttonAction) {
-            label
+        Group {
+            if isIconButtonStyle {
+                Button(action: buttonAction) {
+                    label
+                }
+                .buttonStyle(iconButtonStyle)
+            } else {
+                Button(action: buttonAction) {
+                    label
+                }
+                .buttonStyle(buttonStyle)
+            }
         }
-        .buttonStyle(buttonStyle)
         .controlBorderShape(.capsule)
-        .controlSize(controlSize)
+        .controlSize(.small)
         .accent(isAccent)
         .disabled(isDisabled)
         .elevation(.z2)
         #endif
-    }
-
-    @available(tvOS, unavailable)
-    private var controlSize: ControlSize {
-        switch type {
-        case .close, .closeAction, .back, .backAction, .image, .icon:
-            .mini
-        default:
-            .small
-        }
     }
 
     private var isAccent: Bool {
@@ -93,6 +92,26 @@ public struct BarButton: View {
             .primary
         case .disabled:
             .tertiary
+        }
+    }
+
+    private var iconButtonStyle: IconButtonStyle {
+        switch type {
+        case .close, .closeAction, .back, .backAction, .image, .icon, .secondary:
+            .iconSecondary
+        case .accent, .primary:
+            .iconPrimary
+        case .disabled:
+            .iconTertiary
+        }
+    }
+
+    private var isIconButtonStyle: Bool {
+        switch type {
+        case .close, .closeAction, .back, .backAction, .image, .icon:
+            true
+        default:
+            false
         }
     }
 

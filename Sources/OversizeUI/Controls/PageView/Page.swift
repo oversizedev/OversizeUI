@@ -1,3 +1,8 @@
+//
+// Copyright © 2021 Alexander Romanov
+// PageIndexView.swift, created on 14.03.2024
+//
+
 import SwiftUI
 
 @available(iOS 16.0, *)
@@ -5,8 +10,9 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
     where Content: View, Header: View, LeadingBar: View, TrailingBar: View, TopToolbar: View, TitleLabel: View
 {
     @Environment(\.platform) var platform
+    @Environment(\.screenSize) private var screenSize
 
-    public typealias ScrollAction = (_ offset: CGPoint, _ headerVisibleRatio: CGFloat) -> Void
+    public typealias ScrollAction = @MainActor @Sendable (_ offset: CGPoint, _ headerVisibleRatio: CGFloat) -> Void
 
     private let title: String?
     private let content: Content
@@ -28,8 +34,6 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
     @State
     private var isShowSearchBar = false
 
-    @Environment(\.screenSize) private var screenSize
-
     private let onScroll: ScrollAction?
 
     let custumHeaderHeight: CGFloat
@@ -40,7 +44,9 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
     private let headerMinHeight: CGFloat?
 
     var calcHeaderHeight: CGFloat {
-        isFocusSearchBar ? (navigationBarHeight - screenSize.safeAreaTop) + 20 : (isLargeTitle && !isFocusSearchBar ? 60 : 0) + (isShowSearchBar ? 57 : 0) + custumHeaderHeight
+        isFocusSearchBar
+            ? (navigationBarHeight - screenSize.safeAreaTop) + 20
+            : (isLargeTitle && !isFocusSearchBar ? 60 : 0) + (isShowSearchBar ? 57 : 0) + custumHeaderHeight
     }
 
     /// Search
@@ -80,7 +86,6 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
             scrollView
             navbarOverlay
         }
-        .prefersNavigationBarHidden()
         .onChange(of: focusStateSearchBar, perform: onChangeFocusSearchBar)
         .onChange(of: displaySearchBar, perform: onChangeDisplaySearchBar)
         #if os(iOS)
@@ -103,10 +108,7 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
 
     var scrollView: some View {
         GeometryReader { proxy in
-            ScrollViewWithOffsetTracking(
-                showsIndicators: platform == .macOS,
-                onScroll: handleOffset
-            ) {
+            ScrollViewWithOffsetTracking(showsIndicators: platform == .macOS, onScroll: handleOffset) {
                 VStack(spacing: 0) {
                     scrollHeader
                         .opacity(isFocusSearchBar ? 0 : 1)
@@ -136,9 +138,8 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
     }
 
     func handleOffset(_ scrollOffset: CGPoint) {
-        DispatchQueue.main.async {
-            offset = scrollOffset
-        }
+        offset = scrollOffset
+
         if isEnableSearchBar, scrollOffset.y > 95, !isShowSearchBar {
             withAnimation(.easeOut(duration: 0.30)) {
                 isShowSearchBar = true
@@ -1122,7 +1123,6 @@ struct SeartchTextFieldButtonStyle: ButtonStyle {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(Color.onSurfaceTertiary.opacity(height > 20 ? opacity : 0))
         }
-
         .callout(.semibold)
         .padding(.horizontal, 12)
         .frame(height: height)
@@ -1134,20 +1134,5 @@ struct SeartchTextFieldButtonStyle: ButtonStyle {
             .fill(Color.onSurfacePrimary.opacity(0.07))
         )
         .submitLabel(.search)
-    }
-}
-
-private extension View {
-    @ViewBuilder
-    func prefersNavigationBarHidden() -> some View {
-        #if os(watchOS) || os(macOS)
-        self
-        #else
-        if #available(iOS 16.0, macOS 13.0, tvOS 16.0, *) {
-            self.toolbarBackground(.hidden)
-        } else {
-            self
-        }
-        #endif
     }
 }
