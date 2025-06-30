@@ -17,7 +17,6 @@ public struct ListLayoutView<
     @ViewBuilder private let background: Background
 
     private let title: String
-    var logo: Image? = nil
 
     public var body: some View {
         SwiftUI.List { content }

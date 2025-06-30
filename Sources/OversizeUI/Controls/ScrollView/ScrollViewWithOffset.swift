@@ -87,7 +87,7 @@ public extension View {
     func scrollViewOffsetTracking(
         action: @escaping @MainActor @Sendable (_ offset: CGPoint) -> Void
     ) -> some View {
-        self.coordinateSpace(name: "ScrollView")
+        coordinateSpace(name: "ScrollView")
             .onPreferenceChange(ScrollOffsetPreferenceKey.self) { offset in
                 DispatchQueue.main.async {
                     action(offset)

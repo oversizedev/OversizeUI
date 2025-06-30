@@ -7,21 +7,9 @@ import SwiftUI
 
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 public extension CoverLayoutView {
-    func toolbarImage(_ image: Image?) -> Self {
-        var control = self
-        control.logo = image
-        return control
-    }
-
     func coverStyle(_ coverStyle: CoverNavigationType) -> Self {
         var control = self
         control.coverStyle = coverStyle
-        return control
-    }
-
-    func toolbarImage(_ image: Image) -> Self {
-        var control = self
-        control.logo = image
         return control
     }
 

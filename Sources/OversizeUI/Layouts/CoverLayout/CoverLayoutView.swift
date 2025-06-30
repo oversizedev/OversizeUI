@@ -26,7 +26,6 @@ public struct CoverLayoutView<
     private let title: String
     private let coverHeight: CGFloat
     private let onScroll: ScrollAction?
-    var logo: Image? = nil
     var coverStyle: CoverNavigationType = .static
     var contentCornerRadius: CGFloat = 0
 
@@ -79,7 +78,7 @@ public struct CoverLayoutView<
 
     private var coverScrollOffset: CGFloat {
         switch coverStyle {
-        case .prallax:
+        case .parallax:
             scrollOffset.y < 0 ? scrollOffset.y / 2 : 0
         default:
             0
@@ -183,7 +182,7 @@ public struct CoverLayoutView<
     } background: {
         Color.surfacePrimary
     }
-    .coverStyle(.prallax)
+    .coverStyle(.parallax)
 }
 
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)

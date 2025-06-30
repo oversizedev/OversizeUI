@@ -19,7 +19,6 @@ public struct LayoutView<
 
     private let title: String
     private let onScroll: ScrollAction?
-    var logo: Image? = nil
 
     public var body: some View {
         ScrollView {
