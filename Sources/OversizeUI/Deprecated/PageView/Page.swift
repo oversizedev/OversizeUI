@@ -375,7 +375,7 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
                     bottomToolbar()
                     Spacer()
                 }
-                .background(Color.surfacePrimary.shadowElevaton(style == .shadow ? .z2 : .z0))
+                .background(Color.surfacePrimary.shadowElevation(style == .shadow ? .z2 : .z0))
             }
         }
     }

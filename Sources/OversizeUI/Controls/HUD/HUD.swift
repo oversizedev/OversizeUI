@@ -63,13 +63,13 @@ public struct HUD<Title, Icon>: View where Title: View, Icon: View {
             .background(
                 RoundedRectangle(cornerRadius: .small, style: .continuous)
                     .foregroundColor(Color.onBackgroundPrimary)
-                    .shadowElevaton(.z2)
+                    .shadowElevation(.z2)
             )
         #else
             .background(
                 Capsule()
                     .foregroundColor(Color.surfacePrimary)
-                    .shadowElevaton(.z2)
+                    .shadowElevation(.z2)
             )
         #endif
             .padding(.small)

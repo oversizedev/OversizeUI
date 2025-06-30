@@ -56,7 +56,7 @@ public struct MaterialSurface<Label: View>: View {
                 in: RoundedRectangle(cornerRadius: controlRadius, style: .continuous)
             )
             .overlay(overlayView)
-            .shadowElevaton(elevation)
+            .shadowElevation(elevation)
     }
 
     @ViewBuilder

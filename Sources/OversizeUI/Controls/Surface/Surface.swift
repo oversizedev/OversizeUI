@@ -84,7 +84,7 @@ public struct Surface<Label: View>: View {
                         style: .continuous
                     )
                     .fill(surfaceBackgroundColor)
-                    .shadowElevaton(elevation)
+                    .shadowElevation(elevation)
 
                     if isHover {
                         RoundedRectangle(
@@ -100,7 +100,7 @@ public struct Surface<Label: View>: View {
                     style: .continuous
                 )
                 .fill(surfaceBackgroundColor)
-                .shadowElevaton(elevation)
+                .shadowElevation(elevation)
                 #endif
             }
             .overlay(
