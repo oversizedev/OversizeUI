@@ -3,15 +3,15 @@
 // PageView.swift, created on 01.06.2025
 //
 
-import ScrollKit
 import SwiftUI
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 public struct LayoutView<
     Content: View,
     Background: View
 >: View {
     @Environment(\.screenSize) private var screenSize
-    
+
     public typealias ScrollAction = @MainActor @Sendable (_ offset: CGPoint, _ headerVisibleRatio: CGFloat) -> Void
 
     @ViewBuilder private var content: Content
@@ -51,6 +51,7 @@ public struct LayoutView<
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview {
     NavigationView {
         LayoutView(
@@ -73,10 +74,11 @@ public struct LayoutView<
             },
             background: { Color.backgroundSecondary }
         )
-        .navigationBarTitleDisplayMode(.inline)
+        .toolbarTitleDisplayMode(.inline)
     }
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview {
     NavigationView {
         LayoutView(

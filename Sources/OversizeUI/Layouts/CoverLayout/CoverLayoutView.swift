@@ -3,7 +3,6 @@
 // CoverPageView.swift, created on 01.06.2025
 //
 
-import ScrollKit
 import SwiftUI
 
 public enum CoverNavigationType {
@@ -19,7 +18,7 @@ public struct CoverLayoutView<
     @Environment(\.screenSize) private var screenSize
 
     public typealias ScrollAction = @MainActor @Sendable (_ offset: CGPoint, _ headerVisibleRatio: CGFloat) -> Void
-    
+
     @ViewBuilder private var content: Content
     @ViewBuilder private let cover: Cover
     @ViewBuilder private let background: Background
@@ -141,6 +140,10 @@ public struct CoverLayoutView<
             startPoint: .top,
             endPoint: .bottom
         )
+        .overlay {
+            Color.red
+                .border(Color.blue, width: 1)
+        }
     } background: {
         Color.surfacePrimary
     }
@@ -173,6 +176,10 @@ public struct CoverLayoutView<
             startPoint: .top,
             endPoint: .bottom
         )
+        .overlay {
+            Color.red
+                .border(Color.blue, width: 1)
+        }
     } background: {
         Color.surfacePrimary
     }
@@ -205,6 +212,10 @@ public struct CoverLayoutView<
             startPoint: .top,
             endPoint: .bottom
         )
+        .overlay {
+            Color.red
+                .border(Color.blue, width: 1)
+        }
     } background: {
         Color.surfacePrimary
     }
