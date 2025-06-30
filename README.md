@@ -4,13 +4,13 @@
 [![Build Example](https://github.com/oversizedev/OversizeUI/actions/workflows/build-example.yml/badge.svg)](https://github.com/oversizedev/OversizeUI/actions/workflows/ci-release.yml)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/oversizedev/OversizeUI/blob/main/LICENSE)
 
-**SwiftUI Component Library**
+**SwiftUI Component Library**  
 OversizeUI is a powerful SwiftUI component library that provides a comprehensive set of customizable UI components following modern design principles. Built with theming, and developer experience in mind, OversizeUI accelerates development while maintaining design consistency across your applications.
 
 ### Design System Core
 
-- **Colors**: Semantic color system with light/dark mode support
-- **Typography**: Scalable type system with Dynamic Type support  
+**Colors**: Semantic color system with light/dark mode support  
+**Typography**: Scalable type system with Dynamic Type support  
 - **Spacing**: Consistent spacing scale from .xxSmall to .xxLarge
 - **Elevation**: Material Design inspired shadow system
 - **Radius**: Configurable corner radius system
