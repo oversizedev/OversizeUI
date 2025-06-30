@@ -217,8 +217,6 @@ public enum IconsNames: String, CaseIterable {
     case rotateCw = "rotate-cw"
     case rss
     case ruler
-    @available(*, deprecated, renamed: "ruler")
-    case ruller
     case save
     case scissors
     case search
@@ -300,16 +298,4 @@ public enum IconsNames: String, CaseIterable {
     case zap
     case zoomIn = "zoom-in"
     case zoomOut = "zoom-out"
-}
-
-// MARK: - Improved naming aliases
-extension IconsNames {
-    /// Improved naming for edit-2 icon
-    public static let editOutline: IconsNames = .edit2
-    
-    /// Improved naming for edit-3 icon  
-    public static let editFilled: IconsNames = .edit3
-    
-    /// Improved naming for menu2line icon
-    public static let menuTwoLine: IconsNames = .menu2line
 }
