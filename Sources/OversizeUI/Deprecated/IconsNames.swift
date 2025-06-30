@@ -101,7 +101,11 @@ public enum IconsNames: String, CaseIterable {
     case downloadCloud = "download-cloud"
     case download
     case droplet
+    case editOutline = "edit-2"
+    case editFilled = "edit-3"
+    @available(*, deprecated, renamed: "editOutline")
     case edit2 = "edit-2"
+    @available(*, deprecated, renamed: "editFilled")
     case edit3 = "edit-3"
     case externalLink = "external-link"
     case eyeOff = "eye-off"
@@ -164,6 +168,8 @@ public enum IconsNames: String, CaseIterable {
     case maximize
     case meh
     case menu
+    case menuTwoLine
+    @available(*, deprecated, renamed: "menuTwoLine")
     case menu2line
     case messageCircle = "message-circle"
     case messageSquare = "message-square"
