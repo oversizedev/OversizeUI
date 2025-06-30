@@ -5,14 +5,66 @@
 
 import SwiftUI
 
+/// Display alert banners and notifications with customizable styling and actions.
+///
+/// Use `NoticeView` to present important information, alerts, and notifications to users.
+/// It supports various styles, custom actions, and maintains accessibility standards.
+///
+/// ```swift
+/// NoticeView("Operation completed successfully!")
+/// ```
+///
+/// ```swift
+/// NoticeView("Update Available", subtitle: "A new version is available.") {
+///     Button("Update") { performUpdate() }
+///         .buttonStyle(.primary)
+///         .controlSize(.small)
+/// } closeAction: {
+///     dismissNotice()
+/// }
+/// ```
+///
+/// ## Topics
+///
+/// ### Creating a Notice
+/// - ``init(_:subtitle:image:imageURL:actions:closeAction:)``
+/// - ``init(_:subtitle:image:imageURL:closeAction:)``
+///
+/// ### Styling
+/// - ``noticeStyle(_:)``
+///
+/// ## See Also
+/// - <doc:Components/NoticeView>
+/// - ``Button``
+/// - ``Surface``
 public struct NoticeView<A>: View where A: View {
+    /// The image displayed in the notice.
     let image: Image?
+    
+    /// The URL for an image to be displayed in the notice.
     let imageURL: URL?
+    
+    /// The title text of the notice.
     let title: String
+    
+    /// The subtitle text providing additional information.
     let subtitle: String?
+    
+    /// Custom actions displayed in the notice.
     let actions: Group<A>?
+    
+    /// The closure executed when the close button is tapped.
     let closeAction: (() -> Void)?
 
+    /// Creates a notice view with title, subtitle, optional image, actions, and close functionality.
+    ///
+    /// - Parameters:
+    ///   - title: The main title text for the notice
+    ///   - subtitle: Optional subtitle providing additional context
+    ///   - image: Optional image to display alongside the content
+    ///   - imageURL: Optional URL for loading an image asynchronously
+    ///   - actions: Custom action buttons or controls
+    ///   - closeAction: Optional closure called when the notice is dismissed
     public init(
         _ title: String,
         subtitle: String? = nil,
