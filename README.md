@@ -10,15 +10,15 @@ OversizeUI is a powerful SwiftUI component library that provides a comprehensive
 
 ### Design System Core
 
-- **Colors**: Semantic color system with light/dark mode support
+Colors: Semantic color system with light/dark mode support
 - **Typography**: Scalable type system with Dynamic Type support  
 - **Spacing**: Consistent spacing scale from .xxSmall to .xxLarge
 - **Elevation**: Material Design inspired shadow system
 - **Radius**: Configurable corner radius system
 - **Themes**: Multiple built-in themes with custom theme support
 
-*All components in: [Sources/OversizeUI](Sources/OversizeUI)*
-*Core design tokens in: [Sources/OversizeUI/Core](Sources/OversizeUI/Core)*
+All components in: [Sources/OversizeUI](Sources/OversizeUI)*
+Сore design tokens in: [Sources/OversizeUI/Core](Sources/OversizeUI/Core)*
 
 ## Getting Started
 
@@ -104,13 +104,6 @@ Experience OversizeUI in action with our comprehensive example app that showcase
    - **Example (watchOS)** - Apple Watch optimized
 
 4. Build and run (`⌘+R`) to explore the interactive component gallery
-
-### What's Included
-
-- **Interactive Component Gallery**: Try every component with live controls
-- **Theme Playground**: Test different themes and color combinations  
-- **Dark Mode Toggle**: See components in both light and dark themes
-- **Real-world Examples**: Production-ready implementation patterns
 
 ## Component Examples
 
@@ -292,13 +285,12 @@ Surface {
 
 ## Resources
 
-### Design Resources
+#### Design Resources
 - [**Figma Design System**](https://www.figma.com/community/file/1144847542164788208) - Complete design system
 
-### Development Tools
+#### Development Tools
 - [**SwiftLint Config**](.swiftlint.yml) - Code quality and consistency
 - [**SwiftFormat Config**](.swiftformat) - Automatic code formatting
-- [**GitHub Actions**](.github/workflows/) - CI/CD templates
 - [**XcodeGen Templates**](Templates/) - Component creation templates
 
 ## License
@@ -310,7 +302,5 @@ OversizeUI is released under the **MIT License**. See [LICENSE](LICENSE) for det
 <div align="center">
 
 **Made with ❤️ by the Oversize**
-
-[⭐ Star on GitHub](https://github.com/oversizedev/OversizeUI) • [🐛 Report Bug](https://github.com/oversizedev/OversizeUI/issues) • [📖 Documentation](https://oversizedev.github.io/OversizeUI/documentation/oversizeui/)
 
 </div>
