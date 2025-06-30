@@ -20,7 +20,7 @@ public struct BarButtonMenuStyle: MenuStyle {
             .foregroundColor(Color.onPrimary)
             .padding(.xxSmall)
             .background(background)
-            .shadowElevaton(.z2)
+            .shadowElevation(.z2)
     }
 
     private var background: some View {

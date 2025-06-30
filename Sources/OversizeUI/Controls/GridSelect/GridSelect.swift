@@ -129,7 +129,7 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
                     lineWidth: CGFloat(theme.borderSize)
                 )
             )
-            .shadowElevaton(.z2)
+            .shadowElevation(.z2)
         case .graySurface:
             RoundedRectangle(
                 cornerRadius: radius,
@@ -183,7 +183,7 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
                 ZStack {
                     Circle()
                         .foregroundColor(Color.surfacePrimary)
-                        .shadowElevaton(.z2)
+                        .shadowElevation(.z2)
                     IconDeprecated(.checkMini, color: .onSurfacePrimary)
                 }.frame(width: Space.large.rawValue, height: Space.large.rawValue)
                     .padding(.small)
@@ -195,7 +195,7 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
                 ZStack {
                     Circle()
                         .foregroundColor(Color.accent)
-                        .shadowElevaton(.z2)
+                        .shadowElevation(.z2)
                     Circle()
                         .frame(width: Space.small.rawValue, height: Space.small.rawValue)
                 }.frame(width: Space.large.rawValue, height: Space.large.rawValue)

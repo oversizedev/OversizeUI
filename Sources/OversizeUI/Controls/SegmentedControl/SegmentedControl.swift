@@ -247,7 +247,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                     lineWidth: CGFloat(theme.borderSize)
                 )
             )
-            .shadowElevaton(platform == .macOS ? .z0 : .z2)
+            .shadowElevation(platform == .macOS ? .z0 : .z2)
 
         case .graySurface:
             if style.unseletionStyle == .clean {

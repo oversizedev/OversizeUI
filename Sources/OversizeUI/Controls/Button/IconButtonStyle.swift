@@ -31,7 +31,7 @@ public struct IconButtonStyle: ButtonStyle {
             .background(background(for: configuration.role))
             .overlay(loadingView(for: configuration.role))
             .scaleEffect(configuration.isPressed ? 0.95 : 1)
-            .shadowElevaton(isEnabled ? elevation : .z0)
+            .shadowElevation(isEnabled ? elevation : .z0)
     }
 
     @ViewBuilder

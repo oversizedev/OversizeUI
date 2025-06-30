@@ -49,6 +49,6 @@ public struct KeyboardToolbar<A>: View where A: View {
         .padding(.horizontal, .small)
         .padding(.vertical, .xxSmall)
         .background(Color.surfacePrimary)
-        .shadowElevaton(.z1)
+        .shadowElevation(.z1)
     }
 }

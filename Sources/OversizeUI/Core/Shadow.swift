@@ -62,11 +62,21 @@ public struct Shadow: ViewModifier {
 }
 
 public extension View {
+    @available(*, deprecated, renamed: "shadowElevation")
     func shadowElevaton(_ elevation: Elevation) -> some View {
         modifier(Shadow(elevation: elevation))
     }
 
+    @available(*, deprecated, renamed: "shadowElevation")
     func shadowElevaton(_ elevation: Elevation, color: Color) -> some View {
+        modifier(Shadow(elevation: elevation, color: color))
+    }
+    
+    func shadowElevation(_ elevation: Elevation) -> some View {
+        modifier(Shadow(elevation: elevation))
+    }
+
+    func shadowElevation(_ elevation: Elevation, color: Color) -> some View {
         modifier(Shadow(elevation: elevation, color: color))
     }
 }
