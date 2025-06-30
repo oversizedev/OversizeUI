@@ -96,21 +96,122 @@ public struct Typography: ViewModifier {
     }
 }
 
+/// Typography modifiers that provide semantic text styling with design system integration.
+///
+/// These modifiers apply consistent typography styles that automatically adapt to:
+/// - Dynamic Type settings for accessibility
+/// - Light and dark appearance modes  
+/// - Platform conventions (iOS, macOS, tvOS, watchOS)
+/// - Custom theme typography settings
+///
+/// The typography system provides a semantic hierarchy from large titles to small captions,
+/// ensuring consistent visual relationships and accessibility compliance.
+///
+/// ```swift
+/// VStack(alignment: .leading) {
+///     Text("Main Title")
+///         .largeTitle(.bold)
+///     
+///     Text("Section Header")
+///         .title2()
+///     
+///     Text("Body content with proper hierarchy")
+///         .body()
+///     
+///     Text("Supporting information")
+///         .caption(.medium)
+/// }
+/// ```
+///
+/// ## Topics
+///
+/// ### Display Typography
+/// - ``largeTitle(_:)-5xnbj``
+/// - ``largeTitle(_:)-8bhhy``
+///
+/// ### Title Hierarchy
+/// - ``title(_:)-5l7py``
+/// - ``title(_:)-5tq7d``
+/// - ``title2(_:)-1h8p5``
+/// - ``title2(_:)-7q4q5``
+/// - ``title3(_:)-8k90n``
+/// - ``title3(_:)-2vzdf``
+///
+/// ### Content Typography
+/// - ``headline(_:)-43xce``
+/// - ``headline(_:)-92efm``
+/// - ``subheadline(_:)-4g97e``
+/// - ``subheadline(_:)-89q5p``
+/// - ``body(_:)-1z89x``
+/// - ``body(_:)-15dbt``
+/// - ``callout(_:)-8xr3n``
+/// - ``callout(_:)-2f5a8``
+///
+/// ### Supporting Typography
+/// - ``footnote(_:)-8kqrw``
+/// - ``footnote(_:)-8ycaw``
+/// - ``caption(_:)-9oysj``
+/// - ``caption(_:)-6y8n9``
+/// - ``caption2(_:)-7pn4x``
+/// - ``caption2(_:)-16kby``
+///
+/// ## See Also
+/// - <doc:DesignSystem/Typography>
+/// - ``Typography``
 public extension View {
-    // Large Title
+    
+    // MARK: - Large Title
+    
+    /// Applies large title typography style with optional bold formatting.
+    ///
+    /// Large titles are used for the most prominent text on screen, typically
+    /// app names, main screen titles, or hero content.
+    ///
+    /// - Parameter bold: Whether to apply bold formatting (default: true)
+    /// - Returns: A view with large title typography applied
+    ///
+    /// ```swift
+    /// Text("Welcome to MyApp")
+    ///     .largeTitle()
+    /// ```
     nonisolated func largeTitle(_ bold: Bool = true) -> some View {
         modifier(Typography(fontStyle: .largeTitle, isBold: bold))
     }
 
+    /// Applies large title typography style with custom font weight.
+    ///
+    /// - Parameter weight: The specific font weight to apply
+    /// - Returns: A view with large title typography and custom weight applied
+    ///
+    /// ```swift
+    /// Text("App Title")
+    ///     .largeTitle(.heavy)
+    /// ```
     nonisolated func largeTitle(_ weight: Font.Weight) -> some View {
         modifier(Typography(fontStyle: .largeTitle, weight: weight))
     }
 
-    // Title
+    // MARK: - Title
+    
+    /// Applies title typography style with optional bold formatting.
+    ///
+    /// Titles are used for primary section headers and important content headings.
+    ///
+    /// - Parameter bold: Whether to apply bold formatting (default: true)
+    /// - Returns: A view with title typography applied
+    ///
+    /// ```swift
+    /// Text("Settings")
+    ///     .title()
+    /// ```
     nonisolated func title(_ bold: Bool = true) -> some View {
         modifier(Typography(fontStyle: .title, isBold: bold))
     }
 
+    /// Applies title typography style with custom font weight.
+    ///
+    /// - Parameter weight: The specific font weight to apply
+    /// - Returns: A view with title typography and custom weight applied
     nonisolated func title(_ weight: Font.Weight) -> some View {
         modifier(Typography(fontStyle: .title, weight: weight))
     }

@@ -5,28 +5,109 @@
 
 import SwiftUI
 
+/// Semantic button types that define visual hierarchy and user interaction patterns.
+///
+/// Use these button types to create consistent visual hierarchy in your interface:
+/// - Use ``primary`` for the main call-to-action
+/// - Use ``secondary`` for important but alternative actions  
+/// - Use ``tertiary`` for supplementary actions
+/// - Use ``quaternary`` for minimal actions with low visual weight
+///
+/// ```swift
+/// Button("Save") { save() }
+///     .buttonStyle(.primary)
+/// 
+/// Button("Cancel") { cancel() }
+///     .buttonStyle(.tertiary)
+/// ```
 public enum ButtonType: Int, CaseIterable {
+    /// Primary button style for main call-to-action buttons.
     case primary
+    
+    /// Secondary button style for important alternative actions.
     case secondary
+    
+    /// Tertiary button style for supplementary actions.
     case tertiary
+    
+    /// Quaternary button style for minimal actions with low visual weight.
     case quaternary
 }
 
+/// A comprehensive button style that provides semantic styling with theme integration.
+///
+/// `OversizeButtonStyle` implements the design system's button styling with support for:
+/// - Multiple button types (primary, secondary, tertiary, quaternary)
+/// - Loading states with spinner overlays
+/// - Accessibility features including proper contrast and touch targets
+/// - Theme integration with accent colors and customization
+/// - Platform-appropriate styling and behavior
+///
+/// The button style automatically adapts to:
+/// - Light and dark appearance modes
+/// - Different control sizes (mini, small, regular, large)
+/// - Accessibility settings like increased contrast and Dynamic Type
+/// - Platform conventions (iOS, macOS, tvOS, watchOS)
+///
+/// ```swift
+/// Button("Primary Action") { performAction() }
+///     .buttonStyle(.primary)
+///     .controlSize(.large)
+///     .accent()
+/// ```
+///
+/// ## Topics
+///
+/// ### Creating Button Styles
+/// - ``init(_:infinityWidth:)``
+/// - ``ButtonType``
+///
+/// ### Styling Options
+/// - ``accent()``
+/// - ``bordered()``
+/// - ``loading(_:)``
+///
+/// ## See Also
+/// - <doc:Components/Button>
+/// - ``ButtonType``
 public struct OversizeButtonStyle: ButtonStyle {
+    /// Environment values for theme customization.
     @Environment(\.theme) private var theme: ThemeSettings
+    
+    /// Environment value indicating if the button is enabled.
     @Environment(\.isEnabled) private var isEnabled: Bool
+    
+    /// Environment value indicating if the button is in loading state.
     @Environment(\.isLoading) private var isLoading: Bool
+    
+    /// Environment value indicating if accent styling should be applied.
     @Environment(\.isAccent) private var isAccent: Bool
+    
+    /// Environment value for the button's elevation/shadow level.
     @Environment(\.elevation) private var elevation: Elevation
+    
+    /// Environment value for the button's border shape.
     @Environment(\.controlBorderShape) var controlBorderShape: ControlBorderShape
+    
+    /// Environment value indicating if the button should have a border.
     @Environment(\.isBordered) var isBordered: Bool
+    
     #if !os(tvOS)
+    /// Environment value for the button's control size.
     @Environment(\.controlSize) var controlSize: ControlSize
     #endif
 
+    /// The semantic type of button determining its visual style.
     private let type: ButtonType
+    
+    /// Whether the button should expand to fill available width.
     private let isInfinityWidth: Bool?
 
+    /// Creates a button style with the specified type and width behavior.
+    ///
+    /// - Parameters:
+    ///   - type: The semantic button type determining visual hierarchy
+    ///   - infinityWidth: Whether the button should expand to fill available width
     public init(_ type: ButtonType, infinityWidth: Bool? = nil) {
         self.type = type
         isInfinityWidth = infinityWidth
