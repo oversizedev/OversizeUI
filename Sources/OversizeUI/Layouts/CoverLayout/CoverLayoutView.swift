@@ -6,7 +6,7 @@
 import SwiftUI
 
 public enum CoverNavigationType {
-    case `static`, prallax, pinch
+    case `static`, parallax, pinch
 }
 
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
