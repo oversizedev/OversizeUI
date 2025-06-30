@@ -11,14 +11,19 @@ OversizeUI is a powerful SwiftUI component library that provides a comprehensive
 ### Design System Core
 
 **Colors**: Semantic color system with light/dark mode support
+
 **Typography**: Scalable type system with Dynamic Type support  
+
 **Spacing**: Consistent spacing scale from .xxSmall to .xxLarge
+
 **Elevation**: Material Design inspired shadow system
+
 **Radius**: Configurable corner radius system
+
 **Themes**: Multiple built-in themes with custom theme support
 
-All components in: [Sources/OversizeUI](Sources/OversizeUI)*
-Сore design tokens in: [Sources/OversizeUI/Core](Sources/OversizeUI/Core)*
+All components in: [Sources/OversizeUI](Sources/OversizeUI)
+Сore design tokens in: [Sources/OversizeUI/Core](Sources/OversizeUI/Core)
 
 ## Getting Started
 
