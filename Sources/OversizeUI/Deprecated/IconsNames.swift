@@ -101,11 +101,7 @@ public enum IconsNames: String, CaseIterable {
     case downloadCloud = "download-cloud"
     case download
     case droplet
-    case editOutline = "edit-2"
-    case editFilled = "edit-3"
-    @available(*, deprecated, renamed: "editOutline")
     case edit2 = "edit-2"
-    @available(*, deprecated, renamed: "editFilled")
     case edit3 = "edit-3"
     case externalLink = "external-link"
     case eyeOff = "eye-off"
@@ -168,8 +164,6 @@ public enum IconsNames: String, CaseIterable {
     case maximize
     case meh
     case menu
-    case menuTwoLine
-    @available(*, deprecated, renamed: "menuTwoLine")
     case menu2line
     case messageCircle = "message-circle"
     case messageSquare = "message-square"
@@ -306,4 +300,16 @@ public enum IconsNames: String, CaseIterable {
     case zap
     case zoomIn = "zoom-in"
     case zoomOut = "zoom-out"
+}
+
+// MARK: - Improved naming aliases
+extension IconsNames {
+    /// Improved naming for edit-2 icon
+    static let editOutline: IconsNames = .edit2
+    
+    /// Improved naming for edit-3 icon  
+    static let editFilled: IconsNames = .edit3
+    
+    /// Improved naming for menu2line icon
+    static let menuTwoLine: IconsNames = .menu2line
 }
