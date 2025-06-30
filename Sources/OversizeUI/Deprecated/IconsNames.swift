@@ -305,11 +305,11 @@ public enum IconsNames: String, CaseIterable {
 // MARK: - Improved naming aliases
 extension IconsNames {
     /// Improved naming for edit-2 icon
-    static let editOutline: IconsNames = .edit2
+    public static let editOutline: IconsNames = .edit2
     
     /// Improved naming for edit-3 icon  
-    static let editFilled: IconsNames = .edit3
+    public static let editFilled: IconsNames = .edit3
     
     /// Improved naming for menu2line icon
-    static let menuTwoLine: IconsNames = .menu2line
+    public static let menuTwoLine: IconsNames = .menu2line
 }
