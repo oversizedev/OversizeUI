@@ -216,7 +216,7 @@ public enum IconsNames: String, CaseIterable {
     case rotateCcw = "rotate-ccw"
     case rotateCw = "rotate-cw"
     case rss
-    case ruller
+    case ruler
     case save
     case scissors
     case search

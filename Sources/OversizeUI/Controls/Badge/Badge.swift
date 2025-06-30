@@ -1,11 +1,14 @@
 //
 // Copyright © 2021 Alexander Romanov
-// Bage.swift, created on 20.02.2022
+// Badge.swift, created on 20.02.2022
 //
 
 import SwiftUI
 
-public struct Bage<Label: View>: View {
+@available(*, deprecated, renamed: "Badge")
+public typealias Bage<Label: View> = Badge<Label>
+
+public struct Badge<Label: View>: View {
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.controlRadius) private var controlRadius: Radius
 

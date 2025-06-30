@@ -97,7 +97,7 @@ public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar:
                         .multilineTextAlignment(.center)
                         .frame(minHeight: 40)
                         .opacity(min(smallTitleOpacity, 1))
-                        .offset(y: -smmallTitleOffset)
+                        .offset(y: -smallTitleOffset)
                     // .matchedGeometryEffect(id: "titleName", in: titleName, properties: .position, anchor: .center, isSource: true)
 
                     titleLabel()
@@ -173,7 +173,7 @@ public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar:
         }
     }
 
-    private var smmallTitleOffset: CGFloat {
+    private var smallTitleOffset: CGFloat {
         if largeTitle || alwaysSlideSmallTile {
             if offset.y < 50 {
                 -50
