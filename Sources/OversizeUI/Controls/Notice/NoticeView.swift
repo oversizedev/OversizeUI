@@ -40,19 +40,19 @@ import SwiftUI
 public struct NoticeView<A>: View where A: View {
     /// The image displayed in the notice.
     let image: Image?
-    
+
     /// The URL for an image to be displayed in the notice.
     let imageURL: URL?
-    
+
     /// The title text of the notice.
     let title: String
-    
+
     /// The subtitle text providing additional information.
     let subtitle: String?
-    
+
     /// Custom actions displayed in the notice.
     let actions: Group<A>?
-    
+
     /// The closure executed when the close button is tapped.
     let closeAction: (() -> Void)?
 

@@ -71,7 +71,7 @@ public extension View {
     func shadowElevaton(_ elevation: Elevation, color: Color) -> some View {
         modifier(Shadow(elevation: elevation, color: color))
     }
-    
+
     func shadowElevation(_ elevation: Elevation) -> some View {
         modifier(Shadow(elevation: elevation))
     }

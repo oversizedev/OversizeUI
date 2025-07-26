@@ -38,7 +38,7 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
 
     private var leadingSpace: Space = .small
 
-    private var textColor: Color? = nil
+    private var textColor: Color?
 
     private var isShowSubtitle: Bool {
         (subtitle?.isEmpty) != nil

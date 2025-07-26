@@ -129,7 +129,7 @@ public struct AnyGridSelectStyle: GridSelectStyle {
 }
 
 struct GridSelectStyleKey: EnvironmentKey {
-    public static let defaultValue = AnyGridSelectStyle(
+    static let defaultValue = AnyGridSelectStyle(
         seletionStyle: .accentSurface,
         unseletionStyle: .surface,
         icon: .none,

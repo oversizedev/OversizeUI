@@ -186,6 +186,16 @@ public extension SwiftUI.Image {
 
         public static let chat = Image("Base/Chat", bundle: .module)
         public enum Check {
+            public enum Circle {
+                public static let fill = Image("Base/Check/Circle/Fill", bundle: .module)
+                public enum TwoTone {
+                    public static let fill = Image("Base/Check/Circle/TwoTone/Fill", bundle: .module)
+                }
+
+                public static let twoTone = Image("Base/Check/Circle/TwoTone", bundle: .module)
+            }
+
+            public static let circle = Image("Base/Check/Circle", bundle: .module)
             public static let mini = Image("Base/Check/Mini", bundle: .module)
             public enum Square {
                 public static let fill = Image("Base/Check/Square/Fill", bundle: .module)
@@ -723,8 +733,8 @@ public extension SwiftUI.Image {
 
         public static let send = Image("Base/Send", bundle: .module)
         public enum Setting {
-            public static let mini = Image("Base/Setting/Mini", bundle: .module)
             public static let fill = Image("Base/Setting/Fill", bundle: .module)
+            public static let mini = Image("Base/Setting/Mini", bundle: .module)
             public enum TwoTone {
                 public static let fill = Image("Base/Setting/TwoTone/Fill", bundle: .module)
             }
@@ -765,6 +775,7 @@ public extension SwiftUI.Image {
         public static let shieldFail = Image("Base/ShieldFail", bundle: .module)
         public enum Star {
             public static let fill = Image("Base/Star/Fill", bundle: .module)
+            public static let mini = Image("Base/Star/Mini", bundle: .module)
             public enum TwoTone {
                 public static let fill = Image("Base/Star/TwoTone/Fill", bundle: .module)
             }
@@ -811,6 +822,12 @@ public extension SwiftUI.Image {
         }
 
         public static let unlock = Image("Base/Unlock", bundle: .module)
+        public enum Unstar {
+            public static let fill = Image("Base/Unstar/Fill", bundle: .module)
+            public static let mini = Image("Base/Unstar/Mini", bundle: .module)
+        }
+
+        public static let unstar = Image("Base/Unstar", bundle: .module)
         public enum Upload {
             public static let fill = Image("Base/Upload/Fill", bundle: .module)
             public enum TwoTone {

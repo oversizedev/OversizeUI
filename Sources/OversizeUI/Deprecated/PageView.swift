@@ -186,7 +186,7 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
         control.isAlwaysSlideSmallTile = isSlide
         return control
     }
-    
+
     @available(*, deprecated, renamed: "slideSmallTitle")
     public func slideSmallTile(_ isSlide: Bool = true) -> PageView {
         var control = self

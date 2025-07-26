@@ -9,27 +9,27 @@ import SwiftUI
 ///
 /// Use these button types to create consistent visual hierarchy in your interface:
 /// - Use ``primary`` for the main call-to-action
-/// - Use ``secondary`` for important but alternative actions  
+/// - Use ``secondary`` for important but alternative actions
 /// - Use ``tertiary`` for supplementary actions
 /// - Use ``quaternary`` for minimal actions with low visual weight
 ///
 /// ```swift
 /// Button("Save") { save() }
 ///     .buttonStyle(.primary)
-/// 
+///
 /// Button("Cancel") { cancel() }
 ///     .buttonStyle(.tertiary)
 /// ```
 public enum ButtonType: Int, CaseIterable {
     /// Primary button style for main call-to-action buttons.
     case primary
-    
+
     /// Secondary button style for important alternative actions.
     case secondary
-    
+
     /// Tertiary button style for supplementary actions.
     case tertiary
-    
+
     /// Quaternary button style for minimal actions with low visual weight.
     case quaternary
 }
@@ -73,25 +73,25 @@ public enum ButtonType: Int, CaseIterable {
 public struct OversizeButtonStyle: ButtonStyle {
     /// Environment values for theme customization.
     @Environment(\.theme) private var theme: ThemeSettings
-    
+
     /// Environment value indicating if the button is enabled.
     @Environment(\.isEnabled) private var isEnabled: Bool
-    
+
     /// Environment value indicating if the button is in loading state.
     @Environment(\.isLoading) private var isLoading: Bool
-    
+
     /// Environment value indicating if accent styling should be applied.
     @Environment(\.isAccent) private var isAccent: Bool
-    
+
     /// Environment value for the button's elevation/shadow level.
     @Environment(\.elevation) private var elevation: Elevation
-    
+
     /// Environment value for the button's border shape.
     @Environment(\.controlBorderShape) var controlBorderShape: ControlBorderShape
-    
+
     /// Environment value indicating if the button should have a border.
     @Environment(\.isBordered) var isBordered: Bool
-    
+
     #if !os(tvOS)
     /// Environment value for the button's control size.
     @Environment(\.controlSize) var controlSize: ControlSize
@@ -99,7 +99,7 @@ public struct OversizeButtonStyle: ButtonStyle {
 
     /// The semantic type of button determining its visual style.
     private let type: ButtonType
-    
+
     /// Whether the button should expand to fill available width.
     private let isInfinityWidth: Bool?
 

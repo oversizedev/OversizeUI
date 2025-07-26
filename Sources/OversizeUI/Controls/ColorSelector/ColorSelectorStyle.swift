@@ -31,7 +31,7 @@ public struct DefaultColorSelectorStyle: ColorSelectorStyle {
 }
 
 struct ColorSelectorStyleStyleKey: EnvironmentKey {
-    public static let defaultValue = AnyColorSelectorStyle(style: DefaultColorSelectorStyle())
+    static let defaultValue = AnyColorSelectorStyle(style: DefaultColorSelectorStyle())
 }
 
 public extension EnvironmentValues {
