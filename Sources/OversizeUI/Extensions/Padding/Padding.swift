@@ -46,7 +46,7 @@ public struct ContentPaddingModifier: ViewModifier {
             edges,
             horizontalSizeClass == .compact
                 ? length.rawValue
-                : length.rawValue + Space.large.rawValue
+                : length.rawValue + .large
         )
     }
     #else

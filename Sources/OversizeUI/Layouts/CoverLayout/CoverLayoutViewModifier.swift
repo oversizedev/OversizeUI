@@ -19,7 +19,7 @@ public extension CoverLayoutView {
         return control
     }
 
-    func contentCornerRadius(_ radius: Radius) -> Self {
+    func contentCornerRadius(_ radius: Space) -> Self {
         var control = self
         control.contentCornerRadius = radius.rawValue
         return control

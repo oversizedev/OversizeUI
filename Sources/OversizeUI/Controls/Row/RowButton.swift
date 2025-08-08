@@ -55,8 +55,8 @@ public struct RowButton: View {
                         Spacer()
                     }
                 }
-                .padding(.top, controlPadding.top.rawValue - Space.xxSmall.rawValue)
-                .padding(.bottom, controlPadding.bottom.rawValue - Space.xxSmall.rawValue)
+                .padding(.top, controlPadding.top.rawValue - .xxSmall)
+                .padding(.bottom, controlPadding.bottom.rawValue - .xxSmall)
                 .padding(.leading, controlPadding.leading)
                 .padding(.trailing, controlPadding.trailing)
             }

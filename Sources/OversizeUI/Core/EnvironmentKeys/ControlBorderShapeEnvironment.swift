@@ -7,11 +7,11 @@ import SwiftUI
 
 public enum ControlBorderShape: Sendable {
     case capsule
-    case roundedRectangle(radius: Radius = .medium)
+    case roundedRectangle(radius: Space = .xSmall)
 }
 
 private struct ControlBorderShapeKey: EnvironmentKey {
-    public static let defaultValue: ControlBorderShape = .roundedRectangle(radius: .medium)
+    public static let defaultValue: ControlBorderShape = .roundedRectangle(radius: .xSmall)
 }
 
 public extension EnvironmentValues {

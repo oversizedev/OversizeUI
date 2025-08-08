@@ -16,7 +16,7 @@ public enum SurfaceStyle {
 public struct Surface<Label: View>: View {
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.isAccent) private var isAccent: Bool
-    @Environment(\.surfaceRadius) var surfaceRadius: Radius
+    @Environment(\.surfaceRadius) var surfaceRadius
     @Environment(\.surfaceContentMargins) var contentInsets: EdgeSpaceInsets
     @Environment(\.surfaceElevation) private var elevation: Elevation
 
@@ -240,7 +240,7 @@ public extension View {
         elevation: Elevation = .z0,
         background: SurfaceStyle = .primary,
         padding: Space = .medium,
-        radius: Radius = .medium
+        radius: Space = .xSmall
     ) -> some View {
         Surface { self }
             .surfaceStyle(background)

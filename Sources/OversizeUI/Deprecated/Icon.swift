@@ -15,19 +15,19 @@ public enum IconSizes: CaseIterable {
     public var rawValue: CGFloat {
         switch self {
         case .xSmall:
-            Space.xSmall.rawValue
+            .xSmall
         case .small:
-            Space.small.rawValue
+            .small
         case .medium:
             #if os(macOS)
             20
             #else
-            Space.medium.rawValue
+            .medium
             #endif
         case .large:
-            Space.large.rawValue
+            .large
         case .xLarge:
-            Space.xLarge.rawValue
+            .xLarge
         }
     }
 }
@@ -35,11 +35,11 @@ public enum IconSizes: CaseIterable {
 public struct IconDeprecated: View {
     private enum Constants: Sendable {
         /// Size
-        static let xSmall: CGFloat = Space.xSmall.rawValue
-        static let small: CGFloat = Space.small.rawValue
-        static let medium: CGFloat = Space.medium.rawValue
-        static let large: CGFloat = Space.large.rawValue
-        static let xLarge: CGFloat = Space.xLarge.rawValue
+        static let xSmall: CGFloat = xSmall
+        static let small: CGFloat = .small
+        static let medium: CGFloat = .medium
+        static let large: CGFloat = .large
+        static let xLarge: CGFloat = .xLarge
     }
 
     let name: IconsNames?

@@ -216,19 +216,19 @@ public struct Avatar: View {
 
     private var avatarSize: CGFloat {
         #if os(tvOS)
-        return Space.xLarge.rawValue
+        return .xLarge
         #else
         switch controlSize {
         case .mini:
-            return Space.medium.rawValue
+            return .medium
         case .small:
-            return Space.large.rawValue
+            return .large
         case .regular:
-            return Space.xLarge.rawValue
+            return .xLarge
         case .large, .extraLarge:
             return Space.xxxLarge.rawValue
         @unknown default:
-            return Space.xLarge.rawValue
+            return .xLarge
         }
         #endif
     }

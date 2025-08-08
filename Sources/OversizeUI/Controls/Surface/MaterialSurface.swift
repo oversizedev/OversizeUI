@@ -12,7 +12,7 @@ import SwiftUI
 public struct MaterialSurface<Label: View>: View {
     @Environment(\.elevation) private var elevation: Elevation
     @Environment(\.theme) private var theme: ThemeSettings
-    @Environment(\.controlRadius) var controlRadius: Radius
+    @Environment(\.controlRadius) var controlRadius
     @Environment(\.surfaceContentMargins) var controlPadding: EdgeSpaceInsets
 
     private let label: Label
@@ -61,7 +61,7 @@ public struct MaterialSurface<Label: View>: View {
 
     @ViewBuilder
     private var overlayView: some View {
-        RoundedRectangle(cornerRadius: controlRadius.rawValue, style: .continuous)
+        RoundedRectangle(cornerRadius: controlRadius, style: .continuous)
             .stroke(
                 border != nil ? border ?? Color.clear
                     : theme.borderSurface

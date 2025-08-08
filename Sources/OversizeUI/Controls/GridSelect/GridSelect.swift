@@ -19,7 +19,7 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
     @State private var selectedIndex: Data.Index?
     @Binding private var selection: Data.Element
 
-    private let radius: Radius
+    private let radius: Space
     private let data: Data
     private let spacing: Space
     private let selectionView: () -> Selection?
@@ -29,7 +29,7 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
     public init(
         _ data: Data,
         selection: Binding<Data.Element>,
-        radius: Radius = .medium,
+        radius: Space = .xSmall,
         spacing: Space = .xSmall,
         @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
         @ViewBuilder selectionView: @escaping () -> Selection? = { nil },
@@ -59,8 +59,8 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
 
     private var gridSelect: some View {
         LazyVGrid(
-            columns: [GridItem(spacing: spacing), GridItem(spacing: spacing)],
-            spacing: spacing
+            columns: [GridItem(spacing: spacing.rawValue), GridItem(spacing: spacing.rawValue)],
+            spacing: spacing.rawValue
         ) {
             ForEach(data.indices, id: \.self) { index in
                 Button(action: {
@@ -113,13 +113,13 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
         switch selectionStyle {
         case .shadowSurface:
             RoundedRectangle(
-                cornerRadius: radius,
+                cornerRadius: radius.rawValue,
                 style: .continuous
             )
             .fill(Color.surfacePrimary)
             .overlay(
                 RoundedRectangle(
-                    cornerRadius: radius,
+                    cornerRadius: radius.rawValue,
                     style: .continuous
                 )
                 .stroke(
@@ -132,7 +132,7 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
             .shadowElevation(.z2)
         case .graySurface:
             RoundedRectangle(
-                cornerRadius: radius,
+                cornerRadius: radius.rawValue,
                 style: .continuous
             )
             .strokeBorder(Color.onSurfaceSecondary, lineWidth: 2)
@@ -152,13 +152,13 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
             EmptyView()
         case .surface:
             RoundedRectangle(
-                cornerRadius: radius,
+                cornerRadius: radius.rawValue,
                 style: .continuous
             )
             .fill(Color.surfaceSecondary)
             .overlay(
                 RoundedRectangle(
-                    cornerRadius: radius,
+                    cornerRadius: radius.rawValue,
                     style: .continuous
                 )
                 .stroke(
@@ -185,7 +185,7 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
                         .foregroundColor(Color.surfacePrimary)
                         .shadowElevation(.z2)
                     IconDeprecated(.checkMini, color: .onSurfacePrimary)
-                }.frame(width: Space.large.rawValue, height: Space.large.rawValue)
+                }.frame(width: .large, height: .large)
                     .padding(.small)
             }
         case let .radio(alignment):
@@ -197,8 +197,8 @@ public struct GridSelect<Element: Equatable, Content, Selection>: View
                         .foregroundColor(Color.accent)
                         .shadowElevation(.z2)
                     Circle()
-                        .frame(width: Space.small.rawValue, height: Space.small.rawValue)
-                }.frame(width: Space.large.rawValue, height: Space.large.rawValue)
+                        .frame(width: .small, height: .small)
+                }.frame(width: .large, height: .large)
                     .padding(.small)
             }
         }
@@ -209,7 +209,7 @@ public extension GridSelect where Selection == EmptyView {
     init(
         _ data: Data,
         selection: Binding<Data.Element>,
-        radius: Radius = .medium,
+        radius: Space = .xSmall,
         spacing: Space = .xSmall,
         @ViewBuilder content: @escaping (Data.Element, Bool) -> Content,
         action: (() -> Void)? = nil

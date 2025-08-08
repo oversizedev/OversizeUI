@@ -76,7 +76,7 @@ public struct IconPicker: View {
                                             .frame(width: 24, height: 24, alignment: .center)
                                     }
                                     .overlay(
-                                        RoundedRectangle(cornerRadius: Radius.medium, style: .continuous)
+                                        RoundedRectangle(cornerRadius: .xxxSmall, style: .continuous)
                                             .strokeBorder(Color.border, lineWidth: 1)
                                             .frame(width: 48, height: 48, alignment: .center)
                                     )

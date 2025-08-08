@@ -114,42 +114,61 @@ public struct OversizeButtonStyle: ButtonStyle {
     }
 
     public func makeBody(configuration: Self.Configuration) -> some View {
-        configuration.label
-            .body(.semibold)
-            .opacity(isLoading ? 0 : 1)
-            .foregroundColor(foregroundColor(for: configuration.role).opacity(foregroundOpacity))
-            .padding(.horizontal, horizontalPadding)
-            .padding(.vertical, verticalPadding)
-            .frame(maxWidth: maxWidth)
-            .background(background(for: configuration.role))
-            .overlay(loadingView(for: configuration.role))
-            .scaleEffect(configuration.isPressed ? 0.95 : 1)
-            .shadowElevation(isEnabled ? elevation : .z0)
+        if #available(iOS 26.0, *) {
+            configuration.label
+                .body(.semibold)
+                .opacity(isLoading ? 0 : 1)
+                .foregroundColor(foregroundColor(for: configuration.role).opacity(foregroundOpacity))
+                .padding(.horizontal, horizontalPadding)
+                .padding(.vertical, verticalPadding)
+                .frame(maxWidth: maxWidth)
+                .background(background(for: configuration.role))
+                .overlay(loadingView(for: configuration.role))
+        } else {
+            configuration.label
+                .body(.semibold)
+                .opacity(isLoading ? 0 : 1)
+                .foregroundColor(foregroundColor(for: configuration.role).opacity(foregroundOpacity))
+                .padding(.horizontal, horizontalPadding)
+                .padding(.vertical, verticalPadding)
+                .frame(maxWidth: maxWidth)
+                .background(background(for: configuration.role))
+                .overlay(loadingView(for: configuration.role))
+                .scaleEffect(configuration.isPressed ? 0.95 : 1)
+                .shadowElevation(isEnabled ? elevation : .z0)
+        }
     }
 
     @ViewBuilder
     private func background(for role: ButtonRole?) -> some View {
-        if type != .quaternary {
-            switch controlBorderShape {
-            case .capsule:
+        if #available(iOS 26.0, *) {
+            if type != .quaternary {
                 Capsule()
-                    .fill(backgroundColor(for: role)
-                        .opacity(backgroundOpacity))
-                    .overlay {
-                        Capsule()
-                            .strokeBorder(Color.onSurfacePrimary.opacity(0.15), lineWidth: 2)
-                            .opacity(isBordered || theme.borderButtons ? 1 : 0)
-                    }
+                    .glassEffect(.regular.tint(backgroundColor(for: role)).interactive())
+            }
+        } else {
+            if type != .quaternary {
+                switch controlBorderShape {
+                case .capsule:
+                    Capsule()
+                        .fill(backgroundColor(for: role)
+                            .opacity(backgroundOpacity))
+                        .overlay {
+                            Capsule()
+                                .strokeBorder(Color.onSurfacePrimary.opacity(0.15), lineWidth: 2)
+                                .opacity(isBordered || theme.borderButtons ? 1 : 0)
+                        }
 
-            case let .roundedRectangle(radius):
-                RoundedRectangle(cornerRadius: radius != .medium ? radius.rawValue : theme.radius, style: .continuous)
-                    .fill(backgroundColor(for: role)
-                        .opacity(backgroundOpacity))
-                    .overlay {
-                        RoundedRectangle(cornerRadius: radius != .medium ? radius.rawValue : theme.radius, style: .continuous)
-                            .strokeBorder(Color.onSurfacePrimary.opacity(0.15), lineWidth: 2)
-                            .opacity(isBordered || theme.borderButtons ? 1 : 0)
-                    }
+                case let .roundedRectangle(radius):
+                    RoundedRectangle(cornerRadius: radius != .medium ? radius.rawValue : theme.radius, style: .continuous)
+                        .fill(backgroundColor(for: role)
+                            .opacity(backgroundOpacity))
+                        .overlay {
+                            RoundedRectangle(cornerRadius: radius != .medium ? radius.rawValue : theme.radius, style: .continuous)
+                                .strokeBorder(Color.onSurfacePrimary.opacity(0.15), lineWidth: 2)
+                                .opacity(isBordered || theme.borderButtons ? 1 : 0)
+                        }
+                }
             }
         }
     }

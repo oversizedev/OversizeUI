@@ -21,6 +21,9 @@ public enum Space: CGFloat, Sendable {
     /// 16
     case small = 16
 
+    /// 20
+    case regular = 20
+
     #if os(macOS)
     /// 20
     case medium = 20
@@ -40,4 +43,29 @@ public enum Space: CGFloat, Sendable {
 
     /// 96
     case xxxLarge = 96
+}
+
+public extension CGFloat {
+    /// 0 spacing.
+    static let zero = Space.zero.rawValue
+    /// 4 spacing.
+    static let xxxSmall = Space.xxxSmall.rawValue
+    /// 8 spacing.
+    static let xxSmall = Space.xxSmall.rawValue
+    /// 12 spacing.
+    static let xSmall = Space.xSmall.rawValue
+    /// 16 spacing.
+    static let small = Space.small.rawValue
+    /// 20 spacing.
+    static let regular = Space.regular.rawValue
+    /// 24 spacing (platform dependent).
+    static let medium = Space.medium.rawValue
+    /// 32 spacing.
+    static let large = Space.large.rawValue
+    /// 48 spacing.
+    static let xLarge = Space.xLarge.rawValue
+    /// 72 spacing.
+    static let xxLarge = Space.xxLarge.rawValue
+    /// 96 spacing.
+    static let xxxLarge = Space.xxxLarge.rawValue
 }

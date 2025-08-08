@@ -6,7 +6,7 @@
 import SwiftUI
 
 // swiftlint:disable all
-@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 public struct Select<Element: Equatable, Content, Selection, Actions, ContentUnavailable: View>: View
     where
     Content: View,
@@ -69,13 +69,13 @@ public struct Select<Element: Equatable, Content, Selection, Actions, ContentUna
             .padding()
             .background(
                 RoundedRectangle(
-                    cornerRadius: Radius.medium,
+                    cornerRadius: .xxxSmall,
                     style: .continuous
                 )
                 .fill(Color.surfaceSecondary)
                 .overlay(
                     RoundedRectangle(
-                        cornerRadius: Radius.medium,
+                        cornerRadius: .xxxSmall,
                         style: .continuous
                     )
                     .stroke(
@@ -120,35 +120,47 @@ public struct Select<Element: Equatable, Content, Selection, Actions, ContentUna
     }
 
     private var modal: some View {
-        PageView(label) {
-            if data.isEmpty, let contentUnavailable {
-                contentUnavailable
-            } else {
-                LazyVStack(alignment: .leading, spacing: .zero) {
-                    ForEach(data.indices, id: \.self) { index in
-                        Radio(isOn: index == selectedIndex) {
-                            selectedIndex = index
-                            selection = data[index]
-                            isSelected = true
-                            showModal.toggle()
-                        } label: {
-                            content(
-                                data[index],
-                                selectedIndex == index
-                            )
-                            .headline()
-                            .onSurfacePrimaryForeground()
+        NavigationStack {
+            LayoutView(label) {
+                if data.isEmpty, let contentUnavailable {
+                    contentUnavailable
+                } else {
+                    LazyVStack(alignment: .leading, spacing: .zero) {
+                        ForEach(data.indices, id: \.self) { index in
+                            Radio(isOn: index == selectedIndex) {
+                                selectedIndex = index
+                                selection = data[index]
+                                isSelected = true
+                                showModal.toggle()
+                            } label: {
+                                content(
+                                    data[index],
+                                    selectedIndex == index
+                                )
+                                .headline()
+                                .onSurfacePrimaryForeground()
+                            }
                         }
                     }
                 }
             }
+            .toolbarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        showModal = false
+                    }
+                }
+
+                ToolbarItem(placement: .confirmationAction) {
+                    actions
+                }
+            }
         }
-        .leadingBar { BarButton(.close) }
-        .trailingBar { actions }
     }
 }
 
-@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 public extension Select where ContentUnavailable == Never {
     init(
         _ label: String,
@@ -170,7 +182,7 @@ public extension Select where ContentUnavailable == Never {
     }
 }
 
-@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 public extension Select where Actions == Never {
     init(
         _ label: String,
@@ -192,7 +204,7 @@ public extension Select where Actions == Never {
     }
 }
 
-@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 public extension Select where ContentUnavailable == Never, Actions == Never {
     init(
         _ label: String,
@@ -214,8 +226,8 @@ public extension Select where ContentUnavailable == Never, Actions == Never {
 }
 
 // swiftlint:disable all
-@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
-struct Select_Preview: PreviewProvider {
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+struct SelectNew_Preview: PreviewProvider {
     struct SelectPreview: View {
         var items = ["One", "Two", "Three", "Four"]
 

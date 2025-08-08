@@ -51,11 +51,11 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
         }
     }
 
-    private var fieldRadius: Radius {
+    private var fieldRadius: CGFloat {
         #if os(macOS)
-        return .xSmall
+        return .xxxSmall
         #else
-        return .medium
+        return .xSmall
         #endif
     }
 
@@ -65,32 +65,32 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
             #if os(macOS)
             return .init(
                 top: 10,
-                leading: Space.xSmall.rawValue,
+                leading: .xSmall,
                 bottom: 10,
-                trailing: Space.xSmall.rawValue
+                trailing: .xSmall
             )
             #else
             return .init(
                 top: 10,
-                leading: Space.xSmall.rawValue,
+                leading: .xSmall,
                 bottom: 10,
-                trailing: Space.xSmall.rawValue
+                trailing: .xSmall
             )
             #endif
         case .overInput:
             #if os(macOS)
             return .init(
                 top: text.isEmpty ? 13 : 22,
-                leading: Space.xxSmall.rawValue,
+                leading: .xxSmall,
                 bottom: 10,
-                trailing: Space.xxSmall.rawValue
+                trailing: .xxSmall
             )
             #else
             return .init(
                 top: text.isEmpty ? 8 : 22,
-                leading: Space.xSmall.rawValue,
+                leading: .xSmall,
                 bottom: 10,
-                trailing: Space.xSmall.rawValue
+                trailing: .xSmall
             )
 
             #endif
@@ -101,15 +101,15 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
         switch fieldPlaceholderPosition {
         case .default, .adjacent:
             #if os(macOS)
-            return .init(Space.xSmall)
+            return .init(.xSmall)
             #else
-            return .init(Space.xSmall)
+            return .init(.xSmall)
             #endif
         case .overInput:
             #if os(macOS)
             return .init(horizontal: Space.xSmall, vertical: Space.xSmall)
             #else
-            return .init(Space.xxSmall)
+            return .init(.xxSmall)
             #endif
         }
     }

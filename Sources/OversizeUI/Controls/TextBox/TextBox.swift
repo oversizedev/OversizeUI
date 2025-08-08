@@ -44,9 +44,9 @@ public struct TextBox: View {
         .multilineTextAlignment(multilineTextAlignment)
     }
 
-    private var textSpacing: Space {
+    private var textSpacing: CGFloat {
         if let spacing {
-            spacing
+            spacing.rawValue
         } else {
             switch size {
             case .small:

@@ -66,7 +66,7 @@ public struct TextFieldExtended: View {
                             .foregroundColor(.onSurfacePrimary)
                         Spacer()
                     }
-                    .padding(.bottom, Space.xxSmall)
+                    .padding(.bottom, .xxSmall)
                 }
 
                 HStack {
@@ -114,7 +114,7 @@ public struct TextFieldExtended: View {
 
                 ).background(RoundedRectangle(cornerRadius: .medium, style: .continuous)
                     .fill(focused ? Color.surfacePrimary : Color.surfaceSecondary))
-                .cornerRadius(Radius.medium)
+                .cornerRadius(.xSmall)
 
             if helperText != "" {
                 if helperStyle == .helperText {

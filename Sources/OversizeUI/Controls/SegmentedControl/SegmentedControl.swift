@@ -8,7 +8,7 @@ import SwiftUI
 public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: View where Content: View, Selection: View {
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.segmentedControlStyle) private var style
-    @Environment(\.controlRadius) var controlRadius: Radius
+    @Environment(\.controlRadius) var controlRadius
     @Environment(\.segmentedPickerMargins) var controlPadding: EdgeSpaceInsets
     @Environment(\.platform) var platform: Platform
 
@@ -48,7 +48,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                     label: SegmentedControlConfiguration.Label(content: getSegmentedControl())
                 )
             )
-            .clipBackground(style.isShowBackground, radius: controlRadius.rawValue)
+            .clipBackground(style.isShowBackground, radius: controlRadius)
             .onAppear {
                 let selctedValue = selection
                 var index = 0
@@ -123,14 +123,14 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                             .padding(.trailing, controlPadding.trailing)
                             .padding(
                                 .top,
-                                controlPadding.top != Space.zero || controlPadding.top != Space.xxSmall
-                                    ? controlPadding.top.rawValue - Space.xxSmall.rawValue
+                                controlPadding.top != Space.zero || controlPadding.top != .xxSmall
+                                    ? controlPadding.top.rawValue - .xxSmall
                                     : Space.zero.rawValue
                             )
                             .padding(
                                 .bottom,
-                                controlPadding.bottom != Space.zero || controlPadding.bottom != Space.xxSmall
-                                    ? controlPadding.bottom.rawValue - Space.xxSmall.rawValue
+                                controlPadding.bottom != Space.zero || controlPadding.bottom != .xxSmall
+                                    ? controlPadding.bottom.rawValue - .xxSmall
                                     : Space.zero.rawValue
                             )
                             .background(selectedIndex != index
@@ -149,7 +149,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                     ) { dimensions in
                         dimensions[HorizontalAlignment.center]
                     }
-                    .padding(.trailing, style.unseletionStyle == .surface ? Space.xSmall.rawValue : 0)
+                    .padding(.trailing, style.unseletionStyle == .surface ? .xSmall : 0)
                 }
             }
         }
@@ -192,14 +192,14 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                             .padding(.trailing, controlPadding.trailing)
                             .padding(
                                 .top,
-                                controlPadding.top != Space.zero || controlPadding.top != Space.xxSmall
-                                    ? controlPadding.top.rawValue - Space.xxSmall.rawValue
+                                controlPadding.top != Space.zero || controlPadding.top != .xxSmall
+                                    ? controlPadding.top.rawValue - .xxSmall
                                     : Space.zero.rawValue
                             )
                             .padding(
                                 .bottom,
-                                controlPadding.bottom != Space.zero || controlPadding.bottom != Space.xxSmall
-                                    ? controlPadding.bottom.rawValue - Space.xxSmall.rawValue
+                                controlPadding.bottom != Space.zero || controlPadding.bottom != .xxSmall
+                                    ? controlPadding.bottom.rawValue - .xxSmall
                                     : Space.zero.rawValue
                             )
                             .background(selectedIndex != index
@@ -217,7 +217,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
                     ) { dimensions in
                         dimensions[HorizontalAlignment.center]
                     }
-                    .padding(.trailing, style.unseletionStyle == .surface ? Space.xSmall.rawValue : 0)
+                    .padding(.trailing, style.unseletionStyle == .surface ? .xSmall : 0)
                 }
             }
         }
@@ -229,15 +229,15 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
         switch selectionStyle {
         case .shadowSurface:
             RoundedRectangle(
-                cornerRadius: style.isShowBackground ? controlRadius.rawValue - 4 : controlRadius.rawValue,
+                cornerRadius: style.isShowBackground ? controlRadius - 4 : controlRadius,
                 style: .continuous
             )
             .fill(Color.surfacePrimary)
             .overlay(
                 RoundedRectangle(
                     cornerRadius: style.isShowBackground
-                        ? controlRadius.rawValue - 4
-                        : controlRadius.rawValue,
+                        ? controlRadius - 4
+                        : controlRadius,
                     style: .continuous
                 )
                 .stroke(
@@ -272,8 +272,8 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
             } else {
                 RoundedRectangle(
                     cornerRadius: style.isShowBackground
-                        ? controlRadius.rawValue - 4
-                        : controlRadius.rawValue,
+                        ? controlRadius - 4
+                        : controlRadius,
                     style: .continuous
                 )
                 .strokeBorder(Color.onSurfaceSecondary, lineWidth: 2)
@@ -281,7 +281,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: V
 
         case .accentSurface:
             RoundedRectangle(
-                cornerRadius: style.isShowBackground ? controlRadius.rawValue - 4 : controlRadius.rawValue,
+                cornerRadius: style.isShowBackground ? controlRadius - 4 : controlRadius,
                 style: .continuous
             )
             .fill(Color.accent)

@@ -66,10 +66,10 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
             return .init(.xSmall)
             #else
             return .init(
-                top: Space.xxxSmall.rawValue + Space.small.rawValue,
-                leading: Space.small.rawValue,
-                bottom: Space.xxxSmall.rawValue + Space.small.rawValue,
-                trailing: Space.small.rawValue
+                top: .xxxSmall + .small,
+                leading: .small,
+                bottom: .xxxSmall + .small,
+                trailing: .small
             )
             #endif
         case .adjacent:
@@ -120,11 +120,11 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
         }
     }
 
-    private var fieldRadius: Radius {
+    private var fieldRadius: CGFloat {
         #if os(macOS)
-        return .small
+        return .xxSmall
         #else
-        return .medium
+        return .xSmall
         #endif
     }
 

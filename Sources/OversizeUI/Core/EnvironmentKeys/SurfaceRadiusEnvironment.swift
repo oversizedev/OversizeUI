@@ -6,18 +6,18 @@
 import SwiftUI
 
 private struct SurfaceRadiusKey: EnvironmentKey {
-    public static let defaultValue: Radius = .medium
+    public static let defaultValue: CGFloat = .xSmall
 }
 
 public extension EnvironmentValues {
-    var surfaceRadius: Radius {
+    var surfaceRadius: CGFloat {
         get { self[SurfaceRadiusKey.self] }
         set { self[SurfaceRadiusKey.self] = newValue }
     }
 }
 
 public extension View {
-    func surfaceRadius(_ radius: Radius) -> some View {
-        environment(\.surfaceRadius, radius)
+    func surfaceRadius(_ radius: Space) -> some View {
+        environment(\.surfaceRadius, radius.rawValue)
     }
 }

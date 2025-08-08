@@ -77,12 +77,12 @@ public struct Checkbox<Label: View>: View {
     @ViewBuilder
     private func checkboxImage(isEnabled: Bool, isOn: Bool) -> some View {
         ZStack {
-            RoundedRectangle(cornerRadius: Radius.small, style: .continuous)
+            RoundedRectangle(cornerRadius: .xxSmall, style: .continuous)
                 .strokeBorder(Color.onSurfaceTertiary.opacity(isEnabled ? 1 : 0.5), lineWidth: 2.5)
                 .frame(width: 24, height: 24)
                 .opacity(isOn ? 0 : 1)
 
-            RoundedRectangle(cornerRadius: Radius.small, style: .continuous).fill(Color.accent.opacity(isEnabled ? 1 : 0.5))
+            RoundedRectangle(cornerRadius: .xxSmall, style: .continuous).fill(Color.accent.opacity(isEnabled ? 1 : 0.5))
                 .frame(width: 24, height: 24)
                 .opacity(isOn ? 1 : 0)
 

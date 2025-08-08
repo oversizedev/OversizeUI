@@ -414,6 +414,7 @@ public extension SwiftUI.Image {
 
         public static let filter = Image("Base/Filter", bundle: .module)
         public enum Folder {
+            public static let mini = Image("Base/Folder/Mini", bundle: .module)
             public static let fill = Image("Base/Folder/Fill", bundle: .module)
             public enum TwoTone {
                 public static let fill = Image("Base/Folder/TwoTone/Fill", bundle: .module)
