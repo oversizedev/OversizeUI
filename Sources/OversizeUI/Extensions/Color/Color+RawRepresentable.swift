@@ -39,5 +39,4 @@ extension Color: @retroactive RawRepresentable {
         }
     }
 }
-
 #endif

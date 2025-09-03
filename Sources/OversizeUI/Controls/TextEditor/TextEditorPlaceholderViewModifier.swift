@@ -36,15 +36,18 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
                 .onSurfacePrimaryForeground()
                 .background {
                     ZStack {
-                        RoundedRectangle(cornerRadius: fieldRadius, style: .continuous)
-                            .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
+                        RoundedRectangle(
+                            cornerRadius: fieldRadius,
+                            style: .continuous
+                        )
+                        .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
                         overlay
                     }
                     .overlay(alignment: .topLeading) {
                         labelTextView
                     }
                 }
-                .frame(minHeight: Space.xxxLarge.rawValue)
+                .frame(minHeight: .xxxLarge)
                 .focused($isFocused)
                 .scrollContentBackground(.hidden)
                 .animation(.easeIn(duration: 0.15), value: text)
@@ -100,16 +103,12 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
     var labelPadding: EdgeInsets {
         switch fieldPlaceholderPosition {
         case .default, .adjacent:
-            #if os(macOS)
             return .init(.xSmall)
-            #else
-            return .init(.xSmall)
-            #endif
         case .overInput:
             #if os(macOS)
-            return .init(horizontal: Space.xSmall, vertical: Space.xSmall)
+            return .init(xSmall)
             #else
-            return .init(.xxSmall)
+            return .init(.small)
             #endif
         }
     }

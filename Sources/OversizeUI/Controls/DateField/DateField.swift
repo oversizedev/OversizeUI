@@ -6,7 +6,7 @@
 import SwiftUI
 
 #if os(iOS)
-@available(iOS 15.0, *)
+@available(iOS 16.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
@@ -79,12 +79,14 @@ public struct DateField: View {
         .sheet(isPresented: $showModal) {
             if isOptionalSelection {
                 DatePickerSheet(title: label, selection: $optionalSelection)
-                    .presentationDetents([.height(500)])
+                    .presentationDetents([.height(540)])
                     .presentationDragIndicator(.hidden)
+                    .scrollDisabled(true)
             } else {
                 DatePickerSheet(title: label, selection: $selection)
-                    .presentationDetents([.height(500)])
+                    .presentationDetents([.height(540)])
                     .presentationDragIndicator(.hidden)
+                    .scrollDisabled(true)
             }
         }
     }

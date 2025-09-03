@@ -38,47 +38,49 @@ public struct DatePickerSheet: View {
     }
 
     public var body: some View {
-        if #available(iOS 23.0, *) {
-            LayoutView(title) {
-                SectionView {
-                    VStack {
-                        if let minimumDate {
-                            DatePicker("", selection: $date, in: minimumDate..., displayedComponents: displayedComponents)
-                                .datePickerStyle(.graphical)
-                                .labelsHidden()
-                        } else {
-                            DatePicker("", selection: $date, displayedComponents: displayedComponents)
-                                .datePickerStyle(.graphical)
-                                .labelsHidden()
+        if #available(iOS 26.0, *) {
+            NavigationStack {
+                LayoutView(title) {
+                    SectionView {
+                        VStack {
+                            if let minimumDate {
+                                DatePicker("", selection: $date, in: minimumDate..., displayedComponents: displayedComponents)
+                                    .datePickerStyle(.graphical)
+                                    .labelsHidden()
+                            } else {
+                                DatePicker("", selection: $date, displayedComponents: displayedComponents)
+                                    .datePickerStyle(.graphical)
+                                    .labelsHidden()
+                            }
+                        }
+                        .padding(.horizontal, .small)
+                        .padding(.vertical, .xxxSmall)
+                    }
+                    .surfaceContentMargins(.zero)
+                } background: {
+                    Color.backgroundSecondary
+                }
+                .toolbar {
+                    ToolbarItemGroup(placement: .cancellationAction) {
+                        Button(role: .cancel) {
+                            dismiss()
+                        } label: {
+                            Image.Base.close.icon()
                         }
                     }
-                    .padding(.horizontal, .small)
-                    .padding(.vertical, .xxxSmall)
-                }
-                .surfaceContentMargins(.zero)
-            } background: {
-                Color.backgroundSecondary
-            }
-            .toolbar {
-                ToolbarItemGroup(placement: .cancellationAction) {
-                    Button(role: .cancel) {
-                        dismiss()
-                    } label: {
-                        Image.Base.close.icon()
-                    }
-                }
 
-                ToolbarItemGroup(placement: .primaryAction) {
-                    Button(role: .confirm) {
-                        selection = date
-                        optionalSelection = date
-                        dismiss()
-                    } label: {
-                        Text("Done")
+                    ToolbarItemGroup(placement: .primaryAction) {
+                        Button(role: .confirm) {
+                            selection = date
+                            optionalSelection = date
+                            dismiss()
+                        } label: {
+                            Text("Done")
+                        }
                     }
                 }
+                .toolbarTitleDisplayMode(.inline)
             }
-            .toolbarTitleDisplayMode(.inline)
         } else {
             PageView(title) {
                 SectionView {

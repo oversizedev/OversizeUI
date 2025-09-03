@@ -49,14 +49,14 @@ public struct Select<Element: Equatable, Content, Selection, Actions, ContentUna
     }
 
     public var body: some View {
-        ZStack {
-            Button {
-                if showModalBinding != nil {
-                    showModalBinding?.toggle()
-                } else {
-                    showModal.toggle()
-                }
-            } label: {
+        Button {
+            if showModalBinding != nil {
+                showModalBinding?.toggle()
+            } else {
+                showModal.toggle()
+            }
+        } label: {
+            HStack(spacing: .zero) {
                 if isSelected, let index = selectedIndex {
                     selectionView(data[index])
                 } else {
@@ -65,56 +65,34 @@ public struct Select<Element: Equatable, Content, Selection, Actions, ContentUna
                 Spacer()
                 IconDeprecated(.chevronDown, color: .onSurfacePrimary)
             }
-            .frame(minWidth: 0, maxWidth: .infinity)
-            .padding()
-            .background(
-                RoundedRectangle(
-                    cornerRadius: .xxxSmall,
-                    style: .continuous
-                )
-                .fill(Color.surfaceSecondary)
-                .overlay(
-                    RoundedRectangle(
-                        cornerRadius: .xxxSmall,
-                        style: .continuous
-                    )
-                    .stroke(
-                        theme.borderTextFields
-                            ? Color.border
-                            : Color.surfaceSecondary,
-                        lineWidth: CGFloat(theme.borderSize)
-                    )
-                )
-            )
-            .headline(.medium)
-            .foregroundColor(.onSurfacePrimary)
-            .sheet(isPresented: $showModal) {
-                #if os(iOS)
-                if #available(iOS 16.0, *) {
-                    modal
-                        .presentationDetents(data.count < 4 ? [.medium, .large] : [.large])
-                        .presentationDragIndicator(.hidden)
-                } else {
-                    modal
-                }
-                #else
+        }
+        .buttonStyle(.field)
+        .sheet(isPresented: $showModal) {
+            #if os(iOS)
+            if #available(iOS 16.0, *) {
                 modal
-                #endif
+                    .presentationDetents(data.count < 4 ? [.medium, .large] : [.large])
+                    .presentationDragIndicator(.hidden)
+            } else {
+                modal
             }
-            .onChange(of: showModalBinding) { state in
-                if let state {
-                    showModal = state
-                }
+            #else
+            modal
+            #endif
+        }
+        .onChange(of: showModalBinding) { state in
+            if let state {
+                showModal = state
             }
-            .onAppear {
-                let selctedValue = selection
-                var index = 0
-                for dataValue in data {
-                    if selctedValue == dataValue {
-                        selectedIndex = index
-                    }
-                    index += 1
+        }
+        .onAppear {
+            let selctedValue = selection
+            var index = 0
+            for dataValue in data {
+                if selctedValue == dataValue {
+                    selectedIndex = index
                 }
+                index += 1
             }
         }
     }

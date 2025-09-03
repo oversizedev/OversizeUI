@@ -39,12 +39,11 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
                     .offset(y: fieldOffset)
                     .focused($isFocused)
                 #if os(macOS)
-                    .if(fieldPlaceholderPosition == .adjacent) {
+                    .if(fieldPlaceholderPosition == .adjacent, then: {
                         $0.textFieldStyle(.roundedBorder).controlSize(.large)
-                    }
-                    .if(fieldPlaceholderPosition != .adjacent) {
+                    }, else: {
                         $0.textFieldStyle(.plain)
-                    }
+                    })
                 #endif
             }
             .background(fieldBackground)

@@ -6,7 +6,7 @@
 import SwiftUI
 
 // swiftlint:disable all
-@available(iOS 16.0, *)
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 public struct SelectPicker<Element: Hashable, Content, Actions, ContentUnavailable: View>: View
     where
     Content: View,
@@ -42,14 +42,15 @@ public struct SelectPicker<Element: Hashable, Content, Actions, ContentUnavailab
     }
 
     public var body: some View {
-        Page(title) {
+        LayoutView(title ?? "") {
             if data.isEmpty, let contentUnavailable {
                 contentUnavailable
             } else {
                 pageContent(data, selectStyle: selectStyle)
             }
+        } background: {
+            Color.backgroundSecondary
         }
-        .backgroundSecondary()
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button {
@@ -131,7 +132,7 @@ public struct SelectPicker<Element: Hashable, Content, Actions, ContentUnavailab
     }
 }
 
-@available(iOS 16.0, *)
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 public extension SelectPicker where ContentUnavailable == Never {
     init(
         _ title: String? = nil,
@@ -149,7 +150,7 @@ public extension SelectPicker where ContentUnavailable == Never {
     }
 }
 
-@available(iOS 16.0, *)
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 public extension SelectPicker where Actions == Never {
     init(
         _ title: String? = nil,
@@ -168,7 +169,7 @@ public extension SelectPicker where Actions == Never {
     }
 }
 
-@available(iOS 16.0, *)
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 public extension SelectPicker where ContentUnavailable == Never, Actions == Never {
     init(
         _ title: String? = nil,
