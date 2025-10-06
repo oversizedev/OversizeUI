@@ -27,11 +27,6 @@ public struct RoundedRectangleCorner: Shape {
         self.radius = radius
         self.corners = corners
     }
-
-    public init(radius: Radius, corners: RectCorner) {
-        self.radius = radius.rawValue
-        self.corners = corners
-    }
     #endif
 
     public func path(in rect: CGRect) -> Path {

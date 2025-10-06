@@ -85,7 +85,7 @@ public struct SelectPicker<Element: Hashable, Content, Actions, ContentUnavailab
                 wheelList(data)
             }
             #else
-            EmptyView()
+            rowsList(data)
             #endif
         }
     }

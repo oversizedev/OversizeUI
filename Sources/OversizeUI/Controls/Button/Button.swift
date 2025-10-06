@@ -123,6 +123,7 @@ public struct OversizeButtonStyle: ButtonStyle {
                 .padding(.vertical, verticalPadding)
                 .frame(maxWidth: maxWidth)
                 .background(background(for: configuration.role))
+                .glassEffect(.clear.interactive())
                 .overlay(loadingView(for: configuration.role))
         } else {
             configuration.label
@@ -141,10 +142,10 @@ public struct OversizeButtonStyle: ButtonStyle {
 
     @ViewBuilder
     private func background(for role: ButtonRole?) -> some View {
-        if #available(iOS 26.0, *) {
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
             if type != .quaternary {
                 Capsule()
-                    .glassEffect(.regular.tint(backgroundColor(for: role)).interactive())
+                    .fill(backgroundColor(for: role).opacity(backgroundOpacity))
             }
         } else {
             if type != .quaternary {

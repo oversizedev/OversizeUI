@@ -106,7 +106,7 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
             return .init(.xSmall)
         case .overInput:
             #if os(macOS)
-            return .init(xSmall)
+            return .init(.xSmall)
             #else
             return .init(.small)
             #endif
