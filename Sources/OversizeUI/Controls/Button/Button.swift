@@ -122,8 +122,15 @@ public struct OversizeButtonStyle: ButtonStyle {
                 .padding(.horizontal, horizontalPadding)
                 .padding(.vertical, verticalPadding)
                 .frame(maxWidth: maxWidth)
-                .background(background(for: configuration.role))
-                .glassEffect(.clear.interactive())
+                .if(type != .quaternary, then: {
+                    $0
+                        .background(background(for: configuration.role))
+                        .glassEffect(.clear.interactive())
+                }, else: {
+                    $0
+                        .scaleEffect(configuration.isPressed ? 1.15 : 1)
+                        .animation(.spring(response: 0.3, dampingFraction: 0.6), value: configuration.isPressed)
+                })
                 .overlay(loadingView(for: configuration.role))
         } else {
             configuration.label
@@ -143,10 +150,9 @@ public struct OversizeButtonStyle: ButtonStyle {
     @ViewBuilder
     private func background(for role: ButtonRole?) -> some View {
         if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
-            if type != .quaternary {
-                Capsule()
-                    .fill(backgroundColor(for: role).opacity(backgroundOpacity))
-            }
+            Capsule()
+                .fill(backgroundColor(for: role).opacity(backgroundOpacity))
+
         } else {
             if type != .quaternary {
                 switch controlBorderShape {
