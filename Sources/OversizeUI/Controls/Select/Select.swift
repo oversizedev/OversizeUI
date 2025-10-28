@@ -125,9 +125,11 @@ public struct Select<Element: Equatable, Content, Selection, Actions, ContentUna
             .toolbarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
+                    Button("Cancel", systemImage: "xmark") {
                         showModal = false
                     }
+                    .labelStyle(.toolbar)
+                    .buttonStyle(.toolbarSecondary)
                 }
 
                 ToolbarItem(placement: .confirmationAction) {

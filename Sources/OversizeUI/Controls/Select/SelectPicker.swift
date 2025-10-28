@@ -53,11 +53,10 @@ public struct SelectPicker<Element: Hashable, Content, Actions, ContentUnavailab
         }
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
-                Button {
+                Button("Cancel", systemImage: "xmark") {
                     dismiss()
-                } label: {
-                    Image.Base.close.icon()
                 }
+                .labelStyle(.toolbar)
             }
 
             ToolbarItem(placement: .confirmationAction) {

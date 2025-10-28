@@ -31,6 +31,21 @@ public struct ToolbarProminentStyle: PrimitiveButtonStyle {
     }
 }
 
+public struct ToolbarSecondaryStyle: PrimitiveButtonStyle {
+    public func makeBody(configuration: Configuration) -> some View {
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+            Button(configuration)
+                .tint(Color.onSurfacePrimary)
+        } else {
+            Button(configuration)
+        }
+    }
+}
+
 public extension PrimitiveButtonStyle where Self == ToolbarProminentStyle {
     static var toolbarPrimary: Self { .init() }
+}
+
+public extension PrimitiveButtonStyle where Self == ToolbarSecondaryStyle {
+    static var toolbarSecondary: Self { .init() }
 }
