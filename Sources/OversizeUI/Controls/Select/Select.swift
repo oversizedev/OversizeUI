@@ -116,7 +116,7 @@ public struct Select<Element: Equatable, Content, Selection, Actions, ContentUna
                                     selectedIndex == index
                                 )
                                 .headline()
-                                .onSurfacePrimaryForeground()
+                                .onSurfacePrimary()
                             }
                         }
                     }

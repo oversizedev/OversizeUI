@@ -82,7 +82,7 @@ public struct IconPicker: View {
         } label: {
             HStack(spacing: .xxSmall) {
                 Text(label)
-                    .onSurfacePrimaryForeground()
+                    .onSurfacePrimary()
 
                 Spacer()
                 if let image = selection {

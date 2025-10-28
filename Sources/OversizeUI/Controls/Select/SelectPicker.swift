@@ -114,7 +114,7 @@ public struct SelectPicker<Element: Hashable, Content, Actions, ContentUnavailab
                         selectedIndex == index
                     )
                     .headline()
-                    .onSurfacePrimaryForeground()
+                    .onSurfacePrimary()
                 }
             }
         }

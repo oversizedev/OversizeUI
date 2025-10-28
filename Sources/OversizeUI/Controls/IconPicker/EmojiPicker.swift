@@ -82,7 +82,7 @@ public struct EmojiPicker: View {
         } label: {
             HStack(spacing: .xxSmall) {
                 Text(label)
-                    .onSurfacePrimaryForeground()
+                    .onSurfacePrimary()
 
                 Spacer()
 

@@ -1085,11 +1085,11 @@ struct SeartchTextFieldStyle: TextFieldStyle {
         HStack(spacing: .xxSmall) {
             Image.Base.search
                 .renderingMode(.template)
-                .onSurfaceTertiaryForeground()
+                .onSurfaceTertiary()
 
             configuration
         }
-        .onSurfacePrimaryForeground()
+        .onSurfacePrimary()
         .callout(.semibold)
         .padding(.horizontal, 12)
         .padding(.vertical, .xSmall)
