@@ -6,7 +6,7 @@
 import SwiftUI
 
 private struct ControlRadiusKey: EnvironmentKey {
-    public static let defaultValue: CGFloat = .xSmall
+    static let defaultValue: CGFloat = .xSmall
 }
 
 public extension EnvironmentValues {

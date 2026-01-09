@@ -196,7 +196,12 @@ public struct SectionView<Content: View>: View {
     private var surfaceVerticalPaddingSize: CGFloat {
         switch style {
         case .default:
-            .small
+            switch titlePosition {
+            case .inside:
+                .xxSmall
+            case .outside:
+                .small
+            }
         case .smallIndent, .edgeToEdge:
             2
         }

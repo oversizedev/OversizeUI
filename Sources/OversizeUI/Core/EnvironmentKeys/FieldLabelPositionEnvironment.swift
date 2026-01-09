@@ -10,7 +10,7 @@ public enum FieldLabelPosition: Sendable {
 }
 
 private struct FieldLabelPositionKey: EnvironmentKey {
-    public static let defaultValue: FieldLabelPosition = .default
+    static let defaultValue: FieldLabelPosition = .default
 }
 
 public extension EnvironmentValues {

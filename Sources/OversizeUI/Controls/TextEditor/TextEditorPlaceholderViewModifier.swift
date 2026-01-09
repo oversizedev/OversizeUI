@@ -33,7 +33,7 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
             content
                 .padding(padding)
                 .headline(.medium)
-                .onSurfacePrimaryForeground()
+                .onSurfacePrimary()
                 .background {
                     ZStack {
                         RoundedRectangle(
@@ -120,7 +120,7 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
             if text.isEmpty {
                 Text(placeholder)
                     .subheadline()
-                    .onSurfaceTertiaryForeground()
+                    .onSurfaceTertiary()
                     .opacity(0.7)
                     .padding(labelPadding)
             }
@@ -130,7 +130,7 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
             Text(placeholder)
                 .font(text.isEmpty ? .headline : .subheadline)
                 .fontWeight(text.isEmpty ? .medium : .semibold)
-                .onSurfaceTertiaryForeground()
+                .onSurfaceTertiary()
                 .opacity(0.7)
                 .padding(labelPadding)
                 .offset(y: text.isEmpty ? 0 : -6)

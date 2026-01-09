@@ -27,6 +27,7 @@ public struct CoverLayoutView<
     private let coverHeight: CGFloat
     private let onScroll: ScrollAction?
     var coverStyle: CoverNavigationType = .static
+    var contentOffset: CGFloat = 0
     var contentCornerRadius: CGFloat = 0
 
     @State private var scrollOffset: CGPoint = .zero
@@ -43,6 +44,7 @@ public struct CoverLayoutView<
                     content
                         .background {
                             background
+                                .padding(.top, contentOffset)
                                 .ignoresSafeArea()
                                 .cornerRadius(
                                     contentCornerRadius,

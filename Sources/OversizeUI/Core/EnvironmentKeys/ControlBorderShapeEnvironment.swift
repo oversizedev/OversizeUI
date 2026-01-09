@@ -11,7 +11,7 @@ public enum ControlBorderShape: Sendable {
 }
 
 private struct ControlBorderShapeKey: EnvironmentKey {
-    public static let defaultValue: ControlBorderShape = .roundedRectangle(radius: .xSmall)
+    static let defaultValue: ControlBorderShape = .roundedRectangle(radius: .xSmall)
 }
 
 public extension EnvironmentValues {

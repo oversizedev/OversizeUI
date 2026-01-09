@@ -6,7 +6,7 @@
 import SwiftUI
 
 private struct FieldPositionKey: EnvironmentKey {
-    public static let defaultValue: VerticalAlignment? = nil
+    static let defaultValue: VerticalAlignment? = nil
 }
 
 public extension EnvironmentValues {

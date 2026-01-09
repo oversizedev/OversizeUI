@@ -58,7 +58,7 @@ public struct DateField: View {
                         Text(label)
                             .font(.subheadline)
                             .fontWeight(.semibold)
-                            .onSurfaceTertiaryForeground()
+                            .onSurfaceTertiary()
                     }
 
                     HStack {

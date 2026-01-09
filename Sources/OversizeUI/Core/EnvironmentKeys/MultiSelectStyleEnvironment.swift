@@ -10,7 +10,7 @@ public enum MultiSelectStyle: Sendable {
 }
 
 private struct MultiSelectStyleKey: EnvironmentKey {
-    public static let defaultValue: MultiSelectStyle = .default
+    static let defaultValue: MultiSelectStyle = .default
 }
 
 public extension EnvironmentValues {

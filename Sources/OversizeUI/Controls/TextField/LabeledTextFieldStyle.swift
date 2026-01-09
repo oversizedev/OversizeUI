@@ -215,7 +215,7 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
             if isFocused {
                 Text(placeholder)
                     .subheadline()
-                    .onSurfaceTertiaryForeground()
+                    .onSurfaceTertiary()
                     .opacity(0.7)
                 #if os(macOS)
                     .padding(.xSmall)
@@ -229,7 +229,7 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
             Text(placeholder)
                 .font(text.isEmpty ? .headline : .subheadline)
                 .fontWeight(text.isEmpty ? .medium : .semibold)
-                .onSurfaceTertiaryForeground()
+                .onSurfaceTertiary()
             #if os(macOS)
                 .padding(.xSmall)
                 .offset(y: text.isEmpty ? 0 : -10)

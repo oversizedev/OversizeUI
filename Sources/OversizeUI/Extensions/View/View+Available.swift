@@ -19,7 +19,7 @@ public extension View {
     @ViewBuilder
     func scrollContentBackground(_ visibility: Visibility) -> some View {
         if #available(iOS 16, macOS 13.0, watchOS 9.0, *) {
-            self.scrollContentBackground(visibility)
+            scrollContentBackground(visibility)
         } else {
             self
         }
@@ -29,7 +29,7 @@ public extension View {
     @ViewBuilder
     func presentationDragIndicator(_ visibility: Visibility) -> some View {
         if #available(iOS 16, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
-            self.presentationDragIndicator(visibility)
+            presentationDragIndicator(visibility)
         } else {
             self
         }
@@ -39,7 +39,7 @@ public extension View {
     @ViewBuilder
     func presentationContentInteraction(_ behavior: PresentationContentInteraction) -> some View {
         if #available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, *) {
-            self.presentationContentInteraction(behavior == .automatic ? .automatic : behavior == .resizes ? .resizes : .scrolls)
+            presentationContentInteraction(behavior == .automatic ? .automatic : behavior == .resizes ? .resizes : .scrolls)
         } else {
             self
         }
@@ -49,7 +49,7 @@ public extension View {
     @ViewBuilder
     func presentationCompactAdaptation(_ adaptation: PresentationAdaptation) -> some View {
         if #available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, *) {
-            self.presentationCompactAdaptation(
+            presentationCompactAdaptation(
                 adaptation == .automatic ? .automatic : adaptation == .none ? .none : adaptation == .popover ? .popover : adaptation == .sheet ? .sheet : .fullScreenCover)
         } else {
             self
@@ -60,9 +60,26 @@ public extension View {
     @ViewBuilder
     func scrollDisabled(_ disabled: Bool) -> some View {
         if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
-            self.scrollDisabled(disabled)
+            scrollDisabled(disabled)
         } else {
             self
+        }
+    }
+
+    @ViewBuilder
+    func safeAreaBarTop(alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil, @ViewBuilder content: @escaping () -> some View) -> some View {
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+            safeAreaBar(edge: .top, alignment: alignment, spacing: spacing, content: content)
+            safeAreaInset(edge: .top, alignment: alignment, spacing: spacing, content: content)
+        }
+    }
+
+    @ViewBuilder
+    func safeAreaBarBottom(alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil, @ViewBuilder content: @escaping () -> some View) -> some View {
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+            safeAreaBar(edge: .bottom, alignment: alignment, spacing: spacing, content: content)
+        } else {
+            safeAreaInset(edge: .bottom, alignment: alignment, spacing: spacing, content: content)
         }
     }
 }

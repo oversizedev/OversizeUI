@@ -114,7 +114,7 @@ public struct OversizeButtonStyle: ButtonStyle {
     }
 
     public func makeBody(configuration: Self.Configuration) -> some View {
-        if #available(iOS 26.0, *) {
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
             configuration.label
                 .body(.semibold)
                 .opacity(isLoading ? 0 : 1)

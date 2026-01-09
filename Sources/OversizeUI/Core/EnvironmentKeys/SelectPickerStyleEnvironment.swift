@@ -13,7 +13,7 @@ public enum SelectStyle: Sendable {
 }
 
 private struct SelectStyleKey: EnvironmentKey {
-    public static let defaultValue: SelectStyle = .default
+    static let defaultValue: SelectStyle = .default
 }
 
 public extension EnvironmentValues {

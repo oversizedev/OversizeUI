@@ -13,7 +13,7 @@ public extension View {
         }
         #else
         if #available(iOS 17, macOS 14.0, *) {
-            return self.onChange(of: value) { _, newValue in
+            return onChange(of: value) { _, newValue in
                 action(newValue)
             }
         } else {

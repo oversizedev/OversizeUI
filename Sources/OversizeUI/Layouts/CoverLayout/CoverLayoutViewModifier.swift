@@ -19,9 +19,9 @@ public extension CoverLayoutView {
         return control
     }
 
-    func contentCornerRadius(_ radius: Space) -> Self {
+    func contentOffset(_ offset: CGFloat) -> Self {
         var control = self
-        control.contentCornerRadius = radius.rawValue
+        control.contentOffset = offset
         return control
     }
 }

@@ -6,7 +6,7 @@
 import SwiftUI
 
 private struct PortraitStateKey: EnvironmentKey {
-    public static let defaultValue: Bool = false
+    static let defaultValue: Bool = false
 }
 
 public extension EnvironmentValues {

@@ -33,3 +33,15 @@ public extension View {
         }
     }
 }
+
+public extension View {
+
+    @ViewBuilder
+    func ifUnavailable26(@ViewBuilder _ modifications: (Self) -> some View) -> some View {
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+            self
+        } else {
+            modifications(self)
+        }
+    }
+}
