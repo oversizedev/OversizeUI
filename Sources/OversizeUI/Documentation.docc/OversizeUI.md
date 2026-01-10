@@ -8,12 +8,12 @@ OversizeUI is a comprehensive SwiftUI component library that provides production
 
 ### Key Features
 
-- **🎨 Complete Design System**: Cohesive visual language with customizable themes
-- **♿ Accessibility First**: WCAG 2.1 compliant with built-in accessibility features  
-- **🌙 Dark Mode Support**: Native dark theme support with automatic color adaptation
-- **📱 Multi-Platform**: iOS, macOS, tvOS, watchOS, and visionOS support
-- **🎛️ Highly Customizable**: Flexible theming system with extensive customization options
-- **📚 Well Documented**: Comprehensive documentation with live examples
+- **Complete Design System**: Cohesive visual language with customizable themes
+- **Accessibility First**: WCAG 2.1 compliant with built-in accessibility features  
+- **Dark Mode Support**: Native dark theme support with automatic color adaptation
+- **Multi-Platform**: iOS, macOS, tvOS, watchOS, and visionOS support
+- **Highly Customizable**: Flexible theming system with extensive customization options
+- **Well Documented**: Comprehensive documentation with live examples
 
 ### Quick Start
 

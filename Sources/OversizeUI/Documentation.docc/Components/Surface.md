@@ -485,19 +485,19 @@ Choose backgrounds that support content hierarchy:
 
 #### Do's
 
-- ✅ Use consistent elevation levels throughout your app
-- ✅ Ensure sufficient contrast between surface and content
-- ✅ Group related content within surfaces
-- ✅ Use elevation to guide user attention
-- ✅ Test surfaces in both light and dark modes
+- Use consistent elevation levels throughout your app
+- Ensure sufficient contrast between surface and content
+- Group related content within surfaces
+- Use elevation to guide user attention
+- Test surfaces in both light and dark modes
 
 #### Don'ts
 
-- ❌ Don't overuse high elevation levels
-- ❌ Don't nest surfaces with the same elevation
-- ❌ Don't use surfaces for purely decorative purposes
-- ❌ Don't ignore touch target sizes on interactive surfaces
-- ❌ Don't use elevation as the only visual separator
+- Don't overuse high elevation levels
+- Don't nest surfaces with the same elevation
+- Don't use surfaces for purely decorative purposes
+- Don't ignore touch target sizes on interactive surfaces
+- Don't use elevation as the only visual separator
 
 ## API Reference
 

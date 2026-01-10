@@ -236,19 +236,19 @@ Avatars automatically scale with Dynamic Type settings to ensure legibility for 
 
 ### Do's
 
-- ✅ Use consistent avatar sizes within the same context
-- ✅ Provide fallback initials for all users
-- ✅ Use appropriate contrast for initials on background colors
-- ✅ Include meaningful accessibility labels for profile images
-- ✅ Consider using stroke borders to improve visual hierarchy
+- Use consistent avatar sizes within the same context
+- Provide fallback initials for all users
+- Use appropriate contrast for initials on background colors
+- Include meaningful accessibility labels for profile images
+- Consider using stroke borders to improve visual hierarchy
 
 ### Don'ts
 
-- ❌ Don't use avatars for non-user entities (use icons instead)
-- ❌ Don't make avatars too small to be recognizable
-- ❌ Don't use low-contrast color combinations
-- ❌ Don't rely solely on color to convey information
-- ❌ Don't forget to handle loading states for remote images
+- Don't use avatars for non-user entities (use icons instead)
+- Don't make avatars too small to be recognizable
+- Don't use low-contrast color combinations
+- Don't rely solely on color to convey information
+- Don't forget to handle loading states for remote images
 
 ## API Reference
 

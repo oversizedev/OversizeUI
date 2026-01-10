@@ -13,7 +13,7 @@ OversizeUI is architected with SwiftUI's declarative paradigm in mind, providing
 OversizeUI favors composition patterns that make components more flexible and testable:
 
 ```swift
-// ✅ Composition - Flexible and reusable
+// Composition - Flexible and reusable
 struct ProfileCard: View {
     let user: User
     
@@ -36,7 +36,7 @@ struct ProfileCard: View {
     }
 }
 
-// ❌ Inheritance - Less flexible
+// Inheritance - Less flexible
 class CustomButton: OversizeButton {
     // Difficult to extend and maintain
 }
@@ -47,7 +47,7 @@ class CustomButton: OversizeButton {
 Each component has a clear, focused purpose:
 
 ```swift
-// ✅ Single responsibility
+// Single responsibility
 struct UserAvatar: View {
     let user: User
     
@@ -68,7 +68,7 @@ struct UserInfo: View {
     }
 }
 
-// ✅ Composed from focused components
+// Composed from focused components
 struct UserRow: View {
     let user: User
     
@@ -440,12 +440,12 @@ class ListViewModel: ObservableObject {
     @Published var items: [Item] = []
     
     func updateItem(_ item: Item) {
-        // ✅ Efficient - only updates specific item
+        // Efficient - only updates specific item
         if let index = items.firstIndex(where: { $0.id == item.id }) {
             items[index] = item
         }
         
-        // ❌ Inefficient - triggers full list update
+        // Inefficient - triggers full list update
         // items = items.map { $0.id == item.id ? item : $0 }
     }
 }
@@ -494,17 +494,17 @@ Sources/
 ### Naming Conventions
 
 ```swift
-// ✅ Clear, descriptive names
+// Clear, descriptive names
 struct UserProfileCard: View { }
 struct ProductListRow: View { }
 struct SettingsToggleRow: View { }
 
-// ✅ Consistent modifier naming
+// Consistent modifier naming
 func primaryAction() -> some View
 func cardStyle() -> some View
 func destructiveAction() -> some View
 
-// ✅ Semantic environment values
+// Semantic environment values
 @Environment(\.theme) var theme
 @Environment(\.isLoading) var isLoading
 ```

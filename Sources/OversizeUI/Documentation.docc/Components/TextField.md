@@ -394,20 +394,20 @@ TextField("Credit Card Number", text: $cardNumber)
 
 ### Do's
 
-- ✅ Use clear, descriptive placeholder text
-- ✅ Provide helpful validation messages
-- ✅ Group related fields logically
-- ✅ Use appropriate keyboard types
-- ✅ Show field requirements upfront
-- ✅ Provide real-time validation feedback
+- Use clear, descriptive placeholder text
+- Provide helpful validation messages
+- Group related fields logically
+- Use appropriate keyboard types
+- Show field requirements upfront
+- Provide real-time validation feedback
 
 ### Don'ts
 
-- ❌ Don't use placeholder text as labels
-- ❌ Don't show error messages before user interaction
-- ❌ Don't make required fields unclear
-- ❌ Don't use generic error messages
-- ❌ Don't forget to handle empty states
+- Don't use placeholder text as labels
+- Don't show error messages before user interaction
+- Don't make required fields unclear
+- Don't use generic error messages
+- Don't forget to handle empty states
 
 ## API Reference
 
