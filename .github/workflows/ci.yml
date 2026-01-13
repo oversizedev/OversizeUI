@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         destination:
-          - platform=iOS Simulator,name=iPhone 17,OS=26.2
+          - platform=iOS Simulator,name=iPhone 17 Pro,OS=26.2
           - platform=watchOS Simulator,name=Apple Watch SE 3 (40mm),OS=26.2
           - platform=tvOS Simulator,name=Apple TV 4K (3rd generation) (at 1080p),OS=26.2
           - platform=macOS,arch=arm64
