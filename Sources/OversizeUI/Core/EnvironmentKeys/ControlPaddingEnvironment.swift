@@ -88,7 +88,7 @@ public struct ControlMargin: Sendable {
 }
 
 private struct ControlMarginKey: EnvironmentKey {
-    public static let defaultValue: ControlMargin = .init(.medium)
+    static let defaultValue: ControlMargin = .init(.medium)
 }
 
 public extension EnvironmentValues {

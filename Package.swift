@@ -1,4 +1,4 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.1
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 // swiftlint:disable all
 
@@ -20,11 +20,21 @@ let package = Package(
             targets: ["OversizeUI"]
         ),
     ],
+    /*
+         dependencies: [
+            .package(url: "https://github.com/SwiftGen/SwiftGenPlugin", .upToNextMajor(from: "6.6.2")),
+        ],
+        */
     targets: [
         .target(
             name: "OversizeUI",
             dependencies: [],
             resources: [.process("Resources")]
+            /*
+              plugins: [
+                 .plugin(name: "SwiftGenPlugin", package: "SwiftGenPlugin"),
+             ]
+             */
         ),
         .testTarget(name: "OversizeUITests", dependencies: ["OversizeUI"]),
     ]

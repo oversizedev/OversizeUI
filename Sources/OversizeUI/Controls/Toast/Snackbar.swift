@@ -60,7 +60,7 @@ public struct Snackbar<Label, Actions>: View where Label: View, Actions: View {
         .padding(.vertical, .xSmall)
         .background(
             RoundedRectangle(
-                cornerRadius: .large,
+                cornerRadius: .small,
                 style: .continuous
             )
             .fill(Color.primary)

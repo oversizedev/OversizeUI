@@ -229,7 +229,7 @@ extension Color {
 All color combinations meet accessibility standards:
 
 ```swift
-// ✅ High contrast combinations
+// High contrast combinations
 Text("Primary text")
     .foregroundColor(.onSurfacePrimary) // 21:1 contrast ratio
 
@@ -239,7 +239,7 @@ Text("Secondary text")
 Text("Tertiary text")
     .foregroundColor(.onSurfaceTertiary) // 4.5:1 contrast ratio
 
-// ❌ Avoid low contrast
+// Avoid low contrast
 Text("Hard to read")
     .foregroundColor(.onSurfaceDisabled) // Only for disabled states
 ```
@@ -249,7 +249,7 @@ Text("Hard to read")
 Never rely solely on color to convey information:
 
 ```swift
-// ✅ Good: Color + icon + text
+// Good: Color + icon + text
 HStack {
     Icon(.checkmark)
         .foregroundColor(.success)
@@ -257,7 +257,7 @@ HStack {
         .foregroundColor(.success)
 }
 
-// ✅ Good: Color + shape + text  
+// Good: Color + shape + text  
 HStack {
     Circle()
         .fill(.error)
@@ -265,7 +265,7 @@ HStack {
     Text("Error occurred")
 }
 
-// ❌ Bad: Color only
+// Bad: Color only
 Text("Important")
     .foregroundColor(.error) // Color alone doesn't convey importance
 ```
@@ -463,21 +463,21 @@ struct AlertBanner: View {
 
 ### Do's
 
-- ✅ Use semantic color names for maintainability
-- ✅ Test colors in both light and dark modes
-- ✅ Ensure sufficient contrast for all text
-- ✅ Use color consistently throughout your app
-- ✅ Provide alternative indicators beyond color
-- ✅ Consider color blindness when designing
+- Use semantic color names for maintainability
+- Test colors in both light and dark modes
+- Ensure sufficient contrast for all text
+- Use color consistently throughout your app
+- Provide alternative indicators beyond color
+- Consider color blindness when designing
 
 ### Don'ts
 
-- ❌ Don't hardcode color values in components
-- ❌ Don't use pure black or white for text
-- ❌ Don't rely solely on color to convey meaning
-- ❌ Don't ignore accessibility contrast requirements
-- ❌ Don't use too many accent colors
-- ❌ Don't forget to test with high contrast settings
+- Don't hardcode color values in components
+- Don't use pure black or white for text
+- Don't rely solely on color to convey meaning
+- Don't ignore accessibility contrast requirements
+- Don't use too many accent colors
+- Don't forget to test with high contrast settings
 
 ## API Reference
 

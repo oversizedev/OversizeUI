@@ -561,20 +561,20 @@ extension ThemeSettings {
 
 ### Do's
 
-- ✅ Test themes with accessibility tools
-- ✅ Provide light and dark variants for custom colors
-- ✅ Use semantic naming for theme properties
-- ✅ Validate contrast ratios for accessibility compliance
-- ✅ Document theme usage and guidelines
-- ✅ Test themes across all supported platforms
+- Test themes with accessibility tools
+- Provide light and dark variants for custom colors
+- Use semantic naming for theme properties
+- Validate contrast ratios for accessibility compliance
+- Document theme usage and guidelines
+- Test themes across all supported platforms
 
 ### Don'ts
 
-- ❌ Don't hardcode colors outside the theme system
-- ❌ Don't ignore platform conventions
-- ❌ Don't sacrifice accessibility for visual appeal
-- ❌ Don't create too many theme variations
-- ❌ Don't forget to test edge cases (large text, high contrast)
+- Don't hardcode colors outside the theme system
+- Don't ignore platform conventions
+- Don't sacrifice accessibility for visual appeal
+- Don't create too many theme variations
+- Don't forget to test edge cases (large text, high contrast)
 
 ## See Also
 

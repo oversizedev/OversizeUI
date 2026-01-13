@@ -160,7 +160,7 @@ public struct BarButton: View {
         case let .image(image, _):
             image
                 .renderingMode(.template)
-                .onSurfacePrimaryForeground()
+                .onSurfacePrimary()
         case let .icon(icon, _):
             IconDeprecated(icon, color: .onSurfaceSecondary)
         }

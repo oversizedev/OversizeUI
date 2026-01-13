@@ -22,18 +22,9 @@ public struct RoundedRectangleCorner: Shape {
         self.corners = corners
     }
 
-    public init(radius: Radius, corners: UIRectCorner) {
-        self.radius = radius.rawValue
-        self.corners = corners
-    }
     #else
     public init(radius: CGFloat, corners: RectCorner) {
         self.radius = radius
-        self.corners = corners
-    }
-
-    public init(radius: Radius, corners: RectCorner) {
-        self.radius = radius.rawValue
         self.corners = corners
     }
     #endif

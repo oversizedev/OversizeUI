@@ -26,10 +26,10 @@ public struct FieldButtonStyle: ButtonStyle {
         switch fieldPosition {
         case .top, .bottom, .center:
             #if os(iOS)
-            RoundedRectangleCorner(radius: Radius.medium, corners: backgroundShapeCorners)
+            RoundedRectangleCorner(radius: .xSmall, corners: backgroundShapeCorners)
                 .fill(isPressed ? Color.surfaceTertiary : Color.surfaceSecondary)
                 .overlay(
-                    RoundedRectangleCorner(radius: Radius.medium, corners: backgroundShapeCorners)
+                    RoundedRectangleCorner(radius: .xSmall, corners: backgroundShapeCorners)
                         .stroke(
                             theme.borderTextFields
                                 ? Color.border
@@ -38,11 +38,11 @@ public struct FieldButtonStyle: ButtonStyle {
                         )
                 )
             #else
-            RoundedRectangle(cornerRadius: Radius.medium, style: .continuous)
+            RoundedRectangle(cornerRadius: .xSmall, style: .continuous)
                 .fill(isPressed ? Color.surfaceTertiary : Color.surfaceSecondary)
                 .overlay(
                     RoundedRectangle(
-                        cornerRadius: Radius.medium,
+                        cornerRadius: .xSmall,
                         style: .continuous
                     )
                     .stroke(
@@ -55,11 +55,11 @@ public struct FieldButtonStyle: ButtonStyle {
             #endif
 
         default:
-            RoundedRectangle(cornerRadius: Radius.medium, style: .continuous)
+            RoundedRectangle(cornerRadius: .xSmall, style: .continuous)
                 .fill(isPressed ? Color.surfaceTertiary : Color.surfaceSecondary)
                 .overlay(
                     RoundedRectangle(
-                        cornerRadius: Radius.medium,
+                        cornerRadius: .xSmall,
                         style: .continuous
                     )
                     .stroke(

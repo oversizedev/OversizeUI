@@ -375,19 +375,19 @@ Text("Serif Design")
 
 ### Do's
 
-- ✅ Use semantic typography styles for proper hierarchy
-- ✅ Ensure sufficient color contrast (4.5:1 minimum)
-- ✅ Test with various Dynamic Type sizes
-- ✅ Use meaningful text that can be read by VoiceOver
-- ✅ Limit line length for better readability (45-75 characters)
+- Use semantic typography styles for proper hierarchy
+- Ensure sufficient color contrast (4.5:1 minimum)
+- Test with various Dynamic Type sizes
+- Use meaningful text that can be read by VoiceOver
+- Limit line length for better readability (45-75 characters)
 
 ### Don'ts
 
-- ❌ Don't use typography purely for visual effect
-- ❌ Don't disable Dynamic Type without good reason
-- ❌ Don't rely solely on font size to convey information
-- ❌ Don't use too many different typography styles in one view
-- ❌ Don't forget to test with larger accessibility font sizes
+- Don't use typography purely for visual effect
+- Don't disable Dynamic Type without good reason
+- Don't rely solely on font size to convey information
+- Don't use too many different typography styles in one view
+- Don't forget to test with larger accessibility font sizes
 
 ## Typography Hierarchy Guidelines
 

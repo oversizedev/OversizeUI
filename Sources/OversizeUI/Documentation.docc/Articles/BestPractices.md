@@ -11,49 +11,49 @@ This guide provides best practices, patterns, and recommendations for building h
 ### Button Best Practices
 
 ```swift
-// ✅ Use semantic button styles
+// Use semantic button styles
 Button("Save Document") { save() }
     .buttonStyle(.primary) // Clear primary action
 
 Button("Cancel") { cancel() }
     .buttonStyle(.tertiary) // Secondary action
 
-// ✅ Provide clear, action-oriented labels
+// Provide clear, action-oriented labels
 Button("Delete Photo") { deletePhoto() }
     .buttonStyle(.primary)
     .accent(.red)
 
-// ❌ Avoid vague labels
+// Avoid vague labels
 Button("OK") { } // What does OK do?
 ```
 
 ### TextField Best Practices
 
 ```swift
-// ✅ Provide helpful placeholder text
+// Provide helpful placeholder text
 TextField("Enter your email address", text: $email)
     .keyboardType(.emailAddress)
     .autocapitalization(.none)
 
-// ✅ Use validation appropriately
+// Use validation appropriately
 TextField("Password", text: $password)
     .fieldHelper(passwordStrength, style: $helperStyle)
     .onChange(of: password) { validatePassword($0) }
 
-// ❌ Don't use placeholder as label
+// Don't use placeholder as label
 TextField("Email", text: $email) // Placeholder disappears when typing
 ```
 
 ### Layout Best Practices
 
 ```swift
-// ✅ Use consistent spacing
+// Use consistent spacing
 VStack(spacing: .medium) { // Consistent spacing token
     Text("Title")
     Text("Content")
 }
 
-// ✅ Group related content
+// Group related content
 SectionView("Account Settings") {
     VStack(spacing: .small) {
         Row("Profile")
@@ -62,7 +62,7 @@ SectionView("Account Settings") {
     }
 }
 
-// ❌ Inconsistent spacing
+// Inconsistent spacing
 VStack(spacing: 17) { // Arbitrary value
     Text("Title")
     Text("Content")
@@ -74,7 +74,7 @@ VStack(spacing: 17) { // Arbitrary value
 ### Efficient List Rendering
 
 ```swift
-// ✅ Use LazyVStack for large lists
+// Use LazyVStack for large lists
 LazyVStack {
     ForEach(items) { item in
         ItemRow(item: item)
@@ -84,7 +84,7 @@ LazyVStack {
     }
 }
 
-// ✅ Minimize state updates
+// Minimize state updates
 class ListViewModel: ObservableObject {
     @Published var items: [Item] = []
     
@@ -99,7 +99,7 @@ class ListViewModel: ObservableObject {
 ### Memory Management
 
 ```swift
-// ✅ Clean up resources
+// Clean up resources
 struct AsyncImageView: View {
     @StateObject private var loader = ImageLoader()
     
@@ -117,7 +117,7 @@ struct AsyncImageView: View {
 ### Local State for Simple UI
 
 ```swift
-// ✅ Use @State for simple, local state
+// Use @State for simple, local state
 struct ToggleView: View {
     @State private var isEnabled = false
     
@@ -130,7 +130,7 @@ struct ToggleView: View {
 ### ObservableObject for Complex State
 
 ```swift
-// ✅ Use ObservableObject for complex state
+// Use ObservableObject for complex state
 class UserProfileViewModel: ObservableObject {
     @Published var user: User
     @Published var isLoading = false
@@ -154,7 +154,7 @@ class UserProfileViewModel: ObservableObject {
 ### Semantic Structure
 
 ```swift
-// ✅ Use proper heading hierarchy
+// Use proper heading hierarchy
 VStack(alignment: .leading) {
     Text("Main Title")
         .title()
@@ -172,7 +172,7 @@ VStack(alignment: .leading) {
 ### Meaningful Labels
 
 ```swift
-// ✅ Provide descriptive accessibility labels
+// Provide descriptive accessibility labels
 Button {
     toggleFavorite()
 } label: {
@@ -181,7 +181,7 @@ Button {
 .accessibilityLabel(isFavorite ? "Remove from favorites" : "Add to favorites")
 .accessibilityHint("Double-tap to toggle favorite status")
 
-// ✅ Group related elements
+// Group related elements
 HStack {
     Avatar(firstName: user.firstName, lastName: user.lastName)
     VStack(alignment: .leading) {
@@ -198,7 +198,7 @@ HStack {
 ### User-Friendly Error Messages
 
 ```swift
-// ✅ Provide helpful error messages
+// Provide helpful error messages
 struct ErrorView: View {
     let error: AppError
     let retry: () -> Void
@@ -231,7 +231,7 @@ struct ErrorView: View {
 ### Graceful Degradation
 
 ```swift
-// ✅ Handle loading and error states
+// Handle loading and error states
 struct ContentView: View {
     @StateObject private var viewModel = ContentViewModel()
     
@@ -259,7 +259,7 @@ struct ContentView: View {
 ### Component Testing
 
 ```swift
-// ✅ Test component behavior
+// Test component behavior
 import XCTest
 import SwiftUI
 @testable import OversizeUI
@@ -284,7 +284,7 @@ class ButtonTests: XCTestCase {
 ### Preview Testing
 
 ```swift
-// ✅ Test different states in previews
+// Test different states in previews
 struct ButtonPreviews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: .medium) {
@@ -330,12 +330,12 @@ Sources/MyApp/
 ### Naming Conventions
 
 ```swift
-// ✅ Clear, descriptive names
+// Clear, descriptive names
 struct UserProfileCard: View { }
 struct SettingsToggleRow: View { }
 struct LoadingIndicator: View { }
 
-// ✅ Consistent modifier naming
+// Consistent modifier naming
 extension View {
     func primaryAction() -> some View { }
     func cardStyle() -> some View { }
@@ -348,7 +348,7 @@ extension View {
 ### Loading States
 
 ```swift
-// ✅ Consistent loading pattern
+// Consistent loading pattern
 struct AsyncButton: View {
     @State private var isLoading = false
     let action: () async -> Void
@@ -376,7 +376,7 @@ struct AsyncButton: View {
 ### Navigation Patterns
 
 ```swift
-// ✅ Consistent navigation
+// Consistent navigation
 struct MainNavigationView: View {
     var body: some View {
         TabView {
@@ -398,25 +398,25 @@ struct MainNavigationView: View {
 
 ### Do's
 
-- ✅ Use semantic component styles consistently
-- ✅ Follow accessibility guidelines
-- ✅ Provide meaningful error messages
-- ✅ Test components with different states
-- ✅ Use design system tokens for spacing and colors
-- ✅ Clean up resources when views disappear
-- ✅ Provide descriptive accessibility labels
-- ✅ Use consistent naming conventions
+- Use semantic component styles consistently
+- Follow accessibility guidelines
+- Provide meaningful error messages
+- Test components with different states
+- Use design system tokens for spacing and colors
+- Clean up resources when views disappear
+- Provide descriptive accessibility labels
+- Use consistent naming conventions
 
 ### Don'ts
 
-- ❌ Hardcode colors or spacing values
-- ❌ Ignore accessibility requirements
-- ❌ Use vague button labels or error messages
-- ❌ Forget to handle loading and error states
-- ❌ Skip testing with assistive technologies
-- ❌ Overuse high elevation surfaces
-- ❌ Rely solely on color to convey information
-- ❌ Ignore platform conventions
+- Hardcode colors or spacing values
+- Ignore accessibility requirements
+- Use vague button labels or error messages
+- Forget to handle loading and error states
+- Skip testing with assistive technologies
+- Overuse high elevation surfaces
+- Rely solely on color to convey information
+- Ignore platform conventions
 
 ## See Also
 

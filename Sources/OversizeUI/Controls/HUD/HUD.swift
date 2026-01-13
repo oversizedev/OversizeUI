@@ -8,9 +8,7 @@ import SwiftUI
 public struct HUD<Title, Icon>: View where Title: View, Icon: View {
     @Environment(\.screenSize) var screenSize
 
-    private let text: String?
-    private let title: Title?
-    private let icon: Icon?
+    private let content: HUDContent<Title, Icon>
     private let isAutoHide: Bool
 
     @Binding private var isPresented: Bool
@@ -31,47 +29,12 @@ public struct HUD<Title, Icon>: View where Title: View, Icon: View {
         @ViewBuilder icon: () -> Icon
     ) {
         _isPresented = isPresented
-        text = nil
-        self.title = title()
-        self.icon = icon()
+        content = HUDContent(title: title(), icon: icon())
         isAutoHide = autoHide
     }
 
     public var body: some View {
-        HStack(spacing: .xSmall) {
-            if icon != nil {
-                icon
-            }
-            if let text {
-                Text(text)
-                    .body(.medium)
-                #if os(macOS)
-                    .foregroundColor(Color.onPrimary)
-                #else
-                    .foregroundColor(Color.onSurfacePrimary)
-
-                #endif
-
-            } else if let title {
-                title
-            }
-        }
-        .padding(.leading, icon == nil ? .medium : .small)
-        .padding(.trailing, .medium)
-        .padding(.vertical, .xSmall)
-        #if os(macOS)
-            .background(
-                RoundedRectangle(cornerRadius: .small, style: .continuous)
-                    .foregroundColor(Color.onBackgroundPrimary)
-                    .shadowElevation(.z2)
-            )
-        #else
-            .background(
-                Capsule()
-                    .foregroundColor(Color.surfacePrimary)
-                    .shadowElevation(.z2)
-            )
-        #endif
+        content
             .padding(.small)
             .opacity(opacity)
             .offset(y: offset)
@@ -124,9 +87,7 @@ public extension HUD where Title == EmptyView, Icon == EmptyView {
         isPresented: Binding<Bool>
     ) {
         _isPresented = isPresented
-        self.text = text
-        title = nil
-        icon = nil
+        content = HUDContent(text)
         isAutoHide = autoHide
     }
 }
@@ -139,10 +100,8 @@ public extension HUD where Title == EmptyView {
         @ViewBuilder icon: () -> Icon
     ) {
         _isPresented = isPresented
-        self.text = text
-        title = nil
+        content = HUDContent(text, icon: icon())
         isAutoHide = autoHide
-        self.icon = icon()
     }
 }
 
@@ -153,9 +112,7 @@ public extension HUD where Icon == EmptyView {
         @ViewBuilder title: () -> Title
     ) {
         _isPresented = isPresented
-        text = nil
-        self.title = title()
-        icon = nil
+        content = HUDContent(title: title())
         isAutoHide = autoHide
     }
 }

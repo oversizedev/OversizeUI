@@ -39,12 +39,11 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
                     .offset(y: fieldOffset)
                     .focused($isFocused)
                 #if os(macOS)
-                    .if(fieldPlaceholderPosition == .adjacent) {
+                    .if(fieldPlaceholderPosition == .adjacent, then: {
                         $0.textFieldStyle(.roundedBorder).controlSize(.large)
-                    }
-                    .if(fieldPlaceholderPosition != .adjacent) {
+                    }, else: {
                         $0.textFieldStyle(.plain)
-                    }
+                    })
                 #endif
             }
             .background(fieldBackground)
@@ -66,10 +65,10 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
             return .init(.xSmall)
             #else
             return .init(
-                top: Space.xxxSmall.rawValue + Space.small.rawValue,
-                leading: Space.small.rawValue,
-                bottom: Space.xxxSmall.rawValue + Space.small.rawValue,
-                trailing: Space.small.rawValue
+                top: .xxxSmall + .small,
+                leading: .small,
+                bottom: .xxxSmall + .small,
+                trailing: .small
             )
             #endif
         case .adjacent:
@@ -120,11 +119,11 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
         }
     }
 
-    private var fieldRadius: Radius {
+    private var fieldRadius: CGFloat {
         #if os(macOS)
-        return .small
+        return .xxSmall
         #else
-        return .medium
+        return .xSmall
         #endif
     }
 
@@ -216,7 +215,7 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
             if isFocused {
                 Text(placeholder)
                     .subheadline()
-                    .onSurfaceTertiaryForeground()
+                    .onSurfaceTertiary()
                     .opacity(0.7)
                 #if os(macOS)
                     .padding(.xSmall)
@@ -230,7 +229,7 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
             Text(placeholder)
                 .font(text.isEmpty ? .headline : .subheadline)
                 .fontWeight(text.isEmpty ? .medium : .semibold)
-                .onSurfaceTertiaryForeground()
+                .onSurfaceTertiary()
             #if os(macOS)
                 .padding(.xSmall)
                 .offset(y: text.isEmpty ? 0 : -10)

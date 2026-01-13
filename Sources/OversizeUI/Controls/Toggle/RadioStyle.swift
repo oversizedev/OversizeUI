@@ -33,8 +33,8 @@ public struct RadioStyle: ToggleStyle {
                     .opacity(configuration.isOn ? 1 : 0)
             }
         }
-        .padding(.top, controlPadding.leading.rawValue - Space.xxSmall.rawValue)
-        .padding(.bottom, controlPadding.bottom.rawValue - Space.xxSmall.rawValue)
+        .padding(.top, controlPadding.leading.rawValue - .xxSmall)
+        .padding(.bottom, controlPadding.bottom.rawValue - .xxSmall)
         .padding(.leading, controlPadding.leading)
         .padding(.trailing, controlPadding.trailing)
     }

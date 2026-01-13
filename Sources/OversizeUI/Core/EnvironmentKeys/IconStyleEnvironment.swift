@@ -10,7 +10,7 @@ public enum IconStyle: Sendable {
 }
 
 private struct IconStyleKey: EnvironmentKey {
-    public static let defaultValue: IconStyle = .line
+    static let defaultValue: IconStyle = .line
 }
 
 public extension EnvironmentValues {

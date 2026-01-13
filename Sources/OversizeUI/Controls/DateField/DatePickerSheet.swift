@@ -19,50 +19,98 @@ public struct DatePickerSheet: View {
 
     private let title: String
     private var minimumDate: Date?
+    private let displayedComponents: DatePicker.Components
 
-    public init(title: String, selection: Binding<Date>) {
+    public init(title: String, selection: Binding<Date>, displayedComponents: DatePicker.Components = [.hourAndMinute, .date]) {
         self.title = title
+        self.displayedComponents = displayedComponents
         _selection = selection
         _date = State(wrappedValue: selection.wrappedValue)
         _optionalSelection = .constant(nil)
     }
 
-    public init(title: String, selection: Binding<Date?>) {
+    public init(title: String, selection: Binding<Date?>, displayedComponents: DatePicker.Components = [.hourAndMinute, .date]) {
         self.title = title
+        self.displayedComponents = displayedComponents
         _date = State(wrappedValue: selection.wrappedValue ?? Date())
         _optionalSelection = selection
         _selection = .constant(Date())
     }
 
     public var body: some View {
-        PageView(title) {
-            SectionView {
-                VStack {
-                    if let minimumDate {
-                        DatePicker("", selection: $date, in: minimumDate...)
-                            .datePickerStyle(.graphical)
-                            .labelsHidden()
-                    } else {
-                        DatePicker("", selection: $date)
-                            .datePickerStyle(.graphical)
-                            .labelsHidden()
+        if #available(iOS 26.0, *) {
+            NavigationStack {
+                LayoutView(title) {
+                    SectionView {
+                        VStack {
+                            if let minimumDate {
+                                DatePicker("", selection: $date, in: minimumDate..., displayedComponents: displayedComponents)
+                                    .datePickerStyle(.graphical)
+                                    .labelsHidden()
+                            } else {
+                                DatePicker("", selection: $date, displayedComponents: displayedComponents)
+                                    .datePickerStyle(.graphical)
+                                    .labelsHidden()
+                            }
+                        }
+                        .padding(.horizontal, .small)
+                        .padding(.vertical, .xxxSmall)
+                    }
+                    .surfaceContentMargins(.zero)
+                } background: {
+                    Color.backgroundSecondary
+                }
+                .toolbar {
+                    ToolbarItemGroup(placement: .cancellationAction) {
+                        Button(role: .cancel) {
+                            dismiss()
+                        } label: {
+                            Image.Base.close.icon()
+                        }
+                    }
+
+                    ToolbarItemGroup(placement: .primaryAction) {
+                        Button(role: .confirm) {
+                            selection = date
+                            optionalSelection = date
+                            dismiss()
+                        } label: {
+                            Text("Done")
+                        }
                     }
                 }
-                .padding(.horizontal, .small)
-                .padding(.vertical, .xxxSmall)
+                .toolbarTitleDisplayMode(.inline)
             }
-            .surfaceContentMargins(.zero)
-        }
-        .backgroundSecondary()
-        .leadingBar {
-            BarButton(.close)
-        }
-        .trailingBar {
-            BarButton(.accent("Done", action: {
-                selection = date
-                optionalSelection = date
-                dismiss()
-            }))
+        } else {
+            PageView(title) {
+                SectionView {
+                    VStack {
+                        if let minimumDate {
+                            DatePicker("", selection: $date, in: minimumDate..., displayedComponents: displayedComponents)
+                                .datePickerStyle(.graphical)
+                                .labelsHidden()
+                        } else {
+                            DatePicker("", selection: $date, displayedComponents: displayedComponents)
+                                .datePickerStyle(.graphical)
+                                .labelsHidden()
+                        }
+                    }
+                    .padding(.horizontal, .small)
+                    .padding(.vertical, .xxxSmall)
+                }
+                .surfaceContentMargins(.zero)
+            }
+            .backgroundSecondary()
+            .leadingBar {
+                BarButton(.close)
+            }
+            .trailingBar {
+                BarButton(.accent("Done", action: {
+                    selection = date
+                    optionalSelection = date
+                    dismiss()
+                }))
+            }
         }
     }
 

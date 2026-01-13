@@ -33,29 +33,32 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
             content
                 .padding(padding)
                 .headline(.medium)
-                .onSurfacePrimaryForeground()
+                .onSurfacePrimary()
                 .background {
                     ZStack {
-                        RoundedRectangle(cornerRadius: fieldRadius, style: .continuous)
-                            .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
+                        RoundedRectangle(
+                            cornerRadius: fieldRadius,
+                            style: .continuous
+                        )
+                        .fill(isFocused ? Color.surfacePrimary : Color.surfaceSecondary)
                         overlay
                     }
                     .overlay(alignment: .topLeading) {
                         labelTextView
                     }
                 }
-                .frame(minHeight: Space.xxxLarge.rawValue)
+                .frame(minHeight: .xxxLarge)
                 .focused($isFocused)
                 .scrollContentBackground(.hidden)
                 .animation(.easeIn(duration: 0.15), value: text)
         }
     }
 
-    private var fieldRadius: Radius {
+    private var fieldRadius: CGFloat {
         #if os(macOS)
-        return .xSmall
+        return .xxxSmall
         #else
-        return .medium
+        return .xSmall
         #endif
     }
 
@@ -65,32 +68,32 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
             #if os(macOS)
             return .init(
                 top: 10,
-                leading: Space.xSmall.rawValue,
+                leading: .xSmall,
                 bottom: 10,
-                trailing: Space.xSmall.rawValue
+                trailing: .xSmall
             )
             #else
             return .init(
                 top: 10,
-                leading: Space.xSmall.rawValue,
+                leading: .xSmall,
                 bottom: 10,
-                trailing: Space.xSmall.rawValue
+                trailing: .xSmall
             )
             #endif
         case .overInput:
             #if os(macOS)
             return .init(
                 top: text.isEmpty ? 13 : 22,
-                leading: Space.xxSmall.rawValue,
+                leading: .xxSmall,
                 bottom: 10,
-                trailing: Space.xxSmall.rawValue
+                trailing: .xxSmall
             )
             #else
             return .init(
                 top: text.isEmpty ? 8 : 22,
-                leading: Space.xSmall.rawValue,
+                leading: .xSmall,
                 bottom: 10,
-                trailing: Space.xSmall.rawValue
+                trailing: .xSmall
             )
 
             #endif
@@ -100,16 +103,12 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
     var labelPadding: EdgeInsets {
         switch fieldPlaceholderPosition {
         case .default, .adjacent:
-            #if os(macOS)
-            return .init(Space.xSmall)
-            #else
-            return .init(Space.xSmall)
-            #endif
+            return .init(.xSmall)
         case .overInput:
             #if os(macOS)
-            return .init(horizontal: Space.xSmall, vertical: Space.xSmall)
+            return .init(.xSmall)
             #else
-            return .init(Space.xxSmall)
+            return .init(.small)
             #endif
         }
     }
@@ -121,7 +120,7 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
             if text.isEmpty {
                 Text(placeholder)
                     .subheadline()
-                    .onSurfaceTertiaryForeground()
+                    .onSurfaceTertiary()
                     .opacity(0.7)
                     .padding(labelPadding)
             }
@@ -131,7 +130,7 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
             Text(placeholder)
                 .font(text.isEmpty ? .headline : .subheadline)
                 .fontWeight(text.isEmpty ? .medium : .semibold)
-                .onSurfaceTertiaryForeground()
+                .onSurfaceTertiary()
                 .opacity(0.7)
                 .padding(labelPadding)
                 .offset(y: text.isEmpty ? 0 : -6)

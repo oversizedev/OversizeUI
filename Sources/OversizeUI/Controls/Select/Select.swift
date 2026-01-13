@@ -6,7 +6,7 @@
 import SwiftUI
 
 // swiftlint:disable all
-@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 public struct Select<Element: Equatable, Content, Selection, Actions, ContentUnavailable: View>: View
     where
     Content: View,
@@ -49,14 +49,14 @@ public struct Select<Element: Equatable, Content, Selection, Actions, ContentUna
     }
 
     public var body: some View {
-        ZStack {
-            Button {
-                if showModalBinding != nil {
-                    showModalBinding?.toggle()
-                } else {
-                    showModal.toggle()
-                }
-            } label: {
+        Button {
+            if showModalBinding != nil {
+                showModalBinding?.toggle()
+            } else {
+                showModal.toggle()
+            }
+        } label: {
+            HStack(spacing: .zero) {
                 if isSelected, let index = selectedIndex {
                     selectionView(data[index])
                 } else {
@@ -65,90 +65,82 @@ public struct Select<Element: Equatable, Content, Selection, Actions, ContentUna
                 Spacer()
                 IconDeprecated(.chevronDown, color: .onSurfacePrimary)
             }
-            .frame(minWidth: 0, maxWidth: .infinity)
-            .padding()
-            .background(
-                RoundedRectangle(
-                    cornerRadius: Radius.medium,
-                    style: .continuous
-                )
-                .fill(Color.surfaceSecondary)
-                .overlay(
-                    RoundedRectangle(
-                        cornerRadius: Radius.medium,
-                        style: .continuous
-                    )
-                    .stroke(
-                        theme.borderTextFields
-                            ? Color.border
-                            : Color.surfaceSecondary,
-                        lineWidth: CGFloat(theme.borderSize)
-                    )
-                )
-            )
-            .headline(.medium)
-            .foregroundColor(.onSurfacePrimary)
-            .sheet(isPresented: $showModal) {
-                #if os(iOS)
-                if #available(iOS 16.0, *) {
-                    modal
-                        .presentationDetents(data.count < 4 ? [.medium, .large] : [.large])
-                        .presentationDragIndicator(.hidden)
-                } else {
-                    modal
-                }
-                #else
+        }
+        .buttonStyle(.field)
+        .sheet(isPresented: $showModal) {
+            #if os(iOS)
+            if #available(iOS 16.0, *) {
                 modal
-                #endif
+                    .presentationDetents(data.count < 4 ? [.medium, .large] : [.large])
+                    .presentationDragIndicator(.hidden)
+            } else {
+                modal
             }
-            .onChange(of: showModalBinding) { state in
-                if let state {
-                    showModal = state
-                }
+            #else
+            modal
+            #endif
+        }
+        .onChange(of: showModalBinding) { state in
+            if let state {
+                showModal = state
             }
-            .onAppear {
-                let selctedValue = selection
-                var index = 0
-                for dataValue in data {
-                    if selctedValue == dataValue {
-                        selectedIndex = index
-                    }
-                    index += 1
+        }
+        .onAppear {
+            let selctedValue = selection
+            var index = 0
+            for dataValue in data {
+                if selctedValue == dataValue {
+                    selectedIndex = index
                 }
+                index += 1
             }
         }
     }
 
     private var modal: some View {
-        PageView(label) {
-            if data.isEmpty, let contentUnavailable {
-                contentUnavailable
-            } else {
-                LazyVStack(alignment: .leading, spacing: .zero) {
-                    ForEach(data.indices, id: \.self) { index in
-                        Radio(isOn: index == selectedIndex) {
-                            selectedIndex = index
-                            selection = data[index]
-                            isSelected = true
-                            showModal.toggle()
-                        } label: {
-                            content(
-                                data[index],
-                                selectedIndex == index
-                            )
-                            .headline()
-                            .onSurfacePrimaryForeground()
+        NavigationStack {
+            LayoutView(label) {
+                if data.isEmpty, let contentUnavailable {
+                    contentUnavailable
+                } else {
+                    LazyVStack(alignment: .leading, spacing: .zero) {
+                        ForEach(data.indices, id: \.self) { index in
+                            Radio(isOn: index == selectedIndex) {
+                                selectedIndex = index
+                                selection = data[index]
+                                isSelected = true
+                                showModal.toggle()
+                            } label: {
+                                content(
+                                    data[index],
+                                    selectedIndex == index
+                                )
+                                .headline()
+                                .onSurfacePrimary()
+                            }
                         }
                     }
                 }
             }
+            .toolbarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel", systemImage: "xmark") {
+                        showModal = false
+                    }
+                    .labelStyle(.toolbar)
+                    .buttonStyle(.toolbarSecondary)
+                }
+
+                ToolbarItem(placement: .confirmationAction) {
+                    actions
+                }
+            }
         }
-        .leadingBar { BarButton(.close) }
-        .trailingBar { actions }
     }
 }
 
-@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 public extension Select where ContentUnavailable == Never {
     init(
         _ label: String,
@@ -170,7 +162,7 @@ public extension Select where ContentUnavailable == Never {
     }
 }
 
-@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 public extension Select where Actions == Never {
     init(
         _ label: String,
@@ -192,7 +184,7 @@ public extension Select where Actions == Never {
     }
 }
 
-@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 public extension Select where ContentUnavailable == Never, Actions == Never {
     init(
         _ label: String,
@@ -214,8 +206,8 @@ public extension Select where ContentUnavailable == Never, Actions == Never {
 }
 
 // swiftlint:disable all
-@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
-struct Select_Preview: PreviewProvider {
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+struct SelectNew_Preview: PreviewProvider {
     struct SelectPreview: View {
         var items = ["One", "Two", "Three", "Four"]
 

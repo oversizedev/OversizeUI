@@ -38,7 +38,7 @@ public struct LayoutView<
     }
 
     public init(
-        _ title: String,
+        _ title: String = "",
         onScroll: ScrollAction? = nil,
         @ViewBuilder content: () -> Content,
         @ViewBuilder background: () -> Background = { Color.backgroundPrimary }

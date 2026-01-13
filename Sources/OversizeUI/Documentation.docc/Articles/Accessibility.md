@@ -309,7 +309,7 @@ struct FocusManagementExample: View {
 struct HighContrastDesign: View {
     var body: some View {
         VStack(spacing: .medium) {
-            // ✅ High contrast text combinations
+            // High contrast text combinations
             Text("Primary content")
                 .foregroundColor(.onSurfacePrimary) // 21:1 contrast
             
@@ -319,7 +319,7 @@ struct HighContrastDesign: View {
             Text("Tertiary content")
                 .foregroundColor(.onSurfaceTertiary) // 4.5:1 contrast
             
-            // ✅ Status with multiple indicators
+            // Status with multiple indicators
             HStack {
                 Circle()
                     .fill(.success)
@@ -371,23 +371,23 @@ struct MotionSensitiveAnimation: View {
 struct AccessibilityAuditView: View {
     var body: some View {
         VStack {
-            // ✅ All interactive elements have labels
+            // All interactive elements have labels
             Button("Save") { save() }
                 .accessibilityLabel("Save document")
             
-            // ✅ Decorative images are hidden
+            // Decorative images are hidden
             Image("decorative-pattern")
                 .accessibilityHidden(true)
             
-            // ✅ Informative images have descriptions
+            // Informative images have descriptions
             Image("chart-data")
                 .accessibilityLabel("Sales increased 25% this quarter")
             
-            // ✅ Form fields have clear labels
+            // Form fields have clear labels
             TextField("Enter email", text: .constant(""))
                 .accessibilityLabel("Email address")
             
-            // ✅ Status updates are announced
+            // Status updates are announced
             if isLoading {
                 ProgressView("Loading...")
                     .accessibilityLabel("Loading content")
@@ -479,22 +479,22 @@ struct macOSAccessibilityFeatures: View {
 
 ### Do's
 
-- ✅ Test with VoiceOver and other assistive technologies
-- ✅ Use semantic color names that convey meaning
-- ✅ Provide meaningful accessibility labels for all interactive elements
-- ✅ Support Dynamic Type and test with larger font sizes
-- ✅ Use proper heading hierarchy with `.accessibilityHeading()`
-- ✅ Group related elements with `.accessibilityElement(children: .combine)`
-- ✅ Respect user preferences for reduced motion and transparency
+- Test with VoiceOver and other assistive technologies
+- Use semantic color names that convey meaning
+- Provide meaningful accessibility labels for all interactive elements
+- Support Dynamic Type and test with larger font sizes
+- Use proper heading hierarchy with `.accessibilityHeading()`
+- Group related elements with `.accessibilityElement(children: .combine)`
+- Respect user preferences for reduced motion and transparency
 
 ### Don'ts
 
-- ❌ Don't rely solely on color to convey information
-- ❌ Don't use vague labels like "Button" or "Image"
-- ❌ Don't make touch targets smaller than 44x44 points
-- ❌ Don't ignore accessibility when using custom gestures
-- ❌ Don't forget to test with assistive technologies
-- ❌ Don't override accessibility unless absolutely necessary
+- Don't rely solely on color to convey information
+- Don't use vague labels like "Button" or "Image"
+- Don't make touch targets smaller than 44x44 points
+- Don't ignore accessibility when using custom gestures
+- Don't forget to test with assistive technologies
+- Don't override accessibility unless absolutely necessary
 
 ## Accessibility Resources
 

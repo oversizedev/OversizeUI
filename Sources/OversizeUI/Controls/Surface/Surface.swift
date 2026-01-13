@@ -16,7 +16,7 @@ public enum SurfaceStyle {
 public struct Surface<Label: View>: View {
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.isAccent) private var isAccent: Bool
-    @Environment(\.surfaceRadius) var surfaceRadius: Radius
+    @Environment(\.surfaceRadius) var surfaceRadius
     @Environment(\.surfaceContentMargins) var contentInsets: EdgeSpaceInsets
     @Environment(\.surfaceElevation) private var elevation: Elevation
 
@@ -240,7 +240,7 @@ public extension View {
         elevation: Elevation = .z0,
         background: SurfaceStyle = .primary,
         padding: Space = .medium,
-        radius: Radius = .medium
+        radius: Space = .xSmall
     ) -> some View {
         Surface { self }
             .surfaceStyle(background)
@@ -295,7 +295,7 @@ struct Surface_Previews: PreviewProvider {
             Surface {
                 Text("Text")
                     .title3()
-                    .onSurfacePrimaryForeground()
+                    .onSurfacePrimary()
             }
             .surfaceStyle(.secondary)
             .previewLayout(.fixed(width: 414, height: 200))
@@ -303,7 +303,7 @@ struct Surface_Previews: PreviewProvider {
             Surface {
                 Text("Text")
                     .title3()
-                    .onSurfacePrimaryForeground()
+                    .onSurfacePrimary()
             }
             .surfaceStyle(.primary)
             .surfaceBorderColor(.surfaceSecondary)

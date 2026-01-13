@@ -29,7 +29,7 @@ public struct PremiumLabel: View {
 
     public var body: some View {
         HStack {
-            HStack(alignment: .center, spacing: Space.xxSmall) {
+            HStack(alignment: .center, spacing: .xxSmall) {
                 if let image {
                     image
                         .renderingMode(.template)
@@ -77,7 +77,7 @@ public struct PremiumLabel: View {
     var leadingPadding: Space {
         switch size {
         case .small:
-            Space.xxSmall
+            .xxSmall
         case .medium:
             Space.xSmall
         }
@@ -97,16 +97,16 @@ public struct PremiumLabel: View {
         case .small:
             Space.xxxSmall
         case .medium:
-            Space.xxSmall
+            .xxSmall
         }
     }
 
-    var radius: Radius {
+    var radius: CGFloat {
         switch size {
         case .small:
-            Radius.small
+            .xxSmall
         case .medium:
-            Radius.medium
+            .xSmall
         }
     }
 

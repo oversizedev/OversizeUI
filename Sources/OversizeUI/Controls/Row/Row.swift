@@ -11,7 +11,7 @@ public enum RowClearIconStyle {
 
 public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, TrailingLabel: View {
     @Environment(\.elevation) private var elevation: Elevation
-    @Environment(\.controlRadius) var controlRadius: Radius
+    @Environment(\.controlRadius) var controlRadius
     @Environment(\.rowContentMargins) var controlMargins: EdgeSpaceInsets
     @Environment(\.multilineTextAlignment) var multilineTextAlignment
     @Environment(\.isPremium) var premiumStatus
@@ -38,7 +38,7 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
 
     private var leadingSpace: Space = .small
 
-    private var textColor: Color? = nil
+    private var textColor: Color?
 
     private var isShowSubtitle: Bool {
         (subtitle?.isEmpty) != nil

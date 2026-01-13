@@ -10,7 +10,7 @@ public typealias Bage<Label: View> = Badge<Label>
 
 public struct Badge<Label: View>: View {
     @Environment(\.theme) private var theme: ThemeSettings
-    @Environment(\.controlRadius) private var controlRadius: Radius
+    @Environment(\.controlRadius) private var controlRadius
 
     private let label: Label
     private let color: Color

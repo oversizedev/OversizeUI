@@ -23,7 +23,7 @@ public enum SectionViewStyle: Sendable {
 }
 
 public struct SectionView<Content: View>: View {
-    @Environment(\.controlRadius) private var controlRadius: Radius
+    @Environment(\.controlRadius) private var controlRadius
     @Environment(\.sectionViewStyle) private var style: SectionViewStyle
     @Environment(\.surfaceContentMargins) var surfaceContentInsets: EdgeSpaceInsets
     @Environment(\.sectionTitleMargins) var sectionTitleInsets: EdgeSpaceInsets
@@ -50,12 +50,12 @@ public struct SectionView<Content: View>: View {
 
     private enum Constants {
         /// Radius
-        static var radiusMedium: CGFloat { Radius.medium.rawValue }
-        static var radiusSmall: CGFloat { Radius.small.rawValue }
+        static var radiusMedium: CGFloat { .xSmall }
+        static var radiusSmall: CGFloat { .xxSmall }
     }
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: Space.xSmall) {
+        VStack(alignment: .leading, spacing: .xSmall) {
             if !title.isEmpty, titlePosition == .outside {
                 titleView
                     .padding(.horizontal, titleHorizontalPadding)
@@ -66,7 +66,7 @@ public struct SectionView<Content: View>: View {
             }
 
             Surface {
-                VStack(alignment: .leading, spacing: Space.xSmall) {
+                VStack(alignment: .leading, spacing: .xSmall) {
                     if !title.isEmpty, titlePosition == .inside {
                         titleView
                             .padding(sectionTitleInsets)
@@ -165,12 +165,12 @@ public struct SectionView<Content: View>: View {
     private var titleHorizontalPadding: CGFloat {
         #if os(iOS)
         if horizontalSizeClass == .regular {
-            return Space.medium.rawValue + Space.large.rawValue
+            return .medium + .large
         } else {
-            return Space.medium.rawValue
+            return .medium
         }
         #else
-        return Space.medium.rawValue
+        return .medium
         #endif
     }
 
@@ -179,15 +179,15 @@ public struct SectionView<Content: View>: View {
         case .default:
             #if os(iOS)
             if horizontalSizeClass == .regular {
-                return Space.medium.rawValue + Space.large.rawValue
+                return .medium + .large
             } else {
-                return Space.medium.rawValue
+                return .medium
             }
             #else
-            return Space.medium.rawValue
+            return .medium
             #endif
         case .smallIndent:
-            return Space.xxSmall.rawValue
+            return .xxSmall
         case .edgeToEdge:
             return .zero
         }
@@ -196,7 +196,12 @@ public struct SectionView<Content: View>: View {
     private var surfaceVerticalPaddingSize: CGFloat {
         switch style {
         case .default:
-            Space.small.rawValue
+            switch titlePosition {
+            case .inside:
+                .xxSmall
+            case .outside:
+                .small
+            }
         case .smallIndent, .edgeToEdge:
             2
         }

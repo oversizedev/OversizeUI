@@ -100,7 +100,7 @@ public struct Typography: ViewModifier {
 ///
 /// These modifiers apply consistent typography styles that automatically adapt to:
 /// - Dynamic Type settings for accessibility
-/// - Light and dark appearance modes  
+/// - Light and dark appearance modes
 /// - Platform conventions (iOS, macOS, tvOS, watchOS)
 /// - Custom theme typography settings
 ///
@@ -111,13 +111,13 @@ public struct Typography: ViewModifier {
 /// VStack(alignment: .leading) {
 ///     Text("Main Title")
 ///         .largeTitle(.bold)
-///     
+///
 ///     Text("Section Header")
 ///         .title2()
-///     
+///
 ///     Text("Body content with proper hierarchy")
 ///         .body()
-///     
+///
 ///     Text("Supporting information")
 ///         .caption(.medium)
 /// }
@@ -159,9 +159,8 @@ public struct Typography: ViewModifier {
 /// - <doc:DesignSystem/Typography>
 /// - ``Typography``
 public extension View {
-    
     // MARK: - Large Title
-    
+
     /// Applies large title typography style with optional bold formatting.
     ///
     /// Large titles are used for the most prominent text on screen, typically
@@ -192,7 +191,7 @@ public extension View {
     }
 
     // MARK: - Title
-    
+
     /// Applies title typography style with optional bold formatting.
     ///
     /// Titles are used for primary section headers and important content headings.

@@ -12,9 +12,10 @@ public enum SeparatorAlignment {
 
 public struct Separator: View {
     private let alignment: SeparatorAlignment
-    private let padding: Space
+    private let padding: CGFloat
+    private let lineWidth: CGFloat = 1
 
-    public init(_ alignment: SeparatorAlignment = .horizontal, padding: Space = .zero) {
+    public init(_ alignment: SeparatorAlignment = .horizontal, padding: CGFloat = .zero) {
         self.alignment = alignment
         self.padding = padding
     }
@@ -36,27 +37,19 @@ public struct Separator: View {
     private func insets(_ isHorizontal: Bool) -> EdgeInsets {
         if isHorizontal {
             EdgeInsets(
-                top: 0.5,
-                leading: padding.rawValue,
+                top: 0,
+                leading: padding,
                 bottom: 0,
-                trailing: padding.rawValue
+                trailing: padding
             )
         } else {
             EdgeInsets(
-                top: padding.rawValue,
-                leading: 0.5,
-                bottom: padding.rawValue,
+                top: padding,
+                leading: 0,
+                bottom: padding,
                 trailing: 0
             )
         }
-    }
-
-    var lineWidth: CGFloat {
-        #if os(macOS)
-        return 1
-        #else
-        return 0.5
-        #endif
     }
 }
 

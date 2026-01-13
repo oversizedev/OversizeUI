@@ -404,20 +404,20 @@ Button {
 
 ### Do's
 
-- ✅ Use primary buttons for the main action on a screen
-- ✅ Limit to one primary button per screen section
-- ✅ Use consistent button sizes within the same context
-- ✅ Provide clear, action-oriented button labels
-- ✅ Use loading states for asynchronous operations
-- ✅ Group related buttons logically
+- Use primary buttons for the main action on a screen
+- Limit to one primary button per screen section
+- Use consistent button sizes within the same context
+- Provide clear, action-oriented button labels
+- Use loading states for asynchronous operations
+- Group related buttons logically
 
 ### Don'ts
 
-- ❌ Don't use multiple primary buttons in the same area
-- ❌ Don't make buttons too small to tap comfortably (minimum 44x44 points)
-- ❌ Don't rely solely on color to convey button state
-- ❌ Don't use vague labels like "OK" or "Submit"
-- ❌ Don't forget to handle disabled and loading states
+- Don't use multiple primary buttons in the same area
+- Don't make buttons too small to tap comfortably (minimum 44x44 points)
+- Don't rely solely on color to convey button state
+- Don't use vague labels like "OK" or "Submit"
+- Don't forget to handle disabled and loading states
 
 ## API Reference
 

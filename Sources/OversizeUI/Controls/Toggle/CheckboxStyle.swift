@@ -17,12 +17,12 @@ public struct CheckboxStyle: ToggleStyle {
             Spacer()
 
             ZStack {
-                RoundedRectangle(cornerRadius: Radius.small, style: .continuous)
+                RoundedRectangle(cornerRadius: .xxSmall, style: .continuous)
                     .strokeBorder(Color.onSurfaceTertiary, lineWidth: 2.5)
                     .frame(width: 24, height: 24)
                     .opacity(configuration.isOn ? 0 : 1)
 
-                RoundedRectangle(cornerRadius: Radius.small, style: .continuous).fill(Color.accent)
+                RoundedRectangle(cornerRadius: .xxSmall, style: .continuous).fill(Color.accent)
                     .frame(width: 24, height: 24)
                     .opacity(configuration.isOn ? 1 : 0)
 
@@ -32,8 +32,8 @@ public struct CheckboxStyle: ToggleStyle {
                     .opacity(configuration.isOn ? 1 : 0)
             }
         }
-        .padding(.top, controlPadding.top.rawValue - Space.xxSmall.rawValue)
-        .padding(.bottom, controlPadding.bottom.rawValue - Space.xxSmall.rawValue)
+        .padding(.top, controlPadding.top.rawValue - .xxSmall)
+        .padding(.bottom, controlPadding.bottom.rawValue - .xxSmall)
         .padding(.leading, controlPadding.leading)
         .padding(.trailing, controlPadding.trailing)
     }
