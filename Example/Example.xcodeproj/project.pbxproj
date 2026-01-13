@@ -514,7 +514,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1610;
+				LastUpgradeCheck = 2620;
 				TargetAttributes = {
 					1101694926E41DE10035CB67 = {
 						CreatedOnToolsVersion = 12.5.1;
@@ -755,8 +755,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ER582ZK85C;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = romanov.cc.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -770,8 +769,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ER582ZK85C;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = romanov.cc.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -789,7 +787,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ER582ZK85C;
 				INFOPLIST_FILE = "Example WatchKit App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
@@ -802,7 +799,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 11.6;
 			};
 			name = Debug;
 		};
@@ -814,7 +811,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ER582ZK85C;
 				INFOPLIST_FILE = "Example WatchKit App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
@@ -827,7 +823,7 @@
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 11.6;
 			};
 			name = Release;
 		};
@@ -836,7 +832,6 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ER582ZK85C;
 				INFOPLIST_FILE = ExampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -849,7 +844,7 @@
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Example (watchOS).app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Example (watchOS)";
-				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 11.6;
 			};
 			name = Debug;
 		};
@@ -858,7 +853,6 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ER582ZK85C;
 				INFOPLIST_FILE = ExampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -872,7 +866,7 @@
 				TARGETED_DEVICE_FAMILY = 4;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Example (watchOS).app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Example (watchOS)";
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 11.6;
 			};
 			name = Release;
 		};
@@ -880,7 +874,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ER582ZK85C;
 				INFOPLIST_FILE = ExampleUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -893,7 +886,7 @@
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				TEST_TARGET_NAME = "Example WatchKit App";
-				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 11.6;
 			};
 			name = Debug;
 		};
@@ -901,7 +894,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ER582ZK85C;
 				INFOPLIST_FILE = ExampleUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -915,7 +907,7 @@
 				TARGETED_DEVICE_FAMILY = 4;
 				TEST_TARGET_NAME = "Example WatchKit App";
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 11.6;
 			};
 			name = Release;
 		};
@@ -924,7 +916,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ER582ZK85C;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = tvOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -936,7 +927,7 @@
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 15.0;
+				TVOS_DEPLOYMENT_TARGET = 18.6;
 			};
 			name = Debug;
 		};
@@ -945,7 +936,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ER582ZK85C;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = tvOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -957,7 +947,7 @@
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 15.0;
+				TVOS_DEPLOYMENT_TARGET = 18.6;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -999,6 +989,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = ER582ZK85C;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -1019,6 +1010,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1061,6 +1053,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = ER582ZK85C;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -1074,6 +1067,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
@@ -1085,10 +1079,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ER582ZK85C;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1107,10 +1100,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ER582ZK85C;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1134,15 +1126,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = ER582ZK85C;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				INFOPLIST_FILE = macOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.6;
 				PRODUCT_BUNDLE_IDENTIFIER = romanov.cc.Example;
 				PRODUCT_NAME = Example;
 				SDKROOT = macosx;
@@ -1160,15 +1153,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = ER582ZK85C;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				INFOPLIST_FILE = macOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.6;
 				PRODUCT_BUNDLE_IDENTIFIER = romanov.cc.Example;
 				PRODUCT_NAME = Example;
 				SDKROOT = macosx;
