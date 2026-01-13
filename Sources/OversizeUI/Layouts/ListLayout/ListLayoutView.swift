@@ -22,11 +22,19 @@ public struct ListLayoutView<
     private let title: String
 
     public var body: some View {
-        SwiftUI.List(selection: $selection) {
-            content
+        if #available(watchOS 10.0, *) {
+            SwiftUI.List(selection: $selection) {
+                content
+            }
+            .navigationTitle(title)
+            .background(background.ignoresSafeArea())
+        } else {
+            SwiftUI.List {
+                content
+            }
+            .navigationTitle(title)
+            .background(background.ignoresSafeArea())
         }
-        .navigationTitle(title)
-        .background(background.ignoresSafeArea())
     }
 
     public init(
@@ -40,6 +48,7 @@ public struct ListLayoutView<
         _selection = .constant(nil)
     }
 
+    @available(watchOS, unavailable)
     public init(
         _ title: String,
         selection: Binding<Set<SelectionValue>?>,
@@ -75,7 +84,8 @@ public struct ListLayoutView<
     }
 }
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
+@available(watchOS, unavailable)
 #Preview("With Selection") {
     @Previewable @State var selectedItems: Set<Int>? = []
 
