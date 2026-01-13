@@ -12,7 +12,7 @@ public extension View {
             action(newValue)
         }
         #else
-        if #available(iOS 17, macOS 14.0, *) {
+        if #available(iOS 17, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
             return onChange(of: value) { _, newValue in
                 action(newValue)
             }
