@@ -13,7 +13,7 @@ struct SelectDemo: View {
 
     var body: some View {
         PageView("Select") {
-            if #available(iOS 17.0, *) {
+            if #available(iOS 17.0, watchOS 10.0, tvOS 17.0, *) {
                 VStack {
                     Select("Select", items, selection: $selection) { item, isSelect in
                         Radio(item, isOn: isSelect)
@@ -24,7 +24,7 @@ struct SelectDemo: View {
                 .padding()
             } else {
                 VStack {
-                    Text("Select is available in iOS 17.0 or newer")
+                    Text("Select is available in iOS 17.0, watchOS 10.0, tvOS 17.0 or newer")
                         .foregroundColor(.onSurfaceSecondary)
                 }
                 .padding()
