@@ -5,11 +5,7 @@
 
 import SwiftUI
 
-public struct GridSelect<Element: Equatable, Content, Selection>: View
-    where
-    Content: View,
-    Selection: View
-{
+public struct GridSelect<Element: Equatable, Content: View, Selection: View>: View {
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.gridSelectStyle) private var style
 

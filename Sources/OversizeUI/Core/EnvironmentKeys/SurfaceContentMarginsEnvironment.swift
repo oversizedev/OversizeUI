@@ -5,15 +5,8 @@
 
 import SwiftUI
 
-private struct SurfaceContentMarginsKey: EnvironmentKey {
-    static let defaultValue: EdgeSpaceInsets = .init(top: .medium, leading: .medium, bottom: .medium, trailing: .medium)
-}
-
 public extension EnvironmentValues {
-    var surfaceContentMargins: EdgeSpaceInsets {
-        get { self[SurfaceContentMarginsKey.self] }
-        set { self[SurfaceContentMarginsKey.self] = newValue }
-    }
+    @Entry var surfaceContentMargins: EdgeSpaceInsets = .init(top: .medium, leading: .medium, bottom: .medium, trailing: .medium)
 }
 
 public extension View {

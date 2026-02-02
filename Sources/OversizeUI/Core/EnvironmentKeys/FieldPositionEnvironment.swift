@@ -5,15 +5,8 @@
 
 import SwiftUI
 
-private struct FieldPositionKey: EnvironmentKey {
-    static let defaultValue: VerticalAlignment? = nil
-}
-
 public extension EnvironmentValues {
-    var fieldPosition: VerticalAlignment? {
-        get { self[FieldPositionKey.self] }
-        set { self[FieldPositionKey.self] = newValue }
-    }
+    @Entry var fieldPosition: VerticalAlignment?
 }
 
 public extension View {

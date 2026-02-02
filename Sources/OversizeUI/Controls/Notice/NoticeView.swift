@@ -37,7 +37,7 @@ import SwiftUI
 /// - <doc:Components/NoticeView>
 /// - ``Button``
 /// - ``Surface``
-public struct NoticeView<A>: View where A: View {
+public struct NoticeView<A: View>: View {
     /// The image displayed in the notice.
     let image: Image?
 
@@ -136,9 +136,9 @@ public struct NoticeView<A>: View where A: View {
                 Button {
                     closeAction?()
                 } label: {
-                    IconDeprecated(.xMini, color: .onSurfacePrimary)
+                    Image.Base.Close.mini.icon()
                 }
-                .buttonStyle(subtitle != nil ? .tertiary(infinityWidth: false) : .quaternary(infinityWidth: false))
+                .buttonStyle(subtitle != nil ? .iconTertiary : .iconQuaternary)
                 .controlBorderShape(.capsule)
                 .padding(.small)
                 .controlSize(.mini)

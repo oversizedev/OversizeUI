@@ -5,15 +5,8 @@
 
 import SwiftUI
 
-private struct PremiumStateKey: EnvironmentKey {
-    static let defaultValue: Bool = false
-}
-
 public extension EnvironmentValues {
-    var isPremium: Bool {
-        get { self[PremiumStateKey.self] }
-        set { self[PremiumStateKey.self] = newValue }
-    }
+    @Entry var isPremium: Bool = false
 }
 
 public extension View {

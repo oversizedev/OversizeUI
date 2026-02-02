@@ -58,6 +58,22 @@ public struct ContentPaddingModifier: ViewModifier {
     #endif
 }
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+public struct ContentMarginsModifier: ViewModifier {
+    #if os(iOS)
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    public func body(content: Content) -> some View {
+        content
+            .contentMargins(.horizontal, horizontalSizeClass == .compact ? .medium : .medium + .large)
+            .contentMargins(.vertical, .small)
+    }
+    #else
+    public func body(content: Content) -> some View {
+        content.contentMargins(.all, .medium)
+    }
+    #endif
+}
+
 public extension View {
     @_disfavoredOverload
     nonisolated func padding(_ edges: Edge.Set, _ length: Space) -> some View {
@@ -77,5 +93,11 @@ public extension View {
 public extension View {
     nonisolated func paddingContent(_ edges: Edge.Set = .all) -> some View {
         modifier(ContentPaddingModifier(edges: edges))
+    }
+
+    @_disfavoredOverload
+    @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+    nonisolated func contentMargins() -> some View {
+        modifier(ContentMarginsModifier())
     }
 }

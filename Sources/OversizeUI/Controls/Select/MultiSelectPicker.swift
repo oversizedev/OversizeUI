@@ -7,12 +7,7 @@ import SwiftUI
 
 // swiftlint:disable all
 @available(iOS 16.0, *)
-public struct MultiSelectPicker<Element: Equatable, Content, Actions, ContentUnavailable>: View
-    where
-    Content: View,
-    Actions: View,
-    ContentUnavailable: View
-{
+public struct MultiSelectPicker<Element: Equatable, Content: View, Actions: View, ContentUnavailable: View>: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.multiSelectStyle) private var multiSelectStyle
     @Environment(\.theme) private var theme: ThemeSettings

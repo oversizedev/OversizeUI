@@ -128,20 +128,13 @@ public struct AnyGridSelectStyle: GridSelectStyle {
     }
 }
 
-struct GridSelectStyleKey: EnvironmentKey {
-    static let defaultValue = AnyGridSelectStyle(
+public extension EnvironmentValues {
+    @Entry var gridSelectStyle: AnyGridSelectStyle = .init(
         seletionStyle: .accentSurface,
         unseletionStyle: .surface,
         icon: .none,
         style: IslandGridSelectStyle()
     )
-}
-
-public extension EnvironmentValues {
-    var gridSelectStyle: AnyGridSelectStyle {
-        get { self[GridSelectStyleKey.self] }
-        set { self[GridSelectStyleKey.self] = newValue }
-    }
 }
 
 public extension View {

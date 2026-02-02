@@ -5,15 +5,8 @@
 
 import SwiftUI
 
-private struct ThemeStateKey: EnvironmentKey {
-    static let defaultValue = ThemeSettings()
-}
-
 public extension EnvironmentValues {
-    var theme: ThemeSettings {
-        get { self[ThemeStateKey.self] }
-        set { self[ThemeStateKey.self] = newValue }
-    }
+    @Entry var theme: ThemeSettings = .init()
 }
 
 public extension View {

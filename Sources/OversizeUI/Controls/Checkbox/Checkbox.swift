@@ -74,7 +74,6 @@ public struct Checkbox<Label: View>: View {
         }
     }
 
-    @ViewBuilder
     private func checkboxImage(isEnabled: Bool, isOn: Bool) -> some View {
         ZStack {
             RoundedRectangle(cornerRadius: .xxSmall, style: .continuous)

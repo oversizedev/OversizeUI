@@ -6,7 +6,7 @@
 import SwiftUI
 
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-public struct SuccessView<C, A>: View where C: View, A: View {
+public struct SuccessView<C: View, A: View>: View {
     private let image: Image?
     private let title: String
     private let subtitle: String?

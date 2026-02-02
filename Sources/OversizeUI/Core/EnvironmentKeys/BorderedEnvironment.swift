@@ -5,15 +5,8 @@
 
 import SwiftUI
 
-private struct BorderedStateKey: EnvironmentKey {
-    static let defaultValue: Bool = false
-}
-
 public extension EnvironmentValues {
-    var isBordered: Bool {
-        get { self[BorderedStateKey.self] }
-        set { self[BorderedStateKey.self] = newValue }
-    }
+    @Entry var isBordered: Bool = false
 }
 
 public extension View {

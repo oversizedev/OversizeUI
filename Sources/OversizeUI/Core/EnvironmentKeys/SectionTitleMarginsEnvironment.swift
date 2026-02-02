@@ -5,15 +5,8 @@
 
 import SwiftUI
 
-private struct SectionTitleMarginsKey: EnvironmentKey {
-    static let defaultValue: EdgeSpaceInsets = .init(top: .zero, leading: .zero, bottom: .zero, trailing: .zero)
-}
-
 public extension EnvironmentValues {
-    var sectionTitleMargins: EdgeSpaceInsets {
-        get { self[SectionTitleMarginsKey.self] }
-        set { self[SectionTitleMarginsKey.self] = newValue }
-    }
+    @Entry var sectionTitleMargins: EdgeSpaceInsets = .init(top: .zero, leading: .zero, bottom: .zero, trailing: .zero)
 }
 
 public extension View {

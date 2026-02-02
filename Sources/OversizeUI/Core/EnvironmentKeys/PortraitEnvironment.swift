@@ -5,15 +5,8 @@
 
 import SwiftUI
 
-private struct PortraitStateKey: EnvironmentKey {
-    static let defaultValue: Bool = false
-}
-
 public extension EnvironmentValues {
-    var isPortrait: Bool {
-        get { self[PortraitStateKey.self] }
-        set { self[PortraitStateKey.self] = newValue }
-    }
+    @Entry var isPortrait: Bool = false
 }
 
 public extension View {

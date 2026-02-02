@@ -7,12 +7,7 @@ import SwiftUI
 
 // swiftlint:disable all
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-public struct Select<Element: Equatable, Content, Selection, Actions, ContentUnavailable: View>: View
-    where
-    Content: View,
-    Actions: View,
-    Selection: View
-{
+public struct Select<Element: Equatable, Content: View, Selection: View, Actions: View, ContentUnavailable: View>: View {
     @Environment(\.theme) private var theme: ThemeSettings
     public typealias Data = [Element]
 

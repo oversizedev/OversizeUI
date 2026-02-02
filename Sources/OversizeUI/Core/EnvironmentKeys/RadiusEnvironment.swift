@@ -5,15 +5,8 @@
 
 import SwiftUI
 
-private struct ControlRadiusKey: EnvironmentKey {
-    static let defaultValue: CGFloat = .xSmall
-}
-
 public extension EnvironmentValues {
-    var controlRadius: CGFloat {
-        get { self[ControlRadiusKey.self] }
-        set { self[ControlRadiusKey.self] = newValue }
-    }
+    @Entry var controlRadius: CGFloat = .xSmall
 }
 
 public extension View {

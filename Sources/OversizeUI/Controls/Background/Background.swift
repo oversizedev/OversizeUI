@@ -20,13 +20,26 @@ public enum BackgroundPadding: Int, CaseIterable {
 public struct Background<Content: View>: View {
     private enum Constants {
         /// Colors
-        static var colorPrimary: Color { Color.backgroundPrimary }
-        static var colorSecondary: Color { Color.backgroundSecondary }
-        static var colorTertiary: Color { Color.backgroundTertiary }
+        static var colorPrimary: Color {
+            Color.backgroundPrimary
+        }
+
+        static var colorSecondary: Color {
+            Color.backgroundSecondary
+        }
+
+        static var colorTertiary: Color {
+            Color.backgroundTertiary
+        }
 
         /// Size
-        static var paddingMedium: CGFloat { .medium }
-        static var paddingSmall: CGFloat { .small }
+        static var paddingMedium: CGFloat {
+            .medium
+        }
+
+        static var paddingSmall: CGFloat {
+            .small
+        }
     }
 
     private let content: Content

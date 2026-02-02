@@ -49,7 +49,9 @@ public struct MenuLabelStyle: LabelStyle {
 }
 
 public extension LabelStyle where Self == MenuLabelStyle {
-    static var menu: MenuLabelStyle { .init() }
+    static var menu: MenuLabelStyle {
+        .init()
+    }
 
     static func menu(_ subtitle: String?) -> MenuLabelStyle {
         MenuLabelStyle(subtitle: subtitle)

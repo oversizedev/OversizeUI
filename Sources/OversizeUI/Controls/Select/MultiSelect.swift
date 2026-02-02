@@ -7,13 +7,7 @@ import SwiftUI
 
 // swiftlint:disable all
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
-public struct MultiSelect<Element: Equatable, Content, Selection, Actions, ContentUnavailable>: View
-    where
-    Content: View,
-    Selection: View,
-    Actions: View,
-    ContentUnavailable: View
-{
+public struct MultiSelect<Element: Equatable, Content: View, Selection: View, Actions: View, ContentUnavailable: View>: View {
     @Environment(\.theme) private var theme: ThemeSettings
     public typealias Data = [Element]
 

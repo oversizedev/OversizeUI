@@ -49,7 +49,9 @@ public struct RowLabelStyle: LabelStyle {
 }
 
 public extension LabelStyle where Self == RowLabelStyle {
-    static var row: RowLabelStyle { .init() }
+    static var row: RowLabelStyle {
+        .init()
+    }
 
     static func row(_ subtitle: String?) -> RowLabelStyle {
         RowLabelStyle(subtitle: subtitle)

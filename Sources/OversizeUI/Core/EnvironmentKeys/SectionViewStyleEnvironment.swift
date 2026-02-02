@@ -5,15 +5,8 @@
 
 import SwiftUI
 
-private struct SectionViewStyleKey: EnvironmentKey {
-    static let defaultValue: SectionViewStyle = .default
-}
-
 public extension EnvironmentValues {
-    var sectionViewStyle: SectionViewStyle {
-        get { self[SectionViewStyleKey.self] }
-        set { self[SectionViewStyleKey.self] = newValue }
-    }
+    @Entry var sectionViewStyle: SectionViewStyle = .default
 }
 
 public extension View {

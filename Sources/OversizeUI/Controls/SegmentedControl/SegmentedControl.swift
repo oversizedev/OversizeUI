@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-public struct SegmentedPickerSelector<Element: Equatable, Content, Selection>: View where Content: View, Selection: View {
+public struct SegmentedPickerSelector<Element: Equatable, Content: View, Selection: View>: View {
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.segmentedControlStyle) private var style
     @Environment(\.controlRadius) var controlRadius

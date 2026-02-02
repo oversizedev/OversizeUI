@@ -6,7 +6,7 @@
 import SwiftUI
 
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
-public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>: View where Content: View, LeadingBar: View, TrailingBar: View, TopToolbar: View, TitleLabel: View {
+public struct PageView<Content: View, LeadingBar: View, TrailingBar: View, TopToolbar: View, TitleLabel: View>: View {
     @Environment(\.screenSize) var screenSize
 
     private let title: String?
@@ -269,7 +269,8 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
                             bottomToolbar()
                         }
                     }
-                })
+                }
+            )
             if style != .none {
                 HStack {
                     Spacer()

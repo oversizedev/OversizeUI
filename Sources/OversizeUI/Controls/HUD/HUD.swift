@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-public struct HUD<Title, Icon>: View where Title: View, Icon: View {
+public struct HUD<Title: View, Icon: View>: View {
     @Environment(\.screenSize) var screenSize
 
     private let content: HUDContent<Title, Icon>

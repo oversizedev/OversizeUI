@@ -58,15 +58,8 @@ public struct ScreenSize: Sendable {
     }
 }
 
-private struct ScreenSizeKey: EnvironmentKey {
-    static let defaultValue: ScreenSize = .init(width: 375, height: 667)
-}
-
 public extension EnvironmentValues {
-    var screenSize: ScreenSize {
-        get { self[ScreenSizeKey.self] }
-        set { self[ScreenSizeKey.self] = newValue }
-    }
+    @Entry var screenSize: ScreenSize = .init(width: 375, height: 667)
 }
 
 public extension View {

@@ -274,21 +274,14 @@ public struct AnySegmentedControlStyle: SegmentedControlStyle, Sendable {
     }
 }
 
-public struct SegmentedControlKey: EnvironmentKey {
-    public static let defaultValue = AnySegmentedControlStyle(
+public extension EnvironmentValues {
+    @Entry var segmentedControlStyle: AnySegmentedControlStyle = .init(
         isEquallySpacing: true,
         isShowBackground: true,
         seletionStyle: .shadowSurface,
         unseletionStyle: .clean,
         style: RectangleSegmentedControlStyle()
     )
-}
-
-public extension EnvironmentValues {
-    var segmentedControlStyle: AnySegmentedControlStyle {
-        get { self[SegmentedControlKey.self] }
-        set { self[SegmentedControlKey.self] = newValue }
-    }
 }
 
 public extension View {

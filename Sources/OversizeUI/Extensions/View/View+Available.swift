@@ -50,7 +50,8 @@ public extension View {
     func presentationCompactAdaptation(_ adaptation: PresentationAdaptation) -> some View {
         if #available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, *) {
             presentationCompactAdaptation(
-                adaptation == .automatic ? .automatic : adaptation == .none ? .none : adaptation == .popover ? .popover : adaptation == .sheet ? .sheet : .fullScreenCover)
+                adaptation == .automatic ? .automatic : adaptation == .none ? .none : adaptation == .popover ? .popover : adaptation == .sheet ? .sheet : .fullScreenCover
+            )
         } else {
             self
         }
@@ -70,6 +71,7 @@ public extension View {
     func safeAreaBarTop(alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil, @ViewBuilder content: @escaping () -> some View) -> some View {
         if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
             safeAreaBar(edge: .top, alignment: alignment, spacing: spacing, content: content)
+        } else {
             safeAreaInset(edge: .top, alignment: alignment, spacing: spacing, content: content)
         }
     }

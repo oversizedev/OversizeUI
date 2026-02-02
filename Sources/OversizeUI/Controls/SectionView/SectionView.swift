@@ -50,8 +50,13 @@ public struct SectionView<Content: View>: View {
 
     private enum Constants {
         /// Radius
-        static var radiusMedium: CGFloat { .xSmall }
-        static var radiusSmall: CGFloat { .xxSmall }
+        static var radiusMedium: CGFloat {
+            .xSmall
+        }
+
+        static var radiusSmall: CGFloat {
+            .xxSmall
+        }
     }
 
     public var body: some View {

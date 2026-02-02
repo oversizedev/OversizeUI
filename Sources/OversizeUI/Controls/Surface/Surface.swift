@@ -22,9 +22,17 @@ public struct Surface<Label: View>: View {
 
     private enum Constants {
         /// Colors
-        static var colorPrimary: Color { Color.surfacePrimary }
-        static var colorSecondary: Color { Color.surfaceSecondary }
-        static var colorTertiary: Color { Color.surfaceTertiary }
+        static var colorPrimary: Color {
+            Color.surfacePrimary
+        }
+
+        static var colorSecondary: Color {
+            Color.surfaceSecondary
+        }
+
+        static var colorTertiary: Color {
+            Color.surfaceTertiary
+        }
     }
 
     private let label: Label

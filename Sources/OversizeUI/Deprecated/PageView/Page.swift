@@ -6,9 +6,7 @@
 import SwiftUI
 
 @available(iOS 16.0, *)
-public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLabel>: View
-    where Content: View, Header: View, LeadingBar: View, TrailingBar: View, TopToolbar: View, TitleLabel: View
-{
+public struct Page<Content: View, Header: View, LeadingBar: View, TrailingBar: View, TopToolbar: View, TitleLabel: View>: View {
     @Environment(\.platform) var platform
     @Environment(\.screenSize) private var screenSize
 
@@ -131,7 +129,6 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
         }
     }
 
-    @ViewBuilder
     var scrollHeader: some View {
         ScrollViewHeader(content: pageHeader)
             .frame(height: calcHeaderHeight)
@@ -368,7 +365,8 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
                             bottomToolbar()
                         }
                     }
-                })
+                }
+            )
             if style != .none {
                 HStack {
                     Spacer()

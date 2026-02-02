@@ -5,15 +5,8 @@
 
 import SwiftUI
 
-private struct SegmentedPickerMarginsKey: EnvironmentKey {
-    static let defaultValue: EdgeSpaceInsets = .init(top: .small, leading: .xxxSmall, bottom: .small, trailing: .xxxSmall)
-}
-
 public extension EnvironmentValues {
-    var segmentedPickerMargins: EdgeSpaceInsets {
-        get { self[SegmentedPickerMarginsKey.self] }
-        set { self[SegmentedPickerMarginsKey.self] = newValue }
-    }
+    @Entry var segmentedPickerMargins: EdgeSpaceInsets = .init(top: .small, leading: .xxxSmall, bottom: .small, trailing: .xxxSmall)
 }
 
 public extension View {

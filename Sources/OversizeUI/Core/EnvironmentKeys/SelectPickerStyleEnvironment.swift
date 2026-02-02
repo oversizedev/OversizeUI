@@ -12,15 +12,8 @@ public enum SelectStyle: Sendable {
     case wheel
 }
 
-private struct SelectStyleKey: EnvironmentKey {
-    static let defaultValue: SelectStyle = .default
-}
-
 public extension EnvironmentValues {
-    var selectStyle: SelectStyle {
-        get { self[SelectStyleKey.self] }
-        set { self[SelectStyleKey.self] = newValue }
-    }
+    @Entry var selectStyle: SelectStyle = .default
 }
 
 public extension View {
