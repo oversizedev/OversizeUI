@@ -13,14 +13,16 @@ public enum CoverNavigationType {
 public struct CoverLayoutView<
     Content: View,
     Cover: View,
+    ContentBackground: View,
     Background: View
 >: View {
-    @Environment(\.screenSize) private var screenSize
+    @Environment(\.safeAreaInsets) private var safeAreaInsets
 
     public typealias ScrollAction = @MainActor @Sendable (_ offset: CGPoint, _ headerVisibleRatio: CGFloat) -> Void
 
     @ViewBuilder private var content: Content
     @ViewBuilder private let cover: Cover
+    @ViewBuilder private let contentBackground: ContentBackground
     @ViewBuilder private let background: Background
 
     private let title: String
@@ -30,20 +32,22 @@ public struct CoverLayoutView<
     var contentOffset: CGFloat = 0
     var contentCornerRadius: CGFloat = 0
 
+    var coverIgnoresSafeAreaEdges: Edge.Set = .top
+    
     @State private var scrollOffset: CGPoint = .zero
 
     public var body: some View {
         ZStack(alignment: .top) {
             cover
-                .ignoresSafeArea(edges: .top)
+                .ignoresSafeArea(edges: coverIgnoresSafeAreaEdges)
                 .frame(height: coverScrollHeight)
                 .offset(y: coverScrollOffset)
-
+            
             ScrollView {
                 ScrollViewOffsetTracker {
                     content
                         .background {
-                            background
+                            contentBackground
                                 .padding(.top, contentOffset)
                                 .ignoresSafeArea()
                                 .cornerRadius(
@@ -57,11 +61,11 @@ public struct CoverLayoutView<
                         .padding(.top, contentTopPadding)
                 }
             }
+            .scrollViewOffsetTracking(action: handleScrollOffset)
         }
         .contentMargins(.top, coverHeight, for: .scrollIndicators)
         .navigationTitle(title)
         .background(background.ignoresSafeArea())
-        .scrollViewOffsetTracking(action: handleScrollOffset)
     }
 
     private var coverScrollHeight: CGFloat {
@@ -93,7 +97,7 @@ public struct CoverLayoutView<
 
     private func handleScrollOffset(_ offset: CGPoint) {
         scrollOffset = offset
-        let calcHeaderHeight = 44 + screenSize.safeAreaTop
+        let calcHeaderHeight = 44 + safeAreaInsets.top
         let visibleRatio: CGFloat = (calcHeaderHeight + offset.y) / calcHeaderHeight
         onScroll?(offset, visibleRatio)
     }
@@ -104,6 +108,7 @@ public struct CoverLayoutView<
         onScroll: ScrollAction? = nil,
         @ViewBuilder content: () -> Content,
         @ViewBuilder cover: () -> Cover,
+        @ViewBuilder contentBackground: () -> ContentBackground = { Color.backgroundPrimary },
         @ViewBuilder background: () -> Background = { Color.backgroundPrimary }
     ) {
         self.title = title
@@ -111,6 +116,7 @@ public struct CoverLayoutView<
         self.onScroll = onScroll
         self.content = content()
         self.cover = cover()
+        self.contentBackground = contentBackground()
         self.background = background()
     }
 }

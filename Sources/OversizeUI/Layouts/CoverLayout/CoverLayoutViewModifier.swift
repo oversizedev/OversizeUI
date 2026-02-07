@@ -13,6 +13,12 @@ public extension CoverLayoutView {
         return control
     }
 
+    func coverIgnoresSafeAreaEdges(_ edges: Edge.Set = []) -> Self {
+        var control = self
+        control.coverIgnoresSafeAreaEdges = edges
+        return control
+    }
+    
     func contentCornerRadius(_ radius: CGFloat) -> Self {
         var control = self
         control.contentCornerRadius = radius
