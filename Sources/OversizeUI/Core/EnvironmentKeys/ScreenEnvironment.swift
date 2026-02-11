@@ -175,8 +175,4 @@ public extension View {
     func screenSize(_ geometry: GeometryProxy) -> some View {
         environment(\.screenSize, ScreenSize(geometry: geometry))
     }
-
-    func safeAreaInsets(_ insets: EdgeInsets) -> some View {
-        environment(\.safeAreaInsets, insets)
-    }
 }

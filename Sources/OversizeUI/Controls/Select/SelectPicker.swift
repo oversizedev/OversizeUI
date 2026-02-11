@@ -49,16 +49,26 @@ public struct SelectPicker<Element: Hashable, Content: View, Actions: View, Cont
         }
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
-                Button("Cancel", systemImage: "xmark") {
-                    dismiss()
-                }
+                Button(
+                    "Close",
+                    systemImage: "xmark",
+                    role: .cancel,
+                    action: {
+                        dismiss()
+                    }
+                )
                 .labelStyle(.toolbar)
+                .buttonStyle(.toolbarSecondary)
+                #if !os(tvOS)
+                    .keyboardShortcut(.cancelAction)
+                #endif
             }
 
             ToolbarItem(placement: .confirmationAction) {
                 actions
             }
         }
+        .toolbarTitleDisplayMode(.inline)
         .onAppear {
             defaultSelect()
         }

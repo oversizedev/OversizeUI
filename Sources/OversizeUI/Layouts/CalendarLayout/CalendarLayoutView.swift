@@ -34,21 +34,11 @@ public struct CalendarLayoutView<
     @State private var months: [Date] = []
     @State private var days: [Date: [Date]] = [:]
     @State private var calendarHeight: CGFloat?
+    
+    @State private var isShowMonthPicker: Bool = false
 
     private var columns: [GridItem] {
-        let spacing: CGFloat = contentSize.isAccessibilityCategory ? 2 : 8
-        return Array(repeating: GridItem(spacing: spacing), count: 7)
-    }
-
-    private var navigationTitle: String {
-        let currentYear = calendar.component(.year, from: Date())
-        let displayedYear = calendar.component(.year, from: displayedMonth)
-
-        if currentYear == displayedYear {
-            return displayedMonth.formatted(.dateTime.month(.wide))
-        } else {
-            return displayedMonth.formatted(.dateTime.month(.wide).year())
-        }
+        return Array(repeating: GridItem(spacing: 0), count: 7)
     }
 
     private var weekdaySymbols: [String] {
@@ -70,10 +60,38 @@ public struct CalendarLayoutView<
                     $0.background(Color.surfacePrimary.ignoresSafeArea())
                 }
         }
-        .navigationTitle(navigationTitle)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+    
+                Button {
+                    isShowMonthPicker = true
+                } label: {
+                    HStack(spacing: 3) {
+                        Text(displayedMonth.formatted(.dateTime.month(.wide)))
+                            .foregroundStyle(Color.onSurfacePrimary)
+                        
+                        Text(displayedMonth.formatted(.dateTime.year()))
+                            .foregroundStyle(Color.onSurfaceTertiary)
+                        
+                        Image.Base.chevronDown.icon(Color.onSurfaceSecondary, size: .small)
+                    }
+                    .body(.semibold)
+                }
+                .buttonStyle(.scale)
+            }
+        }
         .background(background.ignoresSafeArea())
         .toolbarTitleDisplayMode(.inline)
         .sensoryFeedback(.selection, trigger: selection)
+        .sheet(isPresented: $isShowMonthPicker) {
+            NavigationStack {
+                MonthYearPickerSheet(
+                    selection: $displayedMonth,
+                    in: interval.start...interval.end
+                )
+            }
+            .presentationDetents([.height(450)])
+        }
     }
 
     public var calendarView: some View {
@@ -88,29 +106,43 @@ public struct CalendarLayoutView<
                 }
             }
             .padding(.horizontal, .xxSmall)
+            
+            Separator()
+                .padding(.vertical, .xxxSmall)
 
             TabView(selection: $displayedMonth) {
                 ForEach(months, id: \.self) { month in
                     LazyVGrid(columns: columns) {
                         Section {
                             ForEach(days[month, default: []], id: \.self) { date in
-                                if calendar.isDate(date, equalTo: month, toGranularity: .month),
-                                   interval.contains(date) {
+                                if calendar.isDate(date, equalTo: month, toGranularity: .month), interval.contains(date) {
                                     Button {
                                         selection = date
                                     } label: {
                                         day(date)
+                                            .frame(maxWidth: .infinity, alignment: .center)
                                     }
                                     .buttonStyle(.scale)
+                                } else if calendar.isDate(date, equalTo: month, toGranularity: .month), !interval.contains(date) {
+                                    Button {
+                                        selection = date
+                                    } label: {
+                                        day(date)
+                                            .frame(maxWidth: .infinity, alignment: .center)
+                                            .opacity(0.3)
+                                    }
+                                    .disabled(true)
                                 } else {
                                     Button {
                                         selection = date
                                     } label: {
                                         day(date)
-                                            .opacity(0.2)
+                                            .frame(maxWidth: .infinity, alignment: .center)
+                                           
                                     }
                                     .buttonStyle(.scale)
                                     .disabled(true)
+                                    .opacity(0)
                                 }
                             }
                         }
@@ -298,7 +330,9 @@ public struct DefaultCalendarDayView: View {
     }
 }
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
+@available(iOS 17.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
 @available(watchOS, unavailable)
 #Preview("Custom Day View") {
     @Previewable @State var selection = Date()
@@ -329,7 +363,9 @@ public struct DefaultCalendarDayView: View {
     }
 }
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
+@available(iOS 17.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
 @available(watchOS, unavailable)
 #Preview("Default Day View") {
     @Previewable @State var selection = Date()

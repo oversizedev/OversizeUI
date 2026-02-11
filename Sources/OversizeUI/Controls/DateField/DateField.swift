@@ -6,7 +6,7 @@
 import SwiftUI
 
 #if os(iOS)
-@available(iOS 16.0, *)
+@available(iOS 17.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)

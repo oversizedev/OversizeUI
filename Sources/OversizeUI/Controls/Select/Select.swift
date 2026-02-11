@@ -120,11 +120,19 @@ public struct Select<Element: Equatable, Content: View, Selection: View, Actions
             .toolbarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel", systemImage: "xmark") {
-                        showModal = false
-                    }
+                    Button(
+                        "Close",
+                        systemImage: "xmark",
+                        role: .cancel,
+                        action: {
+                            showModal = false
+                        }
+                    )
                     .labelStyle(.toolbar)
                     .buttonStyle(.toolbarSecondary)
+                    #if !os(tvOS)
+                        .keyboardShortcut(.cancelAction)
+                    #endif
                 }
 
                 ToolbarItem(placement: .confirmationAction) {
