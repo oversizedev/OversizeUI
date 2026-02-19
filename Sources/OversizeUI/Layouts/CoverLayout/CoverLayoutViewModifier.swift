@@ -12,12 +12,6 @@ public extension CoverLayoutView {
         control.coverStyle = coverStyle
         return control
     }
-
-    func coverIgnoresSafeAreaEdges(_ edges: Edge.Set = []) -> Self {
-        var control = self
-        control.coverIgnoresSafeAreaEdges = edges
-        return control
-    }
     
     func contentCornerRadius(_ radius: CGFloat) -> Self {
         var control = self
@@ -25,9 +19,9 @@ public extension CoverLayoutView {
         return control
     }
 
+    // Deprecated
     func contentOffset(_ offset: CGFloat) -> Self {
         var control = self
-        control.contentOffset = offset
         return control
     }
 }

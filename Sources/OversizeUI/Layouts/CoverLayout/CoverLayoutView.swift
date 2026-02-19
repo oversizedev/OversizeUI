@@ -14,6 +14,7 @@ public struct CoverLayoutView<
     Content: View,
     Cover: View,
     ContentBackground: View,
+    CoverBackground: View,
     Background: View
 >: View {
     @Environment(\.safeAreaInsets) private var safeAreaInsets
@@ -23,33 +24,36 @@ public struct CoverLayoutView<
     @ViewBuilder private var content: Content
     @ViewBuilder private let cover: Cover
     @ViewBuilder private let contentBackground: ContentBackground
+    @ViewBuilder private let coverBackground: CoverBackground
     @ViewBuilder private let background: Background
 
     private let title: String
     private let coverHeight: CGFloat
     private let onScroll: ScrollAction?
     var coverStyle: CoverNavigationType = .static
-    var contentOffset: CGFloat = 0
     var contentCornerRadius: CGFloat = 0
-
-    var coverIgnoresSafeAreaEdges: Edge.Set = .top
     
     @State private var scrollOffset: CGPoint = .zero
+    @State private var visibleRatio: CGFloat = 0
 
     public var body: some View {
         ZStack(alignment: .top) {
+            coverBackground
+                .ignoresSafeArea(edges: .top)
+                .frame(height: coverBackgroundScrollHeight)
+                .offset(y: coverScrollOffset)
+            
             cover
-                .ignoresSafeArea(edges: coverIgnoresSafeAreaEdges)
                 .frame(height: coverScrollHeight)
                 .offset(y: coverScrollOffset)
+                .opacity(visibleRatio)
             
             ScrollView {
                 ScrollViewOffsetTracker {
                     content
                         .background {
                             contentBackground
-                                .padding(.top, contentOffset)
-                                .ignoresSafeArea()
+                                .ignoresSafeArea(edges: .bottom)
                                 .cornerRadius(
                                     contentCornerRadius,
                                     corners: [
@@ -58,30 +62,33 @@ public struct CoverLayoutView<
                                     ]
                                 )
                         }
-                        .padding(.top, contentTopPadding)
                 }
             }
             .scrollViewOffsetTracking(action: handleScrollOffset)
+            .safeAreaPadding(.top, coverHeight)
         }
-        .contentMargins(.top, coverHeight, for: .scrollIndicators)
         .navigationTitle(title)
         .background(background.ignoresSafeArea())
     }
 
+    private var coverBackgroundScrollHeight: CGFloat {
+        switch coverStyle {
+        case .pinch:
+            return max(0, (coverHeight + safeAreaInsets.top) + scrollOffset.y)
+        default:
+            return scrollOffset.y > 0 ? (coverHeight + safeAreaInsets.top) + scrollOffset.y : (coverHeight + safeAreaInsets.top)
+        }
+    }
+    
     private var coverScrollHeight: CGFloat {
         switch coverStyle {
         case .pinch:
-            if scrollOffset.y > 0 {
-                return coverHeight + scrollOffset.y
-            } else {
-                let dampingFactor: CGFloat = 0.8
-                return max(0, coverHeight + (scrollOffset.y * dampingFactor))
-            }
+            return max(0, coverHeight + scrollOffset.y)
         default:
             return scrollOffset.y > 0 ? coverHeight + scrollOffset.y : coverHeight
         }
     }
-
+    
     private var coverScrollOffset: CGFloat {
         switch coverStyle {
         case .parallax:
@@ -91,15 +98,16 @@ public struct CoverLayoutView<
         }
     }
 
-    private var contentTopPadding: CGFloat {
-        contentCornerRadius == 0 ? coverHeight : coverHeight - (contentCornerRadius * 1.4)
-    }
-
     private func handleScrollOffset(_ offset: CGPoint) {
         scrollOffset = offset
-        let calcHeaderHeight = 44 + safeAreaInsets.top
-        let visibleRatio: CGFloat = (calcHeaderHeight + offset.y) / calcHeaderHeight
+        let progress = max(0, min(1, (coverHeight + offset.y) / coverHeight))
+        let visibleRatio = easeOut(progress)
+        self.visibleRatio = visibleRatio
         onScroll?(offset, visibleRatio)
+    }
+
+    private func easeOut(_ t: CGFloat) -> CGFloat {
+        1 - pow(1 - t, 2)
     }
 
     public init(
@@ -109,6 +117,7 @@ public struct CoverLayoutView<
         @ViewBuilder content: () -> Content,
         @ViewBuilder cover: () -> Cover,
         @ViewBuilder contentBackground: () -> ContentBackground = { Color.backgroundPrimary },
+        @ViewBuilder coverBackground: () -> CoverBackground = { Color.backgroundSecondary },
         @ViewBuilder background: () -> Background = { Color.backgroundPrimary }
     ) {
         self.title = title
@@ -117,6 +126,7 @@ public struct CoverLayoutView<
         self.content = content()
         self.cover = cover()
         self.contentBackground = contentBackground()
+        self.coverBackground = coverBackground()
         self.background = background()
     }
 }
