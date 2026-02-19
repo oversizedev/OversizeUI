@@ -18,10 +18,4 @@ public extension CoverLayoutView {
         control.contentCornerRadius = radius
         return control
     }
-
-    // Deprecated
-    func contentOffset(_ offset: CGFloat) -> Self {
-        var control = self
-        return control
-    }
 }

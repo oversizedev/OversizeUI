@@ -72,6 +72,7 @@ public struct IconDeprecated: View {
     }
 }
 
+@available(*, deprecated)
 @available(tvOS, unavailable)
 struct IconAsset_Previews: PreviewProvider {
     static var previews: some View {
