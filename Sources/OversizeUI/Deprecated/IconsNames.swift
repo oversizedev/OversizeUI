@@ -6,6 +6,7 @@
 import Foundation
 
 // swiftlint:disable type_body_length identifier_name
+@available(*, deprecated, message: "Use Image.Base icons from Icons.swift instead")
 public enum IconsNames: String, CaseIterable {
     case none
     case activity

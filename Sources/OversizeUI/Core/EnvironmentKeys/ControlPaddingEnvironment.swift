@@ -105,31 +105,3 @@ public extension View {
     }
 }
 
-// MARK: Deprecated methods
-
-public extension View {
-    @available(*, deprecated, renamed: "controlMargin")
-    func controlPadding(_ length: Space) -> some View {
-        environment(\.controlMargin, ControlMargin(length))
-    }
-
-    @available(*, deprecated, renamed: "controlMargin", message: "Set paddings with Edges")
-    func controlPadding(horizontal: Space = .medium, vertical: Space = .medium) -> some View {
-        environment(\.controlMargin, ControlMargin(horizontal: horizontal, vertical: vertical))
-    }
-
-    @available(*, deprecated, renamed: "controlMargin")
-    func innerPadding(_ length: Space) -> some View {
-        environment(\.controlMargin, ControlMargin(length))
-    }
-
-    @available(*, deprecated, renamed: "controlMargin")
-    func innerPadding(_ edges: Edge.Set, _ length: Space) -> some View {
-        environment(\.controlMargin, ControlMargin(edges, length))
-    }
-
-    @available(*, deprecated, renamed: "controlMargin")
-    func innerPadding(_ edges: [Edge.Set], _ length: Space) -> some View {
-        environment(\.controlMargin, ControlMargin(edges, length))
-    }
-}

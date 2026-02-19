@@ -5,6 +5,7 @@
 
 import SwiftUI
 
+@available(*, deprecated, message: "Use native SwiftUI NavigationStack and .toolbar instead")
 public enum NavigationBarStyleType {
     case system
     case fixed(_ offset: Binding<CGPoint>)
@@ -13,6 +14,7 @@ public enum NavigationBarStyleType {
 
 // swiftlint:disable all
 public extension View {
+    @available(*, deprecated, message: "Use native SwiftUI NavigationStack and .toolbar instead")
     @ViewBuilder
     func navigationBar(_ title: String, style: NavigationBarStyleType) -> some View {
         switch style {
@@ -45,6 +47,7 @@ public extension View {
         }
     }
 
+    @available(*, deprecated, message: "Use native SwiftUI NavigationStack and .toolbar instead")
     @ViewBuilder
     func navigationBar(
         _ title: String,
@@ -107,6 +110,7 @@ public extension View {
         }
     }
 
+    @available(*, deprecated, message: "Use native SwiftUI NavigationStack and .toolbar instead")
     @ViewBuilder
     func navigationBar(
         _ title: String,
@@ -168,6 +172,7 @@ public extension View {
         }
     }
 
+    @available(*, deprecated, message: "Use native SwiftUI NavigationStack and .toolbar instead")
     @ViewBuilder
     func navigationBar(
         _ title: String,
@@ -219,6 +224,7 @@ public extension View {
         }
     }
 
+    @available(*, deprecated, message: "Use native SwiftUI NavigationStack and .toolbar instead")
     @ViewBuilder
     func navigationBar(
         _ title: String,
@@ -270,6 +276,7 @@ public extension View {
         }
     }
 
+    @available(*, deprecated, message: "Use native SwiftUI NavigationStack and .toolbar instead")
     @ViewBuilder
     func scrollWithNavigationBar(
         _ title: String,

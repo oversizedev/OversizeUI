@@ -5,6 +5,7 @@
 
 import SwiftUI
 
+@available(*, deprecated, message: "Use native SwiftUI navigation (.navigationTitle, .toolbar) instead")
 public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar: View, TitleLabel: View>: View {
     @Environment(\.screenSize) var screenSize
     @Binding public var offset: CGPoint
@@ -207,6 +208,7 @@ public struct ModalNavigationBar<LeadingBar: View, TrailingBar: View, BottomBar:
     }
 }
 
+@available(*, deprecated, message: "Use native SwiftUI navigation (.navigationTitle, .toolbar) instead")
 public extension ModalNavigationBar
     where
     LeadingBar == EmptyView,
@@ -235,6 +237,7 @@ public extension ModalNavigationBar
     }
 }
 
+@available(*, deprecated, message: "Use native SwiftUI navigation (.navigationTitle, .toolbar) instead")
 public extension ModalNavigationBar
     where
     BottomBar == EmptyView,
@@ -263,6 +266,7 @@ public extension ModalNavigationBar
     }
 }
 
+@available(*, deprecated, message: "Use native SwiftUI navigation (.navigationTitle, .toolbar) instead")
 public extension ModalNavigationBar
     where
     TrailingBar == EmptyView,
@@ -292,6 +296,7 @@ public extension ModalNavigationBar
     }
 }
 
+@available(*, deprecated, message: "Use native SwiftUI navigation (.navigationTitle, .toolbar) instead")
 public extension ModalNavigationBar
     where
     LeadingBar == EmptyView,
@@ -321,6 +326,7 @@ public extension ModalNavigationBar
     }
 }
 
+@available(*, deprecated, message: "Use native SwiftUI navigation (.navigationTitle, .toolbar) instead")
 public extension ModalNavigationBar
     where
     LeadingBar == EmptyView,
@@ -350,6 +356,7 @@ public extension ModalNavigationBar
     }
 }
 
+@available(*, deprecated, message: "Use native SwiftUI navigation (.navigationTitle, .toolbar) instead")
 public extension ModalNavigationBar
     where
     LeadingBar == EmptyView,
@@ -378,6 +385,7 @@ public extension ModalNavigationBar
     }
 }
 
+@available(*, deprecated, message: "Use native SwiftUI navigation (.navigationTitle, .toolbar) instead")
 public extension ModalNavigationBar
     where
     TrailingBar == EmptyView,
@@ -406,6 +414,7 @@ public extension ModalNavigationBar
     }
 }
 
+@available(*, deprecated, message: "Use native SwiftUI navigation (.navigationTitle, .toolbar) instead")
 public extension ModalNavigationBar
     where
     LeadingBar == EmptyView,
@@ -434,6 +443,7 @@ public extension ModalNavigationBar
     }
 }
 
+@available(*, deprecated, message: "Use native SwiftUI navigation (.navigationTitle, .toolbar) instead")
 public extension ModalNavigationBar
     where
     TrailingBar == EmptyView
@@ -462,6 +472,7 @@ public extension ModalNavigationBar
     }
 }
 
+@available(*, deprecated, message: "Use native SwiftUI navigation (.navigationTitle, .toolbar) instead")
 public extension ModalNavigationBar
     where
     LeadingBar == EmptyView
@@ -490,6 +501,7 @@ public extension ModalNavigationBar
     }
 }
 
+@available(*, deprecated, message: "Use native SwiftUI navigation (.navigationTitle, .toolbar) instead")
 public extension ModalNavigationBar
     where
     TrailingBar == EmptyView,
@@ -518,6 +530,7 @@ public extension ModalNavigationBar
     }
 }
 
+@available(*, deprecated, message: "Use native SwiftUI navigation (.navigationTitle, .toolbar) instead")
 public extension ModalNavigationBar
     where
     LeadingBar == EmptyView,

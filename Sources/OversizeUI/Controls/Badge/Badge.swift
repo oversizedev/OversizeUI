@@ -5,9 +5,6 @@
 
 import SwiftUI
 
-@available(*, deprecated, renamed: "Badge")
-public typealias Bage<Label: View> = Badge<Label>
-
 public struct Badge<Label: View>: View {
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.controlRadius) private var controlRadius

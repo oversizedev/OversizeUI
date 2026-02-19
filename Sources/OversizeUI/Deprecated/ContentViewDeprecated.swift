@@ -5,6 +5,7 @@
 
 import SwiftUI
 
+@available(*, deprecated, message: "Use ContentView with native SwiftUI button actions")
 public enum ContenButtonType {
     case close
     case closeAction(action: () -> Void)
@@ -16,6 +17,7 @@ public enum ContenButtonType {
     case disabled(_ text: String)
 }
 
+@available(*, deprecated, renamed: "ContentView")
 public struct ContentViewDeprecated: View {
     @Environment(\.multilineTextAlignment) var multilineTextAlignment
     @Environment(\.dismiss) var dismiss
