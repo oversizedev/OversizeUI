@@ -271,7 +271,7 @@ public struct Page<Content: View, Header: View, LeadingBar: View, TrailingBar: V
         case .none:
             EmptyView()
         case .icon:
-            IconDeprecated(.xMini, color: .onSurfaceSecondary)
+            Image.Base.Close.mini.icon(.onSurfaceSecondary)
                 .background {
                     Circle()
                         .fill(Color.backgroundTertiary)

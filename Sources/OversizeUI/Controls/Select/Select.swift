@@ -58,7 +58,7 @@ public struct Select<Element: Equatable, Content: View, Selection: View, Actions
                     Text(label)
                 }
                 Spacer()
-                IconDeprecated(.chevronDown, color: .onSurfacePrimary)
+                Image.Base.chevronDown.icon(.onSurfacePrimary)
             }
         }
         .buttonStyle(.field)

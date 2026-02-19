@@ -57,7 +57,7 @@ public struct MultiSelect<Element: Equatable, Content: View, Selection: View, Ac
                     selectionView(selection)
                 }
                 Spacer()
-                IconDeprecated(.chevronDown, color: .onSurfacePrimary)
+                Image.Base.chevronDown.icon(.onSurfacePrimary)
             }
             .frame(minWidth: 0, maxWidth: .infinity)
             .padding()

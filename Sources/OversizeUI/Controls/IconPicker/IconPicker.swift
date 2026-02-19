@@ -88,7 +88,7 @@ public struct IconPicker: View {
                 if let image = selection {
                     image
                 }
-                IconDeprecated(.chevronDown, color: .onSurfacePrimary)
+                Image.Base.chevronDown.icon(.onSurfacePrimary)
             }
         }
         .buttonStyle(.field)

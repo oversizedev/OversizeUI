@@ -80,7 +80,7 @@ public struct ContentViewDeprecated: View {
         switch primaryButton {
         case .close:
             Button(action: { dismiss() }) {
-                IconDeprecated(.xMini)
+                Image.Base.Close.mini.icon()
             }
             #if os(iOS)
             .buttonStyle(.secondary)
@@ -90,7 +90,7 @@ public struct ContentViewDeprecated: View {
             #endif
         case .back:
             Button(action: { dismiss() }) {
-                IconDeprecated(.arrowLeft)
+                Image.Base.arrowLeft.icon()
             }
             #if os(iOS)
             .buttonStyle(.secondary)
@@ -135,7 +135,7 @@ public struct ContentViewDeprecated: View {
             #endif
         case let .closeAction(action: action):
             Button(action: action) {
-                IconDeprecated(.xMini)
+                Image.Base.Close.mini.icon()
             }
             #if os(iOS)
             .buttonStyle(.secondary)
@@ -145,7 +145,7 @@ public struct ContentViewDeprecated: View {
             #endif
         case let .backAction(action: action):
             Button(action: action) {
-                IconDeprecated(.arrowLeft)
+                Image.Base.arrowLeft.icon()
             }
             #if os(iOS)
             .buttonStyle(.secondary)
@@ -174,14 +174,14 @@ public struct ContentViewDeprecated: View {
         switch secondaryButton {
         case .close:
             Button(action: { dismiss() }) {
-                IconDeprecated(.xMini)
+                Image.Base.Close.mini.icon()
             }
             #if os(iOS)
             .buttonStyle(.secondary)
             #endif
         case .back:
             Button(action: { dismiss() }) {
-                IconDeprecated(.arrowLeft)
+                Image.Base.arrowLeft.icon()
             }
             #if os(iOS)
             .buttonStyle(.secondary)
@@ -211,14 +211,14 @@ public struct ContentViewDeprecated: View {
             #endif
         case let .closeAction(action: action):
             Button(action: action) {
-                IconDeprecated(.xMini)
+                Image.Base.Close.mini.icon()
             }
             #if os(iOS)
             .buttonStyle(.secondary)
             #endif
         case let .backAction(action: action):
             Button(action: action) {
-                IconDeprecated(.arrowLeft)
+                Image.Base.arrowLeft.icon()
             }
             #if os(iOS)
             .buttonStyle(.secondary)

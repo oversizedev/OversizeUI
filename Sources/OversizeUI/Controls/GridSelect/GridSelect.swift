@@ -99,7 +99,7 @@ public struct GridSelect<Element: Equatable, Content: View, Selection: View>: Vi
     private var itemBackground: some View {
         ZStack {
             getSelection(selectionStyle: style.seletionStyle)
-            getSelectionIconDeprecated(icon: style.icon)
+            getSelectionIcon(icon: style.icon)
             selectionView()
         }
     }
@@ -168,7 +168,7 @@ public struct GridSelect<Element: Equatable, Content: View, Selection: View>: Vi
     }
 
     @ViewBuilder
-    private func getSelectionIconDeprecated(icon: GridSelectSeletionIconStyle) -> some View {
+    private func getSelectionIcon(icon: GridSelectSeletionIconStyle) -> some View {
         switch icon {
         case .none:
             EmptyView()
@@ -180,7 +180,7 @@ public struct GridSelect<Element: Equatable, Content: View, Selection: View>: Vi
                     Circle()
                         .foregroundColor(Color.surfacePrimary)
                         .shadowElevation(.z2)
-                    IconDeprecated(.checkMini, color: .onSurfacePrimary)
+                    Image.Base.Check.mini.icon(.onSurfacePrimary)
                 }.frame(width: .large, height: .large)
                     .padding(.small)
             }
@@ -239,7 +239,7 @@ struct GridSelect_Preview: PreviewProvider {
                     selection: $selection,
                     content: { item, _ in
                         VStack {
-                            IconDeprecated(.circle)
+                            Image.Base.category.icon()
                             Text(item)
                         }.padding()
                     }
@@ -251,7 +251,7 @@ struct GridSelect_Preview: PreviewProvider {
                     selection: $selection,
                     content: { item, _ in
                         VStack {
-                            IconDeprecated(.circle)
+                            Image.Base.category.icon()
                             Text(item)
                         }.padding()
                     }

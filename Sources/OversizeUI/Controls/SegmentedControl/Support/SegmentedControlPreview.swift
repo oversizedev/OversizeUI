@@ -66,7 +66,7 @@ struct SegmentedControlPreview: View {
 
             SegmentedPickerSelector(items, selection: $selection) { item, _ in
                 VStack(spacing: Space.xxxSmall.rawValue) {
-                    IconDeprecated(.circle)
+                    Image.Base.category.icon()
                         .padding(.xxSmall)
                     Text(item)
                     Text("Subtitle")

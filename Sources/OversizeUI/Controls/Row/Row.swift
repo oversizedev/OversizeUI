@@ -136,7 +136,7 @@ public struct Row<LeadingLabel: View, TrailingLabel: View>: View {
                 сlearAction?()
             } label: {
                 ZStack {
-                    IconDeprecated(.xMini, color: .onSurfaceTertiary)
+                    Image.Base.Close.mini.icon(.onSurfaceTertiary)
                         .background(
                             RoundedRectangle(cornerRadius: .small, style: .continuous)
                                 .fillSurfaceSecondary()
@@ -424,18 +424,18 @@ struct ListRow_Previews: PreviewProvider {
             Row("Title", subtitle: "Subtitle")
 
             Row("Title", subtitle: "Subtitle") {
-                IconDeprecated(.calendar)
+                Image.Base.calendar.icon()
             }
 
             Radio(isOn: true, label: {
                 Row("Title", subtitle: "Subtitle") {
-                    IconDeprecated(.calendar)
+                    Image.Base.calendar.icon()
                 }
             })
 
             Checkbox(isOn: .constant(true), label: {
                 Row("Title", subtitle: "Subtitle") {
-                    IconDeprecated(.calendar)
+                    Image.Base.calendar.icon()
                 }
                 .rowOnSurface()
             })
