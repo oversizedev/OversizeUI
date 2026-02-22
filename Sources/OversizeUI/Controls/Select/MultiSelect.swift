@@ -155,7 +155,7 @@ public struct MultiSelect<Element: Equatable, Content: View, Selection: View, Ac
                     )
                     .labelStyle(.toolbar)
                     .buttonStyle(.toolbarSecondary)
-                    #if !os(tvOS)
+                    #if !os(tvOS) && !os(watchOS)
                         .keyboardShortcut(.cancelAction)
                     #endif
                 }

@@ -130,7 +130,7 @@ public struct Select<Element: Equatable, Content: View, Selection: View, Actions
                     )
                     .labelStyle(.toolbar)
                     .buttonStyle(.toolbarSecondary)
-                    #if !os(tvOS)
+                    #if !os(tvOS) && !os(watchOS)
                         .keyboardShortcut(.cancelAction)
                     #endif
                 }

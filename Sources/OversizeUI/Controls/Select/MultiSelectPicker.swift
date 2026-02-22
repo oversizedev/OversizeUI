@@ -59,7 +59,7 @@ public struct MultiSelectPicker<Element: Equatable, Content: View, Actions: View
                 )
                 .labelStyle(.toolbar)
                 .buttonStyle(.toolbarSecondary)
-                #if !os(tvOS)
+                #if !os(tvOS) && !os(watchOS)
                     .keyboardShortcut(.cancelAction)
                 #endif
             }
