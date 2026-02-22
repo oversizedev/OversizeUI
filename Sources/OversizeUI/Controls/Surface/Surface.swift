@@ -229,7 +229,6 @@ public extension View {
             .surfaceStyle(background)
             .elevation(elevation)
     }
-
 }
 
 public extension Surface where Label == VStack<TupleView<(Row<Image, EmptyView>, Row<Image, EmptyView>)>> {

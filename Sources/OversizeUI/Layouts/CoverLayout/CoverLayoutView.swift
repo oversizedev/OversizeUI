@@ -32,7 +32,7 @@ public struct CoverLayoutView<
     private let onScroll: ScrollAction?
     var coverStyle: CoverNavigationType = .static
     var contentCornerRadius: CGFloat = 0
-    
+
     @State private var scrollOffset: CGPoint = .zero
     @State private var visibleRatio: CGFloat = 0
 
@@ -42,12 +42,12 @@ public struct CoverLayoutView<
                 .ignoresSafeArea(edges: .top)
                 .frame(height: coverBackgroundScrollHeight)
                 .offset(y: coverScrollOffset)
-            
+
             cover
                 .frame(height: coverScrollHeight)
                 .offset(y: coverScrollOffset)
                 .opacity(visibleRatio)
-            
+
             ScrollView {
                 ScrollViewOffsetTracker {
                     content
@@ -74,21 +74,21 @@ public struct CoverLayoutView<
     private var coverBackgroundScrollHeight: CGFloat {
         switch coverStyle {
         case .pinch:
-            return max(0, (coverHeight + safeAreaInsets.top) + scrollOffset.y)
+            max(0, (coverHeight + safeAreaInsets.top) + scrollOffset.y)
         default:
-            return scrollOffset.y > 0 ? (coverHeight + safeAreaInsets.top) + scrollOffset.y : (coverHeight + safeAreaInsets.top)
+            scrollOffset.y > 0 ? (coverHeight + safeAreaInsets.top) + scrollOffset.y : (coverHeight + safeAreaInsets.top)
         }
     }
-    
+
     private var coverScrollHeight: CGFloat {
         switch coverStyle {
         case .pinch:
-            return max(0, coverHeight + scrollOffset.y)
+            max(0, coverHeight + scrollOffset.y)
         default:
-            return scrollOffset.y > 0 ? coverHeight + scrollOffset.y : coverHeight
+            scrollOffset.y > 0 ? coverHeight + scrollOffset.y : coverHeight
         }
     }
-    
+
     private var coverScrollOffset: CGFloat {
         switch coverStyle {
         case .parallax:

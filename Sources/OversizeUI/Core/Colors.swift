@@ -299,7 +299,6 @@ public extension Shape {
     }
 }
 
-
 struct Color_Previews: PreviewProvider {
     static var previews: some View {
         VStack(alignment: .leading, spacing: 10) {

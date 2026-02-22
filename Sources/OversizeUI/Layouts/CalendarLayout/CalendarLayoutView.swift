@@ -3,8 +3,8 @@
 // CalendarLayoutView.swift, created on 06.01.2025
 //
 
-import SwiftUI
 import Foundation
+import SwiftUI
 
 @available(iOS 17.0, *)
 @available(macOS, unavailable)
@@ -15,11 +15,10 @@ public struct CalendarLayoutView<
     Day: View,
     Background: View
 >: View {
-    
     @Environment(\.sizeCategory) private var contentSize
     @Environment(\.calendar) private var calendar
     @Environment(\.safeAreaInsets) private var safeAreaInsets
-    
+
     public typealias ScrollAction = @MainActor @Sendable (_ offset: CGPoint, _ headerVisibleRatio: CGFloat) -> Void
 
     @ViewBuilder private let background: Background
@@ -34,11 +33,11 @@ public struct CalendarLayoutView<
     @State private var months: [Date] = []
     @State private var days: [Date: [Date]] = [:]
     @State private var calendarHeight: CGFloat?
-    
+
     @State private var isShowMonthPicker: Bool = false
 
     private var columns: [GridItem] {
-        return Array(repeating: GridItem(spacing: 0), count: 7)
+        Array(repeating: GridItem(spacing: 0), count: 7)
     }
 
     private var weekdaySymbols: [String] {
@@ -60,19 +59,21 @@ public struct CalendarLayoutView<
                     $0.background(Color.surfacePrimary.ignoresSafeArea())
                 }
         }
+        .ifUnavailable26 {
+            $0.toolbarBackground(.hidden, for: .navigationBar)
+        }
         .toolbar {
             ToolbarItem(placement: .principal) {
-    
                 Button {
                     isShowMonthPicker = true
                 } label: {
                     HStack(spacing: 3) {
                         Text(displayedMonth.formatted(.dateTime.month(.wide)))
                             .foregroundStyle(Color.onSurfacePrimary)
-                        
+
                         Text(displayedMonth.formatted(.dateTime.year()))
                             .foregroundStyle(Color.onSurfaceTertiary)
-                        
+
                         Image.Base.chevronDown.icon(Color.onSurfaceSecondary, size: .small)
                     }
                     .body(.semibold)
@@ -87,7 +88,7 @@ public struct CalendarLayoutView<
             NavigationStack {
                 MonthYearPickerSheet(
                     selection: $displayedMonth,
-                    in: interval.start...interval.end
+                    in: interval.start ... interval.end
                 )
             }
             .presentationDetents([.height(450)])
@@ -106,7 +107,7 @@ public struct CalendarLayoutView<
                 }
             }
             .padding(.horizontal, .xxSmall)
-            
+
             Separator()
                 .padding(.vertical, .xxxSmall)
 
@@ -138,7 +139,6 @@ public struct CalendarLayoutView<
                                     } label: {
                                         day(date)
                                             .frame(maxWidth: .infinity, alignment: .center)
-                                           
                                     }
                                     .buttonStyle(.scale)
                                     .disabled(true)
@@ -172,7 +172,7 @@ public struct CalendarLayoutView<
             }
         }
     }
-    
+
     private func prepareCalendar() {
         func generateDates(inside interval: DateInterval, matching components: DateComponents) -> [Date] {
             var dates: [Date] = []
@@ -224,13 +224,13 @@ public struct CalendarLayoutView<
             )
         }
     }
-     
+
     private func handleScrollOffset(_ offset: CGPoint) {
         let calcHeaderHeight = 44 + safeAreaInsets.top
         let visibleRatio: CGFloat = (calcHeaderHeight + offset.y) / calcHeaderHeight
         onScroll?(offset, visibleRatio)
     }
-    
+
     public init(
         interval: DateInterval,
         selection: Binding<Date>,
@@ -256,8 +256,8 @@ public struct CalendarLayoutView<
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
-extension CalendarLayoutView where Day == DefaultCalendarDayView {
-    public init(
+public extension CalendarLayoutView where Day == DefaultCalendarDayView {
+    init(
         interval: DateInterval,
         selection: Binding<Date>,
         onScroll: ScrollAction? = nil,
@@ -311,21 +311,21 @@ public struct DefaultCalendarDayView: View {
 
     private var foregroundColor: Color {
         if isSelected {
-            return .onPrimary
+            .onPrimary
         } else if isToday {
-            return .onSurfaceSecondary
+            .onSurfaceSecondary
         } else {
-            return .onSurfacePrimary
+            .onSurfacePrimary
         }
     }
 
     private var selectionCircleFillColor: Color {
         if isSelected {
-            return .accent
+            .accent
         } else if isToday {
-            return .surfaceTertiary
+            .surfaceTertiary
         } else {
-            return .clear
+            .clear
         }
     }
 }

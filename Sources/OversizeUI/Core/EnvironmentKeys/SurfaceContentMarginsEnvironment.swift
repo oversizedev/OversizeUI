@@ -26,4 +26,3 @@ public extension View {
         #endif
     }
 }
-

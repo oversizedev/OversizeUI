@@ -72,11 +72,11 @@ public struct DatePickerSheet: View {
                     )
                     .labelStyle(.toolbar)
                     .buttonStyle(.toolbarSecondary)
-#if !os(tvOS)
-                    .keyboardShortcut(.cancelAction)
-#endif
+                    #if !os(tvOS)
+                        .keyboardShortcut(.cancelAction)
+                    #endif
                 }
-                
+
                 ToolbarItem(placement: .primaryAction) {
                     Button(
                         "Done",
@@ -89,9 +89,9 @@ public struct DatePickerSheet: View {
                     )
                     .labelStyle(.toolbar)
                     .buttonStyle(.toolbarPrimary)
-#if !os(tvOS)
-                    .keyboardShortcut(.defaultAction)
-#endif
+                    #if !os(tvOS)
+                        .keyboardShortcut(.defaultAction)
+                    #endif
                 }
             }
             .toolbarTitleDisplayMode(.inline)

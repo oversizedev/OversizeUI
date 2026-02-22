@@ -1,7 +1,7 @@
 //
 // Copyright © 2026 Alexander Romanov
 // MonthYearPickerSheet.swift, created on 11.02.2026
-//  
+//
 
 import SwiftUI
 
@@ -10,7 +10,6 @@ import SwiftUI
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 public struct MonthYearPickerSheet: View {
-    
     @Environment(\.dismiss) private var dismiss
     @Environment(\.calendar) private var calendar
     @Binding var selection: Date
@@ -23,23 +22,23 @@ public struct MonthYearPickerSheet: View {
     private let dateRange: ClosedRange<Date>
 
     private var availableMonths: [Int] {
-        guard let year = selectedYear else { return Array(1...12) }
+        guard let year = selectedYear else { return Array(1 ... 12) }
 
         let startYear = calendar.component(.year, from: dateRange.lowerBound)
         let endYear = calendar.component(.year, from: dateRange.upperBound)
 
-        if year == startYear && year == endYear {
+        if year == startYear, year == endYear {
             let startMonth = calendar.component(.month, from: dateRange.lowerBound)
             let endMonth = calendar.component(.month, from: dateRange.upperBound)
-            return Array(startMonth...endMonth)
+            return Array(startMonth ... endMonth)
         } else if year == startYear {
             let startMonth = calendar.component(.month, from: dateRange.lowerBound)
-            return Array(startMonth...12)
+            return Array(startMonth ... 12)
         } else if year == endYear {
             let endMonth = calendar.component(.month, from: dateRange.upperBound)
-            return Array(1...endMonth)
+            return Array(1 ... endMonth)
         } else {
-            return Array(1...12)
+            return Array(1 ... 12)
         }
     }
 
@@ -53,15 +52,14 @@ public struct MonthYearPickerSheet: View {
 
         let defaultStartDate = Calendar.current.date(from: DateComponents(year: 1900, month: 1, day: 1)) ?? Date()
         let defaultEndDate = Calendar.current.date(from: DateComponents(year: 2100, month: 12, day: 31)) ?? Date()
-        dateRange = range ?? (defaultStartDate...defaultEndDate)
+        dateRange = range ?? (defaultStartDate ... defaultEndDate)
 
-        let currentDate: Date
-        if selection.wrappedValue < dateRange.lowerBound {
-            currentDate = dateRange.lowerBound
+        let currentDate: Date = if selection.wrappedValue < dateRange.lowerBound {
+            dateRange.lowerBound
         } else if selection.wrappedValue > dateRange.upperBound {
-            currentDate = dateRange.upperBound
+            dateRange.upperBound
         } else {
-            currentDate = selection.wrappedValue
+            selection.wrappedValue
         }
 
         let components = Calendar.current.dateComponents([.month, .year], from: currentDate)
@@ -70,16 +68,14 @@ public struct MonthYearPickerSheet: View {
 
         let startYear = Calendar.current.component(.year, from: dateRange.lowerBound)
         let endYear = Calendar.current.component(.year, from: dateRange.upperBound)
-        years = Array(startYear...endYear)
+        years = Array(startYear ... endYear)
     }
 
     public var body: some View {
         VStack(spacing: .zero) {
             ScrollView(.horizontal) {
                 LazyHStack(spacing: 0) {
-                    
                     ForEach(years, id: \.self) { year in
-                        
                         Text(String(year))
                             .containerRelativeFrame(.horizontal, count: 3, spacing: 0)
                             .foregroundStyle(selectedYear == year ? Color.accent : Color.onSurfaceSecondary)
@@ -94,7 +90,6 @@ public struct MonthYearPickerSheet: View {
                                 selectedYear = year
                             })
                             .id(year)
-                        
                     }
                 }
                 .scrollTargetLayout()
@@ -109,7 +104,7 @@ public struct MonthYearPickerSheet: View {
                         .init(color: .clear, location: 0),
                         .init(color: .black, location: 0.12),
                         .init(color: .black, location: 0.88),
-                        .init(color: .clear, location: 1.0)
+                        .init(color: .clear, location: 1.0),
                     ]),
                     startPoint: .leading,
                     endPoint: .trailing
@@ -117,9 +112,9 @@ public struct MonthYearPickerSheet: View {
             }
             .animation(.interactiveSpring, value: selectedYear)
             .sensoryFeedback(.selection, trigger: selectedYear)
-            
+
             Separator()
-            
+
             Picker("Month", selection: $selectedMonth) {
                 ForEach(availableMonths, id: \.self) { month in
                     Text(monthName(month))
@@ -134,7 +129,6 @@ public struct MonthYearPickerSheet: View {
                     selectedMonth = availableMonths.first ?? 1
                 }
             }
-            
         }
         .background(ContainerRelativeShape().fill(Color.surfacePrimary))
         .padding(10)

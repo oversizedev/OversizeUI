@@ -29,4 +29,3 @@ public extension View {
         environment(\.rowContentMargins, .init(top: margin, leading: margin, bottom: margin, trailing: margin))
     }
 }
-

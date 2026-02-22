@@ -12,7 +12,7 @@ public extension CoverLayoutView {
         control.coverStyle = coverStyle
         return control
     }
-    
+
     func contentCornerRadius(_ radius: CGFloat) -> Self {
         var control = self
         control.contentCornerRadius = radius

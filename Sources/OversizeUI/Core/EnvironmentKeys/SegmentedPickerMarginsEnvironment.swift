@@ -18,4 +18,3 @@ public extension View {
         environment(\.segmentedPickerMargins, .init(top: margins, leading: margins, bottom: margins, trailing: margins))
     }
 }
-

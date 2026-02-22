@@ -6,7 +6,6 @@
 import SwiftUI
 
 public extension View {
-
     @available(*, deprecated, renamed: "onPrimary")
     nonisolated func onPrimaryForeground() -> some View {
         foregroundColor(Color.onPrimary)
