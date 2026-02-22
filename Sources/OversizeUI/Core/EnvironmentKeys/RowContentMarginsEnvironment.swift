@@ -29,17 +29,3 @@ public extension View {
         environment(\.rowContentMargins, .init(top: margin, leading: margin, bottom: margin, trailing: margin))
     }
 }
-
-// MARK: Deprecated methods
-
-public extension View {
-    @available(*, deprecated, renamed: "rowContentMargins")
-    func rowContentInset(_ insets: EdgeSpaceInsets) -> some View {
-        environment(\.rowContentMargins, insets)
-    }
-
-    @available(*, deprecated, renamed: "rowContentMargins")
-    func rowContentInset(_ insets: Space) -> some View {
-        environment(\.rowContentMargins, .init(top: insets, leading: insets, bottom: insets, trailing: insets))
-    }
-}

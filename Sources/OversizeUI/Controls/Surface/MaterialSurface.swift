@@ -45,7 +45,6 @@ public struct MaterialSurface<Label: View>: View {
         .buttonStyle(SurfaceButtonStyle())
     }
 
-    @ViewBuilder
     private var surface: some View {
         label
             .padding(
@@ -59,7 +58,6 @@ public struct MaterialSurface<Label: View>: View {
             .shadowElevation(elevation)
     }
 
-    @ViewBuilder
     private var overlayView: some View {
         RoundedRectangle(cornerRadius: controlRadius, style: .continuous)
             .stroke(

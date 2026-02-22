@@ -91,7 +91,7 @@ public struct EmojiPicker: View {
                         .font(.system(size: 24))
                 }
 
-                IconDeprecated(.chevronDown, color: .onSurfacePrimary)
+                Image.Base.chevronDown.icon(.onSurfacePrimary)
             }
         }
         .buttonStyle(.field)

@@ -49,11 +49,11 @@ public struct ContentViewActionsBuilder {
         component
     }
 
-    public static func buildOptional<Content>(_ content: Content?) -> Content? where Content: View {
+    public static func buildOptional<Content: View>(_ content: Content?) -> Content? {
         content
     }
 
-    public static func buildIf<Content>(_ content: Content?) -> Content? where Content: View {
+    public static func buildIf<Content: View>(_ content: Content?) -> Content? {
         content
     }
 }

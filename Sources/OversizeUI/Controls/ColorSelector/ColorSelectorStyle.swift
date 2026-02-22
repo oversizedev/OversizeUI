@@ -30,15 +30,8 @@ public struct DefaultColorSelectorStyle: ColorSelectorStyle {
     }
 }
 
-struct ColorSelectorStyleStyleKey: EnvironmentKey {
-    static let defaultValue = AnyColorSelectorStyle(style: DefaultColorSelectorStyle())
-}
-
 public extension EnvironmentValues {
-    var colorSelectorStyle: AnyColorSelectorStyle {
-        get { self[ColorSelectorStyleStyleKey.self] }
-        set { self[ColorSelectorStyleStyleKey.self] = newValue }
-    }
+    @Entry var colorSelectorStyle: AnyColorSelectorStyle = .init(style: DefaultColorSelectorStyle())
 }
 
 public extension View {

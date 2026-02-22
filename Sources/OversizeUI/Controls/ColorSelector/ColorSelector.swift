@@ -68,8 +68,7 @@ public struct ColorSelector: View {
                                     }
                                 }
                             }
-                        }
-                    )
+                        })
                 )
             )
     }

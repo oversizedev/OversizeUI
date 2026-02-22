@@ -215,7 +215,7 @@ public extension View {
         modifier(Typography(fontStyle: .title, weight: weight))
     }
 
-    // Title 2
+    /// Title 2
     nonisolated func title2(_ bold: Bool = true) -> some View {
         modifier(Typography(fontStyle: .title2, isBold: bold))
     }
@@ -224,7 +224,7 @@ public extension View {
         modifier(Typography(fontStyle: .title2, weight: weight))
     }
 
-    // Title 3
+    /// Title 3
     nonisolated func title3(_ bold: Bool = true) -> some View {
         modifier(Typography(fontStyle: .title3, isBold: bold))
     }
@@ -233,7 +233,7 @@ public extension View {
         modifier(Typography(fontStyle: .title3, weight: weight))
     }
 
-    // Headline
+    /// Headline
     nonisolated func headline(_ bold: Bool = true) -> some View {
         modifier(Typography(fontStyle: .headline, isBold: bold))
     }
@@ -242,7 +242,7 @@ public extension View {
         modifier(Typography(fontStyle: .headline, weight: weight))
     }
 
-    // Subheadline
+    /// Subheadline
     nonisolated func subheadline(_ bold: Bool = false) -> some View {
         modifier(Typography(fontStyle: .subheadline, isBold: bold))
     }
@@ -251,7 +251,7 @@ public extension View {
         modifier(Typography(fontStyle: .subheadline, weight: weight))
     }
 
-    // Body
+    /// Body
     nonisolated func body(_ bold: Bool = false) -> some View {
         modifier(Typography(fontStyle: .body, isBold: bold))
     }
@@ -260,7 +260,7 @@ public extension View {
         modifier(Typography(fontStyle: .body, weight: weight))
     }
 
-    // Callout
+    /// Callout
     nonisolated func callout(_ bold: Bool = false) -> some View {
         modifier(Typography(fontStyle: .callout, isBold: bold))
     }
@@ -269,7 +269,7 @@ public extension View {
         modifier(Typography(fontStyle: .callout, weight: weight))
     }
 
-    // Footnote
+    /// Footnote
     nonisolated func footnote(_ bold: Bool = false) -> some View {
         modifier(Typography(fontStyle: .footnote, isBold: bold))
     }
@@ -278,7 +278,7 @@ public extension View {
         modifier(Typography(fontStyle: .footnote, weight: weight))
     }
 
-    // Caption
+    /// Caption
     nonisolated func caption(_ bold: Bool = false) -> some View {
         modifier(Typography(fontStyle: .caption, isBold: bold))
     }
@@ -287,7 +287,7 @@ public extension View {
         modifier(Typography(fontStyle: .caption, weight: weight))
     }
 
-    // Caption 2
+    /// Caption 2
     nonisolated func caption2(_ bold: Bool = false) -> some View {
         modifier(Typography(fontStyle: .caption2, isBold: bold))
     }

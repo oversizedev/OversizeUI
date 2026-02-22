@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-public struct Snackbar<Label, Actions>: View where Label: View, Actions: View {
+public struct Snackbar<Label: View, Actions: View>: View {
     @Environment(\.screenSize) var screenSize
 
     private let text: String?

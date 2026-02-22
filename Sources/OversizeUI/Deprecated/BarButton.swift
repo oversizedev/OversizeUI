@@ -5,6 +5,7 @@
 
 import SwiftUI
 
+@available(*, deprecated, message: "Use Button with .buttonStyle(.secondary) or IconButton with .buttonStyle(.iconSecondary)")
 public enum BarButtonType {
     case close
     case closeAction(_ action: () -> Void)
@@ -20,6 +21,7 @@ public enum BarButtonType {
     case icon(_ icon: IconsNames, action: () -> Void)
 }
 
+@available(*, deprecated, message: "Use Button with .buttonStyle(.secondary) or IconButton with .buttonStyle(.iconSecondary)")
 public struct BarButton: View {
     @Environment(\.dismiss) var dismiss
 
@@ -142,9 +144,9 @@ public struct BarButton: View {
     private var label: some View {
         switch type {
         case .close:
-            IconDeprecated(.xMini)
+            Image.Base.Close.mini.icon()
         case .back:
-            IconDeprecated(.arrowLeft)
+            Image.Base.arrowLeft.icon()
         case let .secondary(text, _):
             Text(text)
         case let .accent(text, _):
@@ -152,9 +154,9 @@ public struct BarButton: View {
         case let .primary(text, _):
             Text(text)
         case .closeAction:
-            IconDeprecated(.xMini, color: .onSurfaceSecondary)
+            Image.Base.Close.mini.icon(.onSurfaceSecondary)
         case .backAction:
-            IconDeprecated(.arrowLeft, color: .onSurfaceSecondary)
+            Image.Base.arrowLeft.icon(.onSurfaceSecondary)
         case let .disabled(text):
             Text(text)
         case let .image(image, _):
@@ -162,7 +164,7 @@ public struct BarButton: View {
                 .renderingMode(.template)
                 .onSurfacePrimary()
         case let .icon(icon, _):
-            IconDeprecated(icon, color: .onSurfaceSecondary)
+            Image(icon.rawValue, bundle: .module).icon(.onSurfaceSecondary)
         }
     }
 }

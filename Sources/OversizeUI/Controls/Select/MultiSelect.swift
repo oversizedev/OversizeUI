@@ -6,14 +6,8 @@
 import SwiftUI
 
 // swiftlint:disable all
-@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
-public struct MultiSelect<Element: Equatable, Content, Selection, Actions, ContentUnavailable>: View
-    where
-    Content: View,
-    Selection: View,
-    Actions: View,
-    ContentUnavailable: View
-{
+@available(iOS 17.0, macOS 14, tvOS 17.0, watchOS 10.0, *)
+public struct MultiSelect<Element: Equatable, Content: View, Selection: View, Actions: View, ContentUnavailable: View>: View {
     @Environment(\.theme) private var theme: ThemeSettings
     public typealias Data = [Element]
 
@@ -63,7 +57,7 @@ public struct MultiSelect<Element: Equatable, Content, Selection, Actions, Conte
                     selectionView(selection)
                 }
                 Spacer()
-                IconDeprecated(.chevronDown, color: .onSurfacePrimary)
+                Image.Base.chevronDown.icon(.onSurfacePrimary)
             }
             .frame(minWidth: 0, maxWidth: .infinity)
             .padding()
@@ -120,38 +114,62 @@ public struct MultiSelect<Element: Equatable, Content, Selection, Actions, Conte
     }
 
     private var modal: some View {
-        PageView(label) {
-            if data.isEmpty, let contentUnavailable {
-                contentUnavailable
-            } else {
-                LazyVStack(alignment: .leading, spacing: .zero) {
-                    ForEach(data.indices, id: \.self) { index in
-                        let isSelected = selectedIndexes.contains(index)
+        NavigationStack {
+            LayoutView(label) {
+                if data.isEmpty, let contentUnavailable {
+                    contentUnavailable
+                } else {
+                    LazyVStack(alignment: .leading, spacing: .zero) {
+                        ForEach(data.indices, id: \.self) { index in
+                            let isSelected = selectedIndexes.contains(index)
 
-                        Checkbox(isOn: Binding(
-                            get: { isSelected },
-                            set: { _ in
-                                if isSelected, let elementIndex = selectedIndexes.firstIndex(of: index) {
-                                    selectedIndexes.remove(at: elementIndex)
-                                } else {
-                                    selectedIndexes.append(index)
+                            Checkbox(isOn: Binding(
+                                get: { isSelected },
+                                set: { _ in
+                                    if isSelected, let elementIndex = selectedIndexes.firstIndex(of: index) {
+                                        selectedIndexes.remove(at: elementIndex)
+                                    } else {
+                                        selectedIndexes.append(index)
+                                    }
+                                    let selectionItems = selectedIndexes.compactMap { data[$0] }
+                                    selection = selectionItems
                                 }
-                                let selectionItems = selectedIndexes.compactMap { data[$0] }
-                                selection = selectionItems
-                            }
-                        ), label: {
-                            content(data[index], isSelected)
-                        })
+                            ), label: {
+                                content(data[index], isSelected)
+                            })
+                        }
                     }
                 }
+            } background: {
+                Color.backgroundSecondary
             }
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(
+                        "Close",
+                        systemImage: "xmark",
+                        role: .cancel,
+                        action: {
+                            showModal = false
+                        }
+                    )
+                    .labelStyle(.toolbar)
+                    .buttonStyle(.toolbarSecondary)
+                    #if !os(tvOS) && !os(watchOS)
+                        .keyboardShortcut(.cancelAction)
+                    #endif
+                }
+
+                ToolbarItem(placement: .confirmationAction) {
+                    actions
+                }
+            }
+            .toolbarTitleDisplayMode(.inline)
         }
-        .leadingBar { BarButton(.close) }
-        .trailingBar { actions }
     }
 }
 
-@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
+@available(iOS 17.0, macOS 14, tvOS 17.0, watchOS 10.0, *)
 public extension MultiSelect where ContentUnavailable == Never {
     init(
         _ label: String,
@@ -173,7 +191,7 @@ public extension MultiSelect where ContentUnavailable == Never {
     }
 }
 
-@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
+@available(iOS 17.0, macOS 14, tvOS 17.0, watchOS 10.0, *)
 public extension MultiSelect where Actions == Never {
     init(
         _ label: String,
@@ -195,7 +213,7 @@ public extension MultiSelect where Actions == Never {
     }
 }
 
-@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
+@available(iOS 17.0, macOS 14, tvOS 17.0, watchOS 10.0, *)
 public extension MultiSelect where ContentUnavailable == Never, Actions == Never {
     init(
         _ label: String,
@@ -217,7 +235,7 @@ public extension MultiSelect where ContentUnavailable == Never, Actions == Never
 }
 
 // swiftlint:disable all
-@available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
+@available(iOS 17.0, macOS 14, tvOS 17.0, watchOS 10.0, *)
 struct MultiSelect_Preview: PreviewProvider {
     struct SelectPreview: View {
         var items = ["One", "Two", "Three", "Four"]

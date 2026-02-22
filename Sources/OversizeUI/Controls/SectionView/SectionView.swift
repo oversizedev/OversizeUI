@@ -50,8 +50,13 @@ public struct SectionView<Content: View>: View {
 
     private enum Constants {
         /// Radius
-        static var radiusMedium: CGFloat { .xSmall }
-        static var radiusSmall: CGFloat { .xxSmall }
+        static var radiusMedium: CGFloat {
+            .xSmall
+        }
+
+        static var radiusSmall: CGFloat {
+            .xxSmall
+        }
     }
 
     public var body: some View {
@@ -143,8 +148,7 @@ public struct SectionView<Content: View>: View {
             Button {
                 action()
             } label: {
-                IconDeprecated(.chevronRight)
-                    .iconColor(.onSurfaceSecondary)
+                Image.Base.chevronRight.icon(.onSurfaceSecondary)
                     .offset(y: titleButtonPosition == .leading ? 1.5 : 0)
             }
             .buttonStyle(.scale)
@@ -230,7 +234,7 @@ struct SectionView_Previews: PreviewProvider {
         VStack(spacing: .zero) {
             SectionView("App") {
                 Row("Label") {
-                    IconDeprecated(.user)
+                    Image.Base.profile.icon()
                 }
             }
             .sectionTitlePosition(.inside)
@@ -238,10 +242,10 @@ struct SectionView_Previews: PreviewProvider {
             SectionView("Feedback") {
                 VStack(spacing: .zero) {
                     Row("Label") {
-                        IconDeprecated(.user)
+                        Image.Base.profile.icon()
                     }
                     Row("Label") {
-                        IconDeprecated(.user)
+                        Image.Base.profile.icon()
                     }
                 }
             }
@@ -251,11 +255,11 @@ struct SectionView_Previews: PreviewProvider {
             SectionView("Feedback") {
                 VStack(spacing: .zero) {
                     Row("Label") {
-                        IconDeprecated(.user)
+                        Image.Base.profile.icon()
                     }
 
                     Row("Label") {
-                        IconDeprecated(.user)
+                        Image.Base.profile.icon()
                     }
                 }
             }
@@ -276,7 +280,7 @@ struct SectionView_Previews: PreviewProvider {
         VStack(spacing: .zero) {
             SectionView("App") {
                 Row("Label") {
-                    IconDeprecated(.user)
+                    Image.Base.profile.icon()
                 }
             }
             .sectionTitlePosition(.inside)
@@ -286,10 +290,10 @@ struct SectionView_Previews: PreviewProvider {
             SectionView("Feedback") {
                 VStack(spacing: .zero) {
                     Row("Label") {
-                        IconDeprecated(.user)
+                        Image.Base.profile.icon()
                     }
                     Row("Label") {
-                        IconDeprecated(.user)
+                        Image.Base.profile.icon()
                     }
                 }
             }
@@ -310,7 +314,7 @@ struct SectionView_Previews: PreviewProvider {
         VStack(spacing: .zero) {
             SectionView("App") {
                 Row("Label") {
-                    IconDeprecated(.user)
+                    Image.Base.profile.icon()
                 }
             }
             .sectionTitlePosition(.inside)
@@ -320,10 +324,10 @@ struct SectionView_Previews: PreviewProvider {
             SectionView("Feedback") {
                 VStack(spacing: .zero) {
                     Row("Label") {
-                        IconDeprecated(.user)
+                        Image.Base.profile.icon()
                     }
                     Row("Label") {
-                        IconDeprecated(.user)
+                        Image.Base.profile.icon()
                     }
                 }
             }
@@ -344,17 +348,17 @@ struct SectionView_Previews: PreviewProvider {
         VStack(spacing: .zero) {
             SectionView("App") {
                 Row("Label") {
-                    IconDeprecated(.user)
+                    Image.Base.profile.icon()
                 }
             }
 
             SectionView("Feedback") {
                 VStack(spacing: .zero) {
                     Row("Label") {
-                        IconDeprecated(.user)
+                        Image.Base.profile.icon()
                     }
                     Row("Label") {
-                        IconDeprecated(.user)
+                        Image.Base.profile.icon()
                     }
                 }
             }
@@ -372,7 +376,7 @@ struct SectionView_Previews: PreviewProvider {
         VStack(spacing: .zero) {
             SectionView("App") {
                 Row("Label") {
-                    IconDeprecated(.user)
+                    Image.Base.profile.icon()
                 }
             }
             .sectionViewStyle(.smallIndent)
@@ -380,10 +384,10 @@ struct SectionView_Previews: PreviewProvider {
             SectionView("Feedback") {
                 VStack(spacing: .zero) {
                     Row("Label") {
-                        IconDeprecated(.user)
+                        Image.Base.profile.icon()
                     }
                     Row("Label") {
-                        IconDeprecated(.user)
+                        Image.Base.profile.icon()
                     }
                 }
             }
@@ -403,7 +407,7 @@ struct SectionView_Previews: PreviewProvider {
         VStack(spacing: .zero) {
             SectionView("App") {
                 Row("Label") {
-                    IconDeprecated(.user)
+                    Image.Base.profile.icon()
                 }
             }
             .sectionViewStyle(.edgeToEdge)
@@ -411,10 +415,10 @@ struct SectionView_Previews: PreviewProvider {
             SectionView("Feedback") {
                 VStack(spacing: .zero) {
                     Row("Label") {
-                        IconDeprecated(.user)
+                        Image.Base.profile.icon()
                     }
                     Row("Label") {
-                        IconDeprecated(.user)
+                        Image.Base.profile.icon()
                     }
                 }
             }

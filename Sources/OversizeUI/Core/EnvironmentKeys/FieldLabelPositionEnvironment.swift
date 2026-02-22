@@ -9,15 +9,8 @@ public enum FieldLabelPosition: Sendable {
     case `default`, adjacent, overInput
 }
 
-private struct FieldLabelPositionKey: EnvironmentKey {
-    static let defaultValue: FieldLabelPosition = .default
-}
-
 public extension EnvironmentValues {
-    var fieldLabelPosition: FieldLabelPosition {
-        get { self[FieldLabelPositionKey.self] }
-        set { self[FieldLabelPositionKey.self] = newValue }
-    }
+    @Entry var fieldLabelPosition: FieldLabelPosition = .default
 }
 
 public extension View {

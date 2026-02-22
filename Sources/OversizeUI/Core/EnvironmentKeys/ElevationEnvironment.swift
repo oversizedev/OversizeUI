@@ -5,15 +5,8 @@
 
 import SwiftUI
 
-private struct ElevationStateKey: EnvironmentKey {
-    static let defaultValue: Elevation = .z0
-}
-
 public extension EnvironmentValues {
-    var elevation: Elevation {
-        get { self[ElevationStateKey.self] }
-        set { self[ElevationStateKey.self] = newValue }
-    }
+    @Entry var elevation: Elevation = .z0
 }
 
 public extension View {

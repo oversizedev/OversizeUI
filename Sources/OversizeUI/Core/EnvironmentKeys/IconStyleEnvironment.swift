@@ -9,15 +9,8 @@ public enum IconStyle: Sendable {
     case line, fill, twoTone
 }
 
-private struct IconStyleKey: EnvironmentKey {
-    static let defaultValue: IconStyle = .line
-}
-
 public extension EnvironmentValues {
-    var iconStyle: IconStyle {
-        get { self[IconStyleKey.self] }
-        set { self[IconStyleKey.self] = newValue }
-    }
+    @Entry var iconStyle: IconStyle = .line
 }
 
 public extension View {

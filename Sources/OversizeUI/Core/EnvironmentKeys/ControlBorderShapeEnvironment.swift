@@ -10,15 +10,8 @@ public enum ControlBorderShape: Sendable {
     case roundedRectangle(radius: Space = .xSmall)
 }
 
-private struct ControlBorderShapeKey: EnvironmentKey {
-    static let defaultValue: ControlBorderShape = .roundedRectangle(radius: .xSmall)
-}
-
 public extension EnvironmentValues {
-    var controlBorderShape: ControlBorderShape {
-        get { self[ControlBorderShapeKey.self] }
-        set { self[ControlBorderShapeKey.self] = newValue }
-    }
+    @Entry var controlBorderShape: ControlBorderShape = .roundedRectangle(radius: .xSmall)
 }
 
 public extension View {

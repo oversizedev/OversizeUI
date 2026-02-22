@@ -7,12 +7,7 @@ import SwiftUI
 
 // swiftlint:disable all
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-public struct Select<Element: Equatable, Content, Selection, Actions, ContentUnavailable: View>: View
-    where
-    Content: View,
-    Actions: View,
-    Selection: View
-{
+public struct Select<Element: Equatable, Content: View, Selection: View, Actions: View, ContentUnavailable: View>: View {
     @Environment(\.theme) private var theme: ThemeSettings
     public typealias Data = [Element]
 
@@ -63,7 +58,7 @@ public struct Select<Element: Equatable, Content, Selection, Actions, ContentUna
                     Text(label)
                 }
                 Spacer()
-                IconDeprecated(.chevronDown, color: .onSurfacePrimary)
+                Image.Base.chevronDown.icon(.onSurfacePrimary)
             }
         }
         .buttonStyle(.field)
@@ -125,11 +120,19 @@ public struct Select<Element: Equatable, Content, Selection, Actions, ContentUna
             .toolbarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel", systemImage: "xmark") {
-                        showModal = false
-                    }
+                    Button(
+                        "Close",
+                        systemImage: "xmark",
+                        role: .cancel,
+                        action: {
+                            showModal = false
+                        }
+                    )
                     .labelStyle(.toolbar)
                     .buttonStyle(.toolbarSecondary)
+                    #if !os(tvOS) && !os(watchOS)
+                        .keyboardShortcut(.cancelAction)
+                    #endif
                 }
 
                 ToolbarItem(placement: .confirmationAction) {

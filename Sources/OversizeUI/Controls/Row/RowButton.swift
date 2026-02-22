@@ -16,13 +16,13 @@ public struct RowButton: View {
     @Environment(\.controlMargin) var controlPadding: ControlMargin
     public var text: String
     public var style: RowButtonStyle
-    public var icon: IconsNames
+    public var icon: Image?
     public var tapAction: () -> Void
 
     public init(
         _ text: String,
         style: RowButtonStyle = .row,
-        icon: IconsNames = .none,
+        icon: Image? = nil,
         action: @escaping () -> Void
     ) {
         self.text = text
@@ -39,9 +39,9 @@ public struct RowButton: View {
                         Spacer()
                     }
 
-                    if icon != .none {
+                    if let icon {
                         Surface {
-                            IconDeprecated(icon)
+                            icon.icon()
                         }
                         .surfaceStyle(.secondary)
                         .surfaceContentMargins(.xxSmall)

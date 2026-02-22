@@ -9,15 +9,8 @@ public enum MultiSelectStyle: Sendable {
     case `default`, section
 }
 
-private struct MultiSelectStyleKey: EnvironmentKey {
-    static let defaultValue: MultiSelectStyle = .default
-}
-
 public extension EnvironmentValues {
-    var multiSelectStyle: MultiSelectStyle {
-        get { self[MultiSelectStyleKey.self] }
-        set { self[MultiSelectStyleKey.self] = newValue }
-    }
+    @Entry var multiSelectStyle: MultiSelectStyle = .default
 }
 
 public extension View {

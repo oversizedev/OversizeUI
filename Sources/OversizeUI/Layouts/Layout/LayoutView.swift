@@ -10,7 +10,7 @@ public struct LayoutView<
     Content: View,
     Background: View
 >: View {
-    @Environment(\.screenSize) private var screenSize
+    @Environment(\.safeAreaInsets) private var safeAreaInsets
 
     public typealias ScrollAction = @MainActor @Sendable (_ offset: CGPoint, _ headerVisibleRatio: CGFloat) -> Void
 
@@ -32,7 +32,7 @@ public struct LayoutView<
     }
 
     private func handleScrollOffset(_ offset: CGPoint) {
-        let calcHeaderHeight = 44 + screenSize.safeAreaTop
+        let calcHeaderHeight = 44 + safeAreaInsets.top
         let visibleRatio: CGFloat = (calcHeaderHeight + offset.y) / calcHeaderHeight
         onScroll?(offset, visibleRatio)
     }

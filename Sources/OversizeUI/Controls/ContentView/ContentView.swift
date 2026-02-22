@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-public struct ContentView<A>: View where A: View {
+public struct ContentView<A: View>: View {
     @Environment(\.multilineTextAlignment) var multilineTextAlignment
 
     private let image: Image?

@@ -17,7 +17,9 @@ public struct ToolbarLabelStyle: LabelStyle {
 }
 
 public extension LabelStyle where Self == ToolbarLabelStyle {
-    static var toolbar: Self { .init() }
+    static var toolbar: Self {
+        .init()
+    }
 }
 
 public struct ToolbarProminentStyle: PrimitiveButtonStyle {
@@ -43,9 +45,13 @@ public struct ToolbarSecondaryStyle: PrimitiveButtonStyle {
 }
 
 public extension PrimitiveButtonStyle where Self == ToolbarProminentStyle {
-    static var toolbarPrimary: Self { .init() }
+    static var toolbarPrimary: Self {
+        .init()
+    }
 }
 
 public extension PrimitiveButtonStyle where Self == ToolbarSecondaryStyle {
-    static var toolbarSecondary: Self { .init() }
+    static var toolbarSecondary: Self {
+        .init()
+    }
 }

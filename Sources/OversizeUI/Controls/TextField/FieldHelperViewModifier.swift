@@ -50,11 +50,6 @@ public struct FieldHelperViewModifier: ViewModifier {
 }
 
 public extension View {
-    @available(*, deprecated, renamed: "fieldHelper")
-    func helper(_ text: Binding<String>, style: Binding<FieldHelperStyle>) -> some View {
-        modifier(FieldHelperViewModifier(helperText: text, helperStyle: style))
-    }
-
     func fieldHelper(_ text: Binding<String>, style: Binding<FieldHelperStyle>) -> some View {
         modifier(FieldHelperViewModifier(helperText: text, helperStyle: style))
     }

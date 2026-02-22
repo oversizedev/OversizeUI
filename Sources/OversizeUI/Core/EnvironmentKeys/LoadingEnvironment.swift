@@ -5,15 +5,8 @@
 
 import SwiftUI
 
-private struct LoadingStateKey: EnvironmentKey {
-    static let defaultValue: Bool = false
-}
-
 public extension EnvironmentValues {
-    var isLoading: Bool {
-        get { self[LoadingStateKey.self] }
-        set { self[LoadingStateKey.self] = newValue }
-    }
+    @Entry var isLoading: Bool = false
 }
 
 public extension View {

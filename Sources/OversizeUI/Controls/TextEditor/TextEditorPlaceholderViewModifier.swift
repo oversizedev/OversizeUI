@@ -137,7 +137,6 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
         }
     }
 
-    @ViewBuilder
     var overlay: some View {
         RoundedRectangle(cornerRadius: fieldRadius, style: .continuous)
             .stroke(overlayBorderColor, lineWidth: isFocused ? 2 : CGFloat(theme.borderSize))

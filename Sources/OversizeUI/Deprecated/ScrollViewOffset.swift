@@ -5,6 +5,7 @@
 
 import SwiftUI
 
+@available(*, deprecated, renamed: "ScrollViewWithOffsetTracking")
 public struct ScrollViewOffset<Content: View>: View {
     public var contnt: Content
 

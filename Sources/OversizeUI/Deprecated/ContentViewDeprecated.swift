@@ -5,6 +5,7 @@
 
 import SwiftUI
 
+@available(*, deprecated, message: "Use ContentView with native SwiftUI button actions")
 public enum ContenButtonType {
     case close
     case closeAction(action: () -> Void)
@@ -16,6 +17,7 @@ public enum ContenButtonType {
     case disabled(_ text: String)
 }
 
+@available(*, deprecated, renamed: "ContentView")
 public struct ContentViewDeprecated: View {
     @Environment(\.multilineTextAlignment) var multilineTextAlignment
     @Environment(\.dismiss) var dismiss
@@ -78,7 +80,7 @@ public struct ContentViewDeprecated: View {
         switch primaryButton {
         case .close:
             Button(action: { dismiss() }) {
-                IconDeprecated(.xMini)
+                Image.Base.Close.mini.icon()
             }
             #if os(iOS)
             .buttonStyle(.secondary)
@@ -88,7 +90,7 @@ public struct ContentViewDeprecated: View {
             #endif
         case .back:
             Button(action: { dismiss() }) {
-                IconDeprecated(.arrowLeft)
+                Image.Base.arrowLeft.icon()
             }
             #if os(iOS)
             .buttonStyle(.secondary)
@@ -133,7 +135,7 @@ public struct ContentViewDeprecated: View {
             #endif
         case let .closeAction(action: action):
             Button(action: action) {
-                IconDeprecated(.xMini)
+                Image.Base.Close.mini.icon()
             }
             #if os(iOS)
             .buttonStyle(.secondary)
@@ -143,7 +145,7 @@ public struct ContentViewDeprecated: View {
             #endif
         case let .backAction(action: action):
             Button(action: action) {
-                IconDeprecated(.arrowLeft)
+                Image.Base.arrowLeft.icon()
             }
             #if os(iOS)
             .buttonStyle(.secondary)
@@ -172,14 +174,14 @@ public struct ContentViewDeprecated: View {
         switch secondaryButton {
         case .close:
             Button(action: { dismiss() }) {
-                IconDeprecated(.xMini)
+                Image.Base.Close.mini.icon()
             }
             #if os(iOS)
             .buttonStyle(.secondary)
             #endif
         case .back:
             Button(action: { dismiss() }) {
-                IconDeprecated(.arrowLeft)
+                Image.Base.arrowLeft.icon()
             }
             #if os(iOS)
             .buttonStyle(.secondary)
@@ -209,14 +211,14 @@ public struct ContentViewDeprecated: View {
             #endif
         case let .closeAction(action: action):
             Button(action: action) {
-                IconDeprecated(.xMini)
+                Image.Base.Close.mini.icon()
             }
             #if os(iOS)
             .buttonStyle(.secondary)
             #endif
         case let .backAction(action: action):
             Button(action: action) {
-                IconDeprecated(.arrowLeft)
+                Image.Base.arrowLeft.icon()
             }
             #if os(iOS)
             .buttonStyle(.secondary)

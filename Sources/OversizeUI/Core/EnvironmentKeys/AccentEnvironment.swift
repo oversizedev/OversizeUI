@@ -5,15 +5,8 @@
 
 import SwiftUI
 
-private struct AccentStateKey: EnvironmentKey {
-    static let defaultValue: Bool = false
-}
-
 public extension EnvironmentValues {
-    var isAccent: Bool {
-        get { self[AccentStateKey.self] }
-        set { self[AccentStateKey.self] = newValue }
-    }
+    @Entry var isAccent: Bool = false
 }
 
 public extension View {

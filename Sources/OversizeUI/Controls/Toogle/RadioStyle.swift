@@ -41,7 +41,9 @@ public struct RadioStyle: ToggleStyle {
 }
 
 public extension ToggleStyle where Self == RadioStyle {
-    static var radio: RadioStyle { .init() }
+    static var radio: RadioStyle {
+        .init()
+    }
 }
 
 struct Radio_Previews: PreviewProvider {

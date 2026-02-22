@@ -5,8 +5,9 @@
 
 import SwiftUI
 
+@available(*, deprecated, renamed: "LayoutView")
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
-public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>: View where Content: View, LeadingBar: View, TrailingBar: View, TopToolbar: View, TitleLabel: View {
+public struct PageView<Content: View, LeadingBar: View, TrailingBar: View, TopToolbar: View, TitleLabel: View>: View {
     @Environment(\.screenSize) var screenSize
 
     private let title: String?
@@ -127,7 +128,7 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
         case .none:
             EmptyView()
         case .icon:
-            IconDeprecated(.xMini, color: .onSurfaceSecondary)
+            Image.Base.Close.mini.icon(.onSurfaceSecondary)
                 .background {
                     Circle()
                         .fill(Color.backgroundTertiary)
@@ -269,7 +270,8 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
                             bottomToolbar()
                         }
                     }
-                })
+                }
+            )
             if style != .none {
                 HStack {
                     Spacer()
@@ -282,6 +284,7 @@ public struct PageView<Content, LeadingBar, TrailingBar, TopToolbar, TitleLabel>
     }
 }
 
+@available(*, deprecated, renamed: "LayoutView")
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView {
     enum PageViewBottomType {
@@ -293,6 +296,7 @@ public extension PageView {
     }
 }
 
+@available(*, deprecated, renamed: "LayoutView")
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where LeadingBar == EmptyView, TitleLabel == EmptyView {
     init(
@@ -310,6 +314,7 @@ public extension PageView where LeadingBar == EmptyView, TitleLabel == EmptyView
     }
 }
 
+@available(*, deprecated, renamed: "LayoutView")
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TrailingBar == EmptyView, TitleLabel == EmptyView {
     init(
@@ -327,6 +332,7 @@ public extension PageView where TrailingBar == EmptyView, TitleLabel == EmptyVie
     }
 }
 
+@available(*, deprecated, renamed: "LayoutView")
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TrailingBar == EmptyView, LeadingBar == EmptyView, TitleLabel == EmptyView {
     init(
@@ -345,6 +351,7 @@ public extension PageView where TrailingBar == EmptyView, LeadingBar == EmptyVie
     }
 }
 
+@available(*, deprecated, renamed: "LayoutView")
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TrailingBar == EmptyView, LeadingBar == EmptyView, TopToolbar == EmptyView, TitleLabel == EmptyView {
     init(
@@ -364,6 +371,7 @@ public extension PageView where TrailingBar == EmptyView, LeadingBar == EmptyVie
     }
 }
 
+@available(*, deprecated, renamed: "LayoutView")
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where LeadingBar == EmptyView, TopToolbar == EmptyView, TitleLabel == EmptyView {
     init(
@@ -382,6 +390,7 @@ public extension PageView where LeadingBar == EmptyView, TopToolbar == EmptyView
     }
 }
 
+@available(*, deprecated, renamed: "LayoutView")
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TrailingBar == EmptyView, TopToolbar == EmptyView, TitleLabel == EmptyView {
     init(
@@ -400,6 +409,7 @@ public extension PageView where TrailingBar == EmptyView, TopToolbar == EmptyVie
     }
 }
 
+@available(*, deprecated, renamed: "LayoutView")
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TopToolbar == EmptyView, TitleLabel == EmptyView {
     init(
@@ -417,6 +427,7 @@ public extension PageView where TopToolbar == EmptyView, TitleLabel == EmptyView
     }
 }
 
+@available(*, deprecated, renamed: "LayoutView")
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TrailingBar == EmptyView, LeadingBar == EmptyView, TopToolbar == EmptyView {
     init(
@@ -435,6 +446,7 @@ public extension PageView where TrailingBar == EmptyView, LeadingBar == EmptyVie
     }
 }
 
+@available(*, deprecated, renamed: "LayoutView")
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TrailingBar == EmptyView, TopToolbar == EmptyView {
     init(
@@ -452,6 +464,7 @@ public extension PageView where TrailingBar == EmptyView, TopToolbar == EmptyVie
     }
 }
 
+@available(*, deprecated, renamed: "LayoutView")
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where LeadingBar == EmptyView, TopToolbar == EmptyView {
     init(
@@ -469,6 +482,7 @@ public extension PageView where LeadingBar == EmptyView, TopToolbar == EmptyView
     }
 }
 
+@available(*, deprecated, renamed: "LayoutView")
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TrailingBar == EmptyView {
     init(
@@ -485,6 +499,7 @@ public extension PageView where TrailingBar == EmptyView {
     }
 }
 
+@available(*, deprecated, renamed: "LayoutView")
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where LeadingBar == EmptyView {
     init(
@@ -501,6 +516,7 @@ public extension PageView where LeadingBar == EmptyView {
     }
 }
 
+@available(*, deprecated, renamed: "LayoutView")
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TopToolbar == EmptyView {
     init(
@@ -517,6 +533,7 @@ public extension PageView where TopToolbar == EmptyView {
     }
 }
 
+@available(*, deprecated, renamed: "LayoutView")
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public extension PageView where TitleLabel == EmptyView {
     init(

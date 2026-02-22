@@ -6,13 +6,8 @@
 import SwiftUI
 
 // swiftlint:disable all
-@available(iOS 16.0, *)
-public struct MultiSelectPicker<Element: Equatable, Content, Actions, ContentUnavailable>: View
-    where
-    Content: View,
-    Actions: View,
-    ContentUnavailable: View
-{
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+public struct MultiSelectPicker<Element: Equatable, Content: View, Actions: View, ContentUnavailable: View>: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.multiSelectStyle) private var multiSelectStyle
     @Environment(\.theme) private var theme: ThemeSettings
@@ -43,27 +38,37 @@ public struct MultiSelectPicker<Element: Equatable, Content, Actions, ContentUna
     }
 
     public var body: some View {
-        Page(title) {
+        LayoutView(title) {
             if data.isEmpty, let contentUnavailable {
                 contentUnavailable
             } else {
                 pageContent(data, selectStyle: multiSelectStyle)
             }
+        } background: {
+            Color.backgroundSecondary
         }
-        .backgroundSecondary()
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
-                Button {
-                    dismiss()
-                } label: {
-                    Image.Base.close.icon()
-                }
+                Button(
+                    "Close",
+                    systemImage: "xmark",
+                    role: .cancel,
+                    action: {
+                        dismiss()
+                    }
+                )
+                .labelStyle(.toolbar)
+                .buttonStyle(.toolbarSecondary)
+                #if !os(tvOS) && !os(watchOS)
+                    .keyboardShortcut(.cancelAction)
+                #endif
             }
 
             ToolbarItem(placement: .confirmationAction) {
                 actions
             }
         }
+        .toolbarTitleDisplayMode(.inline)
         .onAppear {
             defaultSelect()
         }
@@ -117,7 +122,7 @@ public struct MultiSelectPicker<Element: Equatable, Content, Actions, ContentUna
     }
 }
 
-@available(iOS 16.0, *)
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 public extension MultiSelectPicker where ContentUnavailable == Never {
     init(
         _ title: String,
@@ -135,7 +140,7 @@ public extension MultiSelectPicker where ContentUnavailable == Never {
     }
 }
 
-@available(iOS 16.0, *)
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 public extension MultiSelectPicker where Actions == Never {
     init(
         _ title: String,
@@ -153,7 +158,7 @@ public extension MultiSelectPicker where Actions == Never {
     }
 }
 
-@available(iOS 16.0, *)
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 public extension MultiSelectPicker where ContentUnavailable == Never, Actions == Never {
     init(
         _ title: String,

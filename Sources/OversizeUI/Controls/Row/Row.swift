@@ -9,7 +9,7 @@ public enum RowClearIconStyle {
     case `default`, onSurface
 }
 
-public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, TrailingLabel: View {
+public struct Row<LeadingLabel: View, TrailingLabel: View>: View {
     @Environment(\.elevation) private var elevation: Elevation
     @Environment(\.controlRadius) var controlRadius
     @Environment(\.rowContentMargins) var controlMargins: EdgeSpaceInsets
@@ -75,7 +75,6 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
         }
     }
 
-    @ViewBuilder
     private func content(_ textAlignment: TextAlignment) -> some View {
         VStack(alignment: .leading) {
             HStack(spacing: .zero) {
@@ -137,7 +136,7 @@ public struct Row<LeadingLabel, TrailingLabel>: View where LeadingLabel: View, T
                 сlearAction?()
             } label: {
                 ZStack {
-                    IconDeprecated(.xMini, color: .onSurfaceTertiary)
+                    Image.Base.Close.mini.icon(.onSurfaceTertiary)
                         .background(
                             RoundedRectangle(cornerRadius: .small, style: .continuous)
                                 .fillSurfaceSecondary()
@@ -425,18 +424,18 @@ struct ListRow_Previews: PreviewProvider {
             Row("Title", subtitle: "Subtitle")
 
             Row("Title", subtitle: "Subtitle") {
-                IconDeprecated(.calendar)
+                Image.Base.calendar.icon()
             }
 
             Radio(isOn: true, label: {
                 Row("Title", subtitle: "Subtitle") {
-                    IconDeprecated(.calendar)
+                    Image.Base.calendar.icon()
                 }
             })
 
             Checkbox(isOn: .constant(true), label: {
                 Row("Title", subtitle: "Subtitle") {
-                    IconDeprecated(.calendar)
+                    Image.Base.calendar.icon()
                 }
                 .rowOnSurface()
             })

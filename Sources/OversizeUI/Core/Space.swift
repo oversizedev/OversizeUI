@@ -42,7 +42,7 @@ public enum Space: CGFloat, Sendable {
 
 public extension CGFloat {
     /// 0 spacing.
-    // static let zero = Space.zero.rawValue
+    /// static let zero = Space.zero.rawValue
     /// 4 spacing.
     static let xxxSmall = Space.xxxSmall.rawValue
     /// 8 spacing.

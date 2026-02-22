@@ -22,8 +22,8 @@ public struct TextFieldExtended: View {
     @Binding public var helperStyle: FieldHelperStyle
     public var placeholderPosition: TextFieldPlaceholderPosition
 
-    public var leadingImage: IconsNames
-    public var trallingImage: IconsNames
+    public var leadingImage: Image?
+    public var trallingImage: Image?
 
     public var secure: Bool
     @State private var focused: Bool = false
@@ -33,8 +33,8 @@ public struct TextFieldExtended: View {
         text: Binding<String>,
         helperText: Binding<String> = .constant(""),
         helperStyle: Binding<FieldHelperStyle> = .constant(.none),
-        leadingImage: IconsNames = .none,
-        trallingImage: IconsNames = .none,
+        leadingImage: Image? = nil,
+        trallingImage: Image? = nil,
         placeholderPosition: TextFieldPlaceholderPosition = .overField,
         secure: Bool = false
     ) {
@@ -70,8 +70,8 @@ public struct TextFieldExtended: View {
                 }
 
                 HStack {
-                    if leadingImage != .none {
-                        IconDeprecated(leadingImage)
+                    if let leadingImage {
+                        leadingImage.icon()
                     }
 
                     if secure {
@@ -88,8 +88,8 @@ public struct TextFieldExtended: View {
                         .foregroundColor(.onSurfacePrimary)
                     }
 
-                    if trallingImage != .none {
-                        IconDeprecated(trallingImage)
+                    if let trallingImage {
+                        trallingImage.icon()
                     }
 
                     if helperStyle == .errorText {
@@ -142,23 +142,23 @@ struct TextFieldExtended_Previews: PreviewProvider {
             VStack(spacing: 24) {
                 TextFieldExtended("Text", text: .constant("Text"))
 
-                TextFieldExtended("Text", text: .constant("Text"), helperText: .constant("Helper"), helperStyle: .constant(.helperText), leadingImage: .calendar)
+                TextFieldExtended("Text", text: .constant("Text"), helperText: .constant("Helper"), helperStyle: .constant(.helperText), leadingImage: Image.Base.calendar)
 
-                TextFieldExtended("Text", text: .constant("Text"), helperText: .constant("Helper"), helperStyle: .constant(.helperText), leadingImage: .calendar)
+                TextFieldExtended("Text", text: .constant("Text"), helperText: .constant("Helper"), helperStyle: .constant(.helperText), leadingImage: Image.Base.calendar)
 
-                TextFieldExtended("Text", text: .constant("Text"), helperText: .constant("Helper"), helperStyle: .constant(.errorText), leadingImage: .calendar)
+                TextFieldExtended("Text", text: .constant("Text"), helperText: .constant("Helper"), helperStyle: .constant(.errorText), leadingImage: Image.Base.calendar)
 
-                TextFieldExtended("Text", text: .constant("Text"), helperText: .constant("Helper"), helperStyle: .constant(.sussesText), leadingImage: .calendar)
+                TextFieldExtended("Text", text: .constant("Text"), helperText: .constant("Helper"), helperStyle: .constant(.sussesText), leadingImage: Image.Base.calendar)
 
                 TextFieldExtended("Text", text: .constant("Текст"), placeholderPosition: .insideFeield)
 
-                TextFieldExtended("Text", text: .constant("Text"), helperText: .constant("Helper"), helperStyle: .constant(.helperText), leadingImage: .calendar, placeholderPosition: .insideFeield)
+                TextFieldExtended("Text", text: .constant("Text"), helperText: .constant("Helper"), helperStyle: .constant(.helperText), leadingImage: Image.Base.calendar, placeholderPosition: .insideFeield)
 
-                TextFieldExtended("Text", text: .constant("Text"), helperText: .constant("Helper"), helperStyle: .constant(.helperText), leadingImage: .calendar, placeholderPosition: .insideFeield)
+                TextFieldExtended("Text", text: .constant("Text"), helperText: .constant("Helper"), helperStyle: .constant(.helperText), leadingImage: Image.Base.calendar, placeholderPosition: .insideFeield)
 
-                TextFieldExtended("Text", text: .constant("Text"), helperText: .constant("Helper"), helperStyle: .constant(.errorText), leadingImage: .calendar, placeholderPosition: .insideFeield)
+                TextFieldExtended("Text", text: .constant("Text"), helperText: .constant("Helper"), helperStyle: .constant(.errorText), leadingImage: Image.Base.calendar, placeholderPosition: .insideFeield)
 
-                TextFieldExtended("Text", text: .constant("Text"), helperText: .constant("Helper"), helperStyle: .constant(.sussesText), leadingImage: .calendar, placeholderPosition: .insideFeield)
+                TextFieldExtended("Text", text: .constant("Text"), helperText: .constant("Helper"), helperStyle: .constant(.sussesText), leadingImage: Image.Base.calendar, placeholderPosition: .insideFeield)
 
             }.padding()
         }

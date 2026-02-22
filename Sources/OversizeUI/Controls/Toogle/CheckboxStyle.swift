@@ -40,7 +40,9 @@ public struct CheckboxStyle: ToggleStyle {
 }
 
 public extension ToggleStyle where Self == CheckboxStyle {
-    static var checkboxRow: CheckboxStyle { .init() }
+    static var checkboxRow: CheckboxStyle {
+        .init()
+    }
 }
 
 struct Checkbox_Previews: PreviewProvider {

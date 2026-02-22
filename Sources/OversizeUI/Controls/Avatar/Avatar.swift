@@ -153,7 +153,6 @@ public struct Avatar: View {
     }
 
     @available(tvOS, unavailable)
-    @ViewBuilder
     private var avatarLabel: some View {
         HStack(spacing: avatarTextSpace) {
             if let icon {

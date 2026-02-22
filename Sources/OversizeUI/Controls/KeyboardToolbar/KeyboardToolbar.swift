@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-public struct KeyboardToolbar<A>: View where A: View {
+public struct KeyboardToolbar<A: View>: View {
     private let actions: Group<A>?
     private let doneAction: (() -> Void)?
 

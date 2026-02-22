@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-public struct RadioPicker<Element: Equatable, Content>: View where Content: View {
+public struct RadioPicker<Element: Equatable, Content: View>: View {
     public typealias Data = [Element]
     @State private var selectedIndex: Data.Index?
     @Binding private var selection: Data.Element

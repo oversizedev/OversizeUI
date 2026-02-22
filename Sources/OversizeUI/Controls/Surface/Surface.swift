@@ -22,9 +22,17 @@ public struct Surface<Label: View>: View {
 
     private enum Constants {
         /// Colors
-        static var colorPrimary: Color { Color.surfacePrimary }
-        static var colorSecondary: Color { Color.surfaceSecondary }
-        static var colorTertiary: Color { Color.surfaceTertiary }
+        static var colorPrimary: Color {
+            Color.surfacePrimary
+        }
+
+        static var colorSecondary: Color {
+            Color.surfaceSecondary
+        }
+
+        static var colorTertiary: Color {
+            Color.surfaceTertiary
+        }
     }
 
     private let label: Label
@@ -219,33 +227,6 @@ public extension View {
     func surface(_ elevation: Elevation, background: SurfaceStyle) -> some View {
         Surface { self }
             .surfaceStyle(background)
-            .elevation(elevation)
-    }
-
-    @available(*, deprecated, message: "Use without elevation")
-    func surface(elevation: Elevation) -> some View {
-        Surface { self }
-            .elevation(elevation)
-    }
-
-    @available(*, deprecated, message: "Use without elevation")
-    func surface(elevation: Elevation, background: SurfaceStyle) -> some View {
-        Surface { self }
-            .surfaceStyle(background)
-            .elevation(elevation)
-    }
-
-    @available(*, deprecated, message: "Use without elevation")
-    func surface(
-        elevation: Elevation = .z0,
-        background: SurfaceStyle = .primary,
-        padding: Space = .medium,
-        radius: Space = .xSmall
-    ) -> some View {
-        Surface { self }
-            .surfaceStyle(background)
-            .controlPadding(padding)
-            .controlRadius(radius)
             .elevation(elevation)
     }
 }

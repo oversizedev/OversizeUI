@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-public struct HUDContent<Title, Icon>: View where Title: View, Icon: View {
+public struct HUDContent<Title: View, Icon: View>: View {
     private let text: String?
     private let title: Title?
     private let icon: Icon?

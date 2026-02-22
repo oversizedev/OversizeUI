@@ -12,8 +12,8 @@ public enum Platform: Sendable {
     case iPhone, iPadOS, macOS, tvOS, watchOS, visionOS, carPlay, other
 }
 
-private struct PlatformKey: EnvironmentKey {
-    static let defaultValue: Platform = {
+public extension EnvironmentValues {
+    @Entry var platform: Platform = {
         #if os(macOS) || targetEnvironment(macCatalyst)
         return .macOS
         #elseif os(watchOS)
@@ -45,11 +45,4 @@ private struct PlatformKey: EnvironmentKey {
         return .other
         #endif
     }()
-}
-
-public extension EnvironmentValues {
-    var platform: Platform {
-        get { self[PlatformKey.self] }
-        set { self[PlatformKey.self] = newValue }
-    }
 }

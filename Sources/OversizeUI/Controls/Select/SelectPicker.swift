@@ -7,11 +7,7 @@ import SwiftUI
 
 // swiftlint:disable all
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-public struct SelectPicker<Element: Hashable, Content, Actions, ContentUnavailable: View>: View
-    where
-    Content: View,
-    Actions: View
-{
+public struct SelectPicker<Element: Hashable, Content: View, Actions: View, ContentUnavailable: View>: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.selectStyle) private var selectStyle
@@ -53,16 +49,26 @@ public struct SelectPicker<Element: Hashable, Content, Actions, ContentUnavailab
         }
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
-                Button("Cancel", systemImage: "xmark") {
-                    dismiss()
-                }
+                Button(
+                    "Close",
+                    systemImage: "xmark",
+                    role: .cancel,
+                    action: {
+                        dismiss()
+                    }
+                )
                 .labelStyle(.toolbar)
+                .buttonStyle(.toolbarSecondary)
+                #if !os(tvOS) && !os(watchOS)
+                    .keyboardShortcut(.cancelAction)
+                #endif
             }
 
             ToolbarItem(placement: .confirmationAction) {
                 actions
             }
         }
+        .toolbarTitleDisplayMode(.inline)
         .onAppear {
             defaultSelect()
         }

@@ -6,6 +6,7 @@
 import SwiftUI
 
 #if os(iOS)
+@available(iOS 17.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
@@ -38,51 +39,8 @@ public struct DatePickerSheet: View {
     }
 
     public var body: some View {
-        if #available(iOS 26.0, *) {
-            NavigationStack {
-                LayoutView(title) {
-                    SectionView {
-                        VStack {
-                            if let minimumDate {
-                                DatePicker("", selection: $date, in: minimumDate..., displayedComponents: displayedComponents)
-                                    .datePickerStyle(.graphical)
-                                    .labelsHidden()
-                            } else {
-                                DatePicker("", selection: $date, displayedComponents: displayedComponents)
-                                    .datePickerStyle(.graphical)
-                                    .labelsHidden()
-                            }
-                        }
-                        .padding(.horizontal, .small)
-                        .padding(.vertical, .xxxSmall)
-                    }
-                    .surfaceContentMargins(.zero)
-                } background: {
-                    Color.backgroundSecondary
-                }
-                .toolbar {
-                    ToolbarItemGroup(placement: .cancellationAction) {
-                        Button(role: .cancel) {
-                            dismiss()
-                        } label: {
-                            Image.Base.close.icon()
-                        }
-                    }
-
-                    ToolbarItemGroup(placement: .primaryAction) {
-                        Button(role: .confirm) {
-                            selection = date
-                            optionalSelection = date
-                            dismiss()
-                        } label: {
-                            Text("Done")
-                        }
-                    }
-                }
-                .toolbarTitleDisplayMode(.inline)
-            }
-        } else {
-            PageView(title) {
+        NavigationStack {
+            LayoutView(title) {
                 SectionView {
                     VStack {
                         if let minimumDate {
@@ -99,18 +57,44 @@ public struct DatePickerSheet: View {
                     .padding(.vertical, .xxxSmall)
                 }
                 .surfaceContentMargins(.zero)
+            } background: {
+                Color.backgroundSecondary
             }
-            .backgroundSecondary()
-            .leadingBar {
-                BarButton(.close)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(
+                        "Close",
+                        systemImage: "xmark",
+                        role: .cancel,
+                        action: {
+                            dismiss()
+                        }
+                    )
+                    .labelStyle(.toolbar)
+                    .buttonStyle(.toolbarSecondary)
+                    #if !os(tvOS)
+                        .keyboardShortcut(.cancelAction)
+                    #endif
+                }
+
+                ToolbarItem(placement: .primaryAction) {
+                    Button(
+                        "Done",
+                        systemImage: "checkmark",
+                        action: {
+                            selection = date
+                            optionalSelection = date
+                            dismiss()
+                        }
+                    )
+                    .labelStyle(.toolbar)
+                    .buttonStyle(.toolbarPrimary)
+                    #if !os(tvOS)
+                        .keyboardShortcut(.defaultAction)
+                    #endif
+                }
             }
-            .trailingBar {
-                BarButton(.accent("Done", action: {
-                    selection = date
-                    optionalSelection = date
-                    dismiss()
-                }))
-            }
+            .toolbarTitleDisplayMode(.inline)
         }
     }
 

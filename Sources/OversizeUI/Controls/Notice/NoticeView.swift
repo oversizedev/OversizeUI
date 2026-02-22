@@ -37,7 +37,7 @@ import SwiftUI
 /// - <doc:Components/NoticeView>
 /// - ``Button``
 /// - ``Surface``
-public struct NoticeView<A>: View where A: View {
+public struct NoticeView<A: View>: View {
     /// The image displayed in the notice.
     let image: Image?
 
@@ -102,20 +102,26 @@ public struct NoticeView<A>: View where A: View {
                                 .frame(width: 32, height: 32)
                         }
                     }
-
-                    Text(title)
-                        .headline(.semibold)
-                        .onSurfacePrimary()
-                        .multilineTextAlignment(.leading)
-                        .padding(.trailing, closeAction != nil ? .medium : .zero)
+                    
+                    VStack(alignment: .leading, spacing: .xxSmall) {
+                        
+                        Text(title)
+                            .headline(.semibold)
+                            .onSurfacePrimary()
+                            .multilineTextAlignment(.leading)
+                            .padding(.trailing, closeAction != nil ? .medium : .zero)
+                        
+                        subtitle.map { text in
+                            Text(text)
+                                .body(.medium)
+                                .onSurfaceSecondary()
+                                .multilineTextAlignment(.leading)
+                        }
+                        
+                    }
                 }
 
-                subtitle.map { text in
-                    Text(text)
-                        .body(.medium)
-                        .onSurfaceSecondary()
-                        .multilineTextAlignment(.leading)
-                }
+                
 
                 #if os(iOS)
                 if actions != nil {
@@ -136,9 +142,9 @@ public struct NoticeView<A>: View where A: View {
                 Button {
                     closeAction?()
                 } label: {
-                    IconDeprecated(.xMini, color: .onSurfacePrimary)
+                    Image.Base.Close.mini.icon()
                 }
-                .buttonStyle(subtitle != nil ? .tertiary(infinityWidth: false) : .quaternary(infinityWidth: false))
+                .buttonStyle(subtitle != nil ? .iconTertiary : .iconQuaternary)
                 .controlBorderShape(.capsule)
                 .padding(.small)
                 .controlSize(.mini)

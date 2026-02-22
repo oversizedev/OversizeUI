@@ -6,7 +6,7 @@
 import SwiftUI
 
 public extension View {
-    func onChangeValue<V>(of value: V, _ action: @escaping (V) -> Void) -> some View where V: Equatable {
+    func onChangeValue<V: Equatable>(of value: V, _ action: @escaping (V) -> Void) -> some View {
         #if os(visionOS)
         return onChange(of: value) { _, newValue in
             action(newValue)

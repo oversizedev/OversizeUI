@@ -5,10 +5,9 @@
 
 import SwiftUI
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
-public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLabel>: View
-    where Content: View, Header: View, LeadingBar: View, TrailingBar: View, TopToolbar: View, TitleLabel: View
-{
+public struct Page<Content: View, Header: View, LeadingBar: View, TrailingBar: View, TopToolbar: View, TitleLabel: View>: View {
     @Environment(\.platform) var platform
     @Environment(\.screenSize) private var screenSize
 
@@ -131,7 +130,6 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
         }
     }
 
-    @ViewBuilder
     var scrollHeader: some View {
         ScrollViewHeader(content: pageHeader)
             .frame(height: calcHeaderHeight)
@@ -273,7 +271,7 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
         case .none:
             EmptyView()
         case .icon:
-            IconDeprecated(.xMini, color: .onSurfaceSecondary)
+            Image.Base.Close.mini.icon(.onSurfaceSecondary)
                 .background {
                     Circle()
                         .fill(Color.backgroundTertiary)
@@ -368,7 +366,8 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
                             bottomToolbar()
                         }
                     }
-                })
+                }
+            )
             if style != .none {
                 HStack {
                     Spacer()
@@ -381,6 +380,7 @@ public struct Page<Content, Header, LeadingBar, TrailingBar, TopToolbar, TitleLa
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page {
     enum PageViewBottomType {
@@ -388,6 +388,7 @@ public extension Page {
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page {
     @ViewBuilder
@@ -418,6 +419,7 @@ public extension Page {
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where LeadingBar == EmptyView, TitleLabel == EmptyView, Header == EmptyView {
     init(
@@ -441,6 +443,7 @@ public extension Page where LeadingBar == EmptyView, TitleLabel == EmptyView, He
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView, TitleLabel == EmptyView, Header == EmptyView {
     init(
@@ -464,6 +467,7 @@ public extension Page where TrailingBar == EmptyView, TitleLabel == EmptyView, H
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, TitleLabel == EmptyView, Header == EmptyView {
     init(
@@ -488,6 +492,7 @@ public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, T
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, TopToolbar == EmptyView, TitleLabel == EmptyView, Header == EmptyView {
     init(
@@ -513,6 +518,7 @@ public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, T
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where LeadingBar == EmptyView, TopToolbar == EmptyView, TitleLabel == EmptyView, Header == EmptyView {
     init(
@@ -537,6 +543,7 @@ public extension Page where LeadingBar == EmptyView, TopToolbar == EmptyView, Ti
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView, TopToolbar == EmptyView, TitleLabel == EmptyView, Header == EmptyView {
     init(
@@ -561,6 +568,7 @@ public extension Page where TrailingBar == EmptyView, TopToolbar == EmptyView, T
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where TopToolbar == EmptyView, TitleLabel == EmptyView, Header == EmptyView {
     init(
@@ -584,6 +592,7 @@ public extension Page where TopToolbar == EmptyView, TitleLabel == EmptyView, He
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, TopToolbar == EmptyView, Header == EmptyView {
     init(
@@ -608,6 +617,7 @@ public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, T
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView, TopToolbar == EmptyView, Header == EmptyView {
     init(
@@ -631,6 +641,7 @@ public extension Page where TrailingBar == EmptyView, TopToolbar == EmptyView, H
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where LeadingBar == EmptyView, TopToolbar == EmptyView, Header == EmptyView {
     init(
@@ -654,6 +665,7 @@ public extension Page where LeadingBar == EmptyView, TopToolbar == EmptyView, He
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView, Header == EmptyView {
     init(
@@ -676,6 +688,7 @@ public extension Page where TrailingBar == EmptyView, Header == EmptyView {
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where LeadingBar == EmptyView, Header == EmptyView {
     init(
@@ -698,6 +711,7 @@ public extension Page where LeadingBar == EmptyView, Header == EmptyView {
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where TopToolbar == EmptyView, Header == EmptyView {
     init(
@@ -720,6 +734,7 @@ public extension Page where TopToolbar == EmptyView, Header == EmptyView {
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where TitleLabel == EmptyView, Header == EmptyView {
     init(
@@ -742,6 +757,7 @@ public extension Page where TitleLabel == EmptyView, Header == EmptyView {
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where LeadingBar == EmptyView, TitleLabel == EmptyView {
     init(
@@ -766,6 +782,7 @@ public extension Page where LeadingBar == EmptyView, TitleLabel == EmptyView {
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView, TitleLabel == EmptyView {
     init(
@@ -790,6 +807,7 @@ public extension Page where TrailingBar == EmptyView, TitleLabel == EmptyView {
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, TitleLabel == EmptyView {
     init(
@@ -815,6 +833,7 @@ public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, T
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, TopToolbar == EmptyView, TitleLabel == EmptyView {
     init(
@@ -841,6 +860,7 @@ public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, T
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where LeadingBar == EmptyView, TopToolbar == EmptyView, TitleLabel == EmptyView {
     init(
@@ -866,6 +886,7 @@ public extension Page where LeadingBar == EmptyView, TopToolbar == EmptyView, Ti
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView, TopToolbar == EmptyView, TitleLabel == EmptyView {
     init(
@@ -891,6 +912,7 @@ public extension Page where TrailingBar == EmptyView, TopToolbar == EmptyView, T
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where TopToolbar == EmptyView, TitleLabel == EmptyView {
     init(
@@ -915,6 +937,7 @@ public extension Page where TopToolbar == EmptyView, TitleLabel == EmptyView {
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, TopToolbar == EmptyView {
     init(
@@ -940,6 +963,7 @@ public extension Page where TrailingBar == EmptyView, LeadingBar == EmptyView, T
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView, TopToolbar == EmptyView {
     init(
@@ -964,6 +988,7 @@ public extension Page where TrailingBar == EmptyView, TopToolbar == EmptyView {
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where LeadingBar == EmptyView, TopToolbar == EmptyView {
     init(
@@ -988,6 +1013,7 @@ public extension Page where LeadingBar == EmptyView, TopToolbar == EmptyView {
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where TrailingBar == EmptyView {
     init(
@@ -1011,6 +1037,7 @@ public extension Page where TrailingBar == EmptyView {
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where LeadingBar == EmptyView {
     init(
@@ -1034,6 +1061,7 @@ public extension Page where LeadingBar == EmptyView {
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where TopToolbar == EmptyView {
     init(
@@ -1057,6 +1085,7 @@ public extension Page where TopToolbar == EmptyView {
     }
 }
 
+@available(*, deprecated, renamed: "CoverLayoutView")
 @available(iOS 16.0, *)
 public extension Page where TitleLabel == EmptyView {
     init(

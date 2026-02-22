@@ -25,45 +25,14 @@ public struct URLField: View {
 
     public var body: some View {
         TextField(title, text: $urlString, onEditingChanged: { state in
-            #if os(iOS)
-            if state {
+            guard !state else {
                 textFieldHelper = .none
-            } else if let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) {
-                textFieldHelper = .none
-                self.url = url
-            } else {
-                textFieldHelper = .errorText
-                urlString = ""
+                return
             }
-            #else
 
-            if state {
-                textFieldHelper = .none
-            } else if let url = URL(string: urlString) {
-                textFieldHelper = .none
-                self.url = url
-            } else {
-                textFieldHelper = .errorText
-                urlString = ""
-            }
-            #endif
-
+            validateURL()
         }, onCommit: {
-            #if os(iOS)
-            if let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) {
-                textFieldHelper = .none
-                self.url = url
-            } else {
-                textFieldHelper = .errorText
-            }
-            #else
-            if let url = URL(string: urlString) {
-                textFieldHelper = .none
-                self.url = url
-            } else {
-                textFieldHelper = .errorText
-            }
-            #endif
+            validateURL()
         })
         #if os(iOS)
         .keyboardType(.URL)
@@ -77,6 +46,34 @@ public struct URLField: View {
                 urlString = newValue.absoluteString
             }
         }
+    }
+
+    private func validateURL() {
+        let trimmed = urlString.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if trimmed.isEmpty {
+            textFieldHelper = .none
+            url = nil
+            return
+        }
+
+        #if os(iOS)
+        if let validURL = URL(string: trimmed), UIApplication.shared.canOpenURL(validURL) {
+            textFieldHelper = .none
+            url = validURL
+        } else {
+            textFieldHelper = .errorText
+            url = nil
+        }
+        #else
+        if let validURL = URL(string: trimmed) {
+            textFieldHelper = .none
+            url = validURL
+        } else {
+            textFieldHelper = .errorText
+            url = nil
+        }
+        #endif
     }
 }
 #endif
