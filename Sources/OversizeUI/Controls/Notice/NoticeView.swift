@@ -102,26 +102,22 @@ public struct NoticeView<A: View>: View {
                                 .frame(width: 32, height: 32)
                         }
                     }
-                    
+
                     VStack(alignment: .leading, spacing: .xxSmall) {
-                        
                         Text(title)
                             .headline(.semibold)
                             .onSurfacePrimary()
                             .multilineTextAlignment(.leading)
                             .padding(.trailing, closeAction != nil ? .medium : .zero)
-                        
+
                         subtitle.map { text in
                             Text(text)
                                 .body(.medium)
                                 .onSurfaceSecondary()
                                 .multilineTextAlignment(.leading)
                         }
-                        
                     }
                 }
-
-                
 
                 #if os(iOS)
                 if actions != nil {
