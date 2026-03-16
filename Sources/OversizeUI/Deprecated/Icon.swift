@@ -7,7 +7,7 @@ import SwiftUI
 
 @available(*, deprecated, message: "Use Image.Base icons from Icons.swift instead")
 public struct IconDeprecated: View {
-    private enum Constants: Sendable {
+    private enum Constants {
         /// Size
         static let xSmall: CGFloat = xSmall
         static let small: CGFloat = .small

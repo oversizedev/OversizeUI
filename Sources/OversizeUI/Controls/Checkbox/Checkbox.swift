@@ -10,7 +10,7 @@ public enum CheckboxAlignment: Sendable {
 }
 
 public struct Checkbox<Label: View>: View {
-    @Environment(\.rowContentMargins) private var contentInset: EdgeSpaceInsets
+    @Environment(\.rowContentMargins) private var contentInset: EdgeInsets
     @Environment(\.isEnabled) private var isEnabled: Bool
     @Binding var isOn: Bool
     private let label: () -> Label?

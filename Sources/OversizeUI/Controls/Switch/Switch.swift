@@ -10,7 +10,7 @@ public enum SwitchAlignment {
 }
 
 public struct Switch<Label: View>: View {
-    @Environment(\.rowContentMargins) private var contentInset: EdgeSpaceInsets
+    @Environment(\.rowContentMargins) private var contentInset: EdgeInsets
     @Environment(\.isEnabled) private var isEnabled: Bool
     @Binding var isOn: Bool
     private let label: () -> Label?
@@ -39,7 +39,7 @@ public struct Switch<Label: View>: View {
             }
             .contentShape(Rectangle())
             .padding(
-                EdgeSpaceInsets(
+                EdgeInsets(
                     top: title == nil ? .zero : contentInset.top,
                     leading: .zero,
                     bottom: title == nil ? .zero : contentInset.bottom,

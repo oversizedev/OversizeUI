@@ -6,12 +6,14 @@
 import SwiftUI
 
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-public struct ListLayoutView<
+public struct GroupedListLayoutView<
     Content: View,
     Background: View,
     SelectionValue: Hashable
 >: View {
     public typealias ScrollAction = @MainActor @Sendable (_ offset: CGPoint, _ headerVisibleRatio: CGFloat) -> Void
+
+    @Environment(\.screenSize) private var screenSize
 
     @ViewBuilder private var content: Content
     @ViewBuilder private let background: Background
@@ -21,23 +23,44 @@ public struct ListLayoutView<
     private let title: String
 
     public var body: some View {
-        SwiftUI.List(selection: $selection) {
-            content
-                .listRowSeparator(.hidden)
-                .listRowSpacing(0)
+        if #available(iOS 26.0, *) {
+            SwiftUI.List(selection: $selection) {
+                content
+                    .listSectionSeparator(.hidden)
+                    .listRowSeparator(.hidden)
+                    .listRowSpacing(0)
+                    .listSectionMargins(.horizontal, .medium)
+                    .listSectionMargins(.vertical, .xSmall)
+                    .listRowBackground(Color.surfacePrimary)
+            }
+            .navigationTitle(title)
+            .environment(\.defaultMinListHeaderHeight, 40)
+            .environment(\.defaultMinListRowHeight, 56)
+            .headerProminence(.increased)
+            .scrollContentBackground(.hidden)
+            .background(background.ignoresSafeArea())
+            .listStyle(.insetGrouped)
+        } else {
+            SwiftUI.List(selection: $selection) {
+                content
+                    .listSectionSeparator(.hidden)
+                    .listRowSeparator(.hidden)
+                    .listSectionSpacing(24)
+                    .listRowSpacing(0)
+            }
+            .navigationTitle(title)
+            .background(background.ignoresSafeArea())
+            .environment(\.defaultMinListHeaderHeight, 40)
+            .environment(\.defaultMinListRowHeight, 56)
+            .headerProminence(.increased)
+            .listStyle(.insetGrouped)
         }
-        .navigationTitle(title)
-        .environment(\.defaultMinListHeaderHeight, 40)
-        .environment(\.defaultMinListRowHeight, 56)
-        .headerProminence(.increased)
-        .background(background.ignoresSafeArea())
-        .listStyle(.plain)
     }
 
     public init(
         _ title: String,
         @ViewBuilder content: () -> Content,
-        @ViewBuilder background: () -> Background = { Color.backgroundPrimary }
+        @ViewBuilder background: () -> Background = { Color.backgroundSecondary }
     ) where SelectionValue == Never {
         self.title = title
         self.content = content()
@@ -50,7 +73,7 @@ public struct ListLayoutView<
         _ title: String,
         selection: Binding<Set<SelectionValue>?>,
         @ViewBuilder content: () -> Content,
-        @ViewBuilder background: () -> Background = { Color.backgroundPrimary }
+        @ViewBuilder background: () -> Background = { Color.backgroundSecondary }
     ) {
         self.title = title
         self.content = content()
@@ -62,19 +85,14 @@ public struct ListLayoutView<
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview {
     NavigationView {
-        ListLayoutView(
+        GroupedListLayoutView(
             "Title",
             content: {
                 ForEach(1 ... 100, id: \.self) { item in
-                    VStack(spacing: 0) {
-                        ListRow("Item \(item)")
-                    }
-                    .clipShape(Rectangle())
+                    ListRow("Item \(item)")
                 }
             }
         )
-        .toolbarTitleDisplayMode(.inline)
-        .listStyle(.plain)
     }
 }
 
@@ -84,15 +102,14 @@ public struct ListLayoutView<
     @Previewable @State var selectedItems: Set<Int>? = []
 
     return NavigationView {
-        ListLayoutView(
+        GroupedListLayoutView(
             "Title with Selection",
             selection: $selectedItems,
             content: {
                 ForEach(1 ... 20, id: \.self) { item in
-                    Text("Item \(item)")
+                    ListRow("Item \(item)")
                 }
-            },
-            background: { Color.backgroundSecondary }
+            }
         )
         .toolbarTitleDisplayMode(.inline)
     }
@@ -101,10 +118,11 @@ public struct ListLayoutView<
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 #Preview {
     NavigationView {
-        ListLayoutView(
+        GroupedListLayoutView(
             "Title",
-            content: { Text("Content") },
-            background: { Color.backgroundSecondary }
+            content: {
+                Text("Content")
+            }
         )
     }
 }

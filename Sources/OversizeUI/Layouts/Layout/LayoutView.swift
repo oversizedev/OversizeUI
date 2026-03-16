@@ -10,8 +10,6 @@ public struct LayoutView<
     Content: View,
     Background: View
 >: View {
-    @Environment(\.safeAreaInsets) private var safeAreaInsets
-
     public typealias ScrollAction = @MainActor @Sendable (_ offset: CGPoint, _ headerVisibleRatio: CGFloat) -> Void
 
     @ViewBuilder private var content: Content
@@ -20,20 +18,38 @@ public struct LayoutView<
     private let title: String
     private let onScroll: ScrollAction?
 
+    @State private var headerHeight: CGFloat = 0
+
     public var body: some View {
         ScrollView {
-            ScrollViewOffsetTracker {
-                content
-            }
+            Color.clear
+                .frame(height: 0)
+                .onGeometryChange(for: CGFloat.self) { proxy in
+                    proxy.frame(in: .named("LayoutScrollView")).minY
+                } action: { minY in
+                    handleScrollOffset(CGPoint(x: 0, y: minY))
+                }
+            content
         }
-        .scrollViewOffsetTracking(action: handleScrollOffset)
+        .coordinateSpace(.named("LayoutScrollView"))
         .navigationTitle(title)
+        .background {
+            Color.clear
+                .ignoresSafeArea()
+                .onGeometryChange(for: CGFloat.self) { proxy in
+                    proxy.safeAreaInsets.top + 44
+                } action: { height in
+                    let isInitial = headerHeight == 0
+                    headerHeight = height
+                    if isInitial { onScroll?(.zero, 1.0) }
+                }
+        }
         .background(background.ignoresSafeArea())
     }
 
     private func handleScrollOffset(_ offset: CGPoint) {
-        let calcHeaderHeight = 44 + safeAreaInsets.top
-        let visibleRatio: CGFloat = (calcHeaderHeight + offset.y) / calcHeaderHeight
+        guard headerHeight > 0 else { return }
+        let visibleRatio: CGFloat = (headerHeight + offset.y) / headerHeight
         onScroll?(offset, visibleRatio)
     }
 

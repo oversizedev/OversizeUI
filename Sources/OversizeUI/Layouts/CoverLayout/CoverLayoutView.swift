@@ -17,8 +17,6 @@ public struct CoverLayoutView<
     CoverBackground: View,
     Background: View
 >: View {
-    @Environment(\.safeAreaInsets) private var safeAreaInsets
-
     public typealias ScrollAction = @MainActor @Sendable (_ offset: CGPoint, _ headerVisibleRatio: CGFloat) -> Void
 
     @ViewBuilder private var content: Content
@@ -35,6 +33,7 @@ public struct CoverLayoutView<
 
     @State private var scrollOffset: CGPoint = .zero
     @State private var visibleRatio: CGFloat = 0
+    @State private var topSafeAreaInset: CGFloat = 0
 
     public var body: some View {
         ZStack(alignment: .top) {
@@ -49,34 +48,48 @@ public struct CoverLayoutView<
                 .opacity(visibleRatio)
 
             ScrollView {
-                ScrollViewOffsetTracker {
-                    content
-                        .background {
-                            contentBackground
-                                .ignoresSafeArea(edges: .bottom)
-                                .cornerRadius(
-                                    contentCornerRadius,
-                                    corners: [
-                                        .topLeft,
-                                        .topRight,
-                                    ]
-                                )
-                        }
-                }
+                Color.clear
+                    .frame(height: 0)
+                    .onGeometryChange(for: CGFloat.self) { proxy in
+                        proxy.frame(in: .named("CoverScrollView")).minY
+                    } action: { minY in
+                        handleScrollOffset(CGPoint(x: 0, y: minY))
+                    }
+                content
+                    .background {
+                        contentBackground
+                            .ignoresSafeArea(edges: .bottom)
+                            .cornerRadius(
+                                contentCornerRadius,
+                                corners: [
+                                    .topLeft,
+                                    .topRight,
+                                ]
+                            )
+                    }
             }
-            .scrollViewOffsetTracking(action: handleScrollOffset)
+            .coordinateSpace(.named("CoverScrollView"))
             .safeAreaPadding(.top, coverHeight)
         }
         .navigationTitle(title)
+        .background {
+            Color.clear
+                .ignoresSafeArea()
+                .onGeometryChange(for: CGFloat.self) { proxy in
+                    proxy.safeAreaInsets.top
+                } action: { top in
+                    topSafeAreaInset = top
+                }
+        }
         .background(background.ignoresSafeArea())
     }
 
     private var coverBackgroundScrollHeight: CGFloat {
         switch coverStyle {
         case .pinch:
-            max(0, (coverHeight + safeAreaInsets.top) + scrollOffset.y)
+            max(0, (coverHeight + topSafeAreaInset) + scrollOffset.y)
         default:
-            scrollOffset.y > 0 ? (coverHeight + safeAreaInsets.top) + scrollOffset.y : (coverHeight + safeAreaInsets.top)
+            scrollOffset.y > 0 ? (coverHeight + topSafeAreaInset) + scrollOffset.y : (coverHeight + topSafeAreaInset)
         }
     }
 
@@ -157,10 +170,8 @@ public struct CoverLayoutView<
             startPoint: .top,
             endPoint: .bottom
         )
-        .overlay {
-            Color.red
-                .border(Color.blue, width: 1)
-        }
+    } coverBackground: {
+        Color.red
     } background: {
         Color.surfacePrimary
     }
