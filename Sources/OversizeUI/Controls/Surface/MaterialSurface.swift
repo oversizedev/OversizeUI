@@ -13,7 +13,7 @@ public struct MaterialSurface<Label: View>: View {
     @Environment(\.elevation) private var elevation: Elevation
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.controlRadius) var controlRadius
-    @Environment(\.surfaceContentMargins) var controlPadding: EdgeSpaceInsets
+    @Environment(\.surfaceContentMargins) var controlPadding: EdgeInsets
 
     private let label: Label
     private let action: (() -> Void)?
@@ -47,8 +47,7 @@ public struct MaterialSurface<Label: View>: View {
 
     private var surface: some View {
         label
-            .padding(
-                EdgeSpaceInsets(top: controlPadding.top, leading: controlPadding.leading, bottom: controlPadding.bottom, trailing: controlPadding.trailing)
+            .padding(.init(top: controlPadding.top, leading: controlPadding.leading, bottom: controlPadding.bottom, trailing: controlPadding.trailing)
             )
             .background(
                 material,

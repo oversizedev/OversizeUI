@@ -6,15 +6,15 @@
 import SwiftUI
 
 public extension EnvironmentValues {
-    @Entry var surfaceContentMargins: EdgeSpaceInsets = .init(top: .medium, leading: .medium, bottom: .medium, trailing: .medium)
+    @Entry var surfaceContentMargins: EdgeInsets = .init(top: .medium, leading: .medium, bottom: .medium, trailing: .medium)
 }
 
 public extension View {
-    func surfaceContentMargins(_ margins: EdgeSpaceInsets) -> some View {
+    func surfaceContentMargins(_ margins: EdgeInsets) -> some View {
         environment(\.surfaceContentMargins, margins)
     }
 
-    func surfaceContentMargins(_ margins: Space) -> some View {
+    func surfaceContentMargins(_ margins: CGFloat) -> some View {
         environment(\.surfaceContentMargins, .init(top: margins, leading: margins, bottom: margins, trailing: margins))
     }
 

@@ -6,7 +6,8 @@
 import SwiftUI
 
 public struct ListRow<LeadingLabel: View, TrailingLabel: View>: View {
-    @Environment(\.elevation) private var elevation: Elevation
+    
+    @Environment(\.listLayoutStyle) private var listStyle:ListLayoutStyle
     @Environment(\.rowContentMargins) var controlMargins: EdgeInsets
     @Environment(\.multilineTextAlignment) var multilineTextAlignment
     @Environment(\.isPremium) var premiumStatus
@@ -40,7 +41,7 @@ public struct ListRow<LeadingLabel: View, TrailingLabel: View>: View {
     }
 
     public var body: some View {
-        VStack(alignment: .leading) {
+       
             HStack(spacing: .zero) {
                 leadingLabel
                     .scaledToFill()
@@ -60,8 +61,9 @@ public struct ListRow<LeadingLabel: View, TrailingLabel: View>: View {
                 trailingLabel
                     .padding(.leading, .xxSmall)
             }
-        }
+        
         .listRowInsets(controlMargins)
+        .listRowSeparatorTint(Color.border)
         .contentShape(Rectangle())
     }
 

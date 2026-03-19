@@ -125,7 +125,7 @@ public struct CoverLayoutView<
 
     public init(
         _ title: String,
-        coverHeight: CGFloat = 350,
+        coverHeight: CGFloat = 300,
         onScroll: ScrollAction? = nil,
         @ViewBuilder content: () -> Content,
         @ViewBuilder cover: () -> Cover,

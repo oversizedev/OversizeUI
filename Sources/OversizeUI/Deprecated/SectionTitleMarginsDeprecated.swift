@@ -7,7 +7,7 @@ import SwiftUI
 
 public extension View {
     @available(*, deprecated, renamed: "sectionTitleMargins")
-    func sectionTitleInsets(_ insets: EdgeSpaceInsets) -> some View {
+    func sectionTitleInsets(_ insets: EdgeInsets) -> some View {
         environment(\.sectionTitleMargins, insets)
     }
 

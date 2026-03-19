@@ -17,7 +17,7 @@ public struct Surface<Label: View>: View {
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.isAccent) private var isAccent: Bool
     @Environment(\.surfaceRadius) var surfaceRadius
-    @Environment(\.surfaceContentMargins) var contentInsets: EdgeSpaceInsets
+    @Environment(\.surfaceContentMargins) var contentInsets: EdgeInsets
     @Environment(\.surfaceElevation) private var elevation: Elevation
 
     private enum Constants {
@@ -41,7 +41,7 @@ public struct Surface<Label: View>: View {
     private var backgroundColor: Color?
     private var border: Color?
     private var borderWidth: CGFloat?
-    private let forceContentInsets: EdgeSpaceInsets?
+    private let forceContentInsets: EdgeInsets?
     private var isSurfaceClipped: Bool = false
 
     @State var isHover = false
