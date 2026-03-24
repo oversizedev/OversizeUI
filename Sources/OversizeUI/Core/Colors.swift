@@ -186,10 +186,6 @@ public extension View {
         foregroundColor(Color.onSurfaceTertiary)
     }
 
-    nonisolated func accent() -> some View {
-        foregroundColor(Color.accentColor)
-    }
-
     nonisolated func error() -> some View {
         foregroundColor(Color.error)
     }

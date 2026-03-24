@@ -11,11 +11,12 @@ public enum SectionHeaderStyle {
 }
 
 public struct ListSectionHeader<Title: StringProtocol, TrailingContent: View>: View {
+    @Environment(\.headerProminence) private var headerProminence
 
     private var trailingContent: (() -> TrailingContent)?
     private let title: Title
     private let style: SectionHeaderStyle
-    
+
     public init(
         title: Title,
         style: SectionHeaderStyle,
@@ -27,10 +28,9 @@ public struct ListSectionHeader<Title: StringProtocol, TrailingContent: View>: V
     }
 
     public var body: some View {
-
         @ViewBuilder var titleView: some View {
             Text(title)
-                .font(.headline.weight(.semibold))
+                .font(headerProminence == .increased ? .title3.weight(.semibold) : .headline.weight(.semibold))
                 .foregroundStyle(Color.onBackgroundPrimary)
         }
 
@@ -53,7 +53,7 @@ public struct ListSectionHeader<Title: StringProtocol, TrailingContent: View>: V
 public extension ListSectionHeader where TrailingContent == EmptyView {
     init(title: Title) {
         self.title = title
-        self.style = .primary
+        style = .primary
     }
 }
 

@@ -6,7 +6,6 @@
 import SwiftUI
 
 public struct ListSectionFooter<Description: StringProtocol>: View {
-    
     private let description: Description
 
     // MARK: Initializer

@@ -19,9 +19,9 @@ public struct ListLayoutView<
     @Binding private var selection: Set<SelectionValue>?
 
     private let title: String
-    
+
     var listStyle: ListLayoutStyle = .plain
-    
+
     public var body: some View {
         @ViewBuilder
         var list: some View {
@@ -43,7 +43,7 @@ public struct ListLayoutView<
             case .inset:
                 list
                     .listStyle(.inset)
-            case .insetGrouped:
+            case .grouped, .insetGrouped, .smallInsetGrouped:
                 list
                     .listStyle(.insetGrouped)
             case .plain:
@@ -72,13 +72,13 @@ public struct ListLayoutView<
 
         return styledList
     }
-    
+
     @ViewBuilder
     private var backgroundView: some View {
         if background.isEmpty {
-             listStyle == .plain ? Color.backgroundPrimary : Color.backgroundSecondary
+            listStyle == .plain ? Color.backgroundPrimary : Color.backgroundSecondary
         } else {
-             background
+            background
         }
     }
 
@@ -141,7 +141,7 @@ public struct ListLayoutView<
                         ListRow("Item \(item)")
                     }
                 }
-                
+
                 Section("Title") {
                     ForEach(1 ... 5, id: \.self) { item in
                         ListRow("Item \(item)")
@@ -170,7 +170,7 @@ public struct ListLayoutView<
                         ListRow("Item \(item)")
                     }
                 }
-                
+
                 Section("Title") {
                     ForEach(1 ... 5, id: \.self) { item in
                         ListRow("Item \(item)")

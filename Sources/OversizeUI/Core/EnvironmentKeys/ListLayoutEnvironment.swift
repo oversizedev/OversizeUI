@@ -7,21 +7,12 @@ import SwiftUI
 
 public enum ListLayoutStyle {
     case plain
-    case insetGrouped
     case inset
+    case insetGrouped
+    case smallInsetGrouped
+    case grouped
 }
 
 extension EnvironmentValues {
-    var listLayoutStyle: ListLayoutStyle {
-        get {
-            self[ListLayoutStyleKey.self]
-        }
-        set {
-            self[ListLayoutStyleKey.self] = newValue
-        }
-    }
-}
-
-struct ListLayoutStyleKey: EnvironmentKey {
-    static var defaultValue: ListLayoutStyle { .plain }
+    @Entry var listLayoutStyle: ListLayoutStyle = .plain
 }

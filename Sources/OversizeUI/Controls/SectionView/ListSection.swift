@@ -6,15 +6,16 @@
 import SwiftUI
 
 public struct ListSection<SectionContent: View, SectionHeaderContent: View, SectionFooterContent: View>: View {
-    
+    @Environment(\.listLayoutStyle) private var listStyle: ListLayoutStyle
+
     private var titlePosition: SectionViewTitlePosition = .outside
-    
+
     private var content: () -> SectionContent
 
     private var footer: (() -> SectionFooterContent)?
 
     private var header: (() -> SectionHeaderContent)?
-    
+
     public init(
         @ViewBuilder content: @escaping () -> SectionContent,
         @ViewBuilder header: @escaping () -> SectionHeaderContent,
@@ -28,28 +29,58 @@ public struct ListSection<SectionContent: View, SectionHeaderContent: View, Sect
     public var body: some View {
         @ViewBuilder
         var sectionView: some View {
-            Section {
-                if let header = header, titlePosition == .inside {
-                    header()
-                        .listRowSeparator(.hidden)
+            if #available(iOS 26.0, *) {
+                Section {
+                    if let header, titlePosition == .inside {
+                        header()
+                            .listRowSeparator(.hidden)
+                    }
+                    content()
+                } header: {
+                    if let header, titlePosition == .outside {
+                        header()
+                    }
+                } footer: {
+                    if let footer {
+                        footer()
+                    }
                 }
-                content()
-            } header: {
-                if let header = header, titlePosition == .outside {
-                    header()
-                }
-            } footer: {
-                if let footer = footer {
-                    footer()
+                .listSectionMargins(.horizontal, listSectionHorizontalMargins)
+            } else {
+                Section {
+                    if let header, titlePosition == .inside {
+                        header()
+                            .listRowSeparator(.hidden)
+                    }
+                    content()
+                } header: {
+                    if let header, titlePosition == .outside {
+                        header()
+                    }
+                } footer: {
+                    if let footer {
+                        footer()
+                    }
                 }
             }
         }
         return sectionView
     }
+
+    var listSectionHorizontalMargins: CGFloat {
+        switch listStyle {
+        case .plain, .inset, .grouped:
+            .zero
+        case .insetGrouped:
+            .medium
+        case .smallInsetGrouped:
+            .xxSmall
+        }
+    }
 }
 
 public extension ListSection {
-    func sectionTitlePosition(_ position: SectionViewTitlePosition) -> ListSection {
+    func listSectionTitlePosition(_ position: SectionViewTitlePosition) -> ListSection {
         var control = self
         control.titlePosition = position
         return control
@@ -79,6 +110,6 @@ public extension ListSection where SectionHeaderContent == EmptyView {
 public extension ListSection where SectionHeaderContent == ListSectionHeader<String, EmptyView>, SectionFooterContent == EmptyView {
     init(_ title: String, @ViewBuilder content: @escaping () -> SectionContent) {
         self.content = content
-        self.header = { ListSectionHeader(title: title) }
+        header = { ListSectionHeader(title: title) }
     }
 }

@@ -47,8 +47,7 @@ public struct MaterialSurface<Label: View>: View {
 
     private var surface: some View {
         label
-            .padding(.init(top: controlPadding.top, leading: controlPadding.leading, bottom: controlPadding.bottom, trailing: controlPadding.trailing)
-            )
+            .padding(.init(top: controlPadding.top, leading: controlPadding.leading, bottom: controlPadding.bottom, trailing: controlPadding.trailing))
             .background(
                 material,
                 in: RoundedRectangle(cornerRadius: controlRadius, style: .continuous)
