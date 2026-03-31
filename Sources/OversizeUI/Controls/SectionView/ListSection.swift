@@ -29,6 +29,7 @@ public struct ListSection<SectionContent: View, SectionHeaderContent: View, Sect
     public var body: some View {
         @ViewBuilder
         var sectionView: some View {
+            #if os(iOS)
             if #available(iOS 26.0, *) {
                 Section {
                     if let header, titlePosition == .inside {
@@ -38,7 +39,7 @@ public struct ListSection<SectionContent: View, SectionHeaderContent: View, Sect
                     content()
                 } header: {
                     if let header, titlePosition == .outside {
-                        header()
+                        header().listRowSeparator(.hidden)
                     }
                 } footer: {
                     if let footer {
@@ -49,8 +50,7 @@ public struct ListSection<SectionContent: View, SectionHeaderContent: View, Sect
             } else {
                 Section {
                     if let header, titlePosition == .inside {
-                        header()
-                            .listRowSeparator(.hidden)
+                        header().listRowSeparator(.hidden)
                     }
                     content()
                 } header: {
@@ -63,6 +63,22 @@ public struct ListSection<SectionContent: View, SectionHeaderContent: View, Sect
                     }
                 }
             }
+            #else
+            Section {
+                if let header, titlePosition == .inside {
+                    header().listRowSeparator(.hidden)
+                }
+                content()
+            } header: {
+                if let header, titlePosition == .outside {
+                    header()
+                }
+            } footer: {
+                if let footer {
+                    footer()
+                }
+            }
+            #endif
         }
         return sectionView
     }

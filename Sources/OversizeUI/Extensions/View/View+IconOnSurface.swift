@@ -10,8 +10,8 @@ public extension View {
         Surface {
             self.foregroundColor(Color.onSurfacePrimary)
         }
-        .surfaceStyle(surfaceStyle)
         .surfaceBackgroundColor(surfaceSolor)
+        .surfaceStyle(surfaceStyle)
         .surfaceContentMargins(.xxSmall)
         .surfaceRadius(.medium)
     }

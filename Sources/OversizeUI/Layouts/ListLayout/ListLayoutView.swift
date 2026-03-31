@@ -55,7 +55,7 @@ public struct ListLayoutView<
         @ViewBuilder
         var styledList: some View {
             switch listStyle {
-            case .inset, .insetGrouped:
+            case .inset, .insetGrouped, .smallInsetGrouped, .grouped:
                 list
                     .listStyle(.inset)
             case .plain:
@@ -136,13 +136,13 @@ public struct ListLayoutView<
             "Title with Selection",
             selection: $selectedItems,
             content: {
-                Section("Title") {
+                ListSection("Title") {
                     ForEach(1 ... 5, id: \.self) { item in
                         ListRow("Item \(item)")
                     }
                 }
 
-                Section("Title") {
+                ListSection("Title") {
                     ForEach(1 ... 5, id: \.self) { item in
                         ListRow("Item \(item)")
                     }
