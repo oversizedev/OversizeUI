@@ -81,7 +81,11 @@ public struct CoverLayoutView<
                     topSafeAreaInset = top
                 }
         }
-        .background(background.ignoresSafeArea())
+        .background(
+            background
+                .ignoresSafeArea()
+                .frame(maxWidth: .infinity)
+        )
     }
 
     private var coverBackgroundScrollHeight: CGFloat {

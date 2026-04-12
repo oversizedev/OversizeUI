@@ -85,6 +85,7 @@ public extension View {
         modifier(PaddingModifier(edges: Edge.Set.all, length: length))
     }
 
+    @_disfavoredOverload
     nonisolated func padding(_ insets: EdgeSpaceInsets) -> some View {
         modifier(PaddingEdgeInsetsModifier(insets: insets))
     }
