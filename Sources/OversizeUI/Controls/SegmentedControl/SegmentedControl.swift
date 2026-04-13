@@ -9,7 +9,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content: View, Selecti
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.segmentedControlStyle) private var style
     @Environment(\.controlRadius) var controlRadius
-    @Environment(\.segmentedPickerMargins) var controlPadding: EdgeSpaceInsets
+    @Environment(\.segmentedPickerMargins) var controlPadding: EdgeInsets
     @Environment(\.platform) var platform: Platform
 
     public typealias Data = [Element]
@@ -123,15 +123,15 @@ public struct SegmentedPickerSelector<Element: Equatable, Content: View, Selecti
                             .padding(.trailing, controlPadding.trailing)
                             .padding(
                                 .top,
-                                controlPadding.top != Space.zero || controlPadding.top != .xxSmall
-                                    ? controlPadding.top.rawValue - .xxSmall
-                                    : Space.zero.rawValue
+                                controlPadding.top != 0 || controlPadding.top != .xxSmall
+                                    ? controlPadding.top - .xxSmall
+                                    : 0
                             )
                             .padding(
                                 .bottom,
-                                controlPadding.bottom != Space.zero || controlPadding.bottom != .xxSmall
-                                    ? controlPadding.bottom.rawValue - .xxSmall
-                                    : Space.zero.rawValue
+                                controlPadding.bottom != 0 || controlPadding.bottom != .xxSmall
+                                    ? controlPadding.bottom - .xxSmall
+                                    : 0
                             )
                             .background(selectedIndex != index
                                 ? getUnselection(unselectionStyle: style.unseletionStyle)
@@ -192,15 +192,15 @@ public struct SegmentedPickerSelector<Element: Equatable, Content: View, Selecti
                             .padding(.trailing, controlPadding.trailing)
                             .padding(
                                 .top,
-                                controlPadding.top != Space.zero || controlPadding.top != .xxSmall
-                                    ? controlPadding.top.rawValue - .xxSmall
-                                    : Space.zero.rawValue
+                                controlPadding.top != 0 || controlPadding.top != .xxSmall
+                                    ? controlPadding.top - .xxSmall
+                                    : 0
                             )
                             .padding(
                                 .bottom,
-                                controlPadding.bottom != Space.zero || controlPadding.bottom != .xxSmall
-                                    ? controlPadding.bottom.rawValue - .xxSmall
-                                    : Space.zero.rawValue
+                                controlPadding.bottom != 0 || controlPadding.bottom != .xxSmall
+                                    ? controlPadding.bottom - .xxSmall
+                                    : 0
                             )
                             .background(selectedIndex != index
                                 ? getUnselection(unselectionStyle: style.unseletionStyle)
