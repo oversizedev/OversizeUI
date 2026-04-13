@@ -25,8 +25,9 @@ public enum SectionViewStyle: Sendable {
 public struct SectionView<Content: View>: View {
     @Environment(\.controlRadius) private var controlRadius
     @Environment(\.sectionViewStyle) private var style: SectionViewStyle
-    @Environment(\.surfaceContentMargins) var surfaceContentInsets: EdgeSpaceInsets
-    @Environment(\.sectionTitleMargins) var sectionTitleInsets: EdgeSpaceInsets
+    @Environment(\.surfaceContentMargins) var surfaceContentInsets: EdgeInsets
+    @Environment(\.sectionTitleMargins) var sectionTitleInsets: EdgeInsets
+    @Environment(\.headerProminence) private var headerProminence
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     #endif
@@ -36,6 +37,9 @@ public struct SectionView<Content: View>: View {
     private var titlePosition: SectionViewTitlePosition = .outside
     private var titleButton: SectionViewTitleButton?
     private var titleButtonPosition: SectionViewTitleButtonPosition = .trailing
+    private var border: Color?
+    private var borderWidth: CGFloat = 0
+    private var isSurfaceClipped: Bool = false
 
     public init(_ title: String = "", @ViewBuilder content: () -> Content) {
         self.title = title
@@ -79,6 +83,9 @@ public struct SectionView<Content: View>: View {
                     content
                 }
             }
+            .surfaceBorderColor(border)
+            .surfaceBorderWidth(borderWidth)
+            .surfaceClip(isSurfaceClipped)
             .padding(.horizontal, surfaceHorizontalPadding)
         }
         .padding(.vertical, surfaceVerticalPaddingSize)
@@ -105,7 +112,7 @@ public struct SectionView<Content: View>: View {
     private var titleFont: Font {
         switch titlePosition {
         case .inside:
-            .title2.weight(.semibold)
+            headerProminence == .standard ? .headline.weight(.bold) : .title2.weight(.semibold)
         case .outside:
             .headline.weight(.semibold)
         }
@@ -223,6 +230,24 @@ public extension SectionView {
         var control = self
         control.titleButton = button
         control.titleButtonPosition = position
+        return control
+    }
+
+    func sectionBorderColor(_ border: Color? = Color.border) -> SectionView {
+        var control = self
+        control.border = border
+        return control
+    }
+
+    func sectionBorderWidth(_ width: CGFloat) -> SectionView {
+        var control = self
+        control.borderWidth = width
+        return control
+    }
+
+    func sectionClip(_ surfaceClipped: Bool = true) -> SectionView {
+        var control = self
+        control.isSurfaceClipped = surfaceClipped
         return control
     }
 }

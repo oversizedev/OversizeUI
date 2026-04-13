@@ -5,20 +5,14 @@
 
 import SwiftUI
 
-public enum SurfaceStyle {
-    case primary
-    case secondary
-    case tertiary
-    case clear
-}
-
 // swiftlint:disable opening_brace
 public struct Surface<Label: View>: View {
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.isAccent) private var isAccent: Bool
     @Environment(\.surfaceRadius) var surfaceRadius
-    @Environment(\.surfaceContentMargins) var contentInsets: EdgeSpaceInsets
+    @Environment(\.surfaceContentMargins) var contentInsets: EdgeInsets
     @Environment(\.surfaceElevation) private var elevation: Elevation
+    @Environment(\.surfaceStyle) private var background: SurfaceStyle
 
     private enum Constants {
         /// Colors
@@ -37,11 +31,10 @@ public struct Surface<Label: View>: View {
 
     private let label: Label
     private let action: (() -> Void)?
-    private var background: SurfaceStyle = .primary
     private var backgroundColor: Color?
     private var border: Color?
     private var borderWidth: CGFloat?
-    private let forceContentInsets: EdgeSpaceInsets?
+    private let forceContentInsets: EdgeInsets?
     private var isSurfaceClipped: Bool = false
 
     @State var isHover = false
@@ -170,12 +163,6 @@ public struct Surface<Label: View>: View {
         }
     }
 
-    public func surfaceStyle(_ style: SurfaceStyle) -> Surface {
-        var control = self
-        control.background = style
-        return control
-    }
-
     public func surfaceBorderColor(_ border: Color? = Color.border) -> Surface {
         var control = self
         control.border = border
@@ -286,8 +273,8 @@ struct Surface_Previews: PreviewProvider {
                     .title3()
                     .onSurfacePrimary()
             }
-            .surfaceStyle(.primary)
             .surfaceBorderColor(.surfaceSecondary)
+            .surfaceStyle(.primary)
             .preferredColorScheme(.dark)
             .previewLayout(.fixed(width: 414, height: 200))
 

@@ -48,7 +48,7 @@ public struct KeyboardToolbar<A: View>: View {
         }
         .padding(.horizontal, .small)
         .padding(.vertical, .xxSmall)
-        .background(Color.surfacePrimary)
+        .background(Color.surfacePrimary.ignoresSafeArea(.keyboard))
         .shadowElevation(.z1)
     }
 }

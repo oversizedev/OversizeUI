@@ -63,13 +63,13 @@ public struct MultiSelect<Element: Equatable, Content: View, Selection: View, Ac
             .padding()
             .background(
                 RoundedRectangle(
-                    cornerRadius: .medium,
+                    cornerRadius: .xSmall,
                     style: .continuous
                 )
                 .fill(Color.surfaceSecondary)
                 .overlay(
                     RoundedRectangle(
-                        cornerRadius: .xxxSmall,
+                        cornerRadius: .xSmall,
                         style: .continuous
                     )
                     .stroke(

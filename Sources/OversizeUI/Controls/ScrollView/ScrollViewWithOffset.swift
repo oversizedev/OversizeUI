@@ -30,56 +30,37 @@ public struct ScrollViewWithOffsetTracking<Content: View>: View {
 
     public var body: some View {
         ScrollView(axes, showsIndicators: showsIndicators) {
-            ScrollViewOffsetTracker {
+            ZStack(alignment: .top) {
+                GeometryReader { geo in
+                    Color.clear
+                        .preference(
+                            key: ScrollOffsetPreferenceKey.self,
+                            value: geo.frame(in: .named(cordinateSpaceName)).origin
+                        )
+                }
+                .frame(height: 0)
                 content()
             }
-        }.withOffsetTracking(
-            coordinateSpaceName: cordinateSpaceName,
-            action: onScroll
-        )
-    }
-}
-
-struct ScrollViewOffsetTracker<Content: View>: View {
-    private let cordinateSpaceName: String
-
-    init(
-        cordinateSpaceName: String = "ScrollView",
-        @ViewBuilder content: @escaping () -> Content
-    ) {
-        self.content = content
-        self.cordinateSpaceName = cordinateSpaceName
-    }
-
-    private var content: () -> Content
-
-    var body: some View {
-        ZStack(alignment: .top) {
-            GeometryReader { geo in
-                Color.clear
-                    .preference(
-                        key: ScrollOffsetPreferenceKey.self,
-                        value: geo.frame(in: .named(cordinateSpaceName)).origin
-                    )
+        }
+        .coordinateSpace(name: cordinateSpaceName)
+        .onPreferenceChange(ScrollOffsetPreferenceKey.self) { offset in
+            DispatchQueue.main.async {
+                onScroll(offset)
             }
-            .frame(height: 0)
-
-            content()
         }
     }
 }
 
-private extension ScrollView {
-    func withOffsetTracking(
-        coordinateSpaceName: String,
-        action: @escaping @MainActor @Sendable (_ offset: CGPoint) -> Void
-    ) -> some View {
-        coordinateSpace(name: coordinateSpaceName)
-            .onPreferenceChange(ScrollOffsetPreferenceKey.self) { offset in
-                DispatchQueue.main.async {
-                    action(offset)
-                }
-            }
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+struct ScrollViewOffsetTracker<Content: View>: View {
+    @ViewBuilder private var content: Content
+
+    init(@ViewBuilder content: () -> Content) {
+        self.content = content()
+    }
+
+    var body: some View {
+        content
     }
 }
 

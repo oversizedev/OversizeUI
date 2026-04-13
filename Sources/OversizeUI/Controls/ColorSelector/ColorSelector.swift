@@ -33,17 +33,16 @@ public struct ColorSelector: View {
                 configuration: ColorSelectorConfiguration(
                     label: ColorSelectorConfiguration.Label(content:
                         Group {
-                            ZStack {
-                                ColorPickerWithoutBorder(selection: $selection)
-                                    .padding(.horizontal, .xxxSmall)
-                                    .padding(.all, .small)
-
-                                if !colors.contains(selection) {
-                                    Circle()
-                                        .stroke(selection, lineWidth: 3)
-                                        .frame(width: 40, height: 40)
+                            ColorPickerWithoutBorder(selection: $selection)
+                                .padding(.horizontal, .xxxSmall)
+                                .padding(.all, .small)
+                                .if(!colors.contains(selection)) {
+                                    $0.overlay {
+                                        Circle()
+                                            .stroke(selection, lineWidth: 3)
+                                            .frame(width: 40, height: 40)
+                                    }
                                 }
-                            }
 
                             ForEach(colors, id: \.self) { color in
                                 ZStack {
@@ -86,25 +85,34 @@ public struct ColorPickerWithoutBorder: View {
     public var body: some View {
         selection
             .frame(width: 0, height: 0, alignment: .center)
-            .cornerRadius(19.0)
+            .clipShape(Circle())
             .background(
-                ZStack {
-                    AngularGradient(
-                        gradient: Gradient(colors:
-                            [.red, .yellow, .green, .blue, .purple, .red]),
-                        center: .center,
-                        startAngle: .zero,
-                        endAngle: .degrees(360)
-                    ).cornerRadius(16)
-                        .frame(width: 32, height: 32)
-
+                AngularGradient(
+                    gradient: Gradient(
+                        colors:
+                        [
+                            .red,
+                            .yellow,
+                            .green,
+                            .blue,
+                            .purple,
+                            .red,
+                        ]
+                    ),
+                    center: .center,
+                    startAngle: .zero,
+                    endAngle: .degrees(360)
+                )
+                .clipShape(Circle())
+                .frame(width: 32, height: 32)
+                .overlay {
                     Circle()
                         .strokeBorder(Color.border, lineWidth: 1)
                 }
             )
             .overlay(
                 ColorPicker("", selection: $selection, supportsOpacity: false)
-                    .labelsHidden().opacity(0.015)
+                    .labelsHidden().opacity(0.1)
             )
             .animation(.default, value: selection)
     }

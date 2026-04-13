@@ -5,6 +5,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Use native EdgeInsets")
 public struct EdgeSpaceInsets: Sendable {
     public let top: Space
     public let leading: Space

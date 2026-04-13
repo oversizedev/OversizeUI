@@ -5,14 +5,13 @@
 
 import SwiftUI
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 public struct ListLayoutView<
     Content: View,
     Background: View,
     SelectionValue: Hashable
 >: View {
     public typealias ScrollAction = @MainActor @Sendable (_ offset: CGPoint, _ headerVisibleRatio: CGFloat) -> Void
-
-    @Environment(\.screenSize) private var screenSize
 
     @ViewBuilder private var content: Content
     @ViewBuilder private let background: Background
@@ -21,26 +20,72 @@ public struct ListLayoutView<
 
     private let title: String
 
+    var listStyle: ListLayoutStyle = .plain
+
     public var body: some View {
-        if #available(watchOS 10.0, *) {
+        @ViewBuilder
+        var list: some View {
             SwiftUI.List(selection: $selection) {
                 content
+                    .environment(\.listLayoutStyle, listStyle)
             }
             .navigationTitle(title)
-            .background(background.ignoresSafeArea())
+            .environment(\.defaultMinListHeaderHeight, 40)
+            .environment(\.defaultMinListRowHeight, 56)
+            .background(backgroundView.ignoresSafeArea())
+            .scrollContentBackground(.hidden)
+        }
+
+        #if os(iOS)
+        @ViewBuilder
+        var styledList: some View {
+            switch listStyle {
+            case .inset:
+                list
+                    .listStyle(.inset)
+            case .grouped, .insetGrouped, .smallInsetGrouped:
+                list
+                    .listStyle(.insetGrouped)
+            case .plain:
+                list
+                    .listStyle(.plain)
+            }
+        }
+        #elseif os(macOS)
+        @ViewBuilder
+        var styledList: some View {
+            switch listStyle {
+            case .inset, .insetGrouped, .smallInsetGrouped, .grouped:
+                list
+                    .listStyle(.inset)
+            case .plain:
+                list
+                    .listStyle(.plain)
+            }
+        }
+        #else
+        @ViewBuilder
+        var styledList: some View {
+            list.listStyle(.plain)
+        }
+        #endif
+
+        return styledList
+    }
+
+    @ViewBuilder
+    private var backgroundView: some View {
+        if background.isEmpty {
+            listStyle == .plain ? Color.backgroundPrimary : Color.backgroundSecondary
         } else {
-            SwiftUI.List {
-                content
-            }
-            .navigationTitle(title)
-            .background(background.ignoresSafeArea())
+            background
         }
     }
 
     public init(
         _ title: String,
         @ViewBuilder content: () -> Content,
-        @ViewBuilder background: () -> Background = { Color.backgroundPrimary }
+        @ViewBuilder background: () -> Background = { EmptyView() }
     ) where SelectionValue == Never {
         self.title = title
         self.content = content()
@@ -53,7 +98,7 @@ public struct ListLayoutView<
         _ title: String,
         selection: Binding<Set<SelectionValue>?>,
         @ViewBuilder content: () -> Content,
-        @ViewBuilder background: () -> Background = { Color.backgroundPrimary }
+        @ViewBuilder background: () -> Background = { EmptyView() }
     ) {
         self.title = title
         self.content = content()
@@ -70,14 +115,11 @@ public struct ListLayoutView<
             content: {
                 ForEach(1 ... 100, id: \.self) { item in
                     VStack(spacing: 0) {
-                        Text("Item \(item)")
-                            .padding()
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                        ListRow("Item \(item)")
                     }
                     .clipShape(Rectangle())
                 }
-            },
-            background: { Color.backgroundSecondary }
+            }
         )
         .toolbarTitleDisplayMode(.inline)
         .listStyle(.plain)
@@ -86,7 +128,7 @@ public struct ListLayoutView<
 
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 @available(watchOS, unavailable)
-#Preview("With Selection") {
+#Preview("With Selection insetGrouped") {
     @Previewable @State var selectedItems: Set<Int>? = []
 
     return NavigationView {
@@ -94,14 +136,50 @@ public struct ListLayoutView<
             "Title with Selection",
             selection: $selectedItems,
             content: {
-                ForEach(1 ... 20, id: \.self) { item in
-                    Text("Item \(item)")
-                        .padding()
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                ListSection("Title") {
+                    ForEach(1 ... 5, id: \.self) { item in
+                        ListRow("Item \(item)")
+                    }
+                }
+
+                ListSection("Title") {
+                    ForEach(1 ... 5, id: \.self) { item in
+                        ListRow("Item \(item)")
+                    }
                 }
             },
             background: { Color.backgroundSecondary }
         )
+        .listLayoutStyle(.insetGrouped)
+        .toolbarTitleDisplayMode(.inline)
+    }
+}
+
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
+@available(watchOS, unavailable)
+#Preview("With Selection inset") {
+    @Previewable @State var selectedItems: Set<Int>? = []
+
+    return NavigationView {
+        ListLayoutView(
+            "Title with Selection",
+            selection: $selectedItems,
+            content: {
+                Section("Title") {
+                    ForEach(1 ... 5, id: \.self) { item in
+                        ListRow("Item \(item)")
+                    }
+                }
+
+                Section("Title") {
+                    ForEach(1 ... 5, id: \.self) { item in
+                        ListRow("Item \(item)")
+                    }
+                }
+            },
+            background: { Color.backgroundSecondary }
+        )
+        .listLayoutStyle(.inset)
         .toolbarTitleDisplayMode(.inline)
     }
 }

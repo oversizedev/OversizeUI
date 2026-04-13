@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-@available(*, deprecated, message: "Use Button with .buttonStyle(.secondary) or IconButton with .buttonStyle(.iconSecondary)")
+@available(*, deprecated, message: "Use native .toolbar modifier with ToolbarItem")
 public enum BarButtonType {
     case close
     case closeAction(_ action: () -> Void)
@@ -21,7 +21,7 @@ public enum BarButtonType {
     case icon(_ icon: IconsNames, action: () -> Void)
 }
 
-@available(*, deprecated, message: "Use Button with .buttonStyle(.secondary) or IconButton with .buttonStyle(.iconSecondary)")
+@available(*, deprecated, message: "Use native .toolbar modifier with ToolbarItem")
 public struct BarButton: View {
     @Environment(\.dismiss) var dismiss
 

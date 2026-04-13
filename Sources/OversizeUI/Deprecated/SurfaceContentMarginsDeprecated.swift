@@ -7,12 +7,12 @@ import SwiftUI
 
 public extension View {
     @available(*, deprecated, renamed: "surfaceContentMargins")
-    func surfaceContentInsets(_ insets: EdgeSpaceInsets) -> some View {
+    func surfaceContentInsets(_ insets: EdgeInsets) -> some View {
         environment(\.surfaceContentMargins, insets)
     }
 
     @available(*, deprecated, renamed: "surfaceContentMargins")
-    func surfaceContentInsets(_ insets: Space) -> some View {
+    func surfaceContentInsets(_ insets: CGFloat) -> some View {
         environment(\.surfaceContentMargins, .init(top: insets, leading: insets, bottom: insets, trailing: insets))
     }
 

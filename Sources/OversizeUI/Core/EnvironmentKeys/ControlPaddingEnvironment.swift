@@ -6,12 +6,12 @@
 import SwiftUI
 
 public struct ControlMargin: Sendable {
-    public var top: Space = .medium
-    public var leading: Space = .medium
-    public var bottom: Space = .medium
-    public var trailing: Space = .medium
+    public var top: CGFloat = .medium
+    public var leading: CGFloat = .medium
+    public var bottom: CGFloat = .medium
+    public var trailing: CGFloat = .medium
 
-    public init(_ length: Space) {
+    public init(_ length: CGFloat) {
         top = length
         leading = length
         bottom = length
@@ -19,14 +19,14 @@ public struct ControlMargin: Sendable {
     }
 
     @available(*, deprecated, message: "Set paddings with Edges")
-    public init(horizontal: Space, vertical: Space) {
+    public init(horizontal: CGFloat, vertical: CGFloat) {
         top = vertical
         leading = horizontal
         bottom = vertical
         trailing = horizontal
     }
 
-    public init(_ edges: Edge.Set, _ length: Space) {
+    public init(_ edges: Edge.Set, _ length: CGFloat) {
         switch edges {
         case .horizontal:
             leading = length
@@ -55,7 +55,7 @@ public struct ControlMargin: Sendable {
         }
     }
 
-    public init(_ edges: [Edge.Set], _ length: Space) {
+    public init(_ edges: [Edge.Set], _ length: CGFloat) {
         for edge in edges {
             switch edge {
             case .horizontal:
@@ -92,15 +92,15 @@ public extension EnvironmentValues {
 }
 
 public extension View {
-    func controlMargin(_ length: Space) -> some View {
+    func controlMargin(_ length: CGFloat) -> some View {
         environment(\.controlMargin, ControlMargin(length))
     }
 
-    func controlMargin(_ edges: Edge.Set, _ length: Space) -> some View {
+    func controlMargin(_ edges: Edge.Set, _ length: CGFloat) -> some View {
         environment(\.controlMargin, ControlMargin(edges, length))
     }
 
-    func controlMargin(_ edges: [Edge.Set], _ length: Space) -> some View {
+    func controlMargin(_ edges: [Edge.Set], _ length: CGFloat) -> some View {
         environment(\.controlMargin, ControlMargin(edges, length))
     }
 }

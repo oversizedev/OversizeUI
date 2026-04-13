@@ -8,11 +8,11 @@ import SwiftUI
 public extension View {
     func iconOnSurface(_ surfaceStyle: SurfaceStyle = .secondary, surfaceSolor: Color? = nil) -> some View {
         Surface {
-            self
+            self.foregroundColor(Color.onSurfacePrimary)
         }
-        .surfaceStyle(surfaceStyle)
         .surfaceBackgroundColor(surfaceSolor)
+        .surfaceStyle(surfaceStyle)
         .surfaceContentMargins(.xxSmall)
-        .surfaceRadius(.medium)
+        .surfaceRadius(.xSmall)
     }
 }
