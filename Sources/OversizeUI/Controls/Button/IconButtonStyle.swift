@@ -113,8 +113,6 @@ public struct IconButtonStyle: ButtonStyle {
         if isLoading {
             ProgressView()
                 .progressViewStyle(CircularProgressViewStyle(tint: foregroundColor(for: role)))
-        } else {
-            EmptyView()
         }
     }
 
