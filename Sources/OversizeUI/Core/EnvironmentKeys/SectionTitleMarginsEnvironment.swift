@@ -6,11 +6,11 @@
 import SwiftUI
 
 public extension EnvironmentValues {
-    @Entry var sectionTitleMargins: EdgeInsets = .init(top: .zero, leading: .zero, bottom: .zero, trailing: .zero)
+    @Entry var sectionTitleMargins: SwiftUI.EdgeInsets = .init(top: .zero, leading: .zero, bottom: .zero, trailing: .zero)
 }
 
 public extension View {
-    func sectionTitleMargins(_ margins: EdgeInsets) -> some View {
+    func sectionTitleMargins(_ margins: SwiftUI.EdgeInsets) -> some View {
         environment(\.sectionTitleMargins, margins)
     }
 

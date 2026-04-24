@@ -52,7 +52,7 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
         .animation(.easeIn(duration: 0.10), value: text)
     }
 
-    private var padding: EdgeInsets {
+    private var padding: SwiftUI.EdgeInsets {
         switch fieldPlaceholderPosition {
         case .default:
             #if os(macOS)

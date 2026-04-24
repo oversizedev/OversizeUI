@@ -7,18 +7,18 @@ import SwiftUI
 
 public extension View {
     @available(*, deprecated, renamed: "segmentedPickerMargins")
-    func segmentedPickerInsets(_ insets: EdgeSpaceInsets) -> some View {
-        environment(\.segmentedPickerMargins, EdgeInsets(
-            top: insets.top.rawValue,
-            leading: insets.leading.rawValue,
-            bottom: insets.bottom.rawValue,
-            trailing: insets.trailing.rawValue
+    func segmentedPickerInsets(_ insets: SwiftUI.EdgeInsets) -> some View {
+        environment(\.segmentedPickerMargins, SwiftUI.EdgeInsets(
+            top: insets.top,
+            leading: insets.leading,
+            bottom: insets.bottom,
+            trailing: insets.trailing
         ))
     }
 
     @available(*, deprecated, renamed: "segmentedPickerMargins")
     func segmentedPickerInsets(_ insets: Space) -> some View {
-        environment(\.segmentedPickerMargins, EdgeInsets(
+        environment(\.segmentedPickerMargins, SwiftUI.EdgeInsets(
             top: insets.rawValue,
             leading: insets.rawValue,
             bottom: insets.rawValue,

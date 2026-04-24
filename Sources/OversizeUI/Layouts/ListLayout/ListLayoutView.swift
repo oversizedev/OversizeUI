@@ -83,7 +83,7 @@ public struct ListLayoutView<
     }
 
     public init(
-        _ title: String,
+        _ title: String = "",
         @ViewBuilder content: () -> Content,
         @ViewBuilder background: () -> Background = { EmptyView() }
     ) where SelectionValue == Never {
@@ -95,7 +95,7 @@ public struct ListLayoutView<
 
     @available(watchOS, unavailable)
     public init(
-        _ title: String,
+        _ title: String = "",
         selection: Binding<Set<SelectionValue>?>,
         @ViewBuilder content: () -> Content,
         @ViewBuilder background: () -> Background = { EmptyView() }

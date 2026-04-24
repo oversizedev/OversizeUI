@@ -7,7 +7,7 @@ import SwiftUI
 
 public struct ListRow<LeadingLabel: View, TrailingLabel: View>: View {
     @Environment(\.listLayoutStyle) private var listStyle: ListLayoutStyle
-    @Environment(\.rowContentMargins) var controlMargins: EdgeInsets
+    @Environment(\.rowContentMargins) var controlMargins: SwiftUI.EdgeInsets
     @Environment(\.multilineTextAlignment) var multilineTextAlignment
     @Environment(\.isPremium) var premiumStatus
     @Environment(\.isLoading) var isLoading
@@ -25,11 +25,14 @@ public struct ListRow<LeadingLabel: View, TrailingLabel: View>: View {
     private var leadingSpace: CGFloat = .small
     private var textColor: Color?
 
+    private var action: (() -> Void)?
+
     public init(
         _ title: String,
         subtitle: String? = nil,
         @ViewBuilder leading: () -> LeadingLabel,
-        @ViewBuilder trailing: () -> TrailingLabel
+        @ViewBuilder trailing: () -> TrailingLabel,
+        action: (() -> Void)? = nil
     ) {
         self.title = title
         self.subtitle = subtitle
@@ -37,9 +40,24 @@ public struct ListRow<LeadingLabel: View, TrailingLabel: View>: View {
         trailingLabel = trailing()
         leadingSize = nil
         leadingRadius = nil
+        self.action = action
     }
 
     public var body: some View {
+        Group {
+            if let action {
+                SwiftUI.Button(action: action, label: {
+                    content
+                })
+            } else {
+                content
+            }
+        }
+        .listRowInsets(controlMargins)
+        .listRowSeparatorTint(Color.border)
+    }
+
+    private var content: some View {
         HStack(spacing: .zero) {
             leadingLabel
                 .scaledToFill()
@@ -59,10 +77,6 @@ public struct ListRow<LeadingLabel: View, TrailingLabel: View>: View {
             trailingLabel
                 .padding(.leading, .xxSmall)
         }
-
-        .listRowInsets(controlMargins)
-        .listRowSeparatorTint(Color.border)
-        .contentShape(Rectangle())
     }
 
     private var text: some View {
@@ -157,7 +171,8 @@ public extension ListRow where LeadingLabel == Image, TrailingLabel == EmptyView
     init(
         _ title: String,
         subtitle: String? = nil,
-        @ViewBuilder leading: () -> LeadingLabel
+        @ViewBuilder leading: () -> LeadingLabel,
+        action _: (() -> Void)? = nil
     ) {
         self.title = title
         self.subtitle = subtitle
@@ -183,7 +198,8 @@ public extension ListRow where LeadingLabel == Image {
         _ title: String,
         subtitle: String? = nil,
         @ViewBuilder leading: () -> LeadingLabel,
-        @ViewBuilder trailing: () -> TrailingLabel
+        @ViewBuilder trailing: () -> TrailingLabel,
+        action: (() -> Void)? = nil
     ) {
         self.title = title
         self.subtitle = subtitle
@@ -201,6 +217,7 @@ public extension ListRow where LeadingLabel == Image {
         )
         #endif
         leadingRadius = 4
+        self.action = action
     }
 }
 
@@ -209,7 +226,8 @@ public extension ListRow where LeadingLabel == Image {
 public extension ListRow where LeadingLabel == EmptyView, TrailingLabel == EmptyView {
     init(
         _ title: String,
-        subtitle: String? = nil
+        subtitle: String? = nil,
+        action: (() -> Void)? = nil
     ) {
         self.title = title
         self.subtitle = subtitle
@@ -217,6 +235,7 @@ public extension ListRow where LeadingLabel == EmptyView, TrailingLabel == Empty
         trailingLabel = nil
         leadingSize = nil
         leadingRadius = nil
+        self.action = action
     }
 }
 
@@ -224,7 +243,8 @@ public extension ListRow where TrailingLabel == EmptyView {
     init(
         _ title: String,
         subtitle: String? = nil,
-        @ViewBuilder leading: () -> LeadingLabel
+        @ViewBuilder leading: () -> LeadingLabel,
+        action: (() -> Void)? = nil
     ) {
         self.title = title
         self.subtitle = subtitle
@@ -232,6 +252,7 @@ public extension ListRow where TrailingLabel == EmptyView {
         trailingLabel = nil
         leadingSize = nil
         leadingRadius = nil
+        self.action = action
     }
 }
 
@@ -239,7 +260,8 @@ public extension ListRow where LeadingLabel == EmptyView {
     init(
         _ title: String,
         subtitle: String? = nil,
-        @ViewBuilder trailing: () -> TrailingLabel
+        @ViewBuilder trailing: () -> TrailingLabel,
+        action: (() -> Void)? = nil
     ) {
         self.title = title
         self.subtitle = subtitle
@@ -247,6 +269,7 @@ public extension ListRow where LeadingLabel == EmptyView {
         trailingLabel = trailing()
         leadingSize = nil
         leadingRadius = nil
+        self.action = action
     }
 }
 

@@ -11,7 +11,7 @@ public enum RowClearIconStyle {
 
 public struct Row<LeadingLabel: View, TrailingLabel: View>: View {
     @Environment(\.elevation) private var elevation: Elevation
-    @Environment(\.rowContentMargins) var controlMargins: EdgeInsets
+    @Environment(\.rowContentMargins) var controlMargins: SwiftUI.EdgeInsets
     @Environment(\.multilineTextAlignment) var multilineTextAlignment
     @Environment(\.isPremium) var premiumStatus
     @Environment(\.isLoading) var isLoading

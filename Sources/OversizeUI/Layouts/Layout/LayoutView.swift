@@ -22,14 +22,15 @@ public struct LayoutView<
 
     public var body: some View {
         ScrollView {
-            Color.clear
-                .frame(height: 0)
-                .onGeometryChange(for: CGFloat.self) { proxy in
-                    proxy.frame(in: .named("LayoutScrollView")).minY
-                } action: { minY in
-                    handleScrollOffset(CGPoint(x: 0, y: minY))
-                }
+//            Color.clear
+//                .frame(height: 0)
+//                .onGeometryChange(for: CGFloat.self) { proxy in
+//                    proxy.frame(in: .named("LayoutScrollView")).minY
+//                } action: { minY in
+//                    handleScrollOffset(CGPoint(x: 0, y: minY))
+//                }
             content
+                .frame(maxWidth: .infinity)
         }
         .coordinateSpace(.named("LayoutScrollView"))
         .navigationTitle(title)

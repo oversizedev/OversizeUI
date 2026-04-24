@@ -7,21 +7,21 @@ import SwiftUI
 
 private struct RowContentMarginsKey: EnvironmentKey {
     #if os(macOS)
-    static let defaultValue: EdgeInsets = .init(top: .xSmall, leading: .small, bottom: .xSmall, trailing: .small)
+    static let defaultValue: SwiftUI.EdgeInsets = .init(top: .xSmall, leading: .small, bottom: .xSmall, trailing: .small)
     #else
-    static let defaultValue: EdgeInsets = .init(top: .small, leading: .medium, bottom: .small, trailing: .medium)
+    static let defaultValue: SwiftUI.EdgeInsets = .init(top: .small, leading: .medium, bottom: .small, trailing: .medium)
     #endif
 }
 
 public extension EnvironmentValues {
-    var rowContentMargins: EdgeInsets {
+    var rowContentMargins: SwiftUI.EdgeInsets {
         get { self[RowContentMarginsKey.self] }
         set { self[RowContentMarginsKey.self] = newValue }
     }
 }
 
 public extension View {
-    func rowContentMargins(_ margins: EdgeInsets) -> some View {
+    func rowContentMargins(_ margins: SwiftUI.EdgeInsets) -> some View {
         environment(\.rowContentMargins, margins)
     }
 

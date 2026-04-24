@@ -6,7 +6,7 @@
 import SwiftUI
 
 public extension EnvironmentValues {
-    @Entry var segmentedPickerMargins: EdgeInsets = .init(
+    @Entry var segmentedPickerMargins: SwiftUI.EdgeInsets = .init(
         top: .small,
         leading: .xxxSmall,
         bottom: .small,
@@ -15,7 +15,7 @@ public extension EnvironmentValues {
 }
 
 public extension View {
-    func segmentedPickerMargins(_ margins: EdgeInsets) -> some View {
+    func segmentedPickerMargins(_ margins: SwiftUI.EdgeInsets) -> some View {
         environment(\.segmentedPickerMargins, margins)
     }
 }

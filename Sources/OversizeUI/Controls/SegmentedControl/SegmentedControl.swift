@@ -9,7 +9,7 @@ public struct SegmentedPickerSelector<Element: Equatable, Content: View, Selecti
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.segmentedControlStyle) private var style
     @Environment(\.controlRadius) var controlRadius
-    @Environment(\.segmentedPickerMargins) var controlPadding: EdgeInsets
+    @Environment(\.segmentedPickerMargins) var controlPadding: SwiftUI.EdgeInsets
     @Environment(\.platform) var platform: Platform
 
     public typealias Data = [Element]

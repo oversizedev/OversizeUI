@@ -10,7 +10,7 @@ public struct Surface<Label: View>: View {
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.isAccent) private var isAccent: Bool
     @Environment(\.surfaceRadius) var surfaceRadius
-    @Environment(\.surfaceContentMargins) var contentInsets: EdgeInsets
+    @Environment(\.surfaceContentMargins) var contentInsets: SwiftUI.EdgeInsets
     @Environment(\.surfaceElevation) private var elevation: Elevation
     @Environment(\.surfaceStyle) private var background: SurfaceStyle
 
@@ -34,7 +34,7 @@ public struct Surface<Label: View>: View {
     private var backgroundColor: Color?
     private var border: Color?
     private var borderWidth: CGFloat?
-    private let forceContentInsets: EdgeInsets?
+    private let forceContentInsets: SwiftUI.EdgeInsets?
     private var isSurfaceClipped: Bool = false
 
     @State var isHover = false

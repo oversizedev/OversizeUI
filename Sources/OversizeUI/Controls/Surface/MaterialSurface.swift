@@ -13,7 +13,7 @@ public struct MaterialSurface<Label: View>: View {
     @Environment(\.elevation) private var elevation: Elevation
     @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.controlRadius) var controlRadius
-    @Environment(\.surfaceContentMargins) var controlPadding: EdgeInsets
+    @Environment(\.surfaceContentMargins) var controlPadding: SwiftUI.EdgeInsets
 
     private let label: Label
     private let action: (() -> Void)?

@@ -35,6 +35,14 @@ public struct ListSection<SectionContent: View, SectionHeaderContent: View, Sect
                     if let header, titlePosition == .inside {
                         header()
                             .listRowSeparator(.hidden)
+                            .listRowInsets(
+                                .init(
+                                    top: .xxSmall,
+                                    leading: .medium,
+                                    bottom: 0,
+                                    trailing: .medium
+                                )
+                            )
                     }
                     content()
                 } header: {

@@ -7,7 +7,7 @@ import SwiftUI
 
 public extension View {
     @available(*, deprecated, renamed: "rowContentMargins")
-    func rowContentInset(_ insets: EdgeInsets) -> some View {
+    func rowContentInset(_ insets: SwiftUI.EdgeInsets) -> some View {
         environment(\.rowContentMargins, insets)
     }
 

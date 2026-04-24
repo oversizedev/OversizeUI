@@ -128,7 +128,7 @@ public extension EnvironmentValues {
         #endif
     }()
 
-    @Entry var safeAreaInsets: EdgeInsets = {
+    @Entry var safeAreaInsets: SwiftUI.EdgeInsets = {
         #if os(iOS) || os(tvOS)
         return MainActor.assumeIsolated {
             let window = UIApplication.shared.connectedScenes
@@ -142,7 +142,7 @@ public extension EnvironmentValues {
                 .first
 
             let safeArea = window?.safeAreaInsets ?? .zero
-            return EdgeInsets(
+            return SwiftUI.EdgeInsets(
                 top: safeArea.top,
                 leading: safeArea.left,
                 bottom: safeArea.bottom,
@@ -152,7 +152,7 @@ public extension EnvironmentValues {
         #elseif os(macOS)
         return MainActor.assumeIsolated {
             let safeArea = NSApp?.keyWindow?.contentView?.safeAreaInsets ?? NSEdgeInsets()
-            return EdgeInsets(
+            return SwiftUI.EdgeInsets(
                 top: safeArea.top,
                 leading: safeArea.left,
                 bottom: safeArea.bottom,
@@ -160,7 +160,7 @@ public extension EnvironmentValues {
             )
         }
         #else
-        return EdgeInsets()
+        return SwiftUI.EdgeInsets()
         #endif
     }()
 }

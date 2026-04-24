@@ -25,8 +25,8 @@ public enum SectionViewStyle: Sendable {
 public struct SectionView<Content: View>: View {
     @Environment(\.controlRadius) private var controlRadius
     @Environment(\.sectionViewStyle) private var style: SectionViewStyle
-    @Environment(\.surfaceContentMargins) var surfaceContentInsets: EdgeInsets
-    @Environment(\.sectionTitleMargins) var sectionTitleInsets: EdgeInsets
+    @Environment(\.surfaceContentMargins) var surfaceContentInsets: SwiftUI.EdgeInsets
+    @Environment(\.sectionTitleMargins) var sectionTitleInsets: SwiftUI.EdgeInsets
     @Environment(\.headerProminence) private var headerProminence
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
