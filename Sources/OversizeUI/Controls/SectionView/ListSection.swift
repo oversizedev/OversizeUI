@@ -74,7 +74,10 @@ public struct ListSection<SectionContent: View, SectionHeaderContent: View, Sect
             #else
             Section {
                 if let header, titlePosition == .inside {
-                    header().listRowSeparator(.hidden)
+                    header()
+                    #if !os(watchOS)
+                        .listRowSeparator(.hidden)
+                    #endif
                 }
                 content()
             } header: {

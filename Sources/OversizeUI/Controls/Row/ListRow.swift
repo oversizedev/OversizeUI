@@ -54,7 +54,9 @@ public struct ListRow<LeadingLabel: View, TrailingLabel: View>: View {
             }
         }
         .listRowInsets(controlMargins)
-        .listRowSeparatorTint(Color.border)
+        #if !os(watchOS)
+            .listRowSeparatorTint(Color.border)
+        #endif
     }
 
     private var content: some View {

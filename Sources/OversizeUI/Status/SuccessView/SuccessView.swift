@@ -105,7 +105,6 @@ public struct SuccessView<C: View, A: View>: View {
             }
         }
         .paddingContent()
-        .containerRelativeFrame([.horizontal, .vertical])
     }
 
     private var displayImage: Image {

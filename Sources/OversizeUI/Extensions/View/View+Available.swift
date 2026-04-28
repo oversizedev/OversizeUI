@@ -67,6 +67,17 @@ public extension View {
         }
     }
 
+    @available(visionOS, unavailable)
+    @_disfavoredOverload
+    @ViewBuilder
+    func scrollEdgeEffectHidden(_ hidden: Bool = true, for edges: Edge.Set = .all) -> some View {
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+            scrollEdgeEffectHidden(hidden, for: edges)
+        } else {
+            self
+        }
+    }
+
     @ViewBuilder
     func safeAreaBarTop(alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil, @ViewBuilder content: @escaping () -> some View) -> some View {
         if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {

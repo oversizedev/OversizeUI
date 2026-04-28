@@ -52,7 +52,6 @@ public struct EmptyStateView<Actions: View>: View {
             #endif
         }
         .paddingContent()
-        .containerRelativeFrame([.horizontal, .vertical])
     }
 
     private var macOSContentView: some View {
