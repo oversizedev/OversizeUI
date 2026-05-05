@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-@available(iOS 18.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
 public struct ListCoverLayoutView<
     Content: View,
     Cover: View,
@@ -34,14 +34,14 @@ public struct ListCoverLayoutView<
         var list: some View {
             ZStack(alignment: .top) {
                 cover
-                    .frame(height: coverStretchHeight)
-                    .offset(y: coverScrollOffset)
                     .background {
                         coverBackground
                             .ignoresSafeArea(edges: .all)
-                            .offset(y: coverScrollOffset)
                     }
+                    .frame(height: coverStretchHeight)
+                    .offset(y: coverScrollOffset)
 
+                if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
                     SwiftUI.List(selection: $selection) {
                         content
                             .environment(\.listLayoutStyle, listStyle)
@@ -56,6 +56,27 @@ public struct ListCoverLayoutView<
                     } action: { _, value in
                         scrollOffset = value
                     }
+                } else {
+                    #if !os(watchOS)
+                    SwiftUI.List(selection: $selection) {
+                        Color.clear
+                            .frame(height: 0)
+                            .background {
+                                                            ListScrollOffsetReader { offset in
+                                                                scrollOffset = offset
+                                                            }
+                            }
+                        content
+                            .environment(\.listLayoutStyle, listStyle)
+                            
+                    }
+                    .navigationTitle(title)
+                    .environment(\.defaultMinListHeaderHeight, 40)
+                    .environment(\.defaultMinListRowHeight, 56)
+                    .scrollContentBackground(.hidden)
+                    .contentMargins(.top, coverHeight, for: .scrollContent)
+                    #endif
+                }
             }
             .background(backgroundView.ignoresSafeArea())
         }
