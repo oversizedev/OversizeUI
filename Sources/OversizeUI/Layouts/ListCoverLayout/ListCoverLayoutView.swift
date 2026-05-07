@@ -13,7 +13,6 @@ public struct ListCoverLayoutView<
     Background: View,
     SelectionValue: Hashable
 >: View {
-
     @ViewBuilder private var content: Content
     @ViewBuilder private let background: Background
 
@@ -24,8 +23,9 @@ public struct ListCoverLayoutView<
     private let title: String
 
     var listStyle: ListLayoutStyle = .plain
+    var contentMarginTop: CGFloat?
 
-    @State private var scrollOffset: CGFloat = 0
+    @State private var scrollOffset: CGFloat = .zero
 
     @Binding private var selection: Set<SelectionValue>?
 
@@ -34,10 +34,16 @@ public struct ListCoverLayoutView<
         var list: some View {
             ZStack(alignment: .top) {
                 cover
+                    .frame(
+                        maxWidth: .infinity,
+                        maxHeight: .infinity,
+                        alignment: .center
+                    )
                     .background {
                         coverBackground
                             .ignoresSafeArea(edges: .all)
                     }
+
                     .frame(height: coverStretchHeight)
                     .offset(y: coverScrollOffset)
 
@@ -50,7 +56,7 @@ public struct ListCoverLayoutView<
                     .environment(\.defaultMinListHeaderHeight, 40)
                     .environment(\.defaultMinListRowHeight, 56)
                     .scrollContentBackground(.hidden)
-                    .contentMargins(.top, coverHeight, for: .scrollContent)
+                    .contentMargins(.top, resolveContentMarginTop, for: .scrollContent)
                     .onScrollGeometryChange(for: CGFloat.self) { proxy in
                         proxy.contentOffset.y + proxy.contentInsets.top
                     } action: { _, value in
@@ -62,19 +68,18 @@ public struct ListCoverLayoutView<
                         Color.clear
                             .frame(height: 0)
                             .background {
-                                                            ListScrollOffsetReader { offset in
-                                                                scrollOffset = offset
-                                                            }
+                                ListScrollOffsetReader { offset in
+                                    scrollOffset = offset
+                                }
                             }
                         content
                             .environment(\.listLayoutStyle, listStyle)
-                            
                     }
                     .navigationTitle(title)
                     .environment(\.defaultMinListHeaderHeight, 40)
                     .environment(\.defaultMinListRowHeight, 56)
                     .scrollContentBackground(.hidden)
-                    .contentMargins(.top, coverHeight, for: .scrollContent)
+                    .contentMargins(.top, resolveContentMarginTop, for: .scrollContent)
                     #endif
                 }
             }
@@ -133,6 +138,21 @@ public struct ListCoverLayoutView<
 
     private var coverScrollOffset: CGFloat {
         scrollOffset > 0 ? -scrollOffset : 0
+    }
+
+    private var resolveContentMarginTop: CGFloat {
+        if let contentMarginTop {
+            coverHeight + contentMarginTop
+        } else {
+            switch listStyle {
+            case .plain, .inset, .grouped:
+                coverHeight + .zero
+            case .insetGrouped:
+                coverHeight + .medium
+            case .smallInsetGrouped:
+                coverHeight + .xxSmall
+            }
+        }
     }
 
     // MARK: - Init

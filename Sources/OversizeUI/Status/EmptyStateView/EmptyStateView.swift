@@ -73,7 +73,6 @@ public struct EmptyStateView<Actions: View>: View {
                 .multilineTextAlignment(.center)
 
                 actions
-
                     .frame(width: 200)
 
                 Spacer()

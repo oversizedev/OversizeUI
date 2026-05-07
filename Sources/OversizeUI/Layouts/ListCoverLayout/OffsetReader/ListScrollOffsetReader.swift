@@ -1,30 +1,28 @@
 //
 // Copyright © 2026 Alexander Romanov
 // ListScrollOffsetReader.swift, created on 06.05.2026
-//  
+//
 
 import SwiftUI
 
 #if os(iOS) || os(tvOS) || os(visionOS)
 @available(iOS 17.0, tvOS 17.0, visionOS 1.0, *)
 struct ListScrollOffsetReader: UIViewRepresentable {
-
     let onScroll: @MainActor (CGFloat) -> Void
 
-    func makeUIView(context: Context) -> ListScrollOffsetUIView {
+    func makeUIView(context _: Context) -> ListScrollOffsetUIView {
         let view = ListScrollOffsetUIView()
         view.onScroll = onScroll
         return view
     }
 
-    func updateUIView(_ uiView: ListScrollOffsetUIView, context: Context) {
+    func updateUIView(_ uiView: ListScrollOffsetUIView, context _: Context) {
         uiView.onScroll = onScroll
     }
 }
 
 @available(iOS 17.0, tvOS 17.0, visionOS 1.0, *)
 final class ListScrollOffsetUIView: UIView {
-
     var onScroll: (@MainActor (CGFloat) -> Void)?
     private var observation: NSKeyValueObservation?
 
@@ -58,23 +56,21 @@ final class ListScrollOffsetUIView: UIView {
 #if os(macOS)
 @available(macOS 14.0, *)
 struct ListScrollOffsetReader: NSViewRepresentable {
-
     let onScroll: @MainActor (CGFloat) -> Void
 
-    func makeNSView(context: Context) -> ListScrollOffsetNSView {
+    func makeNSView(context _: Context) -> ListScrollOffsetNSView {
         let view = ListScrollOffsetNSView()
         view.onScroll = onScroll
         return view
     }
 
-    func updateNSView(_ nsView: ListScrollOffsetNSView, context: Context) {
+    func updateNSView(_ nsView: ListScrollOffsetNSView, context _: Context) {
         nsView.onScroll = onScroll
     }
 }
 
 @available(macOS 14.0, *)
 final class ListScrollOffsetNSView: NSView {
-
     var onScroll: (@MainActor (CGFloat) -> Void)?
     private var observation: NSKeyValueObservation?
 

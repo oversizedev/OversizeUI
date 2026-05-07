@@ -12,4 +12,10 @@ public extension ListCoverLayoutView {
         list.listStyle = listStyle
         return list
     }
+
+    func coverSpacing(_ spacing: CGFloat?) -> Self {
+        var list = self
+        list.contentMarginTop = spacing
+        return list
+    }
 }
