@@ -30,9 +30,9 @@ public struct ListRow<LeadingLabel: View, TrailingLabel: View>: View {
     public init(
         _ title: String,
         subtitle: String? = nil,
+        action: (() -> Void)? = nil,
         @ViewBuilder leading: () -> LeadingLabel,
         @ViewBuilder trailing: () -> TrailingLabel,
-        action: (() -> Void)? = nil
     ) {
         self.title = title
         self.subtitle = subtitle
@@ -173,8 +173,8 @@ public extension ListRow where LeadingLabel == Image, TrailingLabel == EmptyView
     init(
         _ title: String,
         subtitle: String? = nil,
+        action _: (() -> Void)? = nil,
         @ViewBuilder leading: () -> LeadingLabel,
-        action _: (() -> Void)? = nil
     ) {
         self.title = title
         self.subtitle = subtitle
@@ -199,9 +199,9 @@ public extension ListRow where LeadingLabel == Image {
     init(
         _ title: String,
         subtitle: String? = nil,
+        action: (() -> Void)? = nil,
         @ViewBuilder leading: () -> LeadingLabel,
         @ViewBuilder trailing: () -> TrailingLabel,
-        action: (() -> Void)? = nil
     ) {
         self.title = title
         self.subtitle = subtitle
@@ -245,8 +245,8 @@ public extension ListRow where TrailingLabel == EmptyView {
     init(
         _ title: String,
         subtitle: String? = nil,
+        action: (() -> Void)? = nil,
         @ViewBuilder leading: () -> LeadingLabel,
-        action: (() -> Void)? = nil
     ) {
         self.title = title
         self.subtitle = subtitle
@@ -262,8 +262,8 @@ public extension ListRow where LeadingLabel == EmptyView {
     init(
         _ title: String,
         subtitle: String? = nil,
+        action: (() -> Void)? = nil,
         @ViewBuilder trailing: () -> TrailingLabel,
-        action: (() -> Void)? = nil
     ) {
         self.title = title
         self.subtitle = subtitle
