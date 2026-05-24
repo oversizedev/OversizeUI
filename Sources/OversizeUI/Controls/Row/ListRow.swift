@@ -11,6 +11,7 @@ public struct ListRow<LeadingLabel: View, TrailingLabel: View>: View {
     @Environment(\.multilineTextAlignment) var multilineTextAlignment
     @Environment(\.isPremium) var premiumStatus
     @Environment(\.isLoading) var isLoading
+    @Environment(\.isNavigatable) private var isNavigatable: Bool
 
     private let title: String
     private let subtitle: String?
@@ -32,7 +33,7 @@ public struct ListRow<LeadingLabel: View, TrailingLabel: View>: View {
         subtitle: String? = nil,
         action: (() -> Void)? = nil,
         @ViewBuilder leading: () -> LeadingLabel,
-        @ViewBuilder trailing: () -> TrailingLabel,
+        @ViewBuilder trailing: () -> TrailingLabel
     ) {
         self.title = title
         self.subtitle = subtitle
@@ -53,9 +54,16 @@ public struct ListRow<LeadingLabel: View, TrailingLabel: View>: View {
                 content
             }
         }
-        .listRowInsets(controlMargins)
+        .listRowInsets(
+            isNavigatable ? .init(
+                top: controlMargins.top,
+                leading: controlMargins.leading,
+                bottom: controlMargins.bottom,
+                trailing: .xSmall
+            ) : controlMargins
+        )
         #if !os(watchOS)
-            .listRowSeparatorTint(Color.border)
+        .listRowSeparatorTint(Color.border)
         #endif
     }
 
@@ -73,11 +81,18 @@ public struct ListRow<LeadingLabel: View, TrailingLabel: View>: View {
 
             if isLoading {
                 ProgressView()
-                    .padding(.trailing, .xSmall)
+                    .tint(Color.onSurfaceTertiary)
+                    .padding(.leading, .xxSmall)
+            } else {
+                trailingLabel
+                    .padding(.leading, .xxSmall)
             }
 
-            trailingLabel
-                .padding(.leading, .xxSmall)
+            if isNavigatable {
+                Icon(Image.Base.chevronRight)
+                    .iconColor(Color.border)
+                    .padding(.leading, .xxSmall)
+            }
         }
     }
 
@@ -174,7 +189,7 @@ public extension ListRow where LeadingLabel == Image, TrailingLabel == EmptyView
         _ title: String,
         subtitle: String? = nil,
         action _: (() -> Void)? = nil,
-        @ViewBuilder leading: () -> LeadingLabel,
+        @ViewBuilder leading: () -> LeadingLabel
     ) {
         self.title = title
         self.subtitle = subtitle
@@ -201,7 +216,7 @@ public extension ListRow where LeadingLabel == Image {
         subtitle: String? = nil,
         action: (() -> Void)? = nil,
         @ViewBuilder leading: () -> LeadingLabel,
-        @ViewBuilder trailing: () -> TrailingLabel,
+        @ViewBuilder trailing: () -> TrailingLabel
     ) {
         self.title = title
         self.subtitle = subtitle
@@ -246,7 +261,7 @@ public extension ListRow where TrailingLabel == EmptyView {
         _ title: String,
         subtitle: String? = nil,
         action: (() -> Void)? = nil,
-        @ViewBuilder leading: () -> LeadingLabel,
+        @ViewBuilder leading: () -> LeadingLabel
     ) {
         self.title = title
         self.subtitle = subtitle
@@ -263,7 +278,7 @@ public extension ListRow where LeadingLabel == EmptyView {
         _ title: String,
         subtitle: String? = nil,
         action: (() -> Void)? = nil,
-        @ViewBuilder trailing: () -> TrailingLabel,
+        @ViewBuilder trailing: () -> TrailingLabel
     ) {
         self.title = title
         self.subtitle = subtitle

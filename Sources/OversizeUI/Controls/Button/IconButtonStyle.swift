@@ -116,7 +116,7 @@ public struct IconButtonStyle: ButtonStyle {
         }
     }
 
-    private var padding: Space {
+    private var padding: CGFloat {
         #if os(tvOS)
         return .medium
         #else

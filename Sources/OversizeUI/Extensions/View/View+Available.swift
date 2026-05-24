@@ -95,4 +95,37 @@ public extension View {
             safeAreaInset(edge: .bottom, alignment: alignment, spacing: spacing, content: content)
         }
     }
+
+    @_disfavoredOverload
+    @ViewBuilder
+    func listSectionIndexVisibility(_ visibility: Visibility) -> some View {
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+            listSectionIndexVisibility(visibility)
+        } else {
+            self
+        }
+    }
+
+    @_disfavoredOverload
+    @ViewBuilder
+    func matchedTransitionSource(id: some Hashable, in namespace: Namespace.ID) -> some View {
+        if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
+            matchedTransitionSource(id: id, in: namespace)
+        } else {
+            self
+        }
+    }
+
+    @ViewBuilder
+    func navigationTransitionZoom(sourceID: some Hashable, in namespace: Namespace.ID) -> some View {
+        #if !os(macOS)
+        if #available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
+            navigationTransition(.zoom(sourceID: sourceID, in: namespace))
+        } else {
+            self
+        }
+        #else
+        self
+        #endif
+    }
 }

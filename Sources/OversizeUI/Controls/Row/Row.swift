@@ -15,6 +15,7 @@ public struct Row<LeadingLabel: View, TrailingLabel: View>: View {
     @Environment(\.multilineTextAlignment) var multilineTextAlignment
     @Environment(\.isPremium) var premiumStatus
     @Environment(\.isLoading) var isLoading
+    @Environment(\.isNavigatable) private var isNavigatable
 
     private let title: String
     private let subtitle: String?
@@ -97,7 +98,7 @@ public struct Row<LeadingLabel: View, TrailingLabel: View>: View {
                 trailingLabel
                     .padding(.leading, .xxSmall)
 
-                if isShowArrowIcon {
+                if isShowArrowIcon || isNavigatable {
                     Image.Base.chevronRight
                         .icon(.onSurfaceTertiary)
                 }
@@ -197,6 +198,7 @@ public extension Row {
         return control
     }
 
+    @available(*, deprecated, renamed: "navigatable")
     func rowArrow(_ showArrowIcon: Bool = true) -> Row {
         var control = self
         control.isShowArrowIcon = showArrowIcon

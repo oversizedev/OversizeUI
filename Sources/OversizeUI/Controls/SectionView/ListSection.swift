@@ -7,6 +7,7 @@ import SwiftUI
 
 public struct ListSection<SectionContent: View, SectionHeaderContent: View, SectionFooterContent: View>: View {
     @Environment(\.listLayoutStyle) private var listStyle: ListLayoutStyle
+    @Environment(\.listSectionTitleSeparator) private var titleSeparator
 
     private var titlePosition: SectionViewTitlePosition = .outside
 
@@ -34,20 +35,17 @@ public struct ListSection<SectionContent: View, SectionHeaderContent: View, Sect
                 Section {
                     if let header, titlePosition == .inside {
                         header()
-                            .listRowSeparator(.hidden)
-                            .listRowInsets(
-                                .init(
-                                    top: .xxSmall,
-                                    leading: .medium,
-                                    bottom: 0,
-                                    trailing: .medium
-                                )
-                            )
+                            .padding(titleSeparator == .hidden ? .top : .vertical, titleSeparator == .hidden ? .regular : .small)
+                            .padding(.horizontal, .medium)
+                            .listRowSeparator(titleSeparator, edges: .bottom)
+                            .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                            .alignmentGuide(.listRowSeparatorLeading) { _ in 0 }
+                            .alignmentGuide(.listRowSeparatorTrailing) { d in d.width }
                     }
                     content()
                 } header: {
                     if let header, titlePosition == .outside {
-                        header().listRowSeparator(.hidden)
+                        header()
                     }
                 } footer: {
                     if let footer {
@@ -58,7 +56,8 @@ public struct ListSection<SectionContent: View, SectionHeaderContent: View, Sect
             } else {
                 Section {
                     if let header, titlePosition == .inside {
-                        header().listRowSeparator(.hidden)
+                        header()
+                            .listRowSeparator(titleSeparator, edges: .bottom)
                     }
                     content()
                 } header: {

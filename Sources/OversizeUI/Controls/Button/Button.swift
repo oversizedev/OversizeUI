@@ -248,7 +248,7 @@ public struct OversizeButtonStyle: ButtonStyle {
         }
     }
 
-    private var horizontalPadding: Space {
+    private var horizontalPadding: CGFloat {
         #if os(tvOS)
         return .medium
         #else
@@ -272,7 +272,7 @@ public struct OversizeButtonStyle: ButtonStyle {
         #endif
     }
 
-    private var verticalPadding: Space {
+    private var verticalPadding: CGFloat {
         #if os(tvOS)
         return .medium
         #else
