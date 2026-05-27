@@ -11,18 +11,10 @@ public enum IconPickerStyle {
 
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 public struct IconPicker: View {
-    @Environment(\.theme) private var theme: ThemeSettings
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
 
-    private let label: String
     private let icons: [Image]
-    @Binding private var selection: Image?
-    @State private var showModal = false
-    @State private var isSelected = false
-
-    @State private var selectedIndex: Int?
-
-    var style: IconPickerStyle = .field
+    @Binding private var selectedIndex: Int?
 
     private var gridPadding: CGFloat {
         guard let sizeClass = horizontalSizeClass else { return 40 }
@@ -34,125 +26,37 @@ public struct IconPicker: View {
         }
     }
 
-    public init(
-        _ label: String,
-        icons: [Image],
-        selection: Binding<Image?>
-    ) {
-        self.label = label
+    public init(icons: [Image], selectedIndex: Binding<Int?>) {
         self.icons = icons
-        _selection = selection
+        _selectedIndex = selectedIndex
     }
 
     public var body: some View {
-        Group {
-            switch style {
-            case .field:
-                fieldView
-            case .circle:
-                circleView
-            }
-        }
-        .sheet(isPresented: $showModal) {
-            modal
-                .presentationDetents([.medium, .large])
-        }
-    }
-
-    public var circleView: some View {
-        Button {
-            showModal.toggle()
-        } label: {
-            Group {
-                if let image = selection {
-                    image
-                } else {
-                    Image.Base.edit.icon(size: .large)
-                }
-            }
-            .padding(.xxSmall)
-        }
-        .buttonStyle(.iconTertiary)
-        .controlSize(.extraLarge)
-    }
-
-    private var fieldView: some View {
-        Button {
-            showModal.toggle()
-        } label: {
-            HStack(spacing: .xxSmall) {
-                Text(label)
-                    .onSurfacePrimary()
-
-                Spacer()
-                if let image = selection {
-                    image
-                }
-                Image.Base.chevronDown.icon(.onSurfacePrimary)
-            }
-        }
-        .buttonStyle(.field)
-    }
-
-    private var modal: some View {
-        NavigationStack {
-            LayoutView(label) {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: gridPadding))]) {
-                    ForEach(icons.indices, id: \.self) { index in
-                        Button(
-                            action: { selectedIndex = index },
-                            label: {
-                                if index == selectedIndex {
-                                    Group {
-                                        icons[index]
-                                            .resizable()
-                                            .frame(width: 24, height: 24, alignment: .center)
-                                    }
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: .xxxSmall, style: .continuous)
-                                            .strokeBorder(Color.border, lineWidth: 1)
-                                            .frame(width: 48, height: 48, alignment: .center)
-                                    )
-
-                                } else {
-                                    icons[index]
-                                        .resizable()
-                                        .frame(width: 24, height: 24, alignment: .center)
-                                }
-                            }
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: gridPadding))]) {
+            ForEach(icons.indices, id: \.self) { index in
+                Button(
+                    action: { selectedIndex = index },
+                    label: {
+                        Group {
+                            icons[index]
+                                .resizable()
+                                .frame(width: 24, height: 24, alignment: .center)
+                        }
+                        .overlay(
+                            RoundedRectangle(cornerRadius: .xxxSmall, style: .continuous)
+                                .strokeBorder(
+                                    selectedIndex == index ? Color.accentColor : Color.border,
+                                    lineWidth: selectedIndex == index ? 2 : 1
+                                )
+                                .frame(width: 48, height: 48, alignment: .center)
                         )
                         .padding(.vertical, horizontalSizeClass == .compact ? 12 : 20)
                     }
-                }
-                .padding(.top, .medium)
-                .paddingContent(.horizontal)
-                .paddingContent(.bottom)
-            }
-            .toolbarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        showModal = false
-                    }
-                }
-
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
-                        selection = icons[selectedIndex ?? 0]
-                        isSelected = true
-                        showModal.toggle()
-                    }
-                }
+                )
             }
         }
-    }
-}
-
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-public extension IconPicker {
-    func iconPickerStyle(_ style: IconPickerStyle) -> Self {
-        var control = self
-        control.style = style
-        return control
+        .padding(.top, .medium)
+        .paddingContent(.horizontal)
+        .paddingContent(.bottom)
     }
 }
