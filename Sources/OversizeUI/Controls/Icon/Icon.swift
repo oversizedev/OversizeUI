@@ -14,6 +14,7 @@ public struct Icon: View {
 
     public var body: some View {
         image
+            .resizable()
             .renderingMode(.template)
             .foregroundColor(iconColor ?? Color.onSurfacePrimary)
             .frame(width: iconSize, height: iconSize)

@@ -5,10 +5,6 @@
 
 import SwiftUI
 
-public enum SectionViewTitlePosition: Sendable {
-    case inside, outside
-}
-
 public enum SectionViewTitleButtonPosition: Sendable {
     case leading, trailing
 }
@@ -26,15 +22,14 @@ public struct SectionView<Content: View>: View {
     @Environment(\.controlRadius) private var controlRadius
     @Environment(\.sectionViewStyle) private var style: SectionViewStyle
     @Environment(\.surfaceContentMargins) var surfaceContentInsets: SwiftUI.EdgeInsets
-    @Environment(\.sectionTitleMargins) var sectionTitleInsets: SwiftUI.EdgeInsets
     @Environment(\.headerProminence) private var headerProminence
+    @Environment(\.sectionTitlePosition) private var titlePosition
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     #endif
     private let content: Content
     private let title: String
 
-    private var titlePosition: SectionViewTitlePosition = .outside
     private var titleButton: SectionViewTitleButton?
     private var titleButtonPosition: SectionViewTitleButtonPosition = .trailing
     private var border: Color?
@@ -68,7 +63,6 @@ public struct SectionView<Content: View>: View {
             if !title.isEmpty, titlePosition == .outside {
                 titleView
                     .padding(.horizontal, titleHorizontalPadding)
-                    .padding(sectionTitleInsets)
                 #if os(macOS)
                     .padding(.leading, .xxSmall)
                 #endif
@@ -78,7 +72,6 @@ public struct SectionView<Content: View>: View {
                 VStack(alignment: .leading, spacing: .xSmall) {
                     if !title.isEmpty, titlePosition == .inside {
                         titleView
-                            .padding(sectionTitleInsets)
                     }
                     content
                 }
@@ -220,11 +213,6 @@ public struct SectionView<Content: View>: View {
 }
 
 public extension SectionView {
-    func sectionTitlePosition(_ position: SectionViewTitlePosition) -> SectionView {
-        var control = self
-        control.titlePosition = position
-        return control
-    }
 
     func sectionTitleButton(_ button: SectionViewTitleButton, position: SectionViewTitleButtonPosition = .trailing) -> SectionView {
         var control = self
@@ -274,8 +262,8 @@ struct SectionView_Previews: PreviewProvider {
                     }
                 }
             }
-            .sectionTitlePosition(.inside)
             .sectionTitleButton(.title("All") {})
+            .sectionTitlePosition(.inside)
 
             SectionView("Feedback") {
                 VStack(spacing: .zero) {
@@ -288,8 +276,8 @@ struct SectionView_Previews: PreviewProvider {
                     }
                 }
             }
-            .sectionTitlePosition(.inside)
             .sectionTitleButton(.arrow {})
+            .sectionTitlePosition(.inside)
 
             SectionView {
                 Row("Cancel")
@@ -308,9 +296,9 @@ struct SectionView_Previews: PreviewProvider {
                     Image.Base.profile.icon()
                 }
             }
-            .sectionTitlePosition(.inside)
             .sectionTitleButton(.title("All") {})
             .sectionViewStyle(.smallIndent)
+            .sectionTitlePosition(.inside)
 
             SectionView("Feedback") {
                 VStack(spacing: .zero) {
@@ -342,9 +330,9 @@ struct SectionView_Previews: PreviewProvider {
                     Image.Base.profile.icon()
                 }
             }
-            .sectionTitlePosition(.inside)
             .sectionTitleButton(.title("All") {})
             .sectionViewStyle(.edgeToEdge)
+            .sectionTitlePosition(.inside)
 
             SectionView("Feedback") {
                 VStack(spacing: .zero) {

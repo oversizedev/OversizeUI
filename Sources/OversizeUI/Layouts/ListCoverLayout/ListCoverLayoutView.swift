@@ -34,6 +34,7 @@ public struct ListCoverLayoutView<
         var list: some View {
             ZStack(alignment: .top) {
                 cover
+                    .zIndex(1)
                     .frame(
                         maxWidth: .infinity,
                         maxHeight: .infinity,
@@ -43,7 +44,6 @@ public struct ListCoverLayoutView<
                         coverBackground
                             .ignoresSafeArea(edges: .all)
                     }
-
                     .frame(height: coverStretchHeight)
                     .offset(y: coverScrollOffset)
 
@@ -52,7 +52,7 @@ public struct ListCoverLayoutView<
                         content
                             .environment(\.listLayoutStyle, listStyle)
                     }
-                    .navigationTitle(title)
+                    .if(!title.isEmpty) { $0.navigationTitle(title) }
                     .environment(\.defaultMinListHeaderHeight, 40)
                     .environment(\.defaultMinListRowHeight, 56)
                     .scrollContentBackground(.hidden)
@@ -75,7 +75,7 @@ public struct ListCoverLayoutView<
                         content
                             .environment(\.listLayoutStyle, listStyle)
                     }
-                    .navigationTitle(title)
+                    .if(!title.isEmpty) { $0.navigationTitle(title) }
                     .environment(\.defaultMinListHeaderHeight, 40)
                     .environment(\.defaultMinListRowHeight, 56)
                     .scrollContentBackground(.hidden)

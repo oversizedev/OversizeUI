@@ -92,7 +92,7 @@ public struct NoticeView<A: View>: View {
                     }
 
                     imageURL.map { url in
-                        AsyncImage(url: url) {
+                        CachedAsyncImage(url: url) {
                             $0
                                 .resizable()
                                 .frame(width: 32, height: 32)

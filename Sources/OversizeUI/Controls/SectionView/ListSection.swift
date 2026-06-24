@@ -8,8 +8,7 @@ import SwiftUI
 public struct ListSection<SectionContent: View, SectionHeaderContent: View, SectionFooterContent: View>: View {
     @Environment(\.listLayoutStyle) private var listStyle: ListLayoutStyle
     @Environment(\.listSectionTitleSeparator) private var titleSeparator
-
-    private var titlePosition: SectionViewTitlePosition = .outside
+    @Environment(\.sectionTitlePosition) private var titlePosition
 
     private var content: () -> SectionContent
 
@@ -102,14 +101,6 @@ public struct ListSection<SectionContent: View, SectionHeaderContent: View, Sect
         case .smallInsetGrouped:
             .xxSmall
         }
-    }
-}
-
-public extension ListSection {
-    func listSectionTitlePosition(_ position: SectionViewTitlePosition) -> ListSection {
-        var control = self
-        control.titlePosition = position
-        return control
     }
 }
 
