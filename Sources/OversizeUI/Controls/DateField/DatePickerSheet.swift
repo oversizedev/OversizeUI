@@ -39,6 +39,12 @@ public struct DatePickerSheet: View {
     }
 
     public var body: some View {
+        NavigationStack {
+            content
+        }
+    }
+
+    private var content: some View {
         LayoutView(title) {
             SectionView {
                 VStack {

@@ -44,9 +44,16 @@ public struct ListRow<LeadingLabel: View, TrailingLabel: View>: View {
         self.action = action
     }
 
+    private var resolvedAction: (() -> Void)? {
+        if isPremiumOption, premiumStatus == false {
+            return nil
+        }
+        return action
+    }
+
     public var body: some View {
         Group {
-            if let action {
+            if let action = resolvedAction {
                 SwiftUI.Button(action: action, label: {
                     content
                 })

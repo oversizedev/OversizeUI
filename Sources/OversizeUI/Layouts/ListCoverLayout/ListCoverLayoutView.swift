@@ -63,10 +63,25 @@ public struct ListCoverLayoutView<
                         scrollOffset = value
                     }
                 } else {
-                    #if !os(watchOS)
+                    #if os(watchOS)
+                    SwiftUI.List(selection: $selection) {
+                        content
+                            .environment(\.listLayoutStyle, listStyle)
+                    }
+                    .if(!title.isEmpty) { $0.navigationTitle(title) }
+                    .environment(\.defaultMinListHeaderHeight, 40)
+                    .environment(\.defaultMinListRowHeight, 56)
+                    .scrollContentBackground(.hidden)
+                    .contentMargins(.top, resolveContentMarginTop, for: .scrollContent)
+                    #else
                     SwiftUI.List(selection: $selection) {
                         Color.clear
                             .frame(height: 0)
+                            .listRowInsets(EdgeInsets())
+                            .listRowBackground(Color.clear)
+                            #if !os(tvOS)
+                            .listRowSeparator(.hidden)
+                            #endif
                             .background {
                                 ListScrollOffsetReader { offset in
                                     scrollOffset = offset

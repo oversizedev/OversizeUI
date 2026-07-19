@@ -101,6 +101,8 @@ public struct Select<Element: Equatable, Content: View, Selection: View, Actions
                 return
             }
         }
+        selectedIndex = nil
+        isSelected = false
     }
 
     private var modal: some View {

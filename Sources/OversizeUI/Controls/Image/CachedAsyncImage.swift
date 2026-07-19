@@ -10,6 +10,7 @@ public struct CachedAsyncImage<Content: View>: View {
 
     private let urlRequest: URLRequest?
     private let urlSession: URLSession
+    private let urlCache: URLCache
     private let scale: CGFloat
     private let content: (AsyncImagePhase) -> Content
 
@@ -48,6 +49,7 @@ public struct CachedAsyncImage<Content: View>: View {
     ) {
         urlSession = CachedAsyncImageSessionStore.session(for: urlCache)
         self.urlRequest = urlRequest
+        self.urlCache = urlCache
         self.scale = scale
         self.content = content
 
@@ -63,18 +65,23 @@ public struct CachedAsyncImage<Content: View>: View {
     }
 
     @Sendable private func load() async {
+        guard let urlRequest else {
+            phase = .empty
+            return
+        }
+        if let cached = cachedImage(from: urlRequest, cache: urlCache) {
+            phase = .success(cached)
+        }
         do {
-            if let urlRequest {
-                let image = try await remoteImage(from: urlRequest, session: urlSession)
-                withAnimation {
-                    phase = .success(image)
-                }
-            } else {
-                phase = .empty
+            let image = try await remoteImage(from: urlRequest, session: urlSession)
+            withAnimation {
+                phase = .success(image)
             }
         } catch {
-            withAnimation {
-                phase = .failure(error)
+            if cachedImage(from: urlRequest, cache: urlCache) == nil {
+                withAnimation {
+                    phase = .failure(error)
+                }
             }
         }
     }

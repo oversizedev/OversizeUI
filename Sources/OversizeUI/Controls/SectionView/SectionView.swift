@@ -34,7 +34,7 @@ public struct SectionView<Content: View>: View {
     private var titleButton: SectionViewTitleButton?
     private var titleButtonPosition: SectionViewTitleButtonPosition = .trailing
     private var border: Color?
-    private var borderWidth: CGFloat = 0
+    private var borderWidth: CGFloat?
     private var isSurfaceClipped: Bool = false
 
     public init(_ title: String = "", @ViewBuilder content: () -> Content) {
@@ -79,8 +79,8 @@ public struct SectionView<Content: View>: View {
                 }
             }
             .surfaceBorderColor(border)
-            .surfaceBorderWidth(borderWidth)
             .surfaceClip(isSurfaceClipped)
+            .if(borderWidth != nil) { $0.surfaceBorderWidth(borderWidth ?? 0) }
             .padding(.horizontal, surfaceHorizontalPadding)
         }
         .padding(.vertical, surfaceVerticalPaddingSize)
