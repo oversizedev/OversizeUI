@@ -120,10 +120,12 @@ public struct LayoutSection<Content: View>: View {
                     print("")
                 }
             }
+            #if !os(tvOS)
             .sectionActions {
                 Button("Action 1") {}
                 Button("Action 2") {}
             }
+            #endif
 
             Section("Person1’s Favorites") {
                 Text("Song 1")
