@@ -20,11 +20,21 @@ public struct LayoutView<
 
     @State private var headerHeight: CGFloat = 0
 
+    private let coordinateSpaceName = "LayoutViewScrollView"
+
     public var body: some View {
         ScrollView {
+            Color.clear
+                .frame(height: 0)
+                .onGeometryChange(for: CGFloat.self) { proxy in
+                    proxy.frame(in: .named(coordinateSpaceName)).minY
+                } action: { minY in
+                    handleScrollOffset(CGPoint(x: 0, y: minY))
+                }
             content
                 .frame(maxWidth: .infinity)
         }
+        .coordinateSpace(.named(coordinateSpaceName))
         .navigationTitle(title)
         .background {
             Color.clear

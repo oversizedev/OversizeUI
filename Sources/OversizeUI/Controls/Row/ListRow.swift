@@ -188,7 +188,7 @@ public extension ListRow where LeadingLabel == Image, TrailingLabel == EmptyView
     init(
         _ title: String,
         subtitle: String? = nil,
-        action _: (() -> Void)? = nil,
+        action: (() -> Void)? = nil,
         @ViewBuilder leading: () -> LeadingLabel
     ) {
         self.title = title
@@ -207,6 +207,7 @@ public extension ListRow where LeadingLabel == Image, TrailingLabel == EmptyView
         )
         #endif
         leadingRadius = 4
+        self.action = action
     }
 }
 

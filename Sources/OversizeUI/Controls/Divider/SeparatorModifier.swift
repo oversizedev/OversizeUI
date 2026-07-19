@@ -6,9 +6,9 @@
 import SwiftUI
 
 public extension Separator {
-    func lineWidth(_: CGFloat) -> Self {
+    func lineWidth(_ width: CGFloat) -> Self {
         var control = self
-        control.lineWidth = lineWidth
+        control.lineWidth = width
         return control
     }
 }

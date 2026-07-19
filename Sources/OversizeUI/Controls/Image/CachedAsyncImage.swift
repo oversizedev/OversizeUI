@@ -46,9 +46,7 @@ public struct CachedAsyncImage<Content: View>: View {
         scale: CGFloat = 1,
         @ViewBuilder content: @escaping (AsyncImagePhase) -> Content
     ) {
-        let configuration = URLSessionConfiguration.default
-        configuration.urlCache = urlCache
-        urlSession = URLSession(configuration: configuration)
+        urlSession = CachedAsyncImageSessionStore.session(for: urlCache)
         self.urlRequest = urlRequest
         self.scale = scale
         self.content = content
@@ -103,4 +101,23 @@ private extension CachedAsyncImage {
     }
 
     struct LoadingError: Error {}
+}
+
+private enum CachedAsyncImageSessionStore {
+    nonisolated(unsafe) private static var sessions: [ObjectIdentifier: URLSession] = [:]
+    private static let lock = NSLock()
+
+    static func session(for urlCache: URLCache) -> URLSession {
+        let key = ObjectIdentifier(urlCache)
+        lock.lock()
+        defer { lock.unlock() }
+        if let existing = sessions[key] {
+            return existing
+        }
+        let configuration = URLSessionConfiguration.default
+        configuration.urlCache = urlCache
+        let session = URLSession(configuration: configuration)
+        sessions[key] = session
+        return session
+    }
 }
