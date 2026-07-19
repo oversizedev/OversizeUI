@@ -120,7 +120,7 @@ public struct LayoutSection<Content: View>: View {
                     print("")
                 }
             }
-            #if !os(tvOS)
+            #if !os(tvOS) && !os(watchOS)
             .sectionActions {
                 Button("Action 1") {}
                 Button("Action 2") {}
