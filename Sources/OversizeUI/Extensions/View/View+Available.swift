@@ -14,15 +14,18 @@ public enum PresentationAdaptation {
 }
 
 public extension View {
-    @available(tvOS, unavailable)
     @_disfavoredOverload
     @ViewBuilder
     func scrollContentBackground(_ visibility: Visibility) -> some View {
+        #if os(tvOS)
+        self
+        #else
         if #available(iOS 16, macOS 13.0, watchOS 9.0, *) {
             scrollContentBackground(visibility)
         } else {
             self
         }
+        #endif
     }
 
     @_disfavoredOverload
