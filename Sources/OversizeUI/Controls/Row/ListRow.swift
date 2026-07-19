@@ -62,7 +62,7 @@ public struct ListRow<LeadingLabel: View, TrailingLabel: View>: View {
                 trailing: .xSmall
             ) : controlMargins
         )
-        #if !os(watchOS)
+        #if !os(watchOS) && !os(tvOS)
         .listRowSeparatorTint(Color.border)
         #endif
     }
