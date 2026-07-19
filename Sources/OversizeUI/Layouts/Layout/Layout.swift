@@ -82,20 +82,21 @@ public struct LayoutSection<Content: View>: View {
     }
 
     public var body: some View {
-        subviews in
-        VStack(alignment: .leading) {
-            ForEach(subviews) { subview in
-                subview
+        Group(subviews: content) { subviews in
+            VStack(alignment: .leading) {
+                ForEach(subviews) { subview in
+                    subview
 
-                if subviews.last?.id != subview.id {
-                    Divider()
-                        .padding(.vertical, 8)
+                    if subviews.last?.id != subview.id {
+                        Divider()
+                            .padding(.vertical, 8)
+                    }
                 }
             }
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .topLeading)
+            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 32))
         }
-        .padding()
-        .frame(maxWidth: .infinity, alignment: .topLeading)
-        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 32))
     }
 }
 
