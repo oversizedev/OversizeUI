@@ -99,11 +99,15 @@ public extension View {
     @_disfavoredOverload
     @ViewBuilder
     func listSectionIndexVisibility(_ visibility: Visibility) -> some View {
-        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+        #if os(macOS) || os(tvOS)
+        self
+        #else
+        if #available(iOS 26.0, visionOS 26.0, watchOS 26.0, *) {
             listSectionIndexVisibility(visibility)
         } else {
             self
         }
+        #endif
     }
 
     @_disfavoredOverload

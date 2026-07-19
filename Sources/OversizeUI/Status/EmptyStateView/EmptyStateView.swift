@@ -5,12 +5,18 @@
 
 import SwiftUI
 
+public enum EmptyStateViewType {
+    case `default`, compact
+}
+
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 public struct EmptyStateView<Actions: View>: View {
     private let image: Image?
     private let title: String
     private let subtitle: String?
     @ViewBuilder private let actions: Actions
+
+    var type: EmptyStateViewType = .default
 
     public init(
         image: Image? = nil,
@@ -33,10 +39,14 @@ public struct EmptyStateView<Actions: View>: View {
     }
 
     private var contenView: some View {
-        VStack(alignment: .center, spacing: .large) {
+        VStack(alignment: .center, spacing: type == .compact ? .medium : .large) {
             if let image {
                 image
-                    .frame(width: 128, height: 128, alignment: .bottom)
+                    .frame(
+                        width: type == .compact ? 64 : 128,
+                        height: type == .compact ? 64 : 128,
+                        alignment: .bottom
+                    )
             }
 
             TextBox(
@@ -44,13 +54,15 @@ public struct EmptyStateView<Actions: View>: View {
                 subtitle: subtitle,
                 spacing: .xxSmall
             )
+            .textBoxSize(type == .compact ? .small : .medium)
             .multilineTextAlignment(.center)
 
             actions
             #if !os(tvOS)
-            .controlSize(.large)
+            .controlSize(type == .compact ? .small : .large)
             #endif
         }
+        .padding(.top, .regular)
         .paddingContent()
     }
 

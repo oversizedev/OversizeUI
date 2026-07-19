@@ -6,7 +6,7 @@
 import SwiftUI
 
 public extension EnvironmentValues {
-    @Entry var sectionTitleMargins: SwiftUI.EdgeInsets = .init(top: .zero, leading: .zero, bottom: .zero, trailing: .zero)
+    @Entry var sectionTitleMargins: SwiftUI.EdgeInsets = .init(top: .small, leading: .medium, bottom: .small, trailing: .medium)
 }
 
 public extension View {

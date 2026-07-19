@@ -7,7 +7,7 @@ import SwiftUI
 
 public struct ListSection<SectionContent: View, SectionHeaderContent: View, SectionFooterContent: View>: View {
     @Environment(\.listLayoutStyle) private var listStyle: ListLayoutStyle
-    @Environment(\.listSectionTitleSeparator) private var titleSeparator
+    @Environment(\.sectionTitleSeparator) private var titleSeparator
     @Environment(\.sectionTitlePosition) private var titlePosition
 
     private var content: () -> SectionContent

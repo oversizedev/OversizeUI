@@ -22,17 +22,9 @@ public struct LayoutView<
 
     public var body: some View {
         ScrollView {
-//            Color.clear
-//                .frame(height: 0)
-//                .onGeometryChange(for: CGFloat.self) { proxy in
-//                    proxy.frame(in: .named("LayoutScrollView")).minY
-//                } action: { minY in
-//                    handleScrollOffset(CGPoint(x: 0, y: minY))
-//                }
             content
                 .frame(maxWidth: .infinity)
         }
-        .coordinateSpace(.named("LayoutScrollView"))
         .navigationTitle(title)
         .background {
             Color.clear
@@ -42,10 +34,12 @@ public struct LayoutView<
                 } action: { height in
                     let isInitial = headerHeight == 0
                     headerHeight = height
-                    if isInitial { onScroll?(.zero, 1.0) }
+                    if isInitial {
+                        onScroll?(.zero, 1.0)
+                    }
                 }
         }
-        .background(background.ignoresSafeArea())
+        .background { background.ignoresSafeArea(.all, edges: .all) }
     }
 
     private func handleScrollOffset(_ offset: CGPoint) {

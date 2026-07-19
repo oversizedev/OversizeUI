@@ -87,7 +87,10 @@ final class ListScrollOffsetNSView: NSView {
         while let view = current {
             if let scrollView = view as? NSScrollView {
                 observation = scrollView.contentView.observe(\.bounds, options: .new) { [weak self] clipView, _ in
-                    self?.onScroll?(clipView.bounds.origin.y)
+                    MainActor.assumeIsolated {
+                        guard let self else { return }
+                        self.onScroll?(clipView.bounds.origin.y)
+                    }
                 }
                 return
             }

@@ -6,11 +6,11 @@
 import SwiftUI
 
 public extension EnvironmentValues {
-    @Entry var listSectionTitleSeparator: Visibility = .automatic
+    @Entry var sectionTitleSeparator: Visibility = .automatic
 }
 
 public extension View {
-    func listSectionTitleSeparator(_ visibility: Visibility) -> some View {
-        environment(\.listSectionTitleSeparator, visibility)
+    func sectionTitleSeparator(_ visibility: Visibility) -> some View {
+        environment(\.sectionTitleSeparator, visibility)
     }
 }

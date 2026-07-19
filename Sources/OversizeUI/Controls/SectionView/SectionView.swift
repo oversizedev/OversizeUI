@@ -24,6 +24,7 @@ public struct SectionView<Content: View>: View {
     @Environment(\.surfaceContentMargins) var surfaceContentInsets: SwiftUI.EdgeInsets
     @Environment(\.headerProminence) private var headerProminence
     @Environment(\.sectionTitlePosition) private var titlePosition
+    @Environment(\.sectionTitleMargins) private var sectionTitleInsets: SwiftUI.EdgeInsets
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     #endif
@@ -72,6 +73,7 @@ public struct SectionView<Content: View>: View {
                 VStack(alignment: .leading, spacing: .xSmall) {
                     if !title.isEmpty, titlePosition == .inside {
                         titleView
+                            .padding(sectionTitleInsets)
                     }
                     content
                 }
@@ -213,7 +215,6 @@ public struct SectionView<Content: View>: View {
 }
 
 public extension SectionView {
-
     func sectionTitleButton(_ button: SectionViewTitleButton, position: SectionViewTitleButtonPosition = .trailing) -> SectionView {
         var control = self
         control.titleButton = button

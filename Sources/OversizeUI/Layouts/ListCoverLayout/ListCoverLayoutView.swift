@@ -52,7 +52,7 @@ public struct ListCoverLayoutView<
                         content
                             .environment(\.listLayoutStyle, listStyle)
                     }
-                    .if(!title.isEmpty) { $0.navigationTitle(title) }
+                    .navigationTitle(title)
                     .environment(\.defaultMinListHeaderHeight, 40)
                     .environment(\.defaultMinListRowHeight, 56)
                     .scrollContentBackground(.hidden)
