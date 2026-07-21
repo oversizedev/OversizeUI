@@ -17,8 +17,8 @@ jobs:
     strategy:
       matrix:
         destination:
-          - platform=iOS Simulator,name=iPhone 17 Pro,OS=26.2
-          - platform=watchOS Simulator,name=Apple Watch SE 3 (40mm),OS=26.2
+          - platform=iOS Simulator,name=iPhone 17 Pro,OS=latest
+          - platform=watchOS Simulator,name=Apple Watch SE 3 (40mm),OS=latest
           - platform=tvOS Simulator,name=Apple TV 4K (3rd generation) (at 1080p),OS=latest
           - platform=macOS,arch=arm64
     with:
@@ -33,8 +33,8 @@ jobs:
     strategy:
       matrix:
         destination:
-          - platform=iOS Simulator,name=iPhone 17 Pro,OS=26.2
-          - platform=iOS Simulator,name=iPad Air 11-inch (M3),OS=26.2
+          - platform=iOS Simulator,name=iPhone 17 Pro,OS=latest
+          - platform=iOS Simulator,name=iPad Air 11-inch (M3),OS=latest
     with:
       path: Example/Example
       scheme: Example (iOS)
@@ -73,7 +73,7 @@ jobs:
     strategy:
       matrix:
         destination:
-          - platform=watchOS Simulator,name=Apple Watch SE 3 (40mm),OS=26.2
+          - platform=watchOS Simulator,name=Apple Watch SE 3 (40mm),OS=latest
     with:
       path: Example/Example
       scheme: Example (watchOS)
