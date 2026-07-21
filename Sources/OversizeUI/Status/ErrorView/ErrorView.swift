@@ -60,7 +60,6 @@ public struct ErrorView: View {
             Spacer()
         }
         .paddingContent()
-        .containerRelativeFrame([.horizontal, .vertical])
     }
 
     private var macOSContentView: some View {

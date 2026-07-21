@@ -652,6 +652,7 @@ public extension SwiftUI.Image {
         public static let phone = Image("Base/Phone", bundle: .module)
         public enum Picture {
             public static let fill = Image("Base/Picture/Fill", bundle: .module)
+            public static let mini = Image("Base/Picture/Mini", bundle: .module)
             public enum TwoTone {
                 public static let fill = Image("Base/Picture/TwoTone/Fill", bundle: .module)
             }

@@ -77,17 +77,16 @@ public struct DateField: View {
             .buttonStyle(.field)
         }
         .sheet(isPresented: $showModal) {
-            if isOptionalSelection {
-                DatePickerSheet(title: label, selection: $optionalSelection)
-                    .presentationDetents([.height(540)])
-                    .presentationDragIndicator(.hidden)
-                    .scrollDisabled(true)
-            } else {
-                DatePickerSheet(title: label, selection: $selection)
-                    .presentationDetents([.height(540)])
-                    .presentationDragIndicator(.hidden)
-                    .scrollDisabled(true)
+            Group {
+                if isOptionalSelection {
+                    DatePickerSheet(title: label, selection: $optionalSelection)
+                } else {
+                    DatePickerSheet(title: label, selection: $selection)
+                }
             }
+            .presentationDetents([.height(540)])
+            .presentationDragIndicator(.hidden)
+            .scrollDisabled(true)
         }
     }
 }

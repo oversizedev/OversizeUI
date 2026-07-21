@@ -40,62 +40,66 @@ public struct DatePickerSheet: View {
 
     public var body: some View {
         NavigationStack {
-            LayoutView(title) {
-                SectionView {
-                    VStack {
-                        if let minimumDate {
-                            DatePicker("", selection: $date, in: minimumDate..., displayedComponents: displayedComponents)
-                                .datePickerStyle(.graphical)
-                                .labelsHidden()
-                        } else {
-                            DatePicker("", selection: $date, displayedComponents: displayedComponents)
-                                .datePickerStyle(.graphical)
-                                .labelsHidden()
-                        }
-                    }
-                    .padding(.horizontal, .small)
-                    .padding(.vertical, .xxxSmall)
-                }
-                .surfaceContentMargins(.zero)
-            } background: {
-                Color.backgroundSecondary
-            }
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button(
-                        "Close",
-                        systemImage: "xmark",
-                        role: .cancel,
-                        action: {
-                            dismiss()
-                        }
-                    )
-                    .labelStyle(.toolbar)
-                    .buttonStyle(.toolbarSecondary)
-                    #if !os(tvOS)
-                        .keyboardShortcut(.cancelAction)
-                    #endif
-                }
-
-                ToolbarItem(placement: .primaryAction) {
-                    Button(
-                        "Done",
-                        systemImage: "checkmark",
-                        action: {
-                            selection = date
-                            optionalSelection = date
-                            dismiss()
-                        }
-                    )
-                    .labelStyle(.toolbar)
-                    .buttonStyle(.toolbarPrimary)
-                    #if !os(tvOS)
-                        .keyboardShortcut(.defaultAction)
-                    #endif
-                }
-            }
-            .toolbarTitleDisplayMode(.inline)
+            content
         }
+    }
+
+    private var content: some View {
+        LayoutView(title) {
+            SectionView {
+                VStack {
+                    if let minimumDate {
+                        DatePicker("", selection: $date, in: minimumDate..., displayedComponents: displayedComponents)
+                            .datePickerStyle(.graphical)
+                            .labelsHidden()
+                    } else {
+                        DatePicker("", selection: $date, displayedComponents: displayedComponents)
+                            .datePickerStyle(.graphical)
+                            .labelsHidden()
+                    }
+                }
+                .padding(.horizontal, .small)
+                .padding(.vertical, .xxxSmall)
+            }
+            .surfaceContentMargins(.zero)
+        } background: {
+            Color.backgroundSecondary
+        }
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button(
+                    "Close",
+                    systemImage: "xmark",
+                    role: .cancel,
+                    action: {
+                        dismiss()
+                    }
+                )
+                .labelStyle(.toolbar)
+                .buttonStyle(.toolbarSecondary)
+                #if !os(tvOS)
+                    .keyboardShortcut(.cancelAction)
+                #endif
+            }
+
+            ToolbarItem(placement: .primaryAction) {
+                Button(
+                    "Done",
+                    systemImage: "checkmark",
+                    action: {
+                        selection = date
+                        optionalSelection = date
+                        dismiss()
+                    }
+                )
+                .labelStyle(.toolbar)
+                .buttonStyle(.toolbarPrimary)
+                #if !os(tvOS)
+                    .keyboardShortcut(.defaultAction)
+                #endif
+            }
+        }
+        .toolbarTitleDisplayMode(.inline)
     }
 
     public func datePickerMinimumDate(_ date: Date) -> DatePickerSheet {

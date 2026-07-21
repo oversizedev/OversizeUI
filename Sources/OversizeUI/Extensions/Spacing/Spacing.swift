@@ -5,13 +5,13 @@
 
 import SwiftUI
 
-public extension EdgeInsets {
+public extension SwiftUI.EdgeInsets {
     init(_ all: CGFloat) {
         self = .init(top: all, leading: all, bottom: all, trailing: all)
     }
 }
 
-public extension EdgeInsets {
+public extension SwiftUI.EdgeInsets {
     init(horizontal: CGFloat, vertical: CGFloat) {
         self = .init(top: vertical, leading: horizontal, bottom: vertical, trailing: horizontal)
     }

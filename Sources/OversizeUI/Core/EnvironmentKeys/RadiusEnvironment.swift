@@ -10,7 +10,7 @@ public extension EnvironmentValues {
 }
 
 public extension View {
-    func controlRadius(_ radius: Space) -> some View {
-        environment(\.controlRadius, radius.rawValue)
+    func controlRadius(_ radius: CGFloat) -> some View {
+        environment(\.controlRadius, radius)
     }
 }

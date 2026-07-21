@@ -48,11 +48,16 @@ public struct CalendarLayoutView<
 
     public var body: some View {
         ScrollView {
-            ScrollViewOffsetTracker {
-                content()
-            }
+            Color.clear
+                .frame(height: 0)
+                .onGeometryChange(for: CGFloat.self) { proxy in
+                    proxy.frame(in: .named("CalendarScrollView")).minY
+                } action: { minY in
+                    handleScrollOffset(CGPoint(x: 0, y: minY))
+                }
+            content()
         }
-        .scrollViewOffsetTracking(action: handleScrollOffset)
+        .coordinateSpace(.named("CalendarScrollView"))
         .safeAreaBarTop {
             calendarView
                 .ifUnavailable26 {
@@ -226,8 +231,8 @@ public struct CalendarLayoutView<
     }
 
     private func handleScrollOffset(_ offset: CGPoint) {
-        let calcHeaderHeight = 44 + safeAreaInsets.top
-        let visibleRatio: CGFloat = (calcHeaderHeight + offset.y) / calcHeaderHeight
+        let headerHeight = 44 + safeAreaInsets.top
+        let visibleRatio: CGFloat = (headerHeight + offset.y) / headerHeight
         onScroll?(offset, visibleRatio)
     }
 

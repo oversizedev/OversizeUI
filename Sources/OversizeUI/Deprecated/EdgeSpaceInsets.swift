@@ -1,10 +1,11 @@
 //
 // Copyright © 2021 Alexander Romanov
-// EdgeSpaceInsets.swift, created on 07.02.2023
+// EdgeInsets.swift, created on 07.02.2023
 //
 
 import Foundation
 
+@available(*, deprecated, message: "Use native EdgeInsets")
 public struct EdgeSpaceInsets: Sendable {
     public let top: Space
     public let leading: Space

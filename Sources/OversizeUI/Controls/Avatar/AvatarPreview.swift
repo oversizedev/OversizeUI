@@ -35,7 +35,7 @@ struct AvatarPreview: View {
 
             Avatar(avatar: Image("Avatar", bundle: .module))
 
-            Avatar(icon: Image(IconsNames.image.rawValue, bundle: .module))
+            Avatar(icon: Image.Base.picture)
         }
     }
 }

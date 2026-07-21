@@ -14,15 +14,18 @@ public enum PresentationAdaptation {
 }
 
 public extension View {
-    @available(tvOS, unavailable)
     @_disfavoredOverload
     @ViewBuilder
     func scrollContentBackground(_ visibility: Visibility) -> some View {
+        #if os(tvOS)
+        self
+        #else
         if #available(iOS 16, macOS 13.0, watchOS 9.0, *) {
             scrollContentBackground(visibility)
         } else {
             self
         }
+        #endif
     }
 
     @_disfavoredOverload
@@ -67,6 +70,17 @@ public extension View {
         }
     }
 
+    @available(visionOS, unavailable)
+    @_disfavoredOverload
+    @ViewBuilder
+    func scrollEdgeEffectHidden(_ hidden: Bool = true, for edges: Edge.Set = .all) -> some View {
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+            scrollEdgeEffectHidden(hidden, for: edges)
+        } else {
+            self
+        }
+    }
+
     @ViewBuilder
     func safeAreaBarTop(alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil, @ViewBuilder content: @escaping () -> some View) -> some View {
         if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
@@ -83,5 +97,42 @@ public extension View {
         } else {
             safeAreaInset(edge: .bottom, alignment: alignment, spacing: spacing, content: content)
         }
+    }
+
+    @_disfavoredOverload
+    @ViewBuilder
+    func listSectionIndexVisibility(_ visibility: Visibility) -> some View {
+        #if os(macOS) || os(tvOS)
+        self
+        #else
+        if #available(iOS 26.0, visionOS 26.0, watchOS 26.0, *) {
+            listSectionIndexVisibility(visibility)
+        } else {
+            self
+        }
+        #endif
+    }
+
+    @_disfavoredOverload
+    @ViewBuilder
+    func matchedTransitionSource(id: some Hashable, in namespace: Namespace.ID) -> some View {
+        if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
+            matchedTransitionSource(id: id, in: namespace)
+        } else {
+            self
+        }
+    }
+
+    @ViewBuilder
+    func navigationTransitionZoom(sourceID: some Hashable, in namespace: Namespace.ID) -> some View {
+        #if !os(macOS)
+        if #available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
+            navigationTransition(.zoom(sourceID: sourceID, in: namespace))
+        } else {
+            self
+        }
+        #else
+        self
+        #endif
     }
 }

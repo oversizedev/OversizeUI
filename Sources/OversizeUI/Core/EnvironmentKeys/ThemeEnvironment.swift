@@ -5,8 +5,10 @@
 
 import SwiftUI
 
+private let defaultThemeSettings = ThemeSettings()
+
 public extension EnvironmentValues {
-    @Entry var theme: ThemeSettings = .init()
+    @Entry var theme: ThemeSettings = defaultThemeSettings
 }
 
 public extension View {

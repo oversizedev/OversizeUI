@@ -13,7 +13,7 @@ public enum SeparatorAlignment {
 public struct Separator: View {
     private let alignment: SeparatorAlignment
     private let padding: CGFloat
-    private let lineWidth: CGFloat = 1
+    public var lineWidth: CGFloat = 1
 
     public init(_ alignment: SeparatorAlignment = .horizontal, padding: CGFloat = .zero) {
         self.alignment = alignment
@@ -23,7 +23,7 @@ public struct Separator: View {
     public var body: some View {
         let isHorizontal = alignment == .horizontal
 
-        return Rectangle()
+        return Capsule()
             .fill(Color.border)
             .frame(
                 width: isHorizontal ? nil : lineWidth,
@@ -34,16 +34,16 @@ public struct Separator: View {
         #endif
     }
 
-    private func insets(_ isHorizontal: Bool) -> EdgeInsets {
+    private func insets(_ isHorizontal: Bool) -> SwiftUI.EdgeInsets {
         if isHorizontal {
-            EdgeInsets(
+            SwiftUI.EdgeInsets(
                 top: 0,
                 leading: padding,
                 bottom: 0,
                 trailing: padding
             )
         } else {
-            EdgeInsets(
+            SwiftUI.EdgeInsets(
                 top: padding,
                 leading: 0,
                 bottom: padding,

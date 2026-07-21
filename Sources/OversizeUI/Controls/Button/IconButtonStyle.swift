@@ -113,12 +113,10 @@ public struct IconButtonStyle: ButtonStyle {
         if isLoading {
             ProgressView()
                 .progressViewStyle(CircularProgressViewStyle(tint: foregroundColor(for: role)))
-        } else {
-            EmptyView()
         }
     }
 
-    private var padding: Space {
+    private var padding: CGFloat {
         #if os(tvOS)
         return .medium
         #else

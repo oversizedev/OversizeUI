@@ -18,24 +18,6 @@ public struct PaddingModifier: ViewModifier {
     }
 }
 
-public struct PaddingEdgeInsetsModifier: ViewModifier {
-    private let insets: EdgeSpaceInsets
-    public nonisolated init(insets: EdgeSpaceInsets) {
-        self.insets = insets
-    }
-
-    public func body(content: Content) -> some View {
-        content.padding(
-            EdgeInsets(
-                top: insets.top.rawValue,
-                leading: insets.leading.rawValue,
-                bottom: insets.bottom.rawValue,
-                trailing: insets.trailing.rawValue
-            )
-        )
-    }
-}
-
 public struct ContentPaddingModifier: ViewModifier {
     #if os(iOS)
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
@@ -83,10 +65,6 @@ public extension View {
     @_disfavoredOverload
     nonisolated func padding(_ length: Space) -> some View {
         modifier(PaddingModifier(edges: Edge.Set.all, length: length))
-    }
-
-    nonisolated func padding(_ insets: EdgeSpaceInsets) -> some View {
-        modifier(PaddingEdgeInsetsModifier(insets: insets))
     }
 }
 

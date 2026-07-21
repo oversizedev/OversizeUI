@@ -11,11 +11,11 @@ public enum RowClearIconStyle {
 
 public struct Row<LeadingLabel: View, TrailingLabel: View>: View {
     @Environment(\.elevation) private var elevation: Elevation
-    @Environment(\.controlRadius) var controlRadius
-    @Environment(\.rowContentMargins) var controlMargins: EdgeSpaceInsets
+    @Environment(\.rowContentMargins) var controlMargins: SwiftUI.EdgeInsets
     @Environment(\.multilineTextAlignment) var multilineTextAlignment
     @Environment(\.isPremium) var premiumStatus
     @Environment(\.isLoading) var isLoading
+    @Environment(\.isNavigatable) private var isNavigatable
 
     private let title: String
     private let subtitle: String?
@@ -36,7 +36,7 @@ public struct Row<LeadingLabel: View, TrailingLabel: View>: View {
     private var сlearButtonStyle: RowClearIconStyle = .default
     private var сlearAction: (() -> Void)?
 
-    private var leadingSpace: Space = .small
+    private var leadingSpace: CGFloat = .small
 
     private var textColor: Color?
 
@@ -75,7 +75,7 @@ public struct Row<LeadingLabel: View, TrailingLabel: View>: View {
         }
     }
 
-    private func content(_ textAlignment: TextAlignment) -> some View {
+    private func content(_: TextAlignment) -> some View {
         VStack(alignment: .leading) {
             HStack(spacing: .zero) {
                 leadingLabel
@@ -84,17 +84,9 @@ public struct Row<LeadingLabel: View, TrailingLabel: View>: View {
                     .cornerRadius(leadingRadius ?? 0)
                     .padding(.trailing, leadingSpace)
 
-                if textAlignment == .trailing || textAlignment == .center {
-                    Spacer()
-                }
-
                 text
 
                 premiumLabel
-
-                if textAlignment == .leading || textAlignment == .center {
-                    Spacer()
-                }
 
                 if isLoading {
                     ProgressView()
@@ -106,7 +98,7 @@ public struct Row<LeadingLabel: View, TrailingLabel: View>: View {
                 trailingLabel
                     .padding(.leading, .xxSmall)
 
-                if isShowArrowIcon {
+                if isShowArrowIcon || isNavigatable {
                     Image.Base.chevronRight
                         .icon(.onSurfaceTertiary)
                 }
@@ -120,10 +112,13 @@ public struct Row<LeadingLabel: View, TrailingLabel: View>: View {
             Text(title)
                 .headline(.medium)
                 .foregroundColor(titleTextColor)
+                .frame(maxWidth: .infinity, alignment: alignment)
+
             if let subtitle, !subtitle.isEmpty {
                 Text(subtitle)
                     .subheadline()
                     .foregroundColor(subtitleTextColor)
+                    .frame(maxWidth: .infinity, alignment: alignment)
             }
         }
         .multilineTextAlignment(multilineTextAlignment)
@@ -181,6 +176,17 @@ public struct Row<LeadingLabel: View, TrailingLabel: View>: View {
             .trailing
         }
     }
+
+    private var alignment: Alignment {
+        switch multilineTextAlignment {
+        case .leading:
+            .leading
+        case .center:
+            .center
+        case .trailing:
+            .trailing
+        }
+    }
 }
 
 // MARK: - Modificators
@@ -192,6 +198,7 @@ public extension Row {
         return control
     }
 
+    @available(*, deprecated, renamed: "navigatable")
     func rowArrow(_ showArrowIcon: Bool = true) -> Row {
         var control = self
         control.isShowArrowIcon = showArrowIcon
@@ -211,7 +218,7 @@ public extension Row {
         return control
     }
 
-    func leadingContentMargin(_ margin: Space = .small) -> Row {
+    func leadingContentMargin(_ margin: CGFloat = .small) -> Row {
         var control = self
         control.leadingSpace = margin
         return control

@@ -63,17 +63,19 @@ public struct Select<Element: Equatable, Content: View, Selection: View, Actions
         }
         .buttonStyle(.field)
         .sheet(isPresented: $showModal) {
-            #if os(iOS)
-            if #available(iOS 16.0, *) {
+            NavigationStack {
+                #if os(iOS)
+                if #available(iOS 16.0, *) {
+                    modal
+                        .presentationDetents(data.count < 4 ? [.medium, .large] : [.large])
+                        .presentationDragIndicator(.hidden)
+                } else {
+                    modal
+                }
+                #else
                 modal
-                    .presentationDetents(data.count < 4 ? [.medium, .large] : [.large])
-                    .presentationDragIndicator(.hidden)
-            } else {
-                modal
+                #endif
             }
-            #else
-            modal
-            #endif
         }
         .onChange(of: showModalBinding) { state in
             if let state {
@@ -81,23 +83,34 @@ public struct Select<Element: Equatable, Content: View, Selection: View, Actions
             }
         }
         .onAppear {
-            let selctedValue = selection
-            var index = 0
-            for dataValue in data {
-                if selctedValue == dataValue {
-                    selectedIndex = index
-                }
-                index += 1
-            }
+            updateSelectionState()
+        }
+        .onChange(of: data) {
+            updateSelectionState()
+        }
+        .onChange(of: selection) {
+            updateSelectionState()
         }
     }
 
+    private func updateSelectionState() {
+        for (index, dataValue) in data.enumerated() {
+            if selection == dataValue {
+                selectedIndex = index
+                isSelected = true
+                return
+            }
+        }
+        selectedIndex = nil
+        isSelected = false
+    }
+
     private var modal: some View {
-        NavigationStack {
-            LayoutView(label) {
-                if data.isEmpty, let contentUnavailable {
-                    contentUnavailable
-                } else {
+        LayoutView(label) {
+            if data.isEmpty, let contentUnavailable {
+                contentUnavailable
+            } else {
+                SectionView {
                     LazyVStack(alignment: .leading, spacing: .zero) {
                         ForEach(data.indices, id: \.self) { index in
                             Radio(isOn: index == selectedIndex) {
@@ -116,28 +129,31 @@ public struct Select<Element: Equatable, Content: View, Selection: View, Actions
                         }
                     }
                 }
+                .sectionContentCompactRowMargins()
             }
-            .toolbarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button(
-                        "Close",
-                        systemImage: "xmark",
-                        role: .cancel,
-                        action: {
-                            showModal = false
-                        }
-                    )
-                    .labelStyle(.toolbar)
-                    .buttonStyle(.toolbarSecondary)
-                    #if !os(tvOS) && !os(watchOS)
-                        .keyboardShortcut(.cancelAction)
-                    #endif
-                }
+        } background: {
+            Color.backgroundSecondary
+        }
+        .toolbarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button(
+                    "Close",
+                    systemImage: "xmark",
+                    role: .cancel,
+                    action: {
+                        showModal = false
+                    }
+                )
+                .labelStyle(.toolbar)
+                .buttonStyle(.toolbarSecondary)
+                #if !os(tvOS) && !os(watchOS)
+                    .keyboardShortcut(.cancelAction)
+                #endif
+            }
 
-                ToolbarItem(placement: .confirmationAction) {
-                    actions
-                }
+            ToolbarItem(placement: .confirmationAction) {
+                actions
             }
         }
     }

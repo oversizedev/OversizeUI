@@ -23,8 +23,8 @@ public extension View {
     func surface(
         elevation: Elevation = .z0,
         background: SurfaceStyle = .primary,
-        padding: Space = .medium,
-        radius: Space = .xSmall
+        padding: CGFloat = .medium,
+        radius: CGFloat = .xSmall
     ) -> some View {
         Surface { self }
             .surfaceStyle(background)

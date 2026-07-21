@@ -5,10 +5,6 @@
 
 import SwiftUI
 
-public enum SectionViewTitlePosition: Sendable {
-    case inside, outside
-}
-
 public enum SectionViewTitleButtonPosition: Sendable {
     case leading, trailing
 }
@@ -25,17 +21,21 @@ public enum SectionViewStyle: Sendable {
 public struct SectionView<Content: View>: View {
     @Environment(\.controlRadius) private var controlRadius
     @Environment(\.sectionViewStyle) private var style: SectionViewStyle
-    @Environment(\.surfaceContentMargins) var surfaceContentInsets: EdgeSpaceInsets
-    @Environment(\.sectionTitleMargins) var sectionTitleInsets: EdgeSpaceInsets
+    @Environment(\.surfaceContentMargins) var surfaceContentInsets: SwiftUI.EdgeInsets
+    @Environment(\.headerProminence) private var headerProminence
+    @Environment(\.sectionTitlePosition) private var titlePosition
+    @Environment(\.sectionTitleMargins) private var sectionTitleInsets: SwiftUI.EdgeInsets
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     #endif
     private let content: Content
     private let title: String
 
-    private var titlePosition: SectionViewTitlePosition = .outside
     private var titleButton: SectionViewTitleButton?
     private var titleButtonPosition: SectionViewTitleButtonPosition = .trailing
+    private var border: Color?
+    private var borderWidth: CGFloat?
+    private var isSurfaceClipped: Bool = false
 
     public init(_ title: String = "", @ViewBuilder content: () -> Content) {
         self.title = title
@@ -64,7 +64,6 @@ public struct SectionView<Content: View>: View {
             if !title.isEmpty, titlePosition == .outside {
                 titleView
                     .padding(.horizontal, titleHorizontalPadding)
-                    .padding(sectionTitleInsets)
                 #if os(macOS)
                     .padding(.leading, .xxSmall)
                 #endif
@@ -79,6 +78,9 @@ public struct SectionView<Content: View>: View {
                     content
                 }
             }
+            .surfaceBorderColor(border)
+            .surfaceClip(isSurfaceClipped)
+            .if(borderWidth != nil) { $0.surfaceBorderWidth(borderWidth ?? 0) }
             .padding(.horizontal, surfaceHorizontalPadding)
         }
         .padding(.vertical, surfaceVerticalPaddingSize)
@@ -105,7 +107,7 @@ public struct SectionView<Content: View>: View {
     private var titleFont: Font {
         switch titlePosition {
         case .inside:
-            .title2.weight(.semibold)
+            headerProminence == .standard ? .headline.weight(.bold) : .title2.weight(.semibold)
         case .outside:
             .headline.weight(.semibold)
         }
@@ -213,16 +215,28 @@ public struct SectionView<Content: View>: View {
 }
 
 public extension SectionView {
-    func sectionTitlePosition(_ position: SectionViewTitlePosition) -> SectionView {
-        var control = self
-        control.titlePosition = position
-        return control
-    }
-
     func sectionTitleButton(_ button: SectionViewTitleButton, position: SectionViewTitleButtonPosition = .trailing) -> SectionView {
         var control = self
         control.titleButton = button
         control.titleButtonPosition = position
+        return control
+    }
+
+    func sectionBorderColor(_ border: Color? = Color.border) -> SectionView {
+        var control = self
+        control.border = border
+        return control
+    }
+
+    func sectionBorderWidth(_ width: CGFloat) -> SectionView {
+        var control = self
+        control.borderWidth = width
+        return control
+    }
+
+    func sectionClip(_ surfaceClipped: Bool = true) -> SectionView {
+        var control = self
+        control.isSurfaceClipped = surfaceClipped
         return control
     }
 }
@@ -249,8 +263,8 @@ struct SectionView_Previews: PreviewProvider {
                     }
                 }
             }
-            .sectionTitlePosition(.inside)
             .sectionTitleButton(.title("All") {})
+            .sectionTitlePosition(.inside)
 
             SectionView("Feedback") {
                 VStack(spacing: .zero) {
@@ -263,8 +277,8 @@ struct SectionView_Previews: PreviewProvider {
                     }
                 }
             }
-            .sectionTitlePosition(.inside)
             .sectionTitleButton(.arrow {})
+            .sectionTitlePosition(.inside)
 
             SectionView {
                 Row("Cancel")
@@ -283,9 +297,9 @@ struct SectionView_Previews: PreviewProvider {
                     Image.Base.profile.icon()
                 }
             }
-            .sectionTitlePosition(.inside)
             .sectionTitleButton(.title("All") {})
             .sectionViewStyle(.smallIndent)
+            .sectionTitlePosition(.inside)
 
             SectionView("Feedback") {
                 VStack(spacing: .zero) {
@@ -317,9 +331,9 @@ struct SectionView_Previews: PreviewProvider {
                     Image.Base.profile.icon()
                 }
             }
-            .sectionTitlePosition(.inside)
             .sectionTitleButton(.title("All") {})
             .sectionViewStyle(.edgeToEdge)
+            .sectionTitlePosition(.inside)
 
             SectionView("Feedback") {
                 VStack(spacing: .zero) {

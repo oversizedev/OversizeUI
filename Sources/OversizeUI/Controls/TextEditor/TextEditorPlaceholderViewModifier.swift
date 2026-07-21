@@ -62,7 +62,7 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
         #endif
     }
 
-    var padding: EdgeInsets {
+    var padding: SwiftUI.EdgeInsets {
         switch fieldPlaceholderPosition {
         case .default, .adjacent:
             #if os(macOS)
@@ -100,7 +100,7 @@ public struct TextEditorPlaceholderViewModifier: ViewModifier {
         }
     }
 
-    var labelPadding: EdgeInsets {
+    var labelPadding: SwiftUI.EdgeInsets {
         switch fieldPlaceholderPosition {
         case .default, .adjacent:
             return .init(.xSmall)

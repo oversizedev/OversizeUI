@@ -223,9 +223,11 @@ public struct Avatar: View {
         case .small:
             return .large
         case .regular:
+            return 40
+        case .large:
             return .xLarge
-        case .large, .extraLarge:
-            return Space.xxxLarge.rawValue
+        case .extraLarge:
+            return .xxxLarge
         @unknown default:
             return .xLarge
         }
