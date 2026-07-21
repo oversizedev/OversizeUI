@@ -17,9 +17,9 @@ jobs:
     strategy:
       matrix:
         destination:
-          - platform=iOS Simulator,name=iPhone 17 Pro,OS=26.2
-          - platform=watchOS Simulator,name=Apple Watch SE 3 (40mm),OS=26.2
-          - platform=tvOS Simulator,name=Apple TV 4K (3rd generation) (at 1080p),OS=26.2
+          - generic/platform=iOS Simulator
+          - generic/platform=watchOS Simulator
+          - generic/platform=tvOS Simulator
           - platform=macOS,arch=arm64
     with:
       package: OversizeUI
@@ -30,15 +30,10 @@ jobs:
     name: Build iOS example
     needs: build-swiftpm
     uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
-    strategy:
-      matrix:
-        destination:
-          - platform=iOS Simulator,name=iPhone 17 Pro,OS=26.2
-          - platform=iOS Simulator,name=iPad Air 11-inch (M3),OS=26.2
     with:
       path: Example/Example
       scheme: Example (iOS)
-      destination: ${{ matrix.destination }}
+      destination: generic/platform=iOS Simulator
     secrets: inherit
     
   build-macOS-example:
@@ -55,29 +50,20 @@ jobs:
     name: Build tvOS examples
     needs: build-swiftpm
     uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
-    strategy:
-      matrix:
-        destination:
-          - platform=tvOS Simulator,name=Apple TV 4K (3rd generation) (at 1080p),OS=26.2
-          - platform=tvOS Simulator,name=Apple TV 4K (3rd generation),OS=26.2
     with:
       path: Example/Example
       scheme: Example (tvOS)
-      destination: ${{ matrix.destination }}
+      destination: generic/platform=tvOS Simulator
     secrets: inherit
     
   build-watchOS-example:
     name: Build watchOS examples
     needs: build-swiftpm
     uses: oversizedev/GithubWorkflows/.github/workflows/build-app.yml@main
-    strategy:
-      matrix:
-        destination:
-          - platform=watchOS Simulator,name=Apple Watch SE 3 (40mm),OS=26.2
     with:
       path: Example/Example
       scheme: Example (watchOS)
-      destination: ${{ matrix.destination }}
+      destination: generic/platform=watchOS Simulator
     secrets: inherit
 
   bump:
