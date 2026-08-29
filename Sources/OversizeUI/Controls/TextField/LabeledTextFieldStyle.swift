@@ -12,6 +12,7 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
     @Environment(\.fieldLabelPosition) private var fieldPlaceholderPosition: FieldLabelPosition
     @Environment(\.fieldPosition) private var fieldPosition: VerticalAlignment?
     @Environment(\.platform) private var platform: Platform
+    @Environment(\.isLoading) private var isLoading: Bool
     @FocusState private var isFocused: Bool
     @Binding private var text: String
     private let placeholder: String
@@ -45,6 +46,7 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
                         $0.textFieldStyle(.plain)
                     })
                 #endif
+                    .redacted(reason: isLoading ? .placeholder : [])
             }
             .background(fieldBackground)
             .overlay(overlay)

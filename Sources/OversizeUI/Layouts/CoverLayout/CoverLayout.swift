@@ -45,6 +45,7 @@ public struct CoverLayout<
                             LayoutSectionView(
                                 section: section,
                                 isFirst: section.id == sections.first?.id,
+                                isLast: section.id == sections.last?.id,
                                 isStacked: true
                             )
                         }

@@ -14,6 +14,7 @@ struct LayoutSectionView: View {
 
     let section: SectionConfiguration
     let isFirst: Bool
+    let isLast: Bool
     let isStacked: Bool
 
     var body: some View {
@@ -26,7 +27,6 @@ struct LayoutSectionView: View {
             VStack(spacing: .zero) {
                 if sectionTitlePosition == .inside, section.header.count > 0 {
                     LayoutSectionHeaderView(header: section.header)
-                        .padding(.horizontal, isStacked ? .xxxSmall : .zero)
 
                     if titleSeparator == .visible, sectionContentMarginsVisibility != .visible {
                         Separator()
@@ -44,16 +44,24 @@ struct LayoutSectionView: View {
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.vertical, .xxSmall)
-                .clipShape(RoundedRectangle(
-                    cornerRadius: .regular,
-                    style: .continuous
-                ))
-                .if(sectionContentMarginsVisibility == .visible) {
-                    $0
+                // .padding(.vertical, .xxSmall)
+                #if os(macOS)
+                    .clipShape(RoundedRectangle(
+                        cornerRadius: .xSmall,
+                        style: .continuous
+                    ))
+                #else
+                    .clipShape(RoundedRectangle(
+                        cornerRadius: .regular,
+                        style: .continuous
+                    ))
+                #endif
+                    .if(sectionContentMarginsVisibility == .visible) {
+                        $0
+                        #if os(macOS)
                         .overlay(
                             RoundedRectangle(
-                                cornerRadius: 20,
+                                cornerRadius: .xSmall,
                                 style: .continuous
                             )
                             .strokeBorder(
@@ -61,15 +69,27 @@ struct LayoutSectionView: View {
                                 lineWidth: 1
                             )
                         )
-                        .padding(
-                            .init(
-                                top: section.header.count < 1 ? .xxxSmall : titleSeparator == .visible ? .xxxSmall : .zero,
-                                leading: sectionContentMarginsVisibility == .visible ? .xxxSmall : 0,
-                                bottom: sectionContentMarginsVisibility == .visible ? .xxxSmall : 0,
-                                trailing: sectionContentMarginsVisibility == .visible ? .xxxSmall : 0
+                        #else
+                        .overlay(
+                                RoundedRectangle(
+                                    cornerRadius: .regular,
+                                    style: .continuous
+                                )
+                                .strokeBorder(
+                                    Color.border.opacity(isBordered ? 1 : 0),
+                                    lineWidth: 1
+                                )
                             )
-                        )
-                }
+                        #endif
+                            .padding(
+                                .init(
+                                    top: section.header.count < 1 ? .xxxSmall : titleSeparator == .visible && section.header.count < 1 ? .xxxSmall : .zero,
+                                    leading: sectionContentMarginsVisibility == .visible ? .xxxSmall : 0,
+                                    bottom: sectionContentMarginsVisibility == .visible ? .xxxSmall : 0,
+                                    trailing: sectionContentMarginsVisibility == .visible ? .xxxSmall : 0
+                                )
+                            )
+                    }
 
                 if section.footer.count > 0 {
                     if isBordered, sectionContentMarginsVisibility != .visible {
@@ -85,6 +105,25 @@ struct LayoutSectionView: View {
                 }
             }
         }
+        #if os(macOS)
+        .padding(
+            .init(
+                top: isFirst ? .small : .zero,
+                leading: .zero,
+                bottom: isLast ? .small : .zero,
+                trailing: .zero
+            )
+        )
+        #else
+        .padding(
+                .init(
+                    top: isFirst ? .xxSmall : .zero,
+                    leading: .zero,
+                    bottom: isLast ? .xxSmall : .zero,
+                    trailing: .zero
+                )
+            )
+        #endif
     }
 }
 
@@ -108,16 +147,17 @@ struct LayoutSectionHeaderView<Header: View>: View {
 struct LayoutSectionBackgroundView: View {
     @Environment(\.isBordered) private var isBordered
 
+    #if os(macOS)
     var body: some View {
-        RoundedRectangle(cornerRadius: 24)
+        RoundedRectangle(cornerRadius: .xSmall)
             .fill(Color.surfacePrimary)
             .clipShape(RoundedRectangle(
-                cornerRadius: 20,
+                cornerRadius: .regular,
                 style: .continuous
             ))
             .overlay(
                 RoundedRectangle(
-                    cornerRadius: 24,
+                    cornerRadius: .small,
                     style: .continuous
                 )
                 .strokeBorder(
@@ -126,4 +166,24 @@ struct LayoutSectionBackgroundView: View {
                 )
             )
     }
+    #else
+    var body: some View {
+        RoundedRectangle(cornerRadius: .medium)
+            .fill(Color.surfacePrimary)
+            .clipShape(RoundedRectangle(
+                cornerRadius: .regular,
+                style: .continuous
+            ))
+            .overlay(
+                RoundedRectangle(
+                    cornerRadius: .medium,
+                    style: .continuous
+                )
+                .strokeBorder(
+                    Color.border.opacity(isBordered ? 1 : 0),
+                    lineWidth: 1
+                )
+            )
+    }
+    #endif
 }

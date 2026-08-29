@@ -91,6 +91,9 @@ public struct Row<LeadingLabel: View, TrailingLabel: View>: View {
                 if isLoading {
                     ProgressView()
                         .padding(.trailing, .xSmall)
+                    #if os(macOS)
+                        .controlSize(.small)
+                    #endif
                 }
 
                 сlearButton
@@ -99,8 +102,8 @@ public struct Row<LeadingLabel: View, TrailingLabel: View>: View {
                     .padding(.leading, .xxSmall)
 
                 if isShowArrowIcon || isNavigatable {
-                    Image.Base.chevronRight
-                        .icon(.onSurfaceTertiary)
+                    Icon(Image.Base.chevronRight)
+                        .iconColor(Color.onSurfaceTertiary)
                 }
             }
         }

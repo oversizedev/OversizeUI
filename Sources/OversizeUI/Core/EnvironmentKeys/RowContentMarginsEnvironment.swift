@@ -7,7 +7,7 @@ import SwiftUI
 
 private struct RowContentMarginsKey: EnvironmentKey {
     #if os(macOS)
-    static let defaultValue: SwiftUI.EdgeInsets = .init(top: .xSmall, leading: .small, bottom: .xSmall, trailing: .small)
+    static let defaultValue: SwiftUI.EdgeInsets = .init(top: .xSmall, leading: .regular, bottom: .xSmall, trailing: .regular)
     #else
     static let defaultValue: SwiftUI.EdgeInsets = .init(top: .small, leading: .medium, bottom: .small, trailing: .medium)
     #endif

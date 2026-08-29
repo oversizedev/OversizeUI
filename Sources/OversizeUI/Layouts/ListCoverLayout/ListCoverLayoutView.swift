@@ -79,9 +79,9 @@ public struct ListCoverLayoutView<
                             .frame(height: 0)
                             .listRowInsets(EdgeInsets())
                             .listRowBackground(Color.clear)
-                            #if !os(tvOS)
+                        #if !os(tvOS)
                             .listRowSeparator(.hidden)
-                            #endif
+                        #endif
                             .background {
                                 ListScrollOffsetReader { offset in
                                     scrollOffset = offset

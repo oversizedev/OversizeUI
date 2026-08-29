@@ -17,20 +17,26 @@ public struct Layout<Content: View, Background: View>: View {
     @State private var headerHeight: CGFloat = 0
 
     public var body: some View {
-        ScrollView {
-            LazyVStack(spacing: .xxSmall) {
-                Group(sections: content) { sections in
-                    ForEach(sections) { section in
+        SwiftUI.ScrollView {
+            SwiftUI.LazyVStack(spacing: .xxSmall) {
+                SwiftUI.Group(sections: content) { sections in
+                    SwiftUI.ForEach(sections) { section in
                         LayoutSectionView(
                             section: section,
                             isFirst: section.id == sections.first?.id,
-                            isStacked: sections.count > 1
+                            isLast: section.id == sections.last?.id,
+                            isStacked: sections.isEmpty == false
                         )
                     }
                 }
             }
+            #if os(macOS)
+            .padding(.horizontal, .small)
+            #else
             .padding(.horizontal, .xxSmall)
+            #endif
         }
+        .navigationTitle(title)
         .onScrollGeometryChange(for: CGFloat.self) { proxy in
             proxy.contentOffset.y + proxy.contentInsets.top
         } action: { _, value in
@@ -70,33 +76,6 @@ public struct Layout<Content: View, Background: View>: View {
         self.onScroll = onScroll
         self.content = content()
         self.background = background()
-    }
-}
-
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-public struct LayoutSection<Content: View>: View {
-    let content: Content
-
-    public init(@ViewBuilder content: () -> Content) {
-        self.content = content()
-    }
-
-    public var body: some View {
-        Group(subviews: content) { subviews in
-            VStack(alignment: .leading) {
-                ForEach(subviews) { subview in
-                    subview
-
-                    if subviews.last?.id != subview.id {
-                        Divider()
-                            .padding(.vertical, 8)
-                    }
-                }
-            }
-            .padding()
-            .frame(maxWidth: .infinity, alignment: .topLeading)
-            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 32))
-        }
     }
 }
 

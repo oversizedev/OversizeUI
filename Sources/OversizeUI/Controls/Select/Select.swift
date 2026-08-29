@@ -52,7 +52,7 @@ public struct Select<Element: Equatable, Content: View, Selection: View, Actions
             }
         } label: {
             HStack(spacing: .zero) {
-                if isSelected, let index = selectedIndex {
+                if isSelected, let index = selectedIndex, data.indices.contains(index) {
                     selectionView(data[index])
                 } else {
                     Text(label)
