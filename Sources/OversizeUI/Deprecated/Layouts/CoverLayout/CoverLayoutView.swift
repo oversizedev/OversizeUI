@@ -5,11 +5,11 @@
 
 import SwiftUI
 
-public enum CoverNavigationType {
-    case `static`, parallax, pinch
-}
-
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+@available(iOS, introduced: 17.0, deprecated: 18.0, renamed: "CoverLayout")
+@available(macOS, introduced: 14.0, deprecated: 15.0, renamed: "CoverLayout")
+@available(tvOS, introduced: 17.0, deprecated: 18.0, renamed: "CoverLayout")
+@available(watchOS, introduced: 10.0, deprecated: 11.0, renamed: "CoverLayout")
+@available(visionOS, introduced: 1.0, deprecated: 2.0, renamed: "CoverLayout")
 public struct CoverLayoutView<
     Content: View,
     Cover: View,

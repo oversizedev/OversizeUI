@@ -11,3 +11,4 @@ DerivedData/
 /AGENTS.md
 /CLAUDE.md
 /build
+/.claude/settings.local.json

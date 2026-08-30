@@ -97,7 +97,7 @@ public struct ListRow<LeadingLabel: View, TrailingLabel: View>: View {
 
             if isNavigatable {
                 Icon(Image.Base.chevronRight)
-                    .iconColor(Color.border)
+                    .iconColor(Color.onSurfaceTertiary)
                     .padding(.leading, .xxSmall)
             }
         }

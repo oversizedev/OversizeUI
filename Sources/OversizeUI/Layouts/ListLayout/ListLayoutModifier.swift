@@ -5,9 +5,9 @@
 
 import SwiftUI
 
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 10.0, *)
-public extension ListLayoutView {
-    func listLayoutStyle(_ listStyle: ListLayoutStyle) -> ListLayoutView {
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+public extension ListLayout {
+    func listLayoutStyle(_ listStyle: ListLayoutStyle) -> ListLayout {
         var list = self
         list.listStyle = listStyle
         return list

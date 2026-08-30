@@ -13,6 +13,10 @@ public enum PresentationAdaptation {
     case automatic, none, popover, sheet, fullScreenCover
 }
 
+public enum ScrollEdgeEffect {
+    case automatic, soft, hard
+}
+
 public extension View {
     @_disfavoredOverload
     @ViewBuilder
@@ -81,6 +85,17 @@ public extension View {
         }
     }
 
+    @available(visionOS, unavailable)
+    @_disfavoredOverload
+    @ViewBuilder
+    func scrollEdgeEffectStyle(_ style: ScrollEdgeEffect, for edges: Edge.Set = .all) -> some View {
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+            scrollEdgeEffectStyle(style.systemStyle, for: edges)
+        } else {
+            self
+        }
+    }
+
     @ViewBuilder
     func safeAreaBarTop(alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil, @ViewBuilder content: @escaping () -> some View) -> some View {
         if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
@@ -134,5 +149,17 @@ public extension View {
         #else
         self
         #endif
+    }
+}
+
+@available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *)
+@available(visionOS, unavailable)
+private extension ScrollEdgeEffect {
+    var systemStyle: ScrollEdgeEffectStyle {
+        switch self {
+        case .automatic: .automatic
+        case .soft: .soft
+        case .hard: .hard
+        }
     }
 }

@@ -111,7 +111,7 @@ private extension CachedAsyncImage {
 }
 
 private enum CachedAsyncImageSessionStore {
-    nonisolated(unsafe) private static var sessions: [ObjectIdentifier: URLSession] = [:]
+    private nonisolated(unsafe) static var sessions: [ObjectIdentifier: URLSession] = [:]
     private static let lock = NSLock()
 
     static func session(for urlCache: URLCache) -> URLSession {
