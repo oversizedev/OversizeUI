@@ -130,15 +130,20 @@ public struct CalendarLayout<
     private var monthPickerSelection: Binding<Date> {
         Binding(
             get: { displayedMonth },
-            set: { newValue in
-                guard let normalized = calendar.date(
-                    from: calendar.dateComponents([.year, .month], from: newValue)
-                ) else { return }
-                displayedMonth = months.contains(normalized)
-                    ? normalized
-                    : months.last(where: { $0 <= normalized }) ?? months.first ?? normalized
-            }
+            set: { displayedMonth = resolveMonth($0) }
         )
+    }
+
+    private func normalizedMonth(for date: Date) -> Date {
+        calendar.date(from: calendar.dateComponents([.year, .month], from: date)) ?? date
+    }
+
+    private func resolveMonth(_ date: Date) -> Date {
+        let normalized = normalizedMonth(for: date)
+        if months.contains(normalized) {
+            return normalized
+        }
+        return months.last(where: { $0 <= normalized }) ?? months.first ?? normalized
     }
 
     public var calendarView: some View {
@@ -208,10 +213,9 @@ public struct CalendarLayout<
             .indexViewStyle(.page(backgroundDisplayMode: .never))
             .frame(height: calendarHeight)
             .onAppear { prepareCalendar() }
+            .onChange(of: interval) { _, _ in prepareCalendar() }
             .onChange(of: selection) { _, newValue in
-                let newMonth = calendar.date(
-                    from: calendar.dateComponents([.year, .month], from: newValue)
-                ) ?? newValue
+                let newMonth = normalizedMonth(for: newValue)
                 if !calendar.isDate(displayedMonth, equalTo: newMonth, toGranularity: .month) {
                     displayedMonth = newMonth
                 }
@@ -245,9 +249,7 @@ public struct CalendarLayout<
             inside: interval,
             matching: DateComponents(day: 1, hour: 0, minute: 0, second: 0)
         )
-        .compactMap { date in
-            calendar.date(from: calendar.dateComponents([.year, .month], from: date))
-        }
+        .map { normalizedMonth(for: $0) }
         .reduce(into: [Date]()) { result, month in
             if result.last != month {
                 result.append(month)
@@ -277,6 +279,8 @@ public struct CalendarLayout<
                 matching: DateComponents(hour: 0, minute: 0, second: 0)
             )
         }
+
+        displayedMonth = resolveMonth(displayedMonth)
     }
 
     private func updateScrollOffset(_ offset: CGFloat) {
