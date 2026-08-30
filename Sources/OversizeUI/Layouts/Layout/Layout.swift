@@ -43,7 +43,7 @@ public struct Layout<Content: View, Background: View>: View {
             updateScrollOffset(value)
         }
         .background {
-            Color.backgroundSecondary.ignoresSafeArea()
+            background.ignoresSafeArea()
         }
         .background {
             Color.clear
@@ -70,7 +70,7 @@ public struct Layout<Content: View, Background: View>: View {
         _ title: String = "",
         onScroll: ScrollAction? = nil,
         @ViewBuilder content: () -> Content,
-        @ViewBuilder background: () -> Background = { Color.backgroundPrimary }
+        @ViewBuilder background: () -> Background = { Color.backgroundSecondary }
     ) {
         self.title = title
         self.onScroll = onScroll

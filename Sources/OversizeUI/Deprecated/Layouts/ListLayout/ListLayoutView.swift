@@ -5,7 +5,11 @@
 
 import SwiftUI
 
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 10.0, *)
+@available(iOS, deprecated: 18.0, renamed: "ListLayout")
+@available(macOS, deprecated: 15.0, renamed: "ListLayout")
+@available(tvOS, deprecated: 18.0, renamed: "ListLayout")
+@available(watchOS, deprecated: 11.0, renamed: "ListLayout")
+@available(visionOS, deprecated: 2.0, renamed: "ListLayout")
 public struct ListLayoutView<
     Content: View,
     Background: View,

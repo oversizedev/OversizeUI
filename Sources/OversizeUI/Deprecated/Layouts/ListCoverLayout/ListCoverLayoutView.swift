@@ -5,7 +5,11 @@
 
 import SwiftUI
 
-@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
+@available(iOS, introduced: 17.0, deprecated: 18.0, renamed: "ListCoverLayout")
+@available(macOS, introduced: 14.0, deprecated: 15.0, renamed: "ListCoverLayout")
+@available(tvOS, introduced: 17.0, deprecated: 18.0, renamed: "ListCoverLayout")
+@available(watchOS, introduced: 10.0, deprecated: 11.0, renamed: "ListCoverLayout")
+@available(visionOS, introduced: 1.0, deprecated: 2.0, renamed: "ListCoverLayout")
 public struct ListCoverLayoutView<
     Content: View,
     Cover: View,

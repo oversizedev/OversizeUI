@@ -24,6 +24,10 @@ public struct CoverLayout<
     @ViewBuilder private let coverBackground: CoverBackground
     @ViewBuilder private let background: Background
 
+    var coverStyle: CoverNavigationType = .static
+    var contentCornerRadius: CGFloat = 0
+    var contentOffset: CGFloat = 0
+
     @State private var scrollOffset: CGFloat = .zero
     @State private var visibleRatio: CGFloat = 1
 
@@ -36,6 +40,7 @@ public struct CoverLayout<
                         .ignoresSafeArea(edges: .all)
                 }
                 .frame(height: coverStretchHeight)
+                .offset(y: coverParallaxOffset)
                 .opacity(visibleRatio)
 
             ScrollView {
@@ -55,7 +60,14 @@ public struct CoverLayout<
                 .background {
                     contentBackground
                         .ignoresSafeArea(edges: .bottom)
+                        .if(contentCornerRadius > 0) {
+                            $0.cornerRadius(
+                                contentCornerRadius,
+                                corners: [.topLeft, .topRight]
+                            )
+                        }
                 }
+                .padding(.top, contentOffset)
             }
             .safeAreaPadding(.top, coverHeight)
             // .contentMargins(.top, resolveContentMarginTop, for: .scrollContent)
@@ -73,7 +85,21 @@ public struct CoverLayout<
     }
 
     private var coverStretchHeight: CGFloat {
-        coverHeight + max(0, -scrollOffset)
+        switch coverStyle {
+        case .pinch:
+            max(0, coverHeight - scrollOffset)
+        default:
+            coverHeight + max(0, -scrollOffset)
+        }
+    }
+
+    private var coverParallaxOffset: CGFloat {
+        switch coverStyle {
+        case .parallax:
+            scrollOffset > 0 ? -scrollOffset / 2 : 0
+        default:
+            0
+        }
     }
 
     private func updateScrollOffset(_ offset: CGFloat) {

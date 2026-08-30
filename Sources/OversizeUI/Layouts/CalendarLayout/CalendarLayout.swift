@@ -1,39 +1,37 @@
 //
-// Copyright © 2025 Alexander Romanov
-// CalendarLayoutView.swift, created on 06.01.2025
+// Copyright © 2026 Alexander Romanov
+// CalendarLayout.swift, created on 30.08.2026
 //
 
 import Foundation
 import SwiftUI
 
-@available(iOS 17.0, *)
+@available(iOS 18.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
-public struct CalendarLayoutView<
+public struct CalendarLayout<
     Content: View,
     Day: View,
     Background: View
 >: View {
-    @Environment(\.sizeCategory) private var contentSize
     @Environment(\.calendar) private var calendar
-    @Environment(\.safeAreaInsets) private var safeAreaInsets
 
-    public typealias ScrollAction = @MainActor @Sendable (_ offset: CGPoint, _ headerVisibleRatio: CGFloat) -> Void
+    public typealias ScrollAction = @MainActor @Sendable (_ offset: CGFloat, _ headerVisibleRatio: CGFloat) -> Void
 
-    @ViewBuilder private let background: Background
     private let interval: DateInterval
-    private let content: () -> Content
-    private let day: (Date) -> Day
-
     private let onScroll: ScrollAction?
+    private let day: (Date) -> Day
+    @ViewBuilder private var content: Content
+    @ViewBuilder private let background: Background
 
-    @Binding var selection: Date
+    @Binding private var selection: Date
+
     @State private var displayedMonth: Date
     @State private var months: [Date] = []
     @State private var days: [Date: [Date]] = [:]
     @State private var calendarHeight: CGFloat?
-
+    @State private var headerHeight: CGFloat = 0
     @State private var isShowMonthPicker: Bool = false
 
     private var columns: [GridItem] {
@@ -47,17 +45,26 @@ public struct CalendarLayoutView<
     }
 
     public var body: some View {
-        ScrollView {
-            Color.clear
-                .frame(height: 0)
-                .onGeometryChange(for: CGFloat.self) { proxy in
-                    proxy.frame(in: .named("CalendarScrollView")).minY
-                } action: { minY in
-                    handleScrollOffset(CGPoint(x: 0, y: minY))
+        SwiftUI.ScrollView {
+            SwiftUI.LazyVStack(spacing: .xxSmall) {
+                SwiftUI.Group(sections: content) { sections in
+                    SwiftUI.ForEach(sections) { section in
+                        LayoutSectionView(
+                            section: section,
+                            isFirst: section.id == sections.first?.id,
+                            isLast: section.id == sections.last?.id,
+                            isStacked: sections.isEmpty == false
+                        )
+                    }
                 }
-            content()
+            }
+            .padding(.horizontal, .xxSmall)
         }
-        .coordinateSpace(.named("CalendarScrollView"))
+        .onScrollGeometryChange(for: CGFloat.self) { proxy in
+            proxy.contentOffset.y + proxy.contentInsets.top
+        } action: { _, value in
+            updateScrollOffset(value)
+        }
         .safeAreaBarTop {
             calendarView
                 .ifUnavailable26 {
@@ -87,17 +94,51 @@ public struct CalendarLayoutView<
             }
         }
         .background(background.ignoresSafeArea())
+        .background {
+            Color.clear
+                .ignoresSafeArea()
+                .onGeometryChange(for: CGFloat.self) { proxy in
+                    proxy.safeAreaInsets.top + 44
+                } action: { height in
+                    let isInitial = headerHeight == 0
+                    headerHeight = height
+                    if isInitial {
+                        onScroll?(.zero, 1.0)
+                    }
+                }
+        }
         .toolbarTitleDisplayMode(.inline)
         .sensoryFeedback(.selection, trigger: selection)
         .sheet(isPresented: $isShowMonthPicker) {
             NavigationStack {
                 MonthYearPickerSheet(
-                    selection: $displayedMonth,
-                    in: interval.start ... interval.end
+                    selection: monthPickerSelection,
+                    in: monthPickerRange
                 )
             }
             .presentationDetents([.height(450)])
         }
+    }
+
+    private var monthPickerRange: ClosedRange<Date> {
+        guard let first = months.first, let last = months.last, first <= last else {
+            return interval.start ... interval.end
+        }
+        return first ... last
+    }
+
+    private var monthPickerSelection: Binding<Date> {
+        Binding(
+            get: { displayedMonth },
+            set: { newValue in
+                guard let normalized = calendar.date(
+                    from: calendar.dateComponents([.year, .month], from: newValue)
+                ) else { return }
+                displayedMonth = months.contains(normalized)
+                    ? normalized
+                    : months.last(where: { $0 <= normalized }) ?? months.first ?? normalized
+            }
+        )
     }
 
     public var calendarView: some View {
@@ -204,6 +245,14 @@ public struct CalendarLayoutView<
             inside: interval,
             matching: DateComponents(day: 1, hour: 0, minute: 0, second: 0)
         )
+        .compactMap { date in
+            calendar.date(from: calendar.dateComponents([.year, .month], from: date))
+        }
+        .reduce(into: [Date]()) { result, month in
+            if result.last != month {
+                result.append(month)
+            }
+        }
 
         days = months.reduce(into: [:]) { current, month in
             guard
@@ -230,9 +279,9 @@ public struct CalendarLayoutView<
         }
     }
 
-    private func handleScrollOffset(_ offset: CGPoint) {
-        let headerHeight = 44 + safeAreaInsets.top
-        let visibleRatio: CGFloat = (headerHeight + offset.y) / headerHeight
+    private func updateScrollOffset(_ offset: CGFloat) {
+        guard headerHeight > 0 else { return }
+        let visibleRatio: CGFloat = (headerHeight - offset) / headerHeight
         onScroll?(offset, visibleRatio)
     }
 
@@ -240,9 +289,9 @@ public struct CalendarLayoutView<
         interval: DateInterval,
         selection: Binding<Date>,
         onScroll: ScrollAction? = nil,
-        @ViewBuilder content: @escaping () -> Content,
+        @ViewBuilder content: () -> Content,
         @ViewBuilder day: @escaping (Date) -> Day,
-        @ViewBuilder background: () -> Background = { Color.backgroundPrimary }
+        @ViewBuilder background: () -> Background = { Color.backgroundSecondary }
     ) {
         self.interval = interval
         _selection = selection
@@ -250,24 +299,24 @@ public struct CalendarLayoutView<
             from: Calendar.current.dateComponents([.year, .month], from: selection.wrappedValue)
         ) ?? selection.wrappedValue
         _displayedMonth = State(initialValue: initialMonth)
-        self.content = content
+        self.content = content()
         self.day = day
         self.onScroll = onScroll
         self.background = background()
     }
 }
 
-@available(iOS 17.0, *)
+@available(iOS 18.0, *)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
-public extension CalendarLayoutView where Day == DefaultCalendarDayView {
+public extension CalendarLayout where Day == DefaultCalendarDayView {
     init(
         interval: DateInterval,
         selection: Binding<Date>,
         onScroll: ScrollAction? = nil,
-        @ViewBuilder content: @escaping () -> Content,
-        @ViewBuilder background: () -> Background = { Color.backgroundPrimary }
+        @ViewBuilder content: () -> Content,
+        @ViewBuilder background: () -> Background = { Color.backgroundSecondary }
     ) {
         self.init(
             interval: interval,
@@ -282,121 +331,62 @@ public extension CalendarLayoutView where Day == DefaultCalendarDayView {
     }
 }
 
-@available(iOS 17.0, *)
-public struct DefaultCalendarDayView: View {
-    let date: Date
-    @Binding var selection: Date
-    @Environment(\.calendar) private var calendar
-
-    public init(date: Date, selection: Binding<Date>) {
-        self.date = date
-        _selection = selection
-    }
-
-    public var body: some View {
-        Text(date.formatted(.dateTime.day()))
-            .callout(.semibold)
-            .foregroundColor(foregroundColor)
-            .background {
-                Circle()
-                    .fill(selectionCircleFillColor)
-                    .frame(width: 40, height: 40)
-            }
-            .padding(.vertical, .xxSmall)
-            .contentShape(Rectangle())
-    }
-
-    private var isSelected: Bool {
-        calendar.isDate(date, inSameDayAs: selection)
-    }
-
-    private var isToday: Bool {
-        calendar.isDate(date, inSameDayAs: Date())
-    }
-
-    private var foregroundColor: Color {
-        if isSelected {
-            .onPrimary
-        } else if isToday {
-            .onSurfaceSecondary
-        } else {
-            .onSurfacePrimary
-        }
-    }
-
-    private var selectionCircleFillColor: Color {
-        if isSelected {
-            .accent
-        } else if isToday {
-            .surfaceTertiary
-        } else {
-            .clear
-        }
-    }
-}
-
-@available(iOS 17.0, *)
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-#Preview("Custom Day View") {
-    @Previewable @State var selection = Date()
-
-    return NavigationStack {
-        CalendarLayoutView(
-            interval: DateInterval(
-                start: Calendar.current.date(byAdding: .month, value: -6, to: Date()) ?? Date(),
-                end: Calendar.current.date(byAdding: .month, value: 6, to: Date()) ?? Date()
-            ),
-            selection: $selection,
-            content: {
-                VStack {
-                    Text("Select: \(selection.formatted(.dateTime))")
-                        .frame(maxWidth: .infinity, minHeight: 44)
-                    Spacer()
-                }
-                .background {
-                    Color.surfaceTertiary
-                }
-            },
-            day: { date in
-                Text(date.formatted(.dateTime.day()))
-            },
-            background: { Color.backgroundSecondary }
-        )
-        .toolbarTitleDisplayMode(.inline)
-    }
-}
-
-@available(iOS 17.0, *)
+@available(iOS 18.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 #Preview("Default Day View") {
     @Previewable @State var selection = Date()
 
-    return NavigationStack {
-        CalendarLayoutView(
+    NavigationStack {
+        CalendarLayout(
             interval: DateInterval(
                 start: Calendar.current.date(byAdding: .month, value: -6, to: Date()) ?? Date(),
                 end: Calendar.current.date(byAdding: .month, value: 6, to: Date()) ?? Date()
             ),
             selection: $selection,
             content: {
-                VStack {
-                    VStack {
-                        Text("Select:")
-                            .headline()
-                        Text(selection.formatted(.dateTime.day().month().year()))
-                            .title()
-                    }
-                    .frame(maxWidth: .infinity, minHeight: 100)
-                    Spacer()
+                Section("Selected") {
+                    Row(selection.formatted(.dateTime.day().month().year()))
                 }
-                .background(Color.surfaceTertiary)
+
+                Section("Events") {
+                    Row("Morning run")
+                    Row("Design review")
+                    Row("Dinner")
+                }
+            }
+        )
+        .sectionTitlePosition(.inside)
+        .bordered()
+        .sectionTitleSeparator(.visible)
+    }
+}
+
+@available(iOS 18.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+#Preview("Custom Day View") {
+    @Previewable @State var selection = Date()
+
+    NavigationStack {
+        CalendarLayout(
+            interval: DateInterval(
+                start: Calendar.current.date(byAdding: .month, value: -6, to: Date()) ?? Date(),
+                end: Calendar.current.date(byAdding: .month, value: 6, to: Date()) ?? Date()
+            ),
+            selection: $selection,
+            content: {
+                Section {
+                    Row("Select: \(selection.formatted(.dateTime.day().month().year()))")
+                }
+            },
+            day: { date in
+                Text(date.formatted(.dateTime.day()))
+                    .padding(.vertical, .xxSmall)
             },
             background: { Color.backgroundSecondary }
         )
-        .toolbarTitleDisplayMode(.inline)
     }
 }
