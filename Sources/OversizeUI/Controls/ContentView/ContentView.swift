@@ -42,9 +42,9 @@ public struct ContentView<A: View>: View {
             if let actions {
                 VStack(spacing: .small) {
                     actions
-                    #if !os(tvOS)
-                    .controlSize(.large)
-                    #endif
+                        #if !os(tvOS)
+                        .controlSize(.large)
+                        #endif
                 }
             }
         }

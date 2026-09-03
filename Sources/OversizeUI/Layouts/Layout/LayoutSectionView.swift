@@ -46,18 +46,18 @@ struct LayoutSectionView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 // .padding(.vertical, .xxSmall)
                 #if os(macOS)
-                    .clipShape(RoundedRectangle(
-                        cornerRadius: .xSmall,
-                        style: .continuous
-                    ))
+                .clipShape(RoundedRectangle(
+                    cornerRadius: .xSmall,
+                    style: .continuous
+                ))
                 #else
-                    .clipShape(RoundedRectangle(
-                        cornerRadius: .regular,
-                        style: .continuous
-                    ))
+                .clipShape(RoundedRectangle(
+                    cornerRadius: .regular,
+                    style: .continuous
+                ))
                 #endif
-                    .if(sectionContentMarginsVisibility == .visible) {
-                        $0
+                .if(sectionContentMarginsVisibility == .visible) {
+                    $0
                         #if os(macOS)
                         .overlay(
                             RoundedRectangle(
@@ -71,25 +71,25 @@ struct LayoutSectionView: View {
                         )
                         #else
                         .overlay(
-                                RoundedRectangle(
-                                    cornerRadius: .regular,
-                                    style: .continuous
-                                )
-                                .strokeBorder(
-                                    Color.border.opacity(isBordered ? 1 : 0),
-                                    lineWidth: 1
-                                )
+                            RoundedRectangle(
+                                cornerRadius: .regular,
+                                style: .continuous
                             )
+                            .strokeBorder(
+                                Color.border.opacity(isBordered ? 1 : 0),
+                                lineWidth: 1
+                            )
+                        )
                         #endif
-                            .padding(
-                                .init(
-                                    top: section.header.count < 1 ? .xxxSmall : titleSeparator == .visible && section.header.count < 1 ? .xxxSmall : .zero,
-                                    leading: sectionContentMarginsVisibility == .visible ? .xxxSmall : 0,
-                                    bottom: sectionContentMarginsVisibility == .visible ? .xxxSmall : 0,
-                                    trailing: sectionContentMarginsVisibility == .visible ? .xxxSmall : 0
-                                )
+                        .padding(
+                            .init(
+                                top: section.header.count < 1 ? .xxxSmall : titleSeparator == .visible && section.header.count < 1 ? .xxxSmall : .zero,
+                                leading: sectionContentMarginsVisibility == .visible ? .xxxSmall : 0,
+                                bottom: sectionContentMarginsVisibility == .visible ? .xxxSmall : 0,
+                                trailing: sectionContentMarginsVisibility == .visible ? .xxxSmall : 0
                             )
-                    }
+                        )
+                }
 
                 if section.footer.count > 0 {
                     if isBordered, sectionContentMarginsVisibility != .visible {
@@ -116,13 +116,13 @@ struct LayoutSectionView: View {
         )
         #else
         .padding(
-                .init(
-                    top: isFirst ? .xxSmall : .zero,
-                    leading: .zero,
-                    bottom: isLast ? .xxSmall : .zero,
-                    trailing: .zero
-                )
+            .init(
+                top: isFirst ? .xxSmall : .zero,
+                leading: .zero,
+                bottom: isLast ? .xxSmall : .zero,
+                trailing: .zero
             )
+        )
         #endif
     }
 }

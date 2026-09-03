@@ -60,7 +60,7 @@ public struct SelectPicker<Element: Hashable, Content: View, Actions: View, Cont
                 .labelStyle(.toolbar)
                 .buttonStyle(.toolbarSecondary)
                 #if !os(tvOS) && !os(watchOS)
-                    .keyboardShortcut(.cancelAction)
+                .keyboardShortcut(.cancelAction)
                 #endif
             }
 

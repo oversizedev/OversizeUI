@@ -92,10 +92,10 @@ public struct Switch<Label: View>: View {
         Toggle("", isOn: $isOn)
             .labelsHidden()
             .disabled(!isEnabled)
-        #if os(macOS)
+            #if os(macOS)
             .toggleStyle(.switch)
             .controlSize(.small)
-        #endif
+            #endif
     }
 
     private var foregroundColor: Color {

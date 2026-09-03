@@ -148,7 +148,7 @@ public struct MonthYearPickerSheet: View {
                 .labelStyle(.toolbar)
                 .buttonStyle(.toolbarSecondary)
                 #if !os(tvOS)
-                    .keyboardShortcut(.cancelAction)
+                .keyboardShortcut(.cancelAction)
                 #endif
             }
 
@@ -164,7 +164,7 @@ public struct MonthYearPickerSheet: View {
                 .labelStyle(.toolbar)
                 .buttonStyle(.toolbarPrimary)
                 #if !os(tvOS)
-                    .keyboardShortcut(.defaultAction)
+                .keyboardShortcut(.defaultAction)
                 #endif
             }
         }

@@ -59,9 +59,9 @@ struct ListLayoutSectionView: View {
             Section {
                 if section.header.count > 0, titlePosition == .inside {
                     section.header
-                    #if !os(watchOS) && !os(tvOS)
+                        #if !os(watchOS) && !os(tvOS)
                         .listRowSeparator(.hidden)
-                    #endif
+                        #endif
                 }
                 section.content
             } header: {

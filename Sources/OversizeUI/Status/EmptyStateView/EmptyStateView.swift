@@ -58,9 +58,9 @@ public struct EmptyStateView<Actions: View>: View {
             .multilineTextAlignment(.center)
 
             actions
-            #if !os(tvOS)
-            .controlSize(type == .compact ? .small : .large)
-            #endif
+                #if !os(tvOS)
+                .controlSize(type == .compact ? .small : .large)
+                #endif
         }
         .padding(.top, .regular)
         .paddingContent()

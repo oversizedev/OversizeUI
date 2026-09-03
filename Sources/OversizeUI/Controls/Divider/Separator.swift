@@ -29,9 +29,9 @@ public struct Separator: View {
                 width: isHorizontal ? nil : lineWidth,
                 height: isHorizontal ? lineWidth : nil
             )
-        #if !os(macOS)
+            #if !os(macOS)
             .padding(insets(isHorizontal))
-        #endif
+            #endif
     }
 
     private func insets(_ isHorizontal: Bool) -> SwiftUI.EdgeInsets {

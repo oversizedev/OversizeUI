@@ -39,13 +39,13 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
                     .padding(padding)
                     .offset(y: fieldOffset)
                     .focused($isFocused)
-                #if os(macOS)
+                    #if os(macOS)
                     .if(fieldPlaceholderPosition == .adjacent, then: {
                         $0.textFieldStyle(.roundedBorder).controlSize(.large)
                     }, else: {
                         $0.textFieldStyle(.plain)
                     })
-                #endif
+                    #endif
                     .redacted(reason: isLoading ? .placeholder : [])
             }
             .background(fieldBackground)
@@ -219,11 +219,11 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
                     .subheadline()
                     .onSurfaceTertiary()
                     .opacity(0.7)
-                #if os(macOS)
+                    #if os(macOS)
                     .padding(.xSmall)
-                #else
+                    #else
                     .padding(.small)
-                #endif
+                    #endif
             }
         case .adjacent:
             EmptyView()
@@ -232,13 +232,13 @@ public struct LabeledTextFieldStyle: TextFieldStyle {
                 .font(text.isEmpty ? .headline : .subheadline)
                 .fontWeight(text.isEmpty ? .medium : .semibold)
                 .onSurfaceTertiary()
-            #if os(macOS)
+                #if os(macOS)
                 .padding(.xSmall)
                 .offset(y: text.isEmpty ? 0 : -10)
-            #else
+                #else
                 .padding(.small)
                 .offset(y: text.isEmpty ? 0 : -13)
-            #endif
+                #endif
                 .opacity(text.isEmpty ? 0 : 1)
         }
     }

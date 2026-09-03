@@ -91,9 +91,9 @@ public struct Row<LeadingLabel: View, TrailingLabel: View>: View {
                 if isLoading {
                     ProgressView()
                         .padding(.trailing, .xSmall)
-                    #if os(macOS)
+                        #if os(macOS)
                         .controlSize(.small)
-                    #endif
+                        #endif
                 }
 
                 сlearButton

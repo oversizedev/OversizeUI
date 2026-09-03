@@ -48,9 +48,9 @@ public struct Snackbar<Label: View, Actions: View>: View {
                 HStack(spacing: .xxSmall) {
                     actions
                         .buttonStyle(.quaternary)
-                    #if !os(tvOS)
+                        #if !os(tvOS)
                         .controlSize(.mini)
-                    #endif
+                        #endif
                         .accent()
                 }
             }

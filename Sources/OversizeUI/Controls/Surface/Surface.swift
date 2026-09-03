@@ -65,9 +65,9 @@ public struct Surface<Label: View>: View {
         }
         .buttonStyle(SurfaceButtonStyle())
         #if os(macOS)
-            .onHover { hover in
-                isHover = hover
-            }
+        .onHover { hover in
+            isHover = hover
+        }
         #endif
     }
 
@@ -193,11 +193,11 @@ public struct SurfaceButtonStyle: ButtonStyle {
 
     public func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
-        #if os(macOS)
+            #if os(macOS)
             .scaleEffect(configuration.isPressed ? 0.99 : 1)
-        #else
+            #else
             .scaleEffect(configuration.isPressed ? 0.96 : 1)
-        #endif
+            #endif
     }
 }
 

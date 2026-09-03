@@ -84,7 +84,7 @@ public struct PriceField: View {
             })
             .textFieldStyle(.default)
             #if os(iOS)
-                .keyboardType(.decimalPad)
+            .keyboardType(.decimalPad)
             #endif
 
             HStack(spacing: 8) {
