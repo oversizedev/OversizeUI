@@ -1,6 +1,6 @@
 //
 // Copyright © 2026 Alexander Romanov
-// ListSection.swift, created on 19.03.2026
+// ListSectionFooter.swift, created on 19.03.2026
 //
 
 import SwiftUI
