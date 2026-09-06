@@ -92,7 +92,7 @@ Layout("Groups") {
 |---|---|
 | ``SwiftUI/View/sectionTitlePosition(_:)`` | `.inside`, `.outside` |
 | ``SwiftUI/View/sectionTitleSeparator(_:)`` | `.visible`, `.hidden` |
-| ``SwiftUI/View/sectionBackgroundStyle(_:)`` | `.surface`, `.dotted` |
+| ``SwiftUI/View/sectionBackgroundStyle(_:)`` | `.surface`, `.dotted`, `.plain` |
 | ``SwiftUI/View/bordered(_:)`` | Toggles section borders |
 
 ### Section actions

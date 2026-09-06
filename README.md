@@ -146,7 +146,7 @@ NavigationStack {
 | `.listLayoutStyle(_:)` | `.plain`, `.inset`, `.insetGrouped`, `.smallInsetGrouped`, `.grouped` |
 | `.sectionTitlePosition(_:)` | `.inside`, `.outside` |
 | `.sectionTitleSeparator(_:)` | `.visible`, `.hidden` |
-| `.sectionBackgroundStyle(_:)` | `.surface`, `.dotted` |
+| `.sectionBackgroundStyle(_:)` | `.surface`, `.dotted`, `.plain` |
 | `.sectionActions { }` | Trailing buttons on a section header |
 | `.bordered(_:)` | Toggles section borders |
 

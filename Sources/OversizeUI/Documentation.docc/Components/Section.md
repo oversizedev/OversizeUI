@@ -69,15 +69,24 @@ Layout("Library") {
 
 ## Background Style
 
-``SectionBackgroundStyle`` switches between the standard surface and a dotted outline, which suits
-"create new" affordances:
+``SectionBackgroundStyle`` has three cases: `.surface` (the default card), `.dotted` (a dashed
+outline with no fill, which suits "create new" affordances) and `.plain` (no background, no
+border):
 
 ```swift
 Section("New") {
     Button("Create a group") {}
 }
 .sectionBackgroundStyle(.dotted)
+
+Section {
+    Row("No chrome")
+}
+.sectionBackgroundStyle(.plain)
 ```
+
+Section modifiers apply per section as well as to a whole layout: a modifier on a single
+`Section` wins over the same modifier applied to the enclosing ``Layout``.
 
 ## Section Actions
 

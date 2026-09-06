@@ -69,10 +69,32 @@ jobs:
   test-iOS-example:
     name: Test iOS example
     needs: build-iOS-example
-    runs-on: macos-15
+    runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Select the newest available iPhone simulator
+        id: simulator
+        run: |
+          set -eo pipefail
+          udid=$(xcrun simctl list devices available --json | jq -r '
+            .devices
+            | to_entries
+            | map(select(.key | test("com.apple.CoreSimulator.SimRuntime.iOS")))
+            | sort_by(.key)
+            | reverse
+            | map(.value | map(select(.name | test("iPhone"))))
+            | flatten
+            | .[0].udid // empty
+          ')
+          if [ -z "$udid" ]; then
+            echo "No iPhone simulator available on this runner" >&2
+            xcrun simctl list devices available >&2
+            exit 1
+          fi
+          echo "udid=$udid" >> "$GITHUB_OUTPUT"
+          xcrun simctl list devices available | grep "$udid"
 
       - name: Run package and UI tests
         run: |
@@ -80,7 +102,7 @@ jobs:
           xcodebuild \
             -project Example/Example.xcodeproj \
             -scheme "Example (iOS)" \
-            -destination "platform=iOS Simulator,name=iPhone 16 Pro" \
+            -destination "id=${{ steps.simulator.outputs.udid }}" \
             -resultBundlePath TestResults \
             test \
             -retry-tests-on-failure \
