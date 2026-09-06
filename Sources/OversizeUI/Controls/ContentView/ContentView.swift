@@ -42,9 +42,9 @@ public struct ContentView<A: View>: View {
             if let actions {
                 VStack(spacing: .small) {
                     actions
-                    #if !os(tvOS)
-                    .controlSize(.large)
-                    #endif
+                        #if !os(tvOS)
+                        .controlSize(.large)
+                        #endif
                 }
             }
         }
@@ -70,4 +70,26 @@ public extension ContentView where A == EmptyView {
         self.subtitle = subtitle
         actions = nil
     }
+}
+
+// MARK: - Previews
+
+#Preview("Title only") {
+    ContentView(title: "All caught up")
+}
+
+#Preview("With actions") {
+    ContentView(
+        image: Image.Base.check,
+        title: "Subscription activated",
+        subtitle: "You now have access to every feature"
+    ) {
+        Button("Continue") {}
+            .buttonStyle(.primary)
+            .accent()
+
+        Button("Not now") {}
+            .buttonStyle(.tertiary)
+    }
+    .padding()
 }

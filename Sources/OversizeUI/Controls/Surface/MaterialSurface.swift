@@ -78,4 +78,33 @@ public struct MaterialSurface<Label: View>: View {
         return control
     }
 }
+
+// MARK: - Previews
+
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+#Preview {
+    ZStack {
+        LinearGradient(
+            colors: [.accent, .backgroundSecondary],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+        .ignoresSafeArea()
+
+        VStack(spacing: .medium) {
+            MaterialSurface {
+                Text("Plain material surface")
+                    .padding()
+            }
+
+            MaterialSurface(action: {}) {
+                Text("Actionable material surface")
+                    .padding()
+            }
+        }
+        .padding()
+    }
+}
 #endif

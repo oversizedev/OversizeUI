@@ -325,7 +325,7 @@ struct HighContrastDesign: View {
                     .fill(.success)
                     .frame(width: 8, height: 8)
                 
-                Icon(.checkmark)
+                Icon(Image.Base.check)
                     .foregroundColor(.success)
                 
                 Text("Success")

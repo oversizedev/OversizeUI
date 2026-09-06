@@ -58,14 +58,12 @@ public extension LabelStyle where Self == RowLabelStyle {
     }
 }
 
-struct RowLabelStyle_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack(spacing: .large) {
-            Label("Text", systemImage: "sun.max")
-                .labelStyle(.row)
+#Preview {
+    VStack(spacing: .large) {
+        Label("Text", systemImage: "sun.max")
+            .labelStyle(.row)
 
-            Label("Text", systemImage: "sun.max")
-                .labelStyle(.row("Subtitle"))
-        }
+        Label("Text", systemImage: "sun.max")
+            .labelStyle(.row("Subtitle"))
     }
 }

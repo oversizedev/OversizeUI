@@ -350,192 +350,189 @@ public extension ButtonStyle where Self == OversizeButtonStyle {
     }
 }
 
-@available(tvOS, unavailable)
-struct OversizeButtonStyle_Previews: PreviewProvider {
-    struct Buttons: View {
-        var body: some View {
-            Group {
-                Button(role: .cancel) {} label: {
-                    Text("Button")
-                }
-                .buttonStyle(.primary)
-
-                Button(role: .destructive) {} label: {
-                    Text("Button")
-                }
-                .buttonStyle(.primary)
-
-                Button {} label: {
-                    Text("Button")
-                }
-                .buttonStyle(.primary)
-
-                Button(role: .cancel) {} label: {
-                    Text("Button")
-                }
-                .buttonStyle(OversizeButtonStyle(.secondary))
-
-                Button(role: .destructive) {} label: {
-                    Text("Button")
-                }
-                .buttonStyle(OversizeButtonStyle(.secondary))
-
-                Button {} label: {
-                    Text("Button")
-                }
-                .buttonStyle(OversizeButtonStyle(.secondary))
+struct Buttons: View {
+    var body: some View {
+        Group {
+            Button(role: .cancel) {} label: {
+                Text("Button")
             }
-            Group {
-                Button(role: .cancel) {} label: {
-                    Text("Button")
-                }
-                .buttonStyle(OversizeButtonStyle(.tertiary))
+            .buttonStyle(.primary)
 
-                Button(role: .destructive) {} label: {
-                    Text("Button")
-                }
-                .buttonStyle(OversizeButtonStyle(.tertiary))
-
-                Button {} label: {
-                    Text("Button")
-                }
-                .buttonStyle(OversizeButtonStyle(.tertiary))
-
-                Button(role: .cancel) {} label: {
-                    Text("Button")
-                }
-                .buttonStyle(OversizeButtonStyle(.quaternary))
-
-                Button(role: .destructive) {} label: {
-                    Text("Button")
-                }
-                .buttonStyle(OversizeButtonStyle(.quaternary))
-
-                Button {} label: {
-                    Text("Button")
-                }
-
-                .buttonStyle(OversizeButtonStyle(.quaternary))
+            Button(role: .destructive) {} label: {
+                Text("Button")
             }
+            .buttonStyle(.primary)
+
+            Button {} label: {
+                Text("Button")
+            }
+            .buttonStyle(.primary)
+
+            Button(role: .cancel) {} label: {
+                Text("Button")
+            }
+            .buttonStyle(OversizeButtonStyle(.secondary))
+
+            Button(role: .destructive) {} label: {
+                Text("Button")
+            }
+            .buttonStyle(OversizeButtonStyle(.secondary))
+
+            Button {} label: {
+                Text("Button")
+            }
+            .buttonStyle(OversizeButtonStyle(.secondary))
+        }
+        Group {
+            Button(role: .cancel) {} label: {
+                Text("Button")
+            }
+            .buttonStyle(OversizeButtonStyle(.tertiary))
+
+            Button(role: .destructive) {} label: {
+                Text("Button")
+            }
+            .buttonStyle(OversizeButtonStyle(.tertiary))
+
+            Button {} label: {
+                Text("Button")
+            }
+            .buttonStyle(OversizeButtonStyle(.tertiary))
+
+            Button(role: .cancel) {} label: {
+                Text("Button")
+            }
+            .buttonStyle(OversizeButtonStyle(.quaternary))
+
+            Button(role: .destructive) {} label: {
+                Text("Button")
+            }
+            .buttonStyle(OversizeButtonStyle(.quaternary))
+
+            Button {} label: {
+                Text("Button")
+            }
+
+            .buttonStyle(OversizeButtonStyle(.quaternary))
         }
     }
+}
 
-    static var previews: some View {
-        ScrollView {
-            VStack(alignment: .leading) {
-                Text("Large")
-                    .title()
+@available(tvOS, unavailable)
+#Preview {
+    ScrollView {
+        VStack(alignment: .leading) {
+            Text("Large")
+                .title()
 
-                Button(role: .cancel) {} label: {
-                    Text("Button")
-                }
-                .buttonStyle(OversizeButtonStyle(.primary))
-                .controlSize(.large)
-
-                HStack {
-                    VStack(spacing: 16) {
-                        Buttons()
-                    }
-                    .controlBorderShape(.capsule)
-
-                    VStack(spacing: 16) {
-                        Buttons()
-                    }
-                    .accent()
-                    .bordered()
-
-                    VStack(spacing: 16) {
-                        Buttons()
-                    }
-                    .disabled(true)
-                }
-                .controlSize(.large)
-
-                Text("Regular")
-                    .title()
-
-                Button(role: .cancel) {} label: {
-                    Text("Button")
-                }
-                .buttonStyle(OversizeButtonStyle(.primary))
-
-                HStack {
-                    VStack(spacing: 16) {
-                        Buttons()
-                    }
-                    .controlBorderShape(.capsule)
-
-                    VStack(spacing: 16) {
-                        Buttons()
-                    }
-                    .accent()
-                    .bordered()
-
-                    VStack(spacing: 16) {
-                        Buttons()
-                    }
-                    .disabled(true)
-                }
-
-                Text("Small")
-                    .bold()
-                    .title()
-
-                HStack {
-                    VStack(spacing: 16) {
-                        Buttons()
-                    }
-                    .controlBorderShape(.capsule)
-
-                    VStack(spacing: 16) {
-                        Buttons()
-                    }
-                    .accent()
-                    .bordered()
-
-                    VStack(spacing: 16) {
-                        Buttons()
-                    }
-                    .disabled(true)
-
-                    VStack(spacing: 16) {
-                        Buttons()
-                    }
-                    .accent()
-                    .disabled(true)
-                }
-                .controlSize(.small)
-
-                Text("Mini")
-                    .title()
-
-                HStack {
-                    VStack(spacing: 16) {
-                        Buttons()
-                    }
-                    .controlBorderShape(.capsule)
-
-                    VStack(spacing: 16) {
-                        Buttons()
-                    }
-                    .accent()
-                    .bordered()
-
-                    VStack(spacing: 16) {
-                        Buttons()
-                    }
-                    .disabled(true)
-
-                    VStack(spacing: 16) {
-                        Buttons()
-                    }
-                    .accent()
-                    .disabled(true)
-                }
-                .controlSize(.mini)
+            Button(role: .cancel) {} label: {
+                Text("Button")
             }
-            .padding()
+            .buttonStyle(OversizeButtonStyle(.primary))
+            .controlSize(.large)
+
+            HStack {
+                VStack(spacing: 16) {
+                    Buttons()
+                }
+                .controlBorderShape(.capsule)
+
+                VStack(spacing: 16) {
+                    Buttons()
+                }
+                .accent()
+                .bordered()
+
+                VStack(spacing: 16) {
+                    Buttons()
+                }
+                .disabled(true)
+            }
+            .controlSize(.large)
+
+            Text("Regular")
+                .title()
+
+            Button(role: .cancel) {} label: {
+                Text("Button")
+            }
+            .buttonStyle(OversizeButtonStyle(.primary))
+
+            HStack {
+                VStack(spacing: 16) {
+                    Buttons()
+                }
+                .controlBorderShape(.capsule)
+
+                VStack(spacing: 16) {
+                    Buttons()
+                }
+                .accent()
+                .bordered()
+
+                VStack(spacing: 16) {
+                    Buttons()
+                }
+                .disabled(true)
+            }
+
+            Text("Small")
+                .bold()
+                .title()
+
+            HStack {
+                VStack(spacing: 16) {
+                    Buttons()
+                }
+                .controlBorderShape(.capsule)
+
+                VStack(spacing: 16) {
+                    Buttons()
+                }
+                .accent()
+                .bordered()
+
+                VStack(spacing: 16) {
+                    Buttons()
+                }
+                .disabled(true)
+
+                VStack(spacing: 16) {
+                    Buttons()
+                }
+                .accent()
+                .disabled(true)
+            }
+            .controlSize(.small)
+
+            Text("Mini")
+                .title()
+
+            HStack {
+                VStack(spacing: 16) {
+                    Buttons()
+                }
+                .controlBorderShape(.capsule)
+
+                VStack(spacing: 16) {
+                    Buttons()
+                }
+                .accent()
+                .bordered()
+
+                VStack(spacing: 16) {
+                    Buttons()
+                }
+                .disabled(true)
+
+                VStack(spacing: 16) {
+                    Buttons()
+                }
+                .accent()
+                .disabled(true)
+            }
+            .controlSize(.mini)
         }
-        .previewLayout(.sizeThatFits)
+        .padding()
     }
 }

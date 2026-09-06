@@ -58,14 +58,12 @@ public extension LabelStyle where Self == MenuLabelStyle {
     }
 }
 
-struct MenuLabelStyle_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack(spacing: .large) {
-            Label("Text", systemImage: "sun.max")
-                .labelStyle(.menu)
+#Preview {
+    VStack(spacing: .large) {
+        Label("Text", systemImage: "sun.max")
+            .labelStyle(.menu)
 
-            Label("Text", systemImage: "sun.max")
-                .labelStyle(.menu("Subtitle"))
-        }
+        Label("Text", systemImage: "sun.max")
+            .labelStyle(.menu("Subtitle"))
     }
 }

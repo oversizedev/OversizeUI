@@ -64,9 +64,9 @@ public struct SectionView<Content: View>: View {
             if !title.isEmpty, titlePosition == .outside {
                 titleView
                     .padding(.horizontal, titleHorizontalPadding)
-                #if os(macOS)
+                    #if os(macOS)
                     .padding(.leading, .xxSmall)
-                #endif
+                    #endif
             }
 
             Surface {

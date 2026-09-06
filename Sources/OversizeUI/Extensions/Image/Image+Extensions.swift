@@ -22,25 +22,25 @@ public extension Image {
 public extension Image {
     func icon(_ color: Color = Color.onSurfacePrimary) -> some View {
         renderingMode(.template)
-        #if os(macOS)
+            #if os(macOS)
             .resizable()
             .frame(
                 width: IconSizes.medium.rawValue,
                 height: IconSizes.medium.rawValue
             )
-        #endif
+            #endif
             .foregroundColor(color)
     }
 
     var icon: some View {
         renderingMode(.template)
-        #if os(macOS)
+            #if os(macOS)
             .resizable()
             .frame(
                 width: IconSizes.medium.rawValue,
                 height: IconSizes.medium.rawValue
             )
-        #endif
+            #endif
             .foregroundColor(Color.onSurfacePrimary)
     }
 

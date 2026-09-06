@@ -6,38 +6,29 @@
 import OversizeUI
 import SwiftUI
 
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 struct SelectDemo: View {
-    var items = ["One", "Two", "Three", "Four"]
+    private let items = ["One", "Two", "Three", "Four"]
 
-    @State var selection = ""
+    @State private var selection = "One"
 
     var body: some View {
-        PageView("Select") {
-            if #available(iOS 17.0, watchOS 10.0, tvOS 17.0, *) {
-                VStack {
-                    Select("Select", items, selection: $selection) { item, isSelect in
-                        Radio(item, isOn: isSelect)
-                    } selectionView: { selected in
-                        Text(selected)
-                    }
+        DemoScreen {
+            DemoSectionView("Select") {
+                Select("Select", items, selection: $selection) { item, isSelected in
+                    Radio(item, isOn: isSelected)
+                } selectionView: { selected in
+                    Text(selected)
                 }
-                .padding()
-            } else {
-                VStack {
-                    Text("Select is available in iOS 17.0, watchOS 10.0, tvOS 17.0 or newer")
-                        .foregroundColor(.onSurfaceSecondary)
-                }
-                .padding()
+                .accessibilityIdentifier("selectField")
             }
-        }
-        .leadingBar {
-            BarButton(.back)
         }
     }
 }
 
-struct SelectDemo_Previews: PreviewProvider {
-    static var previews: some View {
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+#Preview {
+    NavigationStack {
         SelectDemo()
     }
 }

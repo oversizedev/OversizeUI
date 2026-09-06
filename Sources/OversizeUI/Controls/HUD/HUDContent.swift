@@ -28,11 +28,11 @@ public struct HUDContent<Title: View, Icon: View>: View {
             if let text {
                 Text(text)
                     .body(.medium)
-                #if os(macOS)
+                    #if os(macOS)
                     .foregroundColor(Color.onPrimary)
-                #else
+                    #else
                     .foregroundColor(Color.onSurfacePrimary)
-                #endif
+                    #endif
             } else if let title {
                 title
             }
@@ -41,17 +41,17 @@ public struct HUDContent<Title: View, Icon: View>: View {
         .padding(.trailing, .medium)
         .padding(.vertical, .xSmall)
         #if os(macOS)
-            .background(
-                RoundedRectangle(cornerRadius: .small, style: .continuous)
-                    .foregroundColor(Color.onBackgroundPrimary)
-                    .shadowElevation(.z2)
-            )
+        .background(
+            RoundedRectangle(cornerRadius: .small, style: .continuous)
+                .foregroundColor(Color.onBackgroundPrimary)
+                .shadowElevation(.z2)
+        )
         #else
-            .background(
-                Capsule()
-                    .foregroundColor(Color.surfacePrimary)
-                    .shadowElevation(.z2)
-            )
+        .background(
+            Capsule()
+                .foregroundColor(Color.surfacePrimary)
+                .shadowElevation(.z2)
+        )
         #endif
     }
 }

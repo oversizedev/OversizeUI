@@ -72,3 +72,14 @@ public struct RowButton: View {
             : Color.onSurfacePrimary
     }
 }
+
+// MARK: - Previews
+
+#Preview {
+    VStack(spacing: .zero) {
+        RowButton("Row style") {}
+
+        RowButton("With icon", icon: Image.Base.setting) {}
+    }
+    .padding()
+}

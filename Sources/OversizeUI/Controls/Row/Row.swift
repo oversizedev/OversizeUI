@@ -91,9 +91,9 @@ public struct Row<LeadingLabel: View, TrailingLabel: View>: View {
                 if isLoading {
                     ProgressView()
                         .padding(.trailing, .xSmall)
-                    #if os(macOS)
+                        #if os(macOS)
                         .controlSize(.small)
-                    #endif
+                        #endif
                 }
 
                 сlearButton
@@ -426,33 +426,30 @@ public extension Row where LeadingLabel == EmptyView {
 // MARK: - Preview
 
 // swiftlint:disable all
-struct ListRow_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack(spacing: .medium) {
-            Row("Title")
+#Preview {
+    VStack(spacing: .medium) {
+        Row("Title")
 
-            Row("Title", subtitle: "Subtitle")
+        Row("Title", subtitle: "Subtitle")
 
+        Row("Title", subtitle: "Subtitle") {
+            Image.Base.calendar.icon()
+        }
+
+        Radio(isOn: true, label: {
             Row("Title", subtitle: "Subtitle") {
                 Image.Base.calendar.icon()
             }
+        })
 
-            Radio(isOn: true, label: {
-                Row("Title", subtitle: "Subtitle") {
-                    Image.Base.calendar.icon()
-                }
-            })
+        Checkbox(isOn: .constant(true), label: {
+            Row("Title", subtitle: "Subtitle") {
+                Image.Base.calendar.icon()
+            }
+            .rowOnSurface()
+        })
 
-            Checkbox(isOn: .constant(true), label: {
-                Row("Title", subtitle: "Subtitle") {
-                    Image.Base.calendar.icon()
-                }
-                .rowOnSurface()
-            })
-
-            Row("Title", subtitle: "Red")
-                .premium()
-        }
-        .previewLayout(.fixed(width: 375, height: 70))
+        Row("Title", subtitle: "Red")
+            .premium()
     }
 }

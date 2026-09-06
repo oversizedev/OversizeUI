@@ -163,26 +163,24 @@ public extension View {
 
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-struct TextEditor_preview: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            TextEditor(text: .constant(""))
-                .textEditorPlaceholder("Complaint", text: .constant("Text"))
-                .fieldLabelPosition(.overInput)
+#Preview {
+    VStack {
+        TextEditor(text: .constant(""))
+            .textEditorPlaceholder("Complaint", text: .constant("Text"))
+            .fieldLabelPosition(.overInput)
 
-            TextEditor(text: .constant(""))
-                .textEditorPlaceholder("Complaint", text: .constant(""))
-                .fieldLabelPosition(.overInput)
-                .fieldPosition(.top)
+        TextEditor(text: .constant(""))
+            .textEditorPlaceholder("Complaint", text: .constant(""))
+            .fieldLabelPosition(.overInput)
+            .fieldPosition(.top)
 
-            TextEditor(text: .constant("Text"))
-                .textEditorPlaceholder("Complaint", text: .constant("Text"))
-                .fieldLabelPosition(.overInput)
-                .fieldPosition(.bottom)
+        TextEditor(text: .constant("Text"))
+            .textEditorPlaceholder("Complaint", text: .constant("Text"))
+            .fieldLabelPosition(.overInput)
+            .fieldPosition(.bottom)
 
-            Spacer()
-        }
-        .padding()
-        .background(Color.backgroundTertiary)
+        Spacer()
     }
+    .padding()
+    .background(Color.backgroundTertiary)
 }

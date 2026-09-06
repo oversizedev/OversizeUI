@@ -1,246 +1,115 @@
 # Icon
 
-Display SF Symbols and custom icons with consistent sizing and styling.
+A themed icon that renders either a bundled asset or an SF Symbol.
 
 ## Overview
 
-The `Icon` component provides a unified interface for displaying SF Symbols and custom icons. It ensures consistent sizing, coloring, and accessibility across your application while maintaining platform conventions.
+``Icon`` is a small wrapper that applies the design system's icon colour and size. It takes either
+an `Image` — typically one from the bundled `Image.Base` catalogue — or an SF Symbol name.
 
 ## Basic Usage
 
-### SF Symbols
-
 ```swift
-Icon(.heart)
-    .foregroundColor(.red)
+// Bundled icon
+Icon(Image.Base.setting)
 
-Icon(.star)
-    .font(.title2)
-    .foregroundColor(.yellow)
+// SF Symbol
+Icon("bolt.fill")
 ```
 
-### System Icons
+## The Icon Catalogue
+
+Bundled icons live under the `Image.Base` namespace, generated from the asset catalogue by
+SwiftGen. Names are camel-cased asset names:
 
 ```swift
-// Common interface icons
-Icon(.plus)
-Icon(.minus)
-Icon(.xmark)
-
-// Navigation icons
-Icon(.chevronLeft)
-Icon(.chevronRight)
-Icon(.arrowUp)
-Icon(.arrowDown)
-
-// Communication icons
-Icon(.message)
-Icon(.phone)
-Icon(.mail)
+Icon(Image.Base.heart)
+Icon(Image.Base.search)
+Icon(Image.Base.chevronRight)
+Icon(Image.Base.notification)
 ```
 
-## Practical Examples
-
-### Button with Icon
+Many icons ship variants, nested under a type of the same name:
 
 ```swift
+Icon(Image.Base.Heart.fill)
+Icon(Image.Base.Eye.slash)
+Icon(Image.Base.ArrowDown.square)
+Icon(Image.Base.Activity.TwoTone.fill)
+```
+
+Browse the full set in the **Icons** screen of the example app, or in
+`Sources/OversizeUI/Core/Icons.swift`.
+
+## Size
+
+``IconSizes`` has five steps: `.xSmall`, `.small`, `.medium` (the default), `.large` and `.xLarge`.
+
+```swift
+Icon(Image.Base.star)
+    .iconSize(.xSmall)
+
+Icon(Image.Base.star)
+    .iconSize(.large)
+
+// Arbitrary size
+Icon(Image.Base.star)
+    .iconSize(custom: 18)
+```
+
+## Colour
+
+Icons default to `Color.onSurfacePrimary` and follow the environment:
+
+```swift
+Icon(Image.Base.check)
+    .iconColor(.success)
+
+Icon(Image.Base.delete)
+    .iconColor(.error)
+```
+
+## In Other Components
+
+Most components that take leading or trailing content accept an ``Icon``:
+
+```swift
+Row("Notifications", subtitle: "Manage your alerts", leading: {
+    Icon(Image.Base.notification)
+})
+
 Button {
-    addToFavorites()
+    refresh()
 } label: {
-    HStack {
-        Icon(.heart)
-        Text("Add to Favorites")
-    }
+    Icon(Image.Base.swap)
 }
-.buttonStyle(.primary)
+.buttonStyle(.tertiary)
 ```
 
-### Status Indicators
+``ListRow`` is the exception — its leading content is an `Image`, so use the `icon()` helper:
 
 ```swift
-struct StatusIndicator: View {
-    let status: ConnectionStatus
-    
-    var body: some View {
-        HStack {
-            Icon(statusIcon)
-                .foregroundColor(statusColor)
-            
-            Text(status.description)
-                .body(.medium)
-        }
-    }
-    
-    private var statusIcon: IconsNames {
-        switch status {
-        case .connected: return .checkmark
-        case .connecting: return .clock
-        case .disconnected: return .xmark
-        }
-    }
-    
-    private var statusColor: Color {
-        switch status {
-        case .connected: return .success
-        case .connecting: return .warning
-        case .disconnected: return .error
-        }
-    }
-}
+ListRow("Calendar", leading: {
+    Image.Base.calendar.icon()
+})
 ```
 
-### Icon Grid
+## Migration
+
+`IconDeprecated` and the `IconsNames` enum are deprecated. Replace name-based lookups with the
+`Image.Base` catalogue:
 
 ```swift
-struct IconShowcase: View {
-    let icons: [IconsNames] = [.heart, .star, .bookmark, .share, .gear, .bell]
-    
-    var body: some View {
-        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3)) {
-            ForEach(icons, id: \.self) { icon in
-                VStack {
-                    Icon(icon)
-                        .font(.largeTitle)
-                        .foregroundColor(.accent)
-                    
-                    Text(icon.rawValue)
-                        .caption()
-                }
-                .padding()
-            }
-        }
-    }
-}
+// Before
+IconDeprecated(.settings)
+
+// After
+Icon(Image.Base.setting)
 ```
 
-## Icon Categories
+## Topics
 
-### Interface Icons
-```swift
-Icon(.plus)      // Add/Create
-Icon(.minus)     // Remove/Subtract
-Icon(.xmark)     // Close/Cancel
-Icon(.checkmark) // Confirm/Success
-```
+### Modifiers
 
-### Navigation Icons
-```swift
-Icon(.chevronLeft)  // Back navigation
-Icon(.chevronRight) // Forward navigation
-Icon(.arrowUp)      // Move up
-Icon(.arrowDown)    // Move down
-```
-
-### Communication Icons
-```swift
-Icon(.message)  // Messages/Chat
-Icon(.phone)    // Phone calls
-Icon(.video)    // Video calls
-Icon(.mail)     // Email
-```
-
-### Media Icons
-```swift
-Icon(.play)   // Play media
-Icon(.pause)  // Pause media
-Icon(.stop)   // Stop media
-Icon(.camera) // Take photo
-```
-
-### System Icons
-```swift
-Icon(.gear)     // Settings
-Icon(.shield)   // Security
-Icon(.lock)     // Locked/Private
-Icon(.wifi)     // Network/Connectivity
-```
-
-## Customization
-
-### Size and Color
-
-```swift
-Icon(.star)
-    .font(.title)
-    .foregroundColor(.yellow)
-
-Icon(.heart)
-    .frame(width: 24, height: 24)
-    .foregroundColor(.red)
-```
-
-### Custom Styling
-
-```swift
-Icon(.bookmark)
-    .font(.title2)
-    .foregroundColor(.white)
-    .background(Circle().fill(.accent))
-    .frame(width: 40, height: 40)
-```
-
-## Accessibility
-
-Icons automatically provide accessibility support:
-
-```swift
-// Decorative icons (hidden from VoiceOver)
-Icon(.chevronRight)
-    .accessibilityHidden(true)
-
-// Informative icons (with labels)
-Icon(.warning)
-    .accessibilityLabel("Warning")
-
-// Interactive icons (with labels and hints)
-Button {
-    deleteItem()
-} label: {
-    Icon(.trash)
-}
-.accessibilityLabel("Delete")
-.accessibilityHint("Delete this item permanently")
-```
-
-## API Reference
-
-### Icon Names
-
-```swift
-enum IconsNames: String, CaseIterable {
-    // Interface
-    case plus, minus, xmark, checkmark
-    
-    // Navigation
-    case chevronLeft, chevronRight, chevronUp, chevronDown
-    case arrowLeft, arrowRight, arrowUp, arrowDown
-    
-    // Communication
-    case message, phone, video, mail
-    
-    // Media
-    case play, pause, stop, camera, photo
-    
-    // System
-    case gear, shield, lock, wifi, bell
-    
-    // Content
-    case heart, star, bookmark, share
-    
-    // Custom
-    case custom(String)
-}
-```
-
-### Initializers
-
-```swift
-Icon(_ name: IconsNames)
-Icon(_ systemName: String) // Direct SF Symbol access
-```
-
-## See Also
-
-- ``Button``
-- ``Row``
-- ``Avatar``
+- ``SwiftUI/View/iconSize(_:)``
+- ``SwiftUI/View/iconColor(_:)``

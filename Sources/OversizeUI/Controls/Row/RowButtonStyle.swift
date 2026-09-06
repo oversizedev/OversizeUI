@@ -19,3 +19,11 @@ public extension ButtonStyle where Self == RowActionButtonStyle {
         RowActionButtonStyle()
     }
 }
+
+// MARK: - Previews
+
+#Preview {
+    Button("Row action") {}
+        .buttonStyle(RowActionButtonStyle())
+        .padding()
+}

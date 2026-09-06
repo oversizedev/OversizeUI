@@ -100,3 +100,26 @@ public struct CenterLazyVStack<Content: View>: View {
         }
     }
 }
+
+// MARK: - Previews
+
+#Preview {
+    VStack(spacing: .medium) {
+        LeadingVStack(spacing: .xxSmall) {
+            Text("Leading")
+            Text("Aligned stack")
+        }
+
+        CenterVStack(spacing: .xxSmall) {
+            Text("Center")
+            Text("Aligned stack")
+        }
+
+        TrailingVStack(spacing: .xxSmall) {
+            Text("Trailing")
+            Text("Aligned stack")
+        }
+    }
+    .padding()
+    .background(Color.backgroundSecondary)
+}

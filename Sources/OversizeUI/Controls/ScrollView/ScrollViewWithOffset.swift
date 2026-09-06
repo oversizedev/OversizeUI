@@ -76,3 +76,17 @@ public extension View {
             }
     }
 }
+
+// MARK: - Previews
+
+#Preview {
+    ScrollViewWithOffsetTracking { offset in
+        print(offset)
+    } content: {
+        VStack(spacing: .xxSmall) {
+            ForEach(0 ..< 30, id: \.self) { index in
+                Row("Row \(index)")
+            }
+        }
+    }
+}

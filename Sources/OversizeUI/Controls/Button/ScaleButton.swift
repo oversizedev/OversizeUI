@@ -20,3 +20,16 @@ public extension ButtonStyle where Self == ScaleButtonStyle {
         ScaleButtonStyle()
     }
 }
+
+// MARK: - Previews
+
+#Preview {
+    Button {} label: {
+        Surface {
+            Text("Scale on press")
+                .padding()
+        }
+    }
+    .buttonStyle(.scale)
+    .padding()
+}

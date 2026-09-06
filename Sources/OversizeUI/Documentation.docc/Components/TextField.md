@@ -73,26 +73,35 @@ TextField("Full Name", text: $fullName)
 
 Show different types of helper messages:
 
+`fieldHelper` takes bindings for both the text and the style, so a field can move
+between states as the user types. `FieldHelperStyle` has four cases: `.none`,
+`.helperText`, `.errorText` and `.sussesText`.
+
 ```swift
-// Informational helper
+@State private var username = ""
+@State private var helper = "Must be 3-20 characters"
+@State private var helperStyle: FieldHelperStyle = .helperText
+
 TextField("Username", text: $username)
     .textFieldStyle(.default)
-    .fieldHelper("Must be 3-20 characters", style: .constant(.info))
+    .fieldHelper($helper, style: $helperStyle)
+    .onChange(of: username) { value in
+        if value.count < 3 {
+            helper = "Must be 3-20 characters"
+            helperStyle = .errorText
+        } else {
+            helper = "Looks good"
+            helperStyle = .sussesText
+        }
+    }
+```
 
-// Success state
-TextField("Password", text: $password)
-    .textFieldStyle(.default)
-    .fieldHelper("Strong password!", style: .constant(.success))
+For a static message, wrap the values in constant bindings:
 
-// Warning state
-TextField("Confirm Password", text: $confirmPassword)
-    .textFieldStyle(.default)
-    .fieldHelper("Passwords don't match", style: .constant(.warning))
-
-// Error state
+```swift
 TextField("Email", text: $email)
     .textFieldStyle(.default)
-    .fieldHelper("Invalid email format", style: .constant(.error))
+    .fieldHelper(.constant("Invalid email format"), style: .constant(.errorText))
 ```
 
 ### Field Title
@@ -134,7 +143,7 @@ For longer text input:
 TextEditor(text: $notes)
     .textFieldStyle(.default)
     .frame(minHeight: 100)
-    .fieldHelper("Add any additional notes", style: .constant(.info))
+    .fieldHelper(.constant("Add any additional notes"), style: .constant(.helperText))
 ```
 
 ### Numeric Fields
@@ -280,7 +289,7 @@ struct SearchField: View {
                 Button {
                     clearSearch()
                 } label: {
-                    Icon(.xmark)
+                    Icon(Image.Base.close)
                 }
                 .buttonStyle(.quaternary)
                 .accessibilityLabel("Clear search")

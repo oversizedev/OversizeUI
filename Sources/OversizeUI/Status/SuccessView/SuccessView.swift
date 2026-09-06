@@ -55,9 +55,9 @@ public struct SuccessView<C: View, A: View>: View {
             if actions != nil {
                 VStack(spacing: .small) {
                     actions
-                    #if !os(tvOS)
-                    .controlSize(.large)
-                    #endif
+                        #if !os(tvOS)
+                        .controlSize(.large)
+                        #endif
                 }
                 .padding(.top, .xxSmall)
             }

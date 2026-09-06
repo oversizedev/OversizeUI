@@ -48,9 +48,9 @@ public struct Snackbar<Label: View, Actions: View>: View {
                 HStack(spacing: .xxSmall) {
                     actions
                         .buttonStyle(.quaternary)
-                    #if !os(tvOS)
+                        #if !os(tvOS)
                         .controlSize(.mini)
-                    #endif
+                        #endif
                         .accent()
                 }
             }
@@ -248,4 +248,18 @@ public extension View {
             Snackbar(isPresented: isPresented, label: label, actions: actions)
         }
     }
+}
+
+// MARK: - Previews
+
+private struct SnackbarPreview: View {
+    @State private var isPresented = true
+
+    var body: some View {
+        Snackbar("Changes saved", isPresented: $isPresented)
+    }
+}
+
+#Preview {
+    SnackbarPreview()
 }

@@ -24,7 +24,7 @@ Row("Notifications", subtitle: "Manage your alert preferences")
 
 ```swift
 Row("Profile") {
-    Icon(.person)
+    Icon(Image.Base.profile)
         .foregroundColor(.accent)
 }
 ```
@@ -45,17 +45,17 @@ Row("Dark Mode") {
 List {
     Section("Account") {
         Row("Profile", subtitle: "Manage your personal information") {
-            Icon(.person)
+            Icon(Image.Base.profile)
                 .foregroundColor(.accent)
         }
         
         Row("Privacy", subtitle: "Control your data and privacy") {
-            Icon(.shield)
+            Icon(Image.Base.shieldDone)
                 .foregroundColor(.accent)
         }
         
         Row("Security", subtitle: "Manage security settings") {
-            Icon(.lock)
+            Icon(Image.Base.lock)
                 .foregroundColor(.accent)
         }
     }
@@ -97,7 +97,7 @@ List(contacts) { contact in
             Button {
                 callContact(contact)
             } label: {
-                Icon(.phone)
+                Icon(Image.Base.phone)
             }
             .buttonStyle(.quaternary)
         }
@@ -115,7 +115,7 @@ Row components automatically provide:
 
 ```swift
 Row("Delete Account", subtitle: "This action cannot be undone") {
-    Icon(.trash)
+    Icon(Image.Base.delete)
         .foregroundColor(.error)
 }
 .accessibilityLabel("Delete Account")

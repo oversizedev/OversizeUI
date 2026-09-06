@@ -117,11 +117,9 @@ public struct PremiumLabel: View {
     }
 }
 
-struct PrmiumLabel_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            PremiumLabel(size: .small)
-            PremiumLabel()
-        }
+#Preview {
+    VStack {
+        PremiumLabel(size: .small)
+        PremiumLabel()
     }
 }

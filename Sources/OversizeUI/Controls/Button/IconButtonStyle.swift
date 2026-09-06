@@ -164,164 +164,161 @@ public extension ButtonStyle where Self == IconButtonStyle {
     }
 }
 
-@available(tvOS, unavailable)
-struct IcobButtonStyle_Previews: PreviewProvider {
-    struct Buttons: View {
-        var body: some View {
-            Group {
-                Button(role: .cancel) {} label: {
-                    Image.Base.arrowLeft.templated
-                }
-                .buttonStyle(.iconPrimary)
-
-                Button(role: .destructive) {} label: {
-                    Image.Base.arrowLeft.templated
-                }
-                .buttonStyle(.iconPrimary)
-
-                Button {} label: {
-                    Image.Base.arrowLeft.templated
-                }
-                .buttonStyle(.iconPrimary)
-
-                Button(role: .cancel) {} label: {
-                    Image.Base.arrowLeft.templated
-                }
-                .buttonStyle(IconButtonStyle(.secondary))
-
-                Button(role: .destructive) {} label: {
-                    Image.Base.arrowLeft.templated
-                }
-                .buttonStyle(IconButtonStyle(.secondary))
-
-                Button {} label: {
-                    Image.Base.arrowLeft.templated
-                }
-                .buttonStyle(IconButtonStyle(.secondary))
+struct IconButtons: View {
+    var body: some View {
+        Group {
+            Button(role: .cancel) {} label: {
+                Image.Base.arrowLeft.templated
             }
-            Group {
-                Button(role: .cancel) {} label: {
-                    Image.Base.arrowLeft.templated
-                }
-                .buttonStyle(IconButtonStyle(.tertiary))
+            .buttonStyle(.iconPrimary)
 
-                Button(role: .destructive) {} label: {
-                    Image.Base.arrowLeft.templated
-                }
-                .buttonStyle(IconButtonStyle(.tertiary))
-
-                Button {} label: {
-                    Image.Base.arrowLeft.templated
-                }
-                .buttonStyle(IconButtonStyle(.tertiary))
-
-                Button(role: .cancel) {} label: {
-                    Image.Base.arrowLeft.templated
-                }
-                .buttonStyle(IconButtonStyle(.quaternary))
-
-                Button(role: .destructive) {} label: {
-                    Image.Base.arrowLeft.templated
-                }
-                .buttonStyle(IconButtonStyle(.quaternary))
-
-                Button {} label: {
-                    Image.Base.arrowLeft.templated
-                }
-
-                .buttonStyle(IconButtonStyle(.quaternary))
+            Button(role: .destructive) {} label: {
+                Image.Base.arrowLeft.templated
             }
+            .buttonStyle(.iconPrimary)
+
+            Button {} label: {
+                Image.Base.arrowLeft.templated
+            }
+            .buttonStyle(.iconPrimary)
+
+            Button(role: .cancel) {} label: {
+                Image.Base.arrowLeft.templated
+            }
+            .buttonStyle(IconButtonStyle(.secondary))
+
+            Button(role: .destructive) {} label: {
+                Image.Base.arrowLeft.templated
+            }
+            .buttonStyle(IconButtonStyle(.secondary))
+
+            Button {} label: {
+                Image.Base.arrowLeft.templated
+            }
+            .buttonStyle(IconButtonStyle(.secondary))
+        }
+        Group {
+            Button(role: .cancel) {} label: {
+                Image.Base.arrowLeft.templated
+            }
+            .buttonStyle(IconButtonStyle(.tertiary))
+
+            Button(role: .destructive) {} label: {
+                Image.Base.arrowLeft.templated
+            }
+            .buttonStyle(IconButtonStyle(.tertiary))
+
+            Button {} label: {
+                Image.Base.arrowLeft.templated
+            }
+            .buttonStyle(IconButtonStyle(.tertiary))
+
+            Button(role: .cancel) {} label: {
+                Image.Base.arrowLeft.templated
+            }
+            .buttonStyle(IconButtonStyle(.quaternary))
+
+            Button(role: .destructive) {} label: {
+                Image.Base.arrowLeft.templated
+            }
+            .buttonStyle(IconButtonStyle(.quaternary))
+
+            Button {} label: {
+                Image.Base.arrowLeft.templated
+            }
+
+            .buttonStyle(IconButtonStyle(.quaternary))
         }
     }
+}
 
-    static var previews: some View {
-        ScrollView {
-            VStack(alignment: .leading) {
-                Text("Regular")
-                    .title()
+@available(tvOS, unavailable)
+#Preview {
+    ScrollView {
+        VStack(alignment: .leading) {
+            Text("Regular")
+                .title()
 
-                Button(role: .cancel) {} label: {
-                    Image.Base.arrowLeft.templated
-                }
-                .buttonStyle(IconButtonStyle(.primary))
-
-                HStack {
-                    VStack(spacing: 16) {
-                        Buttons()
-                    }
-                    .controlBorderShape(.capsule)
-
-                    VStack(spacing: 16) {
-                        Buttons()
-                    }
-                    .accent()
-                    .bordered()
-
-                    VStack(spacing: 16) {
-                        Buttons()
-                    }
-                    .disabled(true)
-                }
-
-                Text("Small")
-                    .bold()
-                    .title()
-
-                HStack {
-                    VStack(spacing: 16) {
-                        Buttons()
-                    }
-                    .controlBorderShape(.capsule)
-
-                    VStack(spacing: 16) {
-                        Buttons()
-                    }
-                    .accent()
-                    .bordered()
-
-                    VStack(spacing: 16) {
-                        Buttons()
-                    }
-                    .disabled(true)
-
-                    VStack(spacing: 16) {
-                        Buttons()
-                    }
-                    .accent()
-                    .disabled(true)
-                }
-                .controlSize(.small)
-
-                Text("Mini")
-                    .title()
-
-                HStack {
-                    VStack(spacing: 16) {
-                        Buttons()
-                    }
-                    .controlBorderShape(.capsule)
-
-                    VStack(spacing: 16) {
-                        Buttons()
-                    }
-                    .accent()
-                    .bordered()
-
-                    VStack(spacing: 16) {
-                        Buttons()
-                    }
-                    .disabled(true)
-
-                    VStack(spacing: 16) {
-                        Buttons()
-                    }
-                    .accent()
-                    .disabled(true)
-                }
-                .controlSize(.mini)
+            Button(role: .cancel) {} label: {
+                Image.Base.arrowLeft.templated
             }
-            .padding()
+            .buttonStyle(IconButtonStyle(.primary))
+
+            HStack {
+                VStack(spacing: 16) {
+                    IconButtons()
+                }
+                .controlBorderShape(.capsule)
+
+                VStack(spacing: 16) {
+                    IconButtons()
+                }
+                .accent()
+                .bordered()
+
+                VStack(spacing: 16) {
+                    IconButtons()
+                }
+                .disabled(true)
+            }
+
+            Text("Small")
+                .bold()
+                .title()
+
+            HStack {
+                VStack(spacing: 16) {
+                    IconButtons()
+                }
+                .controlBorderShape(.capsule)
+
+                VStack(spacing: 16) {
+                    IconButtons()
+                }
+                .accent()
+                .bordered()
+
+                VStack(spacing: 16) {
+                    IconButtons()
+                }
+                .disabled(true)
+
+                VStack(spacing: 16) {
+                    IconButtons()
+                }
+                .accent()
+                .disabled(true)
+            }
+            .controlSize(.small)
+
+            Text("Mini")
+                .title()
+
+            HStack {
+                VStack(spacing: 16) {
+                    IconButtons()
+                }
+                .controlBorderShape(.capsule)
+
+                VStack(spacing: 16) {
+                    IconButtons()
+                }
+                .accent()
+                .bordered()
+
+                VStack(spacing: 16) {
+                    IconButtons()
+                }
+                .disabled(true)
+
+                VStack(spacing: 16) {
+                    IconButtons()
+                }
+                .accent()
+                .disabled(true)
+            }
+            .controlSize(.mini)
         }
-        .previewLayout(.sizeThatFits)
+        .padding()
     }
 }

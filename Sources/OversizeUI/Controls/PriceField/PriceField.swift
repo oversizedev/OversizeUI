@@ -84,7 +84,7 @@ public struct PriceField: View {
             })
             .textFieldStyle(.default)
             #if os(iOS)
-                .keyboardType(.decimalPad)
+            .keyboardType(.decimalPad)
             #endif
 
             HStack(spacing: 8) {
@@ -131,4 +131,21 @@ public struct PriceField: View {
     }
 
     let dispalySymbol: String
+}
+
+// MARK: - Previews
+
+@available(macOS 14, iOS 16, tvOS 16, watchOS 9, *)
+private struct PriceFieldPreview: View {
+    @State private var amount: Decimal = 0
+
+    var body: some View {
+        PriceField(amount: $amount, currency: .init("USD"))
+            .padding()
+    }
+}
+
+@available(macOS 14, iOS 16, tvOS 16, watchOS 9, *)
+#Preview {
+    PriceFieldPreview()
 }

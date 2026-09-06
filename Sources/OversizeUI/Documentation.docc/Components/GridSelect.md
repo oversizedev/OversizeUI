@@ -16,7 +16,7 @@ let options = ["Swift", "SwiftUI", "Xcode", "iOS"]
 
 GridSelect(options, selection: $selectedItems) { item, isSelected in
     VStack {
-        Icon(.swift)
+        Icon("swift")
             .foregroundColor(isSelected ? .white : .primary)
         
         Text(item)
@@ -73,7 +73,7 @@ GridSelect(items, selection: $selection) { item, isSelected in
     .padding()
     .overlay(alignment: .topTrailing) {
         if isSelected {
-            Icon(.checkmark)
+            Icon(Image.Base.check)
                 .foregroundColor(.white)
                 .background(Circle().fill(.accent))
                 .padding(.xSmall)

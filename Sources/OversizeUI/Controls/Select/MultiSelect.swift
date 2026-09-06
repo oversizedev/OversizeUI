@@ -156,7 +156,7 @@ public struct MultiSelect<Element: Equatable, Content: View, Selection: View, Ac
                     .labelStyle(.toolbar)
                     .buttonStyle(.toolbarSecondary)
                     #if !os(tvOS) && !os(watchOS)
-                        .keyboardShortcut(.cancelAction)
+                    .keyboardShortcut(.cancelAction)
                     #endif
                 }
 
@@ -235,28 +235,26 @@ public extension MultiSelect where ContentUnavailable == Never, Actions == Never
 }
 
 // swiftlint:disable all
-@available(iOS 17.0, macOS 14, tvOS 17.0, watchOS 10.0, *)
-struct MultiSelect_Preview: PreviewProvider {
-    struct SelectPreview: View {
-        var items = ["One", "Two", "Three", "Four"]
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+struct MultiSelectPreview: View {
+    var items = ["One", "Two", "Three", "Four"]
 
-        @State var selection = [""]
+    @State var selection = [""]
 
-        var body: some View {
-            VStack {
-                MultiSelect("Select", items, selection: $selection) { _, _ in
-                    // Text(item)
-                } selectionView: { _ in
-                    // Text(selected)
-                }
+    var body: some View {
+        VStack {
+            MultiSelect("Select", items, selection: $selection) { _, _ in
+                // Text(item)
+            } selectionView: { _ in
+                // Text(selected)
             }
-
-            .padding()
         }
-    }
 
-    static var previews: some View {
-        SelectPreview()
-            .previewLayout(.sizeThatFits)
+        .padding()
     }
+}
+
+@available(iOS 17.0, macOS 14, tvOS 17.0, watchOS 10.0, *)
+#Preview {
+    MultiSelectPreview()
 }

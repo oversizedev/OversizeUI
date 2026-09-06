@@ -40,8 +40,6 @@ struct AvatarPreview: View {
     }
 }
 
-struct Avatar_Preview: PreviewProvider {
-    static var previews: some View {
-        AvatarPreview()
-    }
+#Preview {
+    AvatarPreview()
 }

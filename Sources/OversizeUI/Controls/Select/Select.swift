@@ -148,7 +148,7 @@ public struct Select<Element: Equatable, Content: View, Selection: View, Actions
                 .labelStyle(.toolbar)
                 .buttonStyle(.toolbarSecondary)
                 #if !os(tvOS) && !os(watchOS)
-                    .keyboardShortcut(.cancelAction)
+                .keyboardShortcut(.cancelAction)
                 #endif
             }
 
@@ -226,26 +226,24 @@ public extension Select where ContentUnavailable == Never, Actions == Never {
 
 // swiftlint:disable all
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
-struct SelectNew_Preview: PreviewProvider {
-    struct SelectPreview: View {
-        var items = ["One", "Two", "Three", "Four"]
+struct SelectPreview: View {
+    var items = ["One", "Two", "Three", "Four"]
 
-        @State var selection = ""
+    @State var selection = ""
 
-        var body: some View {
-            VStack {
-                Select("Select", items, selection: $selection) { item, _ in
-                    Text(item)
-                } selectionView: { selected in
-                    Text(selected)
-                }
+    var body: some View {
+        VStack {
+            Select("Select", items, selection: $selection) { item, _ in
+                Text(item)
+            } selectionView: { selected in
+                Text(selected)
             }
-            .padding()
         }
+        .padding()
     }
+}
 
-    static var previews: some View {
-        SelectPreview()
-            .previewLayout(.sizeThatFits)
-    }
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+#Preview {
+    SelectPreview()
 }

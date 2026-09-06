@@ -346,9 +346,17 @@ private extension View {
     }
 }
 
-// swiftlint:disable all
-struct SegmentedPicker_Preview: PreviewProvider {
-    static var previews: some View {
-        SegmentedControlPreview()
+private struct SegmentedPickerSelectorPreview: View {
+    @State private var selection = "One"
+
+    var body: some View {
+        SegmentedPickerSelector(["One", "Two", "Three"], selection: $selection) { item, _ in
+            Text(item)
+        }
+        .padding()
     }
+}
+
+#Preview {
+    SegmentedPickerSelectorPreview()
 }

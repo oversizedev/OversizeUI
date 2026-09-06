@@ -68,33 +68,28 @@ public struct RadioPicker<Element: Equatable, Content: View>: View {
  }
  */
 
-struct RadioPicker_previw: PreviewProvider {
-    struct RadioPickerPreview: View {
-        var data = ["One", "Two", "Three", "Four"]
-        @State var selection = ""
-        var body: some View {
-            VStack {
-                RadioPicker(data, selection: $selection) { item in
-                    Text(item)
-                }
-                .onChange(of: selection) { selectedItem in
-                    print(selectedItem)
-                }
+private struct RadioPickerPreview: View {
+    var data = ["One", "Two", "Three", "Four"]
+    @State var selection = ""
+    var body: some View {
+        VStack {
+            RadioPicker(data, selection: $selection) { item in
+                Text(item)
             }
-            .padding()
-            .background(Color.backgroundSecondary)
+            .onChange(of: selection) { selectedItem in
+                print(selectedItem)
+            }
         }
+        .padding()
+        .background(Color.backgroundSecondary)
     }
+}
 
-    static var previews: some View {
-        Group {
-            RadioPickerPreview()
-                .previewDisplayName("Radio buttons (Light theme)")
-            RadioPickerPreview()
-                .previewDisplayName("Radio buttons (Dark theme)")
-                .colorScheme(.dark)
-        }
+#Preview("Light") {
+    RadioPickerPreview()
+}
 
-        .previewLayout(.sizeThatFits)
-    }
+#Preview("Dark") {
+    RadioPickerPreview()
+        .colorScheme(.dark)
 }

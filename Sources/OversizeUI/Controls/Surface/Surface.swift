@@ -65,9 +65,9 @@ public struct Surface<Label: View>: View {
         }
         .buttonStyle(SurfaceButtonStyle())
         #if os(macOS)
-            .onHover { hover in
-                isHover = hover
-            }
+        .onHover { hover in
+            isHover = hover
+        }
         #endif
     }
 
@@ -193,11 +193,11 @@ public struct SurfaceButtonStyle: ButtonStyle {
 
     public func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
-        #if os(macOS)
+            #if os(macOS)
             .scaleEffect(configuration.isPressed ? 0.99 : 1)
-        #else
+            #else
             .scaleEffect(configuration.isPressed ? 0.96 : 1)
-        #endif
+            #endif
     }
 }
 
@@ -251,51 +251,44 @@ public extension Surface where Label == Row<Image, EmptyView> {
     }
 }
 
-struct Surface_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            Surface {
-                Row("Title") {}
-            }
-            .surfaceStyle(.primary)
-            .previewLayout(.fixed(width: 414, height: 300))
-
-            Surface {
-                Text("Text")
-                    .title3()
-                    .onSurfacePrimary()
-            }
-            .surfaceStyle(.secondary)
-            .previewLayout(.fixed(width: 414, height: 200))
-
-            Surface {
-                Text("Text")
-                    .title3()
-                    .onSurfacePrimary()
-            }
-            .surfaceBorderColor(.surfaceSecondary)
-            .surfaceStyle(.primary)
-            .preferredColorScheme(.dark)
-            .previewLayout(.fixed(width: 414, height: 200))
-
-            Surface { HStack {
-                Spacer()
-                Text("Text")
-                Spacer()
-            }}
-            .surfaceStyle(.primary)
-            .elevation(.z2)
-            .controlRadius(.zero)
-            .previewLayout(.fixed(width: 375, height: 200))
-
-            Surface { HStack {
-                Text("Text")
-                Spacer()
-            }}
-            .elevation(.z1)
-            .surfaceContentMargins(.large)
-            .previewLayout(.fixed(width: 320, height: 200))
+#Preview {
+    VStack {
+        Surface {
+            Row("Title") {}
         }
-        .padding()
+        .surfaceStyle(.primary)
+
+        Surface {
+            Text("Text")
+                .title3()
+                .onSurfacePrimary()
+        }
+        .surfaceStyle(.secondary)
+
+        Surface {
+            Text("Text")
+                .title3()
+                .onSurfacePrimary()
+        }
+        .surfaceBorderColor(.surfaceSecondary)
+        .surfaceStyle(.primary)
+        .preferredColorScheme(.dark)
+
+        Surface { HStack {
+            Spacer()
+            Text("Text")
+            Spacer()
+        }}
+        .surfaceStyle(.primary)
+        .elevation(.z2)
+        .controlRadius(.zero)
+
+        Surface { HStack {
+            Text("Text")
+            Spacer()
+        }}
+        .elevation(.z1)
+        .surfaceContentMargins(.large)
     }
+    .padding()
 }

@@ -167,39 +167,37 @@ public extension NoticeView where A == EmptyView {
     }
 }
 
-struct NoticeView_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack(spacing: .small) {
-            NoticeView("Title")
+#Preview {
+    VStack(spacing: .small) {
+        NoticeView("Title")
 
-            NoticeView("Title", subtitle: "Subtitle")
+        NoticeView("Title", subtitle: "Subtitle")
 
-            NoticeView("Title", subtitle: "Subtitle") {
-                print("Close action")
-            }
-
-            NoticeView("Title") {
-                Button {
-                    print("Primay action")
-                } label: {
-                    Text("Primay")
-                }
-                .accent()
-            }
-
-            NoticeView("Title", subtitle: "Subtitle") {
-                Button("Primay") {
-                    print("Primay action")
-                }
-                Button("Secondary") {
-                    print("Secondary action")
-                }
-                .buttonStyle(.tertiary)
-            } closeAction: {
-                print("Close")
-            }
+        NoticeView("Title", subtitle: "Subtitle") {
+            print("Close action")
         }
-        .padding()
-        .background { Color.backgroundSecondary.ignoresSafeArea(.all) }
+
+        NoticeView("Title") {
+            Button {
+                print("Primay action")
+            } label: {
+                Text("Primay")
+            }
+            .accent()
+        }
+
+        NoticeView("Title", subtitle: "Subtitle") {
+            Button("Primay") {
+                print("Primay action")
+            }
+            Button("Secondary") {
+                print("Secondary action")
+            }
+            .buttonStyle(.tertiary)
+        } closeAction: {
+            print("Close")
+        }
     }
+    .padding()
+    .background { Color.backgroundSecondary.ignoresSafeArea(.all) }
 }

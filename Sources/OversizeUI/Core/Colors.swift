@@ -295,25 +295,23 @@ public extension Shape {
     }
 }
 
-struct Color_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("Accent")
-                .foregroundColor(Color.onPrimarySecondary)
-                .padding()
+#Preview {
+    VStack(alignment: .leading, spacing: 10) {
+        Text("Accent")
+            .foregroundColor(Color.onPrimarySecondary)
+            .padding()
 
-            HStack {
-                Rectangle().size(CGSize(width: 50, height: 50))
-                    .foregroundColor(Color.onPrimary)
-                Rectangle().size(CGSize(width: 50, height: 50))
-                    .foregroundColor(Color.onPrimarySecondary)
-                Rectangle().size(CGSize(width: 50, height: 50))
-                    .foregroundColor(Color.onPrimaryTertiary)
-                Rectangle().size(CGSize(width: 50, height: 50))
-            }
-            .padding(.horizontal)
+        HStack {
+            Rectangle().size(CGSize(width: 50, height: 50))
+                .foregroundColor(Color.onPrimary)
+            Rectangle().size(CGSize(width: 50, height: 50))
+                .foregroundColor(Color.onPrimarySecondary)
+            Rectangle().size(CGSize(width: 50, height: 50))
+                .foregroundColor(Color.onPrimaryTertiary)
+            Rectangle().size(CGSize(width: 50, height: 50))
         }
-        .background(Color.accentColor)
-        .padding()
+        .padding(.horizontal)
     }
+    .background(Color.accentColor)
+    .padding()
 }

@@ -90,4 +90,33 @@ public struct DateField: View {
         }
     }
 }
+
+// MARK: - Previews
+
+@available(iOS 17.0, *)
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+private struct DateFieldPreview: View {
+    @State private var date: Date = .init()
+    @State private var optionalDate: Date?
+
+    var body: some View {
+        VStack(spacing: .medium) {
+            DateField("Date", selection: $date)
+
+            DateField("Optional date", selection: $optionalDate)
+        }
+        .padding()
+    }
+}
+
+@available(iOS 17.0, *)
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+#Preview {
+    DateFieldPreview()
+}
+
 #endif

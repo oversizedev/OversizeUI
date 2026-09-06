@@ -44,11 +44,13 @@ public struct Radio<Label: View>: View {
                 .contentShape(Rectangle())
             }
             .buttonStyle(.row)
+            .accessibilityAddTraits(isOn ? .isSelected : [])
         } else {
             HStack(alignment: verticalAlignment, spacing: .xSmall) {
                 content(alignment: alignment)
             }
             .contentShape(Rectangle())
+            .accessibilityAddTraits(isOn ? .isSelected : [])
         }
     }
 
@@ -136,41 +138,38 @@ public extension Radio where Label == EmptyView {
  }
  */
 
-struct Radio_preview: PreviewProvider {
-    struct RadioPreview: View {
-        var data = ["One", "Two", "Three", "Four"]
-        @State var selection = ""
-        var body: some View {
-            RadioPicker(data, selection: $selection) { item in
-                Text(item)
-            }
-            .onChange(of: selection) { selectedItem in
-                print(selectedItem)
-            }
+struct RadioPreview: View {
+    var data = ["One", "Two", "Three", "Four"]
+    @State var selection = ""
+    var body: some View {
+        RadioPicker(data, selection: $selection) { item in
+            Text(item)
+        }
+        .onChange(of: selection) { selectedItem in
+            print(selectedItem)
         }
     }
+}
 
-    static var previews: some View {
-        VStack {
-            RadioPreview()
+#Preview {
+    VStack {
+        RadioPreview()
 
-            Radio(isOn: false, alignment: .leading, label: {
-                Text("Text")
-            })
-            Radio(isOn: true, alignment: .trailing, label: {
-                Text("Text")
-            })
-            Radio("Text", isOn: false, alignment: .leading)
+        Radio(isOn: false, alignment: .leading, label: {
+            Text("Text")
+        })
+        Radio(isOn: true, alignment: .trailing, label: {
+            Text("Text")
+        })
+        Radio("Text", isOn: false, alignment: .leading)
 
-            Radio("Text", isOn: true, alignment: .trailing)
+        Radio("Text", isOn: true, alignment: .trailing)
 
-            Radio("Text", isOn: true, alignment: .leading)
-                .disabled(true)
+        Radio("Text", isOn: true, alignment: .leading)
+            .disabled(true)
 
-            Radio("Text", isOn: false, alignment: .leading)
-                .disabled(true)
-        }
-        .padding()
-        .previewLayout(.sizeThatFits)
+        Radio("Text", isOn: false, alignment: .leading)
+            .disabled(true)
     }
+    .padding()
 }

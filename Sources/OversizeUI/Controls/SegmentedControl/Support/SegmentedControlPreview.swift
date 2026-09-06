@@ -5,107 +5,103 @@
 
 import SwiftUI
 
-struct SegmentedControlPreview: View {
-    var items = ["One", "Two", "Three", "Four long"]
+private struct SegmentedControlPreview<Content: View>: View {
+    let items = ["One", "Two", "Three", "Four long"]
 
-    @State var selection = ""
+    @State private var selection = ""
+
+    @ViewBuilder private let content: (String, Bool) -> Content
+
+    init(@ViewBuilder content: @escaping (String, Bool) -> Content) {
+        self.content = content
+    }
 
     var body: some View {
-        Group {
-            SegmentedPickerSelector(items, selection: $selection) { item, _ in
-                Text(item)
-            }
-            .previewDisplayName("Default")
-
-            SegmentedPickerSelector(items, selection: $selection) { item, _ in
-                Text(item)
-            }
-            .segmentedControlStyle(SelectionOnlySegmentedControlStyle())
-            .previewDisplayName("Selection only Style")
-
-            HStack {
-                SegmentedPickerSelector(items, selection: $selection) { item, _ in
-                    Text(item)
-                }
-                .segmentedControlStyle(.onlySelection(selected: .accentSurface))
-
-                Spacer()
-            }
-            .previewLayout(.fixed(width: 375, height: 70))
-            .previewDisplayName("Selection only Leading Style")
-
-            HStack {
-                SegmentedPickerSelector(items, selection: $selection) { item, _ in
-                    Text(item)
-                }
-                .segmentedControlStyle(ScrollSegmentedControlStyle())
-                Spacer()
-            }
-            .previewLayout(.fixed(width: 375, height: 70))
-            .previewDisplayName("Scroll Style")
-
-            HStack {
-                SegmentedPickerSelector(items, selection: $selection) { item, _ in
-                    Text(item)
-                }
-                .segmentedControlStyle(.islandScroll(selected: .accentSurface))
-                Spacer()
-            }
-            .previewLayout(.fixed(width: 375, height: 70))
-            .previewDisplayName("Scroll Island Style")
-
-            HStack {
-                SegmentedPickerSelector(items, selection: $selection) { item, _ in
-                    Text(item)
-                }
-                .segmentedControlStyle(IslandSegmentedControlStyle())
-                Spacer()
-            }
-            .previewLayout(.fixed(width: 375, height: 80))
-            .previewDisplayName("Island Style")
-
-            SegmentedPickerSelector(items, selection: $selection) { item, _ in
-                VStack(spacing: Space.xxxSmall.rawValue) {
-                    Image.Base.category.icon()
-                        .padding(.xxSmall)
-                    Text(item)
-                    Text("Subtitle")
-                        .subheadline()
-                        .onSurfaceSecondary()
-                }
-            }
-            .segmentedControlStyle(SelectionOnlySegmentedControlStyle())
-            .previewDisplayName("Icon and subtitle")
-
-            VStack {
-                SegmentedPickerSelector(items, selection: $selection) { item, _ in
-                    Text(item)
-                }
-                .controlRadius(.small)
-
-                SegmentedPickerSelector(items, selection: $selection) { item, _ in
-                    Text(item)
-                }
-
-                SegmentedPickerSelector(items, selection: $selection) { item, _ in
-                    Text(item)
-                }
-                .controlRadius(.large)
-
-                SegmentedPickerSelector(items, selection: $selection) { item, _ in
-                    Text(item)
-                }
-                .controlRadius(.xLarge)
-            }.previewDisplayName("Radius styles")
-        }
-        .previewLayout(.sizeThatFits)
-        .padding()
+        SegmentedPickerSelector(items, selection: $selection, content: content)
+            .padding()
     }
 }
 
-// swiftlint:disable all
-struct SegmentedPicker2_Preview: PreviewProvider {
-    static var previews: some View {
-        SegmentedControlPreview()
+private struct TitleSegmentedControlPreview: View {
+    var body: some View {
+        SegmentedControlPreview { item, _ in
+            Text(item)
+        }
+    }
+}
+
+#Preview("Default") {
+    TitleSegmentedControlPreview()
+}
+
+#Preview("Selection only") {
+    TitleSegmentedControlPreview()
+        .segmentedControlStyle(SelectionOnlySegmentedControlStyle())
+}
+
+#Preview("Selection only leading") {
+    HStack {
+        TitleSegmentedControlPreview()
+            .segmentedControlStyle(.onlySelection(selected: .accentSurface))
+
+        Spacer()
+    }
+}
+
+#Preview("Scroll") {
+    HStack {
+        TitleSegmentedControlPreview()
+            .segmentedControlStyle(ScrollSegmentedControlStyle())
+
+        Spacer()
+    }
+}
+
+#Preview("Scroll island") {
+    HStack {
+        TitleSegmentedControlPreview()
+            .segmentedControlStyle(.islandScroll(selected: .accentSurface))
+
+        Spacer()
+    }
+}
+
+#Preview("Island") {
+    HStack {
+        TitleSegmentedControlPreview()
+            .segmentedControlStyle(IslandSegmentedControlStyle())
+
+        Spacer()
+    }
+}
+
+#Preview("Icon and subtitle") {
+    SegmentedControlPreview { item, _ in
+        VStack(spacing: Space.xxxSmall.rawValue) {
+            Icon(Image.Base.category)
+                .padding(.xxSmall)
+
+            Text(item)
+
+            Text("Subtitle")
+                .subheadline()
+                .onSurfaceSecondary()
+        }
+    }
+    .segmentedControlStyle(SelectionOnlySegmentedControlStyle())
+}
+
+#Preview("Radius styles") {
+    VStack {
+        TitleSegmentedControlPreview()
+            .controlRadius(.small)
+
+        TitleSegmentedControlPreview()
+
+        TitleSegmentedControlPreview()
+            .controlRadius(.large)
+
+        TitleSegmentedControlPreview()
+            .controlRadius(.xLarge)
     }
 }

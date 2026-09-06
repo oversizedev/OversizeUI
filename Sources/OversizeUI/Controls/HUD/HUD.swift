@@ -187,3 +187,19 @@ public extension View {
     }
 }
 #endif
+
+// MARK: - Previews
+
+private struct HUDPreview: View {
+    @State private var isPresented = true
+
+    var body: some View {
+        HUD("Copied", autoHide: false, isPresented: $isPresented) {
+            Icon(Image.Base.check)
+        }
+    }
+}
+
+#Preview {
+    HUDPreview()
+}

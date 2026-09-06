@@ -46,31 +46,29 @@ public extension ToggleStyle where Self == RadioStyle {
     }
 }
 
-struct Radio_Previews: PreviewProvider {
-    static var previews: some View {
-        SectionView {
-            VStack {
-                Toggle(isOn: .constant(true)) {
-                    Label("Label", systemImage: "folder.fill")
-                        .labelStyle(.row("Subtitle"))
-                }
-                .toggleStyle(.radio)
-
-                Toggle(isOn: .constant(true)) {
-                    Label("Label", systemImage: "folder.fill")
-                        .labelStyle(.row)
-                }
-                .toggleStyle(.radio)
-
-                Separator()
-
-                Toggle("Title", isOn: .constant(true))
-                    .toggleStyle(.radio)
-
-                Toggle("Title", isOn: .constant(false))
-                    .toggleStyle(.radio)
+#Preview {
+    SectionView {
+        VStack {
+            Toggle(isOn: .constant(true)) {
+                Label("Label", systemImage: "folder.fill")
+                    .labelStyle(.row("Subtitle"))
             }
+            .toggleStyle(.radio)
+
+            Toggle(isOn: .constant(true)) {
+                Label("Label", systemImage: "folder.fill")
+                    .labelStyle(.row)
+            }
+            .toggleStyle(.radio)
+
+            Separator()
+
+            Toggle("Title", isOn: .constant(true))
+                .toggleStyle(.radio)
+
+            Toggle("Title", isOn: .constant(false))
+                .toggleStyle(.radio)
         }
-        .background(Color.surfaceSecondary)
     }
+    .background(Color.surfaceSecondary)
 }

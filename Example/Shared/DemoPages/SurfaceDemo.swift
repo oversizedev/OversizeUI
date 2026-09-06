@@ -8,53 +8,56 @@ import SwiftUI
 
 struct SurfaceDemo: View {
     var body: some View {
-        PageView("Surface") {
-            VStack {
+        DemoScreen {
+            DemoSectionView("Styles") {
                 Surface {
-                    Text("Text")
-                        .title3()
+                    Text("Primary")
+                        .onSurfacePrimary()
+                }
+
+                Surface {
+                    Text("Secondary")
                         .onSurfacePrimary()
                 }
                 .surfaceStyle(.secondary)
+            }
 
-                Text("Text")
-                    .surface()
-                    .elevation(.z4)
-                    .previewLayout(.fixed(width: 414, height: 200))
-
-                HStack {
-                    Text("Text")
-
-                    Spacer()
+            DemoSectionView("Elevation") {
+                Surface {
+                    Text("z1")
                 }
-                .surface()
-                .elevation(.z4)
+                .elevation(.z1)
 
-                Surface { HStack {
-                    Spacer()
-                    Text("Text")
-                    Spacer()
-                }}
-                .controlRadius(.zero)
-                .surfaceContentMargins(.zero)
+                Surface {
+                    Text("z2")
+                }
                 .elevation(.z2)
 
-                Surface { HStack {
-                    Text("Text")
-                    Spacer()
-                }}
-                .elevation(.z1)
+                Surface {
+                    Text("z4")
+                }
+                .elevation(.z4)
             }
-            .padding()
-        }
-        .leadingBar {
-            BarButton(.back)
+
+            DemoSectionView("Modifier") {
+                Text("Applied with .surface()")
+                    .surface()
+                    .elevation(.z2)
+            }
+
+            DemoSectionView("Margins and radius") {
+                Surface {
+                    Text("No margins, no radius")
+                }
+                .controlRadius(.zero)
+                .surfaceContentMargins(.zero)
+            }
         }
     }
 }
 
-struct SurfaceDemo_Previews: PreviewProvider {
-    static var previews: some View {
+#Preview {
+    NavigationStack {
         SurfaceDemo()
     }
 }

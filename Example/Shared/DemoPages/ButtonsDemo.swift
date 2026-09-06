@@ -8,79 +8,70 @@ import SwiftUI
 
 struct ButtonsDemo: View {
     var body: some View {
-        PageView("Buttons") {
-            VStack(spacing: .xSmall) {
-                Button("Button") { print(#function) }
+        DemoScreen {
+            DemoSectionView("Styles") {
+                Button("Primary") {}
                     .buttonStyle(.primary)
-                    .elevation(.z2)
 
-                Button("Button") { print(#function) }
+                Button("Secondary") {}
                     .buttonStyle(.secondary)
-                    .elevation(.z2)
 
-                Button("Button") { print(#function) }
+                Button("Tertiary") {}
                     .buttonStyle(.tertiary)
 
-                Button("Button") { print(#function) }
+                Button("Quaternary") {}
                     .buttonStyle(.quaternary)
+            }
 
-                Button("Button") { print(#function) }
+            DemoSectionView("Accent") {
+                Button("Accent primary") {}
+                    .buttonStyle(.primary)
                     .accent()
+
+                Button("Accent quaternary") {}
+                    .buttonStyle(.quaternary)
+                    .accent()
+            }
+
+            DemoSectionView("Roles") {
+                Button(role: .cancel) {} label: {
+                    Text("Cancel")
+                }
+                .buttonStyle(.primary)
+
+                Button(role: .destructive) {} label: {
+                    Text("Destructive")
+                }
+                .buttonStyle(.primary)
+            }
+
+            DemoSectionView("Radius and elevation") {
+                Button("Extra large radius") {}
                     .buttonStyle(.primary)
                     .controlRadius(.xLarge)
 
-                Button("Button") { print(#function) }
-                    .buttonStyle(.quaternary)
-                    .accent()
-
-                Button(role: .cancel) {
-                    print(#function)
-                } label: {
-                    Text("Button")
-                }
-                .buttonStyle(.primary)
-
-                Button(role: .destructive) {
-                    print(#function)
-                } label: {
-                    Text("Button")
-                }
-                .buttonStyle(.primary)
-
-                #if os(iOS) || os(macOS) || os(watchOS)
-                HStack {
-                    Button("Button") { print(#function) }
-                        .buttonStyle(.secondary)
-                        .accent()
-                        .controlSize(.small)
-                        .elevation(.z2)
-
-                    Button("Button") { print(#function) }
-                        .buttonStyle(.secondary)
-                        .controlSize(.mini)
-                        .elevation(.z2)
-
-                    Button {
-                        print(#function)
-                    } label: {
-                        Image(systemName: "archivebox")
-                    }
-                    .controlSize(.small)
+                Button("Elevated") {}
                     .buttonStyle(.secondary)
                     .elevation(.z2)
-                }
-                #endif
+            }
 
-            }.padding()
-        }
-        .leadingBar {
-            BarButton(.back)
+            #if os(iOS) || os(macOS) || os(watchOS)
+            DemoSectionView("Control sizes") {
+                Button("Small") {}
+                    .buttonStyle(.secondary)
+                    .controlSize(.small)
+
+                Button("Mini") {}
+                    .buttonStyle(.secondary)
+                    .controlSize(.mini)
+            }
+            #endif
         }
     }
 }
 
-struct BittonsDemo_Previews: PreviewProvider {
-    static var previews: some View {
+#Preview {
+    NavigationStack {
         ButtonsDemo()
     }
 }

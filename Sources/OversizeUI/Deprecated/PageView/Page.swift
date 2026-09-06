@@ -88,20 +88,20 @@ public struct Page<Content: View, Header: View, LeadingBar: View, TrailingBar: V
         .onChange(of: focusStateSearchBar, perform: onChangeFocusSearchBar)
         .onChange(of: displaySearchBar, perform: onChangeDisplaySearchBar)
         #if os(iOS)
-            .toolbar {
-                if let title {
-                    ToolbarItem(placement: .principal) {
-                        Text(title)
-                            .font(.headline)
-                            .opacity(isLargeTitle ? 1 - visibleRatio : 1) // .opacity(isLargeTitle ? visibleRatio > 0 ? 0 : -5 * visibleRatio : 1)
-                    }
+        .toolbar {
+            if let title {
+                ToolbarItem(placement: .principal) {
+                    Text(title)
+                        .font(.headline)
+                        .opacity(isLargeTitle ? 1 - visibleRatio : 1) // .opacity(isLargeTitle ? visibleRatio > 0 ? 0 : -5 * visibleRatio : 1)
                 }
             }
-            .toolbarBackground(.hidden)
-            .toolbar(isFocusSearchBar ? .hidden : .automatic, for: .navigationBar)
-            .navigationBarTitleDisplayMode(.inline)
+        }
+        .toolbarBackground(.hidden)
+        .toolbar(isFocusSearchBar ? .hidden : .automatic, for: .navigationBar)
+        .navigationBarTitleDisplayMode(.inline)
         #elseif os(macOS)
-            .navigationTitle(title ?? "")
+        .navigationTitle(title ?? "")
         #endif
     }
 
@@ -215,9 +215,9 @@ public struct Page<Content: View, Header: View, LeadingBar: View, TrailingBar: V
     private var searchHeader: some View {
         ZStack(alignment: .bottomLeading) {
             Rectangle()
-            #if os(iOS) || os(macOS)
+                #if os(iOS) || os(macOS)
                 .fill(Material.bar)
-            #endif
+                #endif
                 .overlay(alignment: .bottom) {
                     Divider().opacity(visibleRatio > 0 ? 0 : -5 * visibleRatio)
                 }
@@ -236,9 +236,9 @@ public struct Page<Content: View, Header: View, LeadingBar: View, TrailingBar: V
                     }
                     .buttonStyle(.quaternary(infinityWidth: false))
                     #if !os(tvOS)
-                        .controlSize(.mini)
+                    .controlSize(.mini)
                     #endif
-                        .offset(x: 8)
+                    .offset(x: 8)
                 }
             }
             .padding(.horizontal, .small)

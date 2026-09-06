@@ -10,7 +10,13 @@ public extension EnvironmentValues {
 }
 
 public extension View {
+    @ViewBuilder
     func sectionTitleSeparator(_ visibility: Visibility) -> some View {
-        environment(\.sectionTitleSeparator, visibility)
+        if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
+            environment(\.sectionTitleSeparator, visibility)
+                .containerValue(\.sectionTitleSeparator, visibility)
+        } else {
+            environment(\.sectionTitleSeparator, visibility)
+        }
     }
 }

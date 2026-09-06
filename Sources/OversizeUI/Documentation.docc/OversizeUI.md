@@ -23,21 +23,26 @@ import OversizeUI
 
 struct ContentView: View {
     @State private var name = ""
-    @State private var selectedColor = Color.blue
-    
+    @State private var helper = "We use this to greet you"
+    @State private var helperStyle: FieldHelperStyle = .helperText
+
     var body: some View {
         VStack(spacing: .medium) {
             TextField("Enter your name", text: $name)
                 .textFieldStyle(.default)
-            
-            ColorSelector(selection: $selectedColor)
-                .colorSelectorStyle(.grid)
-            
+                .fieldHelper($helper, style: $helperStyle)
+
             Button("Get Started") {
+                guard name.isEmpty == false else {
+                    helper = "Name is required"
+                    helperStyle = .errorText
+                    return
+                }
                 print("Welcome, \(name)!")
             }
             .buttonStyle(.primary)
             .controlSize(.large)
+            .accent()
         }
         .padding()
         .surface()
@@ -53,18 +58,27 @@ struct ContentView: View {
 - <doc:Architecture>
 - <doc:Theming>
 
+### Layouts
+
+- <doc:Layout>
+- <doc:ListLayout>
+- <doc:CoverLayout>
+- <doc:ListCoverLayout>
+- <doc:CalendarLayout>
+- <doc:Section>
+
 ### Interface Components
 
 - <doc:Avatar>
 - <doc:Button>
 - <doc:ColorSelector>
 - <doc:GridSelect>
+- <doc:Icon>
 - <doc:TextField>
 - <doc:Row>
 - <doc:SegmentedControl>
 - <doc:Select>
 - <doc:Surface>
-- <doc:SectionView>
 - <doc:NoticeView>
 
 ### Design System
