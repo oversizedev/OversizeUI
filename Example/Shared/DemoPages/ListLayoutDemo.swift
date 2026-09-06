@@ -9,7 +9,7 @@ import SwiftUI
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, *)
 struct ListLayoutDemo: View {
     var body: some View {
-        ListLayout {
+        ListLayout("ListLayout") {
             ListSection("Section") {
                 ForEach(1 ... 5, id: \.self) { index in
                     ListRow("Item \(index)")

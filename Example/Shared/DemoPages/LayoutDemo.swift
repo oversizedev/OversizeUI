@@ -11,7 +11,7 @@ struct LayoutDemo: View {
     @State private var style: ListLayoutStyle = .insetGrouped
 
     var body: some View {
-        Layout {
+        Layout("Layout") {
             Section("Title inside") {
                 Row("First")
                 Row("Second")
