@@ -1,14 +1,14 @@
 //
 // Copyright © 2026 Alexander Romanov
-// StatusTest.swift, created on 06.09.2026
+// ErrorViewTest.swift, created on 06.09.2026
 //
 
 import XCTest
 
 @MainActor
-final class StatusTest: BaseTest {
+final class ErrorViewTest: BaseTest {
     override var controlName: String {
-        "Status"
+        "ErrorView"
     }
 
     func testLaunch() {

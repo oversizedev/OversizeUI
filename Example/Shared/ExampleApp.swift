@@ -27,7 +27,14 @@ struct ExampleApp: App {
 
     private var rootView: some View {
         NavigationStack {
-            ComponentsList()
+            if let title = UITestSupport.requestedDemoTitle,
+               let demo = Demos.all.first(where: { $0.title == title })
+            {
+                demo.screen
+                    .navigationTitle(demo.title)
+            } else {
+                ComponentsList()
+            }
         }
         .preferredColorScheme(theme.appearance.colorScheme)
         #if os(iOS)

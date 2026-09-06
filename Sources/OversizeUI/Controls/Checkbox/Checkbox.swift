@@ -43,6 +43,7 @@ public struct Checkbox<Label: View>: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.row)
+        .accessibilityAddTraits(isOn ? .isSelected : [])
     }
 
     @ViewBuilder

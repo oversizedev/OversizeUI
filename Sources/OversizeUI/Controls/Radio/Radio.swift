@@ -44,11 +44,13 @@ public struct Radio<Label: View>: View {
                 .contentShape(Rectangle())
             }
             .buttonStyle(.row)
+            .accessibilityAddTraits(isOn ? .isSelected : [])
         } else {
             HStack(alignment: verticalAlignment, spacing: .xSmall) {
                 content(alignment: alignment)
             }
             .contentShape(Rectangle())
+            .accessibilityAddTraits(isOn ? .isSelected : [])
         }
     }
 

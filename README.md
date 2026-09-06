@@ -33,7 +33,19 @@ API documentation: [Sources/OversizeUI/Documentation.docc](Sources/OversizeUI/Do
 - **Xcode**: 16.3+
 - **Swift**: 6.1+
 
-The [layout system](#layouts) requires iOS 18, macOS 15, tvOS 18, watchOS 11 or visionOS 2. Everything else runs on the deployment targets above.
+Those are the package's deployment targets, but individual components raise the bar. Notable cases:
+
+| Component | Requires |
+|---|---|
+| `Layout`, `ListLayout`, `CoverLayout`, `ListCoverLayout` | iOS 18, macOS 15, tvOS 18, watchOS 11, visionOS 2 |
+| `CalendarLayout`, `DateField` | iOS only — iOS 18 and iOS 17 respectively |
+| `Select`, `MultiSelect`, `EmptyStateView`, `ErrorView`, `SuccessView` | iOS 17, macOS 14, tvOS 17, watchOS 10 |
+| `PriceField` | iOS 16, macOS 14, tvOS 16, watchOS 9 |
+| `URLField` | iOS 15, macOS 14 — unavailable on tvOS and watchOS |
+| `PhoneField`, `MaterialSurface` | iOS only |
+| `ColorSelector` | unavailable on tvOS and watchOS |
+
+Each type carries its own `@available` annotations, so the compiler will tell you.
 
 ### Installation
 
@@ -95,17 +107,21 @@ Apply a theme once, at the root of your app:
 ```swift
 @main
 struct MyApp: App {
-    @Environment(\.theme) private var theme
+    @StateObject private var theme = ThemeSettings()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .theme(ThemeSettings())
+                .theme(theme)
                 .preferredColorScheme(theme.appearance.colorScheme)
         }
     }
 }
 ```
+
+Hold a single `ThemeSettings` at app scope and pass that same instance to `theme(_:)`. Reading
+`@Environment(\.theme)` here instead would resolve the default instance, not the one you install,
+so appearance changes would not drive `preferredColorScheme`.
 
 ## Layouts
 

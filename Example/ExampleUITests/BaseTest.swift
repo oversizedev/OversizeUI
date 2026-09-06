@@ -5,10 +5,11 @@
 
 import XCTest
 
-/// Launches the demo app and navigates to the screen named by ``controlName``.
+/// Launches the demo app straight onto the screen named by ``controlName``.
 ///
 /// The name is the single contract between the tests and the app: `Demos.swift`
-/// uses it for the list entry and for the screen's navigation title.
+/// uses it for the list entry and for the screen's navigation title, and the app
+/// resolves it from a launch argument so tests do not have to walk the list.
 @MainActor
 class BaseTest: XCTestCase {
     lazy var app: XCUIApplication = .init()
@@ -21,25 +22,11 @@ class BaseTest: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         continueAfterFailure = false
+        app.launchArguments += ["-uiTestDemo", controlName]
         app.launch()
-        XCTAssertTrue(app.navigationBars["OversizeUI"].waitForExistence(timeout: 20), "The app did not reach the component list")
-        try openControlPage()
-    }
-
-    private func openControlPage() throws {
-        let entry: XCUIElement = app.buttons[controlName].firstMatch
-
-        // Entries live in a lazy stack, so an off-screen one does not exist yet.
-        var swipes = 0
-        while !entry.exists || !entry.isHittable {
-            guard swipes < 20 else {
-                XCTFail("No entry named \(controlName) in the component list")
-                return
-            }
-            app.swipeUp()
-            swipes += 1
-        }
-
-        entry.tap()
+        XCTAssertTrue(
+            app.navigationBars[controlName].waitForExistence(timeout: 30),
+            "The app did not open the \(controlName) screen"
+        )
     }
 }

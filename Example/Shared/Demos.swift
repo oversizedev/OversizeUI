@@ -101,7 +101,9 @@ enum Demos {
             DemoDescriptor("Loader", LoaderDemo()),
         ]
         if #available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *) {
-            demos.append(DemoDescriptor("Status", StatusDemo()))
+            demos.append(DemoDescriptor("EmptyState", EmptyStateDemo()))
+            demos.append(DemoDescriptor("ErrorView", ErrorViewDemo()))
+            demos.append(DemoDescriptor("SuccessView", SuccessViewDemo()))
         }
         demos.append(DemoDescriptor("ContentView", ContentViewDemo()))
         return demos
