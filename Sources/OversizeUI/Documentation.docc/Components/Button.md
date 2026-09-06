@@ -71,7 +71,7 @@ Create buttons with only icons:
 
 ```swift
 Button(action: refresh) {
-    Icon(.refresh)
+    Icon(Image.Base.swap)
 }
 .buttonStyle(.tertiary)
 .controlBorderShape(.circle)
@@ -87,7 +87,7 @@ Button {
     addItem()
 } label: {
     HStack {
-        Icon(.plus)
+        Icon(Image.Base.plus)
         Text("Add Item")
     }
 }
@@ -181,7 +181,7 @@ Button("Rounded") { }
 Button {
     share()
 } label: {
-    Icon(.share)
+    Icon(Image.Base.upload)
 }
 .buttonStyle(.tertiary)
 .controlBorderShape(.circle)
@@ -260,7 +260,7 @@ struct FloatingActionButton: View {
         Button {
             createNew()
         } label: {
-            Icon(.plus)
+            Icon(Image.Base.plus)
                 .foregroundColor(.white)
         }
         .buttonStyle(.primary)
@@ -294,7 +294,7 @@ struct ToolbarButtons: View {
                         Button {
                             showHelp()
                         } label: {
-                            Icon(.questionmark)
+                            Icon("questionmark.circle")
                         }
                         .buttonStyle(.quaternary)
                         .accessibilityLabel("Help")

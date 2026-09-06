@@ -50,7 +50,7 @@ VStack(spacing: .medium) { // 16pt between elements
 }
 
 HStack(spacing: .small) { // 8pt between elements
-    Icon(.star)
+    Icon(Image.Base.star)
     Text("Rating")
 }
 ```

@@ -75,7 +75,7 @@ struct LanguageSelector: View {
                             .foregroundColor(.onSurfaceSecondary)
                     }
                     Spacer()
-                    Icon(.chevronDown)
+                    Icon(Image.Base.chevronDown)
                         .foregroundColor(.onSurfaceSecondary)
                 }
             }
@@ -95,7 +95,7 @@ Select("Tags", availableTags, selection: $selectedTags) { tag, isSelected in
         Text(tag)
         Spacer()
         if isSelected {
-            Icon(.checkmark)
+            Icon(Image.Base.check)
                 .foregroundColor(.accent)
         }
     }

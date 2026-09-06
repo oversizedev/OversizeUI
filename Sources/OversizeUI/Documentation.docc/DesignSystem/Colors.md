@@ -147,7 +147,7 @@ VStack(spacing: .medium) {
             .padding()
     }
     .background(.backgroundSecondary)
-    .elevation(.medium)
+    .elevation(.z2)
     
     // Highest elevation
     Surface {
@@ -155,7 +155,7 @@ VStack(spacing: .medium) {
             .padding()
     }
     .background(.backgroundTertiary)
-    .elevation(.high)
+    .elevation(.z4)
 }
 ```
 
@@ -251,7 +251,7 @@ Never rely solely on color to convey information:
 ```swift
 // Good: Color + icon + text
 HStack {
-    Icon(.checkmark)
+    Icon(Image.Base.check)
         .foregroundColor(.success)
     Text("Success")
         .foregroundColor(.success)

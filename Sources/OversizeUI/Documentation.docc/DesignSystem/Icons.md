@@ -11,10 +11,10 @@ OversizeUI's icon system provides access to SF Symbols and custom icons through 
 ### SF Symbols
 
 ```swift
-Icon(.heart)
+Icon(Image.Base.heart)
     .foregroundColor(.accent)
 
-Icon(.star)
+Icon(Image.Base.star)
     .font(.title2)
     .foregroundColor(.warning)
 ```
@@ -22,7 +22,7 @@ Icon(.star)
 ### Custom Icons
 
 ```swift
-Icon(.custom("my-custom-icon"))
+Icon(Image("my-custom-icon"))
     .frame(width: 24, height: 24)
 ```
 
@@ -54,7 +54,7 @@ Button {
     addToFavorites()
 } label: {
     HStack {
-        Icon(.heart)
+        Icon(Image.Base.heart)
         Text("Add to Favorites")
     }
 }
@@ -82,7 +82,7 @@ LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4)) {
 Icons automatically provide accessibility labels:
 
 ```swift
-Icon(.trash)
+Icon(Image.Base.delete)
     .accessibilityLabel("Delete")
     .accessibilityHint("Delete this item")
 ```

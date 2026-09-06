@@ -261,7 +261,7 @@ struct CustomSurface<Content: View>: View {
             .cornerRadius(theme.radius)
             .overlay(
                 RoundedRectangle(cornerRadius: theme.radius)
-                    .stroke(.borderPrimary, lineWidth: theme.borderSurface ? theme.borderSize : 0)
+                    .stroke(.border, lineWidth: theme.borderSurface ? theme.borderSize : 0)
             )
     }
 }

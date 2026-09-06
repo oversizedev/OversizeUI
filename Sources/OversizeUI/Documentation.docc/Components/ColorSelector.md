@@ -14,7 +14,7 @@ The `ColorSelector` component provides an elegant way for users to select colors
 @State private var selectedColor = Color.blue
 
 ColorSelector(selection: $selectedColor)
-    .colorSelectorStyle(.grid)
+    .colorSelectorStyle(GridColorSelectorStyle())
 ```
 
 ### Palette Style Color Selector
@@ -23,7 +23,7 @@ ColorSelector(selection: $selectedColor)
 @State private var selectedColor = Color.blue
 
 ColorSelector(selection: $selectedColor)
-    .colorSelectorStyle(.palette)
+    .colorSelectorStyle(HorizontalColorSelectorStyle())
 ```
 
 ## Customization
@@ -32,7 +32,7 @@ ColorSelector(selection: $selectedColor)
 
 ```swift
 ColorSelector(selection: $selectedColor)
-    .colorSelectorStyle(.grid)
+    .colorSelectorStyle(GridColorSelectorStyle())
     .controlSize(.large)
 ```
 
@@ -42,7 +42,7 @@ ColorSelector(selection: $selectedColor)
 let customColors: [Color] = [.red, .blue, .green, .yellow]
 
 ColorSelector(colors: customColors, selection: $selectedColor)
-    .colorSelectorStyle(.grid)
+    .colorSelectorStyle(GridColorSelectorStyle())
 ```
 
 ## Practical Examples
@@ -59,7 +59,7 @@ struct ThemeSelector: View {
                 .headline()
             
             ColorSelector(selection: $accentColor)
-                .colorSelectorStyle(.grid)
+                .colorSelectorStyle(GridColorSelectorStyle())
                 .onChange(of: accentColor) { newColor in
                     updateTheme(accentColor: newColor)
                 }
@@ -83,7 +83,7 @@ struct ColorPreferences: View {
                         .body(.medium)
                     
                     ColorSelector(selection: $backgroundColor)
-                        .colorSelectorStyle(.palette)
+                        .colorSelectorStyle(HorizontalColorSelectorStyle())
                 }
                 
                 VStack(alignment: .leading) {
@@ -91,7 +91,7 @@ struct ColorPreferences: View {
                         .body(.medium)
                     
                     ColorSelector(selection: $textColor)
-                        .colorSelectorStyle(.grid)
+                        .colorSelectorStyle(GridColorSelectorStyle())
                 }
             }
         }

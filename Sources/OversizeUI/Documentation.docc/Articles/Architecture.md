@@ -329,7 +329,7 @@ struct CardContainer<Content: View>: View {
         }
         .background(.surfacePrimary)
         .cornerRadius(.medium)
-        .elevation(.small)
+        .elevation(.z1)
     }
 }
 

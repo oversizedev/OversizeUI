@@ -69,7 +69,7 @@ Add a stroke border around the avatar:
 
 ```swift
 Avatar(firstName: "John", lastName: "Doe")
-    .stroke(.accent, lineWidth: 2)
+    .avatarStroke(.accent, lineWidth: 2)
 ```
 
 #### Custom Background
@@ -145,8 +145,8 @@ struct ProfileHeader: View {
                 lastName: user.lastName,
                 avatar: user.profileImage
             )
+            .avatarStroke(.accent, lineWidth: 3)
             .controlSize(.extraLarge)
-            .stroke(.accent, lineWidth: 3)
             .onTapGesture {
                 isEditingPhoto = true
             }

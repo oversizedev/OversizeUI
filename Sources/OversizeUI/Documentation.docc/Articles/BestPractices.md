@@ -205,7 +205,7 @@ struct ErrorView: View {
     
     var body: some View {
         VStack(spacing: .medium) {
-            Icon(.exclamationmark)
+            Icon(Image.Base.exclamationmark)
                 .font(.largeTitle)
                 .foregroundColor(.error)
             

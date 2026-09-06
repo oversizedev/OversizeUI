@@ -296,7 +296,7 @@ struct ProductCard: View {
                 .padding()
             }
         }
-        .elevation(.small)
+        .elevation(.z1)
     }
 }
 ```

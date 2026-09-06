@@ -36,7 +36,7 @@ Surface {
 ```swift
 Surface {
     HStack {
-        Icon(.info)
+        Icon(Image.Base.info)
             .foregroundColor(.accent)
         
         Text("Important information")
@@ -68,21 +68,21 @@ VStack(spacing: .medium) {
         Text("Small Elevation")
             .padding()
     }
-    .elevation(.small)
+    .elevation(.z1)
     
     // Medium elevation
     Surface {
         Text("Medium Elevation")
             .padding()
     }
-    .elevation(.medium)
+    .elevation(.z2)
     
     // Large elevation
     Surface {
         Text("Large Elevation")
             .padding()
     }
-    .elevation(.large)
+    .elevation(.z3)
 }
 ```
 
@@ -156,7 +156,7 @@ struct InfoCard: View {
             .padding()
         }
         .background(.surfacePrimary)
-        .elevation(.small)
+        .elevation(.z1)
     }
 }
 
@@ -216,7 +216,7 @@ struct ProfileCard: View {
             .padding(.large)
         }
         .background(.surfacePrimary)
-        .elevation(.medium)
+        .elevation(.z2)
     }
 }
 ```
@@ -267,7 +267,7 @@ struct StatisticsCard: View {
             .padding()
         }
         .background(.surfacePrimary)
-        .elevation(.small)
+        .elevation(.z1)
     }
     
     private var trendIcon: some View {
@@ -319,7 +319,7 @@ struct ModalSurface<Content: View>: View {
                     Button {
                         isPresented = false
                     } label: {
-                        Icon(.xmark)
+                        Icon(Image.Base.close)
                     }
                     .buttonStyle(.quaternary)
                     .controlSize(.small)
@@ -331,7 +331,7 @@ struct ModalSurface<Content: View>: View {
                 .padding()
             }
             .background(.surfaceTertiary)
-            .elevation(.large)
+            .elevation(.z3)
             .cornerRadius(.large)
             .padding()
         }
@@ -402,7 +402,7 @@ struct SettingsPanel: View {
             .padding()
         }
         .background(.surfaceSecondary)
-        .elevation(.medium)
+        .elevation(.z2)
     }
 }
 

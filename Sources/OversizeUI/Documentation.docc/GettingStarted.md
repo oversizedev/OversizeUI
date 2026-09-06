@@ -11,12 +11,15 @@ OversizeUI is designed to make SwiftUI development faster and more consistent. T
 ### Requirements
 
 - **iOS**: 15.0+
-- **macOS**: 12.0+
+- **macOS**: 13.0+
 - **tvOS**: 15.0+
 - **watchOS**: 9.0+
 - **visionOS**: 2.0+
-- **Xcode**: 14.2+
-- **Swift**: 5.7+
+- **Xcode**: 16.3+
+- **Swift**: 6.1+
+
+The layout system (``Layout``, ``ListLayout``, ``CoverLayout``, ``ListCoverLayout``,
+``CalendarLayout``) requires iOS 18, macOS 15, tvOS 18, watchOS 11 or visionOS 2.
 
 ### Swift Package Manager
 
@@ -25,14 +28,16 @@ OversizeUI is designed to make SwiftUI development faster and more consistent. T
    ```
    https://github.com/oversizedev/OversizeUI.git
    ```
-3. Choose **"Up to Next Major"** with version **"3.0.3"**
+3. Choose **"Up to Next Major"** with version **"3.19.0"**
 4. Click **Add Package**
 
-### Manual Installation
+Or declare it in a `Package.swift`:
 
-1. Download or clone the repository
-2. Drag `OversizeUI.xcodeproj` into your Xcode project
-3. Add OversizeUI as a dependency to your target
+```swift
+dependencies: [
+    .package(url: "https://github.com/oversizedev/OversizeUI.git", .upToNextMajor(from: "3.19.0")),
+]
+```
 
 ## Basic Setup
 
@@ -45,15 +50,19 @@ import OversizeUI
 
 ### Configure Theming
 
-Enable theming support in your app by adding the `ThemeSettings` environment object:
+Components read the theme from `@Environment(\.theme)`, so install it with the
+`theme(_:)` modifier at the root of your app:
 
 ```swift
 @main
 struct MyApp: App {
+    @Environment(\.theme) private var theme
+
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(ThemeSettings())
+                .theme(ThemeSettings())
+                .preferredColorScheme(theme.appearance.colorScheme)
         }
     }
 }
@@ -99,8 +108,8 @@ struct ProfileFormView: View {
     private var profileHeader: some View {
         VStack(spacing: .medium) {
             Avatar(firstName: firstName, lastName: lastName)
+                .avatarStroke(.accent, lineWidth: 2)
                 .controlSize(.large)
-                .stroke(.accent, lineWidth: 2)
             
             Text(fullName)
                 .title2(.bold)
@@ -135,7 +144,7 @@ struct ProfileFormView: View {
                         .foregroundColor(.onSurfacePrimary)
                     
                     ColorSelector(selection: $favoriteColor)
-                        .colorSelectorStyle(.grid)
+                        .colorSelectorStyle(GridColorSelectorStyle())
                 }
                 
                 // Theme Selector
@@ -216,7 +225,7 @@ TextField("Placeholder", text: $text)
 
 // Color Picker
 ColorSelector(selection: $color)
-    .colorSelectorStyle(.grid)
+    .colorSelectorStyle(GridColorSelectorStyle())
 
 // Dropdown Selector
 Select("Title", options, selection: $selection) { option, _ in
