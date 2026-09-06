@@ -66,6 +66,35 @@ jobs:
       destination: generic/platform=watchOS Simulator
     secrets: inherit
 
+  test-iOS-example:
+    name: Test iOS example
+    needs: build-iOS-example
+    runs-on: macos-15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run package and UI tests
+        run: |
+          set -eo pipefail
+          xcodebuild \
+            -project Example/Example.xcodeproj \
+            -scheme "Example (iOS)" \
+            -destination "platform=iOS Simulator,name=iPhone 16 Pro" \
+            -resultBundlePath TestResults \
+            test \
+            -retry-tests-on-failure \
+            -test-iterations 3 \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: TestResults
+          path: TestResults.xcresult
+          retention-days: 3
+
   bump:
     name: Bump version
     if: github.ref == 'refs/heads/main'
@@ -75,6 +104,7 @@ jobs:
       - build-macOS-example
       - build-tvOS-example
       - build-watchOS-example
+      - test-iOS-example
 
     uses: oversizedev/GithubWorkflows/.github/workflows/bump.yml@main
     secrets: inherit
