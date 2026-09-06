@@ -45,3 +45,31 @@ public struct Badge<Label: View>: View {
         )
     }
 }
+
+// MARK: - Previews
+
+#Preview {
+    VStack(spacing: .small) {
+        Badge {
+            Text("Default")
+        }
+
+        Badge(color: .success) {
+            Text("Success")
+        }
+
+        Badge(color: .error) {
+            Text("Error")
+        }
+
+        Badge(color: .warning) {
+            HStack(spacing: .xxxSmall) {
+                Icon(Image.Base.info)
+                    .iconSize(.xSmall)
+
+                Text("With icon")
+            }
+        }
+    }
+    .padding()
+}

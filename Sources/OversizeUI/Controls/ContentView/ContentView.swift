@@ -71,3 +71,25 @@ public extension ContentView where A == EmptyView {
         actions = nil
     }
 }
+
+// MARK: - Previews
+
+#Preview("Title only") {
+    ContentView(title: "All caught up")
+}
+
+#Preview("With actions") {
+    ContentView(
+        image: Image.Base.check,
+        title: "Subscription activated",
+        subtitle: "You now have access to every feature"
+    ) {
+        Button("Continue") {}
+            .buttonStyle(.primary)
+            .accent()
+
+        Button("Not now") {}
+            .buttonStyle(.tertiary)
+    }
+    .padding()
+}

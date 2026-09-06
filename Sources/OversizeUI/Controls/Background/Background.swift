@@ -84,3 +84,21 @@ public struct Background<Content: View>: View {
         }
     }
 }
+
+// MARK: - Previews
+
+#Preview {
+    VStack(spacing: .zero) {
+        Background(background: .primary) {
+            Text("Primary")
+        }
+
+        Background(background: .secondary) {
+            Text("Secondary")
+        }
+
+        Background(background: .tertiary, padding: .small) {
+            Text("Tertiary, small padding")
+        }
+    }
+}

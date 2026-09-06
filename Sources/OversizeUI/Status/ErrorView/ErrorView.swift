@@ -95,3 +95,16 @@ public struct ErrorView: View {
         }
     }
 }
+
+// MARK: - Previews
+
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+#Preview {
+    ErrorView(
+        error: NSError(
+            domain: "OversizeUI",
+            code: -1,
+            userInfo: [NSLocalizedDescriptionKey: "Something went wrong"]
+        )
+    )
+}

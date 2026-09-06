@@ -95,3 +95,22 @@ public struct EmptyStateView<Actions: View>: View {
         .containerRelativeFrame([.horizontal, .vertical])
     }
 }
+
+// MARK: - Previews
+
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+#Preview("Title only") {
+    EmptyStateView(title: "No results")
+}
+
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+#Preview("With actions") {
+    EmptyStateView(
+        image: Image.Base.search,
+        title: "Nothing here yet",
+        subtitle: "Items you add will show up in this list"
+    ) {
+        Button("Add item") {}
+        Button("Learn more") {}
+    }
+}

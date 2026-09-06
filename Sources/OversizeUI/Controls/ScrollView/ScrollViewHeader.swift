@@ -34,3 +34,24 @@ private extension View {
             .offset(y: useStandard ? 0 : -minY)
     }
 }
+
+// MARK: - Previews
+
+#Preview {
+    ScrollView {
+        ScrollViewHeader {
+            LinearGradient(
+                colors: [.accent, .backgroundSecondary],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+        }
+        .frame(height: 200)
+
+        VStack(spacing: .xxSmall) {
+            ForEach(0 ..< 20, id: \.self) { index in
+                Row("Row \(index)")
+            }
+        }
+    }
+}

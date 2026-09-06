@@ -128,3 +128,21 @@ private enum CachedAsyncImageSessionStore {
         return session
     }
 }
+
+// MARK: - Previews
+
+#Preview {
+    CachedAsyncImage(
+        url: URL(string: "https://avatars.githubusercontent.com/u/23033825"),
+        content: { image in
+            image
+                .resizable()
+                .scaledToFill()
+        },
+        placeholder: {
+            ProgressView()
+        }
+    )
+    .frame(width: 120, height: 120)
+    .clipShape(Circle())
+}

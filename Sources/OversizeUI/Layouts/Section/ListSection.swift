@@ -130,3 +130,28 @@ public extension ListSection where SectionHeaderContent == ListSectionHeader<Str
         header = { ListSectionHeader(title: title) }
     }
 }
+
+// MARK: - Previews
+
+#Preview {
+    List {
+        ListSection("Titled section") {
+            ListRow("First")
+            ListRow("Second")
+        }
+
+        ListSection {
+            ListRow("Content only")
+        } header: {
+            ListSectionHeader(title: "Custom header") {
+                Button("Edit") {}
+            }
+        }
+
+        ListSection {
+            ListRow("With footer")
+        } footer: {
+            ListSectionFooter(description: "Supporting text below the section.")
+        }
+    }
+}

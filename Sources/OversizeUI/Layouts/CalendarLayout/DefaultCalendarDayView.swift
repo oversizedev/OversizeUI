@@ -57,3 +57,32 @@ public struct DefaultCalendarDayView: View {
         }
     }
 }
+
+// MARK: - Previews
+
+@available(iOS 17.0, *)
+private struct DefaultCalendarDayViewPreview: View {
+    @State private var selection: Date = .init()
+
+    var body: some View {
+        HStack(spacing: .small) {
+            DefaultCalendarDayView(date: selection, selection: $selection)
+
+            DefaultCalendarDayView(
+                date: Calendar.current.date(byAdding: .day, value: 1, to: selection) ?? selection,
+                selection: $selection
+            )
+
+            DefaultCalendarDayView(
+                date: Calendar.current.date(byAdding: .day, value: 2, to: selection) ?? selection,
+                selection: $selection
+            )
+        }
+        .padding()
+    }
+}
+
+@available(iOS 17.0, *)
+#Preview {
+    DefaultCalendarDayViewPreview()
+}

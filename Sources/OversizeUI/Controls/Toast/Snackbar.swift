@@ -249,3 +249,17 @@ public extension View {
         }
     }
 }
+
+// MARK: - Previews
+
+private struct SnackbarPreview: View {
+    @State private var isPresented = true
+
+    var body: some View {
+        Snackbar("Changes saved", isPresented: $isPresented)
+    }
+}
+
+#Preview {
+    SnackbarPreview()
+}

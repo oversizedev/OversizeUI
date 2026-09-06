@@ -56,3 +56,22 @@ public extension ListSectionHeader where TrailingContent == EmptyView {
         self.title = title
     }
 }
+
+// MARK: - Previews
+
+#Preview {
+    VStack(alignment: .leading, spacing: .medium) {
+        ListSectionHeader(title: "Plain header")
+
+        ListSectionHeader(title: "Navigatable header")
+            .navigatable()
+
+        ListSectionHeader(title: "With trailing") {
+            Button("Edit") {}
+        }
+
+        ListSectionHeader(title: "Prominent")
+            .headerProminence(.increased)
+    }
+    .padding()
+}

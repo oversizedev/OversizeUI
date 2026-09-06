@@ -55,3 +55,23 @@ public extension PrimitiveButtonStyle where Self == ToolbarSecondaryStyle {
         .init()
     }
 }
+
+// MARK: - Previews
+
+#Preview {
+    VStack(spacing: .medium) {
+        Label {
+            Text("Toolbar")
+        } icon: {
+            Icon(Image.Base.setting)
+        }
+        .labelStyle(.toolbar)
+
+        Button("Prominent") {}
+            .buttonStyle(.toolbarPrimary)
+
+        Button("Secondary") {}
+            .buttonStyle(.toolbarSecondary)
+    }
+    .padding()
+}

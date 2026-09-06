@@ -28,4 +28,27 @@ public struct PhoneField: View {
             .fieldHelper(.constant("Invalid Phone"), style: $textFieldHelper)
     }
 }
+
+// MARK: - Previews
+
+@available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+private struct PhoneFieldPreview: View {
+    @State private var phone = ""
+
+    var body: some View {
+        PhoneField($phone)
+            .padding()
+    }
+}
+
+@available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+#Preview {
+    PhoneFieldPreview()
+}
 #endif

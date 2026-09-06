@@ -98,3 +98,16 @@ public struct TextBox: View {
         return control
     }
 }
+
+// MARK: - Previews
+
+#Preview {
+    VStack(spacing: .medium) {
+        TextBox(title: "Title only")
+
+        TextBox(title: "Title", subtitle: "A short supporting description")
+
+        TextBox(title: "Compact", subtitle: "Custom spacing", spacing: .xxSmall)
+    }
+    .padding()
+}

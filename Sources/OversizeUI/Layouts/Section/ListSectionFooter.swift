@@ -24,3 +24,10 @@ public struct ListSectionFooter<Description: StringProtocol>: View {
         return descriptionView
     }
 }
+
+// MARK: - Previews
+
+#Preview {
+    ListSectionFooter(description: "Turning this off stops background refresh for every account.")
+        .padding()
+}

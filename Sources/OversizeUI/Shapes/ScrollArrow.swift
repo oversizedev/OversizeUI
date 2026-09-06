@@ -28,3 +28,12 @@ public struct ScrollArrow: Shape {
         }
     }
 }
+
+// MARK: - Previews
+
+#Preview {
+    ScrollArrow(width: 30, offset: 6)
+        .stroke(Color.onSurfacePrimary, lineWidth: 2)
+        .frame(width: 30, height: 30)
+        .padding()
+}

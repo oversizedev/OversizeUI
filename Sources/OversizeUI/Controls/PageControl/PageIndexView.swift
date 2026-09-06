@@ -31,3 +31,14 @@ public struct PageIndexView: View {
         .animation(.default, value: index)
     }
 }
+
+// MARK: - Previews
+
+#Preview {
+    VStack(spacing: .medium) {
+        PageIndexView(0, maxIndex: 3)
+        PageIndexView(1, maxIndex: 3)
+        PageIndexView(2, maxIndex: 3)
+    }
+    .padding()
+}

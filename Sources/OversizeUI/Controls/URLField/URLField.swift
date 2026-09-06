@@ -76,4 +76,27 @@ public struct URLField: View {
         #endif
     }
 }
+
+// MARK: - Previews
+
+@available(iOS 15.0, *)
+@available(macOS 14.0, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+private struct URLFieldPreview: View {
+    @State private var url: URL?
+
+    var body: some View {
+        URLField(url: $url)
+            .padding()
+    }
+}
+
+@available(iOS 15.0, *)
+@available(macOS 14.0, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+#Preview {
+    URLFieldPreview()
+}
 #endif
