@@ -10,7 +10,13 @@ public extension EnvironmentValues {
 }
 
 public extension View {
+    @ViewBuilder
     func sectionContentMarginsVisibility(_ visibility: Visibility) -> some View {
-        environment(\.sectionContentMarginsVisibility, visibility)
+        if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
+            environment(\.sectionContentMarginsVisibility, visibility)
+                .containerValue(\.sectionContentMarginsVisibility, visibility)
+        } else {
+            environment(\.sectionContentMarginsVisibility, visibility)
+        }
     }
 }

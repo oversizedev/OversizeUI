@@ -7,26 +7,59 @@ import SwiftUI
 
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 struct LayoutSectionView: View {
-    @Environment(\.sectionTitleSeparator) private var titleSeparator
-    @Environment(\.isBordered) private var isBordered
-    @Environment(\.sectionTitlePosition) private var sectionTitlePosition
-    @Environment(\.sectionContentMarginsVisibility) private var sectionContentMarginsVisibility
+    @Environment(\.self) private var environment
+    @Environment(\.listLayoutStyle) private var listStyle: ListLayoutStyle
 
     let section: SectionConfiguration
     let isFirst: Bool
     let isLast: Bool
     let isStacked: Bool
 
+    private var style: ResolvedSectionStyle {
+        section.resolvedStyle(environment: environment)
+    }
+
+    private var titleSeparator: Visibility {
+        style.titleSeparator
+    }
+
+    private var isBordered: Bool {
+        style.isBordered
+    }
+
+    private var sectionTitlePosition: SectionTitlePosition {
+        style.titlePosition
+    }
+
+    private var sectionContentMarginsVisibility: Visibility {
+        style.contentMarginsVisibility
+    }
+
+    private var backgroundStyle: SectionBackgroundStyle {
+        style.backgroundStyle
+    }
+
+    private var sectionHorizontalMargins: CGFloat {
+        switch listStyle {
+        case .plain, .inset, .grouped:
+            .zero
+        case .insetGrouped:
+            .medium
+        case .smallInsetGrouped:
+            .xxSmall
+        }
+    }
+
     var body: some View {
         VStack(spacing: .zero) {
             if sectionTitlePosition == .outside, section.header.count > 0 {
-                LayoutSectionHeaderView(header: section.header)
+                LayoutSectionHeaderView(header: section.header, margins: style.titleMargins)
                     .padding(.top, isFirst ? .zero : .xSmall)
             }
 
             VStack(spacing: .zero) {
                 if sectionTitlePosition == .inside, section.header.count > 0 {
-                    LayoutSectionHeaderView(header: section.header)
+                    LayoutSectionHeaderView(header: section.header, margins: style.titleMargins)
 
                     if titleSeparator == .visible, sectionContentMarginsVisibility != .visible {
                         Separator()
@@ -101,10 +134,14 @@ struct LayoutSectionView: View {
             }
             .background {
                 if isStacked {
-                    LayoutSectionBackgroundView()
+                    LayoutSectionBackgroundView(
+                        style: backgroundStyle,
+                        isBordered: isBordered
+                    )
                 }
             }
         }
+        .padding(.horizontal, sectionHorizontalMargins)
         #if os(macOS)
         .padding(
             .init(
@@ -129,26 +166,47 @@ struct LayoutSectionView: View {
 
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 struct LayoutSectionHeaderView<Header: View>: View {
-    @Environment(\.sectionTitleMargins) private var sectionTitleInsets: SwiftUI.EdgeInsets
     @Environment(\.headerProminence) private var headerProminence
 
     let header: Header
+    let margins: SwiftUI.EdgeInsets
 
     var body: some View {
         header
             .font(headerProminence == .increased ? .title3.weight(.semibold) : .headline.weight(.semibold))
             .foregroundStyle(Color.onBackgroundPrimary)
-            .padding(sectionTitleInsets)
+            .padding(margins)
             .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 struct LayoutSectionBackgroundView: View {
-    @Environment(\.isBordered) private var isBordered
+    let style: SectionBackgroundStyle
+    let isBordered: Bool
+
+    private var borderRadius: CGFloat {
+        #if os(macOS)
+        .small
+        #else
+        .medium
+        #endif
+    }
+
+    var body: some View {
+        switch style {
+        case .surface:
+            surfaceBackground
+        case .dotted:
+            Color.clear
+                .dottedBorder(cornerRadius: borderRadius)
+        case .plain:
+            EmptyView()
+        }
+    }
 
     #if os(macOS)
-    var body: some View {
+    private var surfaceBackground: some View {
         RoundedRectangle(cornerRadius: .xSmall)
             .fill(Color.surfacePrimary)
             .clipShape(RoundedRectangle(
@@ -167,7 +225,7 @@ struct LayoutSectionBackgroundView: View {
             )
     }
     #else
-    var body: some View {
+    private var surfaceBackground: some View {
         RoundedRectangle(cornerRadius: .medium)
             .fill(Color.surfacePrimary)
             .clipShape(RoundedRectangle(

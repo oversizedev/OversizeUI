@@ -7,13 +7,22 @@ import SwiftUI
 
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 struct ListLayoutSectionView: View {
-    @Environment(\.sectionTitleSeparator) private var titleSeparator
-    @Environment(\.isBordered) private var isBordered
-    @Environment(\.sectionTitlePosition) private var titlePosition
-    @Environment(\.sectionContentMarginsVisibility) private var sectionContentMarginsVisibility
+    @Environment(\.self) private var environment
     @Environment(\.listLayoutStyle) private var listStyle: ListLayoutStyle
 
     let section: SectionConfiguration
+
+    private var style: ResolvedSectionStyle {
+        section.resolvedStyle(environment: environment)
+    }
+
+    private var titleSeparator: Visibility {
+        style.titleSeparator
+    }
+
+    private var titlePosition: SectionTitlePosition {
+        style.titlePosition
+    }
 
     var body: some View {
         @ViewBuilder

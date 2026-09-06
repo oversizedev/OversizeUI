@@ -14,11 +14,23 @@ public extension EnvironmentValues {
 }
 
 public extension View {
+    @ViewBuilder
     func sectionTitlePosition(_ sectionTitlePosition: SectionTitlePosition) -> some View {
-        environment(\.sectionTitlePosition, sectionTitlePosition)
+        if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
+            environment(\.sectionTitlePosition, sectionTitlePosition)
+                .containerValue(\.sectionTitlePosition, sectionTitlePosition)
+        } else {
+            environment(\.sectionTitlePosition, sectionTitlePosition)
+        }
     }
 
-    func listSectionTitlePosition(_ sectionTitlePosition: SectionTitlePosition) -> some View {
-        environment(\.sectionTitlePosition, sectionTitlePosition)
+    @ViewBuilder
+    func listSectionTitlePosition(_ position: SectionTitlePosition) -> some View {
+        if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
+            environment(\.sectionTitlePosition, position)
+                .containerValue(\.sectionTitlePosition, position)
+        } else {
+            environment(\.sectionTitlePosition, position)
+        }
     }
 }

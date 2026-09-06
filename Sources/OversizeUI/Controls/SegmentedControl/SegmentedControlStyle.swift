@@ -231,7 +231,8 @@ public protocol SegmentedControlStyle: Sendable {
 }
 
 public struct SegmentedControlConfiguration: Sendable {
-    public struct Label: View {
+    public struct
+    Label: View {
         public init(content: some View) {
             body = AnyView(content)
         }

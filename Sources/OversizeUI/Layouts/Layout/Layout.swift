@@ -14,6 +14,8 @@ public struct Layout<Content: View, Background: View>: View {
     @ViewBuilder private var content: Content
     @ViewBuilder private let background: Background
 
+    var listStyle: ListLayoutStyle = .plain
+
     @State private var headerHeight: CGFloat = 0
 
     public var body: some View {
@@ -29,6 +31,7 @@ public struct Layout<Content: View, Background: View>: View {
                         )
                     }
                 }
+                .environment(\.listLayoutStyle, listStyle)
             }
             #if os(macOS)
             .padding(.horizontal, .small)
@@ -43,7 +46,7 @@ public struct Layout<Content: View, Background: View>: View {
             updateScrollOffset(value)
         }
         .background {
-            background.ignoresSafeArea()
+            backgroundView.ignoresSafeArea()
         }
         .background {
             Color.clear
@@ -60,6 +63,15 @@ public struct Layout<Content: View, Background: View>: View {
         }
     }
 
+    @ViewBuilder
+    private var backgroundView: some View {
+        if background.isEmpty {
+            listStyle == .plain ? Color.backgroundPrimary : Color.backgroundSecondary
+        } else {
+            background
+        }
+    }
+
     private func updateScrollOffset(_ offset: CGFloat) {
         guard headerHeight > 0 else { return }
         let visibleRatio: CGFloat = (headerHeight - offset) / headerHeight
@@ -70,7 +82,7 @@ public struct Layout<Content: View, Background: View>: View {
         _ title: String = "",
         onScroll: ScrollAction? = nil,
         @ViewBuilder content: () -> Content,
-        @ViewBuilder background: () -> Background = { Color.backgroundSecondary }
+        @ViewBuilder background: () -> Background = { EmptyView() }
     ) {
         self.title = title
         self.onScroll = onScroll
@@ -111,6 +123,8 @@ public struct Layout<Content: View, Background: View>: View {
                 Text("Song 2")
                 Text("Song 3")
             }
+            .sectionTitlePosition(.outside)
+            .bordered(false)
 
             Section {
                 Text("Song 1")
@@ -121,10 +135,56 @@ public struct Layout<Content: View, Background: View>: View {
             } footer: {
                 Text("Footer")
             }
+
+            Section {
+                Button("Create a new Subscription Group") {}
+            }
+            .sectionBackgroundStyle(.dotted)
         }
         .sectionTitlePosition(.inside)
         .bordered()
         .sectionTitleSeparator(.visible)
         // .headerProminence(.increased)
+    }
+}
+
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+#Preview("Inset Grouped") {
+    NavigationStack {
+        Layout("Inset Grouped") {
+            Section("Section") {
+                Row("Song 1")
+                Row("Song 2")
+                Row("Song 3")
+            }
+
+            Section("Section") {
+                Row("Song 1")
+                Row("Song 2")
+            }
+        }
+        .listLayoutStyle(.insetGrouped)
+        .sectionTitlePosition(.inside)
+        .bordered()
+    }
+}
+
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+#Preview("Small Inset Grouped") {
+    NavigationStack {
+        Layout("Small Inset Grouped") {
+            Section("Section") {
+                Row("Song 1")
+                Row("Song 2")
+                Row("Song 3")
+            }
+
+            Section("Section") {
+                Row("Song 1")
+                Row("Song 2")
+            }
+        }
+        .listLayoutStyle(.smallInsetGrouped)
+        .sectionTitlePosition(.outside)
     }
 }

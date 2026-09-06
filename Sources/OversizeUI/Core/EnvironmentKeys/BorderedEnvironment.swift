@@ -10,7 +10,13 @@ public extension EnvironmentValues {
 }
 
 public extension View {
+    @ViewBuilder
     func bordered(_ isBordered: Bool = true) -> some View {
-        environment(\.isBordered, isBordered)
+        if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
+            environment(\.isBordered, isBordered)
+                .containerValue(\.isBordered, isBordered)
+        } else {
+            environment(\.isBordered, isBordered)
+        }
     }
 }

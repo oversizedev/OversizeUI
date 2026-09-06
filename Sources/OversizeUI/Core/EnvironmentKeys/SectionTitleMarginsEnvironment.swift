@@ -14,8 +14,14 @@ public extension EnvironmentValues {
 }
 
 public extension View {
+    @ViewBuilder
     func sectionTitleMargins(_ margins: SwiftUI.EdgeInsets) -> some View {
-        environment(\.sectionTitleMargins, margins)
+        if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
+            environment(\.sectionTitleMargins, margins)
+                .containerValue(\.sectionTitleMargins, margins)
+        } else {
+            environment(\.sectionTitleMargins, margins)
+        }
     }
 
     func sectionContentRowMargins() -> some View {
