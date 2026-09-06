@@ -6,27 +6,41 @@
 import OversizeUI
 import SwiftUI
 
-// swiftlint:disable all
 struct RowDemo: View {
-    @State var radioOne: Bool = false
-    @State var radioTwo: Bool = false
+    @State private var isOn = true
 
     var body: some View {
-        PageView("Rows") {
-            VStack {
-                Row("Title")
+        DemoScreen {
+            DemoSectionView("Basic") {
+                Row("Title only")
 
-                Row("Title", subtitle: "Subtitle")
+                Row("Title", subtitle: "With a supporting subtitle")
             }
-        }
-        .leadingBar {
-            BarButton(.back)
+
+            DemoSectionView("Leading and trailing") {
+                Row("With leading icon") {
+                    Icon(Image.Base.setting)
+                }
+
+                Row("With toggle") {
+                    Icon(Image.Base.notification)
+                } trailing: {
+                    Toggle("", isOn: $isOn)
+                        .labelsHidden()
+                        .accessibilityIdentifier("rowToggle")
+                }
+            }
+
+            DemoSectionView("Navigatable") {
+                Row("Tappable row", subtitle: "Shows a chevron") {}
+                    .navigatable()
+            }
         }
     }
 }
 
-struct RowDemo_Previews: PreviewProvider {
-    static var previews: some View {
+#Preview {
+    NavigationStack {
         RowDemo()
     }
 }

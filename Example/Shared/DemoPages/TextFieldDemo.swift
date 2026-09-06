@@ -7,58 +7,54 @@ import OversizeUI
 import SwiftUI
 
 struct TextFieldDemo: View {
-    @State var text = ""
+    @State private var name = ""
+    @State private var email = ""
+    @State private var password = ""
+    @State private var helperText = "Enter a valid email"
+    @State private var helperStyle: FieldHelperStyle = .helperText
 
     var body: some View {
-        PageView("Text Fields") {
-            VStack(spacing: .xSmall) {
-                fields
+        DemoScreen {
+            DemoSectionView("Default") {
+                TextField("Name", text: $name)
+                    .textFieldStyle(.default)
+                    .accessibilityIdentifier("nameField")
+            }
 
-                fields
+            DemoSectionView("Label position") {
+                TextField("Adjacent", text: $name)
+                    .textFieldStyle(.default)
                     .fieldLabelPosition(.adjacent)
 
-                fields
+                TextField("Over input", text: $name)
+                    .textFieldStyle(.default)
                     .fieldLabelPosition(.overInput)
+            }
 
-            }.padding()
+            DemoSectionView("Helper") {
+                TextField("Email", text: $email)
+                    .textFieldStyle(.default)
+                    .fieldHelper($helperText, style: $helperStyle)
+                    .accessibilityIdentifier("emailField")
+
+                Button("Toggle error") {
+                    helperStyle = helperStyle == .errorText ? .helperText : .errorText
+                    helperText = helperStyle == .errorText ? "Invalid email" : "Enter a valid email"
+                }
+                .buttonStyle(.tertiary)
+                .accessibilityIdentifier("toggleHelperButton")
+            }
+
+            DemoSectionView("Secure") {
+                SecureField("Password", text: $password)
+                    .textFieldStyle(.default)
+            }
         }
-        .leadingBar {
-            BarButton(.back)
-        }
-    }
-
-    var fields: some View {
-        VStack(spacing: .xSmall) {
-            TextField("Text", text: $text)
-                .textFieldStyle(.default)
-
-            TextField("Text", text: $text)
-                .textFieldStyle(.placeholder("Placeholder"))
-
-            TextField("Text", text: $text)
-                .textFieldStyle(.placeholder("Placeholder", text: $text))
-
-            TextField("Text", text: $text, prompt: Text("Promt"))
-                .textFieldStyle(.placeholder("Placeholder", text: $text))
-
-            TextField("Text", text: $text)
-                .textFieldStyle(.placeholder("Placeholder", text: $text))
-                .fieldHelper(.constant("Help"), style: .constant(.helperText))
-
-            TextField("Text", text: $text)
-                .textFieldStyle(.placeholder("Placeholder", text: $text))
-                .fieldHelper(.constant("Ok"), style: .constant(.sussesText))
-
-            TextField("Text", text: $text)
-                .textFieldStyle(.placeholder("Placeholder", text: $text))
-                .fieldHelper(.constant("Error"), style: .constant(.errorText))
-
-        }.padding()
     }
 }
 
-struct TextFielsDemo_Previews: PreviewProvider {
-    static var previews: some View {
+#Preview {
+    NavigationStack {
         TextFieldDemo()
     }
 }

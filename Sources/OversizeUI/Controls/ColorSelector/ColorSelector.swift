@@ -118,6 +118,8 @@ public struct ColorPickerWithoutBorder: View {
     }
 }
 
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
 private struct PreviewViewHorizontal: View {
     @State var color = Color.red
     var body: some View {
@@ -125,6 +127,8 @@ private struct PreviewViewHorizontal: View {
     }
 }
 
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
 private struct PreviewViewGrid: View {
     @State var color = Color.red
     var body: some View {

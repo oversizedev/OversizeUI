@@ -6,52 +6,43 @@
 import OversizeUI
 import SwiftUI
 
-// swiftlint:disable all
 struct GridSelectDemo: View {
-    var items = ["One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four"]
-    var items2 = ["One", "Two", "Three", "Four"]
+    private let items = ["Swift", "SwiftUI", "Xcode", "iOS"]
 
-    @State var selection = ""
+    @State private var defaultSelection = "Swift"
+    @State private var selectionOnly = "Swift"
 
     var body: some View {
-        PageView("Grid select") {
-            VStack(spacing: .xSmall) {
-                ScrollView {
-                    GridSelect(
-                        items,
-                        selection: $selection,
-                        content: { item, _ in
-                            VStack {
-                                IconDeprecated(.circle)
-                                Text(item)
-                            }.padding()
-                        }
-                    )
-                }
+        DemoScreen {
+            DemoSectionView("Default") {
+                GridSelect(items, selection: $defaultSelection) { item, _ in
+                    VStack(spacing: .xxSmall) {
+                        Icon(Image.Base.category)
 
-                GridSelect(
-                    items2,
-                    selection: $selection,
-                    content: { item, _ in
-                        VStack {
-                            IconDeprecated(.circle)
-                            Text(item)
-                        }.padding()
+                        Text(item)
                     }
-                )
+                    .padding()
+                }
+                .accessibilityIdentifier("defaultGridSelect")
+            }
 
+            DemoSectionView("Selection only") {
+                GridSelect(items, selection: $selectionOnly) { item, _ in
+                    VStack(spacing: .xxSmall) {
+                        Icon(Image.Base.star)
+
+                        Text(item)
+                    }
+                    .padding()
+                }
                 .gridSelectStyle(SelectionOnlyGridSelectStyle())
             }
-            .padding()
-        }
-        .leadingBar {
-            BarButton(.back)
         }
     }
 }
 
-struct GridSelectDemo_Previews: PreviewProvider {
-    static var previews: some View {
+#Preview {
+    NavigationStack {
         GridSelectDemo()
     }
 }

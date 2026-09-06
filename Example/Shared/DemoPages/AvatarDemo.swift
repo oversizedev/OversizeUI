@@ -8,62 +8,52 @@ import SwiftUI
 
 struct AvatarDemo: View {
     var body: some View {
-        PageView("Avatars") {
-            LazyVStack(spacing: .xSmall) {
-                #if os(iOS) || os(macOS) || os(watchOS)
-                Group {
-                    Avatar(firstName: "Jhon")
-                        .controlSize(.small)
-                        .previewDisplayName("Only firsy name")
-
-                    Avatar(firstName: "Jhon", lastName: "Smith")
+        DemoScreen {
+            #if os(iOS) || os(macOS) || os(watchOS)
+            DemoSectionView("Sizes") {
+                HStack(spacing: .small) {
+                    Avatar(firstName: "John")
                         .controlSize(.small)
 
-                    Avatar(avatar: Image("empty"))
-                        .controlSize(.small)
-
-                    Avatar(firstName: "Jhon", lastName: "Smith", avatar: Image("empty"))
-                        .controlSize(.small)
-                }
-
-                Group {
-                    Avatar(firstName: "Jhon")
-                        .controlSize(.regular)
-                        .previewDisplayName("Only firsy name")
-
-                    Avatar(firstName: "Jhon", lastName: "Smith")
+                    Avatar(firstName: "John", lastName: "Smith")
                         .controlSize(.regular)
 
-                    Avatar(avatar: Image("empty"))
-                        .controlSize(.regular)
-
-                    Avatar(firstName: "Jhon", lastName: "Smith", avatar: Image("empty"))
-                        .controlSize(.regular)
-                }
-                Group {
-                    Avatar(firstName: "Jhon")
-                        .controlSize(.large)
-
-                    Avatar(firstName: "Jhon", lastName: "Smith")
-                        .controlSize(.large)
-
-                    Avatar(avatar: Image("empty"))
-                        .controlSize(.large)
-
-                    Avatar(firstName: "Jhon", lastName: "Smith", avatar: Image("empty"))
+                    Avatar(firstName: "John", lastName: "Smith")
                         .controlSize(.large)
                 }
-                #endif
             }
-        }
-        .leadingBar {
-            BarButton(.back)
+
+            DemoSectionView("Content") {
+                HStack(spacing: .small) {
+                    Avatar(firstName: "John", lastName: "Smith")
+
+                    Avatar(icon: Image.Base.profile)
+
+                    Avatar(avatar: Image(systemName: "swift"))
+                }
+            }
+
+            DemoSectionView("Background and stroke") {
+                HStack(spacing: .small) {
+                    Avatar(firstName: "AI", lastName: "Bot")
+                        .avatarBackground(.gradient([.blue, .purple]))
+                        .avatarOnBackground(.white)
+
+                    Avatar(firstName: "John", lastName: "Smith")
+                        .avatarBackground(.color(.accent))
+                        .avatarOnBackground(.onPrimary)
+
+                    Avatar(firstName: "John", lastName: "Smith")
+                        .avatarStroke(.accent, lineWidth: 2)
+                }
+            }
+            #endif
         }
     }
 }
 
-struct AvatarDemo_Previews: PreviewProvider {
-    static var previews: some View {
+#Preview {
+    NavigationStack {
         AvatarDemo()
     }
 }
