@@ -53,9 +53,7 @@ public struct Separator: View {
     }
 }
 
-struct Separator_Preview: PreviewProvider {
-    static var previews: some View {
-        Separator()
-            .padding(.vertical)
-    }
+#Preview {
+    Separator()
+        .padding(.vertical)
 }

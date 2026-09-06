@@ -226,45 +226,32 @@ public extension GridSelect where Selection == EmptyView {
 }
 
 // swiftlint:disable all
-struct GridSelect_Preview: PreviewProvider {
-    struct GridSelectPreview: View {
-        var items = ["One", "Two", "Three", "Four"]
+private struct GridSelectPreview: View {
+    var items = ["One", "Two", "Three", "Four"]
 
-        @State var selection = ""
+    @State var selection = ""
 
-        var body: some View {
-            Group {
-                GridSelect(
-                    items,
-                    selection: $selection,
-                    content: { item, _ in
-                        VStack {
-                            Image.Base.category.icon()
-                            Text(item)
-                        }.padding()
-                    }
-                )
-                .previewDisplayName("Default")
-
-                GridSelect(
-                    items,
-                    selection: $selection,
-                    content: { item, _ in
-                        VStack {
-                            Image.Base.category.icon()
-                            Text(item)
-                        }.padding()
-                    }
-                )
-                .previewDisplayName("Selection Only")
-                .gridSelectStyle(SelectionOnlyGridSelectStyle())
+    var body: some View {
+        GridSelect(
+            items,
+            selection: $selection,
+            content: { item, _ in
+                VStack {
+                    Image.Base.category.icon()
+                    Text(item)
+                }
+                .padding()
             }
-            .previewLayout(.sizeThatFits)
-            .padding()
-        }
+        )
+        .padding()
     }
+}
 
-    static var previews: some View {
-        GridSelectPreview()
-    }
+#Preview("Default") {
+    GridSelectPreview()
+}
+
+#Preview("Selection Only") {
+    GridSelectPreview()
+        .gridSelectStyle(SelectionOnlyGridSelectStyle())
 }

@@ -235,9 +235,7 @@ public struct Avatar: View {
     }
 }
 
-struct Avatar_Previews: PreviewProvider {
-    static var previews: some View {
-        AvatarPreview()
-            .previewComponent("Avatar")
-    }
+#Preview {
+    AvatarPreview()
+        .previewComponent("Avatar")
 }

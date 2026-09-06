@@ -136,31 +136,29 @@ public extension Switch where Label == EmptyView {
  }
  */
 
-struct Switch_preview: PreviewProvider {
-    static var previews: some View {
-        VStack(spacing: 24) {
-            Switch(isOn: .constant(true)) {
-                Text("Text")
-            }
-
-            Switch(isOn: .constant(false), alignment: .leading, label: {
-                Text("Text")
-            })
-
-            Switch(isOn: .constant(true), alignment: .trailing) {
-                Text("Text")
-            }
-
-            Switch("Text", isOn: .constant(false), alignment: .leading)
-
-            Switch("Text", isOn: .constant(true), alignment: .trailing)
-
-            Switch("Text", isOn: .constant(false))
-                .disabled(true)
-
-            Switch("Text", isOn: .constant(true))
-                .disabled(true)
+#Preview {
+    VStack(spacing: 24) {
+        Switch(isOn: .constant(true)) {
+            Text("Text")
         }
-        .padding()
+
+        Switch(isOn: .constant(false), alignment: .leading, label: {
+            Text("Text")
+        })
+
+        Switch(isOn: .constant(true), alignment: .trailing) {
+            Text("Text")
+        }
+
+        Switch("Text", isOn: .constant(false), alignment: .leading)
+
+        Switch("Text", isOn: .constant(true), alignment: .trailing)
+
+        Switch("Text", isOn: .constant(false))
+            .disabled(true)
+
+        Switch("Text", isOn: .constant(true))
+            .disabled(true)
     }
+    .padding()
 }

@@ -90,8 +90,6 @@ public extension RowTitle {
     }
 }
 
-struct RowTitle_Previews: PreviewProvider {
-    static var previews: some View {
-        RowTitle("Title")
-    }
+#Preview {
+    RowTitle("Title")
 }

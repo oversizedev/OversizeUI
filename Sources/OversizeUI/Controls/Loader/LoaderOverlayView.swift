@@ -137,12 +137,10 @@ public extension View {
     }
 }
 
-struct LoaderOverlayView_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            Spacer()
-        }
-        .loader(isPresented: .constant(true))
+#Preview {
+    VStack {
+        Spacer()
     }
+    .loader(isPresented: .constant(true))
 }
 #endif

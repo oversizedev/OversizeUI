@@ -129,31 +129,29 @@ public extension Checkbox where Label == EmptyView {
  }
  */
 
-struct Checkbox_preview: PreviewProvider {
-    static var previews: some View {
-        VStack(spacing: 24) {
-            Checkbox(isOn: .constant(true), label: {
-                Text("Text")
-            })
+#Preview {
+    VStack(spacing: 24) {
+        Checkbox(isOn: .constant(true), label: {
+            Text("Text")
+        })
 
-            Checkbox(isOn: .constant(false), alignment: .leading, label: {
-                Text("Text")
-            })
+        Checkbox(isOn: .constant(false), alignment: .leading, label: {
+            Text("Text")
+        })
 
-            Checkbox(isOn: .constant(true), alignment: .trailing, label: {
-                Text("Text")
-            })
+        Checkbox(isOn: .constant(true), alignment: .trailing, label: {
+            Text("Text")
+        })
 
-            Checkbox("Text", isOn: .constant(false), alignment: .leading)
+        Checkbox("Text", isOn: .constant(false), alignment: .leading)
 
-            Checkbox("Text", isOn: .constant(true), alignment: .trailing)
+        Checkbox("Text", isOn: .constant(true), alignment: .trailing)
 
-            Checkbox("Text", isOn: .constant(false))
-                .disabled(true)
+        Checkbox("Text", isOn: .constant(false))
+            .disabled(true)
 
-            Checkbox("Text", isOn: .constant(true))
-                .disabled(true)
-        }
-        .padding()
+        Checkbox("Text", isOn: .constant(true))
+            .disabled(true)
     }
+    .padding()
 }

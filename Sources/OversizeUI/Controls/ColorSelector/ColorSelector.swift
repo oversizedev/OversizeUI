@@ -118,28 +118,29 @@ public struct ColorPickerWithoutBorder: View {
     }
 }
 
+private struct PreviewViewHorizontal: View {
+    @State var color = Color.red
+    var body: some View {
+        ColorSelector(selection: $color)
+    }
+}
+
+private struct PreviewViewGrid: View {
+    @State var color = Color.red
+    var body: some View {
+        ColorSelector(selection: $color)
+            .colorSelectorStyle(GridColorSelectorStyle())
+    }
+}
+
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
-struct ColorSelector_Previews: PreviewProvider {
-    struct PreviewViewHorizontal: View {
-        @State var color = Color.red
-        var body: some View {
-            ColorSelector(selection: $color)
-        }
-    }
+#Preview("Horizontal") {
+    PreviewViewHorizontal()
+}
 
-    struct PreviewViewGrid: View {
-        @State var color = Color.red
-        var body: some View {
-            ColorSelector(selection: $color)
-                .colorSelectorStyle(GridColorSelectorStyle())
-        }
-    }
-
-    static var previews: some View {
-        Group {
-            PreviewViewHorizontal()
-            PreviewViewGrid()
-        }.previewLayout(.fixed(width: 375, height: 300))
-    }
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+#Preview("Grid") {
+    PreviewViewGrid()
 }

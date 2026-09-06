@@ -45,34 +45,32 @@ public extension ToggleStyle where Self == CheckboxStyle {
     }
 }
 
-struct Checkbox_Previews: PreviewProvider {
-    static var previews: some View {
-        SectionView {
-            VStack {
-                Toggle(isOn: .constant(true)) {
-                    Label("Label", systemImage: "folder.fill")
-                        .labelStyle(.row("Subtitle"))
-                }
-                .toggleStyle(.checkboxRow)
-
-                Toggle(isOn: .constant(true)) {
-                    Label("Label", systemImage: "folder.fill")
-                        .labelStyle(.row)
-                }
-                .toggleStyle(.checkboxRow)
-
-                Separator()
-
-                Toggle("Title", isOn: .constant(true))
-                    .toggleStyle(.checkboxRow)
-
-                Toggle("Title", isOn: .constant(false))
-                    .toggleStyle(.checkboxRow)
-
-                Toggle("Title", isOn: .constant(false))
-                    .toggleStyle(.checkboxRow)
+#Preview {
+    SectionView {
+        VStack {
+            Toggle(isOn: .constant(true)) {
+                Label("Label", systemImage: "folder.fill")
+                    .labelStyle(.row("Subtitle"))
             }
+            .toggleStyle(.checkboxRow)
+
+            Toggle(isOn: .constant(true)) {
+                Label("Label", systemImage: "folder.fill")
+                    .labelStyle(.row)
+            }
+            .toggleStyle(.checkboxRow)
+
+            Separator()
+
+            Toggle("Title", isOn: .constant(true))
+                .toggleStyle(.checkboxRow)
+
+            Toggle("Title", isOn: .constant(false))
+                .toggleStyle(.checkboxRow)
+
+            Toggle("Title", isOn: .constant(false))
+                .toggleStyle(.checkboxRow)
         }
-        .background(Color.surfaceSecondary)
     }
+    .background(Color.surfaceSecondary)
 }
