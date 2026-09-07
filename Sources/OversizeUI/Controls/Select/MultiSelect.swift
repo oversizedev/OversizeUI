@@ -95,13 +95,21 @@ public struct MultiSelect<Element: Equatable, Content: View, Selection: View, Ac
                 modal
                 #endif
             }
-            .onChange(of: showModalBinding) { state in
-                if let state {
-                    showModal = state
+            .onChange(of: showModalBinding) { _, newValue in
+                if let newValue, newValue != showModal {
+                    showModal = newValue
+                }
+            }
+            .onChange(of: showModal) { _, newValue in
+                if showModalBinding != nil, showModalBinding != newValue {
+                    showModalBinding = newValue
                 }
             }
         }
         .onAppear {
+            if let showModalBinding, showModalBinding != showModal {
+                showModal = showModalBinding
+            }
             if !selection.isEmpty {
                 for dataIndex in 0 ..< data.count {
                     let dataItem = data[dataIndex]

@@ -77,12 +77,20 @@ public struct Select<Element: Equatable, Content: View, Selection: View, Actions
                 #endif
             }
         }
-        .onChange(of: showModalBinding) { state in
-            if let state {
-                showModal = state
+        .onChange(of: showModalBinding) { _, newValue in
+            if let newValue, newValue != showModal {
+                showModal = newValue
+            }
+        }
+        .onChange(of: showModal) { _, newValue in
+            if showModalBinding != nil, showModalBinding != newValue {
+                showModalBinding = newValue
             }
         }
         .onAppear {
+            if let showModalBinding, showModalBinding != showModal {
+                showModal = showModalBinding
+            }
             updateSelectionState()
         }
         .onChange(of: data) {
