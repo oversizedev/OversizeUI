@@ -88,6 +88,9 @@ public struct Select<Element: Equatable, Content: View, Selection: View, Actions
             }
         }
         .onAppear {
+            if let showModalBinding, showModalBinding != showModal {
+                showModal = showModalBinding
+            }
             updateSelectionState()
         }
         .onChange(of: data) {
