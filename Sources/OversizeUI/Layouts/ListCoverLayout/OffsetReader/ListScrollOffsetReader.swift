@@ -72,13 +72,20 @@ struct ListScrollOffsetReader: NSViewRepresentable {
 @available(macOS 14.0, *)
 final class ListScrollOffsetNSView: NSView {
     var onScroll: (@MainActor (CGFloat) -> Void)?
-    private var observation: NSKeyValueObservation?
+    private nonisolated(unsafe) var observer: NSObjectProtocol?
+    private weak var observedScrollView: NSScrollView?
 
     override func viewDidMoveToWindow() {
         super.viewDidMoveToWindow()
-        guard window != nil, observation == nil else { return }
+        guard window != nil, observer == nil else { return }
         DispatchQueue.main.async { [weak self] in
             self?.observeScrollView()
+        }
+    }
+
+    deinit {
+        if let observer {
+            NotificationCenter.default.removeObserver(observer)
         }
     }
 
@@ -86,15 +93,27 @@ final class ListScrollOffsetNSView: NSView {
         var current: NSView? = self
         while let view = current {
             if let scrollView = view as? NSScrollView {
-                observation = scrollView.contentView.observe(\.bounds, options: .new) { [weak self] clipView, _ in
-                    MainActor.assumeIsolated {
-                        guard let self else { return }
-                        self.onScroll?(clipView.bounds.origin.y)
-                    }
-                }
+                observe(scrollView)
                 return
             }
             current = view.superview
+        }
+    }
+
+    private func observe(_ scrollView: NSScrollView) {
+        observedScrollView = scrollView
+        let clipView = scrollView.contentView
+        clipView.postsBoundsChangedNotifications = true
+        observer = NotificationCenter.default.addObserver(
+            forName: NSView.boundsDidChangeNotification,
+            object: clipView,
+            queue: .main
+        ) { [weak self] _ in
+            MainActor.assumeIsolated {
+                guard let self, let scrollView = self.observedScrollView else { return }
+                let offset = scrollView.contentView.bounds.origin.y + scrollView.contentInsets.top
+                self.onScroll?(offset)
+            }
         }
     }
 }
