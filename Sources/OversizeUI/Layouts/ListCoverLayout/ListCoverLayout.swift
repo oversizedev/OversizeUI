@@ -47,6 +47,19 @@ public struct ListCoverLayout<
                     .offset(y: coverScrollOffset)
 
                 SwiftUI.List(selection: $selection) {
+                    #if os(macOS)
+                    Color.clear
+                        .frame(height: spacerRowHeight)
+                        .listRowInsets(EdgeInsets())
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
+                        .selectionDisabled()
+                        .background {
+                            ListScrollOffsetReader { offset in
+                                scrollOffset = offset
+                            }
+                        }
+                    #endif
                     SwiftUI.Group(sections: content) { sections in
                         SwiftUI.ForEach(sections) { section in
                             ListLayoutSectionView(section: section)
@@ -58,12 +71,14 @@ public struct ListCoverLayout<
                 .environment(\.defaultMinListHeaderHeight, 40)
                 .environment(\.defaultMinListRowHeight, 56)
                 .scrollContentBackground(.hidden)
+                #if !os(macOS)
                 .contentMargins(.top, resolveContentMarginTop, for: .scrollContent)
                 .onScrollGeometryChange(for: CGFloat.self) { proxy in
                     proxy.contentOffset.y + proxy.contentInsets.top
                 } action: { _, value in
                     scrollOffset = value
                 }
+                #endif
             }
             .background(backgroundView.ignoresSafeArea())
         }
@@ -121,6 +136,12 @@ public struct ListCoverLayout<
     private var coverScrollOffset: CGFloat {
         scrollOffset > 0 ? -scrollOffset : 0
     }
+
+    #if os(macOS)
+    private var spacerRowHeight: CGFloat {
+        max(0, resolveContentMarginTop)
+    }
+    #endif
 
     private var resolveContentMarginTop: CGFloat {
         if let contentMarginTop {

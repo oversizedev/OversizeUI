@@ -69,8 +69,11 @@ public struct CoverLayout<
                 }
                 .padding(.top, contentOffset)
             }
+            #if os(macOS)
+            .contentMargins(.top, coverHeight, for: .scrollContent)
+            #else
             .safeAreaPadding(.top, coverHeight)
-            // .contentMargins(.top, resolveContentMarginTop, for: .scrollContent)
+            #endif
             .onScrollGeometryChange(for: CGFloat.self) { proxy in
                 proxy.contentOffset.y + proxy.contentInsets.top
             } action: { _, value in
@@ -82,6 +85,7 @@ public struct CoverLayout<
             background
                 .ignoresSafeArea()
         }
+        .modifier(CoverScrollEdgeEffectModifier())
     }
 
     private var coverStretchHeight: CGFloat {
@@ -131,6 +135,20 @@ public struct CoverLayout<
         self.contentBackground = contentBackground()
         self.coverBackground = coverBackground()
         self.background = background()
+    }
+}
+
+private struct CoverScrollEdgeEffectModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        #if os(macOS)
+        if #available(macOS 26.0, *) {
+            content.scrollEdgeEffectHidden(true, for: .top)
+        } else {
+            content
+        }
+        #else
+        content
+        #endif
     }
 }
 
