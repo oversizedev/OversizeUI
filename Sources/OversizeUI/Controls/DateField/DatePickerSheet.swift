@@ -11,7 +11,6 @@ import SwiftUI
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
 public struct DatePickerSheet: View {
-    @Environment(\.screenSize) var screenSize
     @Environment(\.dismiss) var dismiss
 
     @Binding private var selection: Date

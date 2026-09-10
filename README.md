@@ -417,6 +417,7 @@ The old page and navigation stack is deprecated in favour of native SwiftUI navi
 | `ScrollViewOffset` | `ScrollViewWithOffsetTracking` |
 | `.rowArrow()` | `.navigatable()` |
 | `.shadow(elevation:)` | `.shadowElevation(_:)` |
+| `.screenSize(_:)` modifiers | `@Environment(\.screenSize)` resolves itself; `GeometryReader` / `.onGeometryChange` for container sizes |
 | `.screenSize` safe-area accessors | `@Environment(\.safeAreaInsets)` |
 
 ## Example App

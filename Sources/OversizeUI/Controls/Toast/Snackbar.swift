@@ -6,8 +6,6 @@
 import SwiftUI
 
 public struct Snackbar<Label: View, Actions: View>: View {
-    @Environment(\.screenSize) var screenSize
-
     private let text: String?
 
     private let label: Label?

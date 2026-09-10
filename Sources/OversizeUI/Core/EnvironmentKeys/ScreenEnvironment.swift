@@ -76,6 +76,7 @@ public struct ScreenSize: Sendable {
 // MARK: - EnvironmentValues
 
 public extension EnvironmentValues {
+    @available(*, deprecated, message: "Use GeometryReader or onGeometryChange to read the size and safe area of the container")
     @Entry var screenSize: ScreenSize = {
         #if os(iOS) || os(tvOS)
         return MainActor.assumeIsolated {
@@ -163,16 +164,4 @@ public extension EnvironmentValues {
         return SwiftUI.EdgeInsets()
         #endif
     }()
-}
-
-// MARK: - View Extensions
-
-public extension View {
-    func screenSize(_ size: ScreenSize) -> some View {
-        environment(\.screenSize, size)
-    }
-
-    func screenSize(_ geometry: GeometryProxy) -> some View {
-        environment(\.screenSize, ScreenSize(geometry: geometry))
-    }
 }

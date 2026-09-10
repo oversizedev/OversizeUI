@@ -8,8 +8,6 @@ import SwiftUI
 @available(*, deprecated, renamed: "LayoutView")
 @available(iOS 15.0, macOS 14, tvOS 15.0, watchOS 9.0, *)
 public struct PageView<Content: View, LeadingBar: View, TrailingBar: View, TopToolbar: View, TitleLabel: View>: View {
-    @Environment(\.screenSize) var screenSize
-
     private let title: String?
     private let content: Content
     private var isLargeTitle = false

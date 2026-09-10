@@ -17,7 +17,6 @@ public struct CalendarLayoutView<
 >: View {
     @Environment(\.sizeCategory) private var contentSize
     @Environment(\.calendar) private var calendar
-    @Environment(\.safeAreaInsets) private var safeAreaInsets
 
     public typealias ScrollAction = @MainActor @Sendable (_ offset: CGPoint, _ headerVisibleRatio: CGFloat) -> Void
 
@@ -35,6 +34,7 @@ public struct CalendarLayoutView<
     @State private var calendarHeight: CGFloat?
 
     @State private var isShowMonthPicker: Bool = false
+    @State private var headerHeight: CGFloat = 0
 
     private var columns: [GridItem] {
         Array(repeating: GridItem(spacing: 0), count: 7)
@@ -87,6 +87,19 @@ public struct CalendarLayoutView<
             }
         }
         .background(background.ignoresSafeArea())
+        .background {
+            Color.clear
+                .ignoresSafeArea()
+                .onGeometryChange(for: CGFloat.self) { proxy in
+                    proxy.safeAreaInsets.top + 44
+                } action: { height in
+                    let isInitial = headerHeight == 0
+                    headerHeight = height
+                    if isInitial {
+                        onScroll?(.zero, 1.0)
+                    }
+                }
+        }
         .toolbarTitleDisplayMode(.inline)
         .sensoryFeedback(.selection, trigger: selection)
         .sheet(isPresented: $isShowMonthPicker) {
@@ -231,7 +244,7 @@ public struct CalendarLayoutView<
     }
 
     private func handleScrollOffset(_ offset: CGPoint) {
-        let headerHeight = 44 + safeAreaInsets.top
+        guard headerHeight > 0 else { return }
         let visibleRatio: CGFloat = (headerHeight + offset.y) / headerHeight
         onScroll?(offset, visibleRatio)
     }
