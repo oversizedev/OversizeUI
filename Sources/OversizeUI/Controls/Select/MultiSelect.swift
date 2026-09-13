@@ -121,7 +121,15 @@ public struct MultiSelect<Element: Equatable, Content: View, Selection: View, Ac
     }
 
     private func updateSelectedIndexes() {
-        selectedIndexes = data.indices.filter { selection.contains(data[$0]) }
+        var remainingSelection = selection
+        var indexes: [Int] = []
+        for (index, item) in data.enumerated() {
+            if let matchIndex = remainingSelection.firstIndex(of: item) {
+                indexes.append(index)
+                remainingSelection.remove(at: matchIndex)
+            }
+        }
+        selectedIndexes = indexes
     }
 
     private var modal: some View {
