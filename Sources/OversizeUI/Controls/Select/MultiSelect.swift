@@ -123,13 +123,23 @@ public struct MultiSelect<Element: Equatable, Content: View, Selection: View, Ac
     private func updateSelectedIndexes() {
         var remainingSelection = selection
         var indexes: [Int] = []
-        for (index, item) in data.enumerated() {
+
+        for index in selectedIndexes where data.indices.contains(index) {
+            let item = data[index]
             if let matchIndex = remainingSelection.firstIndex(of: item) {
                 indexes.append(index)
                 remainingSelection.remove(at: matchIndex)
             }
         }
-        selectedIndexes = indexes
+
+        for (index, item) in data.enumerated() where !indexes.contains(index) {
+            if let matchIndex = remainingSelection.firstIndex(of: item) {
+                indexes.append(index)
+                remainingSelection.remove(at: matchIndex)
+            }
+        }
+
+        selectedIndexes = indexes.sorted()
     }
 
     private var modal: some View {
