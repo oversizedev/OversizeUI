@@ -110,15 +110,36 @@ public struct MultiSelect<Element: Equatable, Content: View, Selection: View, Ac
             if let showModalBinding, showModalBinding != showModal {
                 showModal = showModalBinding
             }
-            if !selection.isEmpty {
-                for dataIndex in 0 ..< data.count {
-                    let dataItem = data[dataIndex]
-                    for selectIndex in 0 ..< selection.count where dataItem == selection[selectIndex] {
-                        selectedIndexes.append(dataIndex)
-                    }
-                }
+            updateSelectedIndexes()
+        }
+        .onChange(of: data) {
+            updateSelectedIndexes()
+        }
+        .onChange(of: selection) {
+            updateSelectedIndexes()
+        }
+    }
+
+    private func updateSelectedIndexes() {
+        var remainingSelection = selection
+        var indexes: [Int] = []
+
+        for index in selectedIndexes where data.indices.contains(index) {
+            let item = data[index]
+            if let matchIndex = remainingSelection.firstIndex(of: item) {
+                indexes.append(index)
+                remainingSelection.remove(at: matchIndex)
             }
         }
+
+        for (index, item) in data.enumerated() where !indexes.contains(index) {
+            if let matchIndex = remainingSelection.firstIndex(of: item) {
+                indexes.append(index)
+                remainingSelection.remove(at: matchIndex)
+            }
+        }
+
+        selectedIndexes = indexes.sorted()
     }
 
     private var modal: some View {
