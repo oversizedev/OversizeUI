@@ -26,7 +26,13 @@ public struct URLField: View {
     }
 
     public var body: some View {
-        TextField(title, text: $urlString, onEditingChanged: { state in
+        TextField(title, text: Binding(
+            get: { urlString },
+            set: { newValue in
+                urlString = newValue
+                onRawTextChange?(newValue)
+            }
+        ), onEditingChanged: { state in
             guard !state else {
                 textFieldHelper = .none
                 return
@@ -47,9 +53,6 @@ public struct URLField: View {
             if let newValue, newValue.absoluteString != urlString {
                 urlString = newValue.absoluteString
             }
-        }
-        .onChange(of: urlString) { newValue in
-            onRawTextChange?(newValue)
         }
     }
 
