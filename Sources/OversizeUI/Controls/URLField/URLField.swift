@@ -14,15 +14,15 @@ public struct URLField: View {
     @Binding private var url: URL?
     @State private var urlString: String = ""
     let title: String
-    private let onRawTextChange: ((String) -> Void)?
+    private let onTextChange: ((String) -> Void)?
 
     @State private var textFieldHelper: FieldHelperStyle = .none
 
-    public init(_ title: String = "URL", url: Binding<URL?>, onRawTextChange: ((String) -> Void)? = nil) {
+    public init(_ title: String = "URL", url: Binding<URL?>, onTextChange: ((String) -> Void)? = nil) {
         self.title = title
         _url = url
         _urlString = .init(initialValue: url.wrappedValue?.absoluteString ?? "")
-        self.onRawTextChange = onRawTextChange
+        self.onTextChange = onTextChange
     }
 
     public var body: some View {
@@ -30,7 +30,7 @@ public struct URLField: View {
             get: { urlString },
             set: { newValue in
                 urlString = newValue
-                onRawTextChange?(newValue)
+                onTextChange?(newValue)
             }
         ), onEditingChanged: { state in
             guard !state else {
