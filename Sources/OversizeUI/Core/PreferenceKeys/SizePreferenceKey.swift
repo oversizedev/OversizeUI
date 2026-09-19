@@ -5,6 +5,7 @@
 
 import SwiftUI
 
+@available(*, deprecated, message: "Use readSize(onChange:) instead")
 public struct SizePreferenceKey: PreferenceKey {
     public static let defaultValue: CGSize = .zero
     public static func reduce(value _: inout CGSize, nextValue _: () -> CGSize) {}
