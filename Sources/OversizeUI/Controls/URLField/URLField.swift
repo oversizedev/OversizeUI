@@ -14,13 +14,15 @@ public struct URLField: View {
     @Binding private var url: URL?
     @State private var urlString: String = ""
     let title: String
+    private let onRawTextChange: ((String) -> Void)?
 
     @State private var textFieldHelper: FieldHelperStyle = .none
 
-    public init(_ title: String = "URL", url: Binding<URL?>) {
+    public init(_ title: String = "URL", url: Binding<URL?>, onRawTextChange: ((String) -> Void)? = nil) {
         self.title = title
         _url = url
         _urlString = .init(initialValue: url.wrappedValue?.absoluteString ?? "")
+        self.onRawTextChange = onRawTextChange
     }
 
     public var body: some View {
@@ -45,6 +47,9 @@ public struct URLField: View {
             if let newValue, newValue.absoluteString != urlString {
                 urlString = newValue.absoluteString
             }
+        }
+        .onChange(of: urlString) { newValue in
+            onRawTextChange?(newValue)
         }
     }
 
