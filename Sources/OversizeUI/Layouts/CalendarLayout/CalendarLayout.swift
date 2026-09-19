@@ -202,9 +202,7 @@ public struct CalendarLayout<
                     .padding(.horizontal, .xxSmall)
                     .padding(.vertical, .xxxSmall)
                     .readSize { size in
-                        MainActor.assumeIsolated {
-                            calendarHeight = max(calendarHeight ?? 0, size.height)
-                        }
+                        calendarHeight = max(calendarHeight ?? 0, size.height)
                     }
                     .tag(month)
                 }
