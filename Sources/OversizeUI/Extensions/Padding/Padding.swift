@@ -46,12 +46,12 @@ public struct ContentMarginsModifier: ViewModifier {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     public func body(content: Content) -> some View {
         content
-            .contentMargins(.horizontal, horizontalSizeClass == .compact ? .medium : .medium + .large)
-            .contentMargins(.vertical, .small)
+            .contentMargins(.horizontal, horizontalSizeClass == .compact ? .medium : .medium + .large, for: .scrollContent)
+            .contentMargins(.vertical, .small, for: .scrollContent)
     }
     #else
     public func body(content: Content) -> some View {
-        content.contentMargins(.all, .medium)
+        content.contentMargins(.all, .medium, for: .scrollContent)
     }
     #endif
 }

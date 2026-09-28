@@ -66,6 +66,9 @@ Layout("Library") { ... }
 | `.smallInsetGrouped` | Tighter variant of `.insetGrouped` |
 | `.grouped` | Grouped rows with full-width separators |
 
+Like a native `List`, only the grouped styles add section margins and section cards. With `.plain` and
+`.inset` a section draws a card only when it sets `.sectionBackgroundStyle(_:)` explicitly.
+
 ### Section styling
 
 Section-level modifiers can be applied to the whole layout or to a single `Section`:

@@ -20,24 +20,18 @@ public struct Layout<Content: View, Background: View>: View {
 
     public var body: some View {
         SwiftUI.ScrollView {
-            SwiftUI.LazyVStack(spacing: .xxSmall) {
+            SwiftUI.LazyVStack(spacing: sectionSpacing) {
                 SwiftUI.Group(sections: content) { sections in
                     SwiftUI.ForEach(sections) { section in
                         LayoutSectionView(
                             section: section,
                             isFirst: section.id == sections.first?.id,
-                            isLast: section.id == sections.last?.id,
-                            isStacked: sections.isEmpty == false
+                            isLast: section.id == sections.last?.id
                         )
                     }
                 }
                 .environment(\.listLayoutStyle, listStyle)
             }
-            #if os(macOS)
-            .padding(.horizontal, .small)
-            #else
-            .padding(.horizontal, .xxSmall)
-            #endif
         }
         .navigationTitle(title)
         .onScrollGeometryChange(for: CGFloat.self) { proxy in
@@ -60,6 +54,15 @@ public struct Layout<Content: View, Background: View>: View {
                         onScroll?(.zero, 1.0)
                     }
                 }
+        }
+    }
+
+    private var sectionSpacing: CGFloat {
+        switch listStyle {
+        case .plain, .inset:
+            .zero
+        case .grouped, .insetGrouped, .smallInsetGrouped:
+            .xxSmall
         }
     }
 
@@ -141,10 +144,30 @@ public struct Layout<Content: View, Background: View>: View {
             }
             .sectionBackgroundStyle(.dotted)
         }
+        .listLayoutStyle(.smallInsetGrouped)
         .sectionTitlePosition(.inside)
         .bordered()
         .sectionTitleSeparator(.visible)
         // .headerProminence(.increased)
+    }
+}
+
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+#Preview("Plain") {
+    NavigationStack {
+        Layout("Plain") {
+            Section("Section") {
+                Row("Song 1")
+                Row("Song 2")
+                Row("Song 3")
+            }
+
+            Section("Section") {
+                Row("Song 1")
+                Row("Song 2")
+            }
+        }
+        .sectionTitlePosition(.outside)
     }
 }
 
