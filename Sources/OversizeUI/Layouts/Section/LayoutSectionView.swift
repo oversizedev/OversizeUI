@@ -37,7 +37,7 @@ struct LayoutSectionView: View {
     private var backgroundStyle: SectionBackgroundStyle {
         switch listStyle {
         case .plain, .inset:
-            section.containerValues.sectionBackgroundStyle ?? .plain
+            section.containerValues.sectionBackgroundStyle ?? environment.explicitSectionBackgroundStyle ?? .plain
         case .grouped, .insetGrouped, .smallInsetGrouped:
             style.backgroundStyle
         }
@@ -120,12 +120,10 @@ struct LayoutSectionView: View {
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .if(isCardVisible && isRounded) {
-                    $0.clipShape(RoundedRectangle(
-                        cornerRadius: contentCornerRadius,
-                        style: .continuous
-                    ))
-                }
+                .clipShape(RoundedRectangle(
+                    cornerRadius: isCardVisible ? contentCornerRadius : .zero,
+                    style: .continuous
+                ))
                 .if(sectionContentMarginsVisibility == .visible) {
                     $0
                         .overlay(
