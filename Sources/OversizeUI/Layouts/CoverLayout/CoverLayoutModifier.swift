@@ -24,4 +24,10 @@ public extension CoverLayout {
         control.contentOffset = contentOffset
         return control
     }
+
+    func listLayoutStyle(_ listStyle: ListLayoutStyle) -> Self {
+        var control = self
+        control.listStyle = listStyle
+        return control
+    }
 }

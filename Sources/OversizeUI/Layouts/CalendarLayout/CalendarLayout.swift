@@ -27,6 +27,8 @@ public struct CalendarLayout<
 
     @Binding private var selection: Date
 
+    var listStyle: ListLayoutStyle = .smallInsetGrouped
+
     @State private var displayedMonth: Date
     @State private var months: [Date] = []
     @State private var days: [Date: [Date]] = [:]
@@ -46,19 +48,18 @@ public struct CalendarLayout<
 
     public var body: some View {
         SwiftUI.ScrollView {
-            SwiftUI.LazyVStack(spacing: .xxSmall) {
+            SwiftUI.LazyVStack(spacing: sectionSpacing) {
                 SwiftUI.Group(sections: content) { sections in
                     SwiftUI.ForEach(sections) { section in
                         LayoutSectionView(
                             section: section,
                             isFirst: section.id == sections.first?.id,
-                            isLast: section.id == sections.last?.id,
-                            isStacked: sections.isEmpty == false
+                            isLast: section.id == sections.last?.id
                         )
                     }
                 }
+                .environment(\.listLayoutStyle, listStyle)
             }
-            .padding(.horizontal, .xxSmall)
         }
         .onScrollGeometryChange(for: CGFloat.self) { proxy in
             proxy.contentOffset.y + proxy.contentInsets.top
@@ -117,6 +118,15 @@ public struct CalendarLayout<
                 )
             }
             .presentationDetents([.height(450)])
+        }
+    }
+
+    private var sectionSpacing: CGFloat {
+        switch listStyle {
+        case .plain, .inset:
+            .zero
+        case .grouped, .insetGrouped, .smallInsetGrouped:
+            .xxSmall
         }
     }
 

@@ -18,14 +18,20 @@ public extension EnvironmentValues {
     @Entry var sectionBackgroundStyle: SectionBackgroundStyle = .surface
 }
 
+extension EnvironmentValues {
+    @Entry var explicitSectionBackgroundStyle: SectionBackgroundStyle?
+}
+
 public extension View {
     @ViewBuilder
     func sectionBackgroundStyle(_ style: SectionBackgroundStyle) -> some View {
         if #available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *) {
             environment(\.sectionBackgroundStyle, style)
+                .environment(\.explicitSectionBackgroundStyle, style)
                 .containerValue(\.sectionBackgroundStyle, style)
         } else {
             environment(\.sectionBackgroundStyle, style)
+                .environment(\.explicitSectionBackgroundStyle, style)
         }
     }
 }

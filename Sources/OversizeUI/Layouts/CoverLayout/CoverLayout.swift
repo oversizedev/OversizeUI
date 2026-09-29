@@ -27,6 +27,7 @@ public struct CoverLayout<
     var coverStyle: CoverNavigationType = .static
     var contentCornerRadius: CGFloat = 0
     var contentOffset: CGFloat = 0
+    var listStyle: ListLayoutStyle = .plain
 
     @State private var scrollOffset: CGFloat = .zero
     @State private var visibleRatio: CGFloat = 1
@@ -44,19 +45,18 @@ public struct CoverLayout<
                 .opacity(visibleRatio)
 
             ScrollView {
-                LazyVStack(spacing: .xxSmall) {
+                LazyVStack(spacing: sectionSpacing) {
                     Group(sections: content) { sections in
                         ForEach(sections) { section in
                             LayoutSectionView(
                                 section: section,
                                 isFirst: section.id == sections.first?.id,
-                                isLast: section.id == sections.last?.id,
-                                isStacked: true
+                                isLast: section.id == sections.last?.id
                             )
                         }
                     }
+                    .environment(\.listLayoutStyle, listStyle)
                 }
-                .padding(.horizontal, .xxSmall)
                 .background {
                     contentBackground
                         .ignoresSafeArea(edges: .bottom)
@@ -86,6 +86,15 @@ public struct CoverLayout<
                 .ignoresSafeArea()
         }
         .modifier(CoverScrollEdgeEffectModifier())
+    }
+
+    private var sectionSpacing: CGFloat {
+        switch listStyle {
+        case .plain, .inset:
+            .zero
+        case .grouped, .insetGrouped, .smallInsetGrouped:
+            .xxSmall
+        }
     }
 
     private var coverStretchHeight: CGFloat {
@@ -203,6 +212,7 @@ private struct CoverScrollEdgeEffectModifier: ViewModifier {
         } coverBackground: {
             Color.red
         }
+        .listLayoutStyle(.smallInsetGrouped)
         .sectionTitlePosition(.inside)
         .bordered()
         .sectionTitleSeparator(.visible)

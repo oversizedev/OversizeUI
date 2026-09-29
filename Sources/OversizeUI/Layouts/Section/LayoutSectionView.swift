@@ -13,7 +13,6 @@ struct LayoutSectionView: View {
     let section: SectionConfiguration
     let isFirst: Bool
     let isLast: Bool
-    let isStacked: Bool
 
     private var style: ResolvedSectionStyle {
         section.resolvedStyle(environment: environment)
@@ -36,7 +35,34 @@ struct LayoutSectionView: View {
     }
 
     private var backgroundStyle: SectionBackgroundStyle {
-        style.backgroundStyle
+        switch listStyle {
+        case .plain, .inset:
+            section.containerValues.sectionBackgroundStyle ?? environment.explicitSectionBackgroundStyle ?? .plain
+        case .grouped, .insetGrouped, .smallInsetGrouped:
+            style.backgroundStyle
+        }
+    }
+
+    private var isCardVisible: Bool {
+        backgroundStyle != .plain
+    }
+
+    private var isRounded: Bool {
+        switch listStyle {
+        case .plain, .inset, .grouped:
+            false
+        case .insetGrouped, .smallInsetGrouped:
+            true
+        }
+    }
+
+    private var contentCornerRadius: CGFloat {
+        guard isRounded else { return .zero }
+        #if os(macOS)
+        return .xSmall
+        #else
+        return .regular
+        #endif
     }
 
     private var sectionHorizontalMargins: CGFloat {
@@ -46,7 +72,24 @@ struct LayoutSectionView: View {
         case .insetGrouped:
             .medium
         case .smallInsetGrouped:
+            #if os(macOS)
+            .small
+            #else
             .xxSmall
+            #endif
+        }
+    }
+
+    private var sectionVerticalMargins: CGFloat {
+        switch listStyle {
+        case .plain, .inset:
+            .zero
+        case .grouped, .insetGrouped, .smallInsetGrouped:
+            #if os(macOS)
+            .small
+            #else
+            .xxSmall
+            #endif
         }
     }
 
@@ -77,24 +120,15 @@ struct LayoutSectionView: View {
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                // .padding(.vertical, .xxSmall)
-                #if os(macOS)
                 .clipShape(RoundedRectangle(
-                    cornerRadius: .xSmall,
+                    cornerRadius: isCardVisible ? contentCornerRadius : .zero,
                     style: .continuous
                 ))
-                #else
-                .clipShape(RoundedRectangle(
-                    cornerRadius: .regular,
-                    style: .continuous
-                ))
-                #endif
                 .if(sectionContentMarginsVisibility == .visible) {
                     $0
-                        #if os(macOS)
                         .overlay(
                             RoundedRectangle(
-                                cornerRadius: .xSmall,
+                                cornerRadius: contentCornerRadius,
                                 style: .continuous
                             )
                             .strokeBorder(
@@ -102,18 +136,6 @@ struct LayoutSectionView: View {
                                 lineWidth: 1
                             )
                         )
-                        #else
-                        .overlay(
-                            RoundedRectangle(
-                                cornerRadius: .regular,
-                                style: .continuous
-                            )
-                            .strokeBorder(
-                                Color.border.opacity(isBordered ? 1 : 0),
-                                lineWidth: 1
-                            )
-                        )
-                        #endif
                         .padding(
                             .init(
                                 top: section.header.count < 1 ? .xxxSmall : titleSeparator == .visible && section.header.count < 1 ? .xxxSmall : .zero,
@@ -125,7 +147,7 @@ struct LayoutSectionView: View {
                 }
 
                 if section.footer.count > 0 {
-                    if isBordered, sectionContentMarginsVisibility != .visible {
+                    if isBordered, isCardVisible, sectionContentMarginsVisibility != .visible {
                         Separator()
                     }
 
@@ -133,34 +155,22 @@ struct LayoutSectionView: View {
                 }
             }
             .background {
-                if isStacked {
-                    LayoutSectionBackgroundView(
-                        style: backgroundStyle,
-                        isBordered: isBordered
-                    )
-                }
+                LayoutSectionBackgroundView(
+                    style: backgroundStyle,
+                    isBordered: isBordered,
+                    isRounded: isRounded
+                )
             }
         }
         .padding(.horizontal, sectionHorizontalMargins)
-        #if os(macOS)
         .padding(
             .init(
-                top: isFirst ? .small : .zero,
+                top: isFirst ? sectionVerticalMargins : .zero,
                 leading: .zero,
-                bottom: isLast ? .small : .zero,
+                bottom: isLast ? sectionVerticalMargins : .zero,
                 trailing: .zero
             )
         )
-        #else
-        .padding(
-            .init(
-                top: isFirst ? .xxSmall : .zero,
-                leading: .zero,
-                bottom: isLast ? .xxSmall : .zero,
-                trailing: .zero
-            )
-        )
-        #endif
     }
 }
 
@@ -184,12 +194,13 @@ struct LayoutSectionHeaderView<Header: View>: View {
 struct LayoutSectionBackgroundView: View {
     let style: SectionBackgroundStyle
     let isBordered: Bool
+    let isRounded: Bool
 
     private var borderRadius: CGFloat {
         #if os(macOS)
-        .small
+        cornerRadius(.small)
         #else
-        .medium
+        cornerRadius(.medium)
         #endif
     }
 
@@ -205,17 +216,21 @@ struct LayoutSectionBackgroundView: View {
         }
     }
 
+    private func cornerRadius(_ radius: CGFloat) -> CGFloat {
+        isRounded ? radius : .zero
+    }
+
     #if os(macOS)
     private var surfaceBackground: some View {
-        RoundedRectangle(cornerRadius: .xSmall)
+        RoundedRectangle(cornerRadius: cornerRadius(.xSmall))
             .fill(Color.surfacePrimary)
             .clipShape(RoundedRectangle(
-                cornerRadius: .regular,
+                cornerRadius: cornerRadius(.regular),
                 style: .continuous
             ))
             .overlay(
                 RoundedRectangle(
-                    cornerRadius: .small,
+                    cornerRadius: cornerRadius(.small),
                     style: .continuous
                 )
                 .strokeBorder(
@@ -226,15 +241,15 @@ struct LayoutSectionBackgroundView: View {
     }
     #else
     private var surfaceBackground: some View {
-        RoundedRectangle(cornerRadius: .medium)
+        RoundedRectangle(cornerRadius: cornerRadius(.medium))
             .fill(Color.surfacePrimary)
             .clipShape(RoundedRectangle(
-                cornerRadius: .regular,
+                cornerRadius: cornerRadius(.regular),
                 style: .continuous
             ))
             .overlay(
                 RoundedRectangle(
-                    cornerRadius: .medium,
+                    cornerRadius: cornerRadius(.medium),
                     style: .continuous
                 )
                 .strokeBorder(
