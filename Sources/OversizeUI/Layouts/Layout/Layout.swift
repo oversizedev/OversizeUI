@@ -39,8 +39,10 @@ public struct Layout<Content: View, Background: View>: View {
         } action: { _, value in
             updateScrollOffset(value)
         }
-        .background {
-            backgroundView.ignoresSafeArea()
+        .if(!background.isEmpty) {
+            $0.background {
+                backgroundView.ignoresSafeArea()
+            }
         }
         .background {
             Color.clear

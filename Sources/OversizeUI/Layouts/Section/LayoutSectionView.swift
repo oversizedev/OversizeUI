@@ -109,15 +109,8 @@ struct LayoutSectionView: View {
                     }
                 }
 
-                VStack(spacing: .zero) {
-                    ForEach(section.content) { subview in
-                        subview
-                            .overlay(alignment: .bottom) {
-                                if section.content.last?.id != subview.id {
-                                    Separator()
-                                }
-                            }
-                    }
+                LazyVStack(spacing: .zero) {
+                    sectionRows
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .clipShape(RoundedRectangle(
@@ -171,6 +164,19 @@ struct LayoutSectionView: View {
                 trailing: .zero
             )
         )
+    }
+
+    @ViewBuilder
+    private var sectionRows: some View {
+        let lastID = section.content.last?.id
+        ForEach(section.content) { subview in
+            subview
+                .overlay(alignment: .bottom) {
+                    if lastID != subview.id {
+                        Separator()
+                    }
+                }
+        }
     }
 }
 
