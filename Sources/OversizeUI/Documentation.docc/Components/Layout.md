@@ -97,6 +97,7 @@ Layout("Groups") {
 | ``SwiftUI/View/sectionTitleSeparator(_:)`` | `.visible`, `.hidden` |
 | ``SwiftUI/View/sectionBackgroundStyle(_:)`` | `.surface`, `.dotted`, `.plain` |
 | ``SwiftUI/View/bordered(_:)`` | Toggles section borders |
+| ``SwiftUI/View/sectionRowsPadding(_:)`` | `.automatic` (only without borders), `.visible`, `.hidden` |
 
 ### Section actions
 
