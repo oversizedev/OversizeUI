@@ -7,44 +7,149 @@ import SwiftUI
 
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 struct LayoutSectionView: View {
-    @Environment(\.self) private var environment
     @Environment(\.listLayoutStyle) private var listStyle: ListLayoutStyle
+    @Environment(\.sectionTitlePosition) private var defaultTitlePosition
+    @Environment(\.isBordered) private var defaultIsBordered
+    @Environment(\.sectionTitleSeparator) private var defaultTitleSeparator
+    @Environment(\.sectionContentMarginsVisibility) private var defaultContentMarginsVisibility
+    @Environment(\.sectionTitleMargins) private var defaultTitleMargins
+    @Environment(\.sectionBackgroundStyle) private var defaultBackgroundStyle
+    @Environment(\.explicitSectionBackgroundStyle) private var explicitBackgroundStyle
+    @Environment(\.sectionRowsPaddingVisibility) private var defaultRowsPaddingVisibility
 
     let section: SectionConfiguration
     let isFirst: Bool
     let isLast: Bool
 
-    private var style: ResolvedSectionStyle {
-        section.resolvedStyle(environment: environment)
+    var body: some View {
+        VStack(spacing: .zero) {
+            if titlePosition == .outside, section.header.count > 0 {
+                LayoutSectionHeaderView(header: section.header, margins: titleMargins)
+                    .padding(.top, isFirst ? .zero : .xSmall)
+            }
+
+            card
+
+            if titlePosition == .outside, section.footer.count > 0 {
+                LayoutSectionFooterView(footer: section.footer, margins: titleMargins, color: .onBackgroundSecondary)
+            }
+        }
+        .padding(.horizontal, sectionHorizontalMargins)
+        .padding(
+            .init(
+                top: isFirst ? sectionVerticalMargins : .zero,
+                leading: .zero,
+                bottom: isLast ? sectionVerticalMargins : .zero,
+                trailing: .zero
+            )
+        )
     }
 
-    private var titleSeparator: Visibility {
-        style.titleSeparator
-    }
+    private var card: some View {
 
-    private var isBordered: Bool {
-        style.isBordered
-    }
+        return VStack(spacing: .zero) {
+            if titlePosition == .inside, section.header.count > 0 {
+                LayoutSectionHeaderView(header: section.header, margins: titleMargins)
 
-    private var sectionTitlePosition: SectionTitlePosition {
-        style.titlePosition
-    }
+                if titleSeparator == .visible, contentMarginsVisibility != .visible {
+                    Separator()
+                }
+            }
 
-    private var sectionContentMarginsVisibility: Visibility {
-        style.contentMarginsVisibility
-    }
+            LazyVStack(spacing: .zero) {
+                sectionRows
+            }
+            .padding(.vertical, (rowsPaddingVisibility == .visible || rowsPaddingVisibility == .automatic && !isBordered) ? .xxSmall : .zero)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .clipShape(RoundedRectangle(
+                cornerRadius: backgroundStyle != .plain ? contentCornerRadius : .zero,
+                style: .continuous
+            ))
+            .if(contentMarginsVisibility == .visible) {
+                $0
+                    .overlay(
+                        RoundedRectangle(
+                            cornerRadius: contentCornerRadius,
+                            style: .continuous
+                        )
+                        .strokeBorder(
+                            Color.border.opacity(isBordered ? 1 : 0),
+                            lineWidth: 1
+                        )
+                    )
+                    .padding(
+                        .init(
+                            top: section.header.count == 0 ? .xxxSmall : .zero,
+                            leading: .xxxSmall,
+                            bottom: .xxxSmall,
+                            trailing: .xxxSmall
+                        )
+                    )
+            }
 
-    private var backgroundStyle: SectionBackgroundStyle {
-        switch listStyle {
-        case .plain, .inset:
-            section.containerValues.sectionBackgroundStyle ?? environment.explicitSectionBackgroundStyle ?? .plain
-        case .grouped, .insetGrouped, .smallInsetGrouped:
-            style.backgroundStyle
+            if titlePosition == .inside, section.footer.count > 0 {
+                if titleSeparator == .visible, contentMarginsVisibility != .visible {
+                    Separator()
+                }
+
+                LayoutSectionFooterView(footer: section.footer, margins: titleMargins, color: .onSurfaceSecondary)
+            }
+        }
+        .background {
+            LayoutSectionBackgroundView(
+                style: backgroundStyle,
+                isBordered: isBordered,
+                isRounded: isRounded
+            )
         }
     }
 
-    private var isCardVisible: Bool {
-        backgroundStyle != .plain
+    private var sectionRows: some View {
+        let lastID = section.content.last?.id
+        return ForEach(section.content) { subview in
+            subview
+                .overlay(alignment: .bottom) {
+                    if isBordered, lastID != subview.id {
+                        Separator()
+                    }
+                }
+        }
+    }
+
+    // MARK: - Style
+
+    private var titlePosition: SectionTitlePosition {
+        section.containerValues.sectionTitlePosition ?? defaultTitlePosition
+    }
+
+    private var isBordered: Bool {
+        section.containerValues.isBordered ?? defaultIsBordered
+    }
+
+    private var titleSeparator: Visibility {
+        section.containerValues.sectionTitleSeparator ?? defaultTitleSeparator
+    }
+
+    private var contentMarginsVisibility: Visibility {
+        section.containerValues.sectionContentMarginsVisibility ?? defaultContentMarginsVisibility
+    }
+
+    private var titleMargins: SwiftUI.EdgeInsets {
+        section.containerValues.sectionTitleMargins ?? defaultTitleMargins
+    }
+
+    private var rowsPaddingVisibility: Visibility {
+        section.containerValues.sectionRowsPaddingVisibility ?? defaultRowsPaddingVisibility
+    }
+
+    private var backgroundStyle: SectionBackgroundStyle {
+        let sectionBackgroundStyle = section.containerValues.sectionBackgroundStyle
+        switch listStyle {
+        case .plain, .inset:
+            return sectionBackgroundStyle ?? explicitBackgroundStyle ?? .plain
+        case .grouped, .insetGrouped, .smallInsetGrouped:
+            return sectionBackgroundStyle ?? defaultBackgroundStyle
+        }
     }
 
     private var isRounded: Bool {
@@ -92,86 +197,6 @@ struct LayoutSectionView: View {
             #endif
         }
     }
-
-    var body: some View {
-        VStack(spacing: .zero) {
-            if sectionTitlePosition == .outside, section.header.count > 0 {
-                LayoutSectionHeaderView(header: section.header, margins: style.titleMargins)
-                    .padding(.top, isFirst ? .zero : .xSmall)
-            }
-
-            VStack(spacing: .zero) {
-                if sectionTitlePosition == .inside, section.header.count > 0 {
-                    LayoutSectionHeaderView(header: section.header, margins: style.titleMargins)
-
-                    if titleSeparator == .visible, sectionContentMarginsVisibility != .visible {
-                        Separator()
-                    }
-                }
-
-                VStack(spacing: .zero) {
-                    ForEach(section.content) { subview in
-                        subview
-                            .overlay(alignment: .bottom) {
-                                if section.content.last?.id != subview.id {
-                                    Separator()
-                                }
-                            }
-                    }
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .clipShape(RoundedRectangle(
-                    cornerRadius: isCardVisible ? contentCornerRadius : .zero,
-                    style: .continuous
-                ))
-                .if(sectionContentMarginsVisibility == .visible) {
-                    $0
-                        .overlay(
-                            RoundedRectangle(
-                                cornerRadius: contentCornerRadius,
-                                style: .continuous
-                            )
-                            .strokeBorder(
-                                Color.border.opacity(isBordered ? 1 : 0),
-                                lineWidth: 1
-                            )
-                        )
-                        .padding(
-                            .init(
-                                top: section.header.count < 1 ? .xxxSmall : titleSeparator == .visible && section.header.count < 1 ? .xxxSmall : .zero,
-                                leading: sectionContentMarginsVisibility == .visible ? .xxxSmall : 0,
-                                bottom: sectionContentMarginsVisibility == .visible ? .xxxSmall : 0,
-                                trailing: sectionContentMarginsVisibility == .visible ? .xxxSmall : 0
-                            )
-                        )
-                }
-
-                if section.footer.count > 0 {
-                    if isBordered, isCardVisible, sectionContentMarginsVisibility != .visible {
-                        Separator()
-                    }
-
-                    section.footer
-                }
-            }
-            .background {
-                LayoutSectionBackgroundView(
-                    style: backgroundStyle,
-                    isBordered: isBordered,
-                    isRounded: isRounded
-                )
-            }
-        }
-        .padding(.horizontal, sectionHorizontalMargins)
-        .padding(
-            .init(
-                top: isFirst ? sectionVerticalMargins : .zero,
-                leading: .zero,
-                bottom: isLast ? sectionVerticalMargins : .zero,
-                trailing: .zero
-            )
-        )
-    }
 }
 
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
@@ -185,6 +210,21 @@ struct LayoutSectionHeaderView<Header: View>: View {
         header
             .font(headerProminence == .increased ? .title3.weight(.semibold) : .headline.weight(.semibold))
             .foregroundStyle(Color.onBackgroundPrimary)
+            .padding(margins)
+            .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+struct LayoutSectionFooterView<Footer: View>: View {
+    let footer: Footer
+    let margins: SwiftUI.EdgeInsets
+    let color: Color
+
+    var body: some View {
+        footer
+            .font(.footnote)
+            .foregroundStyle(color)
             .padding(margins)
             .frame(maxWidth: .infinity, alignment: .leading)
     }

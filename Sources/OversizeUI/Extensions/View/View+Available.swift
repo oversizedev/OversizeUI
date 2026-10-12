@@ -17,6 +17,28 @@ public enum ScrollEdgeEffect {
     case automatic, soft, hard
 }
 
+public struct GlassEffect: Equatable, Sendable {
+    enum Variant: Equatable, Sendable {
+        case regular, clear, identity
+    }
+
+    let variant: Variant
+    let tintColor: Color?
+    let isInteractive: Bool
+
+    public static let regular = GlassEffect(variant: .regular, tintColor: nil, isInteractive: false)
+    public static let clear = GlassEffect(variant: .clear, tintColor: nil, isInteractive: false)
+    public static let identity = GlassEffect(variant: .identity, tintColor: nil, isInteractive: false)
+
+    public func tint(_ color: Color?) -> GlassEffect {
+        GlassEffect(variant: variant, tintColor: color, isInteractive: isInteractive)
+    }
+
+    public func interactive(_ isEnabled: Bool = true) -> GlassEffect {
+        GlassEffect(variant: variant, tintColor: tintColor, isInteractive: isEnabled)
+    }
+}
+
 public extension View {
     @_disfavoredOverload
     @ViewBuilder
@@ -96,6 +118,31 @@ public extension View {
         }
     }
 
+    @available(visionOS, unavailable)
+    @_disfavoredOverload
+    @ViewBuilder
+    func glassEffect(_ glass: GlassEffect = .regular, in shape: some Shape = Capsule()) -> some View {
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+            glassEffect(glass.systemGlass, in: shape)
+        } else {
+            self
+        }
+    }
+
+    @_disfavoredOverload
+    @ViewBuilder
+    func swipeActionsContainer() -> some View {
+        #if os(tvOS) || !compiler(>=6.4)
+        self
+        #else
+        if #available(iOS 27.0, macOS 27.0, watchOS 27.0, visionOS 27.0, *) {
+            swipeActionsContainer()
+        } else {
+            self
+        }
+        #endif
+    }
+
     @ViewBuilder
     func safeAreaBarTop(alignment: HorizontalAlignment = .center, spacing: CGFloat? = nil, @ViewBuilder content: @escaping () -> some View) -> some View {
         if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
@@ -161,5 +208,18 @@ private extension ScrollEdgeEffect {
         case .soft: .soft
         case .hard: .hard
         }
+    }
+}
+
+@available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *)
+@available(visionOS, unavailable)
+private extension GlassEffect {
+    var systemGlass: Glass {
+        let base: Glass = switch variant {
+        case .regular: .regular
+        case .clear: .clear
+        case .identity: .identity
+        }
+        return base.tint(tintColor).interactive(isInteractive)
     }
 }

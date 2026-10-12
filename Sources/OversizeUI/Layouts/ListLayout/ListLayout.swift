@@ -36,8 +36,12 @@ public struct ListLayout<
             .navigationTitle(title)
             .environment(\.defaultMinListHeaderHeight, 40)
             .environment(\.defaultMinListRowHeight, 56)
-            .background(backgroundView.ignoresSafeArea())
-            .scrollContentBackground(.hidden)
+            .if(!background.isEmpty) {
+                $0
+                    .background(backgroundView.ignoresSafeArea())
+                    .scrollContentBackground(.hidden)
+            }
+           
         }
 
         #if os(iOS)
