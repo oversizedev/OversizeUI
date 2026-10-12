@@ -139,12 +139,12 @@ struct LayoutSectionView: View {
                         )
                 }
 
-                if section.footer.count > 0 {
-                    if isBordered, isCardVisible, sectionContentMarginsVisibility != .visible {
+                if sectionTitlePosition == .inside, section.footer.count > 0 {
+                    if titleSeparator == .visible, sectionContentMarginsVisibility != .visible {
                         Separator()
                     }
 
-                    section.footer
+                    LayoutSectionFooterView(footer: section.footer, margins: style.titleMargins, color: .onSurfaceSecondary)
                 }
             }
             .background {
@@ -153,6 +153,10 @@ struct LayoutSectionView: View {
                     isBordered: isBordered,
                     isRounded: isRounded
                 )
+            }
+
+            if sectionTitlePosition == .outside, section.footer.count > 0 {
+                LayoutSectionFooterView(footer: section.footer, margins: style.titleMargins, color: .onBackgroundSecondary)
             }
         }
         .padding(.horizontal, sectionHorizontalMargins)
@@ -172,7 +176,7 @@ struct LayoutSectionView: View {
         ForEach(section.content) { subview in
             subview
                 .overlay(alignment: .bottom) {
-                    if lastID != subview.id {
+                    if isBordered, lastID != subview.id {
                         Separator()
                     }
                 }
@@ -191,6 +195,21 @@ struct LayoutSectionHeaderView<Header: View>: View {
         header
             .font(headerProminence == .increased ? .title3.weight(.semibold) : .headline.weight(.semibold))
             .foregroundStyle(Color.onBackgroundPrimary)
+            .padding(margins)
+            .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+struct LayoutSectionFooterView<Footer: View>: View {
+    let footer: Footer
+    let margins: SwiftUI.EdgeInsets
+    let color: Color
+
+    var body: some View {
+        footer
+            .font(.footnote)
+            .foregroundStyle(color)
             .padding(margins)
             .frame(maxWidth: .infinity, alignment: .leading)
     }

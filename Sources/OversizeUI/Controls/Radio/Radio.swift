@@ -60,11 +60,12 @@ public struct Radio<Label: View>: View {
         case .leading:
             radioImage(isEnabled: isEnabled, isOn: isOn)
                 .padding(.leading, contentInset.leading)
+            
             labelContent
 
         case .trailing:
             labelContent
-            Spacer()
+                .frame(maxWidth: .infinity, alignment: .leading)
             radioImage(isEnabled: isEnabled, isOn: isOn)
                 .padding(.trailing, contentInset.trailing)
         }
