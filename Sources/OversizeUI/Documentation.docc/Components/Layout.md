@@ -88,7 +88,7 @@ Layout("Groups") {
 }
 .sectionTitlePosition(.inside)
 .sectionTitleSeparator(.visible)
-.bordered()
+.sectionBordered()
 ```
 
 | Modifier | Values |
@@ -96,8 +96,12 @@ Layout("Groups") {
 | ``SwiftUI/View/sectionTitlePosition(_:)`` | `.inside`, `.outside` |
 | ``SwiftUI/View/sectionTitleSeparator(_:)`` | `.visible`, `.hidden` |
 | ``SwiftUI/View/sectionBackgroundStyle(_:)`` | `.surface`, `.dotted`, `.plain` |
-| ``SwiftUI/View/bordered(_:)`` | Toggles section borders |
+| ``SwiftUI/View/sectionBordered(_:)`` | Toggles section borders |
 | ``SwiftUI/View/sectionRowsPadding(_:)`` | `.automatic` (only without borders), `.visible`, `.hidden` |
+
+> Note: Section borders used to be toggled with ``SwiftUI/View/bordered(_:)``. It still works as a
+> fallback, but it also borders every button inside the sections and stops affecting sections in the
+> next major version. Use `bordered()` for controls and ``SwiftUI/View/sectionBordered(_:)`` for sections.
 
 ### Section actions
 

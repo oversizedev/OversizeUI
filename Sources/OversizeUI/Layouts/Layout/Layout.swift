@@ -129,7 +129,7 @@ public struct Layout<Content: View, Background: View>: View {
                 Text("Song 3")
             }
             .sectionTitlePosition(.outside)
-            .bordered(false)
+            .sectionBordered(false)
 
             Section {
                 Text("Song 1")
@@ -148,7 +148,7 @@ public struct Layout<Content: View, Background: View>: View {
         }
         .listLayoutStyle(.smallInsetGrouped)
         .sectionTitlePosition(.inside)
-        .bordered()
+        .sectionBordered()
         .sectionTitleSeparator(.visible)
         // .headerProminence(.increased)
     }
@@ -190,7 +190,7 @@ public struct Layout<Content: View, Background: View>: View {
         }
         .listLayoutStyle(.insetGrouped)
         .sectionTitlePosition(.inside)
-        .bordered()
+        .sectionBordered()
     }
 }
 

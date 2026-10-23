@@ -370,7 +370,7 @@ public extension CalendarLayout where Day == DefaultCalendarDayView {
             }
         )
         .sectionTitlePosition(.inside)
-        .bordered()
+        .sectionBordered()
         .sectionTitleSeparator(.visible)
     }
 }

@@ -49,7 +49,7 @@ struct LayoutDemo: View {
         }
         .listLayoutStyle(style)
         .sectionTitleSeparator(.visible)
-        .bordered()
+        .sectionBordered()
     }
 }
 

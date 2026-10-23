@@ -9,7 +9,8 @@ import SwiftUI
 struct LayoutSectionView: View {
     @Environment(\.listLayoutStyle) private var listStyle: ListLayoutStyle
     @Environment(\.sectionTitlePosition) private var defaultTitlePosition
-    @Environment(\.isBordered) private var defaultIsBordered
+    @Environment(\.isBordered) private var legacyIsBordered
+    @Environment(\.isSectionBordered) private var defaultIsBordered
     @Environment(\.sectionTitleSeparator) private var defaultTitleSeparator
     @Environment(\.sectionContentMarginsVisibility) private var defaultContentMarginsVisibility
     @Environment(\.sectionTitleMargins) private var defaultTitleMargins
@@ -123,7 +124,9 @@ struct LayoutSectionView: View {
     }
 
     private var isBordered: Bool {
-        section.containerValues.isBordered ?? defaultIsBordered
+        section.containerValues.isSectionBordered
+            ?? section.containerValues.isBordered
+            ?? (defaultIsBordered || legacyIsBordered)
     }
 
     private var titleSeparator: Visibility {
