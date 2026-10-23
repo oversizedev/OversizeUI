@@ -48,7 +48,7 @@ final class ComponentsListTest: XCTestCase {
 
         XCTAssertTrue(app.navigationBars["Buttons"].waitForExistence(timeout: 5))
 
-        app.navigationBars.buttons.firstMatch.tap()
+        app.buttons["BackButton"].firstMatch.tap()
 
         XCTAssertTrue(app.navigationBars["OversizeUI"].waitForExistence(timeout: 5))
     }
