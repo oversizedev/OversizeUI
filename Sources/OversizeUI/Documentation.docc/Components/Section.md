@@ -64,7 +64,7 @@ Layout("Library") {
     }
 }
 .sectionTitleSeparator(.visible)
-.bordered()
+.sectionBordered()
 ```
 
 ## Background Style

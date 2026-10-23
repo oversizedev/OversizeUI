@@ -214,7 +214,7 @@ private struct CoverScrollEdgeEffectModifier: ViewModifier {
         }
         .listLayoutStyle(.smallInsetGrouped)
         .sectionTitlePosition(.inside)
-        .bordered()
+        .sectionBordered()
         .sectionTitleSeparator(.visible)
     }
 }

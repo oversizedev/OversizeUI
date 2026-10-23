@@ -9,6 +9,7 @@ import SwiftUI
 public extension ContainerValues {
     @Entry var sectionTitlePosition: SectionTitlePosition?
     @Entry var isBordered: Bool?
+    @Entry var isSectionBordered: Bool?
     @Entry var sectionTitleSeparator: Visibility?
     @Entry var sectionContentMarginsVisibility: Visibility?
     @Entry var sectionTitleMargins: SwiftUI.EdgeInsets?
