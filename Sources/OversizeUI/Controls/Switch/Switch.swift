@@ -57,11 +57,11 @@ public struct Switch<Label: View>: View {
             switchImage(isEnabled: isEnabled)
                 .padding(.leading, contentInset.leading)
             labelContent
-            Spacer()
+                .frame(maxWidth: .infinity, alignment: .leading)
 
         case .trailing:
             labelContent
-            Spacer()
+                .frame(maxWidth: .infinity, alignment: .leading)
             switchImage(isEnabled: isEnabled)
                 .padding(.trailing, contentInset.trailing)
         }

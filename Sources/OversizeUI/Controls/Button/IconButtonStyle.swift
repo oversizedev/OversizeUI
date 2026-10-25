@@ -23,15 +23,33 @@ public struct IconButtonStyle: ButtonStyle {
     }
 
     public func makeBody(configuration: Self.Configuration) -> some View {
-        configuration.label
-            .body(.semibold)
-            .opacity(isLoading ? 0 : 1)
-            .foregroundColor(foregroundColor(for: configuration.role).opacity(foregroundOpacity))
-            .padding(padding)
-            .background(background(for: configuration.role))
-            .overlay(loadingView(for: configuration.role))
-            .scaleEffect(configuration.isPressed ? 0.95 : 1)
-            .shadowElevation(isEnabled ? elevation : .z0)
+        if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+            configuration.label
+                .body(.semibold)
+                .opacity(isLoading ? 0 : 1)
+                .foregroundColor(foregroundColor(for: configuration.role).opacity(foregroundOpacity))
+                .padding(padding)
+                .if(type != .quaternary, then: {
+                    $0
+                        .background(background(for: configuration.role))
+                        .glassEffect(.clear.interactive(), in: Circle())
+                }, else: {
+                    $0
+                        .scaleEffect(configuration.isPressed ? 1.15 : 1)
+                        .animation(.spring(response: 0.3, dampingFraction: 0.6), value: configuration.isPressed)
+                })
+                .overlay(loadingView(for: configuration.role))
+        } else {
+            configuration.label
+                .body(.semibold)
+                .opacity(isLoading ? 0 : 1)
+                .foregroundColor(foregroundColor(for: configuration.role).opacity(foregroundOpacity))
+                .padding(padding)
+                .background(background(for: configuration.role))
+                .overlay(loadingView(for: configuration.role))
+                .scaleEffect(configuration.isPressed ? 0.95 : 1)
+                .shadowElevation(isEnabled ? elevation : .z0)
+        }
     }
 
     @ViewBuilder
