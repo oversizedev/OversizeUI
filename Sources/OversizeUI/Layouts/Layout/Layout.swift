@@ -66,13 +66,9 @@ public struct Layout<Content: View, Background: View>: View {
         }
     }
 
-    @ViewBuilder
     private var backgroundView: some View {
-        if background.isEmpty {
-            listStyle == .plain ? Color.backgroundPrimary : Color.backgroundSecondary
-        } else {
-            background
-        }
+        background
+            .environment(\.listLayoutStyle, listStyle)
     }
 
     private func updateScrollOffset(_ offset: CGFloat) {
@@ -85,7 +81,7 @@ public struct Layout<Content: View, Background: View>: View {
         _ title: String = "",
         onScroll: ScrollAction? = nil,
         @ViewBuilder content: () -> Content,
-        @ViewBuilder background: () -> Background = { EmptyView() }
+        @ViewBuilder background: () -> Background = { LayoutBackground() }
     ) {
         self.title = title
         self.onScroll = onScroll
