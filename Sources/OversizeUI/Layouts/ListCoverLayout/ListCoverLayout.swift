@@ -120,13 +120,9 @@ public struct ListCoverLayout<
         return styledList
     }
 
-    @ViewBuilder
     private var backgroundView: some View {
-        if background.isEmpty {
-            listStyle == .plain ? Color.backgroundPrimary : Color.backgroundSecondary
-        } else {
-            background
-        }
+        background
+            .environment(\.listLayoutStyle, listStyle)
     }
 
     private var coverStretchHeight: CGFloat {
@@ -166,7 +162,7 @@ public struct ListCoverLayout<
         @ViewBuilder content: () -> Content,
         @ViewBuilder cover: () -> Cover,
         @ViewBuilder coverBackground: () -> CoverBackground = { Color.backgroundSecondary },
-        @ViewBuilder background: () -> Background = { EmptyView() }
+        @ViewBuilder background: () -> Background = { LayoutBackground() }
     ) where SelectionValue == Never {
         self.title = title
         self.coverHeight = coverHeight
@@ -185,7 +181,7 @@ public struct ListCoverLayout<
         @ViewBuilder content: () -> Content,
         @ViewBuilder cover: () -> Cover,
         @ViewBuilder coverBackground: () -> CoverBackground = { Color.backgroundSecondary },
-        @ViewBuilder background: () -> Background = { EmptyView() }
+        @ViewBuilder background: () -> Background = { LayoutBackground() }
     ) {
         self.title = title
         self.coverHeight = coverHeight

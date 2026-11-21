@@ -119,6 +119,10 @@ Section("Playlists") {
 
 ## Custom Background
 
+Without a `background` closure the layout draws ``LayoutBackground``: the primary background
+for `.plain` and the secondary background for the other styles. A passed view is drawn as is;
+pass `EmptyView()` to draw no background.
+
 ```swift
 Layout("Profile") {
     Section {

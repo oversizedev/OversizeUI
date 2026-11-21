@@ -36,12 +36,8 @@ public struct ListLayout<
             .navigationTitle(title)
             .environment(\.defaultMinListHeaderHeight, 40)
             .environment(\.defaultMinListRowHeight, 56)
-            .if(!background.isEmpty) {
-                $0
-                    .background(backgroundView.ignoresSafeArea())
-                    .scrollContentBackground(.hidden)
-            }
-           
+            .background(backgroundView.ignoresSafeArea())
+            .scrollContentBackground(.hidden)
         }
 
         #if os(iOS)
@@ -81,19 +77,15 @@ public struct ListLayout<
         return styledList
     }
 
-    @ViewBuilder
     private var backgroundView: some View {
-        if background.isEmpty {
-            listStyle == .plain ? Color.backgroundPrimary : Color.backgroundSecondary
-        } else {
-            background
-        }
+        background
+            .environment(\.listLayoutStyle, listStyle)
     }
 
     public init(
         _ title: String = "",
         @ViewBuilder content: () -> Content,
-        @ViewBuilder background: () -> Background = { EmptyView() }
+        @ViewBuilder background: () -> Background = { LayoutBackground() }
     ) where SelectionValue == Never {
         self.title = title
         self.content = content()
@@ -106,7 +98,7 @@ public struct ListLayout<
         _ title: String = "",
         selection: Binding<Set<SelectionValue>?>,
         @ViewBuilder content: () -> Content,
-        @ViewBuilder background: () -> Background = { EmptyView() }
+        @ViewBuilder background: () -> Background = { LayoutBackground() }
     ) {
         self.title = title
         self.content = content()
